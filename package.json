@@ -17,6 +17,14 @@
         {
             "name": "Kunal Nagpal",
             "email": "kunagpal@gmail.com"
+        },
+        {
+            "name": "Sukriti",
+            "email": "sukriti477@gmail.com"
+        },
+        {
+            "name": "Amol Gautam",
+            "email": "amol_gautam25@hotmail.com"
         }
     ],
   "dependencies": {
@@ -26,7 +34,7 @@
     "main": "./app.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/aneesh-neelam/GPL.git"
+        "url": "https://github.com/IEEECS-VIT/GPL.git"
     },
     "license": "GNU GPLv3",
     "engines": {
