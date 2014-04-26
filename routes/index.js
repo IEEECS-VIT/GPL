@@ -4,6 +4,6 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Exp' });
+  res.render('index', { title: 'avi' });
     console.log("Hello World");
 };
