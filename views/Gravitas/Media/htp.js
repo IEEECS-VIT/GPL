@@ -1,5 +1,5 @@
 var i =0;
-var menu = ["htp/Abt.html","htp/Createteam.html","htp/SelXI.html","htp/EP.html","htp/MS.html","htp/League.html","htp/Win.html","htp/FAQ.html"];
+var menu = ["Media/bat.html","Media/bowl.html","Media/all.html","Media/coaches.html"];
 function ch(i)
 {
 
