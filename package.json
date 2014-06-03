@@ -1,11 +1,11 @@
 {
-    "name": "GPL",
+  "name": "GPL",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node ./bin/www"
   },
-    "contributors": [
+  "contributors": [
         {
             "name": "Aneesh Neelam",
             "email": "neelam.aneesh@gmail.com"
@@ -28,16 +28,20 @@
         }
     ],
   "dependencies": {
-    "express": "3.5.1",
-    "ejs": "*"
+    "express": "~4.2.0",
+    "static-favicon": "~1.0.0",
+    "morgan": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "body-parser": "~1.0.0",
+    "debug": "~0.7.4",
+    "ejs": "~0.8.5"
   },
-    "main": "./app.js",
+  "main": "./bin/www",
     "repository": {
         "type": "git",
         "url": "https://github.com/IEEECS-VIT/GPL.git"
     },
     "license": "GNU GPLv3",
     "engines": {
-        "node": ">=0.10"
-  }
+        "node": "0.10.x"
 }
