@@ -3,16 +3,12 @@ GPL
 
 The GPL code repository.
 
-## Requirements
-* Node.js 0.10.x
-
-## Install Node Dependencies and Modules
+## Instructions:
+### Install Node.js 0.10.x 
+### Install all dependencies
     $ npm install
-    
-## To run the Server
+### Run the server locally
     $ npm start
     
-## External Requirements
+### External Requirements
 * None at this time
-
-More info coming soon
