@@ -1,0 +1,199 @@
+a {
+target:_self;
+color:rgba(255, 255, 255,1);
+text-decoration:none;
+}
+a:active{text-decoration:underline;}
+body{
+background:rgba(25,25,25,1)/*url("waca.jpg")*/;
+overflow:visible;
+width:100%/*80em*/;
+height:100%/*41.3em*/;
+    padding:0;
+    margin:0;
+}
+.back {
+height:42.5em;
+width:85.4em;
+position:absolute;
+z-index:-1;
+top:0;
+left:0;
+margin:0;
+}
+.im {
+margin-top:5em;
+margin-left:20em;
+}
+#trap1{
+top:0;
+border-top: 1em solid rgba(200,200,200,0.7);
+	border-left: 0.5em solid transparent;
+	border-right: 0.5em solid transparent;
+	height: 0;
+	width: 84.4em;
+	margin:0;
+	position:absolute;
+	left:0;
+	z-index:1;
+}
+#trap2{
+
+    top:41.53em;
+border-bottom: 1em solid rgba(200,200,200,0.7);
+	border-left: 0.5em solid transparent;
+	border-right: 0.5em solid transparent;
+	height: 0;
+	width: 84.4em;
+	margin:0;
+	position:absolute;
+	left:0;
+	
+}
+#menu{
+
+background:rgba(255,255,255,0.1);
+ width: 79.4em;
+position:absolute;
+height:2.7em;
+left:0;
+margin:0;
+top:2em;
+padding-left:6em;
+}
+#menu #box{
+margin:0;
+	text-align:center;
+	padding:0.3em;
+	width:auto;
+	position:relative;
+
+	z-index:2;
+}
+#menu #box td{
+	float:left;
+	position:relative;
+	padding:0;
+	overflow:hidden;
+	color:rgba(255, 255, 255,1);
+	height:auto;
+	font-family:Arial;
+	font-size:1.4em;
+	font-weight:bold;
+	left:2em;
+	margin-right:2em;
+	/*border-right:1px rgba(0, 172, 237,0.3) solid;*/
+}
+
+#menu #box td:hover{
+text-shadow: 0.1em 0.1em rgba(255,255,255,0.1);
+left:2em;
+padding-left:0;
+margin-right:2em;
+font-size:1.35em;
+}
+#bar {
+background:rgba(255,255,255,0.9);
+margin-left:20em;
+width:43.8em;
+}
+#bar table{
+display:block;
+font-size:1.2em;
+color :rgba(25,25,25,1);
+}
+#bar td { padding-left:1em;}
+#Signup { width: 75em; margin:0; padding:0; text-align: center;}
+#Signup input{
+    position:absolute;
+height:2em;
+width:6em;
+color:white;
+font-size:1.5em;
+background:rgba(255,0,0,0.8);
+}
+#m{
+background:rgba(255,255,255,0.6);
+width:75em;
+position:absolute;
+height:36em;
+top:5em;
+overflow:visible;
+left:5em;
+padding:0;
+margin:0;
+}
+#leftm
+{
+width:20em;
+height:36em;
+
+border-right:0.2em solid rgba(255,255,255,0.5);
+padding:0;
+margin:0;
+position:absolute;
+}
+#leftm li
+{
+position:relative;
+padding:1em;
+margin:0;
+list-style:none;
+
+background:rgba(0,0,0,0.1);
+}
+#leftm li:hover{
+background:rgba(25,25,25,1);
+box-shadow:inset 0 0 2em rgba(255,255,255,0.2);
+color:White;
+padding:1em;
+cursor:pointer;
+}
+#leftm img {
+height:6em;
+width:13em;
+    cursor: default;
+}
+#leftm a {
+text-decoration: none;
+color:black;
+}
+
+#rightm {
+padding:0;
+margin:0;
+margin-left:21em;
+width:50em;
+}
+#rightm iframe {
+width:54em;
+height:36em;
+    border:transparent;
+}
+#h
+{
+text-align:center;
+background:rgba(25,25,25,1);
+width:61.2em;
+color:white;
+padding:0.3em;
+padding-left:1em;
+position:absolute;
+margin:0;
+
+font-size:1.2em;
+box-shadow:inset 0 0 1em rgba(255,255,255,0.5);
+}
+
+#frlnk { }
+#nottemp{}
+#temp li
+{
+
+    background:rgba(25,25,25,1);
+    box-shadow:inset 0 0 2em rgba(255,255,255,0.2);
+    color:White;
+    padding:1em;
+    cursor:pointer;
+
+}
