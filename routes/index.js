@@ -7,10 +7,10 @@ router.get('/', function(req, res) {
     res.render('Main', { title: temp });
 });
 
-router.get('/how', function (req, res) {
+router.get('/express', function (req, res) {
     // Pull from Database
     // variable
-    res.render('index', { title: 'Express' });
+    res.render('express', { title: 'Express' });
 });
 
 module.exports = router;
