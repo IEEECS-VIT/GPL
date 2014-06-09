@@ -1,59 +1,76 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <title>
-        GPL
-    </title>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/gplmain.css"/>
-</head>
-<body>
-<div id="1">
+    <head>
+        <title>
+            GPL
+        </title>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/gplmain.css"/>
+    </head>
+    <body>
+    <div id="header">
+        <ul id="rightbox">
+            <a href="#"><li class="egder">Login</li></a>
+            <a href="/register"><li>Sign Up</li></a>
+        </ul>
+        <ul id="leftbox">
+            <a href="/myteam"><li class="egdel">My Team</li></a>
+            <a href="/next_match"><li>Next Match</li></a>
+            <a href="/points"><li>Points </li></a>                                                                      <!--Get Player points from Server-->
+            <a href="/league"><li>Standings</li></a>
+        </ul>
+    </div>
 
-</div>
-<!--Main GPL logo or image required-->
-<img class="im" src="/images/Main.jpg"/>
+    <div id="menu">
+        <table id="box">
 
-<div id="trap1">
-</div>
-<div id="menu">
-    <table id="box">
+            <td><a href="/">Home</a></td>
+            <td><a href="/howtoplay">How To Play</a></td>
+            <td><a href="/rules">Rules & Scoring</a></td>
+            <td><a href="/prize">Prizes</a></td>
+            <td><a href="/players">Players & Coaches</a></td>
+            <td><a href="/sponsor">Sponsors</a></td>
 
-        <td><a href="/">Home</a></td>
-        <td><a href="/how">How To Play</a></td>
-        <td><a href="RS.html">Rules & Scoring</a></td>
-        <td><a href="prize.html">Prizes</a></td>
-        <td><a href="stats.html">Players & Coaches</a></td>
-        <td>My Team</td>
-        <td><a href="Sponsors.html">Sponsors</a></td>
-
-    </table>
-</div>
-<img class="back" src="/images/background.jpg"/>
-
-<div style="text-align:center;" id="bar">
-    <table>
-
-
-        <tr>
-            <td style="padding-left:0em;"><p>Feel what it is to be an owner.....</p></td>
-        </tr>
-        <tr>
-            <td>1.Create your team.</td>
-            <td style="padding-left:3em;">2.Earn points.</td>
-            <td style="padding-left:5em;">3.Win Prizes.</td>
-        </tr>
+        </table>
+    </div>
+        <div class="im">
+            <img src="/images/gplmain.gif"/>
+        </div>
 
 
-    </table>
+        <!--<img class="back" src="/images/background.jpg"/>-->
 
-</div>
-<div id="Signup">
+        <div id="bar">                                                                                                  <!--Need better content for white box-->
+            <table>
+
+
+                <tr>
+                    <td style="padding-left:0em;"><p>Feel what it is to be an owner.....</p></td>
+                </tr>
+                <tr>
+                    <td>1.Create your team.</td>
+                    <td style="padding-left:3em;">2.Earn points.</td>
+                    <td style="padding-left:5em;">3.Win Prizes.</td>
+                </tr>
+                <tr>
+                    <p> IEEE-Computer Society presents the first ever GRAVITAS PREMIER LEAGUE </p>
+
+                </tr>
+
+
+            </table>
+
+        </div>
+        <div id="Signup">
     <!--Javascript Required for login -->
-    <input type="Button" value="Sign Up">
+            <input type="Button" value="Sign Up" onclick="window.location.href='/register'">
+            <input type="Button" value="Login" onclick="window.location.href='/login'">
 
-</div>
-<div id="trap2">
-</div>
-</body>
+        </div>
+        <footer id="footer">
+            <p>IEEE CS</p>
+        </footer>
+        <!--<div id="trap2">
+        </div>-->
+    </body>
 </html>
