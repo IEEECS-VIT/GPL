@@ -38,29 +38,19 @@
 <div id="signup" style="text-align:center;">
     <form>
 
-        <fieldset class="basicinfo">
+        <fieldset class="login">
             <table>
-                <tr><td><label>Name:</label></td> <td><input  class="text" type="text" value="" name="name"/></td></tr>
+                <tr><td><label>E-Mail:</label></td> <td><input  class="text" type="email" value="" /></td></tr>
                 <tr><td><label>Password: </label></td><td> <input  class="text" type="password" value="" /></td></tr>
-                <tr><td><label>Confirm Password: </label></td><td> <input  class="text" type="password" value="" /></td></tr>
-             </table>
+                <tr><td></td><td><label><button type="submit" value="Submit">Login</button></label></td>
+            </table>
         </fieldset>
-        <fieldset class="contactinfo">
-            <label>E-Mail: </label><input  class="text" type="email" value="" />
-                <label>Phone No:</label> <input  class="tel" type="text" value="" />
-        </fieldset>
-        <!--Will Insert Captcha elements later -->
-        <img class="ieee" src="/images/ieeecs%20logo.gif" />
 
-        <fieldset class="captcha">
-            <label><img src="/images/captcha.jpg" /></label><br/> <input type="text" value="tempcaptcha" />             <!-- captcha needs backend-->
+        <fieldset class="noacc">
+            <p> Don't have an account?<br/> <br/>Sign up for free!</p><br/>
+            <input type="button" class="button" onclick="window.location.href='/register'" value="Sign Up"/>
         </fieldset>
-        <fieldset class="tc">
-
-            <input type="checkbox" /> <label>I have read and agree to the Terms and Conditions and Privacy Policy.<br/></label>
-        </fieldset>
-        <button type="submit" value="Submit">Submit</button>
-
+        <img class="ieee" src="/images/ieeecs%20logo.gif" style="margin-top: 0;"/>
     </form>
 
 </div>

@@ -10,7 +10,10 @@ router.get('/register', function(req, res) {
     var temp = "";
     res.render('register', { title: temp });
 });
-
+router.get('/login', function(req, res) {
+    var temp = "";
+    res.render('login', { title: temp });
+});
 router.get('/prize', function(req, res) {
     var temp = "";
     res.render('prize', { title: temp });

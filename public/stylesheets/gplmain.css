@@ -14,6 +14,21 @@ body {
     margin: 0 auto;
     text-align: center;
 }
+.ieee{
+    height:7em;
+    width:14em;
+    cursor: default;
+    margin:2em;
+}
+.button{
+
+    height:2em;
+    width:6em;
+    color:white;
+    font-size:1.5em;
+    background:rgba(255,25,25,1);
+    margin:1em;
+}
 .back {
 height:42.5em;
 width:85.4em;
@@ -50,7 +65,7 @@ height:auto;
 left:0;
 margin:auto;
 top:2em;
-    padding:0;
+    padding:0.3em 0;
     box-shadow:inset 0em 0.1em 0.1em rgba(255,255,255,0.5),inset 0em -0.1em 0.1em rgba(255,255,255,0.5),inset 0 0.2em 0.5em rgba(255,255,255,0.2),inset 0 -0.2em 0.5em rgba(255,255,255,0.2);
 
     border-radius:5px;
@@ -110,8 +125,8 @@ display:block;
 }
 #bar td { padding-left:1em;}
 #bar p{ padding:0; margin:0; margin-bottom:1em; }
-#Signup { width: 100%/*75em*/;  margin:0; margin-top: 1.5em ; padding:0; text-align: center;}
-#Signup input{
+#Signupb { width: 100%/*75em*/;  margin:0; margin-top: 1.5em ; padding:0; text-align: center;}
+#Signupb input{
     position:relative;
 height:2em;
 width:6em;
@@ -212,6 +227,79 @@ box-shadow:inset 0 0 1em rgba(255,255,255,0.5);
     padding:1em;
     cursor:pointer;
 
+}
+
+#signup{
+
+    background:rgba(255,255,255,0.9);
+    width:100%/*75em*/;
+    position:relative;
+    height:29em;
+    top:4em;
+    text-align: center;
+    left:0;
+    padding:0.5em 0;
+    margin:0;
+    font: Arial;
+
+    font-size:1.3em;
+}
+
+#signup .basicinfo, #signup .contactinfo,#signup .login{
+
+    float: left;
+    border:none;
+    text-align: left;
+}
+#signup .basicinfo input,#signup .contactinfo input, #signup .login input{
+    border:1px rgba(0,0,0,0.3) solid;
+    border-radius:5px;
+    height:1.8em;
+    width: 15em;
+    font-size:1em;
+    font-weight: lighter;
+    font-style:italic;
+       margin-right:1em;
+    padding:0.2em;
+    margin-bottom: 1em;
+}
+#signup button{
+
+    height:2em;
+    width:6em;
+    color:white;
+    font-size:1.5em;
+    background:rgba(255,25,25,1);
+    margin:1em;
+}
+#signup .tc{
+    border:none;
+}
+#signup .captcha {
+
+    border:1px black solid;
+    margin:1em;
+    margin-left: 38%;
+    background: rgba(25,25,255,0.8);
+    width:20%;
+
+}
+#signup .captcha input{
+    border:1px rgba(0,0,0,0.3) solid;
+    border-radius:5px;
+    height:1.8em;
+    width: 15em;
+}
+#signup .login{
+
+    margin:1em 0 0 1em;
+    border-right:1px rgba(0,0,0,0.2) solid;
+}
+#signup .noacc {
+    margin:1em;
+    margin-bottom: 2em;
+    border: none;
+    padding:1.8em;
 }
 /*HEADER SECTION*/
 #header{
