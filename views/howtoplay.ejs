@@ -8,32 +8,36 @@
     <script type="text/javascript" src="/javascript/htp.js">
     </script>
 
-    <link rel="stylesheet" type="text/css" href="CSS.css"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/gplmain.css"/>
 </head>
 <body>
-<div id="1">
-
-</div>
-
-<div id="trap1">
+<div id="header">
+    <ul id="rightbox">
+        <a href="/login"><li class="egder">Login</li></a>
+        <a href="/register"><li>Sign Up</li></a>
+    </ul>
+    <ul id="leftbox">
+        <a href="/myteam"><li class="egdel">My Team</li></a>
+        <a href="/next_match"><li>Next Match</li></a>
+        <a href="/points"><li>Points </li></a>                                                                      <!--Get Player points from Server-->
+        <a href="/league"><li>Standings</li></a>
+    </ul>
 </div>
 <div id="menu">
     <table id="box">
 
-        <td><a href="Main.html">Home</a></td>
-        <td><a href="HowTP.html">How To Play</a></td>
-        <td><a href="RS.html">Rules & Scoring</a></td>
-        <td><a href="prize.html">Prizes</a></td>
-        <td><a href="stats.html">Players & Coaches</a></td>
-        <td>My Team</td>
-        <td><a href="Sponsors.html">Sponsors</a></td>
+        <td><a href="/">Home</a></td>
+        <td><a href="/howtoplay">How To Play</a></td>
+        <td><a href="/rules">Rules & Scoring</a></td>
+        <td><a href="/prize">Prizes</a></td>
+        <td><a href="/players">Players & Coaches</a></td>
+        <td><a href="/sponsor">Sponsors</a></td>
 
     </table>
 </div>
-<img class="back" src="waca.jpg"/>
 
-<div id="trap2">
-</div>
+
+
 <div id="m">
     <div id="leftm">
         <ol>
@@ -67,8 +71,13 @@
         </ol>
     </div>
     <div id="rightm">
-        <iframe id="frlnk" src="htp/Abt.html"></iframe>
+        <iframe id="frlnk" src="/howtoplay/about"></iframe>
     </div>
+    <br/>
+    <br/>
+    <br/>
 </div>
+
+<div id="footer"><p>IEEE CS</p></div>
 </body>
 </html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>
+        GPL
+    </title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/gplmain.css"/>
+</head>
+<body>
+
+
+
+<div id="header">
+    <ul id="rightbox">
+        <a href="/login"><li class="egder">Login</li></a>
+        <a href="/register"><li>Sign Up</li></a>
+    </ul>
+    <ul id="leftbox">
+        <a href="/myteam"><li class="egdel">My Team</li></a>
+        <a href="/next_match"><li>Next Match</li></a>
+        <a href="/points"><li>Points </li></a>                                                                      <!--Get Player points from Server-->
+        <a href="/league"><li>Standings</li></a>
+    </ul>
+</div>
+<div id="menu">
+    <table id="box">
+
+        <td><a href="/">Home</a></td>
+        <td><a href="/howtoplay">How To Play</a></td>
+        <td><a href="/rules">Rules & Scoring</a></td>
+        <td><a href="/prize">Prizes</a></td>
+        <td><a href="/players">Players & Coaches</a></td>
+        <td><a href="/sponsor">Sponsors</a></td>
+
+    </table>
+</div>
+<div id="signup" style="text-align:center;">
+    <form>
+
+        <fieldset class="basicinfo">
+            <table>
+                <tr><td><label>Name:</label></td> <td><input  class="text" type="text" value="" name="name"/></td></tr>
+                <tr><td><label>Password: </label></td><td> <input  class="text" type="password" value="" /></td></tr>
+                <tr><td><label>Confirm Password: </label></td><td> <input  class="text" type="password" value="" /></td></tr>
+             </table>
+        </fieldset>
+        <fieldset class="contactinfo">
+            <label>E-Mail: </label><input  class="text" type="email" value="" />
+                <label>Phone No:</label> <input  class="tel" type="text" value="" />
+        </fieldset>
+        <!--Will Insert Captcha elements later -->
+        <img class="ieee" src="/images/ieeecs%20logo.gif" />
+
+        <fieldset class="captcha">
+            <label><img src="/images/captcha.jpg" /></label><br/> <input type="text" value="tempcaptcha" />             <!-- captcha needs backend-->
+        </fieldset>
+        <fieldset class="tc">
+
+            <input type="checkbox" /> <label>I have read and agree to the Terms and Conditions and Privacy Policy.<br/></label>
+        </fieldset>
+        <button type="submit" value="Submit">Submit</button>
+
+    </form>
+
+</div>
+
+
+<footer id="footer"style="top:7em;"><p>IEEE CS</p></footer>
+</body>
+</html>
