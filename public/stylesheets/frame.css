@@ -1,17 +1,20 @@
-#head
-{
-background:rgba(25,25,25,1);
-width:42.3em;
-color:white;
-padding:0.3em;
-padding-left:1em;
-position:absolute;
-margin:0;
-font-weight:;
-font-size:1.2em;
-box-shadow:inset 0em 0em 1em rgba(255,255,255,0.5);
+
+#rightm header{
+
+    background:rgba(25,25,25,1);
+    width:100%/*42.3em*/;
+    color:white;
+    /*padding:0.3em;
+    padding-left:1em;*/
+    position:absolute;
+    margin:0;
+    font-weight:;
+    font-size:1.2em;
+    box-shadow:inset 0 0 1em rgba(255,255,255,0.5);
 }
-table {
+
+
+#rightm table {
     position:absolute;
     margin-top:5em;
     /*border:0.1em black solid;*/
@@ -22,15 +25,26 @@ table {
     padding-right: 0;
     padding-left:0;
 }
-td {
+#rightm td {
     padding:1em;
     padding-right:0;
 
 }
-img {
+#rightm img {
 
     width:7em;
     height:10em;
 
 
+}
+
+#dis
+{
+    display:block;
+
+}
+#nodis
+{
+
+display:none;
 }

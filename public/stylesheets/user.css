@@ -1,0 +1,316 @@
+a {
+    target:_self;
+    color:rgba(255, 255, 255,1);
+    text-decoration:none;
+}
+a:active{text-decoration:underline;}
+body {
+
+    background-color: rgba(25, 25, 25, 1) /*url("waca.jpg")*/;
+    overflow: visible;
+    width: 960px /*80em*/;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'PT Sans', sans-serif;
+}
+.ieee{
+    height:7em;
+    width:14em;
+    cursor: default;
+    margin:2em;
+}
+.button{
+
+    height:2em;
+    width:6em;
+    color:white;
+    font-size:1.5em;
+    background:rgba(255,25,25,1);
+    margin:1em;
+}
+.back {
+    height:42.5em;
+    width:85.4em;
+    position:absolute;
+    z-index:-1;
+    top:0;
+    left:0;
+    margin:0;
+}
+.im {
+    margin-top:3em;
+    text-align: center;
+}
+
+#menu{
+
+    background:rgba(0,0,0,0.5);
+    width:100% /*79.4em*/;
+    position:relative;
+    height:auto;
+    left:0;
+    margin:auto;
+    top:2em;
+    padding:0.3em 0;
+    box-shadow:inset 0em 0.1em 0.1em rgba(255,255,255,0.5),inset 0em -0.1em 0.1em rgba(255,255,255,0.5),inset 0 0.2em 0.5em rgba(255,255,255,0.2),inset 0 -0.2em 0.5em rgba(255,255,255,0.2);
+
+    border-radius:5px;
+}
+#menu #box{
+    margin:0;
+    margin-left:2.2em;
+
+
+    padding:0;
+    width:auto;
+    position:relative;
+
+    z-index:2;
+}
+#menu #box td{
+    float:left;
+    display:block;
+    position:relative;
+
+    overflow:hidden;
+    color:rgba(255, 255, 255,1);
+    height:auto;
+    font-size:1.2em;
+    font-weight:bold;
+    margin:0;
+    left:1em;
+    margin-right:2em;
+    /*border-right:1px rgba(0, 172, 237,0.3) solid;*/
+}
+
+#menu #box td:hover{
+    text-shadow: 0.1em 0.1em rgba(255,255,255,0.1);
+    /*left:2em;
+    padding-left:0;
+    margin-right:2em;
+    font-size:1.25em;
+    text-color:rgba(0,0,0,1);
+        background: rgba(255,255,255,1);*/
+    top:-1px;
+}
+
+
+#m{
+    background:rgba(255,255,255,0);
+    width:100%/*75em*/;
+    position:relative;
+    height:40em;
+    top:3em;
+    overflow:visible;
+    left:0;
+    padding:0;
+    margin:0;
+
+
+}
+#leftm
+{
+    width:30%;
+    height:auto/*36em*/;
+    float:left;
+    margin:0;
+    border-radius: 5px;
+    /*box-shadow:inset 0em 0.1em 0.1em rgba(255,255,255,0.5),inset 0em -0.1em 0.1em rgba(255,255,255,0.5),inset 0 0.2em 0.5em rgba(255,255,255,0.2),inset 0 -0.2em 0.5em rgba(255,255,255,0.2);
+    text-align: center;
+      background:rgba(0,0,0,1);*/
+    border-right:0.2em solid rgba(255,255,255,0.5);
+    padding:0;
+    color: rgba(255,255,255,1);
+    /*margin-top: 3em;*/
+    position:relative;
+    font-weight: bold;
+    overflow:visible;
+}
+#leftm a{
+    text-color:white;
+}
+#leftm ul{
+    margin:0;
+    padding-left:0;
+}
+#leftm li
+{
+    color:white;
+    width:100%;
+    border-radius: 5px;
+    position:relative;
+    padding:1em;
+    margin:0;
+    list-style:none;
+    left:0;
+    background:rgba(0,0,0,1);
+    box-shadow:inset 0 0.1em 0.1em rgba(255,255,255,0.5),inset 0 -0.1em 0.1em rgba(255,255,255,0.5),inset 0 0.2em 0.5em rgba(255,255,255,0.2),inset 0 -0.2em 0.5em rgba(255,255,255,0.2);
+
+}
+#leftm li:hover{
+    background:rgba(255,255,255,1);
+    box-shadow:inset 0 0.1em 0.1em rgba(0,0,0,0.5),
+               inset 0 -0.1em 0.1em rgba(0,0,0,0.5),
+               inset 0 0.2em 0.5em rgba(0,0,0,0.2),
+               inset 0 -0.2em 0.5em rgba(0,0,0,0.2),
+               inset 0 0.3em 1em rgba(0,0,0,0.6),
+               inset 0 -0.3em 1em rgba(0,0,0,0.6);
+
+    color:black;
+    padding:1em;
+    cursor:pointer;
+}
+#leftm img {
+    height:6em;
+    width:13em;
+    cursor: default;
+}
+#leftm a {
+    text-decoration: none;
+    color:black;
+}
+
+#rightm {
+    padding:0;
+    margin:0;
+    /* margin-top:3em;*/
+    margin-left:30.4%/*21em*/;
+    width:69.6%/*50em*/;
+    height:auto;
+    background:rgba(255,255,255,0.8);
+    position: absolute;
+
+}
+
+#h
+{
+    text-align:center;
+    background:rgba(25,25,25,1);
+    width:100%/*61.2em*/;
+    color:white;
+    padding:0.3em 0;
+
+    position:relative;
+    margin:0;
+
+    font-size:1.2em;
+    box-shadow:inset 0 0 1em rgba(255,255,255,0.5);
+}
+
+
+#nottemp{}
+#temp li
+{
+
+    background:rgba(25,25,25,1);
+    box-shadow:inset 0 0 2em rgba(255,255,255,0.2);
+    color:White;
+    padding:1em;
+    cursor:pointer;
+
+}
+
+
+/*HEADER SECTION*/
+#header{
+    margin:0;
+    top:0;
+    border-radius:0 0 5px 5px;
+    padding:0;
+    height: 40px;
+    width: 100%/*84.4em*/;
+    background:rgba(0,0,0,1);
+    position:relative;
+    left:0;
+    color:rgba(255,255,255,1);
+    box-shadow:inset 0.1em -0.1em 0.1em rgba(255,255,255,0.5),inset -0.1em -0.1em 0.1em rgba(255,255,255,0.5),inset 0 -0.3em 0.5em rgba(255,255,255,0.2);
+}
+
+.edger{
+    border-radius:0 0 5px 0;
+}
+
+#header #rightbox {
+    margin:0;
+    color:rgba(255,255,255,1);
+
+}
+
+#header #rightbox li{
+    margin:0;
+    display:inline-block;
+    list-style:none;
+    float:right;
+    border-left:0 white solid;
+    padding:0.3em;
+    padding-left:0.4em;
+    padding-top:0.5em;
+    height:27px;
+    box-shadow:inset 0.1em 0 0 rgba(255,255,255,0.6),inset -0.1em 0 0.2em rgba(255,255,255,0.3),inset 0.1em 0 0.5em rgba(255,255,255,0.3);
+    font-weight:bold;
+
+}
+.edgel{
+    border-radius:0 0 0 5px;
+}
+#header #leftbox {
+    margin:0;
+    color:rgba(255,255,255,1);
+    padding:0;
+}
+#header #leftbox li{
+    margin:0;
+    display:inline-block;
+    list-style:none;
+    float:left;
+    border-left:0 white solid;
+    padding:0.3em;
+    padding-left:0.4em;
+    padding-top:0.5em;
+    height:27px;
+    box-shadow:inset -0.1em 0 0 rgba(255,255,255,0.6),inset 0.1em 0 0.2em rgba(255,255,255,0.3),inset -0.1em 0 0.5em rgba(255,255,255,0.3);
+    font-weight:bold;
+    left:0;
+
+
+}
+#header li:hover{
+
+    background:rgba(255,255,255,1);
+    color:rgba(0,0,0,1);
+
+}
+
+#header #leftbox li:hover{
+
+    box-shadow:inset 0.1em 0 0.2em rgba(0,0,0,0.3),inset -0.1em 0 0.5em rgba(0,0,0,0.3);
+}
+#header #rightbox li:hover{
+
+    box-shadow:inset -0.1em 0 0.2em rgba(0,0,0,0.3),inset 0.1em 0 0.5em rgba(0,0,0,0.3);
+}
+
+
+
+
+/*FOOTER SECTION */
+#footer {
+    margin:0;
+    top:2em;
+    margin-top:1em;
+    border-radius:5px 5px 0px 0px;
+    height: auto;
+    width: 100%/84.4em/;
+    background:rgba(0,0,0,1);
+    position:relative;
+    left:0;
+    text-color:rgba(255,255,255,1);
+    box-shadow:inset 0.1em 0.1em 0.1em rgba(255,255,255,0.5),inset -0.1em 0.1em 0.1em rgba(255,255,255,0.5),inset 0 0.3em 0.5em rgba(255,255,255,0.2);
+
+}
+#footer p{
+    padding:0.5em;
+    color:white;
+}
