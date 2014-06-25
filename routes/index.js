@@ -1,6 +1,11 @@
 var express = require('express');
+//var database = require('../database');
+var http = require('http');
+var querystring = require('querystring');
 var router = express.Router();
-
+var util = require('util');
+var fs = require('fs');
+var url = require('url');
 /* GET home page. */
 router.get('/', function (req, res) {   //homepage, option for login and signup
     res.render('Main', { });
@@ -11,8 +16,24 @@ router.get('/register', function (req, res) {   // page to register
 });
 
 router.get('/registerproceed', function (req, res) {   // page to retrieve register data - a dummy page
-    res.render('register', { });
+    var server = http.createServer(function (req, res) {
+
+        var url_parts = url.parse(req.url, true);
+        console.log(url_parts);
+
+        if (url_parts.pathname == '/register')
+            getData(res, url_parts);
+        // res.render('register', { });
+    });
 });
+function getData(res, url_parts) {
+    var uname = url_parts.query.name;
+    var password = url_parts.query.password;
+    var confpassword = url_parts.query.confirm;
+    console.log(uname);
+    console.log(password);
+    console.log(confpassword);
+}
 
 
 router.get('/login', function (req, res) {      // page to login

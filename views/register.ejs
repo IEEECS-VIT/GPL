@@ -37,14 +37,20 @@
     </table>
 </div>
 <div id="signup" style="text-align:center;">
-    <form method>
+    <form method="post">
 
         <fieldset class="basicinfo">
         <table>
                 <tr><td><label>Name:</label></td> <td><input  class="text" type="text" value="" name="name"/></td></tr>
-                <tr><td><label>Password: </label></td><td> <input  class="text" type="password" value="" /></td></tr>
-                <tr><td><label>Confirm Password: </label></td><td> <input  class="text" type="password" value="" /></td></tr>
-             </table>
+            <tr>
+                <td><label>Password: </label></td>
+                <td><input class="text" type="password" value="" name="password"/></td>
+            </tr>
+            <tr>
+                <td><label>Confirm Password: </label></td>
+                <td><input class="text" type="password" value="" name="confirm"/></td>
+            </tr>
+        </table>
         </fieldset>
         <fieldset class="contactinfo">
             <label>E-Mail: </label><input  class="text" type="email" value="" />
