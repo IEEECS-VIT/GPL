@@ -14,8 +14,8 @@ router.get('/', function (req, res) {   //homepage, option for login and signup
 router.get('/register', function (req, res) {   // page to register
     res.render('register', { });
 });
-
-router.get('/registerproceed', function (req, res) {   // page to retrieve register data - a dummy page
+/*
+ router.get('/registerproceed', function (req, res) {   // page to retrieve register data - a dummy page
     var server = http.createServer(function (req, res) {
 
         var url_parts = url.parse(req.url, true);
@@ -34,8 +34,8 @@ function getData(res, url_parts) {
     console.log(password);
     console.log(confpassword);
 }
-
-
+ Must be rewritten
+ */
 router.get('/login', function (req, res) {      // page to login
     res.render('login', { });
 });
@@ -62,12 +62,6 @@ router.get('/sponsor', function (req, res) {     // sponsors page
 
 router.get('/players', function (req, res) {     // page for all players, only available if he has no squad
     res.render('stats', { });
-});
-
-router.get('/express', function (req, res) {    //Please add comment to explain
-    // Pull from Database
-    // variable
-    res.render('express', { title: 'Express' });
 });
 
 router.get('/squad', function (req, res) {      // page to view the 16 player squad of a particular user
