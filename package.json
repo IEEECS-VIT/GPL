@@ -1,8 +1,8 @@
 {
     "name": "GPL",
     "version": "0.0.1",
-    "description": "",
-    "homepage": "",
+    "description": "GraVITas Premier League",
+    "homepage": "http://gpl-dev.herokuapp.com/",
     "bugs": {
         "url": "https://github.com/IEEECS-VIT/GPL/issues",
         "email": "neelam.aneesh@gmail.com"
