@@ -46,7 +46,9 @@
         "body-parser": "~1.4.3",
         "debug": "~1.0.2",
         "ejs": "~1.0.0",
-        "mongodb": "~1.4.7"
+        "mongodb": "~1.4.7",
+        "moment": "~2.7.0",
+        "emailjs": "0.3.8"
     },
     "repository": {
         "type": "git",
