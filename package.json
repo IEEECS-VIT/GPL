@@ -48,7 +48,9 @@
         "ejs": "~1.0.0",
         "mongodb": "~1.4.7",
         "moment": "~2.7.0",
-        "emailjs": "0.3.8"
+        "emailjs": "0.3.8",
+        "express-session": "1.6.1",
+        "connect": "2.21.1"
     },
     "repository": {
         "type": "git",

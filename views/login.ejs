@@ -37,12 +37,18 @@
     </table>
 </div>
 <div id="signup" style="text-align:center;">
-    <form>
+    <form method="post">
 
         <fieldset class="login">
             <table>
-                <tr><td><label>E-Mail:</label></td> <td><input  class="text" type="email" value="" /></td></tr>
-                <tr><td><label>Password: </label></td><td> <input  class="text" type="password" value="" /></td></tr>
+                <tr>
+                    <td><label>Name:</label></td>
+                    <td><input class="text" type="text" value="" name="user"/></td>
+                </tr>
+                <tr>
+                    <td><label>Password: </label></td>
+                    <td><input class="text" type="password" value="" name="pass"/></td>
+                </tr>
                 <tr><td></td><td><label><button type="submit" value="Submit">Login</button></label></td>
             </table>
         </fieldset>

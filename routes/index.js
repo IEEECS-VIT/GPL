@@ -1,4 +1,5 @@
 var express = require('express');
+var express_session = require('express-session');
 //var database = require('../database');
 var http = require('http');
 var querystring = require('querystring');
@@ -8,6 +9,13 @@ var fs = require('fs');
 var url = require('url');
 var AM = require('account-manager.js');
 var EM = require('email-dispatcher.js');
+var connect = require('connect');
+
+
+connect().use(connect.cookieParser());
+connect().use(connect.session({ secret: 'keyboard cat', key: 'sid', cookie: { secure: true }}))
+
+
 /* GET home page. */
 router.get('/', function (req, res) { // Login page, attempting auto-login
 // check if the user's credentials are saved in a cookie //
@@ -32,14 +40,27 @@ router.get('/login', function (req, res) {      // page to login
     res.render('login', { });
 });
 
+router.post('/login', function (req, res) {
 
-router.get('/loginproceed', function (req, res) {      // page to retrieve login data - a dummy page
-    var username = req.query.username;
-    var password = req.query.password;
-    console.log(username);
-    console.log(password);
-    res.render('login', { });
-});
+    var user = req.param('user');
+    var pass = req.param('pass');
+
+    console.log(user);
+    console.log(pass);
+    AM.manualLogin(user, pass, function (e, o) {
+        if (!o) {
+            res.send(e, 400);
+        } else {
+            req.session.name = o;
+            if (req.param('remember-me') == 'true') {
+                res.cookie('user', o.user, { maxAge: 900000 });
+                res.cookie('pass', o.pass, { maxAge: 900000 });
+            }
+            res.send(o, 200);
+        }
+    });
+
+})
 
 
 router.get('/register', function (req, res) {   // page to register
@@ -61,9 +82,6 @@ router.post('/register', function (req, res) {
     });
 });
 
-router.get('/registerproceed', function (req, res) {   // page to retrieve register data - a dummy page
-
-});
 
 
 router.get('/prize', function (req, res) {       //// page to view prizes
