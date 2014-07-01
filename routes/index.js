@@ -45,7 +45,21 @@ router.get('/loginproceed', function (req, res) {      // page to retrieve login
 router.get('/register', function (req, res) {   // page to register
     res.render('register', { });
 });
+router.post('/register', function (req, res) {
+    AM.addNewAccount({
+        user: req.param('name'),
+        pass: req.param('password'),
 
+        email: req.param('email'),
+        phone: req.param('phone')
+    }, function (e) {
+        if (e) {
+            res.send(e, 400);
+        } else {
+            res.send('ok', 200);
+        }
+    });
+});
 
 router.get('/registerproceed', function (req, res) {   // page to retrieve register data - a dummy page
 
