@@ -11,4 +11,5 @@ The GPL code repository.
     $ npm start
     
 ### External Requirements
-* None at this time
+* A MongoDB instance running locally or valid MONGOLAB_URI/MONGOHQ_URI in process.env 
+* A valid COOKIE_SECRET in process.env for better security (Optional)

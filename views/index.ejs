@@ -9,8 +9,6 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/gplmain.css"/>
 </head>
 <body>
-
-
 <div id="header">
     <ul id="rightbox">
         <a href="/login">
@@ -35,6 +33,7 @@
         </a>
     </ul>
 </div>
+
 <div id="menu">
     <table id="box">
 
@@ -47,37 +46,45 @@
 
     </table>
 </div>
-<div id="signup" style="text-align:center;">
-    <form method="post" action="/login">
-
-        <fieldset class="login">
-            <table>
-                <tr>
-                    <td><label>Name:</label></td>
-                    <td><input class="text" type="text" value="" name="name"/></td>
-                </tr>
-                <tr>
-                    <td><label>Password: </label></td>
-                    <td><input class="text" type="password" value="" name="password"/></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><label>
-                            <button type="submit" value="Submit">Login</button>
-                        </label></td>
-            </table>
-        </fieldset>
-
-        <fieldset class="noacc">
-            <p> Don't have an account?<br/> <br/>Sign up for free!</p><br/>
-            <input type="button" class="button" onclick="window.location.href='/register'" value="Sign Up"/>
-        </fieldset>
-        <img class="ieee" src="/images/ieeecs%20logo.gif" style="margin-top: 0;"/>
-    </form>
-
+<div class="im">
+    <img src="/images/gplmain2.gif"/>
 </div>
 
 
-<footer id="footer" style="top:7em;"><p>IEEE CS</p></footer>
+<!--<img class="back" src="/images/background.jpg"/>-->
+
+<div id="bar">
+    <!--Need better content for white box-->
+    <table>
+
+
+        <tr>
+            <td style="padding-left:0em;"><p>Feel what it is to be an owner.....</p></td>
+        </tr>
+        <tr>
+            <td>1.Create your team.</td>
+            <td style="padding-left:3em;">2.Earn points.</td>
+            <td style="padding-left:5em;">3.Win Prizes.</td>
+        </tr>
+        <tr>
+            <p> IEEE-Computer Society presents the first ever GRAVITAS PREMIER LEAGUE </p>
+
+        </tr>
+
+
+    </table>
+
+</div>
+<div id="Signupb">
+    <!--Javascript Required for login -->
+    <input type="Button" value="Sign Up" onclick="window.location.href='/register'">
+    <input type="Button" value="Login" onclick="window.location.href='/login'">
+
+</div>
+<footer id="footer">
+    <p>IEEE CS</p>
+</footer>
+<!--<div id="trap2">
+</div>-->
 </body>
 </html>
