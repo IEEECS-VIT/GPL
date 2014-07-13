@@ -1,8 +1,8 @@
 var mongo = require('../mongo');
 var express = require('express');
+// var validator = require('validator');
 var router = express.Router();
 // var email_dispatch = require('emailjs'); Implement this later, when the view for forgot password is also present
-var validator = require('validator');
 
 
 router.get('/', function (req, res) {
@@ -23,7 +23,7 @@ router.post('/login', function (req, res) {
 
     // teamName and password Validation Starts
 
-    validator.check()
+    // validator.check()
     if (req.cookies.name) res.clearCookie('name');
     var credentials = {
         '_id': teamName,
@@ -67,7 +67,7 @@ router.post('/register', function (req, res) {
     var phone = req.body.phone;
     var captcha = req.body.captcha;
 
-    teamName
+    // teamName
 
     if ((password === confirmPassword) && captcha) // check if captcha is correct
     {
