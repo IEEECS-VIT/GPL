@@ -8,7 +8,6 @@
 </head>
 <body style="background:/*url('/images/wallpaper.jpg')*/rgba(32,83,172,0.5);font-family: 'PT Sans', sans-serif;height:100%;">
 <div style="min-height: 100%">
-
     <div class="large-12 top-bar" style="overflow: visible;">
         <section class="top-bar-section small-only-text-center">
             <ul class="left">
@@ -18,14 +17,13 @@
                 <li><a href="#">Sign In</a></li>
             </ul>
         </section>
-    </div>
-    <!-- top bar -->
+    </div>                                          <!-- top bar -->
     <div class="row" align="center">
 
-        <div class="small-12 medium-12 large-12 columns"
-             style="background:rgba(0,123,184,0.5); border-radius: 0 0 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);float: left;text-align: left ">
+        <div class="small-12 medium-12 large-12 columns" style="background:rgba(0,123,184,0.5); border-radius: 0 0 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);float: left;text-align: left ">
             <form>
                 <fieldset>
+                    <legend>Account Details</legend>
                     <div class="row">
                         <div class="small-6">
                             <div class="row">
@@ -66,54 +64,76 @@
                         <!--conf pass -->
                 </fieldset>
                 <fieldset>
-                        <div class="small-6 columns">
+                    <legend>Manager Details</legend>
                             <div class="row">
-                                <div class="small-3 columns">
-                                    <label for="email" class="right inline" style="color: white;">Email 1: </label>
-                                </div>
-                                <div class="small-9 columns">
-                                    <input type="email" id="email" placeholder="example@domain.com">
+                                <div class="small-12 large-12 columns">
+                                    <div class="small-2 large-2 columns">
+                                        <label for="email" class="right inline" style="color: white;">Email 1: </label>
+                                    </div>
+                                    <div class="small-4 large-4 columns">
+                                        <input type="email" id="email" placeholder="example@domain.com">
+                                    </div>
+                                    <div class="small-2 large-2 columns">
+                                        <label for="email" class="right inline" style="color:white;">Email 2:</label>
+                                    </div>
+                                    <div class="small-4 large-4 columns">
+                                        <input type="email" id="email2" placeholder="example@domain.com" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <!--email -->
 
-                        <div class="small-6">
-                            <div class="row">
-                                <div class="small-3 columns">
-                                    <label for="pno" class="right inline" style="color: white;">Mobile 1: </label>
-                                </div>
-                                <div class="small-9 columns">
-                                    <input type="text" id="pno" placeholder="Mobile Number">
-                                </div>
+                    <div class="row">
+                        <div class="small-12 large-12 columns">
+                            <div class="small-2 large-2 columns">
+                                <label for="mobile" class="right inline" style="color: white;">Mobile 1: </label>
+                            </div>
+                            <div class="small-4 large-4 columns">
+                                <input type="text" id="pno" placeholder="Mobile Number">
+                            </div>
+                            <div class="small-2 large-2 columns">
+                                <label for="text" class="right inline" style="color:white;">Mobile 2:</label>
+                            </div>
+                            <div class="small-4 large-4 columns">
+                                <input type="text" id="pno2" placeholder="Mobile Manager" />
                             </div>
                         </div>
+                    </div>
                     <!-- phone -->
 
 
-                    <div class="small-12 medium-12 large-12">
-                        <div class="small-6 medium-6 large-6">
-                            <div class="row">
-                                <div class="small-3 columns">
-                                    <label for="manager" class="right inline" style="color: white;">Manager 1: </label>
-                                </div>
-                                <div class="small-9 columns">
-                                    <input type="text" id="manager" placeholder="Manager Name">
-                                </div>
+                    <div class="row">
+                        <div class="small-12 large-12 columns">
+                            <div class="small-2 large-2 columns">
+                                <label for="manager" class="right inline" style="color: white;">Manager 1: </label>
+                            </div>
+                            <div class="small-4 large-4 columns">
+                                <input type="text" id="manager" placeholder="Manager Name">
+                            </div>
+                            <div class="small-2 large-2 columns">
+                                <label for="manager" class="right inline" style="color:white;">Manager 2:</label>
+                            </div>
+                            <div class="small-4 large-4 columns">
+                                <input type="text" id="manager2" placeholder="Manager Name" />
                             </div>
                         </div>
-                        <!-- Manager 1-->
+                    </div>
+                        <!-- Managers-->
 
 
-                        <div class="small-6 medium-6 large-6">
-                            <div class="row">
-                                <div class="small-3 columns">
-                                    <label for="reg" class="right inline" style="color: white;">Registration Number(VIT
-                                        Students) 1: </label>
-                                </div>
-                                <div class="small-9 columns">
-                                    <input type="text" id="reg" placeholder="13BEC0547">
-                                </div>
+                    <div class="row">
+                        <div class="small-12 large-12 columns">
+                            <div class="small-2 large-2 columns">
+                                <label for="reg" class="right inline" style="color: white;">Registration Number 1 (VIT Students): </label>
+                            </div>
+                            <div class="small-4 large-4 columns">
+                                <input type="text" id="reg" placeholder="13BEC0547">
+                            </div>
+                            <div class="small-2 large-2 columns">
+                                <label for="reg" class="right inline" style="color:white;">Registration Number 2 (VIT Students): </label>
+                            </div>
+                            <div class="small-4 large-4 columns">
+                                <input type="text" id="reg2" placeholder="13BCE0139" />
                             </div>
                         </div>
                     </div>
@@ -123,12 +143,8 @@
                                align="center"/>
                     </div>
                  </div>
-                </fieldset>
-            </form>
-        </div>
-
     </div>
-    <!-- content -->
+
 </div>
 <footer class="large-12" style="bottom:0; position:relative;">
     <div class="top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">
