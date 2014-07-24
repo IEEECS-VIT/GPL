@@ -58,7 +58,10 @@ router.get('/register', function (req, res) {
     if (req.cookies.name) res.redirect('/home');
     else res.render('register', { });
 });
-
+router.get('/home', function (req, res) {
+    if (req.cookies.name) res.redirect('/home');
+    else res.render('home', { });
+});
 router.post('/register', function (req, res) {
     var teamName = req.body.name;
     var password = req.body.password;
