@@ -132,17 +132,9 @@ router.get('/prize', function (req, res) // page to view prizes
     res.render('prize', { });
 });
 
-router.get('/howtoplay', function (req, res) // page for how to play
-{
-    res.render('howtoplay', { });
-});
 
-router.get('/rules', function (req, res) // page to view rules
-{
-    res.render('rules&scoring', { });
-});
 
-router.get('/sponsor', function (req, res) // sponsors page
+router.get('/sponsors', function (req, res) // sponsors page
 {
     res.render('sponsors', { });
 });
