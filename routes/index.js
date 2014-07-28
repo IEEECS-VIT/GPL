@@ -1,4 +1,4 @@
-var mongo = require('../mongo');
+var mongo = require('../mongoUsers');
 var express = require('express');
 // var validator = require('validator');
 var router = express.Router();
@@ -41,7 +41,7 @@ router.post('/login', function (req, res) {
             res.redirect('/home');
         }
     };
-    mongo.auth(credentials, onAuth);
+    mongo_users.auth(credentials, onAuth);
 });
 
 
@@ -101,7 +101,7 @@ router.post('/register', function (req, res) {
                 res.redirect('/home');
             }
         };
-        mongo.insert(newUser, onInsert);
+        mongo_users.insert(newUser, onInsert);
     }
     else {
         console.log('Captcha is wrong or Password!=Confirm Password');
@@ -124,7 +124,7 @@ router.get('/home', function (req, res) // page to user home
                 res.render('home', {name: doc['_id']}); // Home View is not complete, must implement that
             }
         };
-        mongo.fetch(credentials, onFetch);
+        mongo_users.fetch(credentials, onFetch);
     }
     else res.redirect('/login');
 });
@@ -145,6 +145,8 @@ router.get('/sponsors', function (req, res) // sponsors page
 
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
+    var teamname=req.cookies.name;
+
     res.render('stats', { });
 });
 
