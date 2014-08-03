@@ -229,7 +229,48 @@ router.get('/matchday', function (req, res) // page to view next match schedule 
 
 router.get('/leaderboard', function (req, res) // Leaderboard/Standings
 {
-    res.render('leaderboard', { });
+    if (req.cookies.name)
+    {
+        res.redirect('/home');
+    }
+    else
+    {
+        res.render('leaderboard', { });
+      /*  var MongoClient = require('mongodb').MongoClient;
+
+        var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
+
+        exports.insert = function (doc, callback)
+        {
+            var onConnect = function (err, db)
+            {
+                if (err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    var collection = db.collection('users');
+                    var onInsert = function (err, docs)
+                    {
+                        db.close();
+                        if (err)
+                        {
+                            callback(err, null);
+                        }
+                        else
+                        {
+                            callback(null, docs);
+                        }
+                    };
+                    collection.insert(doc, {w: 1}, onInsert);
+                }
+            };
+            MongoClient.connect(mongoUri, onConnect);
+        };
+*/
+        // acquire json array from mongodb database and populate page
+    }
 });
 
 router.get('/forum', function (req, res) // User Forums
