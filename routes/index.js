@@ -1,4 +1,4 @@
-var mongo = require('../mongoUsers');
+var mongo_users = require('../mongoUsers');
 var express = require('express');
 // var validator = require('validator');
 var router = express.Router();
