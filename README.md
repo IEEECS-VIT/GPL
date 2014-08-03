@@ -1,13 +1,24 @@
 GPL
 ===
 
-The GPL code repository.
+The GraVITas Premier League code repository.
 
-#### Instructions:
+Please report any bugs or issues [here] (https://github.com/IEEECS-VIT/GPL/issues) 
+
+#### Instructions for Installation:
 ###### Install Node.js 0.10.x 
 ###### Install all dependencies
+
     $ npm install
+    
+###### Install frontend dependencies manually (Microsoft Windows only)
+The npm postinstall script to run bower may not work properly on Windows
+
+    # npm -g install bower
+    $ bower install
+    
 ###### Run the server locally at port 3000 or "PORT" in process.env
+
     $ npm start
     
 #### External Requirements:
