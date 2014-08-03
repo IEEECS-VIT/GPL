@@ -5,6 +5,8 @@
     <link type="text/css" rel="stylesheet" href="/bower_components/foundation/css/foundation.css"/>
     <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
     <link href="/stylesheets/gplamain.css" rel="stylesheet" type="text/css"/>
+    <script src="/bower_components/foundation/js/foundation.dropdown.js"></script>
+    <script src="/bower_components/foundation/js/foundation.topbar.js"></script>
 </head>
 <body style="background:url('/images/background.png');font-family: 'PT Sans', sans-serif;height:100%;">
 <div style="min-height: 100%">
@@ -14,9 +16,58 @@
                 <li><a href="/">Gravitas Premier League</a></li>
             </ul>
             <ul class="right">
-                <li><a href="#">Sign In</a></li>
+                <li class="has-dropdown not-click" style="border-radius: 5px">
+                    <a href="#" style="border-radius: 5px">Sign In</a>
+                    <ul class="dropdown" style="width:300%;">
+                        <li class="title back js-generated">
+                            <h5>
+                                <a href="javascript:void(0)">
+                                    Back
+                                </a>
+                            </h5>
+                        </li>
 
 
+                        <li>
+                            <form style="margin-top: 3%">
+                                <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
+                                    <div class="row">
+                                        <div class="small-3 columns" style="margin-left: -5%">
+                                            <label for="team" class="right inline" style="color: white;">Team
+                                                Name: </label>
+                                        </div>
+                                        <div class="small-9 columns">
+                                            <input type="text" id="team" placeholder="Team Name"
+                                                   style="margin:-4% 0 0 1%;border-radius: 5px">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+
+                            <!--Username/Team Name -->
+
+                            <form>
+                                <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
+                                    <div class="row" style="margin-top: 2%">
+                                        <div class="small-3 columns" style="margin-left: -5%">
+                                            <label for="pass" class="right inline"
+                                                   style="color: white;">Password: </label>
+                                        </div>
+                                        <div class="small-9 columns">
+                                            <input type="password" id="pass" placeholder="Password"
+                                                   style="margin:-4% 0 0 1%;border-radius: 5px">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- password-->
+
+                            </form>
+                        </li>
+                        <li class="divider"><a href="#">Forgot Password?</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                </li>
             </ul>
 
         </section>

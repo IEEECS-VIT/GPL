@@ -6,26 +6,19 @@ var MongoClient = require('mongodb').MongoClient;
 
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
-exports.insert = function (doc, callback)
-{
-    var onConnect = function (err, db)
-    {
-        if (err)
-        {
+exports.insert = function (doc, callback) {
+    var onConnect = function (err, db) {
+        if (err) {
             callback(err);
         }
-        else
-        {
+        else {
             var collection = db.collection('users');
-            var onInsert = function (err, docs)
-            {
+            var onInsert = function (err, docs) {
                 db.close();
-                if (err)
-                {
+                if (err) {
                     callback(err, null);
                 }
-                else
-                {
+                else {
                     callback(null, docs);
                 }
             };
@@ -35,37 +28,27 @@ exports.insert = function (doc, callback)
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.auth = function (doc, callback)
-{
-    var onConnect = function (err, db)
-    {
-        if (err)
-        {
+exports.auth = function (doc, callback) {
+    var onConnect = function (err, db) {
+        if (err) {
             callback(err);
         }
-        else
-        {
+        else {
             var collection = db.collection('users');
-            var onFetch = function (err, document)
-            {
-                if (err)
-                {
+            var onFetch = function (err, document) {
+                if (err) {
                     callback(err, null);
                 }
-                else if (document)
-                {
+                else if (document) {
                     db.close();
-                    if (doc['_id'] === document['_id'] && doc['password_hash'] === document['password_hash'])
-                    {
+                    if (doc['_id'] === document['_id'] && doc['password_hash'] === document['password_hash']) {
                         callback(null, doc);
                     }
-                    else
-                    {
+                    else {
                         callback(true, null);
                     }
                 }
-                else
-                {
+                else {
                     callback(true, null);
                 }
             };
@@ -75,38 +58,28 @@ exports.auth = function (doc, callback)
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.fetch = function (doc, callback)
-{
-    var onConnect = function (err, db)
-    {
-        if (err)
-        {
+exports.fetch = function (doc, callback) {
+    var onConnect = function (err, db) {
+        if (err) {
             callback(err);
         }
-        else
-        {
+        else {
             var collection = db.collection('users');
-            var onFetch = function (err, document)
-            {
-                if (err)
-                {
+            var onFetch = function (err, document) {
+                if (err) {
                     callback(err, null);
                 }
-                else if (document)
-                {
+                else if (document) {
                     db.close();
-                    if (doc['_id'] === document['_id'])
-                    {
+                    if (doc['_id'] === document['_id']) {
                         callback(null, doc);
                     }
-                    else
-                    {
+                    else {
                         callback(true, null);
                     }
 
                 }
-                else
-                {
+                else {
                     callback(true, null);
                 }
             };
