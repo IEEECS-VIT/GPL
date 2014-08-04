@@ -163,7 +163,10 @@ router.get('/prize', function (req, res) // page to view prizes
 {
     res.render('prize', { });
 });
-
+router.get('/forgot', function (req, res) // sponsors page
+{
+    res.render('forgot', { });
+});
 
 router.get('/sponsors', function (req, res) // sponsors page
 {
