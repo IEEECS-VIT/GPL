@@ -23,7 +23,16 @@
         </section>
     </div>
     <!-- top bar -->
-
+    <h1><%= title %></h1>
+    <ul>
+        <% for(var i=0; i<supplies.length; i++) { %>
+        <li>
+            <a href='supplies/<%= supplies[i] %>'>
+                <%= supplies[i] %>
+            </a>
+        </li>
+        <% } %>
+    </ul>
     <!-- content -->
 </div>
 <footer class="large-12" style="bottom:0; position:relative;">
