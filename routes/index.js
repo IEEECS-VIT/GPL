@@ -2,7 +2,7 @@ var mongo_users = require('../mongoUsers');
 var express = require('express');
 // var validator = require('validator');
 var router = express.Router();
-var mongo_players = require('../mongoPlayers');
+var mongo_players = require('../mongoPlayer');
 // var email_dispatch = require('emailjs'); Implement this later, when the view for forgot password is also present
 
 
