@@ -193,10 +193,12 @@ router.get('/players', function (req, res) // page for all players, only availab
             res.redirect('/home');
         }
         else{
-            res.render('players',documents)
+            res.render('players',{
+                Players: documents
+            });
         }
 
-    }
+    };
     mongo_players.fetchPlayers(onFetch);
 });
 
