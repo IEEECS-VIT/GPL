@@ -86,7 +86,7 @@ router.get('/players', function (req, res) {
         res.redirect('/players');
     }
     else {
-        res.render('home', { });
+        res.render('players', { });
     }
 });
 router.get('/rules', function (req, res) {
