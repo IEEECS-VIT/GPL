@@ -89,6 +89,14 @@ router.get('/rules', function (req, res) {
         res.render('rules', { });
     }
 });
+router.get('/forgot', function (req, res) {
+    if (req.cookies.name) {
+        res.redirect('/home');
+    }
+    else {
+        res.render('forgot', { });
+    }
+});
 router.get('/howtoplay', function (req, res) {
     if (req.cookies.name) {
         res.redirect('/home');
@@ -165,6 +173,10 @@ router.get('/prize', function (req, res) // page to view prizes
     res.render('prize', { });
 });
 
+router.get('/forgot', function (req, res) //forgot password page
+{
+    res.render('forgot', { });
+});
 
 router.get('/sponsors', function (req, res) // sponsors page
 {
