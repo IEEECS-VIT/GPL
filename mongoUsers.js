@@ -79,7 +79,8 @@ exports.fetch = function (doc, callback) {
                     }
 
                 }
-                else {
+                else
+                {
                     callback(true, null);
                 }
             };

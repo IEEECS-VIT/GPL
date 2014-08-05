@@ -2,6 +2,7 @@ var mongo_users = require('../mongoUsers');
 var express = require('express');
 // var validator = require('validator');
 var router = express.Router();
+var mongo_players = require('../mongoPlayers');
 // var email_dispatch = require('emailjs'); Implement this later, when the view for forgot password is also present
 
 
@@ -172,10 +173,21 @@ router.get('/sponsors', function (req, res) // sponsors page
 
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
-    var teamname = req.cookies.name;
+    var onFetch = function(err,documents)
+    {
+        if(err){
+            res.redirect('/home');
+        }
+        else{
+            res.render('players',documents)
+        }
 
-    res.render('stats', { });
+    }
+    mongo_players.fetchPlayers(onFetch);
 });
+
+
+
 
 router.get('/squad', function (req, res) // page to view the 16 player squad of a particular user
 {
