@@ -7,7 +7,9 @@
     <link href="/stylesheets/gplmain.css" rel="stylesheet" type="text/css"/>
     <script src="/bower_components/foundation/js/foundation/foundation.dropdown.js"></script>
     <script src="/bower_components/foundation/js/foundation/foundation.topbar.js"></script>
-    <script src="/bower_components/foundation/js/foundation/foundation.tab.js"></script>
+    <script src="/javascript/tabs.js"></script>
+
+
 </head>
 <body style="background:url('/images/background.png');font-family: 'PT Sans', sans-serif;height:100%;">
 <div style="min-height: 100%">
@@ -78,10 +80,10 @@
     <!-- top bar -->
     <div>
         <ul class="radius tabs" data-tab="">
-            <li class="tab-title active"><a href="#panel1">Tab 1</a></li>
-            <li class="tab-title"><a href="#panel2">Tab 2</a></li>
-            <li class="tab-title"><a href="#panel3">Tab 3</a></li>
-            <li class="tab-title"><a href="#panel4">Tab 4</a></li>
+            <li class="tab-title active" id="act1" onclick="tab(1)"><a href="#panel1">Tab 1</a></li>
+            <li class="tab-title" id="noact2" onclick="tab(2)"><a href="#panel2">Tab 2</a></li>
+            <li class="tab-title" id="noact3" onclick="tab(3)"><a href="#panel3">Tab 3</a></li>
+            <li class="tab-title" id="noact4" onclick="tab(4)"><a href="#panel4">Tab 4</a></li>
         </ul>
         <div class="tabs-content">
             <div class="content active" id="panel1">
