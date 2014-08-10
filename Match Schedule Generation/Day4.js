@@ -1,5 +1,5 @@
 /**
- * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 10/8/14.
+ * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 11/8/14.
  */
 
 
@@ -51,8 +51,8 @@ exports.gen_schedule=function()
 
                     for ( var i = 0; i < count/8;i++)
                     {
-                        var team1=[1,2,3,4];
-                        var team2=[7,5,6,8];
+                        var team1=[1,2,5,6];
+                        var team2=[4,3,8,7];
 
                         for(j=0;j<team1.length;j++)
                         {
@@ -63,10 +63,10 @@ exports.gen_schedule=function()
                                 "_id": match_count,
                                 "Team 1": i,
                                 "Team 2": j,
-                                "TimeStamp": "Day 3"
+                                "TimeStamp": "Day 4"
                             };
                             match_count++;
-                            SchedulePush.insert(match,"matchday3",onInsert)
+                            SchedulePush.insert(match,"matchday4",onInsert)
 
                         }
                     }
