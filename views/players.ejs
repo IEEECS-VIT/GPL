@@ -34,23 +34,25 @@
         </ul>
         <div class="tabs-content">
             <div class="content active" id="panel1">
-                <div style="height: 50em;overflow: scroll;background-color: rgba(60,60,60,0.2);padding:2%" class="large-12" >
-                <ol>
+                <div style="height: 50em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%" class="large-8" >
+                <table style="background-color: rgba(60,60,60,0.8); border: none;">
 
-                <% for(var i=0; i<Players.length; i++) { %>
-                    <li style="display: inline-block;background-color: rgba(200,200,100,1);padding:3%;border-radius: 5px;margin:1%;">
-                    <div class="large-12 medium-12 small-12 columns">
-                    <div class="large-6 medium-6 small-6 left" style="padding: 0;margin: 0;">
-                        <img src="/images/bat/aaron finch.jpg" style="width: 60%;margin: 0;" />
-                    </div>
-                    <div class="large-6 small-6 medium-6 right" style="text-align: center;">
-                    <%= Players[i].Name%><br />
-                    <%= Players[i].Price%>
-                    </div>
-                    </div>
-                    </li>
+                <% var j=0;var k=1;for(var i=0; i+j<Players.length+2; i+=3) { %>
+                    <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%">
+                    <%for(j=0; j<3;j++) { %>
+                    <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;">
+                    <%if(i+j<Players.length){%>
+                        <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float:left;" />
+                        <span style="margin-top: 50%;"><%= Players[i+j].Name%><br />
+                        <%= Players[i+j].Price%></span>
+                    </td>
+                    <%} else break;%>
+
+                    </td>
+                    <%}%>
+                    </tr>
                 <%}%>
-                </ol>
+                </table>
                 </div>
             </div>
             <div class="content" id="panel2">
