@@ -321,7 +321,7 @@ ob[1] = new team();
         if ((s[c[+t]] >= 44 && s[c[+t]] < 50))
             console.log("Batsman ", c[+t] + 1, " one hit away from a well deserving fifty. Will he make it ?\n\n");
         else if ((s[c[+t]] >= 94 && s[c[+t]] < 100))
-            console.log("Batsman ", c[+t] + 1, " knows there is a hundered for the taking if he can knuckle this one down....\n\n");
+            console.log("Batsman ", c[+t] + 1, " knows there is a hundred for the taking if he can knuckle this one down....\n\n");
         for (j = 1; j <= 6; ++j) {
             v = Math.abs(ob[+toss].r[c[+t]] - ob[+!toss].br[x]);
             k2 = (ob[+!toss].br[x]) / ((rand() % (ob[+!toss].bv[c[+t]] * ob[+!toss].br[x] / 750 + 1) + ob[+!toss].bv[x] * ob[+!toss].br[x] / 1000) * (rand() % (ob[+!toss].bs[x] * ob[+!toss].br[x] / 750 + 1) + ob[+!toss].bs[x] * ob[+!toss].br[x] / 1000) * (rand() % (ob[+!toss].ec[x] * ob[+!toss].br[x] / 750 + 1) + ob[+!toss].ec[x] * ob[+!toss].br[x] / 1000));
