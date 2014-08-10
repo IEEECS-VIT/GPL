@@ -3,7 +3,7 @@
 <head>
     <title>GPL</title>
     <link type="text/css" rel="stylesheet" href="/bower_components/foundation/css/foundation.css"/>
-    <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
+    <!--<link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">-->
     <link href="/stylesheets/gplmain.css" rel="stylesheet" type="text/css"/>
     <script src="/bower_components/foundation/js/foundation/foundation.dropdown.js"></script>
     <script src="/bower_components/foundation/js/foundation/foundation.topbar.js"></script>
@@ -19,84 +19,48 @@
                 <li><a href="/">Gravitas Premier League</a></li>
             </ul>
             <ul class="right">
-                <li class="has-dropdown not-click" style="border-radius: 5px">
-                    <a href="#" style="border-radius: 5px">Sign In</a>
-                    <ul class="dropdown" style="width:300%;">
-                        <li class="title back js-generated">
-                            <h5>
-                                <a href="javascript:void(0)">
-                                    Back
-                                </a>
-                            </h5>
-                        </li>
-
-
-                        <li>
-                            <form style="margin-top: 3%">
-                                <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
-                                    <div class="row">
-                                        <div class="small-3 columns" style="margin-left: -5%">
-                                            <label for="team" class="right inline" style="color: white;">Team
-                                                Name: </label>
-                                        </div>
-                                        <div class="small-9 columns">
-                                            <input type="text" id="team" placeholder="Team Name"
-                                                   style="margin:-4% 0 0 1%;border-radius: 5px">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-
-
-                            <!--Username/Team Name -->
-
-                            <form>
-                                <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
-                                    <div class="row" style="margin-top: 2%">
-                                        <div class="small-3 columns" style="margin-left: -5%">
-                                            <label for="pass" class="right inline"
-                                                   style="color: white;">Password: </label>
-                                        </div>
-                                        <div class="small-9 columns">
-                                            <input type="password" id="pass" placeholder="Password"
-                                                   style="margin:-4% 0 0 1%;border-radius: 5px">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- password-->
-
-                            </form>
-                        </li>
-                        <li>
-                            <input type="submit" align="center" class="button [tiny small large]" value="Login" style="border-radius: 5px;background: rgba(30,30,30,1)" />
-                        </li>
-                        <li class="divider"><a href="/forgot">Forgot Password?</a></li>
-                    </ul>
-                </li>
+                <li><a href="#">Log Out</a></li>
             </ul>
 
         </section>
     </div>
     <!-- top bar -->
     <div>
-        <ul class="radius tabs" data-tab="">
-            <li class="tab-title active" id="act1" onclick="tab(1)"><a href="#panel1">Tab 1</a></li>
-            <li class="tab-title" id="noact2" onclick="tab(2)"><a href="#panel2">Tab 2</a></li>
-            <li class="tab-title" id="noact3" onclick="tab(3)"><a href="#panel3">Tab 3</a></li>
-            <li class="tab-title" id="noact4" onclick="tab(4)"><a href="#panel4">Tab 4</a></li>
+        <ul class="radius tabs" data-tab="" style="margin-left: 31%;margin-top: 2%;">
+            <li class="tab-title active" id="act1" onclick="tab(1)"><a href="#">Batsmen</a></li>
+            <li class="tab-title" id="noact2" onclick="tab(2)"><a href="#">Bowlers</a></li>
+            <li class="tab-title" id="noact3" onclick="tab(3)"><a href="#">All Rounders</a></li>
+            <li class="tab-title" id="noact4" onclick="tab(4)"><a href="#">Coaches</a></li>
         </ul>
         <div class="tabs-content">
             <div class="content active" id="panel1">
-                <p>First panel content goes here. Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <div style="height: 50em;overflow: scroll;background-color: rgba(60,60,60,0.2);padding:2%" class="large-12" >
+                <ol>
+
+                <% for(var i=0; i<Players.length; i++) { %>
+                    <li style="display: inline-block;background-color: rgba(200,200,100,1);padding:3%;border-radius: 5px;margin:1%;">
+                    <div class="large-12 medium-12 small-12 columns">
+                    <div class="large-6 medium-6 small-6 left" style="padding: 0;margin: 0;">
+                        <img src="/images/bat/aaron finch.jpg" style="width: 60%;margin: 0;" />
+                    </div>
+                    <div class="large-6 small-6 medium-6 right" style="text-align: center;">
+                    <%= Players[i].Name%><br />
+                    <%= Players[i].Price%>
+                    </div>
+                    </div>
+                    </li>
+                <%}%>
+                </ol>
+                </div>
             </div>
             <div class="content" id="panel2">
-                <p>Second panel content goes here. Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>Second panel content goes here. Panel 2.</p>
             </div>
             <div class="content" id="panel3">
-                <p>Third panel content goes here. Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>Third panel content goes here. Panel 3.</p>
             </div>
             <div class="content" id="panel4">
-                <p>Fourth panel content goes here. Panel 4. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>Fourth panel content goes here. Panel 4.</p>
             </div>
         </div>
     </div>
