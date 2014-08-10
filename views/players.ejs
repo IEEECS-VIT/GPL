@@ -25,7 +25,7 @@
         </section>
     </div>
     <!-- top bar -->
-    <div>
+    <div class="small-12">
         <ul class="radius tabs" data-tab="" style="margin-left: 31%;margin-top: 2%;">
             <li class="tab-title active" id="act1" onclick="tab(1)"><a href="#">Batsmen</a></li>
             <li class="tab-title" id="noact2" onclick="tab(2)"><a href="#">Bowlers</a></li>
@@ -34,25 +34,29 @@
         </ul>
         <div class="tabs-content">
             <div class="content active" id="panel1">
-                <div style="height: 50em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%" class="large-8" >
-                <table style="background-color: rgba(60,60,60,0.8); border: none;">
+                <div class="large-12 small-12 columns">
+                <div class="large-3 small-12 left" style="height:auto;background-color: rgba(10,10,10,0.5);margin-right: 1%;margin-left: 2%;border-radius: 5px;">
+                    <h4 style="color: white;background-color: rgba(80,80,80,1);margin-top: 0;border-radius: 5px;padding: 2%;text-align: center;">Selected Players</h4>
+                    <br /><br /><br />
+                </div>
+                <div style="height: 50em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;" class="large-8 small-12 right" >
+                <table cellspacing="10px" style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
 
                 <% var j=0;var k=1;for(var i=0; i+j<Players.length+2; i+=3) { %>
-                    <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%">
+                    <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
                     <%for(j=0; j<3;j++) { %>
-                    <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;">
+                    <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;">
                     <%if(i+j<Players.length){%>
-                        <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float:left;" />
-                        <span style="margin-top: 50%;"><%= Players[i+j].Name%><br />
-                        <%= Players[i+j].Price%></span>
-                    </td>
+                        <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;" />
+                        <p style="text-align: center;"><%= Players[i+j].Name%><br />
+                        <%= Players[i+j].Price%></p>
                     <%} else break;%>
-
                     </td>
                     <%}%>
                     </tr>
                 <%}%>
                 </table>
+                </div>
                 </div>
             </div>
             <div class="content" id="panel2">
