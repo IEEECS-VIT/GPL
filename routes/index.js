@@ -98,12 +98,12 @@ router.get('/forgot', function (req, res) {
         res.render('forgot', { });
     }
 });
-router.get('/howtoplay', function (req, res) {
+router.get('/matches', function (req, res) {
     if (req.cookies.name) {
         res.redirect('/home');
     }
     else {
-        res.render('howtoplay', { });
+        res.render('matches', { });
     }
 });
 router.post('/register', function (req, res) {
