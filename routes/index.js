@@ -189,13 +189,12 @@ router.get('/sponsors', function (req, res) // sponsors page
 
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
-    var onFetch = function(err,documents)
-    {
-        if(err){
+    var onFetch = function (err, documents) {
+        if (err) {
             res.redirect('/home');
         }
-        else{
-            res.render('players',{
+        else {
+            res.render('players', {
                 Players: documents
             });
         }
@@ -203,8 +202,6 @@ router.get('/players', function (req, res) // page for all players, only availab
     };
     mongo_players.fetchPlayers(onFetch);
 });
-
-
 
 
 router.get('/squad', function (req, res) // page to view the 16 player squad of a particular user
