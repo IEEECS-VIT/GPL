@@ -1,4 +1,4 @@
-var mongo_users = require('../mongoUsers');
+ var mongo_users = require('../mongoUsers');
 var express = require('express');
 // var validator = require('validator');
 var router = express.Router();
@@ -126,7 +126,15 @@ router.post('/register', function (req, res) {
             _id: teamName,
             password_hash: hashedPassword,
             email: email,
-            phone: phone
+            phone: phone,
+            win:0,
+            played:0,
+            points:0,
+            runs_for:0,
+            runs_against:0,
+            balls_for:0,
+            balls_against:0,
+            opponents:[] // store opponent team names here, reference for potential clashes
         };
         var onInsert = function (err, docs) {
             if (err) {
@@ -269,7 +277,18 @@ router.get('/matchday', function (req, res) // page to view next match schedule 
 router.get('/leaderboard', function (req, res) // Leaderboard/Standings
 {
     if (req.cookies.name) {
-        res.redirect('/home');
+
+        var getTeam = function(err,documents)
+        {
+            if(err){
+                res.redirect('/home');
+            }
+            else{
+                res.render('/team',{Team: documents});
+            }
+
+        };
+        mongo_team.find({},getTeam).sort({'points':-1},{'won':-1});
     }
     else {
         res.render('leaderboard', { });
