@@ -3,6 +3,7 @@ var express = require('express');
 // var validator = require('validator');
 var router = express.Router();
 var mongo_players = require('../mongoPlayer');
+var mongo_squad=require('../mongoSquad');
 // var email_dispatch = require('emailjs'); Implement this later, when the view for forgot password is also present
 
 
@@ -73,6 +74,7 @@ router.get('/register', function (req, res) {
         res.render('register', { });
     }
 });
+
 router.get('/home', function (req, res) {
     if (req.cookies.name) {
         res.redirect('/home');
@@ -204,7 +206,30 @@ router.get('/players', function (req, res) // page for all players, only availab
 
 router.get('/squad', function (req, res) // page to view the 16 player squad of a particular user
 {
-    res.render('squad', { });
+    if (req.cookies.name)                           // if cookies exists then access the database
+    {
+        var teamName = req.body.name;
+        var credentials =                           // creating a temporary variable to store cookies
+        {
+        '_id': req.cookies.name                     //  because kashish bhaya told to use '_id' only
+        };
+
+    var getSquad = function(err,documents)
+        {
+            if(err){
+                res.redirect('/home');
+            }
+            else{
+                res.render('/squad',{Squad: documents});
+            }
+
+        };
+        mongo_squad.fetchSquad(credentials,getSquad);
+
+    }
+else {                                                  // if cookies does not exists then it will go to login page
+      res.render('/login', { });
+}
 });
 
 router.get('/team', function (req, res) // view the assigned playing 11 with options to change the playing 11

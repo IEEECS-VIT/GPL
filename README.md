@@ -1,7 +1,7 @@
 GPL
 ===
 
-The GraVITas Premier League code repository.
+The GraVIT-as Premier League code repository.
 
 Please report any bugs or issues [here] (https://github.com/IEEECS-VIT/GPL/issues) 
 
