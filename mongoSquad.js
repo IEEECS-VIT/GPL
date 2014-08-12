@@ -34,8 +34,7 @@ exports.getSquad = function (doc,callback ) {
                     }
 
                 }
-                else
-                {
+                else {
                     callback(true, null);
                 }
             };
@@ -43,3 +42,4 @@ exports.getSquad = function (doc,callback ) {
         }
     };
     MongoClient.connect(mongoUri, onConnect);
+}
