@@ -207,9 +207,11 @@ router.get('/players', function (req, res) // page for all players, only availab
 router.get('/squad', function (req, res) // page to view the 16 player squad of a particular user
 {
     if (req.cookies.name)                           // if cookies exists then access the database
-    { var credentials =
+    {
+        var teamName = req.body.name;
+        var credentials =                           // creating a temporary variable to store cookies
         {
-        '_id': req.cookies.name
+        '_id': req.cookies.name                     //  because kashish bhaya told to use '_id' only
         };
 
     var getSquad = function(err,documents)
@@ -222,7 +224,7 @@ router.get('/squad', function (req, res) // page to view the 16 player squad of 
             }
 
         };
-        mongo_Squad.fetchSquad(getSquad);
+        mongo_squad.fetchSquad(credentials,getSquad);
 
     }
 else {                                                  // if cookies does not exists then it will go to login page

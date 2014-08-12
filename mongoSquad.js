@@ -11,30 +11,35 @@ var MongoClient = require('mongodb').MongoClient;
 
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
-exports.fetchSquad = function (callback)
-{
-    var onConnect = function (err, db)
-    {
-        if (err)
-        {
+
+
+exports.getSquad = function (doc,callback ) {
+    var onConnect = function (err, db) {
+        if (err) {
             callback(err);
         }
-        else
-        {
+        else {
             var collection = db.collection('squad');
-            var onFetch = function (err, documents)
-            {
-                if (err)
-                {
+            var onFetch = function (err, document) {
+                if (err) {
                     callback(err, null);
+                }
+                else if (document) {
+                    db.close();
+                    if (doc['_id'] === document['_id']) {
+                        callback(null, doc);
+                    }
+                    else {
+                        callback(true, null);
+                    }
+
                 }
                 else
                 {
-                    callback(null, documents);
+                    callback(true, null);
                 }
             };
-            collection.find({}).toArray(onFetch);
+            collection.findOne(doc, onFetch);                       // i don't understand this line .. need help in this
         }
     };
     MongoClient.connect(mongoUri, onConnect);
-};
