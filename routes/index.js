@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var mongo_players = require('../mongoPlayer');
 var mongo_squad=require('../mongoSquad');
+var mongo_team=require('../mongoTeam');
 // var email_dispatch = require('emailjs'); Implement this later, when the view for forgot password is also present
 
 
@@ -208,10 +209,10 @@ router.get('/squad', function (req, res) // page to view the 16 player squad of 
 {
     if (req.cookies.name)                           // if cookies exists then access the database
     {
-        var teamName = req.body.name;
+        var teamName = req.cookies.name;
         var credentials =                           // creating a temporary variable to store cookies
         {
-        '_id': req.cookies.name                     //  because kashish bhaya told to use '_id' only
+        '_id': teamName                             //  because kashish bhaya told to use '_id' only
         };
 
     var getSquad = function(err,documents)
@@ -234,7 +235,30 @@ else {                                                  // if cookies does not e
 
 router.get('/team', function (req, res) // view the assigned playing 11 with options to change the playing 11
 {
-    res.render('team', { });
+    if (req.cookies.name)                           // if cookies exists then access the database
+    {
+        var teamName = req.cookies.name;
+        var credentials =
+        {
+        '_id': teamName
+        };
+
+        var getTeam = function(err,documents)
+        {
+            if(err){
+                res.redirect('/home');
+            }
+            else{
+                res.render('/team',{Team: documents});
+            }
+
+        };
+        mongo_team.fetchSquad(credentials,getTeam);
+    }
+    else                                                        // if cookies does not exists , go to login page
+    {
+        res.render('/login', { });
+    }
 });
 
 router.get('/matchday', function (req, res) // page to view next match schedule and the opponent team
