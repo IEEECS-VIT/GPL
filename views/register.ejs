@@ -12,212 +12,216 @@
 <body style="background:url('/images/background.png');font-family: 'PT Sans', sans-serif;height:100%;"
       onLoad="valid();">
 <div style="min-height: 100%">
-    <div class="large-12 top-bar" style="overflow: visible;">
-        <section class="top-bar-section small-only-text-center">
-            <ul class="left">
-                <li><a href="/">Gravitas Premier League</a></li>
-            </ul>
-            <ul class="right">
-                <li class="has-dropdown not-click" style="border-radius: 5px">
-                    <a href="#" style="border-radius: 5px">Sign In</a>
-                    <ul class="dropdown" style="width:300%;">
-                        <li class="title back js-generated">
-                            <h5>
-                                <a href="javascript:void(0)">
-                                    Back
-                                </a>
-                            </h5>
-                        </li>
-                        <li>
-                            <form style="margin-top: 3%">
-                                <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
-                                    <div class="row">
-                                        <div class="small-3 columns" style="margin-left: -5%">
-                                            <label for="team" class="right inline" style="color: white;">Team
-                                                Name:</label>
-                                        </div>
-                                        <div class="small-9 columns">
-                                            <input type="text" id="team" placeholder="Team Name"
-                                                   style="margin:-4% 0 0 1%;border-radius: 5px">
-                                        </div>
+<div class="large-12 top-bar" style="overflow: visible;">
+    <section class="top-bar-section small-only-text-center">
+        <ul class="left">
+            <li><a href="/">Gravitas Premier League</a></li>
+        </ul>
+        <ul class="right">
+            <li class="has-dropdown not-click" style="border-radius: 5px">
+                <a href="#" style="border-radius: 5px">Sign In</a>
+                <ul class="dropdown" style="width:300%;">
+                    <li class="title back js-generated">
+                        <h5>
+                            <a href="javascript:void(0)">
+                                Back
+                            </a>
+                        </h5>
+                    </li>
+                    <li>
+                        <form style="margin-top: 3%">
+                            <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
+                                <div class="row">
+                                    <div class="small-3 columns" style="margin-left: -5%">
+                                        <label for="team" class="right inline" style="color: white;">Team
+                                            Name:</label>
                                     </div>
-                                </div>
-                            </form>
-
-
-                            <!--Username/Team Name -->
-
-                            <form>
-                                <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
-                                    <div class="row" style="margin-top: 2%">
-                                        <div class="small-3 columns" style="margin-left: -5%">
-                                            <label for="pass" class="right inline"
-                                                   style="color: white;">Password: </label>
-                                        </div>
-                                        <div class="small-9 columns">
-                                            <input type="password" id="pass" placeholder="Password"
-                                                   style="margin:-4% 0 0 1%;border-radius: 5px">
-                                        </div>
+                                    <div class="small-9 columns">
+                                        <input type="text" id="team" placeholder="Team Name"
+                                               style="margin:-4% 0 0 1%;border-radius: 5px">
                                     </div>
-                                </div>
-                                <!-- password-->
-
-                            </form>
-                        </li>
-                        <li>
-                            <input type="submit" align="center" class="button [tiny small large]" value="Login" id="button" name="login" style="border-radius: 5px;background: rgba(30,30,30,1);margin-left: 38%;margin-bottom: 3%;" />
-                        </li>
-                        <li class="divider"><a href="/forgot">Forgot Password?</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </section>
-    </div>                                          <!-- top bar -->
-    <div class="row" align="center">
-
-        <div class="small-12 medium-12 large-12 columns" style="background:rgba(0,123,184,0.5); border-radius: 0 0 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);float: left;text-align: left ">
-            <form name="signin">
-                <fieldset>
-                    <legend>Account Details</legend>
-                    <div id="fill" class="large-12 medium-12 columns"
-                         style="margin:1%;background: red;color: white;display:none"><p></p></div>
-                    <!-- Error Msg-->
-                    <div class="row">
-                        <div class="small-6">
-                            <div class="row">
-                                <div class="small-3 columns">
-                                    <label for="team" class="right inline" style="color: white;">Team Name:<i
-                                                style="color:red;">*</i> </label>
-                                </div>
-                                <div class="small-9 columns">
-                                    <input type="text" id="team" placeholder="Team Name" name="team_name"/>
                                 </div>
                             </div>
-                        </div>
+                        </form>
+
 
                         <!--Username/Team Name -->
 
-                        <div class="small-6">
-                            <div class="row">
-                                <div class="small-3 columns">
-                                    <label for="pass" class="right inline" style="color: white;">Password:<i
-                                                style="color:red;">*</i> </label>
-                                </div>
-                                <div class="small-9 columns">
-                                    <input type="password" id="pass" placeholder="Password" name="pass"/>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- password-->
-
-                        <div class="small-6">
-                            <div class="row">
-                                <div class="small-3 columns">
-                                    <label for="cpass" class="right inline" style="color: white;">Confirm
-                                        Password:<i style="color:red;">*</i> </label>
-                                </div>
-                                <div class="small-9 columns">
-                                    <input type="password" id="cpass" placeholder="Re-type Password" name="cpass"/>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div id="cpas" class="small-6 large-6 medium-6 columns"
-                             style="margin:1%;color: white;background: red;display:none">Pass and Cpass not matching
-                        </div>
-                        <!--Error for cpass -->
-                        <!--conf pass -->
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <legend>Manager Details</legend>
-                            <div class="row">
-                                <div class="small-12 large-12 columns">
-                                    <div class="small-2 large-2 columns">
-                                        <label for="email" class="right inline" style="color: white;">Email 1:<i
-                                                    style="color:red;">*</i> </label>
+                        <form>
+                            <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
+                                <div class="row" style="margin-top: 2%">
+                                    <div class="small-3 columns" style="margin-left: -5%">
+                                        <label for="pass" class="right inline"
+                                               style="color: white;">Password: </label>
                                     </div>
-                                    <div class="small-4 large-4 columns">
-                                        <input type="email" id="email" placeholder="example@domain.com" name="email1"/>
-                                    </div>
-                                    <div class="small-2 large-2 columns">
-                                        <label for="email" class="right inline" style="color:white;">Email 2:</label>
-                                    </div>
-                                    <div class="small-4 large-4 columns">
-                                        <input type="email" id="email2" placeholder="example@domain.com" name="email2"/>
+                                    <div class="small-9 columns">
+                                        <input type="password" id="pass" placeholder="Password"
+                                               style="margin:-4% 0 0 1%;border-radius: 5px">
                                     </div>
                                 </div>
                             </div>
-                        <!--email -->
+                            <!-- password-->
 
-                    <div class="row">
-                        <div class="small-12 large-12 columns">
-                            <div class="small-2 large-2 columns">
-                                <label for="mobile" class="right inline" style="color: white;">Mobile 1:<i
+                        </form>
+                    </li>
+                    <li>
+                        <input type="submit" align="center" class="button [tiny small large]" value="Login" id="button"
+                               name="login"
+                               style="border-radius: 5px;background: rgba(30,30,30,1);margin-left: 38%;margin-bottom: 3%;"/>
+                    </li>
+                    <li class="divider"><a href="/forgot">Forgot Password?</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+</div>
+<!-- top bar -->
+<div class="row" align="center">
+
+    <div class="small-12 medium-12 large-12 columns"
+         style="background:rgba(0,123,184,0.5); border-radius: 0 0 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);float: left;text-align: left ">
+        <form name="signin">
+            <fieldset>
+                <legend>Account Details</legend>
+                <div id="fill" class="large-12 medium-12 columns"
+                     style="margin:1%;background: red;color: white;display:none"><p></p></div>
+                <!-- Error Msg-->
+                <div class="row">
+                    <div class="small-6">
+                        <div class="row">
+                            <div class="small-3 columns">
+                                <label for="team" class="right inline" style="color: white;">Team Name:<i
                                             style="color:red;">*</i> </label>
                             </div>
-                            <div class="small-4 large-4 columns">
-                                <input type="text" id="pno" placeholder="Mobile Number" name="mob1"/>
-                            </div>
-                            <div class="small-2 large-2 columns">
-                                <label for="text" class="right inline" style="color:white;">Mobile 2:</label>
-                            </div>
-                            <div class="small-4 large-4 columns">
-                                <input type="text" id="pno2" placeholder="Mobile Manager" name="mob2"/>
+                            <div class="small-9 columns">
+                                <input type="text" id="team" placeholder="Team Name" name="team_name"/>
                             </div>
                         </div>
                     </div>
-                    <!-- phone -->
 
+                    <!--Username/Team Name -->
 
-                    <div class="row">
-                        <div class="small-12 large-12 columns">
-                            <div class="small-2 large-2 columns">
-                                <label for="manager" class="right inline" style="color: white;">Manager 1:<i
+                    <div class="small-6">
+                        <div class="row">
+                            <div class="small-3 columns">
+                                <label for="pass" class="right inline" style="color: white;">Password:<i
                                             style="color:red;">*</i> </label>
                             </div>
-                            <div class="small-4 large-4 columns">
-                                <input type="text" id="manager" placeholder="Manager Name" name="manager1"/>
-                            </div>
-                            <div class="small-2 large-2 columns">
-                                <label for="manager" class="right inline" style="color:white;">Manager 2:</label>
-                            </div>
-                            <div class="small-4 large-4 columns">
-                                <input type="text" id="manager2" placeholder="Manager Name" name="manager2"/>
+                            <div class="small-9 columns">
+                                <input type="password" id="pass" placeholder="Password" name="pass"/>
                             </div>
                         </div>
                     </div>
-                        <!-- Managers-->
+                    <!-- password-->
 
-
-                    <div class="row">
-                        <div class="small-12 large-12 columns">
-                            <div class="small-2 large-2 columns">
-                                <label for="reg" class="right inline" style="color: white;">Registration Number 1 (VIT Students): </label>
+                    <div class="small-6">
+                        <div class="row">
+                            <div class="small-3 columns">
+                                <label for="cpass" class="right inline" style="color: white;">Confirm
+                                    Password:<i style="color:red;">*</i> </label>
                             </div>
-                            <div class="small-4 large-4 columns">
-                                <input type="text" id="reg" placeholder="13BEC0547" name="reg1"/>
-                            </div>
-                            <div class="small-2 large-2 columns">
-                                <label for="reg" class="right inline" style="color:white;">Registration Number 2 (VIT Students): </label>
-                            </div>
-                            <div class="small-4 large-4 columns">
-                                <input type="text" id="reg2" placeholder="13BCE0139" name="reg2"/>
+                            <div class="small-9 columns">
+                                <input type="password" id="cpass" placeholder="Re-type Password" name="cpass"/>
                             </div>
                         </div>
-                    </div>
-                    <!-- Reg no (VIT students only)-->
-                    <div class="large-12" align="center">
-                        <input type="submit" id="button" class="button"
-                               style="background: rgba(50,50,50,1);border-radius: 5px" align="center" name="button"
-                               onmouseover="validator()"/>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
 
+
+                    </div>
+                    <div id="cpas" class="small-6 large-6 medium-6 columns"
+                         style="margin:1%;color: white;background: red;display:none">Pass and Cpass not matching
+                    </div>
+                    <!--Error for cpass -->
+                    <!--conf pass -->
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Manager Details</legend>
+                <div class="row">
+                    <div class="small-12 large-12 columns">
+                        <div class="small-2 large-2 columns">
+                            <label for="email" class="right inline" style="color: white;">Email 1:<i
+                                        style="color:red;">*</i> </label>
+                        </div>
+                        <div class="small-4 large-4 columns">
+                            <input type="email" id="email" placeholder="example@domain.com" name="email1"/>
+                        </div>
+                        <div class="small-2 large-2 columns">
+                            <label for="email" class="right inline" style="color:white;">Email 2:</label>
+                        </div>
+                        <div class="small-4 large-4 columns">
+                            <input type="email" id="email2" placeholder="example@domain.com" name="email2"/>
+                        </div>
+                    </div>
+                </div>
+                <!--email -->
+
+                <div class="row">
+                    <div class="small-12 large-12 columns">
+                        <div class="small-2 large-2 columns">
+                            <label for="mobile" class="right inline" style="color: white;">Mobile 1:<i
+                                        style="color:red;">*</i> </label>
+                        </div>
+                        <div class="small-4 large-4 columns">
+                            <input type="text" id="pno" placeholder="Mobile Number" name="mob1"/>
+                        </div>
+                        <div class="small-2 large-2 columns">
+                            <label for="text" class="right inline" style="color:white;">Mobile 2:</label>
+                        </div>
+                        <div class="small-4 large-4 columns">
+                            <input type="text" id="pno2" placeholder="Mobile Manager" name="mob2"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- phone -->
+
+
+                <div class="row">
+                    <div class="small-12 large-12 columns">
+                        <div class="small-2 large-2 columns">
+                            <label for="manager" class="right inline" style="color: white;">Manager 1:<i
+                                        style="color:red;">*</i> </label>
+                        </div>
+                        <div class="small-4 large-4 columns">
+                            <input type="text" id="manager" placeholder="Manager Name" name="manager1"/>
+                        </div>
+                        <div class="small-2 large-2 columns">
+                            <label for="manager" class="right inline" style="color:white;">Manager 2:</label>
+                        </div>
+                        <div class="small-4 large-4 columns">
+                            <input type="text" id="manager2" placeholder="Manager Name" name="manager2"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- Managers-->
+
+
+                <!-- <div class="row">
+                     <div class="small-12 large-12 columns">
+                         <div class="small-2 large-2 columns">
+                             <label for="reg" class="right inline" style="color: white;">Registration Number 1 (VIT Students): </label>
+                         </div>
+                         <div class="small-4 large-4 columns">
+                             <input type="text" id="reg" placeholder="13BEC0547" name="reg1"/>
+                         </div>
+                         <div class="small-2 large-2 columns">
+                             <label for="reg" class="right inline" style="color:white;">Registration Number 2 (VIT Students): </label>
+                         </div>
+                         <div class="small-4 large-4 columns">
+                             <input type="text" id="reg2" placeholder="13BCE0139" name="reg2"/>
+                         </div>
+                     </div>
+                 </div>-->
+                <!-- Reg no (VIT students only)-->
+                <div class="large-12" align="center">
+                    <input type="submit" id="button" class="button"
+                           style="background: rgba(50,50,50,1);border-radius: 5px" align="center" name="button"
+                           onmouseover="validator()"/>
+                </div>
+            </fieldset>
+        </form>
     </div>
+
+</div>
 
 </div>
 <footer class="large-12" style="bottom:0; position:relative;">
