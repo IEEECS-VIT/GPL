@@ -89,3 +89,51 @@ exports.fetch = function (doc, callback) {
     };
     MongoClient.connect(mongoUri, onConnect);
 };
+
+exports.getleader = function(doc,callback)
+{
+    var onConnect = function(err,db)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            var collection = db.collection('users');
+            var onFetch = function(err,documents)
+            {
+                if(err)
+                {
+                    callback(err,null);
+                }
+                else
+                {
+                    var onFetchOne = function(err,document)
+                    {
+                        if(err)
+                        {
+                            callback(err,null);
+                        }
+                        else
+                        {
+                            documents.push(document);
+                            callback(null,documents);
+                        }
+                        collection.findOne(doc,onFetchOne);
+                    }
+                }
+            };
+            var options =
+            {
+                "limit" : 10,
+                "sort": [['points','desc'], ['net_run_rate','desc']]
+            };
+
+            collection.find({},options).toArray(onFetch)
+            //collection.find({},onFetch);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+
+}

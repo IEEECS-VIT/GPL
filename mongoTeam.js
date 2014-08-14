@@ -6,9 +6,12 @@ var MongoClient = require('mongodb').MongoClient;
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
 
-exports.getTeam = function (doc,callback ) {
-    var onConnect = function (err, db) {
-        if (err) {
+exports.getTeam = function (doc,callback )
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
         else {

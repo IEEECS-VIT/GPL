@@ -134,6 +134,7 @@ router.post('/register', function (req, res) {
             runs_against:0,
             balls_for:0,
             balls_against:0,
+            net_run_rate:0.0,
             opponents:[] // store opponent team names here, reference for potential clashes
         };
         var onInsert = function (err, docs) {
@@ -276,24 +277,27 @@ router.get('/matchday', function (req, res) // page to view next match schedule 
 
 router.get('/leaderboard', function (req, res) // Leaderboard/Standings
 {
-    if (req.cookies.name) {
-
-        var getTeam = function(err,documents)
+    var teamname=req.cookies.name;
+    var doc =
+    {
+        "_id" : teamname
+    };
+    var onFetch = function(err,documents)
+    {
+        if(err)
         {
-            if(err){
-                res.redirect('/home');
-            }
-            else{
-                res.render('/team',{Team: documents});
-            }
+            res.redirect("/home");
+        }
+        else
+        {
+            res.render("leaderboard",{ leaderboard : documents});
+        }
+    };
+    mongo_users.getleader(doc,onFetch);
 
-        };
-        mongo_team.find({},getTeam).sort({'points':-1},{'won':-1});
-    }
-    else {
-        res.render('leaderboard', { });
 
-    }
+
+
 });
 
 router.get('/forum', function (req, res) // User Forums
