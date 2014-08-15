@@ -103,10 +103,11 @@ router.get('/forgot', function (req, res) {
 });
 router.get('/matches', function (req, res) {
     if (req.cookies.name) {
-        res.redirect('/home');
+
+        res.render('matches', { });
     }
     else {
-        res.render('matches', { });
+        res.redirect('/');
     }
 });
 router.post('/register', function (req, res) {
@@ -276,25 +277,31 @@ router.get('/matchday', function (req, res) // page to view next match schedule 
 
 router.get('/leaderboard', function (req, res) // Leaderboard/Standings
 {
-    var teamname=req.cookies.name;
-    var doc =
+    if (req.cookies.name)                           // if cookies exists then access the database
     {
-        "_id" : teamname
-    };
-    var onFetch = function(err,documents)
+        var teamname = req.cookies.name;
+        var doc =
+        {
+            "_id": teamname
+        };
+        var onFetch = function (err, documents)
+        {
+            if (err)
+            {
+
+            }
+            else
+            {
+                res.render("leaderboard", { leaderboard: documents});
+            }
+        };
+        mongo_users.getleader(doc, onFetch);
+
+    }
+    else
     {
-        if(err)
-        {
-            res.redirect("/home");
-        }
-        else
-        {
-            res.render("leaderboard",{ leaderboard : documents});
-        }
-    };
-    mongo_users.getleader(doc,onFetch);
-
-
+        res.redirect("/");
+    }
 
 
 });

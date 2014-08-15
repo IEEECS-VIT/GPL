@@ -19,6 +19,7 @@
                 <li class="has-dropdown not-click" style="border-radius: 5px">
                     <a href="#" style="border-radius: 5px">Sign In</a>
                     <ul class="dropdown" style="width:300%;">
+                        <form method="post" action="/login">
                         <li class="title back js-generated">
                             <h5>
                                 <a href="javascript:void(0)">
@@ -29,7 +30,7 @@
 
 
                         <li>
-                            <form style="margin-top: 3%">
+
                                 <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
                                     <div class="row">
                                         <div class="small-3 columns" style="margin-left: -5%">
@@ -37,17 +38,16 @@
                                                 Name: </label>
                                         </div>
                                         <div class="small-9 columns">
-                                            <input type="text" id="team" placeholder="Team Name"
+                                            <input type="text" id="team" name="name" placeholder="Team Name" value=""
                                                    style="margin:-4% 0 0 1%;border-radius: 5px">
                                         </div>
                                     </div>
                                 </div>
-                            </form>
 
 
-                            <!--Username/Team Name -->
+                                <!--Username/Team Name -->
 
-                            <form>
+
                                 <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
                                     <div class="row" style="margin-top: 2%">
                                         <div class="small-3 columns" style="margin-left: -5%">
@@ -56,20 +56,24 @@
                                         </div>
                                         <div class="small-9 columns">
                                             <input type="password" id="p
-                                                  ass" placeholder="Password"
+                                                  ass" placeholder="Password" name="password" value=""
                                                    style="margin:-4% 0 0 1%;border-radius: 5px">
                                         </div>
                                     </div>
                                 </div>
+
                                 <!-- password-->
 
-                            </form>
+
                         </li>
                         <li>
-                            <input type="submit" align="center" class="button [tiny small large]" value="Login" id="button" name="login"
+                            <input type="submit" align="center" class="button [tiny small large]" value="Login"
+                                   id="button" name="login"
                                    style="border-radius: 5px;background: rgba(30,30,30,1);margin-left: 38%;margin-bottom: 3%;"/>
                         </li>
+
                         <li class="divider"><a href="/forgot">Forgot Password?</a></li>
+                        </form>
                     </ul>
                 </li>
             </ul>
