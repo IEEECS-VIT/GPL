@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>GPL</title>
     <link type="text/css" rel="stylesheet" href="/bower_components/foundation/css/foundation.css"/>
@@ -12,191 +12,217 @@
 </head>
 <body style="background:url('/images/background.png');font-family: 'PT Sans', sans-serif;height:100%;">
 <div style="min-height: 100%">
-    <div class="large-12 top-bar" style="overflow: visible;">
-        <section class="top-bar-section small-only-text-center">
-            <ul class="left">
-                <li><a href="/">Gravitas Premier League</a></li>
-            </ul>
-            <ul class="right">
-                <li><a href="/logout">Log Out</a></li>
-            </ul>
-
-        </section>
-    </div>
-    <!-- top bar -->
-    <% var team = []; var k = 0;var r, c;function sel(r, c) {
-        if (k < 17) {
-            team[k] = r + c;
-            k++;
-        } else {
-            alert("Max Player Limit reached")
-        }
-    } %>
-    <div class="small-12">
-        <ul class="radius tabs" data-tab="" style="margin-left: 31%;margin-top: 2%;">
-            <li class="tab-title active" id="act1" onclick="tab(1)"><a href="#">Batsmen</a></li>
-            <li class="tab-title" id="noact2" onclick="tab(2)"><a href="#">Bowlers</a></li>
-            <li class="tab-title" id="noact3" onclick="tab(3)"><a href="#">All Rounders</a></li>
-            <li class="tab-title" id="noact4" onclick="tab(4)"><a href="#">Coaches</a></li>
+<div class="large-12 top-bar" style="overflow: visible;">
+    <section class="top-bar-section small-only-text-center">
+        <ul class="left">
+            <li><a href="/">Gravitas Premier League</a></li>
         </ul>
-        <div class="tabs-content">
-            <div class="large-3 small-12 left"
-                 style="height:auto;background-color: rgba(10,10,10,0.5);margin-right: 1%;margin-left: 2%;border-radius: 5px;">
-                <h4 style="color: white;background-color: rgba(80,80,80,1);margin-top: 0;border-radius: 5px;padding: 2%;text-align: center;">
-                    Selected Players</h4>
-                <% for(var count = 0 ; count < k ; count++){ %>
-                <%= Players[team[count]].Name %>
-                <%= Players[team[count]].Price %>
-                <% } %>
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-            </div>
-            <div class="content active" id="panel1">
-                <div class="large-8 small-12 columns">
+        <ul class="right">
+            <li><a href="/logout">Log Out</a></li>
+        </ul>
 
-                    <div style="height: 50em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
-                         class="large-12 small-12 right">
-                        <table cellspacing="10px"
-                               style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
-
-                            <% var j = 0;k=0;for(var i = 0; i< 342; i+=3) { %>
-                                <% if(Players[i].Type.localeCompare("bat")==0){ %>
-                                <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                                    <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                                        id="box<%= i + j %>" onclick="<%- "sel(" + i + ", " + j + ")" %>">
-
-                                        <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;" />
-                                        <p style="text-align: center;"><%= Players[j].Name%><br />
-                                            <%= Players[j].Price%></p>
-                                    </td>
-                                <%for(j=i+1,k=0;j<341&&k<2;j++) { %>
-                                    <% if(Players[j].Type.localeCompare("bat")==0 ){ %>
-                                    <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                                            id="box<%= i + j %>" onclick="<%- "sel(" + i + ", " + j + ")" %>">
-
-                                    <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;" />
-                                    <p style="text-align: center;"><%= Players[j].Name%><br />
-                                    <%= Players[j].Price%></p>
-                                    <% k++;} else continue;%>
-                                    </td>
-                                <%}%>
-                                </tr>
-                                <%}%>
-                            <%}%>
-                        </table>
-                </div>
-                </div>
-            </div>
-            <div class="content" id="panel2">
-                <div class="large-8 small-12 columns">
-
-                    <div style="height: 50em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
-                         class="large-12 small-12 right">
-                        <table cellspacing="10px"
-                               style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
-
-                            <%  j = 0;k=0;for( i = 0; i< 342; i+=3) { %>
-                            <% if(Players[i].Type.localeCompare("bowl")==0){ %>
-                            <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                                    id="box<%= i + j %>" onclick="<%- "sel(" + i + ", " + j + ")" %>">
-
-                                    <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;" />
-                                    <p style="text-align: center;"><%= Players[i].Name%><br />
-                                        <%= Players[i].Price%></p>
-                                    </td>
-                                <%for(j=i+1,k=0;j<341&&k<2;j++) { %>
-                                <% if(Players[j].Type.localeCompare("bowl")==0 ){ %>
-                                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                                    id="box<%= i + j %>" onclick="<%- "sel(" + i + ", " + j + ")" %>">
-
-                                    <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;" />
-                                    <p style="text-align: center;"><%= Players[j].Name%><br />
-                                        <%= Players[j].Price%></p>
-                                    <% k++;} else {}%>
-                                </td>
-                                <%}%>
-                            </tr>
-                            <%}%>
-                            <%}%>
-                        </table>
+    </section>
+</div>
+<!-- top bar -->
+<% var j = 0;var team = []; var k = 1;var r, c;function sel(r, c)
+{
+    if (k < 17)
+    {
+        team[k] = r + c;
+        k++;
+    }
+    else
+    {
+        alert("Max Player Limit reached")
+    }
+} %>
+<div class="small-12">
+    <ul class="radius tabs" data-tab="" style="margin-left: 31%;margin-top: 2%;">
+        <li class="tab-title active" id="act1" onclick="tab(1)"><a href="#">Batsmen</a></li>
+        <li class="tab-title" id="noact2" onclick="tab(2)"><a href="#">Bowlers</a></li>
+        <li class="tab-title" id="noact3" onclick="tab(3)"><a href="#">All Rounders</a></li>
+        <li class="tab-title" id="noact4" onclick="tab(4)"><a href="#">Coaches</a></li>
+    </ul>
+    <div class="tabs-content">
+        <div class="large-3 small-12 left"
+             style="height:auto;background-color: rgba(10,10,10,0.5);margin-right: 1%;margin-left: 2%;border-radius: 5px;">
+            <h4 style="color: white;background-color: rgba(80,80,80,1);margin-top: 0;border-radius: 5px;padding: 2%;text-align: center;">
+                Selected Players</h4>
+            <% for(var count = 0 ; count < k ; count++){ %>
+            <div style="border-radius: 5px;background-color: rgba(0,0,0,0.2);margin-top: 0;">
+                <p align="center" style="color: white;padding: 1%;">
+                    <%= Players[1].Name %><br/>
+                    <%= Players[1].Price %>
+                </p>
+                <a href="#" onclick="">
+                    <div style="height: auto;width: auto;margin-left:70%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid red;background-color:rgba(255,255,255,0.1);color: red;border-radius: 5px;">
+                        Remove
                     </div>
+                </a>
+            </div>
+            <% } %>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        </div>
+        <div class="content active" id="panel1">
+            <div class="large-8 small-12 columns">
+
+                <div style="height: 30em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
+                     class="large-12 small-12 right">
+                    <table cellspacing="10px"
+                           style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
+
+                        <% k = 4;i = 0; var z = 1;for(i = 0;i < Players.length;i++) { %>
+                        <% if(k < 3){ %>
+
+                        <% if(Players[i]._id <= 113){ %>
+                        <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
+                            id="box<%= i + j %>" onclick="<%- "sel(" + i + ", " + j + ")" %>">
+
+                            <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;"/>
+
+                            <p style="text-align: center;"><%= Players[i].Name %><br/>
+                                <%= Players[i].Price %></p>
+                            <a href="#" onclick="">
+                                <div style="height: auto;width: auto;margin-left:75%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
+                                    Select
+                                </div>
+                            </a>
+                        </td>
+                        <% k++; } else {
+                            continue;
+                        } %>
+                        <% } else { if(z == 1) { %>
+                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                            <% z=0;k = 0;} else { %>
+                        </tr>
+                        <% k = 0;i--; %>
+                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                            <% } } } %>
+                        </tr>
+                    </table>
                 </div>
             </div>
-            <div class="content" id="panel3">
-                <div class="large-8 small-12 columns">
+        </div>
+        <div class="content" id="panel2">
+            <div class="large-8 small-12 columns">
 
-                    <div style="height: 50em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
-                         class="large-12 small-12 right">
-                        <table cellspacing="10px"
-                               style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
+                <div style="height: 30em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
+                     class="large-12 small-12 right">
+                    <table cellspacing="10px"
+                           style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
 
-                            <%j = 0;k=0;for(i = 0; i< 342; i+=3) { %>
-                            <% if(Players[i].Type.localeCompare("all")==0){ %>
-                            <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                                    id="box<%= i + j %>" onclick="<%- "sel(" + i + ", " + j + ")" %>">
+                        <% k = 4;z = 1;for(i = 0;i < Players.length;i++) { %>
+                        <% if(k < 3){ %>
 
-                                    <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;" />
-                                    <p style="text-align: center;"><%= Players[i].Name%><br />
-                                        <%= Players[i].Price%></p>
-                                </td>
-                                <%for(j=i+1,k=0;j<341&&k<2;j++) { %>
-                                <% if(Players[j].Type.localeCompare("all")==0 ){ %>
-                                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                                    id="box<%= i + j %>" onclick="<%- "sel(" + i + ", " + j + ")" %>">
+                        <% if(Players[i]._id <= 242 && Players[i]._id > 113){ %>
+                        <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
+                            id="box<%= i + j %>" onclick="<%- "sel(" + i + ", " + j + ")" %>">
 
-                                    <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;" />
-                                    <p style="text-align: center;"><%= Players[j].Name%><br />
-                                        <%= Players[j].Price%></p>
-                                    <% k++;} else {}%>
-                                </td>
-                                <%}%>
-                            </tr>
-                            <%} else {};%>
-                            <%}%>
-                        </table>
-                    </div>
+                            <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;"/>
+
+                            <p style="text-align: center;"><%= Players[i].Name %><br/>
+                                <%= Players[i].Price %></p>
+                            <a href="#" onclick="">
+                                <div style="height: auto;width: auto;margin-left:75%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
+                                    Select
+                                </div>
+                            </a>
+                        </td>
+                        <% k++; } else {
+                        } %>
+                        <% } else { if(z == 1) { %>
+                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                            <% z=0;k = 0;} else { %>
+                        </tr>
+                        <% k = 0;i--; %>
+                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                            <% } } } %>
+                        </tr>
+                    </table>
                 </div>
             </div>
-            <div class="content" id="panel4">
-                <div class="large-8 small-12 columns">
+        </div>
+        <div class="content" id="panel3">
+            <div class="large-8 small-12 columns">
 
-                    <div style="height: 50em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
-                         class="large-12 small-12 right">
-                        <table cellspacing="10px"
-                               style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
+                <div style="height: 30em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
+                     class="large-12 small-12 right">
+                    <table cellspacing="10px"
+                           style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
 
-                            <% j = 0;k=0;for(i = 0; i< 342; i+=3) { %>
-                            <% if(Players[i].Type.localeCompare("coach")==0){ %>
-                            <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                                    id="box<%= i + j %>" onclick="<%- "sel(" + i + ", " + j + ")" %>">
+                        <% k = 4;z = 1;for(i = 0;i < Players.length;i++) { %>
+                        <% if(k < 3){ %>
 
-                                    <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;" />
-                                    <p style="text-align: center;"><%= Players[j].Name%><br />
-                                        <%= Players[j].Price%></p>
-                                </td>
-                                <%for(j=i+1,k=0;j<341&&k<2;j++) { %>
-                                <% if(Players[j].Type.localeCompare("coach")==0 ){ %>
-                                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                                    id="box<%= i + j %>" onclick="<%- "sel(" + i + ", " + j + ")" %>">
+                        <% if(Players[i]._id <= 303 && Players[i]._id > 242){ %>
+                        <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
+                            id="box<%= i + j %>" onclick="<%- "sel(" + i + ", " + j + ")" %>">
 
-                                    <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;" />
-                                    <p style="text-align: center;"><%= Players[j].Name%><br />
-                                        <%= Players[j].Price%></p>
-                                    <% k++;} else {}%>
-                                </td>
-                                <%}%>
-                            </tr>
-                            <%} else {};%>
-                            <%}%>
-                        </table>
-                    </div>
+                            <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;"/>
+
+                            <p style="text-align: center;"><%= Players[i].Name %><br/>
+                                <%= Players[i].Price %></p>
+                            <a href="#" onclick="">
+                                <div style="height: auto;width: auto;margin-left:75%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
+                                    Select
+                                </div>
+                            </a>
+                        </td>
+                        <% k++; } else {
+                        } %>
+                        <% } else { if(z == 1) { %>
+                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                            <% z=0;k = 0;i--;} else { %>
+                        </tr>
+                        <% k = 0;i--; %>
+                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                            <% } } } %>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content" id="panel4">
+            <div class="large-8 small-12 columns">
+
+                <div style="height: 30em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
+                     class="large-12 small-12 right">
+                    <table cellspacing="10px"
+                           style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
+
+                        <% k = 4;z = 1;for(i = 0;i < Players.length;i++) { %>
+                        <% if(k < 3){ %>
+
+                        <% if(Players[i]._id <= 323 && Players[i]._id > 303){ %>
+                        <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
+                            id="box<%= i + j %>" onclick="<%- "sel(" + i + ", " + j + ")" %>">
+
+                            <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;"/>
+
+                            <p style="text-align: center;"><%= Players[i].Name %><br/>
+                                <%= Players[i].Price %></p>
+                            <a href="#" onclick="">
+                                <div style="height: auto;width: auto;margin-left:75%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
+                                    Select
+                                </div>
+                            </a>
+                        </td>
+                        <% k++; } else {
+                        } %>
+                        <% } else { if(z == 1) { %>
+                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                            <% z=0;k = 0;} else { %>
+                        </tr>
+                        <% k = 0;i--; %>
+                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                            <% } } } %>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    <!-- content -->
+</div>
+<!-- content -->
 </div>
 <footer class="large-12" style="bottom:0; position:relative;">
     <div class="top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">

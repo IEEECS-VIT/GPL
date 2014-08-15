@@ -32,7 +32,8 @@
 
         <div class="small-12 medium-12 large-12"
              style="background:rgba(200,200,200,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-top:3%; ">
-            <h4 style="color: white;text-align: center;background-color: rgba(30,30,30,0.8);border-radius: 5px;margin-top: 0;width: 100%;padding: 1%;">Leader Board</h4>
+            <h4 style="color: white;text-align: center;background-color: rgba(30,30,30,0.8);border-radius: 5px;margin-top: 0;width: 100%;padding: 1%;">
+                Leader Board</h4>
             <table cellspacing="5px" style="border: none;border-radius: 5px;width:100%;">
                 <tr>
                     <th style="text-align: center;font-weight: bold;">Rank</th>
@@ -42,22 +43,34 @@
                     <th style="text-align: center;font-weight: bold;">Matches Won</th>
                     <th style="text-align: center;font-weight: bold;">Net Run Rate</th>
                 </tr>
-                <% for(var i=0; i<10; i++) { %>
+                <% for(var i = 0; i < 10; i++) { %>
                 <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                    <%for(var j=1; j<7;j++) { %>
+                    <% for(var j = 1; j < 7;j++) { %>
                     <td style="color: #ffffff;font-weight: bold;text-align: center;margin:2%;border-radius: 5px;height: auto;line-height: 100%;">
-                        <% /* switch ( j ) { %>
-                        <% case 1 : { %><%= i %><% break; }%>
-                        <% case 2 : %><%=leaderboard[i]._id%><% break; %>
-                        <% case 3 : %><%=leaderboard[i].points%><% break; %>
-                        <% case 4 : %><%=leaderboard[i].played%><% break;%>
-                        <% case 5 : %><%=leaderboard[i].win%><% break;%>
-                        <% case 6 : %><%=leaderboard[i].net_run_rate%><% break;%>
-                        <% } */ %>
+                        <% /* switch ( j ) {  %>
+                        <%  case 1 : {  %>
+                        <%=  i  %>
+                        <%  break; } %>
+                        <%  case 2 :  %>
+                        <%= leaderboard[i]._id %>
+                        <%  break;  %>
+                        <%  case 3 :  %>
+                        <%= leaderboard[i].points %>
+                        <%  break;  %>
+                        <%  case 4 :  %>
+                        <%= leaderboard[i].played %>
+                        <%  break; %>
+                        <%  case 5 :  %>
+                        <%= leaderboard[i].win %>
+                        <%  break; %>
+                        <%  case 6 :  %>
+                        <%= leaderboard[i].net_run_rate %>
+                        <%  break; %>
+                        <%  } */ %>
                     </td>
-                    <%}%>
+                    <% } %>
                 </tr>
-                <%}%>
+                <% } %>
 
             </table>
         </div>
