@@ -224,7 +224,7 @@ router.get('/squad', function (req, res) // page to view the 16 player squad of 
         '_id': teamName                             //  because kashish bhaya told to use '_id' only
         };
 
-    var getSquad = function(err,documents)
+    var getSquad = function(err, documents)
         {
             if(err){
                 res.redirect('/home');
@@ -235,7 +235,6 @@ router.get('/squad', function (req, res) // page to view the 16 player squad of 
 
         };
         mongo_squad.fetchSquad(credentials,getSquad);
-
     }
 else {                                                  // if cookies does not exists then it will go to login page
       res.render('/login', { });
@@ -258,11 +257,11 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
                 res.redirect('/home');
             }
             else{
-                res.render('/team',{Team: documents});
+                res.render('team',{Team: documents});
             }
 
         };
-        mongo_team.fetchSquad(credentials,getTeam);
+        mongo_team.getTeam(credentials,getTeam);
     }
     else                                                        // if cookies does not exists , go to login page
     {
