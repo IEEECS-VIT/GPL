@@ -1,4 +1,4 @@
-po = ["c&b", "cover", "midwicket", "long on", "point", "square leg"];
+com=require('./commentary.js');
 var v, k, k2, toss, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fw = [0, 0, 0, 0, 0, 0], fh = 0, pt = -1, ct = 0, bt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], st = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cw = [0, 0, 0, 0, 0, 0], cm, z = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fs = [0, 0, 0, 0, 0, 0], pd = -1, e = 0, x, g = [0, 0, 0, 0, 0, 0], p = -1, p2, s = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], b = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], f = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], m = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c = [0, 1], d = [0, 0, 0, 0, 0, 0], r = [0, 0, 0, 0, 0, 0], w = [0, 0, 0, 0, 0, 0], T = 0, T2 = 0, j, i, l = 0, w1 = 0, w2 = 0, B1 = 0, B2 = 0, t;
 function rand() {
     return parseInt(Math.random() * 1000000000000000);
@@ -11,7 +11,6 @@ function team() {
     this.br = [];
     this.bv = [];
     this.bs = [];
-    this.ba = 0;
     this.co = rand() % 11 + 5;
     this.w = 0;
     this.ec = [];
@@ -39,7 +38,7 @@ function team() {
         this.r[i] += this.r[i] / 10 - B1 / 10 + this.co;
     }
 }
-ob = []
+ob = [];
 ob[0] = new team();
 ob[1] = new team();
 {
@@ -141,10 +140,10 @@ ob[1] = new team();
                 ++cw[x];
                 pt = ct;
                 ++w[x];
-                if (k <= 0 && k > -0.5) console.log("(caught)");
-                else if (k <= -0.5 && k > -1) console.log("(bowled)");
-                else if (k <= -1 && k > -1.5) console.log("(LBW)");
-                else if (k <= -1.5 && k > -2) console.log("(stumped)");
+                if (k <= 0 && k > -0.5) {console.log("(caught)"); console.log(com.caught[rand()%com.caught.length]);}
+                else if (k <= -0.5 && k > -1) {console.log("(bowled)"); console.log(com.bowled[rand()%com.bowled.length]);}
+                else if (k <= -1 && k > -1.5) {console.log("(LBW)"); console.log(com.lbw[rand()%com.lbw.length]);}
+                else if (k <= -1.5 && k > -2) {console.log("(stumped)"); console.log(com.stumpedd[rand()%com.stumped.length]);}
                 else {
                     v = rand() % 3;
                     if (v) {
@@ -156,11 +155,8 @@ ob[1] = new team();
 
                     }
                     if (rand() % 2)
-                        console.log(" Wicket against the run of play ! Absolutely headless running this.");
-                    else {
-                        console.log(" and he's run his partner out! That was completely uncalled for.");
-                        t = !t;
-                    }
+                      t = !t;
+                    console.log(com.runout[rand()%com.runout.length]);
                     pd = -1;
                     cw[x] = 0;
                     --w[x];
@@ -201,11 +197,11 @@ ob[1] = new team();
                 if (v > 6) {
                     if (rand() % 2) {
                         console.log(" wide, ");
-                        if (rand() % 2) console.log("that is way down the leg side, no mercy for that.");
-                        else console.log(" just outside the margin, but the line belongs to the umpire, wide called.");
+                        console.log(com.wide[rand()%com.wide.length]);
                     }
                     else {
                         console.log("No ball. An overstep was the last thing the bowling side needed...\n");
+                        console.log(com.freehit[rand()%com.freehit.length]);
                         fh = 1;
                     }
                     --j;
@@ -221,16 +217,19 @@ ob[1] = new team();
                     switch (v) {
                         case 0:
                             console.log(" no run");
+                            console.log(com.dot[rand()%com.dot.length]);
                             ++dot;
                             break;
                         case 5:
                             v -= 1;
                         case 4:
                             console.log("FOUR");
+                            console.log(com.four[rand()%com.four.length]);
                             ++f[c[+t]];
                             break;
                         case 6:
                             console.log("SIX");
+                            console.log(com.six[rand()%com.six.length]);
                             ++m[c[+t]];
                             ++cm;
                             break;
@@ -347,10 +346,10 @@ ob[1] = new team();
                 ++cw[x];
                 pt = ct;
                 ++w[x];
-                if (k <= 0 && k > -0.5) console.log("(caught)");
-                else if (k <= -0.5 && k > -1) console.log("(bowled)");
-                else if (k <= -1 && k > -1.5) console.log("(LBW)");
-                else if (k <= -1.5 && k > -2) console.log("(stumped)");
+                if (k <= 0 && k > -0.5) {console.log("(caught)"); console.log(com.caught[rand()%com.caught.length]);}
+                else if (k <= -0.5 && k > -1) {console.log("(bowled)"); console.log(com.bowled[rand()%com.bowled.length]);}
+                else if (k <= -1 && k > -1.5) {console.log("(LBW)"); console.log(com.lbw[rand()%com.lbw.length]);}
+                else if (k <= -1.5 && k > -2) {console.log("(stumped)"); console.log(com.stumped[rand()%com.stumped.length]);}
                 else {
                     v = rand() % 3;
                     if (v) {
@@ -361,11 +360,8 @@ ob[1] = new team();
                         T2 += v;
                     }
                     if (rand() % 2)
-                        console.log(" Wicket against the run of play ! Absolutely headless running this.");
-                    else {
-                        console.log(" and he's run his partner out! That was completely uncalled for.");
                         t = !t;
-                    }
+                    console.log(com.runout[rand()%com.runout.length]);
                     pd = -1;
                     cw[x] = 0;
                     --w[x];
@@ -431,16 +427,19 @@ ob[1] = new team();
                     switch (v) {
                         case 0:
                             console.log(" no run");
+                            console.log(com.dot[rand()%com.dot.length]);
                             ++dot;
                             break;
                         case 5:
                             v -= 1;
                         case 4:
                             console.log("FOUR");
+                            console.log(com.four[rand()%com.four.length]);
                             ++f[c[+t]];
                             break;
                         case 6:
                             console.log("SIX");
+                            console.log(com.six[rand()%com.six.length]);
                             ++m[c[+t]];
                             ++cm;
                             break;
