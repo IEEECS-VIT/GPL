@@ -1,10 +1,10 @@
- var mongo_users = require('../mongoUsers');
+var mongo_users = require('../mongoUsers');
 var express = require('express');
 // var validator = require('validator');
 var router = express.Router();
 var mongo_players = require('../mongoPlayer');
-var mongo_squad=require('../mongoSquad');
-var mongo_team=require('../mongoTeam');
+var mongo_squad = require('../mongoSquad');
+var mongo_team = require('../mongoTeam');
 // var email_dispatch = require('emailjs'); Implement this later, when the view for forgot password is also present
 
 
@@ -75,10 +75,10 @@ router.get('/register', function (req, res) {
         res.render('register', { });
     }
 });
- router.get('/interest', function (req, res) // page to view prizes
- {
-     res.render('interest', { });
- });
+router.get('/interest', function (req, res) // page to view prizes
+{
+    res.render('interest', { });
+});
 
 router.get('/home', function (req, res) {
     if (req.cookies.name) {
@@ -132,15 +132,15 @@ router.post('/register', function (req, res) {
             password_hash: hashedPassword,
             email: email,
             phone: phone,
-            win:0,
-            played:0,
-            points:0,
-            runs_for:0,
-            runs_against:0,
-            balls_for:0,
-            balls_against:0,
-            net_run_rate:0.0,
-            opponents:[] // store opponent team names here, reference for potential clashes
+            win: 0,
+            played: 0,
+            points: 0,
+            runs_for: 0,
+            runs_against: 0,
+            balls_for: 0,
+            balls_against: 0,
+            net_run_rate: 0.0,
+            opponents: [] // store opponent team names here, reference for potential clashes
         };
         var onInsert = function (err, docs) {
             if (err) {
@@ -234,24 +234,23 @@ router.get('/squad', function (req, res) // page to view the 16 player squad of 
         var teamName = req.cookies.name;
         var credentials =                           // creating a temporary variable to store cookies
         {
-        '_id': teamName                             //  because kashish bhaya told to use '_id' only
+            '_id': teamName                             //  because kashish bhaya told to use '_id' only
         };
 
-    var getSquad = function(err, documents)
-        {
-            if(err){
+        var getSquad = function (err, documents) {
+            if (err) {
                 res.redirect('/home');
             }
-            else{
-                res.render('/squad',{Squad: documents});
+            else {
+                res.render('/squad', {Squad: documents});
             }
 
         };
-        mongo_squad.fetchSquad(credentials,getSquad);
+        mongo_squad.fetchSquad(credentials, getSquad);
     }
-else {                                                  // if cookies does not exists then it will go to login page
-      res.render('/login', { });
-}
+    else {                                                  // if cookies does not exists then it will go to login page
+        res.render('/login', { });
+    }
 });
 
 router.get('/team', function (req, res) // view the assigned playing 11 with options to change the playing 11
@@ -261,20 +260,19 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
         var teamName = req.cookies.name;
         var credentials =
         {
-        '_id': teamName
+            '_id': teamName
         };
 
-        var getTeam = function(err,documents)
-        {
-            if(err){
+        var getTeam = function (err, documents) {
+            if (err) {
                 res.redirect('/home');
             }
-            else{
-                res.render('team',{Team: documents});
+            else {
+                res.render('team', {Team: documents});
             }
 
         };
-        mongo_team.getTeam(credentials,getTeam);
+        mongo_team.getTeam(credentials, getTeam);
     }
     else                                                        // if cookies does not exists , go to login page
     {
@@ -296,22 +294,18 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
         {
             "_id": teamname
         };
-        var onFetch = function (err, documents)
-        {
-            if (err)
-            {
+        var onFetch = function (err, documents) {
+            if (err) {
 
             }
-            else
-            {
+            else {
                 res.render("leaderboard", { leaderboard: documents});
             }
         };
         mongo_users.getleader(doc, onFetch);
 
     }
-    else
-    {
+    else {
         res.redirect("/");
     }
 
