@@ -202,6 +202,14 @@ router.get('/sponsors', function (req, res) // sponsors page
     res.render('sponsors', { });
 });
 
+router.get('/trailer', function (req, res) // trailer page
+{
+    res.render('trailer', { });
+});
+ router.get('/developers', function (req, res) // developers page
+ {
+     res.render('developers', { });
+ });
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
     var onFetch = function (err, documents) {
