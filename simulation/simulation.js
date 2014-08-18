@@ -1,5 +1,5 @@
 com=require('./commentary.js');
-var v, k, x, k2, p2, toss, i, j, t, cm, fo;
+var v, k, x, k2, p2, toss, i, j, t, cm, fo, commentary='';
 y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fw = [0, 0, 0, 0, 0, 0], fh = 0, pt = -1, ct = 0, bt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], st = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cw = [0, 0, 0, 0, 0, 0], z = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fs = [0, 0, 0, 0, 0, 0], pd = -1, e = 0, g = [0, 0, 0, 0, 0, 0], p = -1, s = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], b = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], f = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], m = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c = [0, 1], d = [0, 0, 0, 0, 0, 0], r = [0, 0, 0, 0, 0, 0], w = [0, 0, 0, 0, 0, 0], T = 0, T2 = 0, l = 0, w1 = 0, w2 = 0, B1 = 0, B2 = 0;
 function rand() {
     return parseInt(Math.random() * 1000000000000000);
@@ -86,36 +86,38 @@ ob[1] = new team();
         console.log(ob[1].ec[i], " ");
     B1 = B2 = 120;
     T = T2 = 0;
-    console.log("\n", "Team ");
+    //console.log("\n", "Team ");
     if (rand() % 2) {
-        console.log(2);
+        //console.log(2);
         toss = 1;
     }
     else {
-        console.log(1);
+        //console.log(1);
         toss = 0;
     }
+    commentary+='Team '+(toss+1)+' wins the toss and chooses to ';
     if (rand() % 2)
-        console.log(" wins the toss and chooses to bowl first");
+        commentary+='bowl ';//console.log(" wins the toss and chooses to bowl first");
     else {
         toss = !toss;
-        console.log(" wins the toss and chooses to bat first");
+        commentary+='bat ';//console.log(" wins the toss and chooses to bat first");
     }
+    commentary+='first\n';
     w1 = w2 = t = p2 = 0;
     for (i = 1; i < 6; ++i)
         if (ob[+toss].br[i] > ob[+toss].br[p2])
             p2 = i;
     x = p2;
-    console.log("\nBowler ", p2 + 1, " to start proceedings from the pavillion end.....\n\n");
+    commentary+='\nBowler '+ (p2 + 1)+ ' to start proceedings from the pavillion end.....\n\n'; //console.log("\nBowler ", p2 + 1, " to start proceedings from the pavillion end.....\n\n");
     dot = 0;
     for (i = 0; i < 20 && w1 < 10; ++i) {
         l = cm = 0;
         if (d[x] == 18)
-            console.log("So the captain has chosen to bowl Bowler ", x + 1, " out.\n");
+            commentary+='So the captain has chosen to bowl Bowler '+( x + 1)+ ' out.\n';//console.log("So the captain has chosen to bowl Bowler ", x + 1, " out.\n");
         if ((s[c[+t]] >= 44 && s[c[+t]] < 50))
-            console.log("Batsman ", c[+t] + 1, " one hit away from a well deserving fifty. Will he make it ?\n\n");
+            commentary+='Batsman '+ (c[+t] + 1)+ ' one hit away from a well deserving fifty. Will he make it ?\n\n';//console.log("Batsman ", c[+t] + 1, " one hit away from a well deserving fifty. Will he make it ?\n\n");
         else if ((s[c[+t]] >= 94 && s[c[+t]] < 100))
-            console.log("Batsman ", c[+t] + 1, " knows there is a hundered for the taking if he can knuckle this one down....\n\n");
+            commentary+='Batsman '+ (c[+t] + 1)+ ' knows there is a hundred for the taking if he can knuckle this one down....\n\n';//console.log("Batsman ", c[+t] + 1, " knows there is a hundered for the taking if he can knuckle this one down....\n\n");
         for (j = 1; j <= 6; ++j) {
             v = Math.abs(ob[+!toss].r[c[+t]] - ob[+toss].br[x]);
             k2 = (ob[+toss].br[x]) / ((rand() % (ob[+toss].bv[c[+t]] * ob[+toss].br[x] / 750 + 1) + ob[+toss].bv[x] * ob[+toss].br[x] / 1000) * (rand() % (ob[+toss].bs[x] * ob[+toss].br[x] / 750 + 1) + ob[+toss].bs[x] * ob[+toss].br[x] / 1000) * (rand() % (ob[+toss].ec[x] * ob[+toss].br[x] / 750 + 1) + ob[+toss].ec[x] * ob[+toss].br[x] / 1000));
@@ -130,25 +132,25 @@ ob[1] = new team();
             ++d[x];
             ++bt[ct];
             if (fh)
-                console.log("\nFree Hit: ");
+                commentary+='\nFree Hit: ';//console.log("\nFree Hit: ");
             else
-                console.log(i + "." + j, " Bowler ", x + 1, " to Batsman ", c[+t] + 1, ", ");
+                commentary+=i + '.' + j+ ' Bowler '+ (x + 1)+ ' to Batsman '+ (c[+t] + 1)+ ', ';//console.log(i + "." + j, " Bowler ", x + 1, " to Batsman ", c[+t] + 1, ", ");
             if (k <= 0 && !fh) {
                 p = c[+t];
                 y[c[+t]] = 1;
-                console.log("OUT ");
+                commentary+='OUT ';//console.log("OUT ");
                 pd = x;
                 ++cw[x];
                 pt = ct;
                 ++w[x];
-                if (k <= 0 && k > -0.5) {console.log("(caught)"); console.log(com.caught[rand()%com.caught.length]);}
-                else if (k <= -0.5 && k > -1) {console.log("(bowled)"); console.log(com.bowled[rand()%com.bowled.length]);}
-                else if (k <= -1 && k > -1.5) {console.log("(LBW)"); console.log(com.lbw[rand()%com.lbw.length]);}
-                else if (k <= -1.5 && k > -2) {console.log("(stumped)"); console.log(com.stumpedd[rand()%com.stumped.length]);}
+                if (k <= 0 && k > -0.5) {commentary+=com.caught[rand()%com.caught.length]; /*console.log("(caught)"); console.log(com.caught[rand()%com.caught.length]);*/}
+                else if (k <= -0.5 && k > -1) { commentary+=com.bowled[rand()%com.bowled.length]; /*console.log("(bowled)"); console.log(com.bowled[rand()%com.bowled.length]);*/}
+                else if (k <= -1 && k > -1.5) {commentary+=com.lbw[rand()%com.lbw.length]; /*console.log("(LBW)"); console.log(com.lbw[rand()%com.lbw.length]);*/}
+                else if (k <= -1.5 && k > -2) {commentary+=com.stumped[rand()%com.stumped.length];/*console.log("(stumped)"); console.log(com.stumpedd[rand()%com.stumped.length]);*/}
                 else {
                     v = rand() % 3;
                     if (v) {
-                        console.log("  ", v, " run(s), ");
+                        commentary+='  '+ v+ ' run(s), ';//console.log("  ", v, " run(s), ");
                         st[ct] += v;
                         s[c[+t]] += v;
                         l += v;
@@ -157,37 +159,37 @@ ob[1] = new team();
                     }
                     if (rand() % 2)
                       t = !t;
-                    console.log(com.runout[rand()%com.runout.length]);
+                    commentary+=com.runout[rand()%com.runout.length];//console.log(com.runout[rand()%com.runout.length]);
                     pd = -1;
                     cw[x] = 0;
                     --w[x];
                 }
-                if (b[c[+t]] == 1) console.log(" first ball ");
-                if (!s[c[+t]]) console.log("for a duck !");
+                if (b[c[+t]] == 1) commentary+=' first ball ';//console.log(" first ball ");
+                if (!s[c[+t]]) commentary+=' for a duck ! ';//console.log("for a duck !");
                 if (w[x] == 5 && !fw[x]) {
                     fw[x] == 1;
-                    console.log(", that brings up his five wicket haul, yet another tick in a list of accomplishments.");
+                    commentary+=', that brings up his five wicket haul, yet another tick in a list of accomplishments.';//console.log(", that brings up his five wicket haul, yet another tick in a list of accomplishments.");
                 }
                 if (s[c[+t]] >= 45 && s[c[+t]] < 50)
-                    console.log("\nlooks like there won't be any fifty for Batsman ", c[+t], ", he came so close, and was yet so far.\n");
-                else if (s[c[+t]] >= 90 && s[c[+t]] < 100) console.log("\nHe'll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team.\n");
+                    commentary+='\nlooks like there won\'t be any fifty for Batsman '+ (c[+t] + 1)+ ', he came so close, and was yet so far.\n';//console.log("\nlooks like there won't be any fifty for Batsman ", c[+t], ", he came so close, and was yet so far.\n");
+                else if (s[c[+t]] >= 90 && s[c[+t]] < 100) commentary+='\nHe\'ll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team.\n';//console.log("\nHe'll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team.\n");
                 if (cw[x] == 3) {
-                    console.log("\nAnd that is also a hattrick for bowler ", x + 1, "! Fantastic bowling in the time of need.");
+                    commentary+='\nAnd that is also a hattrick for bowler '+( x + 1)+ '! Fantastic bowling in the time of need.';//console.log("\nAnd that is also a hattrick for bowler ", x + 1, "! Fantastic bowling in the time of need.");
                     cw[x] = 0;
                 }
-                console.log("\nBatsman ", c[+t] + 1);
-                if (pd > -1) console.log(", Bowler ", x + 1);
-                else console.log(" runout");
-                console.log(" ", s[c[+t]], " (", b[c[+t]], " b", " ", f[c[+t]], "X4's ", m[c[+t]], "X6's) SR: ", s[c[+t]] * 100 / b[c[+t]], "\nPartnership: ", st[ct], "(", bt[ct], ")", ", Runrate: ", st[ct] * 6 / bt[ct]);
+                commentary+='\nBatsman '+ (c[+t] + 1);//console.log("\nBatsman ", c[+t] + 1);
+                if (pd > -1) commentary+=', Bowler '+(x + 1);//console.log(", Bowler ", x + 1);
+                else commentary+=' runout';//console.log(" runout");
+                commentary+=' '+ s[c[+t]]+ ' ('+ b[c[+t]]+ ' b'+ ' '+ f[c[+t]]+ 'X4\'s '+ m[c[+t]]+ 'X6\'s) SR: '+ s[c[+t]] * 100 / b[c[+t]]+ '\nPartnership: '+ st[ct]+ '('+ bt[ct]+ ')'+ ', Runrate: '+ st[ct] * 6 / bt[ct];//console.log(" ", s[c[+t]], " (", b[c[+t]], " b", " ", f[c[+t]], "X4's ", m[c[+t]], "X6's) SR: ", s[c[+t]] * 100 / b[c[+t]], "\nPartnership: ", st[ct], "(", bt[ct], ")", ", Runrate: ", st[ct] * 6 / bt[ct]);
                 ++ct;
                 c[+t] = (c[+t] > c[+!t] ? c[+t] : c[+!t]) + 1;
                 if (k <= -0 && k >= -0.5 && rand() % 2) {
                     t = !t;
-                    console.log("\nThe two batsmen crossed over while the catch was being taken.");
+                    commentary+='\nThe two batsmen crossed over while the catch was being taken.';//console.log("\nThe two batsmen crossed over while the catch was being taken.");
                 }
                 if (w1++ == 9) {
                     B1 = 6 * i + j;
-                    console.log("\nAnd that wraps up the innings.\n");
+                    commentary+='\nAnd that wraps up the innings.\n';//console.log("\nAnd that wraps up the innings.\n");
                     break;
                 }
                 k=i;
@@ -203,12 +205,11 @@ ob[1] = new team();
                 cw[x] = 0;
                 if (v > 6) {
                     if (rand() % 2) {
-                        console.log(" wide, ");
-                        console.log(com.wide[rand()%com.wide.length]);
+                        commentary+='  wide, '+com.wide[rand()%com.wide.length];//console.log(" wide, ");
+                        //console.log(com.wide[rand()%com.wide.length]);
                     }
                     else {
-                        console.log("No ball. An overstep was the last thing the bowling side needed...\n");
-                        console.log(com.freehit[rand()%com.freehit.length]);
+                        commentary+=com.freehit[rand()%com.freehit.length];//console.log(com.freehit[rand()%com.freehit.length]);
                         fh = 1;
                     }
                     --j;
@@ -223,25 +224,33 @@ ob[1] = new team();
                     if (fh) fh = 0;
                     switch (v) {
                         case 0:
-                            console.log(" no run");
-                            console.log(com.dot[rand()%com.dot.length]);
+                            commentary+=' no run'+com.dot[rand()%com.dot.length];//console.log(" no run");
+                            //console.log(com.dot[rand()%com.dot.length]);
                             ++dot;
                             break;
                         case 5:
                             v -= 1;
                         case 4:
-                            console.log("FOUR");
-                            console.log(com.four[rand()%com.four.length]);
+                            commentary+='FOUR, '+com.four[rand()%com.four.length];//console.log("FOUR");
+                            //console.log(com.four[rand()%com.four.length]);
                             ++f[c[+t]];
                             break;
                         case 6:
-                            console.log("SIX");
-                            console.log(com.six[rand()%com.six.length]);
+                            commentary+='SIX, '+com.six[rand()%com.six.length];//console.log("SIX");
+                            //console.log(com.six[rand()%com.six.length]);
                             ++m[c[+t]];
                             ++cm;
                             break;
+                        case 1:
+                            commentary+='1 run, '+com.one[rand()%com.one.length];
+                            break;
+                        case 2:
+                            commentary+='2 runs, '+com.two[rand()%com.two.length];
+                            break;
+                        case 3:
+                            commentary+='3 runs, '+com.three[rand()%com.three.length];
+                            break;
                         default:
-                            console.log(v, " run(s)");
                             break;
                     }
                     if (v != 6) cm = 0;
@@ -251,38 +260,38 @@ ob[1] = new team();
                     st[ct] += v;
                     if (!z[c[+t]] && s[c[+t]] >= 50) {
                         ++z[c[+t]];
-                        console.log(" And that brings up his half century - a well timed innings indeed.");
+                        commentary+=' And that brings up his half century - a well timed innings indeed.';//console.log(" And that brings up his half century - a well timed innings indeed.");
                     }
                     else if (z[c[+t]] == 1 && s[c[+t]] >= 100) {
                         ++z[c[+t]];
-                        console.log(" what a wonderful way to bring up his century.");
+                        commentary+=' what a wonderful way to bring up his century.';//console.log(" what a wonderful way to bring up his century.");
                     }
                     if (v % 2) t = !t;
                 }
             }
         }
-        if (cm == 6) console.log("\nSix G.P.L maximums in the previous over ! What an effort by Batsman.", c[+t], ". The crowd is ecstatic, Bowler ", x, " is absolutely flabbergasted.\n");
+        if (cm == 6) commentary+='\nSix G.P.L maximums in the previous over ! What an effort by Batsman.'+ (c[+t] + 1)+ '. The crowd is ecstatic, Bowler '+ (x + 1) + ' is absolutely flabbergasted.\n';//console.log("\nSix G.P.L maximums in the previous over ! What an effort by Batsman.", c[+t], ". The crowd is ecstatic, Bowler ", x, " is absolutely flabbergasted.\n");
         r[x] += l;
         t = !t;
-        console.log("\nLast over: ");
+        commentary+='\nLast over: ';//console.log("\nLast over: ");
         if (l)
-            console.log(l, " run(s)");
+            commentary+=l+' run(s)';//console.log(l, " run(s)");
         else {
-            if (j == 7) console.log("maiden");
+            if (j == 7) commentary+='maiden';//console.log("maiden");
             g[x] += 1;
         }
-        console.log("\n Current score: ", T, " / ", w1, "\tRunrate: ", T / (i + 1));
-        if (c[+t] < 11) console.log("Batsman: ", c[+t] + 1, " : ", s[c[+t]], " (", b[c[+t]], ") ");
-        if (c[+!t] < 11) console.log("Batsman: ", c[+!t] + 1, " : ", s[c[+!t]], " (", b[c[+!t]], ")\nPartnership: ", st[ct], "(", bt[ct], "), runrate: ", st[ct] * 6 / bt[ct]);
+        commentary+='\n Current score: '+ T+ ' / '+ w1+ '\tRunrate: '+ T / (i + 1);//console.log("\n Current score: ", T, " / ", w1, "\tRunrate: ", T / (i + 1));
+        if (c[+t] < 11) commentary+='Batsman: '+ (c[+t] + 1)+ ' : '+ s[c[+t]]+ ' ('+ b[c[+t]]+ ') ';//console.log("Batsman: ", c[+t] + 1, " : ", s[c[+t]], " (", b[c[+t]], ") ");
+        if (c[+!t] < 11) commentary+='Batsman: '+ (c[+!t] + 1)+ ' : '+ s[c[+!t]]+ ' ('+ b[c[+!t]]+ ')\nPartnership: '+ st[ct]+ '('+ bt[ct]+ ')+ runrate: '+ st[ct] * 6 / bt[ct];//console.log("Batsman: ", c[+!t] + 1, " : ", s[c[+!t]], " (", b[c[+!t]], ")\nPartnership: ", st[ct], "(", bt[ct], "), runrate: ", st[ct] * 6 / bt[ct]);
         if (p > -1) {
-            console.log("\nPrevious Wicket: Batsman ", p + 1, ": ", s[p], "(", b[p], ")");
-            if (pd > -1) console.log(", Dismissed by: Bowler ", pd + 1);
-            else console.log("(runout)");
-            console.log("\nPartnership: ", st[pt], "(", bt[pt], "), runrate: ", st[pt] * 6 / bt[pt]);
-            console.log("Fall of wicket: ",fo);
+            commentary+='\nPrevious Wicket: Batsman '+ (p + 1)+ ': '+ s[p]+ '('+ b[p]+ ')';//console.log("\nPrevious Wicket: Batsman ", p + 1, ": ", s[p], "(", b[p], ")");
+            if (pd > -1) commentary+=', Dismissed by: Bowler '+ (pd + 1);//console.log(", Dismissed by: Bowler ", pd + 1);
+            else commentary+='(runout)';//console.log("(runout)");
+            commentary+='\nPartnership: '+ st[pt]+ '('+ bt[pt]+ '), runrate: '+ st[pt] * 6 / bt[pt]+'\nFall of wicket: '+fo;//console.log("\nPartnership: ", st[pt], "(", bt[pt], "), runrate: ", st[pt] * 6 / bt[pt]);
+            //console.log("Fall of wicket: ",fo);
         }
-        console.log("\nBowler ", x + 1, ": ", d[x] / 6 + "." + d[x] % 6, "-", g[x], "-", w[x], "-", r[x] * 6 / d[x], "\n\n");
-        if (d[x] == 24) console.log("And that brings an end to Bowler ", x + 1, "'s spell.\n\n");
+        commentary+='\nBowler '+( x + 1)+ ': '+ d[x] / 6 + '.' + d[x] % 6 + '-'+ g[x]+ '-'+ w[x]+ '-'+ r[x] * 6 / d[x]+ '\n\n';//console.log("\nBowler ", x + 1, ": ", d[x] / 6 + "." + d[x] % 6, "-", g[x], "-", w[x], "-", r[x] * 6 / d[x], "\n\n");
+        if (d[x] == 24) commentary+='And that brings an end to Bowler '+ (x + 1)+ '\'s spell.\n\n'; //console.log("And that brings an end to Bowler ", x + 1, "'s spell.\n\n");
         for (j = 0; j < 6; ++j)
             if (d[j] <= 18 && j != p2) {
                 v = j;
@@ -294,41 +303,42 @@ ob[1] = new team();
         p2 = x;
     }
     c = [0, 1];
-    console.log("\nScorecard:\n\tRuns Balls Strike Rate Fours Sixes \n");
+    commentary+='\nScorecard:\n\tRuns Balls Strike Rate Fours Sixes \n';//console.log("\nScorecard:\n\tRuns Balls Strike Rate Fours Sixes \n");
     for (i = 0; i < 11; ++i) {
-        if (!b[i]) console.log("\tDNB\n");
+        if (!b[i]) commentary+='\tDNB\n';//console.log("\tDNB\n");
         else {
-            console.log(s[i], b[i], s[i] * 100 / b[i], f[i], m[i]);
-            if (!y[i]) console.log("  (not out)");
+            commentary+=s[i]+' '+b[i]+' '+s[i] * 100 / b[i]+' '+f[i]+' '+m[i];//console.log(s[i], b[i], s[i] * 100 / b[i], f[i], m[i]);
+            if (!y[i]) commentary+='  (not out)';//console.log("  (not out)");
         }
         if (i < 10) {
             st[i] = bt[i] = 0;
         }
         b[i] = f[i] = m[i] = y[i] = z[i] = s[i] = b[i] = f[i] = m[i] = 0;
     }
-    console.log("Total: ", T, " / ", w1, " (", parseInt(B1 / 6) + "." + B1 % 6, " overs)\tRunrate: ", T * 6 / B1, "\nExtras: ", e, "\n\nBowling Statistics:\n\nBowler Overs Maidens Wickets Runs conceded Economy\n\n");
+    commentary+='Total: '+ T+ ' / '+ w1+ ' ('+ parseInt(B1 / 6) + '.' + B1 % 6+ ' overs)\tRunrate: '+ T * 6 / B1+ '\nExtras: '+ e+ '\n\nBowling Statistics:\n\nBowler Overs Maidens Wickets Runs conceded Economy\n\n';//console.log("Total: ", T, " / ", w1, " (", parseInt(B1 / 6) + "." + B1 % 6, " overs)\tRunrate: ", T * 6 / B1, "\nExtras: ", e, "\n\nBowling Statistics:\n\nBowler Overs Maidens Wickets Runs conceded Economy\n\n");
     for (i = 0; i < 6; i++) {
-        console.log(i + 1, parseInt(d[i] / 6) + "." + d[i] % 6, g[i], w[i], r[i], r[i] * 6 / d[i]);
+        commentary+=(i + 1)+' '+parseInt(d[i] / 6) + '.' + d[i] % 6+' '+g[i]+' '+w[i]+' '+r[i]+' '+r[i] * 6 / d[i];//console.log(i + 1, parseInt(d[i] / 6) + "." + d[i] % 6, g[i], w[i], r[i], r[i] * 6 / d[i]);
         fw[i] = cw[i] = fs[i] = d[i] = g[i] = r[i] = w[i] = 0;
     }
-    console.log("Dot ball percentage: ", dot * 100 / B1, " %");
+    commentary+='Dot ball percentage: '+ dot * 100 / B1+ ' %';//console.log("Dot ball percentage: ", dot * 100 / B1, " %");
     e = t = fh = ct = T2 = dot = p2 = 0;
     p = pt = -1;
+    //console.log(commentary);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     for (i = 1; i < 6; i++)
         if (ob[+!toss].br[i] > ob[+!toss].br[p2])
             p2 = i;
     x = p2;
-    console.log("\nBowler ", p2 + 1, " to start proceedings from the pavillion end.....\n\n");
+    commentary+='\nBowler '+ (p2 + 1)+ ' to start proceedings from the pavillion end.....\n\n';//console.log("\nBowler ", p2 + 1, " to start proceedings from the pavillion end.....\n\n");
     dot = 0;
     for (i = 0; i < 20 && (w2 < 10 && T <= T); ++i) {
         l = cm = 0;
         if (d[x] == 18)
-            console.log("So the captain has chosen to bowl Bowler ", x + 1, " out.\n");
+            commentary+='So the captain has chosen to bowl Bowler '+( x + 1)+ ' out.\n';//console.log("So the captain has chosen to bowl Bowler ", x + 1, " out.\n");
         if ((s[c[+t]] >= 44 && s[c[+t]] < 50))
-            console.log("Batsman ", c[+t] + 1, " one hit away from a well deserving fifty. Will he make it ?\n\n");
+            commentary+='Batsman '+ (c[+t] + 1)+ ' one hit away from a well deserving fifty. Will he make it ?\n\n';//console.log("Batsman ", c[+t] + 1, " one hit away from a well deserving fifty. Will he make it ?\n\n");
         else if ((s[c[+t]] >= 94 && s[c[+t]] < 100))
-            console.log("Batsman ", c[+t] + 1, " knows there is a hundred for the taking if he can knuckle this one down....\n\n");
+            commentary+='Batsman '+ (c[+t] + 1)+ ' knows there is a hundred for the taking if he can knuckle this one down....\n\n';//console.log("Batsman ", c[+t] + 1, " knows there is a hundred for the taking if he can knuckle this one down....\n\n");
         for (j = 1; j <= 6; ++j) {
             v = Math.abs(ob[+toss].r[c[+t]] - ob[+!toss].br[x]);
             k2 = (ob[+!toss].br[x]) / ((rand() % (ob[+!toss].bv[c[+t]] * ob[+!toss].br[x] / 750 + 1) + ob[+!toss].bv[x] * ob[+!toss].br[x] / 1000) * (rand() % (ob[+!toss].bs[x] * ob[+!toss].br[x] / 750 + 1) + ob[+!toss].bs[x] * ob[+!toss].br[x] / 1000) * (rand() % (ob[+!toss].ec[x] * ob[+!toss].br[x] / 750 + 1) + ob[+!toss].ec[x] * ob[+!toss].br[x] / 1000));
@@ -343,25 +353,25 @@ ob[1] = new team();
             ++d[x];
             ++bt[ct];
             if (fh)
-                console.log("\nFree Hit: ");
+                commentary+='\nFree Hit: ';//console.log("\nFree Hit: ");
             else
-                console.log(i + "." + j, " Bowler ", x + 1, " to Batsman ", c[+t] + 1, ", ");
+                commentary+=i + '.' + j+ ' Bowler '+ (x + 1)+ ' to Batsman '+ (c[+t] + 1)+ ', ';//console.log(i + "." + j, " Bowler ", x + 1, " to Batsman ", c[+t] + 1, ", ");
             if (k <= 0 && !fh) {
                 p = c[+t];
                 y[c[+t]] = 1;
-                console.log("OUT ");
+                commentary+='OUT ';//console.log("OUT ");
                 pd = x;
                 ++cw[x];
                 pt = ct;
                 ++w[x];
-                if (k <= 0 && k > -0.5) {console.log("(caught)"); console.log(com.caught[rand()%com.caught.length]);}
-                else if (k <= -0.5 && k > -1) {console.log("(bowled)"); console.log(com.bowled[rand()%com.bowled.length]);}
-                else if (k <= -1 && k > -1.5) {console.log("(LBW)"); console.log(com.lbw[rand()%com.lbw.length]);}
-                else if (k <= -1.5 && k > -2) {console.log("(stumped)"); console.log(com.stumped[rand()%com.stumped.length]);}
+                if (k <= 0 && k > -0.5) { commentary+=com.caught[rand()%com.caught.length]; /*console.log("(caught)"); console.log(com.caught[rand()%com.caught.length]);*/}
+                else if (k <= -0.5 && k > -1) {commentary+=com.bowled[rand()%com.bowled.length]; /*console.log("(bowled)"); console.log(com.bowled[rand()%com.bowled.length]);*/}
+                else if (k <= -1 && k > -1.5) {commentary+=com.lbw[rand()%com.lbw.length];/*console.log("(LBW)"); console.log(com.lbw[rand()%com.lbw.length]);*/}
+                else if (k <= -1.5 && k > -2) {commentary+=com.stumped[rand()%com.stumped.length];/*console.log("(stumped)"); console.log(com.stumped[rand()%com.stumped.length]);*/}
                 else {
                     v = rand() % 3;
                     if (v) {
-                        console.log("  ", v, " run(s), ");
+                        commentary+='  '+ v+ ' run(s), ';//console.log("  ", v, " run(s), ");
                         st[ct] += v;
                         s[c[+t]] += v;
                         l += v;
@@ -369,42 +379,42 @@ ob[1] = new team();
                     }
                     if (rand() % 2)
                         t = !t;
-                    console.log(com.runout[rand()%com.runout.length]);
+                    commentary+=com.runout[rand()%com.runout.length];//console.log(com.runout[rand()%com.runout.length]);
                     pd = -1;
                     cw[x] = 0;
                     --w[x];
                     if (T2 > T) {
-                        console.log("What an emphatic victory ! ");
+                        commentary+='What an emphatic victory ! ';//console.log("What an emphatic victory ! ");
                         break;
                     }
-                    else if (T2 == T) console.log("Scores are level...");
+                    else if (T2 == T) commentary+='Scores are level...';//console.log("Scores are level...");
                 }
-                if (b[c[+t]] == 1) console.log(" first ball ");
-                if (!s[c[+t]]) console.log("for a duck !");
+                if (b[c[+t]] == 1) commentary+=' first ball ';//console.log(" first ball ");
+                if (!s[c[+t]]) commentary+='for a duck !';//console.log("for a duck !");
                 if (w[x] == 5 && !fw[x]) {
                     fw[x] == 1;
-                    console.log(", that brings up his five wicket haul, yet another tick in a list of accomplishments.");
+                    commentary+=', that brings up his five wicket haul, yet another tick in a list of accomplishments.';//console.log(", that brings up his five wicket haul, yet another tick in a list of accomplishments.");
                 }
                 if (s[c[+t]] >= 45 && s[c[+t]] < 50)
-                    console.log("\nlooks like there won't be any fifty for Batsman ", c[+t], ", he came so close, and was yet so far.\n");
-                else if (s[c[+t]] >= 90 && s[c[+t]] < 100) console.log("\nHe'll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team.\n");
+                    commentary+='\nlooks like there won\'t be any fifty for Batsman '+( c[+t] + 1 ) + ', he came so close, and was yet so far.\n';//console.log("\nlooks like there won't be any fifty for Batsman ", c[+t], ", he came so close, and was yet so far.\n");
+                else if (s[c[+t]] >= 90 && s[c[+t]] < 100) commentary+='\nHe\'ll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team.\n';//console.log("\nHe'll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team.\n");
                 if (cw[x] == 3) {
-                    console.log("\nAnd that is also a hattrick for bowler ", x + 1, "! Fantastic bowling in the time of need.");
+                    commentary+='\nAnd that is also a hattrick for bowler '+ (x + 1)+ '! Fantastic bowling in the time of need.';//console.log("\nAnd that is also a hattrick for bowler ", x + 1, "! Fantastic bowling in the time of need.");
                     cw[x] = 0;
                 }
-                console.log("\nBatsman ", c[+t] + 1);
-                if (pd > -1) console.log(", Bowler ", x + 1);
-                else console.log(" runout");
-                console.log(" ", s[c[+t]], " (", b[c[+t]], " b", " ", f[c[+t]], "X4's ", m[c[+t]], "X6's) SR: ", s[c[+t]] * 100 / b[c[+t]], "\nPartnership: ", st[ct], "(", bt[ct], ")", ", Runrate: ", st[ct] * 6 / bt[ct]);
+                commentary+='\nBatsman '+( c[+t] + 1);//console.log("\nBatsman ", c[+t] + 1);
+                if (pd > -1) commentary+=', Bowler '+ (x + 1);//console.log(", Bowler ", x + 1);
+                else commentary+=' runout';//console.log(" runout");
+                commentary+=' '+ s[c[+t]]+ ' ('+ b[c[+t]]+ ' b'+ ' '+ f[c[+t]]+ 'X4\'s '+ m[c[+t]]+ 'X6\'s) SR: '+ s[c[+t]] * 100 / b[c[+t]]+ '\nPartnership: '+ st[ct]+ '('+ bt[ct]+ ')'+ ', Runrate: '+ st[ct] * 6 / bt[ct];//console.log(" ", s[c[+t]], " (", b[c[+t]], " b", " ", f[c[+t]], "X4's ", m[c[+t]], "X6's) SR: ", s[c[+t]] * 100 / b[c[+t]], "\nPartnership: ", st[ct], "(", bt[ct], ")", ", Runrate: ", st[ct] * 6 / bt[ct]);
                 ++ct;
                 c[+t] = (c[+t] > c[+!t] ? c[+t] : c[+!t]) + 1;
                 if (k <= -0 && k >= -0.5 && rand() % 2) {
                     t = !t;
-                    console.log("\nThe two batsmen crossed over while the catch was being taken.");
+                    commentary+='\nThe two batsmen crossed over while the catch was being taken.';//console.log("\nThe two batsmen crossed over while the catch was being taken.");
                 }
                 if (w2++ == 9) {
                     B2 = 6 * i + j;
-                    console.log("\nAnd that wraps up the innings.\n");
+                    commentary+='\nAnd that wraps up the innings.\n';//console.log("\nAnd that wraps up the innings.\n");
                     break;
                 }
                 k=i;
@@ -420,12 +430,10 @@ ob[1] = new team();
                 cw[x] = 0;
                 if (v > 6) {
                     if (rand() % 2) {
-                        console.log(" wide, ");
-                        if (rand() % 2) console.log("that is way down the leg side, no mercy for that.");
-                        else console.log(" just outside the margin, but the line belongs to the umpire, wide called.");
+                        commentary+=' wide, '+com.wide[rand()%com.wide.legth];//console.log(" wide, ");
                     }
                     else {
-                        console.log("No ball. An overstep was the last thing the bowling side needed...\n");
+                        commentary+=com.freehit[rand()%com.freehit.length];//console.log("No ball. An overstep was the last thing the bowling side needed...\n");
                         fh = 1;
                     }
                     --j;
@@ -440,25 +448,33 @@ ob[1] = new team();
                     if (fh) fh = 0;
                     switch (v) {
                         case 0:
-                            console.log(" no run");
-                            console.log(com.dot[rand()%com.dot.length]);
+                            commentary+='no run, '+com.dot[rand()%com.dot.length];//console.log(" no run");
+                            //console.log(com.dot[rand()%com.dot.length]);
                             ++dot;
                             break;
                         case 5:
                             v -= 1;
                         case 4:
-                            console.log("FOUR");
-                            console.log(com.four[rand()%com.four.length]);
+                            commentary+='FOUR, '+com.four[rand()%com.four.length];//console.log("FOUR");
+                            //console.log(com.four[rand()%com.four.length]);
                             ++f[c[+t]];
                             break;
                         case 6:
-                            console.log("SIX");
-                            console.log(com.six[rand()%com.six.length]);
+                            commentary+='SIX, '+com.six[rand()%com.six.length];//console.log("SIX");
+                            //console.log(com.six[rand()%com.six.length]);
                             ++m[c[+t]];
                             ++cm;
                             break;
+                        case 1:
+                            commentary+='1 run, '+com.one[rand()%com.one.length];
+                            break;
+                        case 2:
+                            commentary+='2 runs, '+com.two[rand()%com.two.length];
+                            break;
+                        case 3:
+                            commentary+='3 runs, '+com.three[rand()%com.three.length];
+                            break;
                         default:
-                            console.log(v, " run(s)");
                             break;
                     }
                     if (v != 6) cm = 0;
@@ -466,48 +482,48 @@ ob[1] = new team();
                     s[c[+t]] += v;
                     T2 += v;
                     st[ct] += v;
-                    if (T2 == T) console.log("\nScores are level now...\n");
+                    if (T2 == T) commentary+='\nScores are level now...\n';//console.log("\nScores are level now...\n");
                     else if (T2 > T) {
-                        console.log("\nAnd they have done it! What an emphatic victory !\n");
+                        commentary+='\nAnd they have done it! What an emphatic victory !\n';//console.log("\nAnd they have done it! What an emphatic victory !\n");
                         B2 = 6 * i + j;
                         break;
                     }
                     if (!z[c[+t]] && s[c[+t]] >= 50) {
                         ++z[c[+t]];
-                        console.log(" And that brings up his half century - a well timed innings indeed.");
+                        commentary+=' And that brings up his half century - a well timed innings indeed.';//console.log(" And that brings up his half century - a well timed innings indeed.");
                     }
                     else if (z[c[+t]] == 1 && s[c[+t]] >= 100) {
                         ++z[c[+t]];
-                        console.log(" what a wonderful way to bring up his century.");
+                        commentary+=' what a wonderful way to bring up his century.';//console.log(" what a wonderful way to bring up his century.");
                     }
                     if (v % 2) t = !t;
                 }
             }
         }
-        if (cm == 6) console.log("\nSix G.P.L maximums in the previous over ! What an effort by Batsman.", c[+t], ". The crowd is ecstatic, Bowler ", x, " is absolutely flabbergasted.\n");
+        if (cm == 6) commentary+='\nSix G.P.L maximums in the previous over ! What an effort by Batsman.'+ (c[+t] + 1)+ '. The crowd is ecstatic, Bowler '+( x + 1)+ ' is absolutely flabbergasted.\n';//console.log("\nSix G.P.L maximums in the previous over ! What an effort by Batsman.", c[+t], ". The crowd is ecstatic, Bowler ", x, " is absolutely flabbergasted.\n");
         r[x] += l;
         t = !t;
-        console.log("\nLast over: ");
+        commentary+='\nLast over: ';//console.log("\nLast over: ");
         if (l)
-            console.log(l, " run(s)");
+            commentary+=l+ " run(s)";//console.log(l, " run(s)");
         else {
-            if (j == 7) console.log("maiden");
+            if (j == 7) commentary+='maiden';//console.log("maiden");
             g[x] += 1;
         }
-        console.log("\n Current score: ", T2, " / ", w2, "\tRunrate: ", T2 / (i + 1));
+        commentary+='\n Current score: '+ T2+ ' / '+ w2+ '\tRunrate: '+ T2 / (i + 1);//console.log("\n Current score: ", T2, " / ", w2, "\tRunrate: ", T2 / (i + 1));
         if (T2 > T) break;
-        console.log(", RRR: ", (T + 1 - T2) / (19 - i), "\n Equation: ", (T + 1 - T2), " runs needed from ", 114 - 6 * i, " balls.\n");
-        if (c[+t] < 11) console.log("Batsman: ", c[+t] + 1, " : ", s[c[+t]], " (", b[c[+t]], ") ");
-        if (c[+!t] < 11) console.log("Batsman: ", c[+!t] + 1, " : ", s[c[+!t]], " (", b[c[+!t]], ")\nPartnership: ", st[ct], "(", bt[ct], "), runrate: ", st[ct] * 6 / bt[ct]);
+        commentary+=', RRR: '+ (T + 1 - T2) / (19 - i)+ '\n Equation: '+ (T + 1 - T2)+ ' runs needed from '+ 114 - 6 * i+ ' balls.\n';//console.log(", RRR: ", (T + 1 - T2) / (19 - i), "\n Equation: ", (T + 1 - T2), " runs needed from ", 114 - 6 * i, " balls.\n");
+        if (c[+t] < 11) commentary+='Batsman: '+ (c[+t] + 1)+ ' : '+ s[c[+t]]+ ' ('+ b[c[+t]]+ ') ';//console.log("Batsman: ", c[+t] + 1, " : ", s[c[+t]], " (", b[c[+t]], ") ");
+        if (c[+!t] < 11) commentary+='Batsman: '+ (c[+!t] + 1)+ ' : '+ s[c[+!t]]+ ' ('+ b[c[+!t]]+ ')\nPartnership: '+ st[ct]+ '('+ bt[ct]+ '), runrate: '+ st[ct] * 6 / bt[ct];//console.log("Batsman: ", c[+!t] + 1, " : ", s[c[+!t]], " (", b[c[+!t]], ")\nPartnership: ", st[ct], "(", bt[ct], "), runrate: ", st[ct] * 6 / bt[ct]);
         if (p > -1) {
-            console.log("\nPrevious Wicket: Batsman ", p + 1, ": ", s[p], "(", b[p], ")");
-            if (pd > -1) console.log(", Dismissed by: Bowler ", pd + 1);
-            else console.log("(runout)");
-            console.log("\nPartnership: ", st[pt], "(", bt[pt], "), runrate: ", st[pt] * 6 / bt[pt]);
+            commentary+='\nPrevious Wicket: Batsman '+( p + 1)+ ': '+ s[p]+ '('+ b[p]+ ')';//console.log("\nPrevious Wicket: Batsman ", p + 1, ": ", s[p], "(", b[p], ")");
+            if (pd > -1) commentary+=', Dismissed by: Bowler '+ (pd + 1);//console.log(", Dismissed by: Bowler ", pd + 1);
+            else commentary+='(runout)';//console.log("(runout)");
+            commentary+='\nPartnership: '+ st[pt]+ '('+ bt[pt]+ '), runrate: '+ st[pt] * 6 / bt[pt];//console.log("\nPartnership: ", st[pt], "(", bt[pt], "), runrate: ", st[pt] * 6 / bt[pt]);
         }
-        console.log("\nBowler ", x + 1, ": ", parseInt(d[x] / 6) + "." + d[x] % 6, "-", g[x], "-", w[x], "-", r[x] * 6 / d[x], "\n\n");
-        if (i < 19 && (T + 1 - T2) / (19 - i) >= 36) console.log("The team might as well hop onto the team bus now....\n");
-        if (d[x] == 24) console.log("And that brings an end to Bowler ", x + 1, "'s spell.\n\n");
+        commentary+='\nBowler '+( x + 1)+ ': '+ parseInt(d[x] / 6) + '.' + d[x] % 6 + '-' + g[x] + '-' + w[x] + '-' + r[x] * 6 / d[x]+ '\n\n';//console.log("\nBowler ", x + 1, ": ", parseInt(d[x] / 6) + "." + d[x] % 6, "-", g[x], "-", w[x], "-", r[x] * 6 / d[x], "\n\n");
+        if (i < 19 && (T + 1 - T2) / (19 - i) >= 36) commentary+='The team might as well hop onto the team bus now....\n';//console.log("The team might as well hop onto the team bus now....\n");
+        if (d[x] == 24) commentary+='And that brings an end to Bowler '+ (x + 1)+ '\'s spell.\n\n';//console.log("And that brings an end to Bowler ", x + 1, "'s spell.\n\n");
         for (j = 0; j < 6; ++j)
             if (d[j] <= 18 && j != p2) {
                 v = j;
@@ -519,49 +535,51 @@ ob[1] = new team();
         p2 = x;
     }
     c = [0, 1];
-    console.log("\nScorecard:\n\tRuns Balls Strike Rate Fours Sixes \n");
+    commentary+='\nScorecard:\n\tRuns Balls Strike Rate Fours Sixes \n';//console.log("\nScorecard:\n\tRuns Balls Strike Rate Fours Sixes \n");
     for (i = 0; i < 11; ++i) {
-        if (!b[i]) console.log("\tDNB\n");
+        if (!b[i]) commentary+='\tDNB\n';//console.log("\tDNB\n");
         else {
-            console.log(s[i], b[i], s[i] * 100 / b[i], f[i], m[i]);
-            if (!y[i]) console.log("  (not out)");
+            commentary+=s[i] + ' ' + b[i]+' '+s[i] * 100 / b[i]+' '+f[i]+' '+m[i];//console.log(s[i], b[i], s[i] * 100 / b[i], f[i], m[i]);
+            if (!y[i]) commentary+='  (not out)';//console.log("  (not out)");
         }
         if (i < 10) {
             st[i] = bt[i] = 0;
         }
         b[i] = f[i] = m[i] = y[i] = z[i] = s[i] = b[i] = f[i] = m[i] = 0;
     }
-    console.log("Total: ", T2, " / ", w2, " (", parseInt(B2 / 6) + "." + B2 % 6, " overs)\tRunrate: ", T2 * 6 / B2, "\nExtras: ", e, "\n\nBowling Statistics:\n\nBowler Overs Maidens Wickets Runs conceded Economy\n\n");
+    commentary+='Total: '+ T2+ ' / '+ w2+ ' ('+ parseInt(B2 / 6) + '.' + B2 % 6+ ' overs)\tRunrate: '+ T2 * 6 / B2+ '\nExtras: '+ e+ '\n\nBowling Statistics:\n\nBowler Overs Maidens Wickets Runs conceded Economy\n\n';//console.log("Total: ", T2, " / ", w2, " (", parseInt(B2 / 6) + "." + B2 % 6, " overs)\tRunrate: ", T2 * 6 / B2, "\nExtras: ", e, "\n\nBowling Statistics:\n\nBowler Overs Maidens Wickets Runs conceded Economy\n\n");
     for (i = 0; i < 6; i++) {
-        console.log(i + 1, parseInt(d[i] / 6) + "." + d[i] % 6, g[i], w[i], r[i], r[i] * 6 / d[i]);
+        commentary+=(i + 1)+ parseInt(d[i] / 6) + '.' + d[i] % 6+' '+ g[i]+' '+ w[i]+' '+ r[i]+' '+ r[i] * 6 / d[i];//console.log(i + 1, parseInt(d[i] / 6) + "." + d[i] % 6, g[i], w[i], r[i], r[i] * 6 / d[i]);
         fw[i] = cw[i] = fs[i] = d[i] = g[i] = r[i] = w[i] = 0;
     }
-    console.log("Dot ball percentage: ", dot * 100 / B2, " %");
+    commentary+='Dot ball percentage: '+ dot * 100 / B2+ ' %';//console.log("Dot ball percentage: ", dot * 100 / B2, " %");
     if (!(T - T2))
         if (!(w1 - w2))
             if (!(B1 - B2))
-                console.log("TIE !\n");
+                commentary+='TIE !\n';//console.log("TIE !\n");
             else {
-                console.log("Team ");
-                if (B2 > B1) console.log(+!toss + 1);
+                commentary+='Team';//console.log("Team ");
+                if (B2 > B1) commentary+=(+!toss + 1);//console.log(+!toss + 1);
                 else
-                    console.log(+toss + 1);
-                console.log(" wins! (higher run rate)\n\n");
+                    commentary+=(+toss + 1);//console.log(+toss + 1);
+                commentary+=' wins! (higher run rate)\n\n';//console.log(" wins! (higher run rate)\n\n");
             }
         else {
-            console.log("Team ");
-            if (w1 > w2) console.log(+!toss + 1);
-            else console.log(+toss + 1);
-            console.log(" wins! (fewer wickets lost)\n\n");
+            commentary+='Team';//console.log("Team ");
+            if (w1 > w2) commentary+=(+!toss + 1);//console.log(+!toss + 1);
+            else commentary+=(+toss + 1);//console.log(+toss + 1);
+            commentary+=' wins! (fewer wickets lost)\n\n';//console.log(" wins! (fewer wickets lost)\n\n");
         }
     else {
-        console.log("Team ");
+        commentary+='Team ';//console.log("Team ");
         if (T < T2) {
-            console.log(+toss + 1, " wins by ", 10 - w2, " wicket(s) !");
+            commentary+=(+toss + 1)+ ' wins by '+ (10 - w2)+ ' wicket(s) !';//console.log(+toss + 1, " wins by ", 10 - w2, " wicket(s) !");
+
         }
         else {
-            console.log(+!toss + 1, " wins by ", T - T2, " runs!");
+            commentary+=(+!toss + 1)+ ' wins by '+ (T - T2)+ ' runs!';//console.log(+!toss + 1, " wins by ", T - T2, " runs!");
         }
-        console.log("\n");
+        commentary+='\n';//console.log("\n");
     }
+console.log(commentary);
 }
