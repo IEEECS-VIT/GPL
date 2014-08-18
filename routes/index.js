@@ -75,6 +75,10 @@ router.get('/register', function (req, res) {
         res.render('register', { });
     }
 });
+ router.get('/interest', function (req, res) // page to view prizes
+ {
+     res.render('interest', { });
+ });
 
 router.get('/home', function (req, res) {
     if (req.cookies.name) {
