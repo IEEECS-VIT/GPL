@@ -1,5 +1,6 @@
 com=require('./commentary.js');
-var v, k, k2, toss, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fw = [0, 0, 0, 0, 0, 0], fh = 0, pt = -1, ct = 0, bt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], st = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cw = [0, 0, 0, 0, 0, 0], cm, z = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fs = [0, 0, 0, 0, 0, 0], pd = -1, e = 0, x, g = [0, 0, 0, 0, 0, 0], p = -1, p2, s = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], b = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], f = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], m = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c = [0, 1], d = [0, 0, 0, 0, 0, 0], r = [0, 0, 0, 0, 0, 0], w = [0, 0, 0, 0, 0, 0], T = 0, T2 = 0, j, i, l = 0, w1 = 0, w2 = 0, B1 = 0, B2 = 0, t;
+var v, k, x, k2, p2, toss, i, j, t, cm, fo;
+y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fw = [0, 0, 0, 0, 0, 0], fh = 0, pt = -1, ct = 0, bt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], st = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cw = [0, 0, 0, 0, 0, 0], z = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fs = [0, 0, 0, 0, 0, 0], pd = -1, e = 0, g = [0, 0, 0, 0, 0, 0], p = -1, s = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], b = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], f = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], m = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c = [0, 1], d = [0, 0, 0, 0, 0, 0], r = [0, 0, 0, 0, 0, 0], w = [0, 0, 0, 0, 0, 0], T = 0, T2 = 0, l = 0, w1 = 0, w2 = 0, B1 = 0, B2 = 0;
 function rand() {
     return parseInt(Math.random() * 1000000000000000);
 }
@@ -14,7 +15,7 @@ function team() {
     this.co = rand() % 11 + 5;
     this.w = 0;
     this.ec = [];
-    for (i = 0; i < 6; i++) {
+    for (i = 0; i < 6; ++i) {
         this.ec[i] = (rand() % 401 + 500) / 100;
         this.bv[i] = rand() % 16 + 15;
         this.bs[i] = rand() % 16 + 15;
@@ -25,13 +26,13 @@ function team() {
         this.br[i] = rand() % 201 + 700;
         B2 += this.br[i] / 6;
     }
-    for (i = 6; i < 11; i++) {
+    for (i = 6; i < 11; ++i) {
         this.r[i] = 900 - this.br[i - 6];
         B1 += this.r[i] / 11;
         this.a[i] = rand() % 21 + 2 * (5 - i / 2);
         this.st[i] = rand() % 51 + 100;
     }
-    for (i = 0; i < 11; i++) {
+    for (i = 0; i < 11; ++i) {
         if (i < 6) {
             this.br[i] += this.br[i] / 5 - B2 / 5 + this.co;
         }
@@ -44,44 +45,44 @@ ob[1] = new team();
 {
     console.log("\n Team:", "1", "2\n", "Coach:", ob[0].co, ob[1].co);
     console.log("\nBatsmen:   ");
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < 6; ++i)
         console.log(ob[0].r[i], " ");
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < 6; ++i)
         console.log(ob[1].r[i], " ");
     console.log("\nAverage:   ");
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < 6; ++i)
         console.log(ob[0].a[i], "  ");
     console.log("\t\t");
-    for (i = 0; i < 6; i++) console.log(ob[1].a[i], " ");
+    for (i = 0; i < 6; ++i) console.log(ob[1].a[i], " ");
     console.log("\nStrikerate:");
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < 6; ++i)
         console.log(ob[0].st[i], "  ");
     console.log("\t\t");
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < 6; ++i)
         console.log(ob[1].st[i], " ");
     console.log("\n\nBowlers:   ");
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < 6; ++i)
         console.log(ob[0].br[i], " ");
     console.log("\t");
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < 6; ++i)
         console.log(ob[1].br[i], " ");
     console.log("\nAverage: ");
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < 6; ++i)
         console.log(ob[0].bv[i], " ");
     console.log("\t");
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < 6; ++i)
         console.log(ob[1].bv[i], " ");
     console.log("\nStrike Rate: ");
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < 6; ++i)
         console.log(ob[0].bs[i], " ");
     console.log("\t");
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < 6; ++i)
         console.log(ob[1].bs[i], " ");
     console.log("\nEconomy: ");
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < 6; ++i)
         console.log(ob[0].ec[i], " ");
     console.log("\t");
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < 6; ++i)
         console.log(ob[1].ec[i], " ");
     B1 = B2 = 120;
     T = T2 = 0;
@@ -101,7 +102,7 @@ ob[1] = new team();
         console.log(" wins the toss and chooses to bat first");
     }
     w1 = w2 = t = p2 = 0;
-    for (i = 1; i < 6; i++)
+    for (i = 1; i < 6; ++i)
         if (ob[+toss].br[i] > ob[+toss].br[p2])
             p2 = i;
     x = p2;
@@ -189,6 +190,12 @@ ob[1] = new team();
                     console.log("\nAnd that wraps up the innings.\n");
                     break;
                 }
+                k=i;
+                if(j==6) {
+                    j=0;
+                    ++k;
+                }
+                fo= T.toString()+' / '+w1.toString()+', '+ k.toString()+'.'+ j.toString();  // a similar conversion may be used to store the entire commentary for a match
             }
             else {
                 v = parseInt(k);
@@ -272,6 +279,7 @@ ob[1] = new team();
             if (pd > -1) console.log(", Dismissed by: Bowler ", pd + 1);
             else console.log("(runout)");
             console.log("\nPartnership: ", st[pt], "(", bt[pt], "), runrate: ", st[pt] * 6 / bt[pt]);
+            console.log("Fall of wicket: ",fo);
         }
         console.log("\nBowler ", x + 1, ": ", d[x] / 6 + "." + d[x] % 6, "-", g[x], "-", w[x], "-", r[x] * 6 / d[x], "\n\n");
         if (d[x] == 24) console.log("And that brings an end to Bowler ", x + 1, "'s spell.\n\n");
@@ -399,6 +407,12 @@ ob[1] = new team();
                     console.log("\nAnd that wraps up the innings.\n");
                     break;
                 }
+                k=i;
+                if(j==6) {
+                    j=0;
+                    ++k;
+                }
+                fo= T2.toString()+' / '+w2.toString()+', '+ k.toString()+'.'+ j.toString();  // a similar conversion may be used to store the entire commentary for a match
             }
             else {
                 v = parseInt(k);
