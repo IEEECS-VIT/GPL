@@ -9,6 +9,8 @@
     <script src="/bower_components/foundation/js/foundation/foundation.topbar.js"></script>
     <script src="/javascript/tabs.js"></script>
     <script src="/javascript/players.js"></script>
+
+
 </head>
 <body style="background:url('/images/background.png');font-family: 'PT Sans', sans-serif;height:100%;">
 <div style="min-height: 100%">
@@ -24,18 +26,41 @@
     </section>
 </div>
 <!-- top bar -->
-<% var j = 0;var team = []; var k = 1;var r, c;function sel(r, c)
-{
+<script type="text/javascript"> var team = [];
+    var k = 0;
+    var r;
+
+    function t() {
+        var name;
+        var _id;
+        var price;
+        var cost;
+    }
+
+
+    function sel(r) {
+
+        var a = 'c' + String(r);
     if (k < 17)
     {
-        team[k] = r + c;
+        alert(String(document.h.a.value));
+        alert(r);
+        team[k] = r;
         k++;
+        alert(team[k - 1]);
+
+
     }
     else
     {
+
         alert("Max Player Limit reached")
     }
-} %>
+
+        disp();
+        document.getElementById("box" + a).style.opacity = '0';
+    } </script>
+<% var team = []; var k = 0;var r;var j = 0; %>
 <div class="small-12">
     <ul class="radius tabs" data-tab="" style="margin-left: 31%;margin-top: 2%;">
         <li class="tab-title active" id="act1" onclick="tab(1)"><a href="#">Batsmen</a></li>
@@ -48,14 +73,22 @@
              style="height:auto;background-color: rgba(10,10,10,0.5);margin-right: 1%;margin-left: 2%;border-radius: 5px;">
             <h4 style="color: white;background-color: rgba(80,80,80,1);margin-top: 0;border-radius: 5px;padding: 2%;text-align: center;">
                 Selected Players</h4>
+
             <% for(var count = 0 ; count < k ; count++){ %>
             <div style="border-radius: 5px;background-color: rgba(0,0,0,0.2);margin-top: 0;">
-                <p align="center" style="color: white;padding: 1%;">
-                    <%= Players[1].Name %><br/>
-                    <%= Players[1].Price %>
+                <p align="center" style="color: white;padding: 1%;" onload="disp()">
+                    <script type="text/javascript">
+                        function disp() {
+                            for (var j = 0; j < k; j++) {
+                                <%= Players[team[j]].Name %>document.write('\n');
+                                <%= Players[team[j]].Price %>
+                                document.write(team[j].toString());
+                            }
+                        }
+                    </script>
                 </p>
                 <a href="#" onclick="">
-                    <div style="height: auto;width: auto;margin-left:70%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid red;background-color:rgba(255,255,255,0.1);color: red;border-radius: 5px;">
+                <div style="height: auto;width: auto;margin-left:70%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid red;background-color:rgba(255,255,255,0.1);color: red;border-radius: 5px;">
                         Remove
                     </div>
                 </a>
@@ -76,15 +109,18 @@
 
                         <% if(Players[i]._id <= 113){ %>
                         <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                            id="box<%= i + j %>" onclick="<%- "sel(" + i + ", " + j + ")" %>">
+                            id="box<%= i %>" onclick="">
 
                             <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                             <p style="text-align: center;"><%= Players[i].Name %><br/>
                                 <%= Players[i].Price %></p>
-                            <a href="#" onclick="">
-                                <div style="height: auto;width: auto;margin-left:75%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
-                                    Select
+
+                            <form name="h"><input value="<%= Players[i].Name %>" name="c<%= Players[i]._id %>"/></form>
+                            <a href="#" onclick="<%- 'sel(' + i + ')' %>">
+                                <div id="box<%= i %>"
+                                     style="height: auto;width: auto;margin-left:75%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
+                                Select
                                 </div>
                             </a>
                         </td>
@@ -115,10 +151,9 @@
                         <% if(k < 3){ %>
 
                         <% if(Players[i]._id <= 242 && Players[i]._id > 113){ %>
-                        <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                            id="box<%= i + j %>" onclick="<%- "sel(" + i + ", " + j + ")" %>">
+                        <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;">
 
-                            <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;"/>
+                        <img src="/images/bat/aaron finch.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                             <p style="text-align: center;"><%= Players[i].Name %><br/>
                                 <%= Players[i].Price %></p>
