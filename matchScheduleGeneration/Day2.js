@@ -56,8 +56,8 @@ exports.gen_schedule=function()
                         var match =
                         {
                             "_id": match_count,
-                            "Team 1": i,
-                            "Team 2": j,
+                            "Team_1":i,
+                            "Team_2":j,
                             "TimeStamp": "Day 2"
                         };
                         match_count++;

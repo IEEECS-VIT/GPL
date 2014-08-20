@@ -1,20 +1,74 @@
-com=require('./commentary.js');
+var com=require('./commentary.js');
+var MongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
+var MongoClient=require('mongodb').MongoClient;
+var today = new Date();
+
 var v, k, x, k2, p2, toss, i, j, t, cm, fo;
-commentary='', teamName='',y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fw = [0, 0, 0, 0, 0, 0], fh = 0, pt = -1, ct = 0, bt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], st = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cw = [0, 0, 0, 0, 0, 0], z = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fs = [0, 0, 0, 0, 0, 0], pd = -1, e = 0, g = [0, 0, 0, 0, 0, 0], p = -1, s = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], b = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], f = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], m = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c = [0, 1], d = [0, 0, 0, 0, 0, 0], r = [0, 0, 0, 0, 0, 0], w = [0, 0, 0, 0, 0, 0], T = 0, T2 = 0, l = 0, w1 = 0, w2 = 0, B1 = 0, B2 = 0;
-function rand() {
+var commentary='', teamName='',y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fw = [0, 0, 0, 0, 0, 0], fh = 0, pt = -1, ct = 0, bt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], st = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cw = [0, 0, 0, 0, 0, 0], z = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fs = [0, 0, 0, 0, 0, 0], pd = -1, e = 0, g = [0, 0, 0, 0, 0, 0], p = -1, s = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], b = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], f = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], m = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c = [0, 1], d = [0, 0, 0, 0, 0, 0], r = [0, 0, 0, 0, 0, 0], w = [0, 0, 0, 0, 0, 0], T = 0, T2 = 0, l = 0, w1 = 0, w2 = 0, B1 = 0, B2 = 0;
+
+exports.todaysMatches = function()
+{
+    var onConnect = function(err,db)
+    {
+        if(err)
+        {
+            throw err;
+        }
+        else
+        {
+            var dateMatchDay;
+            var day = today.getDate();
+            switch (day)
+            {
+                case 0: dateMatchDay='matchday4';
+                    break;
+                case 1: dateMatchDay='matchday5';
+                    break;
+                case 2: dateMatchDay='matchday6';
+                    break;
+                case 3: dateMatchDay='matchday7';
+                    break;
+                case 4: dateMatchDay='matchday1';
+                    break;
+                case 5: dateMatchDay='matchday2';
+                    break;
+                case 6: dateMatchDay='matchday3';
+                    break;
+                default :
+                    break;
+
+            }
+            var collection = db.collection(dateMatchDay);
+            var onFetch = function(err,documents)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else
+                {
+                    callback(null, documents);
+                }
+            }
+            collection.find({}).toArray(onFetch);
+        }
+
+    }
+    MongoClient.connect(MongoUri,onConnect);
+
+
+}
+function rand()
+{
     return parseInt(Math.random() * 1000000000000000);
 }
-function team() {
+
+
+exports.team = function(team1, team2)
+{
     B1 = B2 = 0;
-    var m=require('mongodb').MongoClient;
-    m.connect('mongodb://localhost:27017/GPL',function(err,db) {
-        if(err) throw err;
-        db.collection('users').find({'_id':teamName}).each(function(err,doc)
-                                                           {
-                                                               if (err) throw err;
-                                                               if (!doc) return db.close();
-                                                           });
-        });
+
+
     this.r = [];
     this.a = [];
     this.st = [];
