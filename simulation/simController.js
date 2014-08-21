@@ -4,8 +4,10 @@
 
 var simulator = require('./simulation.js');
 var mongoTeam = require('../mongoTeam.js');
-var team1,team2;
-function generateMatch()
+var async = require('async');
+
+
+exports.generateMatch = function()
 {
     var matchGenerator = function(err,docs)
     {
@@ -15,45 +17,45 @@ function generateMatch()
         }
         else
         {
-            for( var i=0; i<docs.length;i++)
+            var simulate_match = function(elt, i, arr)
             {
-                var team1_name = docs[i].Team_1;
-                var team2_name = docs[i].Team_2;
-
-                var onFetch1 = function(err,document)
-                {
-                    if(err)
-                    {
-                        // throw err
-                    }
-                    else
-                    {
-                        team1=document;
-                    }
-                };
-                var onFetch2 = function(err,document)
-                {
-                    if(err)
-                    {
-                        // throw err
-                    }
-                    else
-                    {
-                        team2=document;
-                    }
-                };
+                var parallel_tasks = {};
                 var doc1 = {
-                    "_id" : team1_name
+                    "_id" : elt.Team_1
                 };
                 var doc2 = {
-                    "_id" : team2_name
+                    "_id" : elt.Team_2
                 };
-                mongoTeam.getTeam(doc1,onFetch1);
-                mongoTeam.getTeam(doc2,onFetch2);
-                // async.parallel
-                // simulator.team(team1,team2);
-            }
+
+                parallel_tasks.team1 = function(asyncCallback)
+                {
+                    mongoTeam.getTeam(doc1, asyncCallback);
+
+                };
+
+
+                parallel_tasks.team2 = function(asyncCallback)
+                {
+                    mongoTeam.getTeam(doc2, asyncCallback);
+
+                };
+                var onFinish = function(err,results)
+                {
+                    if(err)
+                    {
+                        // Add Response
+                    }
+                    else
+                    {
+                        simulator.team(results.team1,results.team2);
+
+                    }
+                };
+                async.parallel(parallel_tasks,onFinish);
+
+            };
+           docs.forEach(simulate_match);
         }
     };
     simulator.todaysMatches(matchGenerator);
-}
+};
