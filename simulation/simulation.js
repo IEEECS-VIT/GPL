@@ -6,7 +6,7 @@ var today = new Date();
 var v, k, x, k2, p2, toss, i, j, t, cm, fo;
 var commentary='', teamName='',y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fw = [0, 0, 0, 0, 0, 0], fh = 0, pt = -1, ct = 0, bt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], st = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cw = [0, 0, 0, 0, 0, 0], z = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fs = [0, 0, 0, 0, 0, 0], pd = -1, e = 0, g = [0, 0, 0, 0, 0, 0], p = -1, s = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], b = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], f = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], m = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c = [0, 1], d = [0, 0, 0, 0, 0, 0], r = [0, 0, 0, 0, 0, 0], w = [0, 0, 0, 0, 0, 0], T = 0, T2 = 0, l = 0, w1 = 0, w2 = 0, B1 = 0, B2 = 0;
 
-exports.todaysMatches = function()
+exports.todaysMatches = function (callback)
 {
     var onConnect = function(err,db)
     {
@@ -39,25 +39,15 @@ exports.todaysMatches = function()
 
             }
             var collection = db.collection(dateMatchDay);
-            var onFetch = function(err,documents)
-            {
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else
-                {
-                    callback(null, documents);
-                }
-            }
-            collection.find({}).toArray(onFetch);
+            collection.find({}).toArray(callback);
         }
 
-    }
+    };
     MongoClient.connect(MongoUri,onConnect);
 
 
-}
+};
+
 function rand()
 {
     return parseInt(Math.random() * 1000000000000000);

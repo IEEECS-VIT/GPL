@@ -1,93 +1,94 @@
 {
-  "name": "GPL",
-  "version": "0.0.2",
-  "description": "GraVITas Premier League",
-  "homepage": "http://gpl-dev.herokuapp.com/",
-  "bugs": {
-    "url": "https://github.com/IEEECS-VIT/GPL/issues",
-    "email": "neelam.aneesh@gmail.com"
-  },
-  "private": true,
-  "main": "./bin/www",
-  "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install",
-    "start": "node ./bin/www"
-  },
-  "contributors": [
-    {
-      "name": "Aneesh Neelam",
-      "email": "neelam.aneesh@gmail.com"
+    "name": "GPL",
+    "version": "0.0.2",
+    "description": "GraVITas Premier League",
+    "homepage": "http://gpl-dev.herokuapp.com/",
+    "bugs": {
+        "url": "https://github.com/IEEECS-VIT/GPL/issues",
+        "email": "neelam.aneesh@gmail.com"
     },
-    {
-      "name": "Kashish Singhal",
-      "email": "singhal2.kashish@gmail.com"
+    "private": true,
+    "main": "./bin/www",
+    "scripts": {
+        "postinstall": "./node_modules/bower/bin/bower install",
+        "start": "node ./bin/www"
     },
-    {
-      "name": "Diksha Jain",
-      "email": ""
+    "contributors": [
+        {
+            "name": "Aneesh Neelam",
+            "email": "neelam.aneesh@gmail.com"
+        },
+        {
+            "name": "Kashish Singhal",
+            "email": "singhal2.kashish@gmail.com"
+        },
+        {
+            "name": "Diksha Jain",
+            "email": ""
+        },
+        {
+            "name": "Kunal Nagpal",
+            "email": "kunagpal@gmail.com"
+        },
+        {
+            "name": "Tannika Aggarwal",
+            "email": ""
+        },
+        {
+            "name": "Vikhyati Singh",
+            "email": ""
+        },
+        {
+            "name": "Amol Gautam",
+            "email": "amol_gautam25@hotmail.com"
+        },
+        {
+            "name": "Ayush Agarwal",
+            "email": ""
+        },
+        {
+            "name": "Mudit Saraf",
+            "email": ""
+        },
+        {
+            "name": "Shivam Mathur",
+            "email": "burnualive@hotmail.com"
+        },
+        {
+            "name": "Somya Mehta",
+            "email": ""
+        },
+        {
+            "name": "Sukriti Sinha",
+            "email": "sukriti477@gmail.com"
+        }
+    ],
+    "dependencies": {
+        "express": "~4.8.5",
+        "serve-favicon": "2.0.1",
+        "morgan": "~1.2.3",
+        "cookie-parser": "~1.3.2",
+        "body-parser": "~1.6.5",
+        "debug": "~1.0.4",
+        "ejs": "~1.0.0",
+        "mongodb": "~1.4.8",
+        "moment": "~2.8.1",
+        "bower": "~1.3.9",
+        "async": "~0.9.0",
+        "password-hash": "~1.2.2"
     },
-    {
-      "name": "Kunal Nagpal",
-      "email": "kunagpal@gmail.com"
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/IEEECS-VIT/GPL.git"
     },
-    {
-      "name": "Tannika Aggarwal",
-      "email": ""
-    },
-    {
-      "name": "Vikhyati Singh",
-      "email": ""
-    },
-    {
-      "name": "Amol Gautam",
-      "email": "amol_gautam25@hotmail.com"
-    },
-    {
-      "name": "Ayush Agarwal",
-      "email": ""
-    },
-    {
-      "name": "Mudit Saraf",
-      "email": ""
-    },
-    {
-      "name": "Shivam Mathur",
-      "email": "burnualive@hotmail.com"
-    },
-    {
-      "name": "Somya Mehta",
-      "email": ""
-    },
-    {
-      "name": "Sukriti Sinha",
-      "email": "sukriti477@gmail.com"
+    "license": "GPL-3.0+",
+    "licenses": [
+        {
+            "type": "GPL-3.0+",
+            "url": "https://www.gnu.org/licenses/gpl-3.0-standalone.html"
+        }
+    ],
+    "engines": {
+        "node": "0.10.x"
     }
-  ],
-  "dependencies": {
-    "express": "~4.8.2",
-    "serve-favicon": "2.0.1",
-    "morgan": "~1.2.2",
-    "cookie-parser": "~1.3.2",
-    "body-parser": "~1.6.2",
-    "debug": "~1.0.4",
-    "ejs": "~1.0.0",
-    "mongodb": "~1.4.8",
-    "moment": "~2.8.1",
-    "bower": "~1.3.9",
-    "async": "~0.9.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/IEEECS-VIT/GPL.git"
-  },
-  "license": "GPL-3.0+",
-  "licenses": [
-    {
-      "type": "GPL-3.0+",
-      "url": "https://www.gnu.org/licenses/gpl-3.0-standalone.html"
-    }
-  ],
-  "engines": {
-    "node": "0.10.x"
-  }
 }
