@@ -23,9 +23,10 @@ email_manager.dispatchResetPasswordLink = function (account, callback) {
         text: 'something went wrong... :(',
         attachment: email_manager.composeEmail(account)
     }, callback);
-}
+};
 
-email_manager.composeEmail = function (object) {
+email_manager.composeEmail = function (object)
+{
     var link = 'http://gravitaspremierleague.com/reset?e=' + object.email + '&p=' + object.pass;
     var html = "<html><body>";
     html += "Hi " + object.name + ",<br><br>";
@@ -36,4 +37,4 @@ email_manager.composeEmail = function (object) {
     return [
         {data: html, alternative: true}
     ];
-}
+};

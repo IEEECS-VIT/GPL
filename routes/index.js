@@ -312,6 +312,7 @@ router.get('/squad', function (req, res) // page to view the 16 player squad of 
     if (req.cookies.name)                           // if cookies exists then access the database
     {
         var teamName = req.cookies.name;
+        teamName="test";
         var credentials =                           // creating a temporary variable to store cookies
         {
             '_id': teamName                             //  because kashish bhaya told to use '_id' only
