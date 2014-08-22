@@ -2,6 +2,7 @@ var com=require('./commentary.js');
 var MongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 var MongoClient=require('mongodb').MongoClient;
 var today = new Date();
+var dateMatchDay;
 
 var v, k, x, k2, p2, toss, i, j, t, cm, fo;
 var commentary='', teamName='',y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fw = [0, 0, 0, 0, 0, 0], fh = 0, pt = -1, ct = 0, bt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], st = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cw = [0, 0, 0, 0, 0, 0], z = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fs = [0, 0, 0, 0, 0, 0], pd = -1, e = 0, g = [0, 0, 0, 0, 0, 0], p = -1, s = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], b = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], f = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], m = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c = [0, 1], d = [0, 0, 0, 0, 0, 0], r = [0, 0, 0, 0, 0, 0], w = [0, 0, 0, 0, 0, 0], T = 0, T2 = 0, l = 0, w1 = 0, w2 = 0, B1 = 0, B2 = 0;
@@ -16,7 +17,7 @@ exports.todaysMatches = function (callback)
         }
         else
         {
-            var dateMatchDay;
+
             var day = today.getDate();
             switch (day)
             {
@@ -54,7 +55,7 @@ function rand()
 }
 
 
-exports.team = function(team1, team2)
+exports.team = function(elt, team1, team2)
 {
     B1 = B2 = 0;
 
@@ -484,7 +485,7 @@ ob[1] = new team();
                 cw[x] = 0;
                 if (v > 6) {
                     if (rand() % 2) {
-                        commentary+=' wide, '+com.wide[rand()%com.wide.legth];//console.log(" wide, ");
+                        commentary+=' wide, '+com.wide[rand()%com.wide.length];//console.log(" wide, ");
                     }
                     else {
                         commentary+=com.freehit[rand()%com.freehit.length];//console.log("No ball. An overstep was the last thing the bowling side needed...\n");
@@ -635,5 +636,31 @@ ob[1] = new team();
         }
         commentary+='\n';//console.log("\n");
     }
-module.exports=commentary;//console.log(commentary);
+
+//module.exports=commentary;//console.log(commentary);
+}
+
+
+exports.updateMatch(commentary)
+{
+    var onConnect = function(err,db)
+    {
+        if(err)
+        {
+            throw err;
+        }
+        else
+        {
+            var collection = db.collection(dateMatchDay);
+            var onUpdate = function(err,docs)
+            {
+                if(err)
+                {
+                    throw err;
+                }
+
+            }
+            collection.update({},{})
+        }
+    }
 }

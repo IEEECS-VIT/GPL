@@ -47,7 +47,7 @@ exports.generateMatch = function()
                     }
                     else
                     {
-                        simulator.team(results.team1,results.team2);
+                        simulator.team(elt, results.team1,results.team2);
 
                     }
                 };
