@@ -48,26 +48,18 @@
                 <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
                     <% for(var j = 1; j < 7;j++) { %>
                     <td style="color: #ffffff;font-weight: bold;text-align: center;margin:2%;border-radius: 5px;height: auto;line-height: 100%;">
-                        <% /* switch ( j ) {    %>
-                        <%    case 1 : {    %>
-                        <%=    i    %>
-                        <%    break; }   %>
-                        <%    case 2 :    %>
-                        <%=   leaderboard[i]._id   %>
-                        <%    break;    %>
-                        <%    case 3 :    %>
-                        <%=   leaderboard[i].points   %>
-                        <%    break;    %>
-                        <%    case 4 :    %>
-                        <%=   leaderboard[i].played   %>
-                        <%    break;   %>
-                        <%    case 5 :    %>
-                        <%=   leaderboard[i].win   %>
-                        <%    break;   %>
-                        <%    case 6 :    %>
-                        <%=   leaderboard[i].net_run_rate   %>
-                        <%    break;   %>
-                        <%    } */ %>
+                        <% if(j==1){%>
+                        <%=i}%>
+                        <% else if(j==2)  {%>
+                        <%=   leaderboard[i]._id   }%>
+                        <%  else if(j==3) { %>
+                        <%=   leaderboard[i].points }  %>
+                        <%  else if(j==4) { %>
+                        <%=   leaderboard[i].played }  %>
+                        <%   else if(j==5) { %>
+                        <%=   leaderboard[i].win }  %>
+                        <%    else {    %>
+                        <%=   leaderboard[i].net_run_rate  } %>
                     </td>
                     <% } %>
                 </tr>
