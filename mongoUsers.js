@@ -136,4 +136,41 @@ exports.getleader = function(doc,callback)
     };
     MongoClient.connect(mongoUri, onConnect);
 
-}
+};
+
+exports.forgotPassword = function(doc,callback)
+{
+    var onConnect = function(err,db)
+    {
+        if(err)
+        {
+            callback(err,null);
+        }
+        else
+        {
+            var collection = db.collection('users');
+            var onFetch = function(err,document)
+            {
+                if(err)
+                {
+                    callback(err,null);
+                }
+                else
+                {
+                    if(document)
+                    {
+                        callback(null,document);
+                    }
+                    else
+                    {
+                        callback(null,null);
+                    }
+
+                }
+            };
+            collection.findOne(doc,onFetch);
+        }
+
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};

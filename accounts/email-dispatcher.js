@@ -1,38 +1,37 @@
 /**
- * Created by kashish on 1/7/14.
+ * Created by Kashish Singhal<singhal2.kashish@gmail.com> on 1/7/14.
  */
 
-var ES = require('./email-settings');
-var EM = {};
-module.exports = EM;
+var email_settings = require('./email-settings');
+var email_manager = {};
+module.exports = email_manager;
 
-EM.server = require("emailjs/email").server.connect({
+email_manager.server = require("emailjs/email").server.connect({
 
-    host: ES.host,
-    user: ES.user,
-    password: ES.password,
+    host: email_settings.host,
+    user: email_settings.user,
+    password: email_settings.password,
     ssl: true
 
 });
 
-EM.dispatchResetPasswordLink = function (account, callback) {
-    EM.server.send({
-        from: ES.sender,
+email_manager.dispatchResetPasswordLink = function (account, callback) {
+    email_manager.server.send({
+        from: email_settings.sender,
         to: account.email,
         subject: 'Password Reset',
         text: 'something went wrong... :(',
-        attachment: EM.composeEmail(account)
+        attachment: email_manager.composeEmail(account)
     }, callback);
 }
 
-EM.composeEmail = function (o) {
-    var link = 'http://node-login.braitsch.io/reset-password?e=' + o.email + '&p=' + o.pass;
+email_manager.composeEmail = function (object) {
+    var link = 'http://gravitaspremierleague.com/reset?e=' + object.email + '&p=' + object.pass;
     var html = "<html><body>";
-    html += "Hi " + o.name + ",<br><br>";
-    html += "Your username is :: <b>" + o.user + "</b><br><br>";
+    html += "Hi " + object.name + ",<br><br>";
+    html += "Your username is :: <b>" + object.user + "</b><br><br>";
     html += "<a href='" + link + "'>Please click here to reset your password</a><br><br>";
     html += "Cheers,<br>";
-    html += "<a href='http://twitter.com/braitsch'>braitsch</a><br><br>";
     html += "</body></html>";
     return [
         {data: html, alternative: true}
