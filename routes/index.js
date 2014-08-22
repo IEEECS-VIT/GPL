@@ -246,6 +246,33 @@ router.get('/forgot', function (req, res) //forgot password page
 {
     res.render('forgot', { });
 });
+router.post('/forgot',function(req,res)
+{
+    var name=req.body.team_name;
+    var email=req.body.email_id;
+
+    var doc = {
+        '_id':name,
+        '_email':email
+    };
+    var onFetch = function(err,doc)
+    {
+        if(err)
+        {
+            res.render('error');
+        }
+        else if(doc)
+        {
+            // email dispatcher
+        }
+        else
+        {
+            res.render('forgot',{Message:"No record"});
+        }
+
+    };
+    mongo_users.forgotPassword(doc,onFetch);
+});
 
 router.get('/sponsors', function (req, res) // sponsors page
 {
@@ -403,5 +430,9 @@ router.post('/interest', function (req, res) // interest form
     mongo_interest.insert(newUser, onInsert);
 });
 
+router.get('/reset', function (req, res) // interest form
+{
+    res.render('reset', { });
+});
 
 module.exports = router;
