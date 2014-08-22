@@ -14,7 +14,31 @@
         var r;
         var cost = 10000000;
         var che;
-        var cb = 0, cbo = 0, ca = 0, cc = 0;
+        var cb = 7, cbo = 6, ca = 2, cc = 1;
+        function subm() {
+
+            if (k < 17) {
+
+                alert("Team not full");
+
+
+            }
+            else {
+                var id;
+                for (var j = 1; j < 17; j++) {
+                    id = 't' + j;
+                    document.getElementById(id).value = team[j - 1];
+
+                }
+
+                document.getElementById('form').action = "/team";
+                document.getElementById('form').method = "post";
+
+                document.getElementById('form').submit();
+
+            }
+
+        }
         function sel(r) {
             if (k == 16) {
 
@@ -38,7 +62,7 @@
 
                     team[k] = r;
                     k++;
-                    document.getElementById("box" + r).style.opacity = '0';
+                    document.getElementById("box" + r).style.visibility = 'hidden';
                     ch(0);
                     disp();
 
@@ -81,7 +105,8 @@
             }
         }
         function rem(co) {
-            document.getElementById("box" + co).style.opacity = '1';
+            document.getElementById("box" + co).style.visibility = 'visible';
+
             for (var b = 0; b < k; b++) {
                 if (team[b] == co) {
                     var a = b;
@@ -100,10 +125,11 @@
 
                 }
             }
+            cost = 10000000;
             for (b = 0; b < k; b++) {
                 var c = 'cc' + String(team[b]);
                 var y = document.getElementById(c);
-                cost = 10000000;
+
                 cost -= y.value;
 
 
@@ -125,20 +151,20 @@
             if (r != 0) {
                 var asd = 'ct' + String(r);
                 var y = document.getElementById(asd);
-                if (cb == 7 && y.value.localeCompare('bat') == 0) {
+                if (cb == 0 && y.value.localeCompare('bat') == 0) {
                     alert("Maximum number of Batsmen reached");
                     return -1;
                 }
-                if (cbo == 6 && y.value.localeCompare('bowl') == 0) {
+                if (cbo == 0 && y.value.localeCompare('bowl') == 0) {
                     alert("Maximum number of Bowlers reached");
                     return -1;
                 }
-                if (ca == 2 && y.value.localeCompare('all') == 0) {
+                if (ca == 0 && y.value.localeCompare('all') == 0) {
                     alert("Maximum number of All Rounders reached");
                     return -1;
 
                 }
-                if (cc == 1 && y.value.localeCompare('coach') == 0) {
+                if (cc == 0 && y.value.localeCompare('coach') == 0) {
                     alert("Maximum number of Coaches reached");
                     return -1;
 
@@ -165,10 +191,10 @@
             }
 
 
-            cb = b;
-            cbo = bo;
-            ca = al;
-            cc = c;
+            cb = 7 - b;
+            cbo = 6 - bo;
+            ca = 2 - al;
+            cc = 1 - c;
 
 
         }
@@ -216,11 +242,32 @@
             </div>
 
 
+            <form style="text-align: center" id="form">
+                <input style="display: none" id="t1" value=""/>
+                <input style="display: none" id="t2" value=""/>
+                <input style="display: none" id="t3" value=""/>
+                <input style="display: none" id="t4" value=""/>
+                <input style="display: none" id="t5" value=""/>
+                <input style="display: none" id="t6" value=""/>
+                <input style="display: none" id="t7" value=""/>
+                <input style="display: none" id="t8" value=""/>
+                <input style="display: none" id="t9" value=""/>
+                <input style="display: none" id="t10" value=""/>
+                <input style="display: none" id="t11" value=""/>
+                <input style="display: none" id="t12" value=""/>
+                <input style="display: none" id="t13" value=""/>
+                <input style="display: none" id="t14" value=""/>
+                <input style="display: none" id="t15" value=""/>
+                <input style="display: none" id="t16" value=""/>
+                <input onmousedown="subm();" type="submit"
+                       style="background: rgba(60,60,60,1);border-radius: 5px;margin:1%" id="sub" class="button"/>
+
+            </form>
         </div>
         <div class="content active" id="panel1">
             <div class="large-8 small-12 columns">
 
-                <div style="height: 30em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
+                <div style="height: 42em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
                      class="large-12 small-12 right">
                     <table cellspacing="10px"
                            style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
@@ -417,7 +464,7 @@
                 <li style="display:block;"><a href="#">graVITas</a></li>
             </ul>
             <ul class="right">
-
+                <li><a href="/developers">Developers</a></li>
                 <li><a href="#">Privacy Policy</a></li>
             </ul>
 
