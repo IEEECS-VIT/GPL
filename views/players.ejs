@@ -38,7 +38,7 @@
 
                     team[k] = r;
                     k++;
-                    document.getElementById("box" + r).style.opacity = '0';
+                    document.getElementById("box" + r).style.visibility = 'hidden';
                     ch(0);
                     disp();
 
@@ -81,7 +81,7 @@
             }
         }
         function rem(co) {
-            document.getElementById("box" + co).style.opacity = '1';
+            document.getElementById("box" + co).style.visibility = 'visible';
             for (var b = 0; b < k; b++) {
                 if (team[b] == co) {
                     var a = b;
