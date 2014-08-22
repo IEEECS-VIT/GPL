@@ -131,6 +131,17 @@ router.get('/forgot', function (req, res)
         res.render('forgot', { });
     }
 });
+router.get('/reset', function (req, res)
+{
+    if (req.cookies.name)
+    {
+        res.redirect('/home');
+    }
+    else
+    {
+        res.render('reset', { });
+    }
+});
 router.get('/matches', function (req, res)
 {
     if (req.cookies.name)
