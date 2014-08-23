@@ -61,39 +61,42 @@ function rand()
     return parseInt(Math.random() * 1000000000000000);
 }
 
+ob = [];
 
 exports.team = function (elt, team1, team2)
 {
+    ob[0]=new make(team1); ob[1]=new make(team2);
+}
+
+function make(teamName){
     B1 = B2 = 0;
-
-
     this.r = [];
     this.a = [];
     this.st = [];
     this.br = [];
     this.bv = [];
     this.bs = [];
-    this.co = doc.co;//rand() % 11 + 5;
-    this.w = doc.w;
+    this.co = teamName.co;//rand() % 11 + 5;
+    this.w = teamName.w;
     this.ec = [];
     for (i = 0; i < 6; ++i)
     {
-        this.ec[i] = doc.ec[i];//(rand() % 401 + 500) / 100;
-        this.bv[i] = doc.bv[i];//rand() % 16 + 15;
-        this.bs[i] = doc.bs[i];//rand() % 16 + 15;
-        this.r[i] = doc.r[i];//rand() % 201 + 700;
+        this.ec[i] = teaName.ec[i];//(rand() % 401 + 500) / 100;
+        this.bv[i] = teamName.bv[i];//rand() % 16 + 15;
+        this.bs[i] = teamName.bs[i];//rand() % 16 + 15;
+        this.r[i] = teamName.r[i];//rand() % 201 + 700;
         B1 += this.r[i] / 11;
-        this.a[i] = doc.a[i];//rand() % 41 + 2 * (5 - i / 2);
-        this.st[i] = doc.a[i];//rand() % 51 + 100;
-        this.br[i] = doc.br[i];//rand() % 201 + 700;
+        this.a[i] = teamName.a[i];//rand() % 41 + 2 * (5 - i / 2);
+        this.st[i] = teamName.a[i];//rand() % 51 + 100;
+        this.br[i] = teamName.br[i];//rand() % 201 + 700;
         B2 += this.br[i] / 6;
     }
     for (i = 6; i < 11; ++i)
     {
         this.r[i] = 900 - this.br[i - 6];
         B1 += this.r[i] / 11;
-        this.a[i] = doc.a[i];//rand() % 21 + 2 * (5 - i / 2);
-        this.st[i] = doc.st[i];//rand() % 51 + 100;
+        this.a[i] = teamName.a[i];//rand() % 21 + 2 * (5 - i / 2);
+        this.st[i] = teamName.st[i];//rand() % 51 + 100;
     }
     for (i = 0; i < 11; ++i)
     {
@@ -104,12 +107,9 @@ exports.team = function (elt, team1, team2)
         this.r[i] += this.r[i] / 10 - B1 / 10 + this.co;
     }
 }
-ob = [];
-ob[0] = new team();
-teamName = '';
-ob[1] = new team();
+
 {
-    console.log("\n Team:", "1", "2\n", "Coach:", ob[0].co, ob[1].co);
+    /*console.log("\n Team:", "1", "2\n", "Coach:", ob[0].co, ob[1].co);
     console.log("\nBatsmen:   ");
     for (i = 0; i < 6; ++i)
     {
@@ -176,6 +176,7 @@ ob[1] = new team();
     {
         console.log(ob[1].ec[i], " ");
     }
+    */
     B1 = B2 = 120;
     T = T2 = 0;
     //console.log("\n", "Team ");
@@ -189,7 +190,7 @@ ob[1] = new team();
         //console.log(1);
         toss = 0;
     }
-    commentary += 'Team ' + (toss + 1) + ' wins the toss and chooses to ';
+    commentary += '\nTeam ' + (toss + 1) + ' wins the toss and chooses to ';
     if (rand() % 2)
     {
         commentary += 'bowl ';
@@ -199,7 +200,7 @@ ob[1] = new team();
         toss = !toss;
         commentary += 'bat ';//console.log(" wins the toss and chooses to bat first");
     }
-    commentary += 'first\n';
+    commentary += 'first\n\n';
     w1 = w2 = t = p2 = 0;
     for (i = 1; i < 6; ++i)
     {
@@ -250,7 +251,7 @@ ob[1] = new team();
             }//console.log("\nFree Hit: ");
             else
             {
-                commentary += i + '.' + j + ' Bowler ' + (x + 1) + ' to Batsman ' + (c[+t] + 1) + ', ';
+                commentary += '\n'+ i + '.' + j + ' Bowler ' + (x + 1) + ' to Batsman ' + (c[+t] + 1) + ', ';
             }//console.log(i + "." + j, " Bowler ", x + 1, " to Batsman ", c[+t] + 1, ", ");
             if (k <= 0 && !fh)
             {
@@ -279,14 +280,14 @@ ob[1] = new team();
                 else if (k <= -1.5 && k > -2)
                 {
                     commentary += com.stumped[rand() % com.stumped.length];
-                    /*console.log("(stumped)"); console.log(com.stumpedd[rand()%com.stumped.length]);*/
+                    /*console.log("(stumped)"); console.log(com.stumped[rand()%com.stumped.length]);*/
                 }
                 else
                 {
                     v = rand() % 3;
                     if (v)
                     {
-                        commentary += '  ' + v + ' run(s), ';//console.log("  ", v, " run(s), ");
+                        commentary += '  ' + v + ' run(s),\n';//console.log("  ", v, " run(s), ");
                         st[ct] += v;
                         s[c[+t]] += v;
                         l += v;
@@ -348,7 +349,7 @@ ob[1] = new team();
                     j = 0;
                     ++k;
                 }
-                fo = T.toString() + ' / ' + w1.toString() + ', ' + k.toString() + '.' + j.toString();  // a similar conversion may be used to store the entire commentary for a match
+                fo = T + ' / ' + w1 + ', ' + k + '.' + j;
             }
             else
             {
@@ -504,6 +505,7 @@ ob[1] = new team();
     commentary += 'Dot ball percentage: ' + dot * 100 / B1 + ' %';//console.log("Dot ball percentage: ", dot * 100 / B1, " %");
     e = t = fh = ct = T2 = dot = p2 = 0;
     p = pt = -1;
+    commentary+='\n\n\n';
     //console.log(commentary);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     for (i = 1; i < 6; i++)
@@ -521,15 +523,15 @@ ob[1] = new team();
         l = cm = 0;
         if (d[x] == 18)
         {
-            commentary += 'So the captain has chosen to bowl Bowler ' + ( x + 1) + ' out.\n';
+            commentary += '\nSo the captain has chosen to bowl Bowler ' + ( x + 1) + ' out.\n';
         }//console.log("So the captain has chosen to bowl Bowler ", x + 1, " out.\n");
         if ((s[c[+t]] >= 44 && s[c[+t]] < 50))
         {
-            commentary += 'Batsman ' + (c[+t] + 1) + ' one hit away from a well deserving fifty. Will he make it ?\n\n';
+            commentary += '\nBatsman ' + (c[+t] + 1) + ' one hit away from a well deserving fifty. Will he make it ?\n\n';
         }//console.log("Batsman ", c[+t] + 1, " one hit away from a well deserving fifty. Will he make it ?\n\n");
         else if ((s[c[+t]] >= 94 && s[c[+t]] < 100))
         {
-            commentary += 'Batsman ' + (c[+t] + 1) + ' knows there is a hundred for the taking if he can knuckle this one down....\n\n';
+            commentary += '\nBatsman ' + (c[+t] + 1) + ' knows there is a hundred for the taking if he can knuckle this one down....\n\n';
         }//console.log("Batsman ", c[+t] + 1, " knows there is a hundred for the taking if he can knuckle this one down....\n\n");
         for (j = 1; j <= 6; ++j)
         {
@@ -555,7 +557,7 @@ ob[1] = new team();
             }//console.log("\nFree Hit: ");
             else
             {
-                commentary += i + '.' + j + ' Bowler ' + (x + 1) + ' to Batsman ' + (c[+t] + 1) + ', ';
+                commentary +='\n' +  i + '.' + j + ' Bowler ' + (x + 1) + ' to Batsman ' + (c[+t] + 1) + ', ';
             }//console.log(i + "." + j, " Bowler ", x + 1, " to Batsman ", c[+t] + 1, ", ");
             if (k <= 0 && !fh)
             {
@@ -607,7 +609,7 @@ ob[1] = new team();
                     --w[x];
                     if (T2 > T)
                     {
-                        commentary += 'What an emphatic victory ! ';//console.log("What an emphatic victory ! ");
+                        commentary += '\nWhat an emphatic victory ! ';//console.log("What an emphatic victory ! ");
                         break;
                     }
                     else if (T2 == T) commentary += 'Scores are level...';//console.log("Scores are level...");
@@ -658,7 +660,7 @@ ob[1] = new team();
                     j = 0;
                     ++k;
                 }
-                fo = T2.toString() + ' / ' + w2.toString() + ', ' + k.toString() + '.' + j.toString();  // a similar conversion may be used to store the entire commentary for a match
+                fo = T2 + ' / ' + w2 + ', ' + k + '.' + j;
             }
             else
             {
@@ -822,7 +824,7 @@ ob[1] = new team();
         commentary += (i + 1) + parseInt(d[i] / 6) + '.' + d[i] % 6 + ' ' + g[i] + ' ' + w[i] + ' ' + r[i] + ' ' + r[i] * 6 / d[i];//console.log(i + 1, parseInt(d[i] / 6) + "." + d[i] % 6, g[i], w[i], r[i], r[i] * 6 / d[i]);
         fw[i] = cw[i] = fs[i] = d[i] = g[i] = r[i] = w[i] = 0;
     }
-    commentary += 'Dot ball percentage: ' + dot * 100 / B2 + ' %';//console.log("Dot ball percentage: ", dot * 100 / B2, " %");
+    commentary += 'Dot ball percentage: ' + dot * 100 / B2 + ' %\n';//console.log("Dot ball percentage: ", dot * 100 / B2, " %");
     if (!(T - T2))
     {
         if (!(w1 - w2))
