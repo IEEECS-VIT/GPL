@@ -16,35 +16,40 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var MongoClient = require('mongodb').MongoClient;
+var express = require('express');
+var path = require('path');
+var router = express.Router();
 
-var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
+var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
 
-exports.insert = function (doc, callback)
+router.get('/', function (req, res)
 {
-    var onConnect = function (err, db)
+    if (req.signedCookies.name)
     {
-        if (err)
+        var credentials = {
+            '_id': req.signedCookies.name
+        };
+        var onFetch = function (err, doc)
         {
-            callback(err);
-        }
-        else
-        {
-            var collection = db.collection('interest');
-            var onInsert = function (err, docs)
+            if (err)
             {
-                db.close();
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else
-                {
-                    callback(null, docs);
-                }
-            };
-            collection.insert(doc, {w: 1}, onInsert);
-        }
-    };
-    MongoClient.connect(mongoUri, onConnect);
-};
+                res.redirect('/');
+            }
+            else if (doc)
+            {
+                res.render('home', {name: doc['_id']}); // What else does home.ejs want?
+            }
+            else
+            {
+                res.redirect('/');
+            }
+        };
+        mongoUsers.fetch(credentials, onFetch);
+    }
+    else
+    {
+        res.redirect('/');
+    }
+});
+
+module.exports = router;

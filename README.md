@@ -1,9 +1,11 @@
-GPL
-===
+GraVITas Premier League
+=======================
 
-The GraVIT-as Premier League code repository.
+The GraVITas Premier League code repository
 
-Please report any bugs or issues [here] (https://github.com/IEEECS-VIT/GPL/issues) 
+This website is hosted [here](http://gpl-dev.herokuapp.com/)
+
+Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues) 
 
 #### Instructions for Installation:
 ###### Install Node.js 0.10.x 

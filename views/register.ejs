@@ -40,7 +40,7 @@
                                             Name: </label>
                                     </div>
                                     <div class="small-9 columns">
-                                        <input type="text" id="team" name="name" placeholder="Team Name" value=""
+                                        <input type="text" id="team" name="team_name" placeholder="Team Name" value=""
                                                style="margin:-4% 0 0 1%;border-radius: 5px">
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
     <div class="small-12 medium-12 large-12 columns"
          style="background:rgba(0,123,184,0.5); border-radius: 0 0 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);float: left;text-align: left ">
         <form name="signin" action="/register" method="post">
-        <fieldset>
+            <fieldset>
                 <legend>Account Details</legend>
                 <div id="fill" class="large-12 medium-12 columns"
                      style="margin:1%;background: red;color: white;display:none"><p></p></div>
@@ -114,7 +114,7 @@
                                             style="color:red;">*</i> </label>
                             </div>
                             <div class="small-9 columns">
-                                <input type="password" id="pass" placeholder="Password" name="pass"/>
+                                <input type="password" id="pass" placeholder="Password" name="password"/>
                             </div>
                         </div>
                     </div>
@@ -127,7 +127,8 @@
                                     Password:<i style="color:red;">*</i> </label>
                             </div>
                             <div class="small-9 columns">
-                                <input type="password" id="cpass" placeholder="Re-type Password" name="cpass"/>
+                                <input type="password" id="cpass" placeholder="Re-type Password"
+                                       name="confirm_password"/>
                             </div>
                         </div>
 
@@ -149,7 +150,7 @@
                                         style="color:red;">*</i> </label>
                         </div>
                         <div class="small-4 large-4 columns">
-                            <input type="email" id="email" placeholder="example@domain.com" name="email1"/>
+                            <input type="email" id="email" placeholder="example@domain.com" name="email"/>
                         </div>
                         <div class="small-2 large-2 columns">
                             <label for="email" class="right inline" style="color:white;">Email 2:</label>
@@ -168,7 +169,7 @@
                                         style="color:red;">*</i> </label>
                         </div>
                         <div class="small-4 large-4 columns">
-                            <input type="text" id="pno" placeholder="Mobile Number" name="mob1"/>
+                            <input type="text" id="pno" placeholder="Mobile Number" name="phone"/>
                         </div>
                         <div class="small-2 large-2 columns">
                             <label for="text" class="right inline" style="color:white;">Mobile 2:</label>
@@ -188,7 +189,7 @@
                                         style="color:red;">*</i> </label>
                         </div>
                         <div class="small-4 large-4 columns">
-                            <input type="text" id="manager" placeholder="Manager Name" name="manager1"/>
+                            <input type="text" id="manager" placeholder="Manager Name" name="manager_name"/>
                         </div>
                         <div class="small-2 large-2 columns">
                             <label for="manager" class="right inline" style="color:white;">Manager 2:</label>
