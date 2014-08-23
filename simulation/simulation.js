@@ -81,7 +81,7 @@ function make(teamName){
     this.ec = [];
     for (i = 0; i < 6; ++i)
     {
-        this.ec[i] = teaName.ec[i];//(rand() % 401 + 500) / 100;
+        this.ec[i] = teamName.ec[i];//(rand() % 401 + 500) / 100;
         this.bv[i] = teamName.bv[i];//rand() % 16 + 15;
         this.bs[i] = teamName.bs[i];//rand() % 16 + 15;
         this.r[i] = teamName.r[i];//rand() % 201 + 700;
@@ -876,7 +876,7 @@ function make(teamName){
         commentary += '\n';//console.log("\n");
     }
 
-//module.exports=commentary;//console.log(commentary);
+module.exports=commentary;//console.log(commentary);
 }
 
 
