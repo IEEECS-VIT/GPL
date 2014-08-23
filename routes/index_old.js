@@ -51,24 +51,6 @@ router.get('/matches', function (req, res)
     }
 });
 
-router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
-{
-    var onFetch = function (err, documents)
-    {
-        if (err)
-        {
-            res.redirect('/home');
-        }
-        else
-        {
-            res.render('players', {
-                Players: documents
-            });
-        }
-
-    };
-    mongo_players.fetchPlayers(onFetch);
-});
 
 
 router.get('/squad', function (req, res) // page to view the 16 player squad of a particular user

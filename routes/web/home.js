@@ -20,6 +20,7 @@ var express = require('express');
 var path = require('path');
 var router = express.Router();
 
+var mongoPlayers = require(path.join(__dirname, '..', '..', 'db', 'mongo-players'));
 var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
 
 router.get('/', function (req, res)
@@ -51,5 +52,29 @@ router.get('/', function (req, res)
         res.redirect('/');
     }
 });
+
+
+
+router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
+{
+    var onFetch = function (err, documents)
+    {
+        if (err)
+        {
+            res.redirect('/home');
+        }
+        else
+        {
+            res.render('players', {
+                Players: documents
+            });
+        }
+
+    };
+    mongoPlayers.fetchPlayers(onFetch);
+});
+
+
+
 
 module.exports = router;

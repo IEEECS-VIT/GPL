@@ -36,6 +36,21 @@ router.get('/', function (req, res)
     }
 });
 
+
+router.get('/matches', function (req, res)
+{
+    if (req.cookies.name)
+    {
+        var teamName = req.signedCookie.name;
+
+        res.render('matches', { });
+    }
+    else
+    {
+        res.redirect('/');
+    }
+});
+
 router.post('/login', function (req, res)
 {
     var teamName = req.body.team_name;
