@@ -1,206 +1,236 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
-    <title>GPL</title>
-    <link type="text/css" rel="stylesheet" href="/bower_components/foundation/css/foundation.css"/>
-    <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
-    <link href="/stylesheets/gplmain.css" rel="stylesheet" type="text/css"/>
-    <script src="/bower_components/foundation/js/foundation/foundation.dropdown.js"></script>
-    <script src="/bower_components/foundation/js/foundation/foundation.topbar.js"></script>
-    <script src="/javascript/tabs.js"></script>
-    <script src="/javascript/players.js"></script>
-    <script type="text/javascript"> var team = [];
-        var k = 0;
-        var r;
-        var cost = 10000000;
-        var che;
-        var cb = 7, cbo = 6, ca = 2, cc = 1;
-        function subm() {
+<meta charset="UTF-8">
+<title>Players | GPL</title>
+<link type="text/css" rel="stylesheet" href="/bower_components/foundation/css/foundation.css"/>
+<link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
+<link href="/stylesheets/gplmain.css" rel="stylesheet" type="text/css"/>
+<script src="/bower_components/foundation/js/foundation/foundation.dropdown.js"></script>
+<script src="/bower_components/foundation/js/foundation/foundation.topbar.js"></script>
+<script src="/javascript/tabs.js"></script>
+<script src="/javascript/players.js"></script>
+<script type="text/javascript"> var team = [];
+    var k = 0;
+    var r;
+    var cost = 10000000;
+    var che;
+    var cb = 7, cbo = 6, ca = 2, cc = 1;
+    function subm()
+    {
 
-            if (k < 17) {
+        if (k < 17)
+        {
 
-                alert("Team not full");
+            alert("Team not full");
 
-
-            }
-            else {
-                var id;
-                for (var j = 1; j < 17; j++) {
-                    id = 't' + j;
-                    document.getElementById(id).value = team[j - 1];
-
-                }
-
-                document.getElementById('form').action = "/team";
-                document.getElementById('form').method = "post";
-
-                document.getElementById('form').submit();
-
-            }
 
         }
-        function sel(r) {
-            if (k == 16) {
+        else
+        {
+            var id;
+            for (var j = 1; j < 17; j ++)
+            {
+                id = 't' + j;
+                document.getElementById(id).value = team[j - 1];
 
-                alert("Team limit Reached");
-                return -1;
             }
 
-            che = ch(r);
+            document.getElementById('form').action = "/team";
+            document.getElementById('form').method = "post";
 
-            if (che != -1) {
-                if (k < 17) {
+            document.getElementById('form').submit();
 
-
-                    var c = 'cc' + String(r);
-                    var y = document.getElementById(c);
-                    if (cost - y.value < 0) {
-                        alert("Low Budget");
-                        return -1;
-                    }
-                    cost -= y.value;
-
-                    team[k] = r;
-                    k++;
-                    document.getElementById("box" + r).style.visibility = 'hidden';
-                    ch(0);
-                    disp();
-
-
-                }
-
-
-                ch(0);
-            }
         }
-        var count;
-        var di = [];
-        function disp() {
 
+    }
+    function sel(r)
+    {
+        if (k == 16)
+        {
 
-            if (k == 0) {
-                document.getElementById("squad").innerHTML = "";
-                cost = 10000000;
-                document.getElementById('budget').innerHTML = "Selected Players <b style='font-size: 60%'>Budget:" + cost + "<br />" + "Batsmen : " + cb + "<br />" + "Bowlers : " + cbo + "<br />" + "All Rounders : " + ca + "<br />" + "Coach : " + cc + "<br />" + "</b>";
-            }
-            else {
-                for (count = 0; count < k; count++) {
-
-                    var cut = team[count];
-                    var n = 'cn' + String(cut);
-                    var p = 'cp' + String(cut);
-
-                    var t = 'ct' + String(cut);
-
-                    var w = document.getElementById(n);
-                    var x = document.getElementById(p);
-
-                    var z = document.getElementById(t);
-                    document.getElementById('budget').innerHTML = "Selected Players <b style='font-size: 60%'>Budget:" + cost + "<br />" + "Batsmen : " + cb + "<br />" + "Bowlers : " + cbo + "<br />" + "All Rounders : " + ca + "<br />" + "Coach : " + cc + "<br />" + "</b>";
-                    di[count] = "<div style='border-radius: 5px;background-color: rgba(0,0,0,0.2);margin-top: 1%;'>" + "<p align='center' style='color: white;padding: 1%;' >" + w.value + "<br />" + x.value + "<br />" + z.value + "</p>" + "<button class='button [tiny small large]' style='height: auto;width:auto;margin-left:75%;padding:1%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid red;background-color:rgba(255,255,255,0.1);color: red;border-radius: 5px;' onclick='rem(" + cut + ")'>" + " Remove</div></button>" + "</div>";
-
-                }
-
-                document.getElementById("squad").innerHTML = di.join(" ");
-            }
+            alert("Team limit Reached");
+            return - 1;
         }
-        function rem(co) {
-            document.getElementById("box" + co).style.visibility = 'visible';
 
-            for (var b = 0; b < k; b++) {
-                if (team[b] == co) {
-                    var a = b;
-                    while (a < k) {
+        che = ch(r);
 
-                        team[a] = team[a + 1];
+        if (che != - 1)
+        {
+            if (k < 17)
+            {
 
-                        a++;
 
-                    }
-
-                    k -= 1;
-                    di[k] = "";
-
-                    break;
-
-                }
-            }
-            cost = 10000000;
-            for (b = 0; b < k; b++) {
-                var c = 'cc' + String(team[b]);
+                var c = 'cc' + String(r);
                 var y = document.getElementById(c);
-
+                if (cost - y.value < 0)
+                {
+                    alert("Low Budget");
+                    return - 1;
+                }
                 cost -= y.value;
 
+                team[k] = r;
+                k ++;
+                document.getElementById("box" + r).style.visibility = 'hidden';
+                ch(0);
+                disp();
+
 
             }
+
+
             ch(0);
-            disp();
-
         }
-        function ch(r) {
-
-            var t, z;
-
-            var b = 0;
-            var bo = 0;
-            var al = 0;
-            var c = 0;
+    }
+    var count;
+    var di = [];
+    function disp()
+    {
 
 
-            if (r != 0) {
-                var asd = 'ct' + String(r);
-                var y = document.getElementById(asd);
-                if (cb == 0 && y.value.localeCompare('bat') == 0) {
-                    alert("Maximum number of Batsmen reached");
-                    return -1;
-                }
-                if (cbo == 0 && y.value.localeCompare('bowl') == 0) {
-                    alert("Maximum number of Bowlers reached");
-                    return -1;
-                }
-                if (ca == 0 && y.value.localeCompare('all') == 0) {
-                    alert("Maximum number of All Rounders reached");
-                    return -1;
+        if (k == 0)
+        {
+            document.getElementById("squad").innerHTML = "";
+            cost = 10000000;
+            document.getElementById('budget').innerHTML = "Selected Players <b style='font-size: 60%'>Budget:" + cost + "<br />" + "Batsmen : " + cb + "<br />" + "Bowlers : " + cbo + "<br />" + "All Rounders : " + ca + "<br />" + "Coach : " + cc + "<br />" + "</b>";
+        }
+        else
+        {
+            for (count = 0; count < k; count ++)
+            {
 
-                }
-                if (cc == 0 && y.value.localeCompare('coach') == 0) {
-                    alert("Maximum number of Coaches reached");
-                    return -1;
+                var cut = team[count];
+                var n = 'cn' + String(cut);
+                var p = 'cp' + String(cut);
 
-                }
-            }
-            for (var a = 0; a < k; a++) {
+                var t = 'ct' + String(cut);
 
+                var w = document.getElementById(n);
+                var x = document.getElementById(p);
 
-                t = 'ct' + String(team[a]);
-                z = document.getElementById(t);
-                if (z.value.localeCompare('bat') == 0) {
-                    b++;
-                }
-                else if (z.value.localeCompare('bowl') == 0) {
-                    bo++;
-                }
-                else if (z.value.localeCompare('all') == 0) {
-                    al++;
-                }
-                else if (z.value.localeCompare('coach') == 0) {
-                    c++;
-                }
+                var z = document.getElementById(t);
+                document.getElementById('budget').innerHTML = "Selected Players <b style='font-size: 60%'>Budget:" + cost + "<br />" + "Batsmen : " + cb + "<br />" + "Bowlers : " + cbo + "<br />" + "All Rounders : " + ca + "<br />" + "Coach : " + cc + "<br />" + "</b>";
+                di[count] = "<div style='border-radius: 5px;background-color: rgba(0,0,0,0.2);margin-top: 1%;'>" + "<p align='center' style='color: white;padding: 1%;' >" + w.value + "<br />" + x.value + "<br />" + z.value + "</p>" + "<button class='button [tiny small large]' style='height: auto;width:auto;margin-left:75%;padding:1%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid red;background-color:rgba(255,255,255,0.1);color: red;border-radius: 5px;' onclick='rem(" + cut + ")'>" + " Remove</div></button>" + "</div>";
 
             }
 
+            document.getElementById("squad").innerHTML = di.join(" ");
+        }
+    }
+    function rem(co)
+    {
+        document.getElementById("box" + co).style.visibility = 'visible';
 
-            cb = 7 - b;
-            cbo = 6 - bo;
-            ca = 2 - al;
-            cc = 1 - c;
+        for (var b = 0; b < k; b ++)
+        {
+            if (team[b] == co)
+            {
+                var a = b;
+                while (a < k)
+                {
 
+                    team[a] = team[a + 1];
+
+                    a ++;
+
+                }
+
+                k -= 1;
+                di[k] = "";
+
+                break;
+
+            }
+        }
+        cost = 10000000;
+        for (b = 0; b < k; b ++)
+        {
+            var c = 'cc' + String(team[b]);
+            var y = document.getElementById(c);
+
+            cost -= y.value;
+
+
+        }
+        ch(0);
+        disp();
+
+    }
+    function ch(r)
+    {
+
+        var t, z;
+
+        var b = 0;
+        var bo = 0;
+        var al = 0;
+        var c = 0;
+
+
+        if (r != 0)
+        {
+            var asd = 'ct' + String(r);
+            var y = document.getElementById(asd);
+            if (cb == 0 && y.value.localeCompare('bat') == 0)
+            {
+                alert("Maximum number of Batsmen reached");
+                return - 1;
+            }
+            if (cbo == 0 && y.value.localeCompare('bowl') == 0)
+            {
+                alert("Maximum number of Bowlers reached");
+                return - 1;
+            }
+            if (ca == 0 && y.value.localeCompare('all') == 0)
+            {
+                alert("Maximum number of All Rounders reached");
+                return - 1;
+
+            }
+            if (cc == 0 && y.value.localeCompare('coach') == 0)
+            {
+                alert("Maximum number of Coaches reached");
+                return - 1;
+
+            }
+        }
+        for (var a = 0; a < k; a ++)
+        {
+
+
+            t = 'ct' + String(team[a]);
+            z = document.getElementById(t);
+            if (z.value.localeCompare('bat') == 0)
+            {
+                b ++;
+            }
+            else if (z.value.localeCompare('bowl') == 0)
+            {
+                bo ++;
+            }
+            else if (z.value.localeCompare('all') == 0)
+            {
+                al ++;
+            }
+            else if (z.value.localeCompare('coach') == 0)
+            {
+                c ++;
+            }
 
         }
 
 
-    </script>
+        cb = 7 - b;
+        cbo = 6 - bo;
+        ca = 2 - al;
+        cc = 1 - c;
+
+
+    }
+
+
+</script>
 
 </head>
 <body style="background:url('/images/background.png');font-family: 'PT Sans', sans-serif;height:100%;">
@@ -221,241 +251,241 @@
 
 <% var team = []; var k = 0;var r;var j = 0; %>
 <div class="small-12">
-    <ul class="radius tabs" data-tab="" style="margin-left: 31%;margin-top: 2%;">
-        <li class="tab-title active" id="act1" onclick="tab(1)"><a href="#">Batsmen</a></li>
-        <li class="tab-title" id="noact2" onclick="tab(2)"><a href="#">Bowlers</a></li>
-        <li class="tab-title" id="noact3" onclick="tab(3)"><a href="#">All Rounders</a></li>
-        <li class="tab-title" id="noact4" onclick="tab(4)"><a href="#">Coaches</a></li>
-    </ul>
-    <div class="tabs-content">
-        <div class="large-3 small-12 left"
-             style="height:auto;background-color: rgba(10,10,10,0.5);margin-right: 1%;margin-left: 2%;border-radius: 5px;">
-            <h4 style="color: white;background-color: rgba(80,80,80,1);margin-top: 0;border-radius: 5px;padding: 2%;text-align: center;"
-                id="budget">
-                Selected Players <b style='font-size: 60%'>Budget:10000000
-                    <script type="text/javascript">document.write("<br />" + "Batsmen : " + cb + "<br />" + "Bowlers : " + cbo + "<br />" + "All Rounders : " + ca + "<br />" + "Coach : " + cc + "<br />")</script>
-                </b>
-            </h4>
+<ul class="radius tabs" data-tab="" style="margin-left: 31%;margin-top: 2%;">
+    <li class="tab-title active" id="act1" onclick="tab(1)"><a href="#">Batsmen</a></li>
+    <li class="tab-title" id="noact2" onclick="tab(2)"><a href="#">Bowlers</a></li>
+    <li class="tab-title" id="noact3" onclick="tab(3)"><a href="#">All Rounders</a></li>
+    <li class="tab-title" id="noact4" onclick="tab(4)"><a href="#">Coaches</a></li>
+</ul>
+<div class="tabs-content">
+<div class="large-3 small-12 left"
+     style="height:auto;background-color: rgba(10,10,10,0.5);margin-right: 1%;margin-left: 2%;border-radius: 5px;">
+    <h4 style="color: white;background-color: rgba(80,80,80,1);margin-top: 0;border-radius: 5px;padding: 2%;text-align: center;"
+        id="budget">
+        Selected Players <b style='font-size: 60%'>Budget:10000000
+            <script type="text/javascript">document.write("<br />" + "Batsmen : " + cb + "<br />" + "Bowlers : " + cbo + "<br />" + "All Rounders : " + ca + "<br />" + "Coach : " + cc + "<br />")</script>
+        </b>
+    </h4>
 
-            <div style="max-height:29em;overflow-y:scroll" id="squad">
+    <div style="max-height:29em;overflow-y:scroll" id="squad">
 
-            </div>
-
-
-            <form style="text-align: center" id="form">
-                <input style="display: none" id="t1" value=""/>
-                <input style="display: none" id="t2" value=""/>
-                <input style="display: none" id="t3" value=""/>
-                <input style="display: none" id="t4" value=""/>
-                <input style="display: none" id="t5" value=""/>
-                <input style="display: none" id="t6" value=""/>
-                <input style="display: none" id="t7" value=""/>
-                <input style="display: none" id="t8" value=""/>
-                <input style="display: none" id="t9" value=""/>
-                <input style="display: none" id="t10" value=""/>
-                <input style="display: none" id="t11" value=""/>
-                <input style="display: none" id="t12" value=""/>
-                <input style="display: none" id="t13" value=""/>
-                <input style="display: none" id="t14" value=""/>
-                <input style="display: none" id="t15" value=""/>
-                <input style="display: none" id="t16" value=""/>
-                <input onmousedown="subm();" type="submit"
-                       style="background: rgba(60,60,60,1);border-radius: 5px;margin:1%" id="sub" class="button"/>
-
-            </form>
-        </div>
-        <div class="content active" id="panel1">
-            <div class="large-8 small-12 columns">
-
-                <div style="height: 42em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
-                     class="large-12 small-12 right">
-                    <table cellspacing="10px"
-                           style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
-
-                        <% k = 4; var z = 1;i=0;for(i = 0;i < Players.length;i++) { %>
-                        <% if(k < 3){ %>
-
-                        <% if(Players[i]._id <= 113){ %>
-                        <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                            id="box<%= Players[i]._id %>" onclick="">
+    </div>
 
 
-                            <img src="/images/bat/<%=Players[i]._id%>.jpg" style="width: 40%;margin: 0;float: left;"/>
+    <form style="text-align: center" id="form">
+        <input style="display: none" id="t1" value=""/>
+        <input style="display: none" id="t2" value=""/>
+        <input style="display: none" id="t3" value=""/>
+        <input style="display: none" id="t4" value=""/>
+        <input style="display: none" id="t5" value=""/>
+        <input style="display: none" id="t6" value=""/>
+        <input style="display: none" id="t7" value=""/>
+        <input style="display: none" id="t8" value=""/>
+        <input style="display: none" id="t9" value=""/>
+        <input style="display: none" id="t10" value=""/>
+        <input style="display: none" id="t11" value=""/>
+        <input style="display: none" id="t12" value=""/>
+        <input style="display: none" id="t13" value=""/>
+        <input style="display: none" id="t14" value=""/>
+        <input style="display: none" id="t15" value=""/>
+        <input style="display: none" id="t16" value=""/>
+        <input onmousedown="subm();" type="submit"
+               style="background: rgba(60,60,60,1);border-radius: 5px;margin:1%" id="sub" class="button"/>
+
+    </form>
+</div>
+<div class="content active" id="panel1">
+    <div class="large-8 small-12 columns">
+
+        <div style="height: 42em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
+             class="large-12 small-12 right">
+            <table cellspacing="10px"
+                   style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
+
+                <% k = 4; var z = 1;i = 0;for(i = 0;i < Players.length;i ++) { %>
+                <% if(k < 3){ %>
+
+                <% if(Players[i]._id <= 113){ %>
+                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
+                    id="box<%= Players[i]._id %>" onclick="">
 
 
-                            <p style="text-align: center;"><%= Players[i].Name %><br/>
-                                <%= Players[i].Price %><%=Players[i]._id%></p>
+                    <img src="/images/bat/<%= Players[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
-                            <form name="h" style="display: none">
-                                <input value="<%= Players[i].Name %>" id="cn<%= Players[i]._id %>"/>
-                                <input value="<%= Players[i].Price %>" id="cp<%= Players[i]._id %>"/>
-                                <input value="<%= Players[i].Cost %>" id="cc<%= Players[i]._id %>"/>
-                                <input value="<%= Players[i].Type %>" id="ct<%= Players[i]._id %>"/>
-                            </form>
-                            <button class='button [tiny small large]' onclick="<%- 'sel(' + Players[i]._id + ')' %>"
-                                    style="height: auto;width: auto;margin-left:75%;padding:1.5%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
-                            Select
 
-                            </button>
-                        </td>
-                        <% k++; } else {
-                            continue;
-                        } %>
-                        <% } else { if(z == 1) { %>
-                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                            <% z=0;k = 0;} else { %>
-                        </tr>
-                        <% k = 0;i--; %>
-                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                            <% } } } %>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="content" id="panel2">
-            <div class="large-8 small-12 columns">
+                    <p style="text-align: center;"><%= Players[i].Name %><br/>
+                        <%= Players[i].Price %><%= Players[i]._id %></p>
 
-                <div style="height: 42em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
-                     class="large-12 small-12 right">
-                    <table cellspacing="10px"
-                           style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
+                    <form name="h" style="display: none">
+                        <input value="<%= Players[i].Name %>" id="cn<%= Players[i]._id %>"/>
+                        <input value="<%= Players[i].Price %>" id="cp<%= Players[i]._id %>"/>
+                        <input value="<%= Players[i].Cost %>" id="cc<%= Players[i]._id %>"/>
+                        <input value="<%= Players[i].Type %>" id="ct<%= Players[i]._id %>"/>
+                    </form>
+                    <button class='button [tiny small large]' onclick="<%- 'sel(' + Players[i]._id + ')' %>"
+                            style="height: auto;width: auto;margin-left:75%;padding:1.5%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
+                        Select
 
-                        <% k = 4;i = 0; var z = 1;for(i = 0;i < Players.length;i++) { %>
-                        <% if(k < 3){ %>
-
-                        <% if(Players[i]._id <= 242 && Players[i]._id > 113){ %>
-                        <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                            id="box<%= Players[i]._id %>" onclick="">
-
-                            <img src="/images/bowl/<%=Players[i]._id%>.jpg" style="width: 40%;margin: 0;float: left;"/>
-
-                            <p style="text-align: center;"><%= Players[i].Name %><br/>
-                                <%= Players[i].Price %></p>
-
-                            <form name="h" style="display: none">
-                                <input value="<%= Players[i].Name %>" id="cn<%= Players[i]._id %>"/>
-                                <input value="<%= Players[i].Price %>" id="cp<%= Players[i]._id %>"/>
-                                <input value="<%= Players[i].Cost %>" id="cc<%= Players[i]._id %>"/>
-                                <input value="<%= Players[i].Type %>" id="ct<%= Players[i]._id %>"/>
-                            </form>
-                            <button class='button [tiny small large]' onclick="<%- 'sel(' + Players[i]._id + ')' %>"
-                                    style="height: auto;width: auto;margin-left:75%;padding:1.5%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
-                                Select
-
-                            </button>
-                        </td>
-                        <% k++; } else {
-                            continue;
-                        } %>
-                        <% } else { if(z == 1) { %>
-                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                            <% z=0;k = 0;} else { %>
-                        </tr>
-                        <% k = 0;i--; %>
-                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                            <% } } } %>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="content" id="panel3">
-            <div class="large-8 small-12 columns">
-
-                <div style="height: 42em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
-                     class="large-12 small-12 right">
-                    <table cellspacing="10px"
-                           style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
-
-                        <% k = 4;i = 0; var z = 1;for(i = 0;i < Players.length;i++) { %>
-                        <% if(k < 3){ %>
-
-                        <% if(Players[i]._id <= 303 && Players[i]._id > 242){ %>
-                        <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                            id="box<%= Players[i]._id %>" onclick="">
-
-                            <img src="/images/all/<%=Players[i]._id%>.jpg" style="width: 40%;margin: 0;float: left;"/>
-
-                            <p style="text-align: center;"><%= Players[i].Name %><br/>
-                                <%= Players[i].Price %></p>
-
-                            <form name="h" style="display: none">
-                                <input value="<%= Players[i].Name %>" id="cn<%= Players[i]._id %>"/>
-                                <input value="<%= Players[i].Price %>" id="cp<%= Players[i]._id %>"/>
-                                <input value="<%= Players[i].Cost %>" id="cc<%= Players[i]._id %>"/>
-                                <input value="<%= Players[i].Type %>" id="ct<%= Players[i]._id %>"/>
-                            </form>
-                            <button class='button [tiny small large]' onclick="<%- 'sel(' + Players[i]._id + ')' %>"
-                                    style="height: auto;width: auto;margin-left:75%;padding:1.5%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
-                                Select
-
-                            </button>
-                        </td>
-                        <% k++; } else {
-                            continue;
-                        } %>
-                        <% } else { if(z == 1) { %>
-                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                            <% z = 0;k = 0;} else { %>
-                        </tr>
-                        <% k = 0;i--; %>
-                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                            <% } } } %>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="content" id="panel4">
-            <div class="large-8 small-12 columns">
-
-                <div style="height: 42em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
-                     class="large-12 small-12 right">
-                    <table cellspacing="10px"
-                           style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
-
-                        <% k = 4;i = 0; var z = 1;for(i = 0;i < Players.length;i++) { %>
-                        <% if(k < 3){ %>
-
-                        <% if(Players[i]._id <= 323 && Players[i]._id > 303){ %>
-                        <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                            id="box<%= Players[i]._id %>" onclick="">
-
-                            <img src="/images/coaches/<%= Players[i]._id %>.jpg"
-                                 style="width: 40%;margin: 0;float: left;"/>
-
-                            <p style="text-align: center;"><%= Players[i].Name %><br/>
-                                <%= Players[i].Price %></p>
-
-                            <form name="h" style="display: none">
-                                <input value="<%= Players[i].Name %>" id="cn<%= Players[i]._id %>"/>
-                                <input value="<%= Players[i].Price %>" id="cp<%= Players[i]._id %>"/>
-                                <input value="<%= Players[i].Cost %>" id="cc<%= Players[i]._id %>"/>
-                                <input value="<%= Players[i].Type %>" id="ct<%= Players[i]._id %>"/>
-                            </form>
-                            <button class='button [tiny small large]' onclick="<%- 'sel(' + Players[i]._id + ')' %>"
-                                    style="height: auto;width: auto;margin-left:75%;padding:1.5%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
-                                Select
-
-                            </button>
-                        </td>
-                        <% k++; } else {
-                            continue;
-                        } %>
-                        <% } else { if(z == 1) { %>
-                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                            <% z=0;k = 0;} else { %>
-                        </tr>
-                        <% k = 0;i--; %>
-                        <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                            <% } } } %>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+                    </button>
+                </td>
+                <% k ++; } else {
+                    continue;
+                } %>
+                <% } else { if(z == 1) { %>
+                <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                    <% z = 0;k = 0;} else { %>
+                </tr>
+                <% k = 0;i --; %>
+                <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                    <% } } } %>
+                </tr>
+            </table>
         </div>
     </div>
+</div>
+<div class="content" id="panel2">
+    <div class="large-8 small-12 columns">
+
+        <div style="height: 42em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
+             class="large-12 small-12 right">
+            <table cellspacing="10px"
+                   style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
+
+                <% k = 4;i = 0; var z = 1;for(i = 0;i < Players.length;i ++) { %>
+                <% if(k < 3){ %>
+
+                <% if(Players[i]._id <= 242 && Players[i]._id > 113){ %>
+                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
+                    id="box<%= Players[i]._id %>" onclick="">
+
+                    <img src="/images/bowl/<%= Players[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
+
+                    <p style="text-align: center;"><%= Players[i].Name %><br/>
+                        <%= Players[i].Price %></p>
+
+                    <form name="h" style="display: none">
+                        <input value="<%= Players[i].Name %>" id="cn<%= Players[i]._id %>"/>
+                        <input value="<%= Players[i].Price %>" id="cp<%= Players[i]._id %>"/>
+                        <input value="<%= Players[i].Cost %>" id="cc<%= Players[i]._id %>"/>
+                        <input value="<%= Players[i].Type %>" id="ct<%= Players[i]._id %>"/>
+                    </form>
+                    <button class='button [tiny small large]' onclick="<%- 'sel(' + Players[i]._id + ')' %>"
+                            style="height: auto;width: auto;margin-left:75%;padding:1.5%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
+                        Select
+
+                    </button>
+                </td>
+                <% k ++; } else {
+                    continue;
+                } %>
+                <% } else { if(z == 1) { %>
+                <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                    <% z = 0;k = 0;} else { %>
+                </tr>
+                <% k = 0;i --; %>
+                <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                    <% } } } %>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="content" id="panel3">
+    <div class="large-8 small-12 columns">
+
+        <div style="height: 42em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
+             class="large-12 small-12 right">
+            <table cellspacing="10px"
+                   style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
+
+                <% k = 4;i = 0; var z = 1;for(i = 0;i < Players.length;i ++) { %>
+                <% if(k < 3){ %>
+
+                <% if(Players[i]._id <= 303 && Players[i]._id > 242){ %>
+                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
+                    id="box<%= Players[i]._id %>" onclick="">
+
+                    <img src="/images/all/<%= Players[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
+
+                    <p style="text-align: center;"><%= Players[i].Name %><br/>
+                        <%= Players[i].Price %></p>
+
+                    <form name="h" style="display: none">
+                        <input value="<%= Players[i].Name %>" id="cn<%= Players[i]._id %>"/>
+                        <input value="<%= Players[i].Price %>" id="cp<%= Players[i]._id %>"/>
+                        <input value="<%= Players[i].Cost %>" id="cc<%= Players[i]._id %>"/>
+                        <input value="<%= Players[i].Type %>" id="ct<%= Players[i]._id %>"/>
+                    </form>
+                    <button class='button [tiny small large]' onclick="<%- 'sel(' + Players[i]._id + ')' %>"
+                            style="height: auto;width: auto;margin-left:75%;padding:1.5%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
+                        Select
+
+                    </button>
+                </td>
+                <% k ++; } else {
+                    continue;
+                } %>
+                <% } else { if(z == 1) { %>
+                <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                    <% z = 0;k = 0;} else { %>
+                </tr>
+                <% k = 0;i --; %>
+                <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                    <% } } } %>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="content" id="panel4">
+    <div class="large-8 small-12 columns">
+
+        <div style="height: 42em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
+             class="large-12 small-12 right">
+            <table cellspacing="10px"
+                   style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
+
+                <% k = 4;i = 0; var z = 1;for(i = 0;i < Players.length;i ++) { %>
+                <% if(k < 3){ %>
+
+                <% if(Players[i]._id <= 323 && Players[i]._id > 303){ %>
+                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
+                    id="box<%= Players[i]._id %>" onclick="">
+
+                    <img src="/images/coaches/<%= Players[i]._id %>.jpg"
+                         style="width: 40%;margin: 0;float: left;"/>
+
+                    <p style="text-align: center;"><%= Players[i].Name %><br/>
+                        <%= Players[i].Price %></p>
+
+                    <form name="h" style="display: none">
+                        <input value="<%= Players[i].Name %>" id="cn<%= Players[i]._id %>"/>
+                        <input value="<%= Players[i].Price %>" id="cp<%= Players[i]._id %>"/>
+                        <input value="<%= Players[i].Cost %>" id="cc<%= Players[i]._id %>"/>
+                        <input value="<%= Players[i].Type %>" id="ct<%= Players[i]._id %>"/>
+                    </form>
+                    <button class='button [tiny small large]' onclick="<%- 'sel(' + Players[i]._id + ')' %>"
+                            style="height: auto;width: auto;margin-left:75%;padding:1.5%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
+                        Select
+
+                    </button>
+                </td>
+                <% k ++; } else {
+                    continue;
+                } %>
+                <% } else { if(z == 1) { %>
+                <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                    <% z = 0;k = 0;} else { %>
+                </tr>
+                <% k = 0;i --; %>
+                <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                    <% } } } %>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
 </div>
 <!-- content -->
 </div>
