@@ -54,7 +54,6 @@ router.get('/', function (req, res)
 });
 
 
-
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
     var onFetch = function (err, documents)
@@ -73,8 +72,6 @@ router.get('/players', function (req, res) // page for all players, only availab
     };
     mongoPlayers.fetchPlayers(onFetch);
 });
-
-
 
 
 module.exports = router;
