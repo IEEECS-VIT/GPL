@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>GPL</title>
+    <meta charset="UTF-8">
+    <title>Home | GPL</title>
     <link type="text/css" rel="stylesheet" href="/bower_components/foundation/css/foundation.css"/>
     <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
 </head>
@@ -37,27 +38,30 @@
             <table cellspacing="10px"
                    style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
 
-                <% k = 4;i = 0; var z = 1;for(i = 0;i < Team.length;i++) { %>
+                <% k = 4;i = 0; var z = 1;for(i = 0;i < Team.length;i ++) { %>
                 <% if(k < 3){ %>
                 <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
                     id="box<%= Team[i]._id %>" onclick="">
 
-                    <%if (Team[i]._id<=113){%>
-                    <img src="/images/bat/<%=Team[i]._id%>.jpg" style="width: 40%;margin: 0;float: left;"/>
+                    <% if (Team[i]._id <= 113){ %>
+                    <img src="/images/bat/<%= Team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
+
                     <p style="text-align: center;"><%= Team[i].Name %></p>
-                    <%} else if(Team[i]._id>=114&&Team[i]<=242) {%>
-                    <img src="/images/bowl/<%=Team[i]._id%>.jpg" style="width: 40%;margin: 0;float: left;"/>
+                    <% } else if(Team[i]._id >= 114 && Team[i] <= 242) { %>
+                    <img src="/images/bowl/<%= Team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
+
                     <p style="text-align: center;"><%= Team[i].Name %></p>
-                    <%} else if(Team[i]._id>=243&&Team[i]._id<=303) {%>
-                    <img src="/images/all/<%=Team[i]._id%>.jpg" style="width: 40%;margin: 0;float: left;"/>
+                    <% } else if(Team[i]._id >= 243 && Team[i]._id <= 303) { %>
+                    <img src="/images/all/<%= Team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
+
                     <p style="text-align: center;"><%= Team[i].Name %></p>
-                    <%}%>
+                    <% } %>
                 </td>
                 <% } else { if(z == 1) { %>
                 <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                    <% z=0;k = 0;} else { %>
+                    <% z = 0;k = 0;} else { %>
                 </tr>
-                <% k = 0;i--; %>
+                <% k = 0;i --; %>
                 <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
                     <% } } } %>
                 </tr>
