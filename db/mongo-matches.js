@@ -1,7 +1,3 @@
-/**
- * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 24/8/14.
- */
-
 /*
  *  GraVITas Premier League
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
@@ -20,19 +16,21 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var async = require('async');
 var MongoClient = require('mongodb').MongoClient;
+var path = require('path');
+
+var mongoTeam = require(path.join(__dirname, 'mongo-team'));
 
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
-var path = require('path');
-var async = require('async');
-var mongoTeam = require('./mongo-team');
 var today = new Date();
-exports.fetchPreviousMatch = function(doc1,doc2,callback)
+
+exports.fetchPreviousMatch = function (doc1, doc2, callback)
 {
     var parallelTasks = {};
-    var onConnect = function(err,db)
+    var onConnect = function (err, db)
     {
-        if(err)
+        if (err)
         {
             throw err;
         }
@@ -69,47 +67,47 @@ exports.fetchPreviousMatch = function(doc1,doc2,callback)
 
             }
             var collection = db.collection(collectionName);
-            var onFetch = function(err,docs)
+            var onFetch = function (err, docs)
             {
-                if(err)
+                if (err)
                 {
                     throw err;
                 }
-                else if(docs.team1)
+                else if (docs.team1)
                 {
-                    callback(null,docs.team1);
+                    callback(null, docs.team1);
                 }
-                else if(docs.team2)
+                else if (docs.team2)
                 {
-                    callback(null,docs.team2);
+                    callback(null, docs.team2);
                 }
 
             };
-            parallelTasks.team1 = function(asyncCallback)
+            parallelTasks.team1 = function (asyncCallback)
             {
-                collection.findOne(doc1,asyncCallback);
+                collection.findOne(doc1, asyncCallback);
             };
-            parallelTasks.team2 = function(asyncCallback)
+            parallelTasks.team2 = function (asyncCallback)
             {
-                collection.findOne(doc2,asyncCallback);
+                collection.findOne(doc2, asyncCallback);
             };
-            async.parallel(parallelTasks,onFetch);
+            async.parallel(parallelTasks, onFetch);
 
 
         }
 
     };
-    MongoClient.connect(mongoUri,onConnect);
+    MongoClient.connect(mongoUri, onConnect);
 
 
 };
 
-exports.fetchNextMatch=function(doc1,doc2,callback)
+exports.fetchNextMatch = function (doc1, doc2, callback)
 {
     var parallelTasks = {};
-    var onConnect = function(err,db)
+    var onConnect = function (err, db)
     {
-        if(err)
+        if (err)
         {
             throw err;
         }
@@ -147,43 +145,43 @@ exports.fetchNextMatch=function(doc1,doc2,callback)
 
             }
 
-            var onFetch = function(err,doc)
+            var onFetch = function (err, doc)
             {
                 var credentials = {};
-                if(err)
+                if (err)
                 {
                     throw err;
                 }
-                else if(doc.team1)
+                else if (doc.team1)
                 {
                     credentials = {
-                        '_id':doc.team1.Team_2
+                        '_id': doc.team1.Team_2
                     };
                 }
-                else if(doc.team2)
+                else if (doc.team2)
                 {
                     credentials = {
-                        '_id':doc.team2.Team_1
+                        '_id': doc.team2.Team_1
                     };
 
                 }
-                mongoTeam.getTeam(credentials,callback);
+                mongoTeam.getTeam(credentials, callback);
 
             };
             var collection = db.collection(collectionName);
-            parallelTasks.team1 = function(asyncCallback)
+            parallelTasks.team1 = function (asyncCallback)
             {
-                collection.findOne(doc1,asyncCallback);
+                collection.findOne(doc1, asyncCallback);
             };
-            parallelTasks.team2 = function(asyncCallback)
+            parallelTasks.team2 = function (asyncCallback)
             {
-                collection.findOne(doc2,asyncCallback);
+                collection.findOne(doc2, asyncCallback);
             };
-            async.parallel(parallelTasks,onFetch);
+            async.parallel(parallelTasks, onFetch);
 
         }
 
     };
-    MongoClient.connect(mongoUri,onConnect);
+    MongoClient.connect(mongoUri, onConnect);
 
 };

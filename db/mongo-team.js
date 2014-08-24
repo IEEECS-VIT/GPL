@@ -1,6 +1,3 @@
-/**
- * Created by Amol on 12-Aug-2014.
- */
 /*
  *  GraVITas Premier League
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
@@ -18,12 +15,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 var async = require('async');
 var MongoClient = require('mongodb').MongoClient;
 
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
-var getPlayer=function(id, callback)
+var getPlayer = function (id, callback)
 {
     var onConnect = function (err, db)
     {
@@ -65,26 +63,26 @@ exports.getTeam = function (doc, callback)
         {
             var collection = db.collection('users');
             /*
-            var documents = [];
-            var onGetPlayer = function(err, documents)
-            {
-                if(err)
-                {
-                    callback(err,null);
-                }
-                else
-                {
-                    documents.push(document);
-                }
-            };
-            var addDocument = function(data, asyncCallback)
-            {
-                var credentials = {
-                    "_id" : data
-                };
-                getPlayer(credentials, asyncCallback);
-            };
-            */
+             var documents = [];
+             var onGetPlayer = function(err, documents)
+             {
+             if(err)
+             {
+             callback(err,null);
+             }
+             else
+             {
+             documents.push(document);
+             }
+             };
+             var addDocument = function(data, asyncCallback)
+             {
+             var credentials = {
+             "_id" : data
+             };
+             getPlayer(credentials, asyncCallback);
+             };
+             */
             var onFetch = function (err, document)
             {
                 if (err)

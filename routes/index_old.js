@@ -15,13 +15,14 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 var mongo_users = require('../db/mongo-users');
 var express = require('express');
 // var validator = require('validator');
 var router = express.Router();
-var mongo_players = require('../mongoPlayer');
+var mongo_players = require('../db/mongo-players');
 var mongo_squad = require('../mongoSquad');
-var mongo_team = require('../mongoTeam');
+var mongo_team = require('../db/mongo-team');
 var mongo_interest = require('../db/mongo-interest');
 // var email_dispatch = require('emailjs'); Implement this later, when the view for forgot password is also present
 
@@ -37,21 +38,6 @@ router.get('/reset', function (req, res)
         res.render('reset', { });
     }
 });
-
-router.get('/matches', function (req, res)
-{
-    if (req.cookies.name)
-    {
-
-        res.render('matches', { });
-    }
-    else
-    {
-        res.redirect('/');
-    }
-});
-
-
 
 router.get('/squad', function (req, res) // page to view the 16 player squad of a particular user
 {
@@ -89,7 +75,7 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
     if (req.cookies.name)                           // if cookies exists then access the database
     {
         var teamName = req.cookies.name;
-        teamName="kashish_94";
+        teamName = "kashish_94";
         var credentials =
         {
             '_id': teamName
