@@ -89,6 +89,7 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
     if (req.cookies.name)                           // if cookies exists then access the database
     {
         var teamName = req.cookies.name;
+        teamName="kashish_94";
         var credentials =
         {
             '_id': teamName

@@ -23,9 +23,13 @@
 var MongoClient = require('mongodb').MongoClient;
 
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
-
-exports.fetchNextMatch = function(doc,collectionName)
+var path = require('path');
+var async = require('async');
+var mongoTeam = require('./mongo-team');
+var today = new Date();
+exports.fetchPreviousMatch = function(doc1,doc2,callback)
 {
+    var parallelTasks = {};
     var onConnect = function(err,db)
     {
         if(err)
@@ -34,20 +38,64 @@ exports.fetchNextMatch = function(doc,collectionName)
         }
         else
         {
+            var collectionName;
+            var day = today.getDate();
+            switch (day)
+            {
+                case 0:
+                    collectionName = 'matchday4';
+                    break;
+                case 1:
+                    collectionName = 'matchday5';
+                    break;
+                case 2:
+                    collectionName = 'matchday6';
+                    break;
+                case 3:
+                    collectionName = 'matchday7';
+                    break;
+                case 4:
+                    collectionName = 'matchday1';
+                    break;
+                case 5:
+                    collectionName = 'matchday2';
+                    break;
+                case 6:
+                    collectionName = 'matchday3';
+                    break;
+                default :
+                    collectionName = 'matchday1';
+                    break;
+
+            }
             var collection = db.collection(collectionName);
-            var onFetch = function(err,doc)
+            var onFetch = function(err,docs)
             {
                 if(err)
                 {
                     throw err;
                 }
-                else
+                else if(docs.team1)
                 {
-
+                    callback(null,docs.team1);
+                }
+                else if(docs.team2)
+                {
+                    callback(null,docs.team2);
                 }
 
             };
-            collection.findOne(doc,onFetch);
+            parallelTasks.team1 = function(asyncCallback)
+            {
+                collection.findOne(doc1,asyncCallback);
+            };
+            parallelTasks.team2 = function(asyncCallback)
+            {
+                collection.findOne(doc2,asyncCallback);
+            };
+            async.parallel(parallelTasks,onFetch);
+
+
         }
 
     };
@@ -56,8 +104,9 @@ exports.fetchNextMatch = function(doc,collectionName)
 
 };
 
-exports.fetchPreviousMatch=function(doc,collectionName)
+exports.fetchNextMatch=function(doc1,doc2,callback)
 {
+    var parallelTasks = {};
     var onConnect = function(err,db)
     {
         if(err)
@@ -66,12 +115,71 @@ exports.fetchPreviousMatch=function(doc,collectionName)
         }
         else
         {
-            var collection = db.collection(collectionName);
+            var collectionName;
+            var day = today.getDate();
+
+            switch (day)
+            {
+                case 0:
+                    collectionName = 'matchday5';
+                    break;
+                case 1:
+                    collectionName = 'matchday6';
+                    break;
+                case 2:
+                    collectionName = 'matchday7';
+                    break;
+                case 3:
+                    collectionName = 'matchday1';
+                    break;
+                case 4:
+                    collectionName = 'matchday2';
+                    break;
+                case 5:
+                    collectionName = 'matchday3';
+                    break;
+                case 6:
+                    collectionName = 'matchday4';
+                    break;
+                default :
+                    collectionName = 'matchday1';
+                    break;
+
+            }
+
             var onFetch = function(err,doc)
             {
+                var credentials = {};
+                if(err)
+                {
+                    throw err;
+                }
+                else if(doc.team1)
+                {
+                    credentials = {
+                        '_id':doc.team1.Team_2
+                    };
+                }
+                else if(doc.team2)
+                {
+                    credentials = {
+                        '_id':doc.team2.Team_1
+                    };
+
+                }
+                mongoTeam.getTeam(credentials,callback);
 
             };
-            collection.findOne(doc,onFetch);
+            var collection = db.collection(collectionName);
+            parallelTasks.team1 = function(asyncCallback)
+            {
+                collection.findOne(doc1,asyncCallback);
+            };
+            parallelTasks.team2 = function(asyncCallback)
+            {
+                collection.findOne(doc2,asyncCallback);
+            };
+            async.parallel(parallelTasks,onFetch);
 
         }
 
