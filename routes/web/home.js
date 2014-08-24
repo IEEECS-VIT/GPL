@@ -125,6 +125,8 @@ router.get('/players', function (req, res) // page for all players, only availab
     mongoPlayers.fetchPlayers(onFetch);
 });
 
+
+
 router.get('/team', function (req, res) // view the assigned playing 11 with options to change the playing 11
 {
     if (req.cookies.name)                           // if cookies exists then access the database

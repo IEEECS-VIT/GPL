@@ -62,27 +62,7 @@ exports.getTeam = function (doc, callback)
         else
         {
             var collection = db.collection('users');
-            /*
-             var documents = [];
-             var onGetPlayer = function(err, documents)
-             {
-             if(err)
-             {
-             callback(err,null);
-             }
-             else
-             {
-             documents.push(document);
-             }
-             };
-             var addDocument = function(data, asyncCallback)
-             {
-             var credentials = {
-             "_id" : data
-             };
-             getPlayer(credentials, asyncCallback);
-             };
-             */
+
             var onFetch = function (err, document)
             {
                 if (err)
