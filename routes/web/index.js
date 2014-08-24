@@ -23,6 +23,8 @@ var router = express.Router();
 
 var mongoInterest = require(path.join(__dirname, '..', '..', 'db', 'mongo-interest'));
 var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
+var mongoTeam = require(path.join(__dirname, '..', '..', 'db', 'mongo-team'));
+var mongoMatches = require(path.join(__dirname,'..','..','db','mongo-matches'));
 
 router.get('/', function (req, res)
 {
@@ -42,6 +44,27 @@ router.get('/matches', function (req, res)
     if (req.cookies.name)
     {
         var teamName = req.signedCookie.name;
+
+        var credentials1 = {
+            'Team_1' : teamName
+        };
+        var credentials2 = {
+            'Team_2' : teamName
+        };
+        var onFetch = function(err,doc)
+        {
+            if(err)
+            {
+                // what to do with error
+            }
+            else
+            {
+                res.render('matches',{User:doc});
+            }
+
+        };
+        mongoMatches.fetchMatch(credentials1,onFetch);
+
 
         res.render('matches', { });
     }

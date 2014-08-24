@@ -22,6 +22,8 @@ var router = express.Router();
 
 var mongoPlayers = require(path.join(__dirname, '..', '..', 'db', 'mongo-players'));
 var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
+var mongoTeam = require(path.join(__dirname, '..', '..', 'db', 'mongo-team'));
+var mongoMatches = require(path.join(__dirname,'..','..','db','mongo-matches'));
 
 router.get('/', function (req, res)
 {
@@ -52,6 +54,83 @@ router.get('/', function (req, res)
         res.redirect('/');
     }
 });
+
+
+
+router.get('/matches', function (req, res)
+{
+    if (req.cookies.name)
+    {
+        var teamName = req.signedCookie.name;
+
+        var credentials1 = {
+            'Team_1' : teamName
+        };
+        var credentials2 = {
+            'Team_2' : teamName
+        };
+        var parallel_tasks = {};
+        var response=[];
+        var previousMatch = function(err,doc)
+        {
+            if(err)
+            {
+                // do something to the error
+            }
+            else
+            {
+                response.push(doc);
+            }
+
+        };
+
+        parallel_tasks.team1=function(asyncCallback)
+        {
+            mongoMatches.fetchPreviousMatch(credentials1, asyncCallback);
+        };
+        parallel_tasks.team2=function(asyncCallback)
+        {
+            mongoMatches.fetchPreviousMatch(credentials2, asyncCallback);
+        };
+        async.parallel(parallel_tasks,previousMatch);
+
+        parallel_tasks.team1 = function(asyncCallback)
+        {
+            mongoMatches.fetchNextMatch(credentials1, asyncCallback);
+        };
+
+
+        parallel_tasks.team2 = function(asyncCallback)
+        {
+            mongoMatches.fetchNextMatch(credentials2, asyncCallback);
+
+        };
+        var onFinish = function(err,results)
+        {
+            if(err)
+            {
+                // Add Response
+            }
+            else if(results.team1)
+            {
+                response.push(results.team1);
+
+                res.render('matches', {Match : response });
+            }
+            else
+            {
+                response.push(results.team2);
+                res.render('matches', {Match : response });
+            }
+        };
+        async.parallel(parallel_tasks,onFinish);
+    }
+    else
+    {
+        res.redirect('/');
+    }
+});
+
 
 
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen

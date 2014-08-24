@@ -1,7 +1,6 @@
 /**
- * Created by Amol on 12-Aug-2014.
+ * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 24/8/14.
  */
-
 
 /*
  *  GraVITas Premier League
@@ -25,35 +24,58 @@ var MongoClient = require('mongodb').MongoClient;
 
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
-
-
-exports.getSquad = function (doc,callback ) {
-    var onConnect = function (err, db) {
-        if (err) {
-            callback(err);
+exports.fetchNextMatch = function(doc,collectionName)
+{
+    var onConnect = function(err,db)
+    {
+        if(err)
+        {
+            throw err;
         }
-        else {
-            var collection = db.collection('players');                        // i dont know the exact collection name, i have assumed it
-            var onFetch = function (err, document) {
-                if (err) {
-                    callback(err, null);
+        else
+        {
+            var collection = db.collection(collectionName);
+            var onFetch = function(err,doc)
+            {
+                if(err)
+                {
+                    throw err;
                 }
-                else if (document) {
-                    db.close();
-                    if (doc['_id'] === document['_id']) {
-                        callback(null, doc);
-                    }
-                    else {
-                        callback(true, null);
-                    }
+                else
+                {
 
                 }
-                else {
-                    callback(true, null);
-                }
+
             };
-            collection.findOne(doc, onFetch);                       // i don't understand this line .. need help in this
+            collection.findOne(doc,onFetch);
         }
+
     };
-    MongoClient.connect(mongoUri, onConnect);
-}
+    MongoClient.connect(mongoUri,onConnect);
+
+
+};
+
+exports.fetchPreviousMatch=function(doc,collectionName)
+{
+    var onConnect = function(err,db)
+    {
+        if(err)
+        {
+            throw err;
+        }
+        else
+        {
+            var collection = db.collection(collectionName);
+            var onFetch = function(err,doc)
+            {
+
+            };
+            collection.findOne(doc,onFetch);
+
+        }
+
+    };
+    MongoClient.connect(mongoUri,onConnect);
+
+};
