@@ -39,31 +39,31 @@ exports.todaysMatches = function (callback)
             switch (day)
             {
                 case 0:
-                    dateMatchDay = 'matchday4';
+                    collectionName = 'matchday4';
                     break;
                 case 1:
-                    dateMatchDay = 'matchday5';
+                    collectionName = 'matchday5';
                     break;
                 case 2:
-                    dateMatchDay = 'matchday6';
+                    collectionName = 'matchday6';
                     break;
                 case 3:
-                    dateMatchDay = 'matchday7';
+                    collectionName = 'matchday7';
                     break;
                 case 4:
-                    dateMatchDay = 'matchday1';
+                    collectionName = 'matchday1';
                     break;
                 case 5:
-                    dateMatchDay = 'matchday2';
+                    collectionName = 'matchday2';
                     break;
                 case 6:
-                    dateMatchDay = 'matchday3';
+                    collectionName = 'matchday3';
                     break;
                 default :
                     break;
 
             }
-            var collection = db.collection(dateMatchDay);
+            var collection = db.collection(collectionName);
             collection.find({}).toArray(callback);
         }
 
@@ -907,7 +907,7 @@ exports.updateMatch(commentary)
         }
         else
         {
-            var collection = db.collection(dateMatchDay);
+            var collection = db.collection(collectionName);
             var onUpdate = function (err, docs)
             {
                 if (err)

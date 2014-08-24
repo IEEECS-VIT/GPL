@@ -18,6 +18,7 @@
 
 var express = require('express');
 var path = require('path');
+var async = require('async');
 var router = express.Router();
 
 var mongoPlayers = require(path.join(__dirname, '..', '..', 'db', 'mongo-players'));
@@ -57,11 +58,15 @@ router.get('/', function (req, res)
 
 
 
+
+
+
 router.get('/matches', function (req, res)
 {
-    if (req.cookies.name)
-    {
-        var teamName = req.signedCookie.name;
+    //if (req.signedCookies.name)
+    //{
+        var teamName = req.signedCookies.name;
+        teamName="kashish_94";
 
         var credentials1 = {
             'Team_1' : teamName
@@ -70,66 +75,45 @@ router.get('/matches', function (req, res)
             'Team_2' : teamName
         };
         var parallel_tasks = {};
-        var response=[];
-        var previousMatch = function(err,doc)
-        {
-            if(err)
-            {
-                // do something to the error
-            }
-            else
-            {
-                response.push(doc);
-            }
-
-        };
-
-        parallel_tasks.team1=function(asyncCallback)
-        {
-            mongoMatches.fetchPreviousMatch(credentials1, asyncCallback);
-        };
-        parallel_tasks.team2=function(asyncCallback)
-        {
-            mongoMatches.fetchPreviousMatch(credentials2, asyncCallback);
-        };
-        async.parallel(parallel_tasks,previousMatch);
-
-        parallel_tasks.team1 = function(asyncCallback)
-        {
-            mongoMatches.fetchNextMatch(credentials1, asyncCallback);
-        };
-
-
-        parallel_tasks.team2 = function(asyncCallback)
-        {
-            mongoMatches.fetchNextMatch(credentials2, asyncCallback);
-
-        };
+        var response={};
         var onFinish = function(err,results)
         {
             if(err)
             {
-                // Add Response
-            }
-            else if(results.team1)
-            {
-                response.push(results.team1);
-
-                res.render('matches', {Match : response });
+                //do something with the error
             }
             else
             {
-                response.push(results.team2);
-                res.render('matches', {Match : response });
+                response["previousMatch"] = results.previousMatch;
+                response["nextMatch"] = results.nextMatch;
+                res.render('matches',response);
             }
+
+        };
+
+        parallel_tasks.previousMatch = function(asyncCallback)
+        {
+            mongoMatches.fetchPreviousMatch(credentials1,credentials2,asyncCallback);
+        };
+        parallel_tasks.nextMatch = function(asyncCallback)
+        {
+            mongoMatches.fetchNextMatch(credentials1,credentials2,asyncCallback);
+
         };
         async.parallel(parallel_tasks,onFinish);
-    }
-    else
+
+
+
+
+    //}
+    //else
     {
         res.redirect('/');
     }
 });
+
+
+
 
 
 
@@ -151,6 +135,35 @@ router.get('/players', function (req, res) // page for all players, only availab
     };
     mongoPlayers.fetchPlayers(onFetch);
 });
+router.get('/team', function (req, res) // view the assigned playing 11 with options to change the playing 11
+{
+    //if (req.cookies.name)                           // if cookies exists then access the database
+    //{
+        var teamName = req.cookies.name;
+        teamName="kashish_94";
+        var credentials =
+        {
+            '_id': teamName
+        };
 
+        var getTeam = function (err, documents)
+        {
+            if (err)
+            {
+                res.redirect('/home');
+            }
+            else
+            {
+                res.render('team', {Squad: documents});
+            }
+
+        };
+        mongoTeam.getTeam(credentials, getTeam);
+    //}
+    //else                                                        // if cookies does not exists , go to login page
+    {
+       // res.render('/login', { });
+    }
+});
 
 module.exports = router;
