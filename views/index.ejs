@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if IE 9]>
+<html class="lt-ie10" lang="en">
+<![endif]-->
+<html lang="en" class="no-js">
 <head>
     <meta charset="UTF-8">
     <title>GPL</title>
@@ -15,6 +18,8 @@
         <section class="top-bar-section small-only-text-center">
             <ul class="left">
                 <li><a href="/">Gravitas Premier League</a></li>
+                <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
             </ul>
             <ul class="right">
                 <li class="has-dropdown not-click" style="border-radius: 5px">
@@ -117,5 +122,12 @@
     </div>
 </footer>
 <!-- footer -->
+<script type="text/javascript" src="/bower_components/foundation/js/foundation.min.js"></script>
+<script>
+    $(document).foundation();
+
+    var doc = document.documentElement;
+    doc.setAttribute('data-useragent', navigator.userAgent);
+</script>
 </body>
 </html>
