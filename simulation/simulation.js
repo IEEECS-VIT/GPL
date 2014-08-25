@@ -21,8 +21,8 @@ var MongoClient = require('mongodb').MongoClient;
 var today = new Date();
 var dateMatchDay;
 
-var v, k, x, k2, p2, toss, i, j, t, cm, fo;
-var commentary = '', teamName = '', y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fw = [0, 0, 0, 0, 0, 0], fh = 0, pt = -1, ct = 0, bt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], st = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cw = [0, 0, 0, 0, 0, 0], z = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fs = [0, 0, 0, 0, 0, 0], pd = -1, e = 0, g = [0, 0, 0, 0, 0, 0], p = -1, s = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], b = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], f = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], m = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c = [0, 1], d = [0, 0, 0, 0, 0, 0], r = [0, 0, 0, 0, 0, 0], w = [0, 0, 0, 0, 0, 0], T = 0, T2 = 0, l = 0, w1 = 0, w2 = 0, B1 = 0, B2 = 0;
+var v, k, x, k2, p2, toss, i, j, t, cm, fo, wi;
+var commentary = '', y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fw = [0, 0, 0, 0, 0, 0], fh = 0, pt = -1, ct = 0, bt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], st = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cw = [0, 0, 0, 0, 0, 0], z = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fs = [0, 0, 0, 0, 0, 0], pd = -1, e = 0, g = [0, 0, 0, 0, 0, 0], p = -1, s = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], b = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], f = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], m = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c = [0, 1], d = [0, 0, 0, 0, 0, 0], r = [0, 0, 0, 0, 0, 0], w = [0, 0, 0, 0, 0, 0], T = 0, T2 = 0, l = 0, w1 = 0, w2 = 0, B1 = 0, B2 = 0;
 
 exports.todaysMatches = function (callback)
 {
@@ -85,7 +85,7 @@ exports.team = function (elt, team1, team2)
     ob[0]=new make(team1); ob[1]=new make(team2);
 }
 
-function make(teamName){
+function make(team){
     B1 = B2 = 0;
     this.r = [];
     this.a = [];
@@ -93,27 +93,28 @@ function make(teamName){
     this.br = [];
     this.bv = [];
     this.bs = [];
-    this.co = teamName.co;//rand() % 11 + 5;
-    this.w = teamName.w;
+    this.co = team.co;//rand() % 11 + 5;
+    this.w = team.w;
+    this.n=team.teamName;
     this.ec = [];
     for (i = 0; i < 6; ++i)
     {
-        this.ec[i] = teamName.ec[i];//(rand() % 401 + 500) / 100;
-        this.bv[i] = teamName.bv[i];//rand() % 16 + 15;
-        this.bs[i] = teamName.bs[i];//rand() % 16 + 15;
-        this.r[i] = teamName.r[i];//rand() % 201 + 700;
+        this.ec[i] = team.ec[i];//(rand() % 401 + 500) / 100;
+        this.bv[i] = team.bv[i];//rand() % 16 + 15;
+        this.bs[i] = team.bs[i];//rand() % 16 + 15;
+        this.r[i] = team.r[i];//rand() % 201 + 700;
         B1 += this.r[i] / 11;
-        this.a[i] = teamName.a[i];//rand() % 41 + 2 * (5 - i / 2);
-        this.st[i] = teamName.a[i];//rand() % 51 + 100;
-        this.br[i] = teamName.br[i];//rand() % 201 + 700;
+        this.a[i] = team.a[i];//rand() % 41 + 2 * (5 - i / 2);
+        this.st[i] = team.a[i];//rand() % 51 + 100;
+        this.br[i] = team.br[i];//rand() % 201 + 700;
         B2 += this.br[i] / 6;
     }
     for (i = 6; i < 11; ++i)
     {
         this.r[i] = 900 - this.br[i - 6];
         B1 += this.r[i] / 11;
-        this.a[i] = teamName.a[i];//rand() % 21 + 2 * (5 - i / 2);
-        this.st[i] = teamName.st[i];//rand() % 51 + 100;
+        this.a[i] = team.a[i];//rand() % 21 + 2 * (5 - i / 2);
+        this.st[i] = team.st[i];//rand() % 51 + 100;
     }
     for (i = 0; i < 11; ++i)
     {
@@ -243,7 +244,7 @@ function make(teamName){
         else if ((s[c[+t]] >= 94 && s[c[+t]] < 100))
         {
             commentary += 'Batsman ' + (c[+t] + 1) + ' knows there is a hundred for the taking if he can knuckle this one down....\n\n';
-        }//console.log("Batsman ", c[+t] + 1, " knows there is a hundered for the taking if he can knuckle this one down....\n\n");
+        }//console.log("Batsman ", c[+t] + 1, " knows there is a hundred for the taking if he can knuckle this one down....\n\n");
         for (j = 1; j <= 6; ++j)
         {
             v = Math.abs(ob[+!toss].r[c[+t]] - ob[+toss].br[x]);
@@ -849,6 +850,7 @@ function make(teamName){
             if (!(B1 - B2))
             {
                 commentary += 'TIE !\n';
+                wi=-1;
             }//console.log("TIE !\n");
             else
             {
@@ -856,10 +858,12 @@ function make(teamName){
                 if (B2 > B1)
                 {
                     commentary += (+!toss + 1);
+                    wi=+!toss;
                 }//console.log(+!toss + 1);
                 else
                 {
                     commentary += (+toss + 1);
+                    wi=+toss;
                 }//console.log(+toss + 1);
                 commentary += ' wins! (higher run rate)\n\n';//console.log(" wins! (higher run rate)\n\n");
             }
@@ -870,32 +874,208 @@ function make(teamName){
             if (w1 > w2)
             {
                 commentary += (+!toss + 1);
+                wi=+!toss;
             }//console.log(+!toss + 1);
             else
             {
                 commentary += (+toss + 1);
+                wi=+toss;
             }//console.log(+toss + 1);
             commentary += ' wins! (fewer wickets lost)\n\n';//console.log(" wins! (fewer wickets lost)\n\n");
         }
     }
     else
     {
-        commentary += 'Team ';//console.log("Team ");
+        commentary += 'Team '+(+toss + 1) + ' wins by '; //console.log("Team ");
+        wi=+toss;
         if (T < T2)
         {
-            commentary += (+toss + 1) + ' wins by ' + (10 - w2) + ' wicket(s) !';//console.log(+toss + 1, " wins by ", 10 - w2, " wicket(s) !");
+            commentary +=  (10 - w2) + ' wicket(s) !';//console.log(+toss + 1, " wins by ", 10 - w2, " wicket(s) !");
 
         }
         else
         {
-            commentary += (+!toss + 1) + ' wins by ' + (T - T2) + ' runs!';//console.log(+!toss + 1, " wins by ", T - T2, " runs!");
+            commentary += (T - T2) + ' runs!';//console.log(+!toss + 1, " wins by ", T - T2, " runs!");
         }
         commentary += '\n';//console.log("\n");
     }
-
-module.exports=commentary;//console.log(commentary);
+if(T2<T) {B1+=B2; B2=B1-B1; B1-=B2; T+=T2; T2=T-T2; T-=T2;}
+//module.exports=commentary; console.log(commentary);
 }
 
+if(wi==-1) {
+    exports.addtie1= function update(err, db)
+    {
+        if (err)
+        {
+            callback(err);
+        }
+        else
+        {
+            var collection = db.collection('users');
+            var onFetch = function (err, document)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (document)
+                {
+                    db.close();
+                    if (ob[0].n === document['_id'])
+                    {
+                        callback(null, document);
+                    }
+                    else
+                    {
+                        callback(false, null);
+                    }
+
+                }
+                else
+                {
+                    callback(true, null);
+                }
+            };
+            collection.findOne(doc, onFetch);
+        }
+        collection.update(doc, {$inc: {played: 1, points: 1, runs_for: T, runs_against: T2, balls_for: B1, balls_against: B2, net_run_rate: 6 * (T / B1 - T2 / B2)}}, function (err, updated)
+        {
+            if (err) throw err;
+            return db.close();
+        });
+    };
+
+    exports.addtie2 = function update(err, db)
+    {
+        if (err)
+        {
+            callback(err);
+        }
+        else
+        {
+            var collection = db.collection('users');
+            var onFetch = function (err, document)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (document)
+                {
+                    db.close();
+                    if (ob[1].n === document['_id'])
+                    {
+                        callback(null, document);
+                    }
+                    else
+                    {
+                        callback(false, null);
+                    }
+
+                }
+                else
+                {
+                    callback(true, null);
+                }
+            };
+            collection.findOne(doc, onFetch);
+        }
+        collection.update(doc, {$inc: {played: 1, points: 1, runs_for: T2, runs_against: T, balls_for: B2, balls_against: B1, net_run_rate: 6 * (T2 / B2 - T / B1)}}, function (err, updated)
+        {
+            if (err) throw err;
+            return db.close();
+        });
+    };
+}
+
+else
+{
+    exports.addwin = function update(err, db)
+    {
+        if (err)
+        {
+            callback(err);
+        }
+        else
+        {
+            var collection = db.collection('users');
+            var onFetch = function (err, document)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (document)
+                {
+                    db.close();
+                    if (ob[+wi].n === document['_id'])
+                    {
+                        callback(null, document);
+                    }
+                    else
+                    {
+                        callback(false, null);
+                    }
+
+                }
+                else
+                {
+                    callback(true, null);
+                }
+            };
+            collection.findOne(doc, onFetch);
+        }
+        collection.update(doc, {$inc: {played: 1, win: 1, points: 2, runs_for: T, runs_against: T2, balls_for: B1, balls_against: B2, net_run_rate: 6 * (T / B1 - T2 / B2)}}, function (err, updated)
+        {
+            if (err) throw err;
+            return db.close();
+        });
+    };
+
+    exports.addloss = function update(err, db)
+    {
+        if (err)
+        {
+            callback(err);
+        }
+        else
+        {
+            var collection = db.collection('users');
+            var onFetch = function (err, document)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (document)
+                {
+                    db.close();
+                    if (ob[+!wi].n === document['_id'])
+                    {
+                        callback(null, document);
+                    }
+                    else
+                    {
+                        callback(false, null);
+                    }
+
+                }
+                else
+                {
+                    callback(true, null);
+                }
+            };
+            collection.findOne(doc, onFetch);
+        }
+        collection.update(doc, {$inc: {played: 1, loss: 1, runs_for: T2, runs_against: T, balls_for: B2, balls_against: B1, net_run_rate: 6 * (T2 / B2 - T / B1)}}, function (err, updated)
+        {
+            if (err) throw err;
+            return db.close();
+        });
+    };
+}
+MongoClient.connect(mongoUri, onConnect);
 
 exports.updateMatch(commentary)
 {
@@ -915,7 +1095,7 @@ exports.updateMatch(commentary)
                     throw err;
                 }
 
-            }
+            };
             collection.update({}, {})
         }
     }

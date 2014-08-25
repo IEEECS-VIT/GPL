@@ -190,8 +190,7 @@ router.post('/register', function (req, res)
             runs_against: 0,
             balls_for: 0,
             balls_against: 0,
-            net_run_rate: 0.0,
-            opponents: [] // store opponent team names here, reference for potential clashes
+            net_run_rate: 0.0
         };
         var onInsert = function (err, docs)
         {

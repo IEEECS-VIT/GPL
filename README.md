@@ -1,4 +1,4 @@
-GraVITas Premier League
+npm instGraVITas Premier League
 =======================
 
 The GraVITas Premier League code repository
