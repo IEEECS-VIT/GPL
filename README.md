@@ -14,7 +14,7 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
     $ npm install
     
 ###### Install frontend dependencies manually (Microsoft Windows only)
-The npm postinstall script to run bower may not work properly on Windows, see #13
+The npm postinstall script to run bower may not work properly on Windows, see [this issue](https://github.com/IEEECS-VIT/GPL/issues/13)
 
     # npm -g install bower
     $ bower install
