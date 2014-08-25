@@ -1,11 +1,3 @@
-/**
- * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 27/7/14.
- */
-
-
-var MongoClient = require('mongodb').MongoClient;
-
-var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 /*
  *  GraVITas Premier League
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
@@ -23,6 +15,11 @@ var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb:/
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+var MongoClient = require('mongodb').MongoClient;
+
+var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
+
 
 exports.fetchPlayers = function (callback)
 {

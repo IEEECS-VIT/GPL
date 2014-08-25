@@ -1,6 +1,6 @@
 {
     "name": "GPL",
-    "version": "0.0.2",
+    "version": "0.0.4",
     "description": "GraVITas Premier League",
     "homepage": "http://gpl-dev.herokuapp.com/",
     "bugs": {
@@ -23,44 +23,24 @@
             "email": "singhal2.kashish@gmail.com"
         },
         {
-            "name": "Diksha Jain",
-            "email": ""
-        },
-        {
             "name": "Kunal Nagpal",
             "email": "kunagpal@gmail.com"
         },
         {
-            "name": "Tannika Aggarwal",
-            "email": ""
-        },
-        {
             "name": "Vikhyati Singh",
-            "email": ""
-        },
-        {
-            "name": "Amol Gautam",
-            "email": "amol_gautam25@hotmail.com"
+            "email": "vikhyati.jain2012@vit.ac.in"
         },
         {
             "name": "Ayush Agarwal",
-            "email": ""
+            "email": "agarwalayush161@gmail.com"
         },
         {
-            "name": "Mudit Saraf",
-            "email": ""
+            "name": "Karan Pittie",
+            "email": "karan.pittie2013@vit.ac.in"
         },
         {
             "name": "Shivam Mathur",
             "email": "burnualive@hotmail.com"
-        },
-        {
-            "name": "Somya Mehta",
-            "email": ""
-        },
-        {
-            "name": "Sukriti Sinha",
-            "email": "sukriti477@gmail.com"
         }
     ],
     "dependencies": {
@@ -74,7 +54,9 @@
         "mongodb": "~1.4.8",
         "bower": "~1.3.9",
         "async": "~0.9.0",
-        "bcrypt": "~0.8.0"
+        "bcrypt": "~0.8.0",
+        "node-logentries": "~0.1.4",
+        "newrelic": "~1.10.1"
     },
     "repository": {
         "type": "git",

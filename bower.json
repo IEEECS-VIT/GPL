@@ -1,11 +1,15 @@
 {
     "name": "GPL",
-    "version": "0.0.2",
+    "version": "0.0.4",
     "homepage": "https://github.com/IEEECS-VIT/GPL",
     "authors": [
-        "Ayush Agarwal <>",
-        "Shivam Mathur <burnualive@hotmail.com>",
-        "Aneesh Neelam <neelam.aneesh@gmail.com>"
+        "Aneesh Neelam <neelam.aneesh@gmail.com>",
+        "Kashish Singhal <singhal2.kashish@gmail.com>",
+        "Kunal Nagpal <kunagpal@gmail.com>",
+        "Vikhyati Jain <vikhyati.jain2012@vit.ac.in>",
+        "Karan Pittie <karan.pittie2013@vit.ac.in>",
+        "Ayush Agarwal <agarwalayush161@gmail.com>",
+        "Shivam Mathur <burnualive@hotmail.com>"
     ],
     "description": "GraVITas Premier League",
     "main": "bin/www",
@@ -30,6 +34,6 @@
         "tests"
     ],
     "dependencies": {
-        "foundation": "~5.3.3"
+        "foundation": "~5.4.0"
     }
 }
