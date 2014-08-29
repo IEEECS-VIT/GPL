@@ -59,7 +59,7 @@ exports.getPlayer = function(doc,callback)
         }
         else
         {
-            console.log(doc._id);
+            console.log(doc);
             var collection = db.collection('players');
             var onFetch = function(err,document)
             {
@@ -67,13 +67,17 @@ exports.getPlayer = function(doc,callback)
                 {
                     callback(err,null);
                 }
-                else
+                else if(document)
                 {
-                    console.log(document);
                     callback(null,document);
                 }
+                else
+                {
+                    callback(err,null);
+                }
+
             };
-            collection.findOne(doc,onFetch);
+            collection.find({_id:doc},onFetch);
         }
     };
     MongoClient.connect(mongoUri,onConnect);

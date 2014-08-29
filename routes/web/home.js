@@ -149,17 +149,20 @@ router.post('/getTeam',function(req,res)
             }
             else
             {
+                console.log(document.length);
                 cost=(cost-0)+(document.Cost-0);
+                console.log(cost);
+                console.log(document.Cost);
                 if(cost>10000000)
                 {
                     res.redirect('/players',{err:"Cost Exceeded"});
                 }
             }
         };
-        var credentials = {
-            '_id':element
-        };
-        mongoPlayers.getPlayer(credentials,onFetch)
+        /*var credentials = {
+            "_id":element
+        };*/
+        mongoPlayers.getPlayer(element,onFetch)
     };
     players.push(player1);
     players.push(player2);
