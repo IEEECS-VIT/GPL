@@ -58,17 +58,9 @@ function validator() {
     }
 
 
-    if (display == "Error:\n") {
-        document.getElementById("reg").action = "/register";
-        document.getElementById("reg").method = "post";
-
-        document.getElementById("reg").submit();
-
-
-    } else {
-        alert(display);
+    if (display.localeCompare("Error:\n") != 0) {
+        confirm(display);
         return false;
 
     }
-
 }
