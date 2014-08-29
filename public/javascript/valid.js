@@ -58,7 +58,7 @@ function validator() {
     }
 
 
-    if (display.localeCompare("Error:\n") == 0) {
+    if (display == "Error:\n") {
         document.getElementById("reg").action = "/register";
         document.getElementById("reg").method = "post";
 
