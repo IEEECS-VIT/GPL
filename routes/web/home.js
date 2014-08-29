@@ -35,17 +35,16 @@ router.get('/', function (req, res)
         };
         var onFetch = function (err, doc)
         {
+            //var getDetails = function(elt,index,array);
             if (err)
             {
                 res.redirect('/');
             }
-            else if (doc)
-            {
-                res.render('home', {name: doc['_id']}); // What else does home.ejs want?
-            }
             else
             {
-                res.redirect('/');
+              /*  var document = [];
+                document=doc.team;
+                document.forEach(getDetails);*/
             }
         };
         mongoUsers.fetch(credentials, onFetch);
@@ -108,24 +107,25 @@ router.get('/matches', function (req, res)
 
 router.post('/getTeam',function(req,res)
 {
-    var player1 = req.body.t1;
-    var player2 = req.body.t2;
-    var player3 = req.body.t3;
-    var player4 = req.body.t4;
-    var player5 = req.body.t5;
-    var player6 = req.body.t6;
-    var player7 = req.body.t7;
-    var player8 = req.body.t8;
-    var player9 = req.body.t9;
-    var player10 = req.body.t10;
-    var player11 = req.body.t11;
-    var player12 = req.body.t12;
-    var player13 = req.body.t13;
-    var player14 = req.body.t14;
-    var player15 = req.body.t15;
-    var player16 = req.body.t16;
+    var player1 = req.body.p1;
+    var player2 = req.body.p2;
+    var player3 = req.body.p3;
+    var player4 = req.body.p4;
+    var player5 = req.body.p5;
+    var player6 = req.body.p6;
+    var player7 = req.body.p7;
+    var player8 = req.body.p8;
+    var player9 = req.body.p9;
+    var player10 = req.body.p10;
+    var player11 = req.body.p11;
+    var player12 = req.body.p12;
+    var player13 = req.body.p13;
+    var player14 = req.body.p14;
+    var player15 = req.body.p15;
+    var player16 = req.body.p16;
 
     var players = [],cost=0;
+
     var onUpdate = function(err,documents)
     {
         if(err)
@@ -134,7 +134,7 @@ router.post('/getTeam',function(req,res)
         }
         else
         {
-            res.render('home');
+            res.redirect('/home');
         }
 
     };
@@ -177,6 +177,7 @@ router.post('/getTeam',function(req,res)
     players.push(player14);
     players.push(player15);
     players.push(player16);
+
 
 
     players.forEach(getCost);
