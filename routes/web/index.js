@@ -138,6 +138,7 @@ router.post('/register', function (req, res)
     var managerName = req.body.manager_name;
     var email = req.body.email;
     var phone = req.body.phone;
+    console.log("Reached");
 
     if (password === confirmPassword)
     {
@@ -179,6 +180,7 @@ router.post('/register', function (req, res)
     }
     else
     {
+        console.log("Incorrect Password");
         res.redirect('/register');
     }
 });
