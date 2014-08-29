@@ -72,10 +72,10 @@ router.get('/squad', function (req, res) // page to view the 16 player squad of 
 
 router.get('/team', function (req, res) // view the assigned playing 11 with options to change the playing 11
 {
-    if (req.cookies.name)                           // if cookies exists then access the database
+    if (req.signedCookies.name)                           // if cookies exists then access the database
     {
-        var teamName = req.cookies.name;
-        teamName = "kashish_94";
+        var teamName = req.signedCookies.name;
+
         var credentials =
         {
             '_id': teamName

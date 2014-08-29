@@ -96,6 +96,7 @@ router.get('/matches', function (req, res)
 
         };
         async.parallel(parallel_tasks, onFinish);
+        res.render('matches',response);
 
 
     }
@@ -105,7 +106,91 @@ router.get('/matches', function (req, res)
     }
 });
 
+router.post('/getTeam',function(req,res)
+{
+    var player1 = req.body.t1;
+    var player2 = req.body.t2;
+    var player3 = req.body.t3;
+    var player4 = req.body.t4;
+    var player5 = req.body.t5;
+    var player6 = req.body.t6;
+    var player7 = req.body.t7;
+    var player8 = req.body.t8;
+    var player9 = req.body.t9;
+    var player10 = req.body.t10;
+    var player11 = req.body.t11;
+    var player12 = req.body.t12;
+    var player13 = req.body.t13;
+    var player14 = req.body.t14;
+    var player15 = req.body.t15;
+    var player16 = req.body.t16;
 
+    var players = [],cost=0;
+    var onUpdate = function(err,documents)
+    {
+        if(err)
+        {
+            // do something with the error
+        }
+        else
+        {
+            res.render('home');
+        }
+
+    };
+
+    var getCost = function(element,index,array)
+    {
+        var onFetch = function(err,document)
+        {
+            if(err)
+            {
+                //do something with the error
+            }
+            else
+            {
+                cost=(cost-0)+(document.Cost-0);
+                if(cost>10000000)
+                {
+                    res.redirect('/players',{err:"Cost Exceeded"});
+                }
+            }
+        };
+        var credentials = {
+            '_id':element
+        };
+        mongoPlayers.getPlayer(credentials,onFetch)
+    };
+    players.push(player1);
+    players.push(player2);
+    players.push(player3);
+    players.push(player4);
+    players.push(player5);
+    players.push(player6);
+    players.push(player7);
+    players.push(player8);
+    players.push(player9);
+    players.push(player10);
+    players.push(player11);
+    players.push(player12);
+    players.push(player13);
+    players.push(player14);
+    players.push(player15);
+    players.push(player16);
+
+
+    players.forEach(getCost);
+
+
+    var teamName = req.signedCookies.name;
+    var credentials = {
+        '_id' : teamName
+    };
+
+    mongoUsers.updateUser(credentials,players,onUpdate);
+
+
+});
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
     var onFetch = function (err, documents)
@@ -124,6 +209,8 @@ router.get('/players', function (req, res) // page for all players, only availab
     };
     mongoPlayers.fetchPlayers(onFetch);
 });
+
+
 
 router.get('/team', function (req, res) // view the assigned playing 11 with options to change the playing 11
 {
@@ -154,5 +241,4 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
         res.redirect('/');
     }
 });
-
 module.exports = router;
