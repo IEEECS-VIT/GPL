@@ -21,8 +21,8 @@ var MongoClient = require('mongodb').MongoClient;
 var today = new Date();
 var dateMatchDay;
 
-var delivery_score, batsman_performance_index, current_bowler, bowler_performance_index, previous_bowler, toss, i, j, strike_index, continuous_maximums, fall_of_wicket, winner_index;
-var commentary = '', dismissed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], five_wicket_haul = [0, 0, 0, 0, 0, 0], free_hit = 0, previous_partnership_index = -1, current_partnership_index = 0, partnership_balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], partnership_runs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], continuous_wickets = [0, 0, 0, 0, 0, 0], milestone = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], previous_dismissal = -1, extras = 0, maidens = [0, 0, 0, 0, 0, 0], previous_batsman = -1, score = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], maximums = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], strike = [0, 1], deliveries = [0, 0, 0, 0, 0, 0], runs_conceded = [0, 0, 0, 0, 0, 0], wickets_taken = [0, 0, 0, 0, 0, 0], Total = 0, Total2 = 0, previous_over = 0, wickets1 = 0, wickets2 = 0, Balls1 = 0, Balls2 = 0;
+var index= 0,toss_state,delivery_score, batsman_performance_index, current_bowler, bowler_performance_index, previous_bowler, toss, i, j, strike_index, continuous_maximums, fall_of_wicket, winner_index;
+var commentary = '', dismissed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], five_wicket_haul = [0, 0, 0, 0, 0, 0], free_hit = 0, previous_partnership_index = -1, current_partnership_index = 0, partnership_balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], partnership_runs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], continuous_wickets = [0, 0, 0, 0, 0, 0], milestone = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], previous_dismissal = -1, extras = 0, maidens = [0, 0, 0, 0, 0, 0], previous_batsman = -1, score = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], maximums = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], strike = [0, 1], deliveries = [0, 0, 0, 0, 0, 0], runs_conceded = [0, 0, 0, 0, 0, 0], wickets_taken = [0, 0, 0, 0, 0, 0], Total = [0,0], previous_over = 0, wickets = [0,0], Overs = [0,0];
 
 exports.todaysMatches = function (callback)
 {
@@ -86,7 +86,7 @@ exports.team = function (elt, team1, team2)
 };
 
 function make(team){
-    Balls1 = Balls2 = 0;
+    Overs[0] = Overs[1] = 0;
     this.bat_rating = [];
     this.bat_average = [];
     this.bat_strike_rate = [];
@@ -103,16 +103,16 @@ function make(team){
         this.bowl_average[i] = team.bowl_average[i];//rand() % 16 + 15;
         this.bowl_strike_rate[i] = team.bowl_strike_rate[i];//rand() % 16 + 15;
         this.bat_rating[i] = team.bat_rating[i];//rand() % 201 + 700;
-        Balls1 += this.bat_rating[i] / 11;
+        Overs[0] += this.bat_rating[i] / 11;
         this.bat_average[i] = team.bat_average[i];//rand() % 41 + 2 * (5 - i / 2);
         this.partnership_runs[i] = team.bat_average[i];//rand() % 51 + 100;
         this.bowler_rating[i] = team.bowler_rating[i];//rand() % 201 + 700;
-        Balls2 += this.bowler_rating[i] / 6;
+        Overs[1] += this.bowler_rating[i] / 6;
     }
     for (i = 6; i < 11; ++i)
     {
         this.bat_rating[i] = 900 - this.bowler_rating[i - 6];
-        Balls1 += this.bat_rating[i] / 11;
+        Overs[0] += this.bat_rating[i] / 11;
         this.bat_average[i] = team.bat_average[i];//rand() % 21 + 2 * (5 - i / 2);
         this.bat_strike_rate[i] = team.bat_strike_rate[i];//rand() % 51 + 100;
     }
@@ -120,83 +120,135 @@ function make(team){
     {
         if (i < 6)
         {
-            this.bowler_rating[i] += this.bowler_rating[i] / 5 - Balls2 / 5 + this.coach;
+            this.bowler_rating[i] += this.bowler_rating[i] / 5 - Overs[1] / 5 + this.coach;
         }
-        this.bat_rating[i] += this.bat_rating[i] / 10 - Balls1 / 10 + this.coach;
+        this.bat_rating[i] += this.bat_rating[i] / 10 - Overs[0] / 10 + this.coach;
     }
 }
 
 {
-    /*console.log("\n Team:", "1", "2\n", "Coach:", team_object[0].coach, team_object[1].coach);
-    console.log("\nBatsmen:   ");
-    for (i = 0; i < 6; ++i)
+    function comment()
     {
-        console.log(team_object[0].runs_conceded[i], " ");
+        commentary += '\nScorecard:\n\tRuns Balls Strike Rate Fours Sixes \n';//console.log("\nScorecard:\n\tRuns Balls Strike Rate Fours Sixes \n");
+        for (i = 0; i < 11; ++i)
+        {
+            if (!balls[i])
+            {
+                commentary += '\tDNB\n';
+            }//console.log("\tDNB\n");
+            else
+            {
+                commentary += score[i] + ' ' + balls[i] + ' ' + score[i] * 100 / balls[i] + ' ' + fours[i] + ' ' + maximums[i];//console.log(score[i], balls[i], score[i] * 100 / balls[i], fours[i], maximums[i]);
+                if (!dismissed[i]) commentary += '  (not out)';//console.log("  (not out)");
+            }
+            if (i < 10)
+            {
+                partnership_runs[i] = partnership_balls[i] = 0;
+            }
+            balls[i] = fours[i] = maximums[i] = dismissed[i] = milestone[i] = score[i] = balls[i] = fours[i] = maximums[i] = 0;
+        }
+        commentary += 'Total: ' + Total[index] + ' / ' + wickets[index] + ' (' + parseInt(Overs[index] / 6) + '.' + Overs[index] % 6 + ' overs)\tRunrate: ' + Total[index] * 6 / Overs[index] + '\nExtras: ' + extras + '\n\nBowling Statistics:\n\nBowler Overs Maidens Wickets Runs conceded Economy\n\n';//console.log("Total[0]: ", Total[0], " / ", wickets1, " (", parseInt(Overs[0] / 6) + "." + Overs[0] % 6, " overs)\tRunrate: ", Total[0] * 6 / Overs[0], "\nExtras: ", extras, "\n\nBowling Statistics:\n\nBowler Overs Maidens Wickets Runs conceded Economy\n\n");
+        for (i = 0; i < 6; i++)
+        {
+            commentary += (i + 1) + ' ' + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + runs_conceded[i] * 6 / deliveries[i];//console.log(i + 1, parseInt(deliveries[i] / 6) + "." + deliveries[i] % 6, maidens[i], wickets_taken[i], runs_conceded[i], runs_conceded[i] * 6 / deliveries[i]);
+            five_wicket_haul[i] = continuous_wickets[i] = deliveries[i] = maidens[i] = runs_conceded[i] = wickets_taken[i] = 0;
+        }
+        commentary += 'Dot ball percentage: ' + dot * 100 / Overs[index] + ' %';//console.log("Dot ball percentage: ", dot * 100 / Overs[0], " %");
+        extras = strike_index = free_hit = current_partnership_index = Total[index]= dot = previous_bowler = 0;
+        previous_batsman = previous_partnership_index = -1;
+        commentary+='\n\n\n';
     }
-    for (i = 0; i < 6; ++i)
+
+    function post_over()
     {
-        console.log(team_object[1].runs_conceded[i], " ");
+       if (deliveries[current_bowler] == 24) commentary += 'And that brings an end to Bowler ' + (current_bowler + 1) + '\'score spell.\n\n';//console.log("And that brings an end to Bowler ", current_bowler + 1, "'score spell.\n\n");
+        for (j = 0; j < 6; ++j)
+        {
+            if (deliveries[j] <= 18 && j != previous_bowler)
+            {
+                delivery_score = j;
+                break;
+            }
+        }
+        current_bowler = delivery_score;
+        for (j = delivery_score + 1; j < 6; ++j)
+        {
+            if (deliveries[j] <= 18 && team_object[+!toss_state].bowler_rating[j] > team_object[+!toss_state].bowler_rating[current_bowler] && j != previous_bowler) current_bowler = j;
+        }
+        previous_bowler = current_bowler;
+
     }
-    console.log("\nAverage:   ");
-    for (i = 0; i < 6; ++i)
+
+    function score_runs()
     {
-        console.log(team_object[0].bat_average[i], "  ");
+
+        delivery_score = parseInt(batsman_performance_index);
+        if (delivery_score < 0) delivery_score = 0;
+        continuous_wickets[current_bowler] = 0;
+        if (delivery_score > 6)
+        {
+            if (rand() % 2)
+            {
+                commentary += ' wide, ' + com.wide[rand() % com.wide.length];//console.log(" wide, ");
+            }
+            else
+            {
+                commentary += com.freehit[rand() % com.freehit.length];//console.log("No ball. An overstep was the last thing the bowling side needed...\n");
+                free_hit = 1;
+            }
+            --j;
+            ++extras;
+            --partnership_balls[current_partnership_index];
+            ++partnership_runs[current_partnership_index];
+            --balls[strike[+strike_index]];
+            --deliveries[current_bowler];
+            ++Total[index];
+        }
+        else
+        {
+            if (free_hit) free_hit = 0;
+            switch (delivery_score)
+            {
+                case 0:
+                    commentary += 'no run, ' + com.dot[rand() % com.dot.length];//console.log(" no run");
+                    //console.log(com.dot[rand()%com.dot.length]);
+                    ++dot;
+                    break;
+                case 5:
+                    delivery_score -= 1;
+                case 4:
+                    commentary += 'FOUR, ' + com.four[rand() % com.four.length];//console.log("FOUR");
+                    //console.log(com.four[rand()%com.four.length]);
+                    ++fours[strike[+strike_index]];
+                    break;
+                case 6:
+                    commentary += 'SIX, ' + com.six[rand() % com.six.length];//console.log("SIX");
+                    //console.log(com.six[rand()%com.six.length]);
+                    ++maximums[strike[+strike_index]];
+                    ++continuous_maximums;
+                    break;
+                case 1:
+                    commentary += '1 run, ' + com.one[rand() % com.one.length];
+                    break;
+                case 2:
+                    commentary += '2 runs, ' + com.two[rand() % com.two.length];
+                    break;
+                case 3:
+                    commentary += '3 runs, ' + com.three[rand() % com.three.length];
+                    break;
+                default:
+                    break;
+            }
+            if (delivery_score != 6) continuous_maximums = 0;
+            previous_over += delivery_score;
+            score[strike[+strike_index]] += delivery_score;
+            Total[index] += delivery_score;
+            partnership_runs[current_partnership_index] += delivery_score;
+
+        }
     }
-    console.log("\strike_index\strike_index");
-    for (i = 0; i < 6; ++i) console.log(team_object[1].bat_average[i], " ");
-    console.log("\nStrikerate:");
-    for (i = 0; i < 6; ++i)
-    {
-        console.log(team_object[0].partnership_runs[i], "  ");
-    }
-    console.log("\strike_index\strike_index");
-    for (i = 0; i < 6; ++i)
-    {
-        console.log(team_object[1].partnership_runs[i], " ");
-    }
-    console.log("\n\nBowlers:   ");
-    for (i = 0; i < 6; ++i)
-    {
-        console.log(team_object[0].bowler_rating[i], " ");
-    }
-    console.log("\strike_index");
-    for (i = 0; i < 6; ++i)
-    {
-        console.log(team_object[1].bowler_rating[i], " ");
-    }
-    console.log("\nAverage: ");
-    for (i = 0; i < 6; ++i)
-    {
-        console.log(team_object[0].bowl_average[i], " ");
-    }
-    console.log("\strike_index");
-    for (i = 0; i < 6; ++i)
-    {
-        console.log(team_object[1].bowl_average[i], " ");
-    }
-    console.log("\nStrike Rate: ");
-    for (i = 0; i < 6; ++i)
-    {
-        console.log(team_object[0].bowl_strike_rate[i], " ");
-    }
-    console.log("\strike_index");
-    for (i = 0; i < 6; ++i)
-    {
-        console.log(team_object[1].bowl_strike_rate[i], " ");
-    }
-    console.log("\nEconomy: ");
-    for (i = 0; i < 6; ++i)
-    {
-        console.log(team_object[0].economy[i], " ");
-    }
-    console.log("\strike_index");
-    for (i = 0; i < 6; ++i)
-    {
-        console.log(team_object[1].economy[i], " ");
-    }
-    */
-    Balls1 = Balls2 = 120;
-    Total = Total2 = 0;
+    Overs[0] = Overs[1] = 120;
+    Total[0] = Total[1] = 0;
     //console.log("\n", "Team ");
     if (rand() % 2)
     {
@@ -220,9 +272,10 @@ function make(team){
     }
     commentary += 'first\n\n';
     wickets1 = wickets2 = strike_index = previous_bowler = 0;
+    toss_state=toss;
     for (i = 1; i < 6; ++i)
     {
-        if (team_object[+toss].bowler_rating[i] > team_object[+toss].bowler_rating[previous_bowler])
+        if (team_object[+toss_state].bowler_rating[i] > team_object[+toss_state].bowler_rating[previous_bowler])
         {
             previous_bowler = i;
         }
@@ -230,7 +283,7 @@ function make(team){
     current_bowler = previous_bowler;
     commentary += '\nBowler ' + (previous_bowler + 1) + ' to start proceedings from the pavillion end.....\n\n'; //console.log("\nBowler ", previous_bowler + 1, " to start proceedings from the pavillion end.....\n\n");
     dot = 0;
-    for (i = 0; i < 20 && wickets1 < 10; ++i)
+    for (i = 0; i < 20 && wickets[0] < 10; ++i)
     {
         previous_over = continuous_maximums = 0;
         if (deliveries[current_bowler] == 18)
@@ -309,7 +362,7 @@ function make(team){
                         partnership_runs[current_partnership_index] += delivery_score;
                         score[strike[+strike_index]] += delivery_score;
                         previous_over += delivery_score;
-                        Total += delivery_score;
+                        Total[0] += delivery_score;
 
                     }
                     if (rand() % 2)
@@ -355,9 +408,9 @@ function make(team){
                     strike_index = !strike_index;
                     commentary += '\nThe two batsmen crossed over while the catch was being taken.';//console.log("\nThe two batsmen crossed over while the catch was being taken.");
                 }
-                if (wickets1++ == 9)
+                if (wickets[0]++ == 9)
                 {
-                    Balls1 = 6 * i + j;
+                    Overs[0] = 6 * i + j;
                     commentary += '\nAnd that wraps up the innings.\n';//console.log("\nAnd that wraps up the innings.\n");
                     break;
                 }
@@ -367,73 +420,11 @@ function make(team){
                     j = 0;
                     ++batsman_performance_index;
                 }
-                fall_of_wicket = Total + ' / ' + wickets1 + ', ' + batsman_performance_index + '.' + j;
+                fall_of_wicket = Total[0] + ' / ' + wickets[0] + ', ' + batsman_performance_index + '.' + j;
             }
             else
             {
-                delivery_score = parseInt(batsman_performance_index);
-                if (delivery_score < 0) delivery_score = 0;
-                continuous_wickets[current_bowler] = 0;
-                if (delivery_score > 6)
-                {
-                    if (rand() % 2)
-                    {
-                        commentary += '  wide, ' + com.wide[rand() % com.wide.length];//console.log(" wide, ");
-                        //console.log(com.wide[rand()%com.wide.length]);
-                    }
-                    else
-                    {
-                        commentary += com.freehit[rand() % com.freehit.length];//console.log(com.freehit[rand()%com.freehit.length]);
-                        free_hit = 1;
-                    }
-                    --j;
-                    ++extras;
-                    --partnership_balls[current_partnership_index];
-                    ++partnership_runs[current_partnership_index];
-                    --balls[strike[+strike_index]];
-                    --deliveries[current_bowler];
-                    ++Total;
-                }
-                else
-                {
-                    if (free_hit) free_hit = 0;
-                    switch (delivery_score)
-                    {
-                        case 0:
-                            commentary += ' no run' + com.dot[rand() % com.dot.length];//console.log(" no run");
-                            //console.log(com.dot[rand()%com.dot.length]);
-                            ++dot;
-                            break;
-                        case 5:
-                            delivery_score -= 1;
-                        case 4:
-                            commentary += 'FOUR, ' + com.four[rand() % com.four.length];//console.log("FOUR");
-                            //console.log(com.four[rand()%com.four.length]);
-                            ++fours[strike[+strike_index]];
-                            break;
-                        case 6:
-                            commentary += 'SIX, ' + com.six[rand() % com.six.length];//console.log("SIX");
-                            //console.log(com.six[rand()%com.six.length]);
-                            ++maximums[strike[+strike_index]];
-                            ++continuous_maximums;
-                            break;
-                        case 1:
-                            commentary += '1 run, ' + com.one[rand() % com.one.length];
-                            break;
-                        case 2:
-                            commentary += '2 runs, ' + com.two[rand() % com.two.length];
-                            break;
-                        case 3:
-                            commentary += '3 runs, ' + com.three[rand() % com.three.length];
-                            break;
-                        default:
-                            break;
-                    }
-                    if (delivery_score != 6) continuous_maximums = 0;
-                    previous_over += delivery_score;
-                    score[strike[+strike_index]] += delivery_score;
-                    Total += delivery_score;
-                    partnership_runs[current_partnership_index] += delivery_score;
+                score_runs();
                     if (!milestone[strike[+strike_index]] && score[strike[+strike_index]] >= 50)
                     {
                         ++milestone[strike[+strike_index]];
@@ -442,12 +433,11 @@ function make(team){
                     else if (milestone[strike[+strike_index]] == 1 && score[strike[+strike_index]] >= 100)
                     {
                         ++milestone[strike[+strike_index]];
-                        commentary += ' what bat_average wonderful way to bring up his century.';//console.log(" what bat_average wonderful way to bring up his century.");
+                        commentary += ' what a wonderful way to bring up his century.';//console.log(" what a wonderful way to bring up his century.");
                     }
                     if (delivery_score % 2) strike_index = !strike_index;
                 }
             }
-        }
         if (continuous_maximums == 6) commentary += '\nSix G.P.L maximums in the previous over ! What an effort by Batsman.' + (strike[+strike_index] + 1) + '. The crowd is ecstatic, Bowler ' + (current_bowler + 1) + ' is absolutely flabbergasted.\n';//console.log("\nSix G.P.L maximums in the previous over ! What an effort by Batsman.", strike[+strike_index], ". The crowd is ecstatic, Bowler ", current_bowler, " is absolutely flabbergasted.\n");
         runs_conceded[current_bowler] += previous_over;
         strike_index = !strike_index;
@@ -461,7 +451,7 @@ function make(team){
             if (j == 7) commentary += 'maiden';//console.log("maiden");
             maidens[current_bowler] += 1;
         }
-        commentary += '\n Current score: ' + Total + ' / ' + wickets1 + '\tRunrate: ' + Total / (i + 1);//console.log("\n Current score: ", Total, " / ", wickets1, "\tRunrate: ", Total / (i + 1));
+        commentary += '\n Current score: ' + Total[0] + ' / ' + wickets1 + '\tRunrate: ' + Total[0] / (i + 1);//console.log("\n Current score: ", Total[0], " / ", wickets1, "\tRunrate: ", Total[0] / (i + 1));
         if (strike[+strike_index] < 11) commentary += 'Batsman: ' + (strike[+strike_index] + 1) + ' : ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ') ';//console.log("Batsman: ", strike[+strike_index] + 1, " : ", score[strike[+strike_index]], " (", balls[strike[+strike_index]], ") ");
         if (strike[+!strike_index] < 11) commentary += 'Batsman: ' + (strike[+!strike_index] + 1) + ' : ' + score[strike[+!strike_index]] + ' (' + balls[strike[+!strike_index]] + ')\nPartnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + ')+ runrate: ' + partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index];//console.log("Batsman: ", strike[+!strike_index] + 1, " : ", score[strike[+!strike_index]], " (", balls[strike[+!strike_index]], ")\nPartnership: ", partnership_runs[current_partnership_index], "(", partnership_balls[current_partnership_index], "), runrate: ", partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index]);
         if (previous_batsman > -1)
@@ -479,51 +469,14 @@ function make(team){
             //console.log("Fall of wicket: ",fall_of_wicket);
         }
         commentary += '\nBowler ' + ( current_bowler + 1) + ': ' + deliveries[current_bowler] / 6 + '.' + deliveries[current_bowler] % 6 + '-' + maidens[current_bowler] + '-' + wickets_taken[current_bowler] + '-' + runs_conceded[current_bowler] * 6 / deliveries[current_bowler] + '\n\n';//console.log("\nBowler ", current_bowler + 1, ": ", deliveries[current_bowler] / 6 + "." + deliveries[current_bowler] % 6, "-", maidens[current_bowler], "-", wickets_taken[current_bowler], "-", runs_conceded[current_bowler] * 6 / deliveries[current_bowler], "\n\n");
-        if (deliveries[current_bowler] == 24) commentary += 'And that brings an end to Bowler ' + (current_bowler + 1) + '\'score spell.\n\n'; //console.log("And that brings an end to Bowler ", current_bowler + 1, "'score spell.\n\n");
-        for (j = 0; j < 6; ++j)
-        {
-            if (deliveries[j] <= 18 && j != previous_bowler)
-            {
-                delivery_score = j;
-                break;
-            }
-        }
-        current_bowler = delivery_score;
-        for (j = delivery_score + 1; j < 6; ++j)
-        {
-            if (deliveries[j] <= 18 && team_object[+toss].bowler_rating[j] > team_object[+toss].bowler_rating[current_bowler] && j != previous_bowler) current_bowler = j;
-        }
-        previous_bowler = current_bowler;
+        post_over();
+    }
+
     }
     strike = [0, 1];
-    commentary += '\nScorecard:\n\tRuns Balls Strike Rate Fours Sixes \n';//console.log("\nScorecard:\n\tRuns Balls Strike Rate Fours Sixes \n");
-    for (i = 0; i < 11; ++i)
-    {
-        if (!balls[i])
-        {
-            commentary += '\tDNB\n';
-        }//console.log("\tDNB\n");
-        else
-        {
-            commentary += score[i] + ' ' + balls[i] + ' ' + score[i] * 100 / balls[i] + ' ' + fours[i] + ' ' + maximums[i];//console.log(score[i], balls[i], score[i] * 100 / balls[i], fours[i], maximums[i]);
-            if (!dismissed[i]) commentary += '  (not out)';//console.log("  (not out)");
-        }
-        if (i < 10)
-        {
-            partnership_runs[i] = partnership_balls[i] = 0;
-        }
-        balls[i] = fours[i] = maximums[i] = dismissed[i] = milestone[i] = score[i] = balls[i] = fours[i] = maximums[i] = 0;
-    }
-    commentary += 'Total: ' + Total + ' / ' + wickets1 + ' (' + parseInt(Balls1 / 6) + '.' + Balls1 % 6 + ' overs)\tRunrate: ' + Total * 6 / Balls1 + '\nExtras: ' + extras + '\n\nBowling Statistics:\n\nBowler Overs Maidens Wickets Runs conceded Economy\n\n';//console.log("Total: ", Total, " / ", wickets1, " (", parseInt(Balls1 / 6) + "." + Balls1 % 6, " overs)\tRunrate: ", Total * 6 / Balls1, "\nExtras: ", extras, "\n\nBowling Statistics:\n\nBowler Overs Maidens Wickets Runs conceded Economy\n\n");
-    for (i = 0; i < 6; i++)
-    {
-        commentary += (i + 1) + ' ' + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + runs_conceded[i] * 6 / deliveries[i];//console.log(i + 1, parseInt(deliveries[i] / 6) + "." + deliveries[i] % 6, maidens[i], wickets_taken[i], runs_conceded[i], runs_conceded[i] * 6 / deliveries[i]);
-        five_wicket_haul[i] = continuous_wickets[i] = deliveries[i] = maidens[i] = runs_conceded[i] = wickets_taken[i] = 0;
-    }
-    commentary += 'Dot ball percentage: ' + dot * 100 / Balls1 + ' %';//console.log("Dot ball percentage: ", dot * 100 / Balls1, " %");
-    extras = strike_index = free_hit = current_partnership_index = Total2 = dot = previous_bowler = 0;
-    previous_batsman = previous_partnership_index = -1;
-    commentary+='\n\n\n';
+    comment();
+    index=1;
+    toss_state=!toss_state;
     //console.log(commentary);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     for (i = 1; i < 6; i++)
@@ -536,7 +489,7 @@ function make(team){
     current_bowler = previous_bowler;
     commentary += '\nBowler ' + (previous_bowler + 1) + ' to start proceedings from the pavillion end.....\n\n';//console.log("\nBowler ", previous_bowler + 1, " to start proceedings from the pavillion end.....\n\n");
     dot = 0;
-    for (i = 0; i < 20 && (wickets2 < 10 && Total <= Total); ++i)
+    for (i = 0; i < 20 && (wickets[1] < 10 && Total[0] <= Total[1]); ++i)
     {
         previous_over = continuous_maximums = 0;
         if (deliveries[current_bowler] == 18)
@@ -615,7 +568,7 @@ function make(team){
                         partnership_runs[current_partnership_index] += delivery_score;
                         score[strike[+strike_index]] += delivery_score;
                         previous_over += delivery_score;
-                        Total2 += delivery_score;
+                        Total[1] += delivery_score;
                     }
                     if (rand() % 2)
                     {
@@ -625,12 +578,12 @@ function make(team){
                     previous_dismissal = -1;
                     continuous_wickets[current_bowler] = 0;
                     --wickets_taken[current_bowler];
-                    if (Total2 > Total)
+                    if (Total[1] > Total[0])
                     {
                         commentary += '\nWhat an emphatic victory ! ';//console.log("What an emphatic victory ! ");
                         break;
                     }
-                    else if (Total2 == Total) commentary += 'Scores are level...';//console.log("Scores are level...");
+                    else if (Total[1] == Total[0]) commentary += 'Scores are level...';//console.log("Scores are level...");
                 }
                 if (balls[strike[+strike_index]] == 1) commentary += ' first ball ';//console.log(" first ball ");
                 if (!score[strike[+strike_index]]) commentary += 'for bat_average duck !';//console.log("for bat_average duck !");
@@ -668,7 +621,7 @@ function make(team){
                 }
                 if (wickets2++ == 9)
                 {
-                    Balls2 = 6 * i + j;
+                    Overs[1] = 6 * i + j;
                     commentary += '\nAnd that wraps up the innings.\n';//console.log("\nAnd that wraps up the innings.\n");
                     break;
                 }
@@ -678,80 +631,19 @@ function make(team){
                     j = 0;
                     ++batsman_performance_index;
                 }
-                fall_of_wicket = Total2 + ' / ' + wickets2 + ', ' + batsman_performance_index + '.' + j;
+                fall_of_wicket = Total[1] + ' / ' + wickets2 + ', ' + batsman_performance_index + '.' + j;
             }
             else
             {
-                delivery_score = parseInt(batsman_performance_index);
-                if (delivery_score < 0) delivery_score = 0;
-                continuous_wickets[current_bowler] = 0;
-                if (delivery_score > 6)
-                {
-                    if (rand() % 2)
-                    {
-                        commentary += ' wide, ' + com.wide[rand() % com.wide.length];//console.log(" wide, ");
-                    }
-                    else
-                    {
-                        commentary += com.freehit[rand() % com.freehit.length];//console.log("No ball. An overstep was the last thing the bowling side needed...\n");
-                        free_hit = 1;
-                    }
-                    --j;
-                    ++extras;
-                    --partnership_balls[current_partnership_index];
-                    ++partnership_runs[current_partnership_index];
-                    --balls[strike[+strike_index]];
-                    --deliveries[current_bowler];
-                    ++Total2;
-                }
-                else
-                {
-                    if (free_hit) free_hit = 0;
-                    switch (delivery_score)
-                    {
-                        case 0:
-                            commentary += 'no run, ' + com.dot[rand() % com.dot.length];//console.log(" no run");
-                            //console.log(com.dot[rand()%com.dot.length]);
-                            ++dot;
-                            break;
-                        case 5:
-                            delivery_score -= 1;
-                        case 4:
-                            commentary += 'FOUR, ' + com.four[rand() % com.four.length];//console.log("FOUR");
-                            //console.log(com.four[rand()%com.four.length]);
-                            ++fours[strike[+strike_index]];
-                            break;
-                        case 6:
-                            commentary += 'SIX, ' + com.six[rand() % com.six.length];//console.log("SIX");
-                            //console.log(com.six[rand()%com.six.length]);
-                            ++maximums[strike[+strike_index]];
-                            ++continuous_maximums;
-                            break;
-                        case 1:
-                            commentary += '1 run, ' + com.one[rand() % com.one.length];
-                            break;
-                        case 2:
-                            commentary += '2 runs, ' + com.two[rand() % com.two.length];
-                            break;
-                        case 3:
-                            commentary += '3 runs, ' + com.three[rand() % com.three.length];
-                            break;
-                        default:
-                            break;
-                    }
-                    if (delivery_score != 6) continuous_maximums = 0;
-                    previous_over += delivery_score;
-                    score[strike[+strike_index]] += delivery_score;
-                    Total2 += delivery_score;
-                    partnership_runs[current_partnership_index] += delivery_score;
-                    if (Total2 == Total)
+                score_runs();
+                    if (Total[1] == Total[0])
                     {
                         commentary += '\nScores are level now...\n';
                     }//console.log("\nScores are level now...\n");
-                    else if (Total2 > Total)
+                    else if (Total[1] > Total[0])
                     {
                         commentary += '\nAnd they have done it! What an emphatic victory !\n';//console.log("\nAnd they have done it! What an emphatic victory !\n");
-                        Balls2 = 6 * i + j;
+                        Overs[1] = 6 * i + j;
                         break;
                     }
                     if (!milestone[strike[+strike_index]] && score[strike[+strike_index]] >= 50)
@@ -762,12 +654,12 @@ function make(team){
                     else if (milestone[strike[+strike_index]] == 1 && score[strike[+strike_index]] >= 100)
                     {
                         ++milestone[strike[+strike_index]];
-                        commentary += ' what bat_average wonderful way to bring up his century.';//console.log(" what bat_average wonderful way to bring up his century.");
+                        commentary += ' what a wonderful way to bring up his century.';//console.log(" what bat_average wonderful way to bring up his century.");
                     }
                     if (delivery_score % 2) strike_index = !strike_index;
                 }
             }
-        }
+
         if (continuous_maximums == 6) commentary += '\nSix G.P.L maximums in the previous over ! What an effort by Batsman.' + (strike[+strike_index] + 1) + '. The crowd is ecstatic, Bowler ' + ( current_bowler + 1) + ' is absolutely flabbergasted.\n';//console.log("\nSix G.P.L maximums in the previous over ! What an effort by Batsman.", strike[+strike_index], ". The crowd is ecstatic, Bowler ", current_bowler, " is absolutely flabbergasted.\n");
         runs_conceded[current_bowler] += previous_over;
         strike_index = !strike_index;
@@ -781,9 +673,9 @@ function make(team){
             if (j == 7) commentary += 'maiden';//console.log("maiden");
             maidens[current_bowler] += 1;
         }
-        commentary += '\n Current score: ' + Total2 + ' / ' + wickets2 + '\tRunrate: ' + Total2 / (i + 1);//console.log("\n Current score: ", Total2, " / ", wickets2, "\tRunrate: ", Total2 / (i + 1));
-        if (Total2 > Total) break;
-        commentary += ', RRR: ' + (Total + 1 - Total2) / (19 - i) + '\n Equation: ' + (Total + 1 - Total2) + ' runs needed from ' + 114 - 6 * i + ' balls.\n';//console.log(", RRR: ", (Total + 1 - Total2) / (19 - i), "\n Equation: ", (Total + 1 - Total2), " runs needed from ", 114 - 6 * i, " balls.\n");
+        commentary += '\n Current score: ' + Total[1] + ' / ' + wickets2 + '\tRunrate: ' + Total[1] / (i + 1);//console.log("\n Current score: ", Total[1], " / ", wickets2, "\tRunrate: ", Total[1] / (i + 1));
+        if (Total[1] > Total[0]) break;
+        commentary += ', RRR: ' + (Total[0] + 1 - Total[1]) / (19 - i) + '\n Equation: ' + (Total[0] + 1 - Total[1]) + ' runs needed from ' + 114 - 6 * i + ' balls.\n';//console.log(", RRR: ", (Total[0] + 1 - Total[1]) / (19 - i), "\n Equation: ", (Total[0] + 1 - Total[1]), " runs needed from ", 114 - 6 * i, " balls.\n");
         if (strike[+strike_index] < 11) commentary += 'Batsman: ' + (strike[+strike_index] + 1) + ' : ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ') ';//console.log("Batsman: ", strike[+strike_index] + 1, " : ", score[strike[+strike_index]], " (", balls[strike[+strike_index]], ") ");
         if (strike[+!strike_index] < 11) commentary += 'Batsman: ' + (strike[+!strike_index] + 1) + ' : ' + score[strike[+!strike_index]] + ' (' + balls[strike[+!strike_index]] + ')\nPartnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + '), runrate: ' + partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index];//console.log("Batsman: ", strike[+!strike_index] + 1, " : ", score[strike[+!strike_index]], " (", balls[strike[+!strike_index]], ")\nPartnership: ", partnership_runs[current_partnership_index], "(", partnership_balls[current_partnership_index], "), runrate: ", partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index]);
         if (previous_batsman > -1)
@@ -800,54 +692,17 @@ function make(team){
             commentary += '\nPartnership: ' + partnership_runs[previous_partnership_index] + '(' + partnership_balls[previous_partnership_index] + '), runrate: ' + partnership_runs[previous_partnership_index] * 6 / partnership_balls[previous_partnership_index];//console.log("\nPartnership: ", partnership_runs[previous_partnership_index], "(", partnership_balls[previous_partnership_index], "), runrate: ", partnership_runs[previous_partnership_index] * 6 / partnership_balls[previous_partnership_index]);
         }
         commentary += '\nBowler ' + ( current_bowler + 1) + ': ' + parseInt(deliveries[current_bowler] / 6) + '.' + deliveries[current_bowler] % 6 + '-' + maidens[current_bowler] + '-' + wickets_taken[current_bowler] + '-' + runs_conceded[current_bowler] * 6 / deliveries[current_bowler] + '\n\n';//console.log("\nBowler ", current_bowler + 1, ": ", parseInt(deliveries[current_bowler] / 6) + "." + deliveries[current_bowler] % 6, "-", maidens[current_bowler], "-", wickets_taken[current_bowler], "-", runs_conceded[current_bowler] * 6 / deliveries[current_bowler], "\n\n");
-        if (i < 19 && (Total + 1 - Total2) / (19 - i) >= 36) commentary += 'The team might as well hop onto the team bus now....\n';//console.log("The team might as well hop onto the team bus now....\n");
-        if (deliveries[current_bowler] == 24) commentary += 'And that brings an end to Bowler ' + (current_bowler + 1) + '\'score spell.\n\n';//console.log("And that brings an end to Bowler ", current_bowler + 1, "'score spell.\n\n");
-        for (j = 0; j < 6; ++j)
-        {
-            if (deliveries[j] <= 18 && j != previous_bowler)
-            {
-                delivery_score = j;
-                break;
-            }
-        }
-        current_bowler = delivery_score;
-        for (j = delivery_score + 1; j < 6; ++j)
-        {
-            if (deliveries[j] <= 18 && team_object[+!toss].bowler_rating[j] > team_object[+!toss].bowler_rating[current_bowler] && j != previous_bowler) current_bowler = j;
-        }
-        previous_bowler = current_bowler;
+        if (i < 19 && (Total[0] + 1 - Total[1]) / (19 - i) >= 36) commentary += 'The team might as well hop onto the team bus now....\n';//console.log("The team might as well hop onto the team bus now....\n");
+        post_over();
     }
-    strike = [0, 1];
-    commentary += '\nScorecard:\n\tRuns Balls Strike Rate Fours Sixes \n';//console.log("\nScorecard:\n\tRuns Balls Strike Rate Fours Sixes \n");
-    for (i = 0; i < 11; ++i)
-    {
-        if (!balls[i])
-        {
-            commentary += '\tDNB\n';
-        }//console.log("\tDNB\n");
-        else
-        {
-            commentary += score[i] + ' ' + balls[i] + ' ' + score[i] * 100 / balls[i] + ' ' + fours[i] + ' ' + maximums[i];//console.log(score[i], balls[i], score[i] * 100 / balls[i], fours[i], maximums[i]);
-            if (!dismissed[i]) commentary += '  (not out)';//console.log("  (not out)");
-        }
-        if (i < 10)
-        {
-            partnership_runs[i] = partnership_balls[i] = 0;
-        }
-        balls[i] = fours[i] = maximums[i] = dismissed[i] = milestone[i] = score[i] = balls[i] = fours[i] = maximums[i] = 0;
-    }
-    commentary += 'Total: ' + Total2 + ' / ' + wickets2 + ' (' + parseInt(Balls2 / 6) + '.' + Balls2 % 6 + ' overs)\tRunrate: ' + Total2 * 6 / Balls2 + '\nExtras: ' + extras + '\n\nBowling Statistics:\n\nBowler Overs Maidens Wickets Runs conceded Economy\n\n';//console.log("Total: ", Total2, " / ", wickets2, " (", parseInt(Balls2 / 6) + "." + Balls2 % 6, " overs)\tRunrate: ", Total2 * 6 / Balls2, "\nExtras: ", extras, "\n\nBowling Statistics:\n\nBowler Overs Maidens Wickets Runs conceded Economy\n\n");
-    for (i = 0; i < 6; i++)
-    {
-        commentary += (i + 1) + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + runs_conceded[i] * 6 / deliveries[i];//console.log(i + 1, parseInt(deliveries[i] / 6) + "." + deliveries[i] % 6, maidens[i], wickets_taken[i], runs_conceded[i], runs_conceded[i] * 6 / deliveries[i]);
-        five_wicket_haul[i] = continuous_wickets[i] = deliveries[i] = maidens[i] = runs_conceded[i] = wickets_taken[i] = 0;
-    }
-    commentary += 'Dot ball percentage: ' + dot * 100 / Balls2 + ' %\n';//console.log("Dot ball percentage: ", dot * 100 / Balls2, " %");
-    if (!(Total - Total2))
+
+    comment();//console.log("Dot ball percentage: ", dot * 100 / Overs[1], " %");
+
+    if (!(Total[0] - Total[1]))
     {
         if (!(wickets1 - wickets2))
         {
-            if (!(Balls1 - Balls2))
+            if (!(Overs[0] - Overs[1]))
             {
                 commentary += 'TIE !\n';
                 winner_index=-1;
@@ -855,7 +710,7 @@ function make(team){
             else
             {
                 commentary += 'Team';//console.log("Team ");
-                if (Balls2 > Balls1)
+                if (Overs[1] > Overs[0])
                 {
                     commentary += (+!toss + 1);
                     winner_index=+!toss;
@@ -888,20 +743,20 @@ function make(team){
     {
         commentary += 'Team '+(+toss + 1) + ' wins by '; //console.log("Team ");
         winner_index=+toss;
-        if (Total < Total2)
+        if (Total[0] < Total[1])
         {
             commentary +=  (10 - wickets2) + ' wicket(score) !';//console.log(+toss + 1, " wins by ", 10 - wickets2, " wicket(score) !");
 
         }
         else
         {
-            commentary += (Total - Total2) + ' runs!';//console.log(+!toss + 1, " wins by ", Total - Total2, " runs!");
+            commentary += (Total[0] - Total[1]) + ' runs!';//console.log(+!toss + 1, " wins by ", Total[0] - Total[1], " runs!");
         }
         commentary += '\n';//console.log("\n");
     }
-if(Total2<Total) {Balls1+=Balls2; Balls2=Balls1-Balls1; Balls1-=Balls2; Total+=Total2; Total2=Total-Total2; Total-=Total2;}
+if(Total[1]<Total[0]) {Overs[0]+=Overs[1]; Overs[1]=Overs[0]-Overs[0]; Overs[0]-=Overs[1]; Total[0]+=Total[1]; Total[1]=Total[0]-Total[1]; Total[0]-=Total[1];}
 exports.comm=commentary; //console.log(commentary);
-}
+
 
 if(winner_index==-1) {
     exports.addtie1= function update(err, db)
@@ -939,7 +794,7 @@ if(winner_index==-1) {
             };
             collection.findOne(doc, onFetch);
         }
-        collection.update(doc, {$inc: {played: 1, points: 1, runs_for: Total, runs_against: Total2, balls_for: Balls1, balls_against: Balls2, net_run_rate: 6 * (Total / Balls1 - Total2 / Balls2)}}, function (err, updated)
+        collection.update(doc, {$inc: {played: 1, points: 1, runs_for: Total[0], runs_against: Total[1], balls_for: Overs[0], balls_against: Overs[1], net_run_rate: 6 * (Total[0] / Overs[0] - Total[1] / Overs[1])}}, function (err, updated)
         {
             if (err) throw err;
             return db.close();
@@ -981,7 +836,7 @@ if(winner_index==-1) {
             };
             collection.findOne(doc, onFetch);
         }
-        collection.update(doc, {$inc: {played: 1, points: 1, runs_for: Total2, runs_against: Total, balls_for: Balls2, balls_against: Balls1, net_run_rate: 6 * (Total2 / Balls2 - Total / Balls1)}}, function (err, updated)
+        collection.update(doc, {$inc: {played: 1, points: 1, runs_for: Total[1], runs_against: Total[0], balls_for: Overs[1], balls_against: Overs[0], net_run_rate: 6 * (Total[1] / Overs[1] - Total[0] / Overs[0])}}, function (err, updated)
         {
             if (err) throw err;
             return db.close();
@@ -1026,7 +881,7 @@ else
             };
             collection.findOne(doc, onFetch);
         }
-        collection.update(doc, {$inc: {played: 1, win: 1, points: 2, runs_for: Total, runs_against: Total2, balls_for: Balls1, balls_against: Balls2, net_run_rate: 6 * (Total / Balls1 - Total2 / Balls2)}}, function (err, updated)
+        collection.update(doc, {$inc: {played: 1, win: 1, points: 2, runs_for: Total[0], runs_against: Total[1], balls_for: Overs[0], balls_against: Overs[1], net_run_rate: 6 * (Total[0] / Overs[0] - Total[1] / Overs[1])}}, function (err, updated)
         {
             if (err) throw err;
             return db.close();
@@ -1068,7 +923,7 @@ else
             };
             collection.findOne(doc, onFetch);
         }
-        collection.update(doc, {$inc: {played: 1, loss: 1, runs_for: Total2, runs_against: Total, balls_for: Balls2, balls_against: Balls1, net_run_rate: 6 * (Total2 / Balls2 - Total / Balls1)}}, function (err, updated)
+        collection.update(doc, {$inc: {played: 1, loss: 1, runs_for: Total[1], runs_against: Total[0], balls_for: Overs[1], balls_against: Overs[0], net_run_rate: 6 * (Total[1] / Overs[1] - Total[0] / Overs[0])}}, function (err, updated)
         {
             if (err) throw err;
             return db.close();
