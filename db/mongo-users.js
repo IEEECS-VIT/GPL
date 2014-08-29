@@ -177,3 +177,31 @@ exports.forgotPassword = function (doc, callback)
     };
     MongoClient.connect(mongoUri, onConnect);
 };
+
+exports.updateUser = function(doc, arr, callback)
+{
+    var onConnect = function(err,db)
+    {
+        if(err)
+        {
+            throw err;
+        }
+        else
+        {
+            var collection = db.collection('users');
+            var onUpdate = function(err,document)
+            {
+                if(err)
+                {
+                    callback(err,null);
+                }
+                else
+                {
+                    callback(true,document);
+                }
+            };
+            collection.findAndModify(doc,[],{$set : {'team' : arr}},{},onUpdate)
+        }
+    }
+
+};
