@@ -18,9 +18,6 @@ function validator() {
         pass.style.backgroundColor = 'Yellow';
         display += i.toString() + ". Enter Password.\n";
     }
-    else {
-        pass.style.backgroundColor = 'white';
-    }
     if (pass.value.length < 8 && pass.value.length != 0) {
         i++;
         display += i.toString() + ". Password too short.\n";
@@ -61,16 +58,16 @@ function validator() {
     }
 
 
-    if (display.localeCompare("Error:\n") != 0) {
-        confirm(display);
-        return false;
-
-    } else {
-
+    if (display.localeCompare("Error:\n") == 0) {
         document.getElementById("reg").action = "/register";
         document.getElementById("reg").method = "post";
 
         document.getElementById("reg").submit();
+
+
+    } else {
+        alert(display);
+
 
     }
 
