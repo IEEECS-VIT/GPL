@@ -6,7 +6,7 @@
     <link type="text/css" rel="stylesheet" href="/bower_components/foundation/css/foundation.css"/>
     <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
 </head>
-<body style="background:url('/images/background.png');font-family: 'PT Sans', sans-serif;height:100%;">
+<body style="background-color:#646464;font-family: 'PT Sans', sans-serif;height:100%;">
 <div style="min-height: 100%">
     <!--TOP BAR-->
     <div class="large-12 top-bar" style="font-family: 'PT Sans', sans-serif;overflow: visible;">
@@ -46,15 +46,18 @@
                     </div>
                 </div>
                 <div class="content" id="panel2">
-                    <ul>
+                    <h3>Next Opponent<br/></h3>
+                    <h4>OPP</h4>
+                    <ul class="inline-list">
                         <% for(var i = 0;i < 16;i++){ %>
-                        <li>
-                            <% if (nextMatch[i]._id <= 113){ %>
-                            <img src="/images/bat/<%= nextMatch[i]._id %>.jpg"
+                        <li style="float:left">
+                            <% for(var j = 0;j < 16;j++){ %>
+                            <% if (nextMatch[j]._id > 303){ %>
+                            <img src="/images/bat/<%= nextMatch[j]._id %>.jpg"
                                  style="width: 40%;margin: 0;float: left;"/>
 
-                            <p style="text-align: center;"><%= nextMatch[i].Name %></p>
-                            <% } else
+                            <p style="text-align: center;"><%= nextMatch[j].Name %></p>
+                            <% }} %>
                             <% if (nextMatch[i]._id <= 113){ %>
                             <img src="/images/bat/<%= nextMatch[i]._id %>.jpg"
                                  style="width: 40%;margin: 0;float: left;"/>
@@ -73,30 +76,32 @@
                             <% } %>
 
                         </li>
+                        <% } %>
 
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    <!--content-->
-    <footer style="bottom:0; position:relative;">
-        <div class="large-12 top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">
-            <section class="top-bar-section small-only-text-center">
-                <ul class="left">
-                    <li style="display:block;"><a href="#">IEEE-CS VIT Main</a></li>
-                    <li style="display:block;"><a href="#">graVITas</a></li>
-                </ul>
-                <ul class="right">
-                    <li><a href="/developers">Developers</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                </ul>
+</div>
+<!--content-->
+<footer style="bottom:0; position:relative;">
+    <div class="large-12 top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">
+        <section class="top-bar-section small-only-text-center">
+            <ul class="left">
+                <li style="display:block;"><a href="#">IEEE-CS VIT Main</a></li>
+                <li style="display:block;"><a href="#">graVITas</a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="/developers">Developers</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
 
-            </section>
-            <p style="margin-left: 46%; font-size:60%;color:white;bottom:0; margin-top:2%">&copy;IEEE-CS VIT Chapter</p>
+        </section>
+        <p style="margin-left: 46%; font-size:60%;color:white;bottom:0; margin-top:2%">&copy;IEEE-CS VIT Chapter</p>
 
-        </div>
-    </footer>
-    <!-- footer -->
+    </div>
+</footer>
+<!-- footer -->
 </body>
 </html>
