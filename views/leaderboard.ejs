@@ -6,7 +6,7 @@
     <link type="text/css" rel="stylesheet" href="/bower_components/foundation/css/foundation.css"/>
     <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
 </head>
-<body style="background:url('/images/background.png');font-family: 'PT Sans', sans-serif;height:100%;">
+<body style="background-color:#646464;font-family: 'PT Sans', sans-serif;height:100%;">
 <div style="min-height: 100%">
     <!--TOP BAR-->
     <div class="large-12 top-bar" style="overflow: visible;">
@@ -24,7 +24,7 @@
         <ul class="breadcrumbs"
             style="background:rgba(30,30,30,0.9); border: none; box-shadow: inset 0 0 5px 3px rgba(255,255,255,0.2);margin-top: 5%;">
             <li><a href="/home" style="color: #ffffff;">Home</a></li>
-            <li><a href="/rules" style="color: #ffffff;"">Rules</a></li>
+            <li><a href="/rules" style="color: #ffffff;">Rules</a></li>
             <li class="current"><a href="#" style="color:lightsteelblue;">Leader Board</a></li>
             <li><a href="/sponsors" style="color:#ffffff;">Sponsors</a></li>
             <li><a href="/trailer" style="color:#ffffff;">Trailer</a></li>
@@ -50,17 +50,19 @@
                     <% for(var j = 1; j < 7;j ++) { %>
                     <td style="color: #ffffff;font-weight: bold;text-align: center;margin:2%;border-radius: 5px;height: auto;line-height: 100%;">
                         <% if(j == 1){ %>
-                        <%= i} %>
+                        <%= i %>
+                        <% } %>
                         <% else if(j == 2)  { %>
-                        <%= leaderboard[i]._id   } %>
-                        <% else if(j == 3) { %>
-                        <%= leaderboard[i].points } %>
-                        <% else if(j == 4) { %>
-                        <%= leaderboard[i].played } %>
-                        <% else if(j == 5) { %>
-                        <%= leaderboard[i].win } %>
-                        <% else { %>
-                        <%= leaderboard[i].net_run_rate  } %>
+                        <%= leaderboard[i]._id %>
+                        <% }else if(j == 3) { %>
+                        <%= leaderboard[i].points %>
+                        <% }else if(j == 4) { %>
+                        <%= leaderboard[i].played %>
+                        <% } else if(j == 5) { %>
+                        <%= leaderboard[i].win %>
+                        <% }else { %>
+                        <%= leaderboard[i].net_run_rate %>
+                        <% } %>
                     </td>
                     <% } %>
                 </tr>

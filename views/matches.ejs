@@ -6,7 +6,7 @@
     <link type="text/css" rel="stylesheet" href="/bower_components/foundation/css/foundation.css"/>
     <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
 </head>
-<body style="background:url('/images/background.png');font-family: 'PT Sans', sans-serif;height:100%;">
+<body style="background-color:#646464;font-family: 'PT Sans', sans-serif;height:100%;">
 <div style="min-height: 100%">
     <!--TOP BAR-->
     <div class="large-12 top-bar" style="font-family: 'PT Sans', sans-serif;overflow: visible;">
@@ -29,45 +29,58 @@
             <li><a href="/sponsors" style="color:#ffffff;">Sponsors</a></li>
         </ul>
     </div>
-    <div class="large-12 small-12 columns" style="margin-top: 2%;">
-        <div class="large-8 small-12 left"
-             style="background:rgba(200,200,200,0.5); border: none;border-radius: 5px;margin-left: 2%;">
-            <h4 style="border-radius:5px; background-color: rgba(30,30,30,0.8);padding:1%;color: #ffffff;margin-top: 0;text-align: center;width: 100%;">
-                Previous Match Commentary</h4>
+    <div class="small-12">
+        <ul class="radius tabs" data-tab="" style="margin-left: 31%;margin-top: 2%;">
+            <li class="tab-title active" id="act1" onclick="tab(1)"><a href="#">Previous Match</a></li>
+            <li class="tab-title" id="noact2" onclick="tab(2)"><a href="#">Next Match</a></li>
 
-            <p align="left"
-               style="color: #de2b0f;opacity: 0.7;line-height: 95%;padding: 2%;min-height: 50em;overflow-y: scroll;">
-                Commentary
-            </p>
-        </div>
-        <div class="large-3 small-12 right"
-             style="background:rgba(200,200,200,0.5); border: none;border-radius: 5px;margin-right: 2%;">
-            <h4 style="border-radius:5px; background-color: rgba(30,30,30,0.8);padding:1%;color: #ffffff;margin-top: 0;text-align: center;width: 100%;">
-                Previous Matches</h4>
+        </ul>
+        <div class="row" align="center">
 
-            <p align="center" style="color: #de2b0f;opacity: 0.7;line-height: 95%;padding: 2%;">
-                Dates
-            </p>
-        </div>
-    </div>
-    <div class="large-12 small-12 columns" style="margin-top: 2%;">
-        <div class="large-8 small-12 left"
-             style="background:rgba(200,200,200,0.5); border: none;border-radius: 5px;margin-left: 2%;">
-            <h4 style="border-radius:5px; background-color: rgba(30,30,30,0.8);padding:1%;color: #ffffff;margin-top: 0;text-align: center;width: 100%;">
-                Next Match Playing XI</h4>
+            <div class="small-12 medium-12 large-12 columns"
+                 style="background:rgba(0,123,184,0.5); border-radius: 0 0 5px 5px;border:5px;box-shadow: inset 20px 0 50px -10px rgba(0,0,0,0.4), inset -20px 0 50px -10px rgba(0,0,0,0.4),inset 0 -20px 50px rgba(0,0,0,0.4);">
 
-            <p align="left" style="color: #de2b0f;opacity: 0.7;line-height: 95%;padding: 2%;">
-                Playing Team
-            </p>
-        </div>
-        <div class="large-3 small-12 right"
-             style="background:rgba(200,200,200,0.5); border: none;border-radius: 5px;margin-right: 2%;">
-            <h4 style="border-radius:5px; background-color: rgba(30,30,30,0.8);padding:1%;color: #ffffff;margin-top: 0;text-align: center;width: 100%;">
-                Upcoming Matches</h4>
+                <div class="content active" id="panel1">
+                    <div class="large-12 medium-12 small-12">
+                        <%= previousMatch %>
+                    </div>
+                </div>
+                <div class="content" id="panel2">
+                    <h3>Next Opponent<br/></h3>
+                    <h4>OPP</h4>
+                    <ul class="inline-list">
+                        <% for(var i = 0;i < 16;i++){ %>
+                        <li style="float:left">
+                            <% for(var j = 0;j < 16;j++){ %>
+                            <% if (nextMatch[j]._id > 303){ %>
+                            <img src="/images/bat/<%= nextMatch[j]._id %>.jpg"
+                                 style="width: 40%;margin: 0;float: left;"/>
 
-            <p align="center" style="color: #de2b0f;opacity: 0.7;line-height: 95%;padding: 2%;">
-                Dates
-            </p>
+                            <p style="text-align: center;"><%= nextMatch[j].Name %></p>
+                            <% }} %>
+                            <% if (nextMatch[i]._id <= 113){ %>
+                            <img src="/images/bat/<%= nextMatch[i]._id %>.jpg"
+                                 style="width: 40%;margin: 0;float: left;"/>
+
+                            <p style="text-align: center;"><%= nextMatch[i].Name %></p>
+                            <% } else if(nextMatch[i]._id >= 114 && nextMatch[i] <= 242) { %>
+                            <img src="/images/bowl/<%= nextMatch[i]._id %>.jpg"
+                                 style="width: 40%;margin: 0;float: left;"/>
+
+                            <p style="text-align: center;"><%= nextMatch[i].Name %></p>
+                            <% } else if(nextMatch[i]._id >= 243 && nextMatch[i]._id <= 303) { %>
+                            <img src="/images/all/<%= nextMatch[i]._id %>.jpg"
+                                 style="width: 40%;margin: 0;float: left;"/>
+
+                            <p style="text-align: center;"><%= nextMatch[i].Name %></p>
+                            <% } %>
+
+                        </li>
+                        <% } %>
+
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

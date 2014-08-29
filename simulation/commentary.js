@@ -1044,9 +1044,9 @@ caught :
     "tried to fetch this short of a length ball from way outside off and flat-bat it down the ground but he has not got enough elevation on the mishit, mid off times his jump to take a sharp catch",
     "he keeps it on a good length, around off, the batsman tries to force it square on the leg side, misses and the bowler hits off with slight away movement",
     "this has kicked up from just back of a length, the surprised batsman jabs at it and it pops tamely to point",
-    "strikes early, length ball movingaway outside off, the batsman stands and wafts, and feathers it behind",
+    "strikes early, length ball moving away outside off, the batsman stands and wafts, and feathers it behind",
     "full into leg stump, the batsman clears front leg, gets under it and lifts it straight to long on",
-    "swats this full delivery flat and straight to long off! Brilliant judegment !",
+    "swats this full delivery flat and straight to long off! Brilliant judgement !",
     "and he's managed to hold on! The batsman swats a length ball to long off, he comes forward and across and takes it quite safely",
     "slogs probably as hard as he can, but just fails to clear deep midwicket, where the fielder moves to his right to take a well-judged catch very close to the rope",
     "he top-edges it to the man in the deep on the leg side",
@@ -1101,7 +1101,7 @@ bowled :
     "He tries to punch this short of length delivery through cover, there is no room, and he ends up chopping this on to the stumps..",
     "What's happening! You don't expect such loose shots from the batsman. Another tame delivery just outside off and he has a lazy waft at that one, ends up chopping it on to his stumps",
     "he's tried to force a length ball over mid-on, but mishit it, and the fielder has plenty of time to take the dolly",
-    "superb delivery hits top of off, good length, pitches around middle, Hussey looks to defend from the crease, the ball seams away past the outside edge to hit the stumps",
+    "superb delivery hits top of off, good length, pitches around middle, the batsman looks to defend from the crease, the ball seams away past the outside edge to hit the stumps",
     "this one beats the inside edge of the bat, flicks the front pad and then takes the off bail ..",
     "off stump is pegged back and the bowler is on a roll! It was flat, it skidded off the deck and it sneaked below the intended cut",
     "angled in, the batsman swings and misses, and we hear the sound of leather on timber.",
@@ -1117,7 +1117,7 @@ bowled :
     "castled! Skids on after pitching and sneaks through his bat and pad. The batsman's feet fail him once again as this one is pitched on a good length and deviates in at him. He looked all at sea trying to keep that out and by the time he played his shot the middle stump was knocked back",
     "off stump is knocked back !. The slog over midwicket fails again and this time it signals the end of his innings",
     " leg stump cartwheels! It was length and he was looking to slog it across the line seeking the stands at midwicket. Missed it by several inches as the ball sneaks between the bat and pad. The bowler exults!",
-    "what a yorker! Leg stump has been uprooted. There was no room to maneouvre it, which was what he was trying to do with a bit of an open face but the ball just kept coming in at him and cramping him up. He also seemed a little surprised by the extra pace on that and walks off the field",
+    "what a yorker! Leg stump has been uprooted. There was no room to manoeuvre it, which was what he was trying to do with a bit of an open face but the ball just kept coming in at him and cramping him up. He also seemed a little surprised by the extra pace on that and walks off the field",
     "he telegraphs the slower ball with a change of action. The batsman slogs across the line of this delivery, and has his leg stump pegged back."
 ],
 stumped :
@@ -1176,4 +1176,4 @@ wide :
     "short delivery that is just a shade down the leg side. That's rather harsh as the ball sailed over his hips as he was a little cramped up while attempting a shot"
 ]
 };
-console.log(module.exports.dot.length,module.exports.one.length,module.exports.two.length,module.exports.three.length,module.exports.four.length,module.exports.six.length,module.exports.bowled.length,module.exports.caught.length,module.exports.lbw.length,module.exports.stumped.length,module.exports.runout.length,module.exports.wide.length,module.exports.freehit.length);
+//console.log(module.exports.dot.length,module.exports.one.length,module.exports.two.length,module.exports.three.length,module.exports.four.length,module.exports.six.length,module.exports.bowled.length,module.exports.caught.length,module.exports.lbw.length,module.exports.stumped.length,module.exports.runout.length,module.exports.wide.length,module.exports.freehit.length);
