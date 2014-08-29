@@ -61,18 +61,16 @@ function validator() {
     }
 
 
-    if (display != "Error:\n") {
+    if (display.localeCompare("Error:\n") != 0) {
         confirm(display);
         return false;
 
-    }
+    } else {
 
-    else {
+        document.getElementById("reg").action = "/register";
+        document.getElementById("reg").method = "post";
 
-        signin.action = "/register";
-        signin.method = "post";
-
-        signin.submit();
+        document.getElementById("reg").submit();
 
     }
 
