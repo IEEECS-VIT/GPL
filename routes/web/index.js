@@ -39,40 +39,6 @@ router.get('/', function (req, res)
 });
 
 
-router.get('/matches', function (req, res)
-{
-    if (req.cookies.name)
-    {
-        var teamName = req.signedCookie.name;
-
-        var credentials1 = {
-            'Team_1' : teamName
-        };
-        var credentials2 = {
-            'Team_2' : teamName
-        };
-        var onFetch = function(err,doc)
-        {
-            if(err)
-            {
-                // what to do with error
-            }
-            else
-            {
-                res.render('matches',{User:doc});
-            }
-
-        };
-        mongoMatches.fetchMatch(credentials1,onFetch);
-
-
-        res.render('matches', { });
-    }
-    else
-    {
-        res.redirect('/');
-    }
-});
 
 router.post('/login', function (req, res)
 {
@@ -183,6 +149,8 @@ router.post('/register', function (req, res)
             manager_name: managerName,
             email: email,
             phone: phone,
+            squad:[],
+            team:[],
             win: 0,
             played: 0,
             points: 0,
