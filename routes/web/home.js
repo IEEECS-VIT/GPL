@@ -154,5 +154,4 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
         res.redirect('/');
     }
 });
-
 module.exports = router;
