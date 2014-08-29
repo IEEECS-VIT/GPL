@@ -58,7 +58,7 @@ function validator() {
     }
 
 
-    if (display !="Error\n") {
+    if (display !="Error:\n") {
         confirm(display);
         return false;
 
