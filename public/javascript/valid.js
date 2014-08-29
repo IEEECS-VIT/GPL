@@ -62,5 +62,9 @@ function validator() {
         confirm(display);
         return false;
 
+    } else {
+        document.getElementById("reg").action = "/register";
+        document.getElementById("reg").method = "post";
+        document.getElementById("reg").submit();
     }
 }
