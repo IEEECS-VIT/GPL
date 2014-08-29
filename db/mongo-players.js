@@ -59,6 +59,7 @@ exports.getPlayer = function(doc,callback)
         }
         else
         {
+            console.log(doc._id);
             var collection = db.collection('players');
             var onFetch = function(err,document)
             {
@@ -68,6 +69,7 @@ exports.getPlayer = function(doc,callback)
                 }
                 else
                 {
+                    console.log(document);
                     callback(null,document);
                 }
             };
@@ -75,4 +77,4 @@ exports.getPlayer = function(doc,callback)
         }
     };
     MongoClient.connect(mongoUri,onConnect);
-}
+};
