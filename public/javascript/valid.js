@@ -67,7 +67,7 @@ function validator() {
 
     } else {
         alert(display);
-
+        return false;
 
     }
 
