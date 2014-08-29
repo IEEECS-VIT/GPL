@@ -107,6 +107,7 @@ router.get('/matches', function (req, res)
 
 router.post('/getTeam',function(req,res)
 {
+    var players = [],cost=0;
     var player1 = req.body.p1;
     var player2 = req.body.p2;
     var player3 = req.body.p3;
@@ -123,47 +124,6 @@ router.post('/getTeam',function(req,res)
     var player14 = req.body.p14;
     var player15 = req.body.p15;
     var player16 = req.body.p16;
-
-    var players = [],cost=0;
-
-    var onUpdate = function(err,documents)
-    {
-        if(err)
-        {
-            // do something with the error
-        }
-        else
-        {
-            res.redirect('/home');
-        }
-
-    };
-
-    var getCost = function(element,index,array)
-    {
-        var onFetch = function(err,document)
-        {
-            if(err)
-            {
-                //do something with the error
-            }
-            else
-            {
-                console.log(document.length);
-                cost=(cost-0)+(document.Cost-0);
-                console.log(cost);
-                console.log(document.Cost);
-                if(cost>10000000)
-                {
-                    res.redirect('/players',{err:"Cost Exceeded"});
-                }
-            }
-        };
-        /*var credentials = {
-            "_id":element
-        };*/
-        mongoPlayers.getPlayer(element,onFetch)
-    };
     players.push(player1);
     players.push(player2);
     players.push(player3);
@@ -183,7 +143,58 @@ router.post('/getTeam',function(req,res)
 
 
 
-    players.forEach(getCost);
+    var onUpdate = function(err,documents)
+    {
+        if(err)
+        {
+            // do something with the error
+        }
+        else
+        {
+            console.log(documents);
+            res.redirect('/home');
+        }
+
+    };
+
+    var getCost = function(id,callback)
+    {
+
+        var onFetch = function(err,document)
+        {
+            if(err)
+            {
+                //do something with the error
+            }
+            else
+            {
+               callback(null,document);
+            }
+        };
+        var credentials = {
+            "_id":id
+        };
+        mongoPlayers.getPlayer(credentials,onFetch)
+    };
+    var onFinish = function(err,documents)
+    {
+        if(err)
+        {
+            // do something with the error
+        }
+        else
+        {
+            for(var i=0;i<documents.length;i++)
+            {
+                cost=(cost-0) + (documents[i].Cost-0);
+                if(cost>10000000)
+                {
+                    res.redirect('/home/players',{err:"Cost Exceeded"});
+                }
+            }
+        }
+    };
+    async.map(players,getCost,onFinish);
 
 
     var teamName = req.signedCookies.name;
