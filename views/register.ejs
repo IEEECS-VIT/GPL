@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Registration | GPL</title>
     <link type="text/css" rel="stylesheet" href="/bower_components/foundation/css/foundation.css"/>
-    <link type="text/css" rel="stylesheet" href="/stylesheets/gplmain.css"
+    <link type="text/css" rel="stylesheet" href="/stylesheets/gplmain.css"/>
     <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
     <script src="/javascript/valid.js"></script>
     <script src="/bower_components/foundation/js/foundation/foundation.dropdown.js"></script>
@@ -87,7 +87,7 @@
 
     <div class="small-12 medium-12 large-12 columns"
          style="background:rgba(0,123,184,0.5); border-radius: 0 0 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);float: left;text-align: left ">
-        <form name="signin">
+        <form name="signin" id="reg">
             <fieldset>
                 <legend>Account Details</legend>
                 <div id="fill" class="large-12 medium-12 columns"
@@ -147,23 +147,24 @@
                 <div class="row">
                     <div class="small-12 large-12 columns">
                         <div class="small-2 large-2 columns">
-                            <label for="email" class="right inline" style="color: white;">Email 1:<i
+                            <label for="email" class="right inline" style="color: white;">Email:<i
                                         style="color:red;">*</i> </label>
                         </div>
-                        <div class="small-4 large-4 columns">
+                        <div class="small-4 large-4 columns left">
                             <input type="email" id="email" placeholder="example@domain.com" name="email"/>
                         </div>
 
                     </div>
+                </div>
                 <!--email -->
 
                 <div class="row">
                     <div class="small-12 large-12 columns">
                         <div class="small-2 large-2 columns">
-                            <label for="mobile" class="right inline" style="color: white;">Mobile 1:<i
+                            <label for="mobile" class="right inline" style="color: white;">Mobile:<i
                                         style="color:red;">*</i> </label>
                         </div>
-                        <div class="small-4 large-4 columns">
+                        <div class="small-4 large-4 columns left">
                             <input type="text" id="pno" placeholder="Mobile Number" name="phone"/>
                         </div>
 
@@ -175,10 +176,10 @@
                 <div class="row">
                     <div class="small-12 large-12 columns">
                         <div class="small-2 large-2 columns">
-                            <label for="manager" class="right inline" style="color: white;">Manager 1:<i
+                            <label for="manager" class="right inline" style="color: white;">Manager:<i
                                         style="color:red;">*</i> </label>
                         </div>
-                        <div class="small-4 large-4 columns">
+                        <div class="small-4 large-4 columns left">
                             <input type="text" id="manager" placeholder="Manager Name" name="manager_name"/>
                         </div>
 
@@ -201,12 +202,10 @@
     <div class="top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">
         <section class="top-bar-section">
             <ul class="left">
-                <li style="display:block;"><a href="#">IEEE-CS VIT Main</a></li>
-                <li style="display:block;"><a href="#">graVITas</a></li>
+                <li style="display:block;"><a href="http://vitgravitas.com/">graVITas</a></li>
             </ul>
             <ul class="right">
                 <li><a href="/developers">Developers</a></li>
-                <li><a href="#">Privacy Policy</a></li>
             </ul>
 
         </section>

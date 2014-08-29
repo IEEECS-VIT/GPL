@@ -10,17 +10,21 @@
         var r;
         var che;
         var cb = 5, cbo = 5, ca = 1;
-        function subm() {
+        function subm()
+        {
 
-            if (k < 10) {
+            if (k < 11)
+            {
 
                 alert("Team not full");
 
 
             }
-            else {
+            else
+            {
                 var id;
-                for (var j = 1; j < 11; j++) {
+                for (var j = 1; j < 11; j ++)
+                {
                     id = 't' + j;
                     document.getElementById(id).value = team[j - 1];
 
@@ -34,20 +38,24 @@
             }
 
         }
-        function sel(r) {
-            if (k == 11) {
+        function sel(r)
+        {
+            if (k == 11)
+            {
 
                 alert("Team limit Reached");
-                return -1;
+                return - 1;
             }
 
             che = ch(r);
 
-            if (che != -1) {
-                if (k < 11) {
+            if (che != - 1)
+            {
+                if (k < 11)
+                {
 
                     team[k] = r;
-                    k++;
+                    k ++;
                     document.getElementById("box" + r).style.visibility = 'hidden';
                     ch(0);
                     disp();
@@ -61,16 +69,20 @@
         }
         var count;
         var di = [];
-        function disp() {
+        function disp()
+        {
 
 
-            if (k == 0) {
+            if (k == 0)
+            {
                 document.getElementById("squad").innerHTML = "";
 
                 document.getElementById('budget').innerHTML = "Line Up <b style='font-size: 60%'><br />" + "Batsmen : " + cb + "<br />" + "Bowlers : " + cbo + "<br />" + "All Rounders : " + ca + "<br />" + "</b>";
             }
-            else {
-                for (count = 0; count < k; count++) {
+            else
+            {
+                for (count = 0; count < k; count ++)
+                {
 
                     var cut = team[count];
                     var n = 'cn' + String(cut);
@@ -90,17 +102,21 @@
                 document.getElementById("squad").innerHTML = di.join(" ");
             }
         }
-        function rem(co) {
+        function rem(co)
+        {
             document.getElementById("box" + co).style.visibility = 'visible';
 
-            for (var b = 0; b < k; b++) {
-                if (team[b] == co) {
+            for (var b = 0; b < k; b ++)
+            {
+                if (team[b] == co)
+                {
                     var a = b;
-                    while (a < k) {
+                    while (a < k)
+                    {
 
                         team[a] = team[a + 1];
 
-                        a++;
+                        a ++;
 
                     }
 
@@ -116,7 +132,8 @@
             disp();
 
         }
-        function ch(r) {
+        function ch(r)
+        {
 
             var t, z;
 
@@ -125,36 +142,44 @@
             var al = 0;
 
 
-            if (r != 0) {
+            if (r != 0)
+            {
                 var asd = 'ct' + String(r);
                 var y = document.getElementById(asd);
-                if (cb == 0 && y.value.localeCompare('bat') == 0) {
+                if (cb == 0 && y.value.localeCompare('bat') == 0)
+                {
                     alert("Maximum number of Batsmen reached");
-                    return -1;
+                    return - 1;
                 }
-                if (cbo == 0 && y.value.localeCompare('bowl') == 0) {
+                if (cbo == 0 && y.value.localeCompare('bowl') == 0)
+                {
                     alert("Maximum number of Bowlers reached");
-                    return -1;
+                    return - 1;
                 }
-                if (ca == 0 && y.value.localeCompare('all') == 0) {
+                if (ca == 0 && y.value.localeCompare('all') == 0)
+                {
                     alert("Maximum number of All Rounders reached");
-                    return -1;
+                    return - 1;
 
                 }
             }
-            for (var a = 0; a < k; a++) {
+            for (var a = 0; a < k; a ++)
+            {
 
 
                 t = 'ct' + String(team[a]);
                 z = document.getElementById(t);
-                if (z.value.localeCompare('bat') == 0) {
-                    b++;
+                if (z.value.localeCompare('bat') == 0)
+                {
+                    b ++;
                 }
-                else if (z.value.localeCompare('bowl') == 0) {
-                    bo++;
+                else if (z.value.localeCompare('bowl') == 0)
+                {
+                    bo ++;
                 }
-                else if (z.value.localeCompare('all') == 0) {
-                    al++;
+                else if (z.value.localeCompare('all') == 0)
+                {
+                    al ++;
                 }
             }
 
@@ -168,7 +193,7 @@
 
     </script>
 </head>
-<body style="background-color:#646464;font-family: 'PT Sans', sans-serif;height:100%;">
+<body style="background:url('/images/background.png');font-family: 'PT Sans', sans-serif;height:100%;">
 <div style="min-height: 100%">
     <!--TOP BAR-->
     <div class="large-12 top-bar" style="font-family: 'PT Sans', sans-serif;overflow: visible;">
@@ -235,7 +260,7 @@
                     <table cellspacing="10px"
                            style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
 
-                        <% k = 4;i = 0; var z = 1;for(i = 0;i < Squad.length;i++) { %>
+                        <% k = 4;i = 0; var z = 1;for(i = 0;i < Squad.length;i ++) { %>
                         <% if(k < 3){ %>
 
                         <% if(Squad[i]._id <= 303){ %>
@@ -266,14 +291,14 @@
 
                             </button>
                         </td>
-                        <% k++; } else {
+                        <% k ++; } else {
                             continue;
                         } %>
                         <% } else { if(z == 1) { %>
                         <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
                             <% z = 0;k = 0;} else { %>
                         </tr>
-                        <% k = 0;i--; %>
+                        <% k = 0;i --; %>
                         <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
                             <% } } } %>
                         </tr>

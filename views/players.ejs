@@ -233,7 +233,7 @@
 </script>
 
 </head>
-<body style="background:url('/images/background.png');font-family: 'PT Sans', sans-serif;height:100%;">
+<body style="background-color:#646464;font-family: 'PT Sans', sans-serif;height:100%;">
 
 <div style="min-height: 100%">
 <div class="large-12 top-bar" style="overflow: visible;">
@@ -259,7 +259,7 @@
 </ul>
 <div class="tabs-content">
 <div class="large-3 small-12 left"
-     style="height:auto;background-color: rgba(10,10,10,0.5);margin-right: 1%;margin-left: 2%;border-radius: 5px;">
+     style="height:auto;background-color: rgba(30,30,30,0.5);margin-right: 1%;margin-left: 2%;border-radius: 5px;">
     <h4 style="color: white;background-color: rgba(80,80,80,1);margin-top: 0;border-radius: 5px;padding: 2%;text-align: center;"
         id="budget">
         Selected Players <b style='font-size: 60%'>Budget:10000000
@@ -306,7 +306,7 @@
                 <% if(k < 3){ %>
 
                 <% if(Players[i]._id <= 113){ %>
-                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
+                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 0;width: 34%;"
                     id="box<%= Players[i]._id %>" onclick="">
 
 
@@ -314,7 +314,7 @@
 
 
                     <p style="text-align: center;"><%= Players[i].Name %><br/>
-                        <%= Players[i].Price %><%= Players[i]._id %></p>
+                        <%= Players[i].Price %></p>
 
                     <form name="h" style="display: none">
                         <input value="<%= Players[i].Name %>" id="cn<%= Players[i]._id %>"/>
@@ -355,7 +355,7 @@
                 <% if(k < 3){ %>
 
                 <% if(Players[i]._id <= 242 && Players[i]._id > 113){ %>
-                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
+                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;width: 34%;"
                     id="box<%= Players[i]._id %>" onclick="">
 
                     <img src="/images/bowl/<%= Players[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
@@ -402,7 +402,7 @@
                 <% if(k < 3){ %>
 
                 <% if(Players[i]._id <= 303 && Players[i]._id > 242){ %>
-                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
+                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;width: 34%;"
                     id="box<%= Players[i]._id %>" onclick="">
 
                     <img src="/images/all/<%= Players[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
@@ -449,7 +449,7 @@
                 <% if(k < 3){ %>
 
                 <% if(Players[i]._id <= 323 && Players[i]._id > 303){ %>
-                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
+                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;width: 34%;"
                     id="box<%= Players[i]._id %>" onclick="">
 
                     <img src="/images/coaches/<%= Players[i]._id %>.jpg"
@@ -493,12 +493,10 @@
     <div class="top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">
         <section class="top-bar-section">
             <ul class="left">
-                <li style="display:block;"><a href="#">IEEE-CS VIT Main</a></li>
-                <li style="display:block;"><a href="#">graVITas</a></li>
+                <li style="display:block;"><a href="http://vitgravitas.com/">graVITas</a></li>
             </ul>
             <ul class="right">
                 <li><a href="/developers">Developers</a></li>
-                <li><a href="#">Privacy Policy</a></li>
             </ul>
 
         </section>
