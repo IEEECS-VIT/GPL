@@ -1,11 +1,11 @@
 function validator() {
     var display = "Error:\n";
     var team_name = document.signin.team_name;
-    var pass = document.signin.pass;
-    var cpass = document.signin.cpass;
-    var email1 = document.signin.email1;
-    var mob1 = document.signin.mob1;
-    var manager1 = document.signin.manager1;
+    var pass = document.signin.password;
+    var cpass = document.signin.confirm_password;
+    var email1 = document.signin.email;
+    var mob1 = document.signin.phone;
+    var manager1 = document.signin.manager_name;
 
     var i = 0;
     if (team_name.value.length == 0/*||pass.value.length == 0|| cpass.value.length==0||email1.value.length==0||mob1.value.length==0||manager1.value.length==0*/) {
@@ -58,7 +58,7 @@ function validator() {
     }
 
 
-    if (display.localeCompare("Error:\n") != 0) {
+    if (display != 0) {
         confirm(display);
         return false;
 
