@@ -5,7 +5,6 @@ function validator() {
     var cpass = document.signin.cpass;
     var email1 = document.signin.email1;
     var mob1 = document.signin.mob1;
-    var mob2 = document.signin.mob2;
     var manager1 = document.signin.manager1;
 
     var i = 0;
@@ -60,20 +59,20 @@ function validator() {
             break;
         }
     }
-    if (mob2.value.length != 0) {
-        for (var y = 0; y < mob2.value.length; y++) {
-            if (isNaN(mob2.value[y])) {
-                i++;
-                mob2.style.backgroundColor = 'Yellow';
-                display += i.toString() + ". Enter a valid mobile number.\n";
-                break;
-            }
-        }
-    }
+
 
     if (display != "Error:\n") {
         confirm(display);
         return false;
+
+    }
+
+    else {
+
+        signin.action = "/register";
+        signin.method = "post";
+
+        signin.submit();
 
     }
 
