@@ -46,8 +46,35 @@
                     </div>
                 </div>
                 <div class="content" id="panel2">
-                    <% for(var i = 0;i < 16;i++){ %>
-                    <ul class=""
+                    <ul>
+                        <% for(var i = 0;i < 16;i++){ %>
+                        <li>
+                            <% if (nextMatch[i]._id <= 113){ %>
+                            <img src="/images/bat/<%= nextMatch[i]._id %>.jpg"
+                                 style="width: 40%;margin: 0;float: left;"/>
+
+                            <p style="text-align: center;"><%= nextMatch[i].Name %></p>
+                            <% } else
+                            <% if (nextMatch[i]._id <= 113){ %>
+                            <img src="/images/bat/<%= nextMatch[i]._id %>.jpg"
+                                 style="width: 40%;margin: 0;float: left;"/>
+
+                            <p style="text-align: center;"><%= nextMatch[i].Name %></p>
+                            <% } else if(nextMatch[i]._id >= 114 && nextMatch[i] <= 242) { %>
+                            <img src="/images/bowl/<%= nextMatch[i]._id %>.jpg"
+                                 style="width: 40%;margin: 0;float: left;"/>
+
+                            <p style="text-align: center;"><%= nextMatch[i].Name %></p>
+                            <% } else if(nextMatch[i]._id >= 243 && nextMatch[i]._id <= 303) { %>
+                            <img src="/images/all/<%= nextMatch[i]._id %>.jpg"
+                                 style="width: 40%;margin: 0;float: left;"/>
+
+                            <p style="text-align: center;"><%= nextMatch[i].Name %></p>
+                            <% } %>
+
+                        </li>
+
+                    </ul>
                 </div>
             </div>
         </div>
