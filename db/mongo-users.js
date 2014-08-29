@@ -202,6 +202,7 @@ exports.updateUser = function(doc, arr, callback)
             };
             collection.findAndModify(doc,[],{$set : {'team' : arr}},{},onUpdate)
         }
-    }
+    };
+    MongoClient.connect(mongoUri,onConnect);
 
 };

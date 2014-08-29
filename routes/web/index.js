@@ -138,6 +138,7 @@ router.post('/register', function (req, res)
     var managerName = req.body.manager_name;
     var email = req.body.email;
     var phone = req.body.phone;
+    console.log("Reached");
 
     if (password === confirmPassword)
     {
@@ -164,7 +165,7 @@ router.post('/register', function (req, res)
         {
             if (err)
             {
-                console.log('Team Name already exists');
+                console.log(err.message);
                 // Make it more user friendly, output the error to the view
                 res.redirect('/register');
             }
@@ -172,13 +173,14 @@ router.post('/register', function (req, res)
             {
                 var name = docs[0]['_id'];
                 res.cookie('name', name, {maxAge: 86400000, signed: true});
-                res.redirect('/home');
+                res.redirect('/home/players');
             }
         };
         mongoUsers.insert(newUser, onInsert);
     }
     else
     {
+        console.log("Incorrect Password");
         res.redirect('/register');
     }
 });

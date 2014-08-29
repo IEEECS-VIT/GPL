@@ -40,10 +40,9 @@
 
                 <% k = 4;i = 0; var z = 1;for(i = 0;i < Team.length;i ++) { %>
                 <% if(k < 3){ %>
-                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                    id="box<%= Team[i]._id %>" onclick="">
+                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;">
 
-                    <% if (Team[i]._id <= 113){ %>
+                <% if (Team[i]._id <= 113){ %>
                     <img src="/images/bat/<%= Team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                     <p style="text-align: center;"><%= Team[i].Name %></p>
