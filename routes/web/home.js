@@ -28,6 +28,7 @@ var mongoMatches = require(path.join(__dirname, '..', '..', 'db', 'mongo-matches
 
 router.get('/', function (req, res)
 {
+    var results = {};
     if (req.signedCookies.name)
     {
         var credentials = {
@@ -35,16 +36,45 @@ router.get('/', function (req, res)
         };
         var onFetch = function (err, doc)
         {
-            //var getDetails = function(elt,index,array);
+            results.user = doc;
+
+            var getDetails = function(id,callback)
+            {
+                var player = {
+                    '_id':id
+                };
+                var fields =
+                {
+                    _id: 1,
+                    Name: 1,
+                    Cost: 1,
+                    Country: 1,
+                    Type: 1
+                };
+                mongoPlayers.getPlayer(player,fields,callback)
+            };
+            var onFinish = function(err,documents)
+            {
+                if(err)
+                {
+                    //do something with the error
+                }
+                else
+                {
+                    results.team = documents;
+                    res.render('home',results);
+                }
+            };
+
             if (err)
             {
                 res.redirect('/');
             }
             else
             {
-                /*  var document = [];
+                 var document = [];
                  document=doc.team;
-                 document.forEach(getDetails);*/
+                 async.map(document, getDetails, onFinish);
             }
         };
         mongoUsers.fetch(credentials, onFetch);
@@ -178,7 +208,7 @@ router.post('/getTeam', function (req, res)
         else
         {
             console.log(documents);
-            for (var i = 0; i < documents.length; i ++)
+            for (var i = parseInt(0); i < documents.length; i ++)
             {
                 cost = (cost - 0) + (documents[i].Cost - 0);
                 if (cost > 10000000)
@@ -186,7 +216,7 @@ router.post('/getTeam', function (req, res)
                     res.redirect('/home/players', {err: "Cost Exceeded"});
                 }
             }
-            res.redirect('/home/squad');
+            res.redirect('/home/team');
         }
     };
     async.map(players, getCost, onFinish);
@@ -195,10 +225,7 @@ router.post('/getTeam', function (req, res)
     var credentials = {
         _id: teamName
     };
-
     mongoUsers.updateUser(credentials, players, onUpdate);
-
-
 });
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
