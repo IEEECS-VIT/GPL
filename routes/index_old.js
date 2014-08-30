@@ -106,36 +106,7 @@ router.get('/matchday', function (req, res) // page to view next match schedule 
     res.render('matchday', { });
 });
 
-router.get('/leaderboard', function (req, res) // Leaderboard/Standings
-{
-    if (req.cookies.name)                           // if cookies exists then access the database
-    {
-        var teamname = req.cookies.name;
-        var doc =
-        {
-            "_id": teamname
-        };
-        var onFetch = function (err, documents)
-        {
-            if (err)
-            {
 
-            }
-            else
-            {
-                res.render("leaderboard", { leaderboard: documents});
-            }
-        };
-        mongo_users.getleader(doc, onFetch);
-
-    }
-    else
-    {
-        res.redirect("/");
-    }
-
-
-});
 
 router.get('/forum', function (req, res) // User Forums
 {
