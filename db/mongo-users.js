@@ -20,6 +20,35 @@ var MongoClient = require('mongodb').MongoClient;
 
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
+exports.getCount = function(callback)
+{
+    var onConnect = function(err,db)
+    {
+        if(err)
+        {
+            throw err;
+        }
+        else
+        {
+            var collection = db.collection('users');
+            var onFetch = function(err,count)
+            {
+                if(err)
+                {
+                    throw err;
+                }
+                else
+                {
+                    callback(null,count);
+                }
+            };
+            collection.find().count(onFetch);
+        }
+    }
+    MongoClient.connect(mongoUri,onConnect);
+
+};
+
 exports.insert = function (doc, callback)
 {
     var onConnect = function (err, db)
