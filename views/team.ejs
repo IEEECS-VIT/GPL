@@ -234,7 +234,15 @@
                      class="large-12 small-12 right">
                     <table cellspacing="10px"
                            style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
-
+                        <%for(i=0;i<Squad.length;i++) { %>
+                        <%if(Squad[i]._id>303) { %>
+                        <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;" colspan="3">
+                            <img src="/images/coaches/<%= Squad[i]._id%>.jpg" style="width: 40%; margin: 0" />
+                            <p style="text-align: center;">
+                                <%=Squad[i].Name %>
+                            </p>
+                        </td>
+                        <%} } %>
                         <% k = 4;i = 0; var z = 1;for(i = 0;i < Squad.length;i++) { %>
                         <% if(k < 3){ %>
 
@@ -246,7 +254,7 @@
                             <img src="/images/bat/<%= Squad[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                             <p style="text-align: center;"><%= Squad[i].Name %></p>
-                            <% } else if(Squad[i]._id >= 114 && Squad[i] <= 242) { %>
+                            <% } else if(Squad[i]._id >= 114 && Squad[i]._id <= 242) { %>
                             <img src="/images/bowl/<%= Squad[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                             <p style="text-align: center;"><%= Squad[i].Name %></p>
@@ -271,7 +279,7 @@
                         } %>
                         <% } else { if(z == 1) { %>
                         <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                            <% z = 0;k = 0;} else { %>
+                            <% z = 0;k = 0;i--;} else { %>
                         </tr>
                         <% k = 0;i--; %>
                         <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
