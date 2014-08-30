@@ -42,9 +42,9 @@ router.get('/', function (req, res)
             }
             else
             {
-              /*  var document = [];
-                document=doc.team;
-                document.forEach(getDetails);*/
+                /*  var document = [];
+                 document=doc.team;
+                 document.forEach(getDetails);*/
             }
         };
         mongoUsers.fetch(credentials, onFetch);
@@ -95,7 +95,7 @@ router.get('/matches', function (req, res)
 
         };
         async.parallel(parallel_tasks, onFinish);
-        res.render('matches',response);
+        res.render('matches', response);
 
 
     }
@@ -105,25 +105,25 @@ router.get('/matches', function (req, res)
     }
 });
 
-router.post('/getTeam',function(req,res)
+router.post('/getTeam', function (req, res)
 {
-    var players = [],cost=0;
-    var player1 = req.body.p1;
-    var player2 = req.body.p2;
-    var player3 = req.body.p3;
-    var player4 = req.body.p4;
-    var player5 = req.body.p5;
-    var player6 = req.body.p6;
-    var player7 = req.body.p7;
-    var player8 = req.body.p8;
-    var player9 = req.body.p9;
-    var player10 = req.body.p10;
-    var player11 = req.body.p11;
-    var player12 = req.body.p12;
-    var player13 = req.body.p13;
-    var player14 = req.body.p14;
-    var player15 = req.body.p15;
-    var player16 = req.body.p16;
+    var players = [], cost = 0;
+    var player1 = parseInt(req.body.p1);
+    var player2 = parseInt(req.body.p2);
+    var player3 = parseInt(req.body.p3);
+    var player4 = parseInt(req.body.p4);
+    var player5 = parseInt(req.body.p5);
+    var player6 = parseInt(req.body.p6);
+    var player7 = parseInt(req.body.p7);
+    var player8 = parseInt(req.body.p8);
+    var player9 = parseInt(req.body.p9);
+    var player10 = parseInt(req.body.p10);
+    var player11 = parseInt(req.body.p11);
+    var player12 = parseInt(req.body.p12);
+    var player13 = parseInt(req.body.p13);
+    var player14 = parseInt(req.body.p14);
+    var player15 = parseInt(req.body.p15);
+    var player16 = parseInt(req.body.p16);
     players.push(player1);
     players.push(player2);
     players.push(player3);
@@ -141,11 +141,9 @@ router.post('/getTeam',function(req,res)
     players.push(player15);
     players.push(player16);
 
-
-
-    var onUpdate = function(err,documents)
+    var onUpdate = function (err, documents)
     {
-        if(err)
+        if (err)
         {
             // do something with the error
         }
@@ -157,52 +155,48 @@ router.post('/getTeam',function(req,res)
 
     };
 
-    var getCost = function(id,callback)
+    var getCost = function (id, callback)
     {
-
-        var onFetch = function(err,document)
-        {
-            if(err)
-            {
-                //do something with the error
-            }
-            else
-            {
-               callback(null,document);
-            }
+        var fields = {
+            _id: 1,
+            Name: 1,
+            Cost: 1,
+            Country: 1,
+            Type: 1
         };
-        var credentials = {
-            "_id":id
+        var player = {
+            _id: id
         };
-        mongoPlayers.getPlayer(credentials,onFetch)
+        mongoPlayers.getPlayer(player, fields, callback)
     };
-    var onFinish = function(err,documents)
+    var onFinish = function (err, documents)
     {
-        if(err)
+        if (err)
         {
             // do something with the error
         }
         else
         {
-            for(var i=0;i<documents.length;i++)
+            console.log(documents);
+            for (var i = 0; i < documents.length; i ++)
             {
-                cost=(cost-0) + (documents[i].Cost-0);
-                if(cost>10000000)
+                cost = (cost - 0) + (documents[i].Cost - 0);
+                if (cost > 10000000)
                 {
-                    res.redirect('/home/players',{err:"Cost Exceeded"});
+                    res.redirect('/home/players', {err: "Cost Exceeded"});
                 }
             }
+            res.redirect('/home/squad');
         }
     };
-    async.map(players,getCost,onFinish);
-
+    async.map(players, getCost, onFinish);
 
     var teamName = req.signedCookies.name;
     var credentials = {
-        '_id' : teamName
+        _id: teamName
     };
 
-    mongoUsers.updateUser(credentials,players,onUpdate);
+    mongoUsers.updateUser(credentials, players, onUpdate);
 
 
 });
@@ -224,7 +218,6 @@ router.get('/players', function (req, res) // page for all players, only availab
     };
     mongoPlayers.fetchPlayers(onFetch);
 });
-
 
 
 router.get('/team', function (req, res) // view the assigned playing 11 with options to change the playing 11
