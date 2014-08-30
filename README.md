@@ -8,7 +8,7 @@ This website is hosted [here](http://www.gravitaspremierleague.com/)
 Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues) 
 
 #### Instructions for Installation:
-###### Install Node.js 0.10.x 
+###### Install Node.js 0.10.x
 ###### Install all dependencies
 
     $ npm install
