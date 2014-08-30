@@ -24,6 +24,7 @@
         <ul class="breadcrumbs"
             style="background:rgba(30,30,30,0.9); border: none; box-shadow: inset 0 0 5px 3px rgba(255,255,255,0.2);margin-top: 5%;">
             <li class="current"><a href="#" style="color: lightsteelblue;">Home</a></li>
+            <li><a href="/matches" style="color:#ffffff;">Match</a></li>
             <li><a href="/rules" style="color:#ffffff;">Rules</a></li>
             <li><a href="/leaderboard" style="color:#ffffff;">Leader Board</a></li>
             <li><a href="/sponsors" style="color:#ffffff;">Sponsors</a></li>
@@ -38,7 +39,7 @@
             <table cellspacing="10px"
                    style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
 
-                <% k = 4;i = 0; var z = 1;for(i = 0;i < 16 ;i ++) { %>
+                <% k = 4;i = 0; var z = 1;for(i = 0;i < results.team.length;i ++) { %>
                 <% if(k < 3){ %>
                 <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;">
 
@@ -73,18 +74,16 @@
                style="border-radius: 5px;background: rgba(30,30,100,0.5);float: right;">Change</a>
         </div>
     </div>
-    <div class="row" align="left">
+    <div class="row" align="center">
         <div class="small-5 medium-5 large-5 columns"
              style="background:rgba(255,100,0,0.6); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-top:10%; ">
             <h4 style="color: white;text-align: left;">Team Statistics</h4>
-        </div>
-
-        <div align="right">
-            <div class="small-5 medium-5 large-5 columns"
-                 style="background:rgba(233,0,0,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-top:10%;margin-left: 16.5%">
-                <h4 style="color: white;text-align: left;"><a href="/matches" style="color: #ffffff;">Upcoming
-                        Matches</a></h4>
-            </div>
+            <p style="color: white;text-align: left;">
+                Matches Played: <%=results.user.played><br />
+                Matches Won: <%=results.user.win%><br />
+                Points: <%= results.user.points%><br />
+                Net Run Rate: <%= results.user.net_run_rate%>
+            </p>
         </div>
     </div>
     <!-- content -->
