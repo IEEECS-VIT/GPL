@@ -49,32 +49,26 @@ exports.fetchPlayers = function (callback)
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.getPlayer = function(doc,callback)
+exports.getPlayer = function (queryDoc, fields, callback)
 {
-    var onConnect = function(err,db)
+    var onConnect = function (err, db)
     {
-        if(err)
+        if (err)
         {
             callback(err);
         }
         else
         {
-            console.log(doc._id);
             var collection = db.collection('players');
-            var onFetch = function(err,document)
+            if (fields)
             {
-                if(err)
-                {
-                    callback(err,null);
-                }
-                else
-                {
-                    console.log(document);
-                    callback(null,document);
-                }
-            };
-            collection.findOne(doc,onFetch);
+                collection.findOne(queryDoc, fields, callback);
+            }
+            else
+            {
+                collection.findOne(queryDoc, callback);
+            }
         }
     };
-    MongoClient.connect(mongoUri,onConnect);
+    MongoClient.connect(mongoUri, onConnect);
 };

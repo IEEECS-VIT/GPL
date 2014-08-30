@@ -28,6 +28,7 @@ var mongoMatches = require(path.join(__dirname, '..', '..', 'db', 'mongo-matches
 
 router.get('/', function (req, res)
 {
+    var results = {};
     if (req.signedCookies.name)
     {
         var credentials = {
@@ -35,16 +36,45 @@ router.get('/', function (req, res)
         };
         var onFetch = function (err, doc)
         {
-            //var getDetails = function(elt,index,array);
+            results.user = doc;
+
+            var getDetails = function(id,callback)
+            {
+                var player = {
+                    '_id':id
+                };
+                var fields =
+                {
+                    _id: 1,
+                    Name: 1,
+                    Cost: 1,
+                    Country: 1,
+                    Type: 1
+                };
+                mongoPlayers.getPlayer(player,fields,callback)
+            };
+            var onFinish = function(err,documents)
+            {
+                if(err)
+                {
+                    //do something with the error
+                }
+                else
+                {
+                    results.team = documents;
+                    res.render('home',results);
+                }
+            };
+
             if (err)
             {
                 res.redirect('/');
             }
             else
             {
-              /*  var document = [];
-                document=doc.team;
-                document.forEach(getDetails);*/
+                 var document = [];
+                 document=doc.team;
+                 async.map(document, getDetails, onFinish);
             }
         };
         mongoUsers.fetch(credentials, onFetch);
@@ -95,7 +125,7 @@ router.get('/matches', function (req, res)
 
         };
         async.parallel(parallel_tasks, onFinish);
-        res.render('matches',response);
+        res.render('matches', response);
 
 
     }
@@ -105,62 +135,25 @@ router.get('/matches', function (req, res)
     }
 });
 
-router.post('/getTeam',function(req,res)
+router.post('/getTeam', function (req, res)
 {
-    var player1 = req.body.p1;
-    var player2 = req.body.p2;
-    var player3 = req.body.p3;
-    var player4 = req.body.p4;
-    var player5 = req.body.p5;
-    var player6 = req.body.p6;
-    var player7 = req.body.p7;
-    var player8 = req.body.p8;
-    var player9 = req.body.p9;
-    var player10 = req.body.p10;
-    var player11 = req.body.p11;
-    var player12 = req.body.p12;
-    var player13 = req.body.p13;
-    var player14 = req.body.p14;
-    var player15 = req.body.p15;
-    var player16 = req.body.p16;
-
-    var players = [],cost=0;
-
-    var onUpdate = function(err,documents)
-    {
-        if(err)
-        {
-            // do something with the error
-        }
-        else
-        {
-            res.redirect('/home');
-        }
-
-    };
-
-    var getCost = function(element,index,array)
-    {
-        var onFetch = function(err,document)
-        {
-            if(err)
-            {
-                //do something with the error
-            }
-            else
-            {
-                cost=(cost-0)+(document.Cost-0);
-                if(cost>10000000)
-                {
-                    res.redirect('/players',{err:"Cost Exceeded"});
-                }
-            }
-        };
-        var credentials = {
-            '_id':element
-        };
-        mongoPlayers.getPlayer(credentials,onFetch)
-    };
+    var players = [], cost = 0;
+    var player1 = parseInt(req.body.p1);
+    var player2 = parseInt(req.body.p2);
+    var player3 = parseInt(req.body.p3);
+    var player4 = parseInt(req.body.p4);
+    var player5 = parseInt(req.body.p5);
+    var player6 = parseInt(req.body.p6);
+    var player7 = parseInt(req.body.p7);
+    var player8 = parseInt(req.body.p8);
+    var player9 = parseInt(req.body.p9);
+    var player10 = parseInt(req.body.p10);
+    var player11 = parseInt(req.body.p11);
+    var player12 = parseInt(req.body.p12);
+    var player13 = parseInt(req.body.p13);
+    var player14 = parseInt(req.body.p14);
+    var player15 = parseInt(req.body.p15);
+    var player16 = parseInt(req.body.p16);
     players.push(player1);
     players.push(player2);
     players.push(player3);
@@ -178,19 +171,61 @@ router.post('/getTeam',function(req,res)
     players.push(player15);
     players.push(player16);
 
+    var onUpdate = function (err, documents)
+    {
+        if (err)
+        {
+            // do something with the error
+        }
+        else
+        {
+            console.log(documents);
+            res.redirect('/home');
+        }
 
+    };
 
-    players.forEach(getCost);
-
+    var getCost = function (id, callback)
+    {
+        var fields = {
+            _id: 1,
+            Name: 1,
+            Cost: 1,
+            Country: 1,
+            Type: 1
+        };
+        var player = {
+            _id: id
+        };
+        mongoPlayers.getPlayer(player, fields, callback)
+    };
+    var onFinish = function (err, documents)
+    {
+        if (err)
+        {
+            // do something with the error
+        }
+        else
+        {
+            console.log(documents);
+            for (var i = parseInt(0); i < documents.length; i ++)
+            {
+                cost = (cost - 0) + (documents[i].Cost - 0);
+                if (cost > 10000000)
+                {
+                    res.redirect('/home/players', {err: "Cost Exceeded"});
+                }
+            }
+            res.redirect('/home/team');
+        }
+    };
+    async.map(players, getCost, onFinish);
 
     var teamName = req.signedCookies.name;
     var credentials = {
-        '_id' : teamName
+        _id: teamName
     };
-
-    mongoUsers.updateUser(credentials,players,onUpdate);
-
-
+    mongoUsers.updateUser(credentials, players, onUpdate);
 });
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
@@ -212,12 +247,11 @@ router.get('/players', function (req, res) // page for all players, only availab
 });
 
 
-
 router.get('/team', function (req, res) // view the assigned playing 11 with options to change the playing 11
 {
-    if (req.cookies.name)                           // if cookies exists then access the database
+    if (req.signedCookies.name)                           // if cookies exists then access the database
     {
-        var teamName = req.cookies.name;
+        var teamName = req.signedCookies.name;
         var credentials =
         {
             '_id': teamName
