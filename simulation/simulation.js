@@ -36,6 +36,7 @@ exports.todaysMatches = function (callback)
         {
 
             var day = today.getDate();
+            var collectionName;
             switch (day)
             {
                 case 0:

@@ -37,10 +37,10 @@ exports.generateMatch = function()
             {
                 var parallel_tasks = {};
                 var doc1 = {
-                    "_id" : elt.Team_1
+                    "team_no" : elt.Team_1
                 };
                 var doc2 = {
-                    "_id" : elt.Team_2
+                    "team_no" : elt.Team_2
                 };
 
                 parallel_tasks.team1 = function(asyncCallback)
