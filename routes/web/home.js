@@ -135,6 +135,60 @@ router.get('/matches', function (req, res)
     }
 });
 
+
+router.post('/getsquad',function(req,res)
+{
+    if(req.signedCookies.name)
+    {
+        var teamname = req.signedCookies.name;
+        var credentials = {
+            '_id':teamname
+        };
+        var squad = [];
+        var squad1 = parseInt(req.body.p1);
+        var squad2 = parseInt(req.body.p2);
+        var squad3 = parseInt(req.body.p3);
+        var squad4 = parseInt(req.body.p4);
+        var squad5 = parseInt(req.body.p5);
+        var squad6 = parseInt(req.body.p6);
+        var squad7 = parseInt(req.body.p7);
+        var squad8 = parseInt(req.body.p8);
+        var squad9 = parseInt(req.body.p9);
+        var squad10 = parseInt(req.body.p10);
+        var squad11 = parseInt(req.body.p11);
+        squad.push(squad1);
+        squad.push(squad2);
+        squad.push(squad3);
+        squad.push(squad4);
+        squad.push(squad5);
+        squad.push(squad6);
+        squad.push(squad7);
+        squad.push(squad8);
+        squad.push(squad9);
+        squad.push(squad10);
+        squad.push(squad11);
+        var onFetch = function(err,document)
+        {
+            if(err)
+            {
+                console.log("Error");
+                //do something with the error
+                console.log(err.message);
+            }
+            else
+            {
+                console.log(document);
+                res.redirect('/home');
+            }
+        };
+        mongoUsers.updateUserSquad(credentials,squad,onFetch);
+    }
+    else
+    {
+        res.redirect('/');
+    }
+
+});
 router.post('/getTeam', function (req, res)
 {
     var players = [], cost = 0;
@@ -225,7 +279,7 @@ router.post('/getTeam', function (req, res)
     var credentials = {
         _id: teamName
     };
-    mongoUsers.updateUser(credentials, players, onUpdate);
+    mongoUsers.updateUserTeam(credentials, players, onUpdate);
 });
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
