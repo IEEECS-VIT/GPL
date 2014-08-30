@@ -42,7 +42,8 @@
 
                 <div class="content active" id="panel1">
                     <div class="large-12 medium-12 small-12">
-                        <%= previousMatch %>
+                        <h4>Commentary</h4>
+                        <%= response["previousMatch"].commentary %>
                     </div>
                 </div>
                 <div class="content" id="panel2">
@@ -51,30 +52,26 @@
                     <ul class="inline-list">
                         <% for(var i = 0;i < 16;i++){ %>
                         <li style="float:left">
-                            <% for(var j = 0;j < 16;j++){ %>
-                            <% if (nextMatch[j]._id > 303){ %>
-                            <img src="/images/bat/<%= nextMatch[j]._id %>.jpg"
+                            <% if (response["nextMatch"][i]._id <= 113){ %>
+                            <img src="/images/bat/<%= response["nextMatch"][i]._id %>.jpg"
                                  style="width: 40%;margin: 0;float: left;"/>
 
-                            <p style="text-align: center;"><%= nextMatch[j].Name %></p>
-                            <% }} %>
-                            <% if (nextMatch[i]._id <= 113){ %>
-                            <img src="/images/bat/<%= nextMatch[i]._id %>.jpg"
+                            <p style="text-align: center;"><%= response["nextMatch"][i].Name %></p>
+                            <% } else if(response["nextMatch"][i]._id >= 114 && response["nextMatch"][i] <= 242) { %>
+                            <img src="/images/bowl/<%= response["nextMatch"][i]._id %>.jpg"
                                  style="width: 40%;margin: 0;float: left;"/>
 
-                            <p style="text-align: center;"><%= nextMatch[i].Name %></p>
-                            <% } else if(nextMatch[i]._id >= 114 && nextMatch[i] <= 242) { %>
-                            <img src="/images/bowl/<%= nextMatch[i]._id %>.jpg"
+                            <p style="text-align: center;"><%= response["nextMatch"][i].Name %></p>
+                            <% } else if(response["nextMatch"][i]._id >= 243 && response["nextMatch"][i]._id <= 303) { %>
+                            <img src="/images/all/<%= response["nextMatch"][i]._id %>.jpg"
                                  style="width: 40%;margin: 0;float: left;"/>
 
-                            <p style="text-align: center;"><%= nextMatch[i].Name %></p>
-                            <% } else if(nextMatch[i]._id >= 243 && nextMatch[i]._id <= 303) { %>
-                            <img src="/images/all/<%= nextMatch[i]._id %>.jpg"
+                            <p style="text-align: center;"><%= response["nextMatch"][i].Name %></p>
+                            <% } else { %>
+                            <img src="/images/coaches/<%= response["nextMatch"][i]._id %>.jpg"
                                  style="width: 40%;margin: 0;float: left;"/>
 
-                            <p style="text-align: center;"><%= nextMatch[i].Name %></p>
-                            <% } %>
-
+                            <p style="text-align: center;"><%= response["nextMatch"][i].Name %></p>
                         </li>
                         <% } %>
 
