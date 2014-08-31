@@ -608,7 +608,7 @@ function make(team){
                 }
                 if (score[strike[+strike_index]] >= 45 && score[strike[+strike_index]] < 50)
                 {
-                    commentary += '\nlooks like there won\'strike_index be any fifty for ' + taem_object[+toss].bat_name[strike[+strike_index]] + ', he came so close, and was yet so far.\n';
+                    commentary += '\nlooks like there won\'strike_index be any fifty for ' + team_object[+toss].bat_name[strike[+strike_index]] + ', he came so close, and was yet so far.\n';
                 }//console.log("\nlooks like there won'strike_index be any fifty for Batsman ", strike[+strike_index], ", he came so close, and was yet so far.\n");
                 else if (score[strike[+strike_index]] >= 90 && score[strike[+strike_index]] < 100) commentary += '\nHe\'ll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team.\n';//console.log("\nHe'll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team.\n");
                 if (continuous_wickets[current_bowler] == 3)
@@ -674,7 +674,7 @@ function make(team){
                 }
             }
 
-        if (continuous_maximums == 6) commentary += '\nSix G.P.L maximums in the previous over ! What an effort by ' + team_objext[+toss].bat_name[strike[+strike_index]] + '. The crowd is ecstatic, ' + team_object[+!toss].bowl_name[current_bowler] + ' is absolutely flabbergasted.\n';//console.log("\nSix G.P.L maximums in the previous over ! What an effort by Batsman.", strike[+strike_index], ". The crowd is ecstatic, Bowler ", current_bowler, " is absolutely flabbergasted.\n");
+        if (continuous_maximums == 6) commentary += '\nSix G.P.L maximums in the previous over ! What an effort by ' + team_object[+toss].bat_name[strike[+strike_index]] + '. The crowd is ecstatic, ' + team_object[+!toss].bowl_name[current_bowler] + ' is absolutely flabbergasted.\n';//console.log("\nSix G.P.L maximums in the previous over ! What an effort by Batsman.", strike[+strike_index], ". The crowd is ecstatic, Bowler ", current_bowler, " is absolutely flabbergasted.\n");
         runs_conceded[current_bowler] += previous_over;
         strike_index = !strike_index;
         commentary += '\nLast over: ';//console.log("\nLast over: ");
@@ -799,22 +799,6 @@ if(winner_index==-1)
         };
         collection.findAndModify(doc, [], {$inc: {played: 1, points: 1, runs_for: Total[0], runs_against: Total[0], balls_for: Overs[0], balls_against: Overs[0]}}, {$set: { net_run_rate: 6 * (this.runs_for / this.balls_for - this.runs_against / this.balls_against)}}, {}, onUpdate)
         doc._id = users[1].id;
-        var onUpdate = function (err, document)
-        {
-            if (err)
-            {
-                callback(err, null);
-            }
-            else if (document)
-            {
-                db.close();
-                callback(null, document);
-            }
-            else
-            {
-                callback(true, null);
-            }
-        };
         collection.findAndModify(doc, [], {$inc: {played: 1, points: 1, runs_for: Total[0], runs_against: Total[0], balls_for: Overs[0], balls_against: Overs[0]}}, {$set: { net_run_rate: 6 * (this.runs_for / this.balls_for - this.runs_against / this.balls_against)}}, {}, onUpdate)
     };
 }
@@ -844,22 +828,6 @@ else
             };
             collection.findAndModify(doc, [], {$inc: {played: 1, win: 1, points: 2, runs_for: Total[+winner_index], runs_against: Total[+!winner_index], balls_for: Overs[+winner_index], balls_against: Overs[+!winner_index]}}, {$set: { net_run_rate: 6 * (this.runs_for / this.balls_for - this.runs_against / this.balls_against)}}, {}, onUpdate)
             doc._id = users[+!winner_index]._id;
-            var onUpdate = function (err, document)
-            {
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else if (document)
-                {
-                    db.close();
-                    callback(null, document);
-                }
-                else
-                {
-                    callback(true, null);
-                }
-            };
             collection.findAndModify(doc, [], {$inc: {played: 1, runs_for: Total[+!winner_index], runs_against: Total[+winner_index], balls_for: Overs[+winner_index], balls_against: Overs[+!winner_index]}}, {$set: { net_run_rate: 6 * (this.runs_for / this.balls_for - this.runs_against / this.balls_against)}}, {}, onUpdate)
         };
     }
