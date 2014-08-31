@@ -31,191 +31,190 @@
 <body style="background-color:#646464;font-family: 'PT Sans', sans-serif;height:100%;"
       onLoad="valid();">
 <div style="min-height: 100%">
-    <div class="large-12 top-bar" style="overflow: visible;">
-        <section class="top-bar-section small-only-text-center">
-            <ul class="left">
-                <li><a href="/"><img src="/images/small.png" style="height:42px;padding-bottom:3px;"/></a></li>
-                <li><a href="https://www.facebook.com/ieeecsvit"><img src="/images/ieee.png" style="height:40px;"
-                                                                      align="center"/></a></li>
+<div class="large-12 top-bar" style="overflow: visible;">
+    <section class="top-bar-section small-only-text-center">
+        <ul class="left">
+            <li><a href="/"><img src="/images/small.png" style="height:42px;padding-bottom:3px;"/></a></li>
+            <li><a href="https://www.facebook.com/ieeecsvit"><img src="/images/ieee.png" style="height:40px;"
+                                                                  align="center"/></a></li>
 
-            </ul>
-            <ul class="right">
-                <li class="has-dropdown not-click" style="border-radius: 5px">
-                    <a href="#" style="border-radius: 5px">Sign In</a>
-                    <ul class="dropdown" style="width:300%;">
-                        <form method="post" action="/login">
-                            <li class="title back js-generated">
-                                <h5>
-                                    <a href="javascript:void(0)">
-                                        Back
-                                    </a>
-                                </h5>
-                            </li>
+        </ul>
+        <ul class="right">
+            <li class="has-dropdown not-click" style="border-radius: 5px">
+                <a href="#" style="border-radius: 5px">Sign In</a>
+                <ul class="dropdown" style="width:300%;">
+                    <form method="post" action="/login">
+                        <li class="title back js-generated">
+                            <h5>
+                                <a href="javascript:void(0)">
+                                    Back
+                                </a>
+                            </h5>
+                        </li>
 
 
-                            <li>
+                        <li>
 
-                                <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
-                                    <div class="row">
-                                        <div class="small-3 columns" style="margin-left: -5%">
-                                            <label for="team" class="right inline" style="color: white;">Team
-                                                Name: </label>
-                                        </div>
-                                        <div class="small-9 columns">
-                                            <input type="text" id="team" name="team_name" placeholder="Team Name"
-                                                   value=""
-                                                   style="margin:-4% 0 0 1%;border-radius: 5px">
-                                        </div>
+                            <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
+                                <div class="row">
+                                    <div class="small-3 columns" style="margin-left: -5%">
+                                        <label for="team" class="right inline" style="color: white;">Team
+                                            Name: </label>
+                                    </div>
+                                    <div class="small-9 columns">
+                                        <input type="text" id="team" name="team_name" placeholder="Team Name" value=""
+                                               style="margin:-4% 0 0 1%;border-radius: 5px">
                                     </div>
                                 </div>
+                            </div>
 
 
-                                <!--Username/Team Name -->
+                            <!--Username/Team Name -->
 
 
-                                <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
-                                    <div class="row" style="margin-top: 2%">
-                                        <div class="small-3 columns" style="margin-left: -5%">
-                                            <label for="pass" class="right inline"
-                                                   style="color: white;">Password: </label>
-                                        </div>
-                                        <div class="small-9 columns">
-                                            <input type="password" id="p
+                            <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
+                                <div class="row" style="margin-top: 2%">
+                                    <div class="small-3 columns" style="margin-left: -5%">
+                                        <label for="pass" class="right inline"
+                                               style="color: white;">Password: </label>
+                                    </div>
+                                    <div class="small-9 columns">
+                                        <input type="password" id="p
                                                   ass" placeholder="Password" name="password" value=""
-                                                   style="margin:-4% 0 0 1%;border-radius: 5px">
-                                        </div>
+                                               style="margin:-4% 0 0 1%;border-radius: 5px">
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- password-->
+                            <!-- password-->
 
 
-                            </li>
-                            <li>
-                                <input type="submit" align="center" class="button [tiny small large]" value="Login"
-                                       id="button" name="login"
-                                       style="border-radius: 5px;background: rgba(30,30,30,1);margin-left: 38%;margin-bottom: 3%;"/>
-                            </li>
+                        </li>
+                        <li>
+                            <input type="submit" align="center" class="button [tiny small large]" value="Login"
+                                   id="button" name="login"
+                                   style="border-radius: 5px;background: rgba(30,30,30,1);margin-left: 38%;margin-bottom: 3%;"/>
+                        </li>
 
-                            <li class="divider"><a href="/forgot">Forgot Password?</a></li>
-                        </form>
-                    </ul>
-                </li>
-            </ul>
-        </section>
+                        <li class="divider"><a href="/forgot">Forgot Password?</a></li>
+                    </form>
+                </ul>
+            </li>
+        </ul>
+    </section>
+</div>
+<!-- top bar -->
+<div class="row" align="center">
+
+    <div class="small-12 medium-12 large-12 columns"
+         style="background:rgba(0,123,184,0.5); border-radius: 0 0 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);float: left;text-align: left ">
+        <form name="signin" id="reg">
+            <fieldset>
+                <legend>Account Details</legend>
+                <div id="fill" class="large-12 medium-12 columns"
+                     style="margin:1%;background: red;color: white;display:none"><p></p></div>
+                <!-- Error Msg-->
+                <div class="row">
+                    <div class="small-6">
+                        <div class="row">
+                            <div class="small-3 columns">
+                                <label for="team" class="right inline" style="color: white;">Team Name:<i
+                                            style="color:red;">*</i> </label>
+                            </div>
+                            <div class="small-9 columns">
+                                <input type="text" id="team" placeholder="Team Name" name="team_name"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Username/Team Name -->
+
+                    <div class="small-6">
+                        <div class="row">
+                            <div class="small-3 columns">
+                                <label for="pass" class="right inline" style="color: white;">Password:<i
+                                            style="color:red;">*</i> </label>
+                            </div>
+                            <div class="small-9 columns">
+                                <input type="password" id="pass" placeholder="Password" name="password"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- password-->
+
+                    <div class="small-6">
+                        <div class="row">
+                            <div class="small-3 columns">
+                                <label for="cpass" class="right inline" style="color: white;">Confirm
+                                    Password:<i style="color:red;">*</i> </label>
+                            </div>
+                            <div class="small-9 columns">
+                                <input type="password" id="cpass" placeholder="Re-type Password"
+                                       name="confirm_password"/>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <!--conf pass -->
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Manager Details</legend>
+                <div class="row">
+                    <div class="small-12 large-12 columns">
+                        <div class="small-2 large-2 columns">
+                            <label for="email" class="right inline" style="color: white;">Email:<i
+                                        style="color:red;">*</i> </label>
+                        </div>
+                        <div class="small-4 large-4 columns left">
+                            <input type="email" id="email" placeholder="example@domain.com" name="email"/>
+                        </div>
+
+                    </div>
+                </div>
+                <!--email -->
+
+                <div class="row">
+                    <div class="small-12 large-12 columns">
+                        <div class="small-2 large-2 columns">
+                            <label for="mobile" class="right inline" style="color: white;">Mobile:<i
+                                        style="color:red;">*</i> </label>
+                        </div>
+                        <div class="small-4 large-4 columns left">
+                            <input type="text" id="pno" placeholder="Mobile Number" name="phone"/>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- phone -->
+
+
+                <div class="row">
+                    <div class="small-12 large-12 columns">
+                        <div class="small-2 large-2 columns">
+                            <label for="manager" class="right inline" style="color: white;">Manager:<i
+                                        style="color:red;">*</i> </label>
+                        </div>
+                        <div class="small-4 large-4 columns left">
+                            <input type="text" id="manager" placeholder="Manager Name" name="manager_name"/>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="large-12" align="center">
+                    <input type="submit" id="button" class="button"
+                           style="background: rgba(50,50,50,1);border-radius: 5px" align="center" name="button"
+                           onclick="validator()"/>
+                </div>
+            </fieldset>
+        </form>
     </div>
-    <!-- top bar -->
-    <div class="row" align="center">
 
-        <div class="small-12 medium-12 large-12 columns"
-             style="background:rgba(0,123,184,0.5); border-radius: 0 0 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);float: left;text-align: left ">
-            <form name="signin" id="reg">
-                <fieldset>
-                    <legend>Account Details</legend>
-                    <div id="fill" class="large-12 medium-12 columns"
-                         style="margin:1%;background: red;color: white;display:none"><p></p></div>
-                    <!-- Error Msg-->
-                    <div class="row">
-                        <div class="small-6">
-                            <div class="row">
-                                <div class="small-3 columns">
-                                    <label for="team" class="right inline" style="color: white;">Team Name:<i
-                                                style="color:red;">*</i> </label>
-                                </div>
-                                <div class="small-9 columns">
-                                    <input type="text" id="team" placeholder="Team Name" name="team_name"/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Username/Team Name -->
-
-                        <div class="small-6">
-                            <div class="row">
-                                <div class="small-3 columns">
-                                    <label for="pass" class="right inline" style="color: white;">Password:<i
-                                                style="color:red;">*</i> </label>
-                                </div>
-                                <div class="small-9 columns">
-                                    <input type="password" id="pass" placeholder="Password" name="password"/>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- password-->
-
-                        <div class="small-6">
-                            <div class="row">
-                                <div class="small-3 columns">
-                                    <label for="cpass" class="right inline" style="color: white;">Confirm
-                                        Password:<i style="color:red;">*</i> </label>
-                                </div>
-                                <div class="small-9 columns">
-                                    <input type="password" id="cpass" placeholder="Re-type Password"
-                                           name="confirm_password"/>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <!--conf pass -->
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <legend>Manager Details</legend>
-                    <div class="row">
-                        <div class="small-12 large-12 columns">
-                            <div class="small-2 large-2 columns">
-                                <label for="email" class="right inline" style="color: white;">Email:<i
-                                            style="color:red;">*</i> </label>
-                            </div>
-                            <div class="small-4 large-4 columns left">
-                                <input type="email" id="email" placeholder="example@domain.com" name="email"/>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!--email -->
-
-                    <div class="row">
-                        <div class="small-12 large-12 columns">
-                            <div class="small-2 large-2 columns">
-                                <label for="mobile" class="right inline" style="color: white;">Mobile:<i
-                                            style="color:red;">*</i> </label>
-                            </div>
-                            <div class="small-4 large-4 columns left">
-                                <input type="text" id="pno" placeholder="Mobile Number" name="phone"/>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- phone -->
-
-
-                    <div class="row">
-                        <div class="small-12 large-12 columns">
-                            <div class="small-2 large-2 columns">
-                                <label for="manager" class="right inline" style="color: white;">Manager:<i
-                                            style="color:red;">*</i> </label>
-                            </div>
-                            <div class="small-4 large-4 columns left">
-                                <input type="text" id="manager" placeholder="Manager Name" name="manager_name"/>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="large-12" align="center">
-                        <input type="submit" id="button" class="button"
-                               style="background: rgba(50,50,50,1);border-radius: 5px" align="center" name="button"
-                               onclick="validator()"/>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
-
-    </div>
+</div>
 
 </div>
 <footer class="large-12" style="bottom:0; position:relative;">
@@ -228,7 +227,7 @@
                                                          style="height:40px;padding-top: 5px" align="center"/></a></li>
             </ul>
             <ul class="right">
-                <li><a href="/developer"><img src="/images/symbol.png" style="height:35px;" align="center"/><span
+                <li><a href="/developers"><img src="/images/symbol.png" style="height:35px;" align="center"/><span
                                 style="color:white;text-shadow: 1px 1px rgba(68,59,50,1);">Developers</span></a></li>
 
             </ul>
