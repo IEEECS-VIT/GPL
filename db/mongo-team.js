@@ -84,6 +84,7 @@ exports.getTeam = function (doc, callback)
 
 exports.getSquad = function (doc, callback)
 {
+    var coach;
     var onConnect = function (err, db)
     {
         if (err)
@@ -93,6 +94,34 @@ exports.getSquad = function (doc, callback)
         else
         {
             var collection = db.collection('users');
+            var onFinish = function(err,documents)
+            {
+                var onGetCoach = function(err,doc)
+                {
+                    if(err)
+                    {
+                        callback(err,null)
+                    }
+                    else
+                    {
+                        documents.push(doc);
+                        callback(null,documents);
+                    }
+                };
+                if(err)
+                {
+                    throw err;
+                }
+                else
+                {
+                    var credentials =
+                    {
+                        "_id" : coach
+                    };
+                    getPlayer(credentials,onGetCoach);
+                }
+
+            };
 
             var onFetch = function (err, document)
             {
@@ -102,7 +131,14 @@ exports.getSquad = function (doc, callback)
                 }
                 else
                 {
-                    async.map(document.squad, getPlayer, callback);
+                    async.map(document.squad, getPlayer, onFinish);
+                    for( var i=0;i<16;i++)
+                    {
+                        if(parseInt(document.team[i]._id) >= parseInt(304))
+                        {
+                            coach=document.team[i]._id;
+                        }
+                    }
                     // document.team.forEach(addDocument);
                     // callback(false, documents);
                 }
