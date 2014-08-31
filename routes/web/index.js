@@ -23,8 +23,6 @@ var router = express.Router();
 
 var mongoInterest = require(path.join(__dirname, '..', '..', 'db', 'mongo-interest'));
 var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
-var mongoTeam = require(path.join(__dirname, '..', '..', 'db', 'mongo-team'));
-var mongoMatches = require(path.join(__dirname,'..','..','db','mongo-matches'));
 
 router.get('/', function (req, res)
 {
@@ -230,34 +228,83 @@ router.post('/interest', function (req, res) // interest form
     };
     var onInsert = function (err, docs)
     {
-        res.redirect('/interest');
+        if(err)
+        {
+            // do something
+        }
+        else
+        {
+            res.redirect('/interest');
+            console.log(docs);
+        }
+
     };
     mongoInterest.insert(newUser, onInsert);
 });
 
 router.get('/developers', function (req, res) // developers page
 {
-    res.render('developers', { });
+    if(req.signedCookies.name)
+    {
+        var session=1;
+    }
+    else
+    {
+        var session=0;
+    }
+    res.render('developers', {results:session });
 });
 
 router.get('/prize', function (req, res) // page to view prizes
 {
-    res.render('prize', { });
+    if(req.signedCookies.name)
+    {
+        var session=1;
+    }
+    else
+    {
+        var session=0;
+    }
+    res.render('prize', {results : session });
 });
 
 router.get('/rules', function (req, res)
 {
-    res.render('rules', { });
+    if(req.signedCookies.name)
+    {
+        var session=1;
+    }
+    else
+    {
+        var session=0;
+    }
+    res.render('rules', {results : session });
 });
 
 router.get('/sponsors', function (req, res) // sponsors page
 {
-    res.render('sponsors', { });
+    if(req.signedCookies.name)
+    {
+        var session=1;
+    }
+    else
+    {
+        var session=0;
+    }
+    res.render('sponsors', {results : session });
 });
 
 router.get('/trailer', function (req, res) // trailer page
 {
-    res.render('trailer', { });
+    if(req.signedCookies.name)
+    {
+        var session=1;
+    }
+    else
+    {
+        var session=0;
+    }
+    res.render('trailer', {results : session });
 });
 
 module.exports = router;
