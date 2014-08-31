@@ -37,6 +37,10 @@ router.get('/', function (req, res)
         var onFetch = function (err, doc)
         {
             results.user = doc;
+            if(doc.team.length == 0)
+            {
+                res.redirect("/home/players")
+            }
 
             var getDetails = function(id,callback)
             {
@@ -132,6 +136,7 @@ router.get('/matches', function (req, res)
         };
         var parallel_tasks = {};
         var response = {};
+        response.bool="false";
         var onFinish = function (err, results)
         {
             if (err)
@@ -142,7 +147,11 @@ router.get('/matches', function (req, res)
             {
                 response["previousMatch"] = results.previousMatch;
                 response["nextMatch"] = results.nextMatch;
-                res.render('matches', response);
+                if(response["previousMatch"]!=null || response["nextMatch"]!=null)
+                {
+                    response.bool="True";
+                }
+                res.render('matches', {response:response});
             }
 
         };
@@ -315,23 +324,71 @@ router.post('/getTeam', function (req, res)
     };
     mongoUsers.updateUserTeam(credentials, players, onUpdate);
 });
+
+
+
+router.get('/rules', function (req, res)
+{
+    res.render('rules', { });
+});
+
+router.get('/sponsors', function (req, res) // sponsors page
+{
+    res.render('sponsors', { });
+});
+
+router.get('/trailer', function (req, res) // trailer page
+{
+    res.render('trailer', { });
+});
+
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
-    var onFetch = function (err, documents)
+    if(req.signedCookies.name)
     {
-        if (err)
+        var doc = {
+            "_id":req.signedCookies.name
+        };
+        var onFetchUser = function(err,document)
         {
-            res.redirect('/home');
-        }
-        else
-        {
-            res.render('players', {
-                Players: documents
-            });
-        }
+            if(err)
+            {
+                //do something with the error
+            }
+            else
+            {
+                if(document.team.length != 0)
+                {
+                    res.redirect("/home");
+                }
+                else
+                {
+                    var onFetch = function (err, documents)
+                    {
+                        if (err)
+                        {
+                            res.redirect('/home');
+                        }
+                        else
+                        {
+                            res.render('players', {
+                                Players: documents
+                            });
+                        }
 
-    };
-    mongoPlayers.fetchPlayers(onFetch);
+                    };
+                    mongoPlayers.fetchPlayers(onFetch);
+                }
+            }
+        };
+        mongoUsers.fetch(doc,onFetchUser);
+
+    }
+    else
+    {
+        res.redirect("/");
+    }
+
 });
 
 
