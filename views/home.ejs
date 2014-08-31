@@ -41,57 +41,64 @@
         <ul class="breadcrumbs"
             style="background:rgba(30,30,30,0.9); border: none; box-shadow: inset 0 0 5px 3px rgba(255,255,255,0.2);margin-top: 5%;">
             <li class="current"><a href="#" style="color: lightsteelblue;">Home</a></li>
-            <li><a href="/rules" style="color:#ffffff;">Rules</a></li>
-            <li><a href="/leaderboard" style="color:#ffffff;">Leader Board</a></li>
-            <li><a href="/sponsors" style="color:#ffffff;">Sponsors</a></li>
-            <li><a href="/trailer" style="color:#ffffff;">Trailer</a></li>
+            <li><a href="/home/matches" style="color:#ffffff;">Match</a></li>
+            <li><a href="/home/rules" style="color:#ffffff;">Rules</a></li>
+            <li><a href="/home/leaderboard" style="color:#ffffff;">Leader Board</a></li>
+            <li><a href="/home/sponsors" style="color:#ffffff;">Sponsors</a></li>
+            <li><a href="/home/trailer" style="color:#ffffff;">Trailer</a></li>
         </ul>
     </div>
     <div class="row" align="center">
 
         <div class="small-12 medium-12 large-12 columns"
              style="background:rgba(0,233,0,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-top:3%; ">
-            <h4 style="color: white;text-align: left;margin:1%">Playing XI</h4>
+            <h4 style="color: white;text-align: left;margin:1%"></h4>
             <table cellspacing="10px"
-                   style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;" class="large-12 medium-12 small-12">
-
-                <% k = 4;var check=1;i = 0; var z = 1;for(i = 0;i < results.team.length;i ++) { if(results.team[i]._id>303) {continue;}%>
+                   style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
+                <%for(var i=0;i<results.team.length;i++) { %>
+                <%if(results.team[i]._id>303) { %>
+                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;" colspan="3">
+                    <img src="/images/coaches/<%= results.team[i]._id%>.jpg" style="width: 40%; margin: 0" />
+                    <p style="text-align: center;">
+                        <%=results.team[i].Name %>
+                    </p>
+                </td>
+                <%} } %>
+                <% k = 4;i = 0; var z = 1;for(i = 0;i < results.team.length;i++) { %>
                 <% if(k < 3){ %>
-                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;">
-                    <%if(check==0){i=0;check=2;}if(check ==1){for(var count = 0;count<16;count++){%>
-                    <%if(results.team[count]._id>303) { %>
-                    <img src="/images/coaches/<%= results.team[count]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
-                    <p style="text-align: center;"><%= results.team[count].Name %></p>
-                    <p style="text-align: center;">Coach</p>
-                    <% check =0;k++;}}continue;} %>
+
+                <% if(results.team[i]._id <= 303){ %>
+                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
+                    id="box<%= results.team[i]._id %>" onclick="">
+
                     <% if (results.team[i]._id <= 113){ %>
                     <img src="/images/bat/<%= results.team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                     <p style="text-align: center;"><%= results.team[i].Name %></p>
-                    <p style="text-align: center;">Batsman</p>
+                    <% } else if(results.team[i]._id >= 114 && results.team[i]._id <= 242) { %>
+                    <img src="/images/bowl/<%= results.team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
+
+                    <p style="text-align: center;"><%= results.team[i].Name %></p>
                     <% } else if(results.team[i]._id >= 243 && results.team[i]._id <= 303) { %>
                     <img src="/images/all/<%= results.team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                     <p style="text-align: center;"><%= results.team[i].Name %></p>
-                    <p style="text-align: center;">All Rounder</p>
-                    <% }else if(results.team[i]._id >= 114 && results.team[i]._id <= 242){ %>
-                    <img src="/images/bowl/<%= results.team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
-
-                    <p style="text-align: center;"><%= results.team[i].Name %></p>
-                    <p style="text-align: center;">Bowler</p>
-                    <% }%>
+                    <% } %>
                 </td>
-                <% k++;} else { if(z == 1) { %>
+                <% k++; } else {
+                    continue;
+                } %>
+                <% } else { if(z == 1) { %>
                 <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                    <% z = 0;k = 0;} else { %>
+                    <% z = 0;k = 0;i--;} else { %>
                 </tr>
-                <% k = 0;i --; %>
+                <% k = 0;i--; %>
                 <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
                     <% } } } %>
                 </tr>
             </table>
-            <a href="/team" class="button small [radius round]"
-               style="border-radius: 5px;background: rgba(30,30,100,0.5);float: right;">Change</a>
+            <a href="/home/team" class="button small [radius round]"
+               style="border-radius: 5px;background: rgba(30,30,100,0.5);float: right;">Change Line Up</a>
         </div>
     </div>
     <div class="row" align="center">
