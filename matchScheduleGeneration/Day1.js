@@ -63,9 +63,9 @@ exports.gen_schedule=function()
                         {
                             console.log(docs)
                         }
-                    }
+                    };
 
-                    for (var i = 1; i <= count; i = i + 2)
+                    for ( i = 1; i <= count; i = i + 2)
                     {
                         j=i+1;
                         arr[i] = match_count;
@@ -75,7 +75,7 @@ exports.gen_schedule=function()
                             "_id":match_count,
                             "Team_1":i,
                             "Team_2":j,
-                            "TimeStamp":"Day 1"
+                            "TimeStamp": new Date("5 Sep 2014 00:00:00 +0530 (IST)")
                         };
                         match_count++;
 
@@ -92,12 +92,12 @@ exports.gen_schedule=function()
 
                     //callback(null,true);
                 }
-            }
+            };
             collection.count(onFetch);
         }
 
-    }
+    };
     MongoClient.connect(mongoUri, onConnect);
 
 
-}
+};

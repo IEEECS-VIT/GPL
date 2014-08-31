@@ -63,7 +63,7 @@ exports.gen_schedule=function()
                         {
                             console.log(docs)
                         }
-                    }
+                    };
 
                     for ( var i = 0; i < count/8;i++)
                     {
@@ -79,7 +79,7 @@ exports.gen_schedule=function()
                                 "_id": match_count,
                                 "Team_1":i,
                                 "Team_2":j,
-                                "TimeStamp": "Day 5"
+                                "TimeStamp": new Date("9 Sep 2014 00:00:00 +0530 (IST)")
                             };
                             match_count++;
                             SchedulePush.insert(match,"matchday5",onInsert)
@@ -87,12 +87,12 @@ exports.gen_schedule=function()
                         }
                     }
                 }
-            }
+            };
             collection.count(onFetch);
         }
 
-    }
+    };
     MongoClient.connect(mongoUri, onConnect);
 
 
-}
+};
