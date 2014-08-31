@@ -115,13 +115,13 @@
                      style="margin:1%;background: red;color: white;display:none"><p></p></div>
                 <!-- Error Msg-->
                 <div class="row">
-                    <div class="small-6">
+                    <div class="small-6 large-12">
                         <div class="row">
-                            <div class="small-3 columns">
+                            <div class="small-6 large-4 columns">
                                 <label for="team" class="right inline" style="color: white;">Team Name:<i
                                             style="color:red;">*</i> </label>
                             </div>
-                            <div class="small-9 columns">
+                            <div class="small-9 large-5 columns left">
                                 <input type="text" id="team" placeholder="Team Name" name="team_name"/>
                             </div>
                         </div>
@@ -129,35 +129,31 @@
 
                     <!--Username/Team Name -->
 
-                    <div class="small-6">
+                    <div class="small-12 large-12">
                         <div class="row">
-                            <div class="small-3 columns">
+                            <div class="small-4 columns">
                                 <label for="pass" class="right inline" style="color: white;">Password:<i
                                             style="color:red;">*</i> </label>
                             </div>
-                            <div class="small-9 columns">
+                            <div class="small-5  large-5 columns left">
                                 <input type="password" id="pass" placeholder="Password" name="password"/>
                             </div>
                         </div>
                     </div>
                     <!-- password-->
 
-                    <div class="small-6">
+                    <div class="small-6 large-12">
                         <div class="row">
-                            <div class="small-3 columns">
+                            <div class="small-3 large-4 columns">
                                 <label for="cpass" class="right inline" style="color: white;">Confirm
                                     Password:<i style="color:red;">*</i> </label>
                             </div>
-                            <div class="small-9 columns">
+                            <div class="small-9 large-5 columns left">
                                 <input type="password" id="cpass" placeholder="Re-type Password"
                                        name="confirm_password"/>
                             </div>
                         </div>
-
-
                     </div>
-
-
                     <!--conf pass -->
                 </div>
             </fieldset>
@@ -165,11 +161,11 @@
                 <legend>Manager Details</legend>
                 <div class="row">
                     <div class="small-12 large-12 columns">
-                        <div class="small-2 large-2 columns">
+                        <div class="small-2 large-4 columns">
                             <label for="email" class="right inline" style="color: white;">Email:<i
                                         style="color:red;">*</i> </label>
                         </div>
-                        <div class="small-4 large-4 columns left">
+                        <div class="small-4 large-5 columns left">
                             <input type="email" id="email" placeholder="example@domain.com" name="email"/>
                         </div>
 
@@ -179,11 +175,11 @@
 
                 <div class="row">
                     <div class="small-12 large-12 columns">
-                        <div class="small-2 large-2 columns">
+                        <div class="small-2 large-4 columns">
                             <label for="mobile" class="right inline" style="color: white;">Mobile:<i
                                         style="color:red;">*</i> </label>
                         </div>
-                        <div class="small-4 large-4 columns left">
+                        <div class="small-4 large-5 columns left">
                             <input type="text" id="pno" placeholder="Mobile Number" name="phone"/>
                         </div>
 
@@ -194,11 +190,11 @@
 
                 <div class="row">
                     <div class="small-12 large-12 columns">
-                        <div class="small-2 large-2 columns">
+                        <div class="small-2 large-4 columns">
                             <label for="manager" class="right inline" style="color: white;">Manager:<i
                                         style="color:red;">*</i> </label>
                         </div>
-                        <div class="small-4 large-4 columns left">
+                        <div class="small-4 large-5 columns left">
                             <input type="text" id="manager" placeholder="Manager Name" name="manager_name"/>
                         </div>
 
@@ -208,7 +204,7 @@
                 <div class="large-12" align="center">
                     <input type="submit" id="button" class="button"
                            style="background: rgba(50,50,50,1);border-radius: 5px" align="center" name="button"
-                           onclick="validator()"/>
+                           onclick="validator()" value="Submit" />
                 </div>
             </fieldset>
         </form>
