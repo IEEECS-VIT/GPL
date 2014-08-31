@@ -62,7 +62,7 @@ router.get('/', function (req, res)
                 else
                 {
                     results.team = documents;
-                    res.render('home',results);
+                    res.render('home',{results: results});
                 }
             };
 
@@ -85,7 +85,39 @@ router.get('/', function (req, res)
     }
 });
 
+router.get('/leaderboard', function (req, res) // Leaderboard/Standings
+{
+    if (req.signedCookies.name)                           // if cookies exists then access the database
+    {
+        var teamname = req.signedCookies.name;
+        var doc =
+        {
+            "_id": teamname
+        };
+        var onFetch = function (err, documents)
+        {
+            if (err)
+            {
+                console.log(err.message);
 
+            }
+            else
+            {
+                console.log(documents);
+                res.render("leaderboard", { leaderboard: documents});
+            }
+        };
+        console.log("get Leader Function");
+        mongoUsers.getleader(doc, onFetch);
+
+    }
+    else
+    {
+        res.redirect("/");
+    }
+
+
+});
 router.get('/matches', function (req, res)
 {
     if (req.signedCookies.name)
@@ -156,6 +188,7 @@ router.post('/getsquad',function(req,res)
         var squad9 = parseInt(req.body.p9);
         var squad10 = parseInt(req.body.p10);
         var squad11 = parseInt(req.body.p11);
+        console.log(squad11);
         squad.push(squad1);
         squad.push(squad2);
         squad.push(squad3);
@@ -167,6 +200,7 @@ router.post('/getsquad',function(req,res)
         squad.push(squad9);
         squad.push(squad10);
         squad.push(squad11);
+        console.log(squad);
         var onFetch = function(err,document)
         {
             if(err)

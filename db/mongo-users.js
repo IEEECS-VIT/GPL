@@ -20,6 +20,35 @@ var MongoClient = require('mongodb').MongoClient;
 
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
+exports.getCount = function(callback)
+{
+    var onConnect = function(err,db)
+    {
+        if(err)
+        {
+            throw err;
+        }
+        else
+        {
+            var collection = db.collection('users');
+            var onFetch = function(err,count)
+            {
+                if(err)
+                {
+                    throw err;
+                }
+                else
+                {
+                    callback(null,count);
+                }
+            };
+            collection.find().count(onFetch);
+        }
+    }
+    MongoClient.connect(mongoUri,onConnect);
+
+};
+
 exports.insert = function (doc, callback)
 {
     var onConnect = function (err, db)
@@ -94,12 +123,14 @@ exports.getleader = function (doc, callback)
 {
     var onConnect = function (err, db)
     {
+        console.log("get Leader Function2");
         if (err)
         {
             callback(err);
         }
         else
         {
+            console.log("get Leader Function3");
             var collection = db.collection('users');
             var onFetch = function (err, documents)
             {
@@ -109,6 +140,7 @@ exports.getleader = function (doc, callback)
                 }
                 else
                 {
+                    console.log("get Leader Function4");
                     var onFetchOne = function (err, document)
                     {
                         if (err)
@@ -120,8 +152,10 @@ exports.getleader = function (doc, callback)
                             documents.push(document);
                             callback(null, documents);
                         }
-                        collection.findOne(doc, onFetchOne);
-                    }
+                        //console.log("get Leader Function5");
+
+                    };
+                    collection.findOne(doc, onFetchOne);
                 }
             };
             var options =

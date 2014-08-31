@@ -1,3 +1,20 @@
+<!-- /*
+*  GraVITas Premier League
+*  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
+*
+*  This program is free software: you can redistribute it and/or modify
+*  it under the terms of the GNU General Public License as published by
+*  the Free Software Foundation, either version 3 of the License, or
+*  (at your option) any later version.
+*
+*  This program is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU General Public License for more details.
+*
+*  You should have received a copy of the GNU General Public License
+*  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/ -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,31 +53,35 @@
              style="background:rgba(0,233,0,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-top:3%; ">
             <h4 style="color: white;text-align: left;margin:1%">Playing XI</h4>
             <table cellspacing="10px"
-                   style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
+                   style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;" class="large-12 medium-12 small-12">
 
-                <% k = 4;i = 0; var z = 1;for(i = 0;i < results.team.length;i ++) { %>
+                <% k = 4;var check=1;i = 0; var z = 1;for(i = 0;i < results.team.length;i ++) { if(results.team[i]._id>303) {continue;}%>
                 <% if(k < 3){ %>
                 <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;">
-
-                <% if (results.team[i]._id <= 113){ %>
+                    <%if(check==0){i=0;check=2;}if(check ==1){for(var count = 0;count<16;count++){%>
+                    <%if(results.team[count]._id>303) { %>
+                    <img src="/images/coaches/<%= results.team[count]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
+                    <p style="text-align: center;"><%= results.team[count].Name %></p>
+                    <p style="text-align: center;">Coach</p>
+                    <% check =0;k++;}}continue;} %>
+                    <% if (results.team[i]._id <= 113){ %>
                     <img src="/images/bat/<%= results.team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                     <p style="text-align: center;"><%= results.team[i].Name %></p>
-                    <% } else if(results.team[i]._id >= 114 && results.team[i] <= 242) { %>
-                    <img src="/images/bowl/<%= results.team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
-
-                    <p style="text-align: center;"><%= results.team[i].Name %></p>
+                    <p style="text-align: center;">Batsman</p>
                     <% } else if(results.team[i]._id >= 243 && results.team[i]._id <= 303) { %>
                     <img src="/images/all/<%= results.team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                     <p style="text-align: center;"><%= results.team[i].Name %></p>
-                    <% } else { %>
-                    <img src="/images/all/<%= results.team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
+                    <p style="text-align: center;">All Rounder</p>
+                    <% }else if(results.team[i]._id >= 114 && results.team[i]._id <= 242){ %>
+                    <img src="/images/bowl/<%= results.team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                     <p style="text-align: center;"><%= results.team[i].Name %></p>
-                    <% } %>
+                    <p style="text-align: center;">Bowler</p>
+                    <% }%>
                 </td>
-                <% } else { if(z == 1) { %>
+                <% k++;} else { if(z == 1) { %>
                 <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
                     <% z = 0;k = 0;} else { %>
                 </tr>
@@ -78,7 +99,7 @@
              style="background:rgba(255,100,0,0.6); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-top:10%; ">
             <h4 style="color: white;text-align: left;">Team Statistics</h4>
             <p style="color: white;text-align: left;">
-                Matches Played: <%=results.user.played><br />
+                Matches Played: <%=results.user.played%><br />
                 Matches Won: <%=results.user.win%><br />
                 Points: <%=results.user.points%><br />
                 Net Run Rate: <%= results.user.net_run_rate%>
