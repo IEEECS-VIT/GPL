@@ -21,7 +21,7 @@ var MongoClient = require('mongodb').MongoClient;
 var today = new Date();
 var dateMatchDay;
 
-var index= 0,toss_state,delivery_score, batsman_performance_index, current_bowler, bowler_performance_index, previous_bowler, toss, i, j, strike_index, continuous_maximums, fall_of_wicket, winner_index;
+var users,collectionName,index= 0,toss_state,delivery_score, batsman_performance_index, current_bowler, bowler_performance_index, previous_bowler, toss, i, j, strike_index, continuous_maximums, fall_of_wicket, winner_index;
 var commentary = '', dismissed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], five_wicket_haul = [0, 0, 0, 0, 0, 0], free_hit = 0, previous_partnership_index = -1, current_partnership_index = 0, partnership_balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], partnership_runs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], continuous_wickets = [0, 0, 0, 0, 0, 0], milestone = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], previous_dismissal = -1, extras = 0, maidens = [0, 0, 0, 0, 0, 0], previous_batsman = -1, score = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], maximums = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], strike = [0, 1], deliveries = [0, 0, 0, 0, 0, 0], runs_conceded = [0, 0, 0, 0, 0, 0], wickets_taken = [0, 0, 0, 0, 0, 0], Total = [0,0], previous_over = 0, wickets = [0,0], Overs = [0,0];
 
 exports.todaysMatches = function (callback)
@@ -36,7 +36,6 @@ exports.todaysMatches = function (callback)
         {
 
             var day = today.getDate();
-            var collectionName;
             switch (day)
             {
                 case 0:
@@ -83,10 +82,10 @@ team_object = [];
 
 exports.team = function (elt, team1, team2, user1, user2)
 {
-    team_object[0]=new make(team1); team_object[0].num=elt.; team_object[1]=new make(team2); team_object[1].num=elt.;
+ team_object[0]=new make(team1); team_object[1]=new make(team2); users=[user1, user2];
 };
 
-function make(team,index){
+function make(team){
     Overs[0] = Overs[1] = 0;
     this.bat_rating = [];
     this.bat_average = [];
@@ -769,120 +768,20 @@ function make(team,index){
         }
         commentary += '\n';//console.log("\n");
     }
-if(Total[1]<Total[0]) {Overs[0]+=Overs[1]; Overs[1]=Overs[0]-Overs[0]; Overs[0]-=Overs[1]; Total[0]+=Total[1]; Total[1]=Total[0]-Total[1]; Total[0]-=Total[1];}
+//if(Total[1]<Total[0]) {Overs[0]+=Overs[1]; Overs[1]=Overs[0]-Overs[0]; Overs[0]-=Overs[1]; Total[0]+=Total[1]; Total[1]=Total[0]-Total[1]; Total[0]-=Total[1];}
 exports.comm=commentary; //console.log(commentary);
 
 
-if(winner_index==-1) {
-    exports.addtie= function update(err, db)
-    {
-        if (err)
-        {
-            callback(err);
-        }
-        else
-        {
-            var collection = db.collection('users');
-            var onFetch = function (err, document)
-            {
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else if (document)
-                {
-                    db.close();
-                    if (team_object[0].name === document['_id'])
-                    {
-                        callback(null, document);
-                    }
-                    else
-                    {
-                        callback(false, null);
-                    }
-
-                }
-                else
-                {
-                    callback(true, null);
-                }
-            };
-            collection.findOne(doc, onFetch);
-        }
-        collection.update(doc, {$inc: {played: 1, points: 1, runs_for: Total[0], runs_against: Total[1], balls_for: Overs[0], balls_against: Overs[1], net_run_rate: 6 * (Total[0] / Overs[0] - Total[1] / Overs[1])}}, function (err, updated)
-        var onFetch = function (err, document)
-        {
-            if (err)
-            {
-                callback(err, null);
-            }
-            else if (document)
-            {
-                db.close();
-                if (team_object[1].name === document['_id'])
-                {
-                    callback(null, document);
-                }
-                else
-                {
-                    callback(false, null);
-                }
-
-            }
-            else
-            {
-                callback(true, null);
-            }
-        };
-        collection.findOne(doc, onFetch);
-    }
-    collection.update(doc, {$inc: {played: 1, points: 1, runs_for: Total[1], runs_against: Total[0], balls_for: Overs[1], balls_against: Overs[0], net_run_rate: 6 * (Total[1] / Overs[1] - Total[0] / Overs[0])}}, function (err, updated)
-
-    {
-            if (err) throw err;
-            return db.close();
-        });
-    }
-
-else
+if(winner_index==-1)
 {
-    exports.addwin = function update(err, db)
-    {
-        if (err)
-        {
-            callback(err);
-        }
-        else
-        {
-            var collection = db.collection('users');
-            var onFetch = function (err, document)
-            {
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else if (document)
-                {
-                    db.close();
-                    if (team_object[+winner_index].name === document['_id'])
-                    {
-                        callback(null, document);
-                    }
-                    else
-                    {
-                        callback(false, null);
-                    }
 
-                }
-                else
-                {
-                    callback(true, null);
-                }
-            };
-            collection.findOne(doc, onFetch);
-        }
-        collection.update(doc, {$inc: {played: 1, win: 1, points: 2, runs_for: Total[0], runs_against: Total[1], balls_for: Overs[0], balls_against: Overs[1], net_run_rate: 6 * (Total[0] / Overs[0] - Total[1] / Overs[1])}}, function (err, updated)
-        var onFetch = function (err, document)
+    exports.addtie = function (document, callback)
+    {
+        var collection = db.collection('users');
+        var doc = {
+            "_id": users[0]._id
+        };
+        var onUpdate = function (err, document)
         {
             if (err)
             {
@@ -891,33 +790,104 @@ else
             else if (document)
             {
                 db.close();
-                if (team_object[+!winner_index].name === document['_id'])
-                {
-                    callback(null, document);
-                }
-                else
-                {
-                    callback(false, null);
-                }
-
+                callback(null, document);
             }
             else
             {
                 callback(true, null);
             }
         };
-        collection.findOne(doc, onFetch);
-    }
-    collection.update(doc, {$inc: {played: 1, loss: 1, runs_for: Total[1], runs_against: Total[0], balls_for: Overs[1], balls_against: Overs[0], net_run_rate: 6 * (Total[1] / Overs[1] - Total[0] / Overs[0])}}, function (err, updated)
+        collection.findAndModify(doc, [], {$inc: {played: 1, points: 1, runs_for: Total[0], runs_against: Total[0], balls_for: Overs[0], balls_against: Overs[0]}}, {$set: { net_run_rate: 6 * (this.runs_for / this.balls_for - this.runs_against / this.balls_against)}}, {}, onUpdate)
+        doc._id = users[1].id;
+        var onUpdate = function (err, document)
+        {
+            if (err)
+            {
+                callback(err, null);
+            }
+            else if (document)
+            {
+                db.close();
+                callback(null, document);
+            }
+            else
+            {
+                callback(true, null);
+            }
+        };
+        collection.findAndModify(doc, [], {$inc: {played: 1, points: 1, runs_for: Total[0], runs_against: Total[0], balls_for: Overs[0], balls_against: Overs[0]}}, {$set: { net_run_rate: 6 * (this.runs_for / this.balls_for - this.runs_against / this.balls_against)}}, {}, onUpdate)
+    };
+}
+else
     {
-            if (err) throw err;
-            return db.close();
-        });
+        exports.addresult = function (document, callback)
+        {
+            var collection = db.collection('users');
+            var doc = {
+                "_id": users[winner_index]._id
+            };
+            var onUpdate = function (err, document)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (document)
+                {
+                    db.close();
+                    callback(null, document);
+                }
+                else
+                {
+                    callback(true, null);
+                }
+            };
+            collection.findAndModify(doc, [], {$inc: {played: 1, win: 1, points: 2, runs_for: Total[+winner_index], runs_against: Total[+!winner_index], balls_for: Overs[+winner_index], balls_against: Overs[+!winner_index]}}, {$set: { net_run_rate: 6 * (this.runs_for / this.balls_for - this.runs_against / this.balls_against)}}, {}, onUpdate)
+            doc._id = users[+!winner_index]._id;
+            var onUpdate = function (err, document)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (document)
+                {
+                    db.close();
+                    callback(null, document);
+                }
+                else
+                {
+                    callback(true, null);
+                }
+            };
+            collection.findAndModify(doc, [], {$inc: {played: 1, runs_for: Total[+!winner_index], runs_against: Total[+winner_index], balls_for: Overs[+winner_index], balls_against: Overs[+!winner_index]}}, {$set: { net_run_rate: 6 * (this.runs_for / this.balls_for - this.runs_against / this.balls_against)}}, {}, onUpdate)
+        };
+    }
+    MongoClient.connect(mongoUri, onConnect);
+    exports.updateMatch = function (commentary, callback)
+    {
+        var collection = db.collection(collectionName);
+        var doc = {
+            "_id": elt._id
+        };
+        var onUpdate = function (err, document)
+        {
+            if (err)
+            {
+                callback(err, null);
+            }
+            else if (document)
+            {
+                db.close();
+                callback(null, document);
+            }
+            else
+            {
+                callback(true, null);
+            }
+        };
+        collection.findAndModify(doc, [], {$set: {'commentary': commentary}}, {}, onUpdate)
     };
 
-MongoClient.connect(mongoUri, onConnect);
 
-exports.updateMatch(commentary)
-{
-    elt.comm=commentary;
-}
+
