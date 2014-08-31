@@ -81,3 +81,34 @@ exports.getTeam = function (doc, callback)
     };
     MongoClient.connect(mongoUri, onConnect);
 };
+
+exports.getSquad = function (doc, callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
+            callback(err);
+        }
+        else
+        {
+            var collection = db.collection('users');
+
+            var onFetch = function (err, document)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else
+                {
+                    async.map(document.squad, getPlayer, callback);
+                    // document.team.forEach(addDocument);
+                    // callback(false, documents);
+                }
+            };
+            collection.findOne(doc, onFetch);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};

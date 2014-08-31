@@ -45,14 +45,14 @@ exports.generateMatch = function()
 
                 parallel_tasks.team1 = function(asyncCallback)
                 {
-                    mongoTeam.getTeam(doc1, asyncCallback);
+                    mongoTeam.getSquad(doc1, asyncCallback);
 
                 };
 
 
                 parallel_tasks.team2 = function(asyncCallback)
                 {
-                    mongoTeam.getTeam(doc2, asyncCallback);
+                    mongoTeam.getSquad(doc2, asyncCallback);
 
                 };
                 var onFinish = function(err,results)
