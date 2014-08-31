@@ -40,7 +40,6 @@ var getPlayer = function (id, callback)
                 }
                 else
                 {
-                    console.log(document.Name);
                     callback(false, document);
                 }
             };
