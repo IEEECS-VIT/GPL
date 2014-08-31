@@ -257,7 +257,15 @@ router.get('/sponsors', function (req, res) // sponsors page
 
 router.get('/trailer', function (req, res) // trailer page
 {
-    res.render('trailer', { });
+    if(req.signedCookies.name)
+    {
+        var session=1;
+    }
+    else
+    {
+        var session=0;
+    }
+    res.render('trailer', {results : session });
 });
 
 module.exports = router;
