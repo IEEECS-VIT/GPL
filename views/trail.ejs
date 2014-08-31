@@ -16,19 +16,22 @@
 *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */ -->
 <!DOCTYPE html>
-<html lang="en">
+<!--[if IE 9]>
+<html class="lt-ie10" lang="en">
+<![endif]-->
+<html lang="en" class="no-js">
 <head>
     <meta charset="UTF-8">
-    <title>Forgot Password | GPL</title>
+    <title>Trailer | GPL</title>
     <link type="text/css" rel="stylesheet" href="/bower_components/foundation/css/foundation.css"/>
     <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
-    <link href="/stylesheets/gplamain.css" rel="stylesheet" type="text/css"/>
-    <script src="/bower_components/foundation/js/foundation.dropdown.js"></script>
-    <script src="/bower_components/foundation/js/foundation.topbar.js"></script>
+    <link href="/stylesheets/gplmain.css" rel="stylesheet" type="text/css"/>
+    <script src="/bower_components/foundation/js/foundation/foundation.dropdown.js"></script>
+    <script src="/bower_components/foundation/js/foundation/foundation.topbar.js"></script>
 </head>
 <body style="background-color:#646464;font-family: 'PT Sans', sans-serif;height:100%;">
 <div style="min-height: 100%">
-    <div class="large-12 top-bar" style="overflow: visible;">
+    <div class="top-bar" data-topbar style="overflow: visible;" role="navigation">
         <section class="top-bar-section small-only-text-center">
             <ul class="left">
                 <li><a href="/"><img src="/images/small.png" style="height:42px;padding-bottom:3px;"/></a></li>
@@ -59,7 +62,8 @@
                                                 Name: </label>
                                         </div>
                                         <div class="small-9 columns">
-                                            <input type="text" id="team" name="name" placeholder="Team Name" value=""
+                                            <input type="text" id="team" name="team_name" placeholder="Team Name"
+                                                   value=""
                                                    style="margin:-4% 0 0 1%;border-radius: 5px">
                                         </div>
                                     </div>
@@ -77,7 +81,7 @@
                                         </div>
                                         <div class="small-9 columns">
                                             <input type="password" id="p
-                                                  ass" placeholder="Password" name="password" value=""
+                              ass" placeholder="Password" name="password" value=""
                                                    style="margin:-4% 0 0 1%;border-radius: 5px">
                                         </div>
                                     </div>
@@ -102,61 +106,56 @@
         </section>
     </div>
     <!-- top bar -->
+    <br/>
+
     <div class="row" align="center">
-        <div class="small-12 medium-12 large-12 columns"
-             style="background:rgba(0,123,184,0.5); border-radius: 0 0 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0) ">
-            <h3 style="text-align: center; color: #ffffff;">Forgot Password</h3>
-            <br/><br/>
+        <ul class="breadcrumbs"
+            style="background:rgba(30,30,30,0.9); border: none; box-shadow: inset 0 0 5px 3px rgba(255,255,255,0.2);">
+            <li><a href="/" style="color:#ffffff ;">Index</a></li>
 
-            <form name="forgot" action="/forgot" method="post">
-                <div class="row">
-                    <div class="small-3 medium-3 large-3 columns">
-                        <label for="team" class="right inline" style="color: white;">Team Name: </label>
-                    </div>
-                    <div class="small-6 medium-6 large-6 columns">
-                        <input type="text" id="team" placeholder="Team Name" name="team_name"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="small-3 medium-3 large-3 columns">
-                        <label for="team" class="right inline" style="color: white;">Email ID: </label>
-                    </div>
-                    <div class="small-6 medium-6 large-6 columns">
-                        <input type="email" id="email" placeholder="someone@example.com" name="email_id"/>
-                    </div>
-                </div>
-                <br/>
-                <input type="submit" style="background: rgba(30,30,30,1);border-radius: 5px;" align="center"
-                       class="button [radius round]"/>
-            </form>
+            <li><a href="/rule" style="color:#ffffff;">Rules</a></li>
+            <li><a href="/prizes" style="color:#ffffff;">Prizes</a></li>
+            <li><a href="/sponsor" style="color:#ffffff;">Sponsors</a></li>
+            <li class="current"><a href="#" style="color:lightsteelblue;">Trailer</a></li>
+        </ul>
+    </div>
+    <div class="small-12 medium-12 large-12">
+        <div class="row" align="center"
+             style="background:rgba(80,80,120,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-top:3%; ">
+            <div style="background-color: rgba(0,0,0,0);border:none;padding: 2%; margin: 2%;">
+                <object width="853" height="480">
+                    <param name="movie" value="//www.youtube.com/v/2E-NTWwBcY8?hl=en_GB&amp;version=3"/>
+                    <param name="allowFullScreen" value="true"/>
+                    <param name="allowscriptaccess" value="always"/>
+                    <embed src="//www.youtube.com/v/2E-NTWwBcY8?hl=en_GB&amp;version=3"
+                           type="application/x-shockwave-flash" width="853" height="480" allowscriptaccess="always"
+                           allowfullscreen="true"></embed>
+                </object>
+            </div>
         </div>
-
     </div>
 </div>
-<!-- content -->
 
 <footer class="large-12" style="bottom:0; position:relative;">
     <div class="top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">
-            <section class="top-bar-section">
-                <ul class="left">
-                    <li style="display:block;"><a href="http://vitgravitas.com/"><img src="/images/gravitas.png"
-                                                                                      style="height:45px;"/></a></li>
-                    <li><a href="https://www.vit.ac.in"><img src="/images/vit_logo_white.png"
-                                                             style="height:40px;padding-top: 5px" align="center"/></a>
-                    </li>
-                </ul>
-                <ul class="right">
-                    <li><a href="/developer"><img src="/images/symbol.png" style="height:35px;" align="center"/><span
-                                    style="color:white;text-shadow: 1px 1px rgba(68,59,50,1);">Developers</span></a>
-                    </li>
+        <section class="top-bar-section">
+            <ul class="left">
+                <li style="display:block;"><a href="http://vitgravitas.com/"><img src="/images/gravitas.png"
+                                                                                  style="height:45px;"/></a></li>
+                <li><a href="https://www.vit.ac.in"><img src="/images/vit_logo_white.png"
+                                                         style="height:40px;padding-top: 5px" align="center"/></a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="/developer"><img src="/images/symbol.png" style="height:35px;" align="center"/><span
+                                style="color:white;text-shadow: 1px 1px rgba(68,59,50,1);">Developers</span></a></li>
 
-                </ul>
+            </ul>
 
-            </section>
-            <p style="margin-left: 46%; font-size:60%;color:white;bottom:0; margin-top:2%">&copy;IEEE-CS VIT Chapter</p>
+        </section>
+        <p style="margin-left: 46%; font-size:60%;color:white;bottom:0; margin-top:2%">&copy;IEEE-CS VIT Chapter</p>
 
-        </div>
-    </footer>
-    <!-- footer -->
+    </div>
+</footer>
+<!-- footer -->
 </body>
 </html>

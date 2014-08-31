@@ -24,51 +24,40 @@ var router = express.Router();
 var mongoInterest = require(path.join(__dirname, '..', '..', 'db', 'mongo-interest'));
 var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
 
-router.get('/', function (req, res)
-{
-    if (req.signedCookies.name)
-    {
+router.get('/', function (req, res) {
+    if (req.signedCookies.name) {
         res.redirect('/home');
     }
-    else
-    {
+    else {
         res.render('index', { });
     }
 });
 
 
-
-router.post('/login', function (req, res)
-{
+router.post('/login', function (req, res) {
     var teamName = req.body.team_name;
     var password = req.body.password;
     if (req.signedCookies.name) res.clearCookie('name', { });
     var credentials = {
         '_id': teamName
     };
-    var onFetch = function (err, doc)
-    {
-        if (err)
-        {
+    var onFetch = function (err, doc) {
+        if (err) {
             console.log('MongoDB Down');
             // Make it more user friendly, output the error to the view
             res.redirect('/');
         }
-        else if (doc)
-        {
-            if (bcrypt.compareSync(password, doc['password_hash']))
-            {
+        else if (doc) {
+            if (bcrypt.compareSync(password, doc['password_hash'])) {
                 res.cookie('name', doc['_id'], {maxAge: 86400000, signed: true});
                 res.redirect('/home');
             }
-            else
-            {
+            else {
                 console.log('Incorrect Credentials');
                 res.redirect('/');
             }
         }
-        else
-        {
+        else {
             console.log('No user exists');
             // Make it more user friendly, output the error to the view
             res.redirect('/');
@@ -82,8 +71,7 @@ router.get('/forgot', function (req, res) //forgot password page
     res.render('forgot', { });
 });
 
-router.post('/forgot', function (req, res)
-{
+router.post('/forgot', function (req, res) {
     var name = req.body.team_name;
     var email = req.body.email;
 
@@ -91,54 +79,41 @@ router.post('/forgot', function (req, res)
         '_id': name,
         '_email': email
     };
-    var onFetch = function (err, doc)
-    {
-        if (err)
-        {
+    var onFetch = function (err, doc) {
+        if (err) {
             res.redirect('/');
         }
-        else if (doc)
-        {
-            if (doc['email'] === credentials['email'] && doc['_id'] === credentials['_id'])
-            {
+        else if (doc) {
+            if (doc['email'] === credentials['email'] && doc['_id'] === credentials['_id']) {
                 // email dispatcher
             }
-            else
-            {
+            else {
                 // wrong
             }
         }
-        else
-        {
+        else {
             res.render('forgot', {Message: "No record"});
         }
     };
     mongoUsers.forgotPassword(credentials, onFetch);
 });
 
-router.get('/register', function (req, res)
-{
-    if (req.signedCookies.name)
-    {
+router.get('/register', function (req, res) {
+    if (req.signedCookies.name) {
         res.redirect('/home');
     }
-    else
-    {
+    else {
         res.render('register', { });
     }
 });
 
-router.post('/register', function (req, res)
-{
-    var onGetCount = function(err,number)
-    {
-        if(err)
-        {
+router.post('/register', function (req, res) {
+    var onGetCount = function (err, number) {
+        if (err) {
             // do something with the error
         }
-        else
-        {
-            var team_no=parseInt(number)+1;
+        else {
+            var team_no = parseInt(number) + 1;
             var teamName = req.body.team_name;
             var password = req.body.password;
             var confirmPassword = req.body.confirm_password;
@@ -147,20 +122,19 @@ router.post('/register', function (req, res)
             var phone = req.body.phone;
             console.log("Reached");
 
-            if (password === confirmPassword)
-            {
+            if (password === confirmPassword) {
                 var salt = bcrypt.genSaltSync(10);
                 var hashedPassword = bcrypt.hashSync(password, salt);
                 var newUser = {
 
                     _id: teamName,
-                    team_no:team_no,
+                    team_no: team_no,
                     password_hash: hashedPassword,
                     manager_name: managerName,
                     email: email,
                     phone: phone,
-                    squad:[],
-                    team:[],
+                    squad: [],
+                    team: [],
                     win: 0,
                     played: 0,
                     points: 0,
@@ -170,25 +144,21 @@ router.post('/register', function (req, res)
                     balls_against: 0,
                     net_run_rate: 0.0
                 };
-                var onInsert = function (err, docs)
-                {
-                    if (err)
-                    {
+                var onInsert = function (err, docs) {
+                    if (err) {
                         console.log(err.message);
                         // Make it more user friendly, output the error to the view
                         res.redirect('/register');
                     }
-                    else
-                    {
+                    else {
                         var name = docs[0]['_id'];
                         res.cookie('name', name, {maxAge: 86400000, signed: true});
                         res.redirect('/home/players');
                     }
                 };
-                mongoUsers.insert(newUser,onInsert);
+                mongoUsers.insert(newUser, onInsert);
             }
-            else
-            {
+            else {
                 console.log("Incorrect Password");
                 res.redirect('/register');
             }
@@ -198,21 +168,17 @@ router.post('/register', function (req, res)
 
 });
 
-router.get('/logout', function (req, res)
-{
-    if (req.signedCookies.name)
-    {
+router.get('/logout', function (req, res) {
+    if (req.signedCookies.name) {
         res.clearCookie('name', { });
         res.redirect('/');
     }
-    else
-    {
+    else {
         res.redirect('/');
     }
 });
 
-router.get('/interest', function (req, res)
-{
+router.get('/interest', function (req, res) {
     res.render('interest', { });
 });
 
@@ -226,14 +192,11 @@ router.post('/interest', function (req, res) // interest form
         email: email,
         phone: phone
     };
-    var onInsert = function (err, docs)
-    {
-        if(err)
-        {
+    var onInsert = function (err, docs) {
+        if (err) {
             // do something
         }
-        else
-        {
+        else {
             res.redirect('/interest');
             console.log(docs);
         }
@@ -242,69 +205,59 @@ router.post('/interest', function (req, res) // interest form
     mongoInterest.insert(newUser, onInsert);
 });
 
-router.get('/developers', function (req, res) // developers page
+router.get('/developer', function (req, res) // developers page
 {
-    if(req.signedCookies.name)
-    {
-        var session=1;
+    if (req.signedCookies.name) {
+        var session = 1;
     }
-    else
-    {
-        var session=0;
+    else {
+        var session = 0;
     }
-    res.render('developers', {results:session });
+    res.render('developer', {results: session });
 });
 
-router.get('/prize', function (req, res) // page to view prizes
+router.get('/prizes', function (req, res) // page to view prizes
 {
-    if(req.signedCookies.name)
-    {
-        var session=1;
+    var session;
+    if (req.signedCookies.name) {
+        session = true;
     }
-    else
-    {
-        var session=0;
+    else {
+        session = false;
     }
-    res.render('prize', {results : session });
+    res.render('prizes', {Session: session });
 });
 
-router.get('/rules', function (req, res)
-{
-    if(req.signedCookies.name)
-    {
-        var session=1;
+router.get('/rule', function (req, res) {
+    if (req.signedCookies.name) {
+        var session = 1;
     }
-    else
-    {
-        var session=0;
+    else {
+        var session = 0;
     }
-    res.render('rules', {results : session });
+    res.render('rule', {results: session });
 });
 
-router.get('/sponsors', function (req, res) // sponsors page
+router.get('/sponsor', function (req, res) // sponsors page
 {
-    if(req.signedCookies.name)
-    {
-        var session=1;
+    if (req.signedCookies.name) {
+        var session = 1;
     }
-    else
-    {
-        var session=0;
+    else {
+        var session = 0;
     }
-    res.render('sponsors', {results : session });
+    res.render('sponsor', {results: session });
 });
 
-router.get('/trailer', function (req, res) // trailer page
+router.get('/trail', function (req, res) // trailer page
 {
-    if(req.signedCookies.name)
-    {
-        var session=1;
+    if (req.signedCookies.name) {
+        var session = 1;
     }
-    else
-    {
-        var session=0;
+    else {
+        var session = 0;
     }
-    res.render('trailer', {results : session });
+    res.render('trail', {results: session });
 });
 
 module.exports = router;

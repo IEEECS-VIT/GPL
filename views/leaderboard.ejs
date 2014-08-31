@@ -56,11 +56,12 @@
 
         <div class="small-12 medium-12 large-12"
              style="background:rgba(200,200,200,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-top:3%; ">
-            <h4 style="color: white;text-align: center;background-color: rgba(30,30,30,0.8);border-radius: 5px;margin-top: 0;width: 100%;padding: 1%;">Leader Board</h4>
+            <h4 style="color: white;text-align: center;background-color: rgba(30,30,30,0.8);border-radius: 5px;margin-top: 0;width: 100%;padding: 1%;">
+                Leader Board</h4>
             <% if(leaderboard[0].points === 0) { %>
-                <h5 style="color: #ffffff;text-align: center;padding: 2%;font-weight: bold;margin: 1%;">
-                    The Leader Board will be active as soon as the games begin!
-                </h5>
+            <h5 style="color: #ffffff;text-align: center;padding: 2%;font-weight: bold;margin: 1%;">
+                The Leader Board will be active as soon as the games begin!
+            </h5>
             <% } else { %>
             <table cellspacing="5px" style="border: none;border-radius: 5px;width:100%;">
                 <tr>
@@ -73,21 +74,21 @@
                 </tr>
                 <% for(var i = 0; i < leaderboard.length ; i++) { %>
                 <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                    <% for(var j = 1; j < 7;j ++) { %>
+                    <% for(var j = 1; j < 7;j++) { %>
                     <td style="color: #ffffff;font-weight: bold;text-align: center;margin:2%;border-radius: 5px;height: auto;line-height: 100%;">
                         <% if(j === 1){ %>
-                        <%= i+1 %>
+                        <%= i + 1 %>
 
                         <% } else if(j === 2)  { %>
-                        <%=leaderboard[i]._id %>
+                        <%= leaderboard[i]._id %>
                         <% } else if(j === 3) { %>
-                        <%=leaderboard[i].points %>
+                        <%= leaderboard[i].points %>
                         <% } else if(j === 4) { %>
-                        <%=leaderboard[i].played %>
+                        <%= leaderboard[i].played %>
                         <% } else if(j === 5) { %>
-                        <%=leaderboard[i].win %>
+                        <%= leaderboard[i].win %>
                         <% } else { %>
-                        <%=leaderboard[i].net_run_rate %>
+                        <%= leaderboard[i].net_run_rate %>
                         <% } %>
                     </td>
                     <% } %>
@@ -110,7 +111,7 @@
                                                          style="height:40px;padding-top: 5px" align="center"/></a></li>
             </ul>
             <ul class="right">
-                <li><a href="/developers"><img src="/images/symbol.png" style="height:35px;" align="center"/><span
+                <li><a href="/home/developers"><img src="/images/symbol.png" style="height:35px;" align="center"/><span
                                 style="color:white;text-shadow: 1px 1px rgba(68,59,50,1);">Developers</span></a></li>
 
             </ul>
