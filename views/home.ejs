@@ -48,10 +48,10 @@
             <li><a href="/home/trailer" style="color:#ffffff;">Trailer</a></li>
         </ul>
     </div>
-    <div class="row" align="center">
+    <div class="large-12 small-12 medium-12 columns">
 
-        <div class="small-12 medium-12 large-12 columns"
-             style="background:rgba(0,233,0,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-top:3%; ">
+        <div class="small-12 medium-12 large-7 columns"
+             style="background:rgba(20,20,20,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);margin-top:3%;margin-left: 2%;margin-bottom: 3%;">
             <h4 style="color: white;text-align: left;margin:1%"></h4>
             <table cellspacing="10px"
                    style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
@@ -97,15 +97,12 @@
                     <% } } } %>
                 </tr>
             </table>
-            <a href="/home/team" class="button small [radius round]"
-               style="border-radius: 5px;background: rgba(30,30,100,0.5);float: right;">Change Line Up</a>
+            <a href="/home/team" class="button small [radius round]" style="border-radius: 5px;background: rgba(0,0,0,0.5);">Change Line Up</a>
         </div>
-    </div>
-    <div class="row" align="center">
-        <div class="small-5 medium-5 large-5 columns"
-             style="background:rgba(255,100,0,0.6); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-top:10%; ">
-            <h4 style="color: white;text-align: left;">Team Statistics</h4>
-            <p style="color: white;text-align: left;">
+        <div class="large-4 small-12 medium-12 right"
+                     style="background:rgba(20,20,20,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-right:3%;margin-top: 3%;">
+            <h4 style="color: white;text-align: center;margin: 1%;padding: 2%;">Team Statistics</h4>
+            <p style="color: white;text-align: left;padding: 2%;margin: 1%">
                 Matches Played: <%=results.user.played%><br />
                 Matches Won: <%=results.user.win%><br />
                 Points: <%=results.user.points%><br />
