@@ -81,7 +81,7 @@ function rand()
 
 team_object = [];
 
-exports.team = function (elt, team1, team2)
+exports.team = function (elt, team1, team2, user1, user2)
 {
     team_object[0]=new make(team1); team_object[0].num=elt.; team_object[1]=new make(team2); team_object[1].num=elt.;
 };
