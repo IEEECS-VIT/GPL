@@ -818,7 +818,7 @@ four :
     "sees him coming out, pushes it quick into the pad, the batsman swings in front of square and beats the man in the \ndeep",
     "this has been cracked through extra cover, the batsman walks across to a full and wide one, and clobbers it",
     "short again, but in striking range this time, and he slams a pull in the air, to the deep midwicket boundary",
-    "connects for some returns, the bowler digs in the short offcutter, and the batsman is waiting to pull it hard to the\n deep midwicket rope",
+    "connects for some returns, the bowler digs in the short ball, and the batsman is waiting to pull it hard to the\n deep midwicket rope",
     "the batsman forehands it over mid-off for four. Not clean connection, but the man is up in the circle",
     "No energy behind this bowling. Gentle, on a length, wide, and the batsman rashes it over cover for four",
     "no sting behind it, and he has been dismissed through midwicket region. This is a slower bouncer.",
@@ -826,7 +826,7 @@ four :
     "lovely square push drive. Full outside off, the batsman presses forward, covers the swing, and meets it with an open\n face. Bisects square cover and cover",
     "short and wide, outside off, the batsman might as well celebrate his birthday right now.",
     "this time it's a low full toss and he makes room and places it down to the vacant deep point region",
-    "he doesn't need a sighter! This was too full and wide outside off, Faulkner made room and smashed it wide of cover,\n the sweeper can't cut it off",
+    "he doesn't need a sighter! This was too full and wide outside off, the batsman made room and smashed it wide of cover,\n the sweeper can't cut it off",
     " he makes room to a length ball and cuts him hard and fast past backward point, big gap there",
     "he whips a full delivery on middle and leg with such force that the ball blazes away wide of midwicket",
     "a pressure-relieving boundary, this was flighted on the pads, he was on his knee early and swept it firmly to fine \nleg",
@@ -1009,6 +1009,7 @@ six :
 ],
 caught :
 [
+    "whoa what a catch! You beauty! The batsman gets a faint edge as he waits on the back foot and the man at slip dives\n to his right to swoop it low with one hand.. Superb catch",
     "tries to cut this length ball over point, finds the man with a palpably mistimed shot",
     "very slow short ball, so he has to try and create his own momentum on the pull, but only manages to drag it tamely \nto deep midwicket",
     "The fielder pulls out the chainsaw after clinging on to a flat, hard hit from him. It was full and the batsman \nmoved his front leg to give himself room, he struck it well but has pinned down the man in the deep",
@@ -1128,6 +1129,7 @@ stumped :
 ],
 runout :
 [
+    "this is good running! No, no.. this is surprising for everyone on the field as the throw from the deep as hit the non-striker's end direct. Cover wasn't even keen on taking the throw.. He thought the fielder had been slow but the fielder from deep extra cover, makes up for it with an accurate hit. The batsman was well short of the crease there. No need to check with the third umpire. ",
     "another rising delivery, the batsman gets on top of it and drops it towards backward square leg. He tries to sneak \na second one as the fielder is placed deep, but the throw comes in and finds the batsman short of the crease.",
     "Very poor running here. The striker dabbed the full delivery to cover point and called for a single, but the non-striker\n was slow to respond to a late call. He was well short when the throw from point came to the keeper. More of the striker's mistake actually, because his partner was responding to his call..",
     "direct hit from extra cover claims him, he drilled this full delivery straight to the fielder and went for the single,\n replays show he is inches short",
@@ -1162,7 +1164,7 @@ lbw :
     "it's given! That's a pretty tight call from the umpire and the batsman walks back looking a little bemused. It pitched\n in line and went on with the arm as he went for a sweep. \n Struck low on the front pad and it might just have grazed off stump."
 ],
 wide :
-[
+[   "That is a strange way to prevent the batsman from hitting the ball, but it seems to be working. Wide signalled by \nthe umpire.",
     "That is just criminal, to bowl deliveries like that in this format of the game. The batting team on the other hand,\n has no complaints",
     "he strays wide down the leg side",
     "that was way down the leg side, no mercy for that.",

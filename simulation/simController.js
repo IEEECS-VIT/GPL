@@ -19,7 +19,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 var simulator = require('./simulation.js');
-var mongoTeam = require('../mongoTeam.js');
+var mongoTeam = require('../mongo-team.js');
+var mongoUser = require('../mongo-users.js');
 var async = require('async');
 
 
@@ -55,6 +56,16 @@ exports.generateMatch = function()
                     mongoTeam.getSquad(doc2, asyncCallback);
 
                 };
+                parallel_tasks.user1 = function(asyncCallback)
+                {
+                    mongoUser.fetch(doc2, asyncCallback);
+
+                };
+                parallel_tasks.user2 = function(asyncCallback)
+                {
+                    mongoUser.fetch(doc2, asyncCallback);
+
+                };
                 var onFinish = function(err,results)
                 {
                     if(err)
@@ -63,7 +74,7 @@ exports.generateMatch = function()
                     }
                     else
                     {
-                        simulator.team(elt, results.team1,results.team2);
+                        simulator.team(elt, results.team1,results.team2,results.user1,results.user2);
 
                     }
                 };

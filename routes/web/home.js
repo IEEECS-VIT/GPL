@@ -136,7 +136,7 @@ router.get('/matches', function (req, res)
         };
         var parallel_tasks = {};
         var response = {};
-        response.bool="false";
+        response.test="False";
         var onFinish = function (err, results)
         {
             if (err)
@@ -149,7 +149,7 @@ router.get('/matches', function (req, res)
                 response["nextMatch"] = results.nextMatch;
                 if(response["previousMatch"]!=null || response["nextMatch"]!=null)
                 {
-                    response.bool="True";
+                    response.test="True";
                 }
                 res.render('matches', {response:response});
             }
