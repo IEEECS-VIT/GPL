@@ -264,6 +264,8 @@
                             <p style="text-align: center;">
                                 <%= Squad[i].Name %>
                             </p>
+
+                            <p style="text-align: center;">Coach</p>
                         </td>
                         <% } } %>
                         <% k = 4;i = 0; var z = 1;for(i = 0;i < Squad.length;i++) { %>
@@ -271,20 +273,26 @@
 
                         <% if(Squad[i]._id <= 303){ %>
                         <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                            id="box<%= Squad[i]._id %>" onclick="">
+                            id="box<%= Squad[i]._id %>">
 
                             <% if (Squad[i]._id <= 113){ %>
                             <img src="/images/bat/<%= Squad[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                             <p style="text-align: center;"><%= Squad[i].Name %></p>
+
+                            <p style="text-align: center;">Batsman</p>
                             <% } else if(Squad[i]._id >= 114 && Squad[i]._id <= 242) { %>
                             <img src="/images/bowl/<%= Squad[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                             <p style="text-align: center;"><%= Squad[i].Name %></p>
+
+                            <p style="text-align: center;">Bowler</p>
                             <% } else if(Squad[i]._id >= 243 && Squad[i]._id <= 303) { %>
                             <img src="/images/all/<%= Squad[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                             <p style="text-align: center;"><%= Squad[i].Name %></p>
+
+                            <p style="text-align: center;">All Rounder</p>
                             <% } %>
 
                             <form name="h" style="display: none">
@@ -316,15 +324,18 @@
     </div>
 </div>
 <!-- content -->
-<footer style="bottom:0; position:relative;">
-    <div class="large-12 top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">
-        <section class="top-bar-section small-only-text-center">
+<footer class="large-12" style="bottom:0; position:relative;">
+    <div class="top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">
+        <section class="top-bar-section">
             <ul class="left">
-
-                <li style="display:block;"><a href="#">graVITas</a></li>
+                <li style="display:block;"><a href="http://vitgravitas.com/"><img src="/images/gravitas.png"
+                                                                                  style="height:45px;"/></a></li>
+                <li><a href="https://www.vit.ac.in"><img src="/images/vit_logo_white.png"
+                                                         style="height:40px;padding-top: 5px" align="center"/></a></li>
             </ul>
             <ul class="right">
-                <li><a href="/developers">Developers</a></li>
+                <li><a href="/developers"><img src="/images/symbol.png" style="height:35px;" align="center"/><span
+                                style="color:white;text-shadow: 1px 1px rgba(68,59,50,1);">Developers</span></a></li>
 
             </ul>
 

@@ -65,6 +65,8 @@
                     <p style="text-align: center;">
                         <%=results.team[i].Name %>
                     </p>
+
+                    <p style="text-align: center;">Coach</p>
                 </td>
                 <%} } %>
                 <% k = 4;i = 0; var z = 1;for(i = 0;i < results.team.length;i++) { %>
@@ -72,20 +74,26 @@
 
                 <% if(results.team[i]._id <= 303){ %>
                 <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                    id="box<%= results.team[i]._id %>" onclick="">
+                    id="box<%= results.team[i]._id %>">
 
                     <% if (results.team[i]._id <= 113){ %>
                     <img src="/images/bat/<%= results.team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                     <p style="text-align: center;"><%= results.team[i].Name %></p>
+
+                    <p style="text-align: center;">Batsman</p>
                     <% } else if(results.team[i]._id >= 114 && results.team[i]._id <= 242) { %>
                     <img src="/images/bowl/<%= results.team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                     <p style="text-align: center;"><%= results.team[i].Name %></p>
+
+                    <p style="text-align: center;">Bowler</p>
                     <% } else if(results.team[i]._id >= 243 && results.team[i]._id <= 303) { %>
                     <img src="/images/all/<%= results.team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                     <p style="text-align: center;"><%= results.team[i].Name %></p>
+
+                    <p style="text-align: center;">All Rounder</p>
                     <% } %>
                 </td>
                 <% k++; } else {
@@ -115,6 +123,7 @@
     </div>
     <!-- content -->
 </div>
+<span style="visibility: hidden">c</span>
 <footer class="large-12" style="bottom:0; position:relative;">
     <div class="top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">
         <section class="top-bar-section">
