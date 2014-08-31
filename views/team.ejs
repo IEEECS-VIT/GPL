@@ -186,13 +186,16 @@
 
     </script>
 </head>
-<body style="background:url('/images/background.png');font-family: 'PT Sans', sans-serif;height:100%;">
+<body style="background-color: #646464;font-family: 'PT Sans', sans-serif;height:100%;">
 <div style="min-height: 100%">
     <!--TOP BAR-->
     <div class="large-12 top-bar" style="font-family: 'PT Sans', sans-serif;overflow: visible;">
         <section class="top-bar-section small-only-text-center">
             <ul class="left">
-                <li><a href="/">Gravitas Premier League</a></li>
+                <li><a href="/"><img src="/images/small.png" style="height:42px;padding-bottom:3px;"/></a></li>
+                <li><a href="https://www.facebook.com/ieeecsvit"><img src="/images/ieee.png" style="height:40px;"
+                                                                      align="center"/></a></li>
+
             </ul>
             <ul class="right">
                 <li><a href="/logout">Log Out</a></li>
@@ -252,15 +255,17 @@
                      class="large-12 small-12 right">
                     <table cellspacing="10px"
                            style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
-                        <%for(i=0;i<Squad.length;i++) { %>
-                        <%if(Squad[i]._id>303) { %>
-                        <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;" colspan="3">
-                            <img src="/images/coaches/<%= Squad[i]._id%>.jpg" style="width: 40%; margin: 0" />
+                        <% for(i = 0;i < Squad.length;i++) { %>
+                        <% if(Squad[i]._id > 303) { %>
+                        <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;"
+                            colspan="3">
+                            <img src="/images/coaches/<%= Squad[i]._id %>.jpg" style="width: 40%; margin: 0"/>
+
                             <p style="text-align: center;">
-                                <%=Squad[i].Name %>
+                                <%= Squad[i].Name %>
                             </p>
                         </td>
-                        <%} } %>
+                        <% } } %>
                         <% k = 4;i = 0; var z = 1;for(i = 0;i < Squad.length;i++) { %>
                         <% if(k < 3){ %>
 
