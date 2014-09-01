@@ -23,6 +23,14 @@ var router = express.Router();
 
 var mongoInterest = require(path.join(__dirname, '..', '..', 'db', 'mongo-interest'));
 var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
+var log;
+if (process.env.LOGENTRIES_TOKEN)
+{
+    var logentries = require('node-logentries');
+    log = logentries.logger({
+                                token: process.env.LOGENTRIES_TOKEN
+                            });
+}
 
 router.get('/', function (req, res)
 {
@@ -318,6 +326,16 @@ router.get('/trail', function (req, res) // trailer page
         var session = 0;
     }
     res.render('trail', {results: session });
+});
+router.get('/schedule', function (req, res) // schedule page
+{
+    if (req.signedCookies.name) {
+        var session = 1;
+    }
+    else {
+        var session = 0;
+    }
+    res.render('schedule', {results: session });
 });
 
 module.exports = router;
