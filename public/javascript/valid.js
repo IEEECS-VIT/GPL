@@ -14,6 +14,10 @@ function validator()
         i++;
         team_name.style.backgroundColor = 'Yellow';
         display += i.toString() + ". Enter Team Name.\n";
+    } else if (team_name.value.length > 25) {
+        i++;
+        team_name.style.backgroundColor = 'Yellow';
+        display += i.toString() + ". Team Name is too long. Maximum 25 Character.\n";
     }
     if (pass.value.length == 0)
     {
@@ -24,7 +28,7 @@ function validator()
     if (pass.value.length < 8 && pass.value.length != 0)
     {
         i++;
-        display += i.toString() + ". Password too short.\n";
+        display += i.toString() + ". Password too short. Minimum 8 characters.\n";
     }
     if (cpass.value.length == 0)
     {

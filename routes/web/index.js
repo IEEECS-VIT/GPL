@@ -230,7 +230,7 @@ router.get('/logout', function (req, res)
 
 router.get('/interest', function (req, res)
 {
-    res.redirect('/', { });
+    res.redirect('/');
 });
 
 router.post('/interest', function (req, res) // interest form
@@ -340,10 +340,12 @@ router.get('/trail', function (req, res) // trailer page
 });
 router.get('/schedule', function (req, res) // schedule page
 {
-    if (req.signedCookies.name) {
+    if (req.signedCookies.name)
+    {
         var session = 1;
     }
-    else {
+    else
+    {
         var session = 0;
     }
     res.render('schedule', {results: session });
