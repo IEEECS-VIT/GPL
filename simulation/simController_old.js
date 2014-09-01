@@ -23,6 +23,14 @@ var mongoTeam = require('../mongo-team.js');
 var mongoUser = require('../mongo-users.js');
 var async = require('async');
 
+var log;
+if (process.env.LOGENTRIES_TOKEN)
+{
+    var logentries = require('node-logentries');
+    log = logentries.logger({
+                                token: process.env.LOGENTRIES_TOKEN
+                            });
+}
 
 exports.generateMatch = function ()
 {
@@ -74,7 +82,8 @@ exports.generateMatch = function ()
                     }
                     else
                     {
-                        simulator.team(elt, results.team1, results.team2, results.user1, results.user2);
+                        //simulator.team(elt, results.team1, results.team2, results.user1, results.user2);
+                        console.log(results);
 
                     }
                 };

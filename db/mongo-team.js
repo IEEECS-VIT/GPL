@@ -71,8 +71,6 @@ exports.getTeam = function (doc, callback)
                 else
                 {
                     async.map(document.team, getPlayer, callback);
-                    // document.team.forEach(addDocument);
-                    // callback(false, documents);
                 }
             };
             collection.findOne(doc, onFetch);
@@ -99,6 +97,7 @@ exports.getSquad = function (doc, callback)
                 {
                     if (err)
                     {
+                        console.log(err.message);
                         callback(err, null)
                     }
                     else
@@ -113,11 +112,7 @@ exports.getSquad = function (doc, callback)
                 }
                 else
                 {
-                    var credentials =
-                    {
-                        "_id": coach
-                    };
-                    getPlayer(credentials, onGetCoach);
+                    getPlayer(coach, onGetCoach);
                 }
 
             };
@@ -130,16 +125,15 @@ exports.getSquad = function (doc, callback)
                 }
                 else
                 {
-                    async.map(document.squad, getPlayer, onFinish);
+
                     for (var i = 0; i < 16; i++)
                     {
-                        if (parseInt(document.team[i]._id) >= parseInt(304))
+                        if (parseInt(document.team[i]) >= parseInt(304))
                         {
-                            coach = document.team[i]._id;
+                            coach = parseInt(document.team[i]);
                         }
                     }
-                    // document.team.forEach(addDocument);
-                    // callback(false, documents);
+                    async.map(document.squad, getPlayer, onFinish);
                 }
             };
             collection.findOne(doc, onFetch);
