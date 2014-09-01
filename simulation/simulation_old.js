@@ -63,6 +63,7 @@ exports.todaysMatches = function (callback)
                     break;
 
             }
+            collectionName = 'matchday1';
             var collection = db.collection(collectionName);
             collection.find({}).toArray(callback);
         }
