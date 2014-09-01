@@ -20,32 +20,32 @@ var MongoClient = require('mongodb').MongoClient;
 
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
-exports.getCount = function(callback)
+exports.getCount = function (callback)
 {
-    var onConnect = function(err,db)
+    var onConnect = function (err, db)
     {
-        if(err)
+        if (err)
         {
             throw err;
         }
         else
         {
             var collection = db.collection('users');
-            var onFetch = function(err,count)
+            var onFetch = function (err, count)
             {
-                if(err)
+                if (err)
                 {
                     throw err;
                 }
                 else
                 {
-                    callback(null,count);
+                    callback(null, count);
                 }
             };
             collection.find().count(onFetch);
         }
     }
-    MongoClient.connect(mongoUri,onConnect);
+    MongoClient.connect(mongoUri, onConnect);
 
 };
 
@@ -212,60 +212,60 @@ exports.forgotPassword = function (doc, callback)
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.updateUserTeam = function(doc, arr, callback)
+exports.updateUserTeam = function (doc, arr, callback)
 {
-    var onConnect = function(err,db)
+    var onConnect = function (err, db)
     {
-        if(err)
+        if (err)
         {
             throw err;
         }
         else
         {
             var collection = db.collection('users');
-            var onUpdate = function(err,document)
+            var onUpdate = function (err, document)
             {
-                if(err)
+                if (err)
                 {
-                    callback(err,null);
+                    callback(err, null);
                 }
                 else
                 {
-                    callback(true,document);
+                    callback(true, document);
                 }
             };
-            collection.findAndModify(doc,[],{$set : {'team' : arr}},{},onUpdate)
+            collection.findAndModify(doc, [], {$set: {'team': arr}}, {}, onUpdate)
         }
     };
-    MongoClient.connect(mongoUri,onConnect);
+    MongoClient.connect(mongoUri, onConnect);
 
 };
 
 exports.updateUserSquad = function (doc, arr, callback)
 {
-    var onConnect = function(err, db)
+    var onConnect = function (err, db)
     {
-        if(err)
+        if (err)
         {
             throw err;
         }
         else
         {
             var collection = db.collection('users');
-            var onUpdate = function(err,document)
+            var onUpdate = function (err, document)
             {
-                if(err)
+                if (err)
                 {
-                    callback(err,null);
+                    callback(err, null);
                 }
                 else
                 {
                     console.log("Done");
-                    callback(null,document);
+                    callback(null, document);
                 }
             };
-            collection.findAndModify(doc,[],{$set : {'squad' : arr}},{},onUpdate);
+            collection.findAndModify(doc, [], {$set: {'squad': arr}}, {}, onUpdate);
         }
     };
-    MongoClient.connect(mongoUri,onConnect);
+    MongoClient.connect(mongoUri, onConnect);
 };

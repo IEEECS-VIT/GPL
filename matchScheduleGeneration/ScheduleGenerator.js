@@ -19,13 +19,13 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var day1=require("./Day1.js");
-var day2=require("./Day2.js");
-var day3=require("./Day3.js");
-var day4=require("./Day4.js");
-var day5=require("./Day5.js");
-var day6=require("./Day6.js");
-var day7=require("./Day7.js");
+var day1 = require("./Day1.js");
+var day2 = require("./Day2.js");
+var day3 = require("./Day3.js");
+var day4 = require("./Day4.js");
+var day5 = require("./Day5.js");
+var day6 = require("./Day6.js");
+var day7 = require("./Day7.js");
 
 
 day1.gen_schedule();

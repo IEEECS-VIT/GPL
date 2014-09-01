@@ -1,29 +1,30 @@
 <html>
-	<head>
-		<link rel="stylesheet" href="/stylesheets/countdown.css">
+<head>
+    <link rel="stylesheet" href="/stylesheets/countdown.css">
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
-		<script src="/javascript/countdown.js"></script>
-	</head>
-	<body>
-	<div class="clock" style="margin:2em;"></div>
-	<div class="message"></div>
+    <script src="/javascript/countdown.js"></script>
+</head>
+<body>
+<div class="clock" style="margin:2em;"></div>
+<div class="message"></div>
 
-	<script type="text/javascript">
-        var clock;
+<script type="text/javascript">
+    var clock;
 
-        $(document).ready(function() {
+    $(document).ready(function ()
+                      {
 
-            var currentDate = new Date();
-            var futureDate  = new Date("September 01, 2014 18:00:00");
-            var diff = (futureDate.getTime() - currentDate.getTime()) / 1000;
-            clock = $('.clock').FlipClock(diff, {
-                clockFace: 'DailyCounter',
-                countdown: true
-            });
-        });
-	</script>
-	
-	</body>
+                          var currentDate = new Date();
+                          var futureDate = new Date("September 01, 2014 18:00:00");
+                          var diff = (futureDate.getTime() - currentDate.getTime()) / 1000;
+                          clock = $('.clock').FlipClock(diff, {
+                              clockFace: 'DailyCounter',
+                              countdown: true
+                          });
+                      });
+</script>
+
+</body>
 </html>

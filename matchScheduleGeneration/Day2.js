@@ -25,7 +25,7 @@ var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb:/
 var SchedulePush = require("./SchedulePush.js");
 
 
-exports.gen_schedule=function()
+exports.gen_schedule = function ()
 {
 
 
@@ -51,10 +51,10 @@ exports.gen_schedule=function()
                 {
                     console.log(count);
 
-                    var arr = [], match_count = 1,j;
-                    var onInsert = function(err,docs)
+                    var arr = [], match_count = 1, j;
+                    var onInsert = function (err, docs)
                     {
-                        if(err)
+                        if (err)
                         {
                             console.log("Error")
                         }
@@ -72,19 +72,19 @@ exports.gen_schedule=function()
                         var match =
                         {
                             "_id": match_count,
-                            "Team_1":i,
-                            "Team_2":j,
+                            "Team_1": i,
+                            "Team_2": j,
                             "TimeStamp": new Date("6 Sep 2014 00:00:00 +0530 (IST)")
                         };
                         match_count++;
                         i++;
                         if (i % 2 == 0)
                         {
-                            i*=2;
+                            i *= 2;
                         }
 
 
-                        SchedulePush.insert(match,"matchday2",onInsert)
+                        SchedulePush.insert(match, "matchday2", onInsert)
                     }
 
 

@@ -24,21 +24,22 @@ module.exports = email_manager;
 
 email_manager.server = require("emailjs/email").server.connect({
 
-    host: email_settings.host,
-    user: email_settings.user,
-    password: email_settings.password,
-    ssl: true
+                                                                   host: email_settings.host,
+                                                                   user: email_settings.user,
+                                                                   password: email_settings.password,
+                                                                   ssl: true
 
-});
+                                                               });
 
-email_manager.dispatchResetPasswordLink = function (account, callback) {
+email_manager.dispatchResetPasswordLink = function (account, callback)
+{
     email_manager.server.send({
-        from: email_settings.sender,
-        to: account.email,
-        subject: 'Password Reset',
-        text: 'something went wrong... :(',
-        attachment: email_manager.composeEmail(account)
-    }, callback);
+                                  from: email_settings.sender,
+                                  to: account.email,
+                                  subject: 'Password Reset',
+                                  text: 'something went wrong... :(',
+                                  attachment: email_manager.composeEmail(account)
+                              }, callback);
 };
 
 email_manager.composeEmail = function (object)

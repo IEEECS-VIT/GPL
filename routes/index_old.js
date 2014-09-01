@@ -107,7 +107,6 @@ router.get('/matchday', function (req, res) // page to view next match schedule 
 });
 
 
-
 router.get('/forum', function (req, res) // User Forums
 {
     res.render('forum', { });

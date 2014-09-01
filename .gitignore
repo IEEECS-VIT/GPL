@@ -1,4 +1,4 @@
-# Webstorm
+# Webstorm, PyCharm
 .idea/
 
 # Logs
@@ -34,3 +34,7 @@ ehthumbs.db
 Icon?
 thumbs.db
 Thumbs.db
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]

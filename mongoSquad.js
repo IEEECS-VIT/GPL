@@ -26,29 +26,38 @@ var MongoClient = require('mongodb').MongoClient;
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
 
-
-exports.getSquad = function (doc,callback ) {
-    var onConnect = function (err, db) {
-        if (err) {
+exports.getSquad = function (doc, callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             var collection = db.collection('players');                        // i dont know the exact collection name, i have assumed it
-            var onFetch = function (err, document) {
-                if (err) {
+            var onFetch = function (err, document)
+            {
+                if (err)
+                {
                     callback(err, null);
                 }
-                else if (document) {
+                else if (document)
+                {
                     db.close();
-                    if (doc['_id'] === document['_id']) {
+                    if (doc['_id'] === document['_id'])
+                    {
                         callback(null, doc);
                     }
-                    else {
+                    else
+                    {
                         callback(true, null);
                     }
 
                 }
-                else {
+                else
+                {
                     callback(true, null);
                 }
             };

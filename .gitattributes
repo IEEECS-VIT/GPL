@@ -14,12 +14,16 @@
 *.js text
 *.htm text
 *.html text
+*.ejs text
 *.xml text
 *.txt text
 *.ini text
 *.inc text
 .htaccess text
 *.md text
+*.py text
+*.yaml text
+*.json text
 
 # These files are binary and should be left untouched
 # (binary is a macro for -text -diff)
