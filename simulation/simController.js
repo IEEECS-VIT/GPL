@@ -24,9 +24,9 @@ var mongoUser = require('../mongo-users.js');
 var async = require('async');
 
 
-exports.generateMatch = function()
+exports.generateMatch = function ()
 {
-    var matchGenerator = function(err,docs)
+    var matchGenerator = function (err, docs)
     {
         if (err)
         {
@@ -34,54 +34,54 @@ exports.generateMatch = function()
         }
         else
         {
-            var simulate_match = function(elt, i, arr)
+            var simulate_match = function (elt, i, arr)
             {
                 var parallel_tasks = {};
                 var doc1 = {
-                    "team_no" : elt.Team_1
+                    "team_no": elt.Team_1
                 };
                 var doc2 = {
-                    "team_no" : elt.Team_2
+                    "team_no": elt.Team_2
                 };
 
-                parallel_tasks.team1 = function(asyncCallback)
+                parallel_tasks.team1 = function (asyncCallback)
                 {
                     mongoTeam.getSquad(doc1, asyncCallback);
 
                 };
 
 
-                parallel_tasks.team2 = function(asyncCallback)
+                parallel_tasks.team2 = function (asyncCallback)
                 {
                     mongoTeam.getSquad(doc2, asyncCallback);
 
                 };
-                parallel_tasks.user1 = function(asyncCallback)
+                parallel_tasks.user1 = function (asyncCallback)
                 {
                     mongoUser.fetch(doc2, asyncCallback);
 
                 };
-                parallel_tasks.user2 = function(asyncCallback)
+                parallel_tasks.user2 = function (asyncCallback)
                 {
                     mongoUser.fetch(doc2, asyncCallback);
 
                 };
-                var onFinish = function(err,results)
+                var onFinish = function (err, results)
                 {
-                    if(err)
+                    if (err)
                     {
                         // Add Response
                     }
                     else
                     {
-                        simulator.team(elt, results.team1,results.team2,results.user1,results.user2);
+                        simulator.team(elt, results.team1, results.team2, results.user1, results.user2);
 
                     }
                 };
-                async.parallel(parallel_tasks,onFinish);
+                async.parallel(parallel_tasks, onFinish);
 
             };
-           docs.forEach(simulate_match);
+            docs.forEach(simulate_match);
         }
     };
     simulator.todaysMatches(matchGenerator);

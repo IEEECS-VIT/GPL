@@ -26,7 +26,7 @@ var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb:/
 var SchedulePush = require("./SchedulePush.js");
 
 
-exports.gen_schedule=function()
+exports.gen_schedule = function ()
 {
 
 
@@ -52,10 +52,10 @@ exports.gen_schedule=function()
                 {
                     console.log(count);
 
-                    var arr = [], match_count = 1,j=0;
-                    var onInsert = function(err,docs)
+                    var arr = [], match_count = 1, j = 0;
+                    var onInsert = function (err, docs)
                     {
-                        if(err)
+                        if (err)
                         {
                             console.log("Error")
                         }
@@ -65,24 +65,24 @@ exports.gen_schedule=function()
                         }
                     };
 
-                    for ( var i = 0; i < count/8;i++)
+                    for (var i = 0; i < count / 8; i++)
                     {
-                        var team1=[1,2,5,6];
-                        var team2=[4,3,8,7];
+                        var team1 = [1, 2, 5, 6];
+                        var team2 = [4, 3, 8, 7];
 
-                        for(j=0;j<team1.length;j++)
+                        for (j = 0; j < team1.length; j++)
                         {
-                            arr[8*i+team1[j]] = match_count;
-                            arr[8*i+team2[j]] = match_count;
+                            arr[8 * i + team1[j]] = match_count;
+                            arr[8 * i + team2[j]] = match_count;
                             var match =
                             {
                                 "_id": match_count,
-                                "Team_1":i,
-                                "Team_2":j,
+                                "Team_1": i,
+                                "Team_2": j,
                                 "TimeStamp": new Date("8 Sep 2014 00:00:00 +0530 (IST)")
                             };
                             match_count++;
-                            SchedulePush.insert(match,"matchday4",onInsert)
+                            SchedulePush.insert(match, "matchday4", onInsert)
 
                         }
                     }

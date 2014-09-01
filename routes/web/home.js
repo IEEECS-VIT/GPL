@@ -26,19 +26,24 @@ var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
 var mongoTeam = require(path.join(__dirname, '..', '..', 'db', 'mongo-team'));
 var mongoMatches = require(path.join(__dirname, '..', '..', 'db', 'mongo-matches'));
 
-router.get('/', function (req, res) {
+router.get('/', function (req, res)
+{
     var results = {};
-    if (req.signedCookies.name) {
+    if (req.signedCookies.name)
+    {
         var credentials = {
             '_id': req.signedCookies.name
         };
-        var onFetch = function (err, doc) {
+        var onFetch = function (err, doc)
+        {
             results.user = doc;
-            if (doc.team.length == 0) {
+            if (doc.team.length == 0)
+            {
                 res.redirect("/home/players")
             }
 
-            var getDetails = function (id, callback) {
+            var getDetails = function (id, callback)
+            {
                 var player = {
                     '_id': id
                 };
@@ -52,20 +57,25 @@ router.get('/', function (req, res) {
                 };
                 mongoPlayers.getPlayer(player, fields, callback)
             };
-            var onFinish = function (err, documents) {
-                if (err) {
+            var onFinish = function (err, documents)
+            {
+                if (err)
+                {
                     //do something with the error
                 }
-                else {
+                else
+                {
                     results.team = documents;
                     res.render('home', {results: results});
                 }
             };
 
-            if (err) {
+            if (err)
+            {
                 res.redirect('/');
             }
-            else {
+            else
+            {
                 var document = [];
                 document = doc.team;
                 async.map(document, getDetails, onFinish);
@@ -73,7 +83,8 @@ router.get('/', function (req, res) {
         };
         mongoUsers.fetch(credentials, onFetch);
     }
-    else {
+    else
+    {
         res.redirect('/');
     }
 });
@@ -87,12 +98,15 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
         {
             "_id": teamname
         };
-        var onFetch = function (err, documents) {
-            if (err) {
+        var onFetch = function (err, documents)
+        {
+            if (err)
+            {
                 console.log(err.message);
 
             }
-            else {
+            else
+            {
                 console.log(documents);
                 res.render("leaderboard", { leaderboard: documents});
             }
@@ -101,14 +115,17 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
         mongoUsers.getleader(doc, onFetch);
 
     }
-    else {
+    else
+    {
         res.redirect("/");
     }
 
 
 });
-router.get('/matches', function (req, res) {
-    if (req.signedCookies.name) {
+router.get('/matches', function (req, res)
+{
+    if (req.signedCookies.name)
+    {
         var teamName = req.signedCookies.name;
 
         var credentials1 = {
@@ -120,14 +137,18 @@ router.get('/matches', function (req, res) {
         var parallel_tasks = {};
         var response = {};
         response.test = "False";
-        var onFinish = function (err, results) {
-            if (err) {
+        var onFinish = function (err, results)
+        {
+            if (err)
+            {
                 //do something with the error
             }
-            else {
+            else
+            {
                 response["previousMatch"] = results.previousMatch;
                 response["nextMatch"] = results.nextMatch;
-                if (response["previousMatch"] != null || response["nextMatch"] != null) {
+                if (response["previousMatch"] != null || response["nextMatch"] != null)
+                {
                     response.test = "True";
                 }
                 res.render('matches', {response: response});
@@ -135,10 +156,12 @@ router.get('/matches', function (req, res) {
 
         };
 
-        parallel_tasks.previousMatch = function (asyncCallback) {
+        parallel_tasks.previousMatch = function (asyncCallback)
+        {
             mongoMatches.fetchPreviousMatch(credentials1, credentials2, asyncCallback);
         };
-        parallel_tasks.nextMatch = function (asyncCallback) {
+        parallel_tasks.nextMatch = function (asyncCallback)
+        {
             mongoMatches.fetchNextMatch(credentials1, credentials2, asyncCallback);
 
         };
@@ -147,14 +170,17 @@ router.get('/matches', function (req, res) {
 
 
     }
-    else {
+    else
+    {
         res.redirect('/');
     }
 });
 
 
-router.post('/getsquad', function (req, res) {
-    if (req.signedCookies.name) {
+router.post('/getsquad', function (req, res)
+{
+    if (req.signedCookies.name)
+    {
         var teamname = req.signedCookies.name;
         var credentials = {
             '_id': teamname
@@ -184,25 +210,30 @@ router.post('/getsquad', function (req, res) {
         squad.push(squad10);
         squad.push(squad11);
         console.log(squad);
-        var onFetch = function (err, document) {
-            if (err) {
+        var onFetch = function (err, document)
+        {
+            if (err)
+            {
                 console.log("Error");
                 //do something with the error
                 console.log(err.message);
             }
-            else {
+            else
+            {
                 console.log(document);
                 res.redirect('/home');
             }
         };
         mongoUsers.updateUserSquad(credentials, squad, onFetch);
     }
-    else {
+    else
+    {
         res.redirect('/');
     }
 
 });
-router.post('/getTeam', function (req, res) {
+router.post('/getTeam', function (req, res)
+{
     var players = [], cost = 0;
     var player1 = parseInt(req.body.p1);
     var player2 = parseInt(req.body.p2);
@@ -237,18 +268,22 @@ router.post('/getTeam', function (req, res) {
     players.push(player15);
     players.push(player16);
 
-    var onUpdate = function (err, documents) {
-        if (err) {
+    var onUpdate = function (err, documents)
+    {
+        if (err)
+        {
             // do something with the error
         }
-        else {
+        else
+        {
             console.log(documents);
             res.redirect('/home');
         }
 
     };
 
-    var getCost = function (id, callback) {
+    var getCost = function (id, callback)
+    {
         var fields = {
             _id: 1,
             Name: 1,
@@ -261,15 +296,20 @@ router.post('/getTeam', function (req, res) {
         };
         mongoPlayers.getPlayer(player, fields, callback)
     };
-    var onFinish = function (err, documents) {
-        if (err) {
+    var onFinish = function (err, documents)
+    {
+        if (err)
+        {
             // do something with the error
         }
-        else {
+        else
+        {
             console.log(documents);
-            for (var i = parseInt(0); i < documents.length; i++) {
+            for (var i = parseInt(0); i < documents.length; i++)
+            {
                 cost = (cost - 0) + (documents[i].Cost - 0);
-                if (cost > 10000000) {
+                if (cost > 10000000)
+                {
                     res.redirect('/home/players', {err: "Cost Exceeded"});
                 }
             }
@@ -286,7 +326,8 @@ router.post('/getTeam', function (req, res) {
 });
 
 
-router.get('/rules', function (req, res) {
+router.get('/rules', function (req, res)
+{
     res.render('rules', { });
 });
 
@@ -305,24 +346,33 @@ router.get('/trailer', function (req, res) // trailer page
 
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
-    if (req.signedCookies.name) {
+    if (req.signedCookies.name)
+    {
         var doc = {
             "_id": req.signedCookies.name
         };
-        var onFetchUser = function (err, document) {
-            if (err) {
+        var onFetchUser = function (err, document)
+        {
+            if (err)
+            {
                 //do something with the error
             }
-            else {
-                if (document.team.length != 0) {
+            else
+            {
+                if (document.team.length != 0)
+                {
                     res.redirect("/home");
                 }
-                else {
-                    var onFetch = function (err, documents) {
-                        if (err) {
+                else
+                {
+                    var onFetch = function (err, documents)
+                    {
+                        if (err)
+                        {
                             res.redirect('/home');
                         }
-                        else {
+                        else
+                        {
                             res.render('players', {
                                 Players: documents
                             });
@@ -336,7 +386,8 @@ router.get('/players', function (req, res) // page for all players, only availab
         mongoUsers.fetch(doc, onFetchUser);
 
     }
-    else {
+    else
+    {
         res.redirect("/");
     }
 
@@ -353,11 +404,14 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
             '_id': teamName
         };
 
-        var getTeam = function (err, documents) {
-            if (err) {
+        var getTeam = function (err, documents)
+        {
+            if (err)
+            {
                 res.redirect('/home');
             }
-            else {
+            else
+            {
                 res.render('team', {Squad: documents});
             }
 

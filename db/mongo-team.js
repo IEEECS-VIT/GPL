@@ -93,21 +93,21 @@ exports.getSquad = function (doc, callback)
         else
         {
             var collection = db.collection('users');
-            var onFinish = function(err,documents)
+            var onFinish = function (err, documents)
             {
-                var onGetCoach = function(err,doc)
+                var onGetCoach = function (err, doc)
                 {
-                    if(err)
+                    if (err)
                     {
-                        callback(err,null)
+                        callback(err, null)
                     }
                     else
                     {
                         documents.push(doc);
-                        callback(null,documents);
+                        callback(null, documents);
                     }
                 };
-                if(err)
+                if (err)
                 {
                     throw err;
                 }
@@ -115,9 +115,9 @@ exports.getSquad = function (doc, callback)
                 {
                     var credentials =
                     {
-                        "_id" : coach
+                        "_id": coach
                     };
-                    getPlayer(credentials,onGetCoach);
+                    getPlayer(credentials, onGetCoach);
                 }
 
             };
@@ -131,11 +131,11 @@ exports.getSquad = function (doc, callback)
                 else
                 {
                     async.map(document.squad, getPlayer, onFinish);
-                    for( var i=0;i<16;i++)
+                    for (var i = 0; i < 16; i++)
                     {
-                        if(parseInt(document.team[i]._id) >= parseInt(304))
+                        if (parseInt(document.team[i]._id) >= parseInt(304))
                         {
-                            coach=document.team[i]._id;
+                            coach = document.team[i]._id;
                         }
                     }
                     // document.team.forEach(addDocument);

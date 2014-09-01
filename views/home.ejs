@@ -59,17 +59,19 @@
             <h4 style="color: white;text-align: left;margin:1%"></h4>
             <table cellspacing="10px"
                    style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
-                <%for(var i=0;i<results.team.length;i++) { %>
-                <%if(results.team[i]._id>303) { %>
-                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;" colspan="3">
-                    <img src="/images/coaches/<%= results.team[i]._id%>.jpg" style="width: 40%; margin: 0" />
+                <% for(var i = 0;i < results.team.length;i++) { %>
+                <% if(results.team[i]._id > 303) { %>
+                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;"
+                    colspan="3">
+                    <img src="/images/coaches/<%= results.team[i]._id %>.jpg" style="width: 40%; margin: 0"/>
+
                     <p style="text-align: center;">
-                        <%=results.team[i].Name %>
+                        <%= results.team[i].Name %>
                     </p>
 
                     <p style="text-align: center;">Coach</p>
                 </td>
-                <%} } %>
+                <% } } %>
                 <% k = 4;i = 0; var z = 1;for(i = 0;i < results.team.length;i++) { %>
                 <% if(k < 3){ %>
 
@@ -109,16 +111,18 @@
                     <% } } } %>
                 </tr>
             </table>
-            <a href="/home/team" class="button small [radius round]" style="border-radius: 5px;background: rgba(0,0,0,0.5);">Change Line Up</a>
+            <a href="/home/team" class="button small [radius round]"
+               style="border-radius: 5px;background: rgba(0,0,0,0.5);">Change Line Up</a>
         </div>
         <div class="large-4 small-12 medium-12 right"
-                     style="background:rgba(20,20,20,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-right:3%;margin-top: 3%;">
+             style="background:rgba(20,20,20,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-right:3%;margin-top: 3%;">
             <h4 style="color: white;text-align: center;margin: 1%;padding: 2%;">Team Statistics</h4>
+
             <p style="color: white;text-align: left;padding: 2%;margin: 1%">
-                Matches Played: <%=results.user.played%><br />
-                Matches Won: <%=results.user.win%><br />
-                Points: <%=results.user.points%><br />
-                Net Run Rate: <%= results.user.net_run_rate%>
+                Matches Played: <%= results.user.played %><br/>
+                Matches Won: <%= results.user.win %><br/>
+                Points: <%= results.user.points %><br/>
+                Net Run Rate: <%= results.user.net_run_rate %>
             </p>
         </div>
     </div>

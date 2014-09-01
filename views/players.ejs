@@ -33,17 +33,21 @@ var r;
 var cost = 10000000;
 var che;
 var cb = 7, cbo = 6, ca = 2, cc = 1;
-function subm() {
+function subm()
+{
 
-    if (k < 15) {
+    if (k < 15)
+    {
 
         alert("Team not full");
 
 
     }
-    else {
+    else
+    {
         var id;
-        for (var j = 1; j < 17; j++) {
+        for (var j = 1; j < 17; j++)
+        {
             id = 't' + j;
             document.getElementById(id).value = team[j - 1];
 
@@ -57,8 +61,10 @@ function subm() {
     }
 
 }
-function sel(r) {
-    if (k == 16) {
+function sel(r)
+{
+    if (k == 16)
+    {
 
         alert("Team limit Reached");
         return -1;
@@ -66,13 +72,16 @@ function sel(r) {
 
     che = ch(r);
 
-    if (che != -1) {
-        if (k < 17) {
+    if (che != -1)
+    {
+        if (k < 17)
+        {
 
 
             var c = 'cc' + String(r);
             var y = document.getElementById(c);
-            if (cost - y.value < 0) {
+            if (cost - y.value < 0)
+            {
                 alert("Low Budget");
                 return -1;
             }
@@ -93,16 +102,20 @@ function sel(r) {
 }
 var count;
 var di = [];
-function disp() {
+function disp()
+{
 
 
-    if (k == 0) {
+    if (k == 0)
+    {
         document.getElementById("squad").innerHTML = "";
         cost = 10000000;
         document.getElementById('budget').innerHTML = "Selected Players <b style='font-size: 60%'>Budget:" + cost + "<br />" + "Batsmen : " + cb + "<br />" + "Bowlers : " + cbo + "<br />" + "All Rounders : " + ca + "<br />" + "Coach : " + cc + "<br />" + "</b>";
     }
-    else {
-        for (count = 0; count < k; count++) {
+    else
+    {
+        for (count = 0; count < k; count++)
+        {
 
             var cut = team[count];
             var n = 'cn' + String(cut);
@@ -122,13 +135,17 @@ function disp() {
         document.getElementById("squad").innerHTML = di.join(" ");
     }
 }
-function rem(co) {
+function rem(co)
+{
     document.getElementById("box" + co).style.visibility = 'visible';
 
-    for (var b = 0; b < k; b++) {
-        if (team[b] == co) {
+    for (var b = 0; b < k; b++)
+    {
+        if (team[b] == co)
+        {
             var a = b;
-            while (a < k) {
+            while (a < k)
+            {
 
                 team[a] = team[a + 1];
 
@@ -144,7 +161,8 @@ function rem(co) {
         }
     }
     cost = 10000000;
-    for (b = 0; b < k; b++) {
+    for (b = 0; b < k; b++)
+    {
         var c = 'cc' + String(team[b]);
         var y = document.getElementById(c);
 
@@ -156,7 +174,8 @@ function rem(co) {
     disp();
 
 }
-function ch(r) {
+function ch(r)
+{
 
     var t, z;
 
@@ -166,43 +185,53 @@ function ch(r) {
     var c = 0;
 
 
-    if (r != 0) {
+    if (r != 0)
+    {
         var asd = 'ct' + String(r);
         var y = document.getElementById(asd);
-        if (cb == 0 && y.value.localeCompare('bat') == 0) {
+        if (cb == 0 && y.value.localeCompare('bat') == 0)
+        {
             alert("Maximum number of Batsmen reached");
             return -1;
         }
-        if (cbo == 0 && y.value.localeCompare('bowl') == 0) {
+        if (cbo == 0 && y.value.localeCompare('bowl') == 0)
+        {
             alert("Maximum number of Bowlers reached");
             return -1;
         }
-        if (ca == 0 && y.value.localeCompare('all') == 0) {
+        if (ca == 0 && y.value.localeCompare('all') == 0)
+        {
             alert("Maximum number of All Rounders reached");
             return -1;
 
         }
-        if (cc == 0 && y.value.localeCompare('coach') == 0) {
+        if (cc == 0 && y.value.localeCompare('coach') == 0)
+        {
             alert("Maximum number of Coaches reached");
             return -1;
 
         }
     }
-    for (var a = 0; a < k; a++) {
+    for (var a = 0; a < k; a++)
+    {
 
 
         t = 'ct' + String(team[a]);
         z = document.getElementById(t);
-        if (z.value.localeCompare('bat') == 0) {
+        if (z.value.localeCompare('bat') == 0)
+        {
             b++;
         }
-        else if (z.value.localeCompare('bowl') == 0) {
+        else if (z.value.localeCompare('bowl') == 0)
+        {
             bo++;
         }
-        else if (z.value.localeCompare('all') == 0) {
+        else if (z.value.localeCompare('all') == 0)
+        {
             al++;
         }
-        else if (z.value.localeCompare('coach') == 0) {
+        else if (z.value.localeCompare('coach') == 0)
+        {
             c++;
         }
 

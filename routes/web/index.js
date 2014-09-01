@@ -24,43 +24,53 @@ var router = express.Router();
 var mongoInterest = require(path.join(__dirname, '..', '..', 'db', 'mongo-interest'));
 var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
 
-router.get('/', function (req, res) {
-    if (req.signedCookies.name) {
+router.get('/', function (req, res)
+{
+    if (req.signedCookies.name)
+    {
         res.redirect('/home');
     }
-    else {
-        res.render('index', {response : "" });
+    else
+    {
+        res.render('index', {response: "" });
     }
 });
 
 
-router.post('/login', function (req, res) {
+router.post('/login', function (req, res)
+{
     var teamName = req.body.team_name;
     var password = req.body.password;
     if (req.signedCookies.name) res.clearCookie('name', { });
     var credentials = {
         '_id': teamName
     };
-    var onFetch = function (err, doc) {
-        if (err) {
+    var onFetch = function (err, doc)
+    {
+        if (err)
+        {
             console.log('MongoDB Down');
             // Make it more user friendly, output the error to the view
-            res.render('index',{response : "Incorrect Username"});
+            res.render('index', {response: "Incorrect Username"});
         }
-        else if (doc) {
-            if (bcrypt.compareSync(password, doc['password_hash'])) {
+        else if (doc)
+        {
+            if (bcrypt.compareSync(password, doc['password_hash']))
+            {
                 res.cookie('name', doc['_id'], {maxAge: 86400000, signed: true});
                 res.redirect('/home');
             }
-            else {
+            else
+            {
                 console.log('Incorrect Credentials');
-                res.render('index', {response : "Incorrect Password"});
+                res.render('index', {response: "Incorrect Password"});
             }
         }
-        else {
+        else
+        {
             console.log('No user exists');
             // Make it more user friendly, output the error to the view
-            res.render('index',{response : "Incorrect Username"});
+            res.render('index', {response: "Incorrect Username"});
         }
     };
     mongoUsers.fetch(credentials, onFetch);
@@ -71,7 +81,8 @@ router.get('/forgot', function (req, res) //forgot password page
     res.render('forgot', { });
 });
 
-router.post('/forgot', function (req, res) {
+router.post('/forgot', function (req, res)
+{
     var name = req.body.team_name;
     var email = req.body.email;
 
@@ -79,40 +90,53 @@ router.post('/forgot', function (req, res) {
         '_id': name,
         '_email': email
     };
-    var onFetch = function (err, doc) {
-        if (err) {
+    var onFetch = function (err, doc)
+    {
+        if (err)
+        {
             res.redirect('/');
         }
-        else if (doc) {
-            if (doc['email'] === credentials['email'] && doc['_id'] === credentials['_id']) {
+        else if (doc)
+        {
+            if (doc['email'] === credentials['email'] && doc['_id'] === credentials['_id'])
+            {
                 // email dispatcher
             }
-            else {
+            else
+            {
                 // wrong
             }
         }
-        else {
+        else
+        {
             res.render('forgot', {Message: "No record"});
         }
     };
     mongoUsers.forgotPassword(credentials, onFetch);
 });
 
-router.get('/register', function (req, res) {
-    if (req.signedCookies.name) {
+router.get('/register', function (req, res)
+{
+    if (req.signedCookies.name)
+    {
         res.redirect('/home');
     }
-    else {
-        res.render('register', { response : "" });
+    else
+    {
+        res.render('register', { response: "" });
     }
 });
 
-router.post('/register', function (req, res) {
-    var onGetCount = function (err, number) {
-        if (err) {
+router.post('/register', function (req, res)
+{
+    var onGetCount = function (err, number)
+    {
+        if (err)
+        {
             // do something with the error
         }
-        else {
+        else
+        {
             var team_no = parseInt(number) + 1;
             var teamName = req.body.team_name;
             var password = req.body.password;
@@ -122,7 +146,8 @@ router.post('/register', function (req, res) {
             var phone = req.body.phone;
             console.log("Reached");
 
-            if (password === confirmPassword) {
+            if (password === confirmPassword)
+            {
                 var salt = bcrypt.genSaltSync(10);
                 var hashedPassword = bcrypt.hashSync(password, salt);
                 var newUser = {
@@ -144,13 +169,16 @@ router.post('/register', function (req, res) {
                     balls_against: 0,
                     net_run_rate: 0.0
                 };
-                var onInsert = function (err, docs) {
-                    if (err) {
+                var onInsert = function (err, docs)
+                {
+                    if (err)
+                    {
                         console.log(err.message);
                         // Make it more user friendly, output the error to the view
-                        res.render('register', {response:"Team Name Already Exists"});
+                        res.render('register', {response: "Team Name Already Exists"});
                     }
-                    else {
+                    else
+                    {
                         var name = docs[0]['_id'];
                         res.cookie('name', name, {maxAge: 86400000, signed: true});
                         res.redirect('/home/players');
@@ -158,9 +186,10 @@ router.post('/register', function (req, res) {
                 };
                 mongoUsers.insert(newUser, onInsert);
             }
-            else {
+            else
+            {
                 console.log("Incorrect Password");
-                res.render('register',{response : "Passwords do not match"});
+                res.render('register', {response: "Passwords do not match"});
             }
         }
     };
@@ -168,17 +197,21 @@ router.post('/register', function (req, res) {
 
 });
 
-router.get('/logout', function (req, res) {
-    if (req.signedCookies.name) {
+router.get('/logout', function (req, res)
+{
+    if (req.signedCookies.name)
+    {
         res.clearCookie('name', { });
         res.redirect('/');
     }
-    else {
+    else
+    {
         res.redirect('/');
     }
 });
 
-router.get('/interest', function (req, res) {
+router.get('/interest', function (req, res)
+{
     res.render('interest', { });
 });
 
@@ -192,11 +225,14 @@ router.post('/interest', function (req, res) // interest form
         email: email,
         phone: phone
     };
-    var onInsert = function (err, docs) {
-        if (err) {
+    var onInsert = function (err, docs)
+    {
+        if (err)
+        {
             // do something
         }
-        else {
+        else
+        {
             res.redirect('/interest');
             console.log(docs);
         }
@@ -207,10 +243,12 @@ router.post('/interest', function (req, res) // interest form
 
 router.get('/developer', function (req, res) // developers page
 {
-    if (req.signedCookies.name) {
+    if (req.signedCookies.name)
+    {
         var session = 1;
     }
-    else {
+    else
+    {
         var session = 0;
     }
     res.render('developer', {results: session });
@@ -218,10 +256,12 @@ router.get('/developer', function (req, res) // developers page
 router.get('/countdown', function (req, res) // page for countdown
 {
     var session;
-    if (req.signedCookies.name) {
+    if (req.signedCookies.name)
+    {
         session = true;
     }
-    else {
+    else
+    {
         session = false;
     }
     res.render('countdown', {Session: session });
@@ -230,20 +270,25 @@ router.get('/countdown', function (req, res) // page for countdown
 router.get('/prizes', function (req, res) // page to view prizes
 {
     var session;
-    if (req.signedCookies.name) {
+    if (req.signedCookies.name)
+    {
         session = true;
     }
-    else {
+    else
+    {
         session = false;
     }
     res.render('prizes', {Session: session });
 });
 
-router.get('/rule', function (req, res) {
-    if (req.signedCookies.name) {
+router.get('/rule', function (req, res)
+{
+    if (req.signedCookies.name)
+    {
         var session = 1;
     }
-    else {
+    else
+    {
         var session = 0;
     }
     res.render('rule', {results: session });
@@ -251,10 +296,12 @@ router.get('/rule', function (req, res) {
 
 router.get('/sponsor', function (req, res) // sponsors page
 {
-    if (req.signedCookies.name) {
+    if (req.signedCookies.name)
+    {
         var session = 1;
     }
-    else {
+    else
+    {
         var session = 0;
     }
     res.render('sponsor', {results: session });
@@ -262,10 +309,12 @@ router.get('/sponsor', function (req, res) // sponsors page
 
 router.get('/trail', function (req, res) // trailer page
 {
-    if (req.signedCookies.name) {
+    if (req.signedCookies.name)
+    {
         var session = 1;
     }
-    else {
+    else
+    {
         var session = 0;
     }
     res.render('trail', {results: session });
