@@ -25,6 +25,14 @@ var mongoPlayers = require(path.join(__dirname, '..', '..', 'db', 'mongo-players
 var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
 var mongoTeam = require(path.join(__dirname, '..', '..', 'db', 'mongo-team'));
 var mongoMatches = require(path.join(__dirname, '..', '..', 'db', 'mongo-matches'));
+var log;
+if (process.env.LOGENTRIES_TOKEN)
+{
+    var logentries = require('node-logentries');
+    log = logentries.logger({
+                                token: process.env.LOGENTRIES_TOKEN
+                            });
+}
 
 router.get('/', function (req, res)
 {
@@ -36,50 +44,64 @@ router.get('/', function (req, res)
         };
         var onFetch = function (err, doc)
         {
-            results.user = doc;
-            if (doc.team.length == 0)
+            if(err)
             {
-                res.redirect("/home/players")
+                console.log(err);
             }
-
-            var getDetails = function (id, callback)
+            else if(doc)
             {
-                var player = {
-                    '_id': id
-                };
-                var fields =
+                results.user = doc;
+                if (doc.team.length == 0)
                 {
-                    _id: 1,
-                    Name: 1,
-                    Cost: 1,
-                    Country: 1,
-                    Type: 1
+                    res.redirect("/home/players")
+                }
+
+                var getDetails = function (id, callback)
+                {
+                    var player = {
+                        '_id': id
+                    };
+                    var fields =
+                    {
+                        _id: 1,
+                        Name: 1,
+                        Cost: 1,
+                        Country: 1,
+                        Type: 1
+                    };
+                    mongoPlayers.getPlayer(player, fields, callback)
                 };
-                mongoPlayers.getPlayer(player, fields, callback)
-            };
-            var onFinish = function (err, documents)
-            {
+                var onFinish = function (err, documents)
+                {
+                    if (err)
+                    {
+                        //do something with the error
+                    }
+                    else
+                    {
+                        results.team = documents;
+                        res.render('home', {results: results});
+                    }
+                };
+
                 if (err)
                 {
-                    //do something with the error
+                    res.redirect('/');
                 }
                 else
                 {
-                    results.team = documents;
-                    res.render('home', {results: results});
+                    var document = [];
+                    document = doc.team;
+                    async.map(document, getDetails, onFinish);
                 }
-            };
 
-            if (err)
-            {
-                res.redirect('/');
             }
             else
             {
-                var document = [];
-                document = doc.team;
-                async.map(document, getDetails, onFinish);
+                res.clearCookie('name', { });
+                res.redirect('/');
             }
+
         };
         mongoUsers.fetch(credentials, onFetch);
     }
@@ -214,7 +236,7 @@ router.post('/getsquad', function (req, res)
         {
             if (err)
             {
-                console.log("Error");
+                console.log(err.message);
                 //do something with the error
                 console.log(err.message);
             }
@@ -330,7 +352,10 @@ router.get('/rules', function (req, res)
 {
     res.render('rules', { });
 });
-
+router.get('/rules', function (req, res)
+{
+    res.render('rules', { });
+});
 router.get('/sponsors', function (req, res) // sponsors page
 {
     res.render('sponsors', { });
@@ -356,6 +381,8 @@ router.get('/players', function (req, res) // page for all players, only availab
             if (err)
             {
                 //do something with the error
+                console.log(err.message);
+
             }
             else
             {
