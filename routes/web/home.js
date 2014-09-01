@@ -44,50 +44,64 @@ router.get('/', function (req, res)
         };
         var onFetch = function (err, doc)
         {
-            results.user = doc;
-            if (doc.team.length == 0)
+            if(err)
             {
-                res.redirect("/home/players")
+                console.log(err);
             }
-
-            var getDetails = function (id, callback)
+            else if(doc)
             {
-                var player = {
-                    '_id': id
-                };
-                var fields =
+                results.user = doc;
+                if (doc.team.length == 0)
                 {
-                    _id: 1,
-                    Name: 1,
-                    Cost: 1,
-                    Country: 1,
-                    Type: 1
+                    res.redirect("/home/players")
+                }
+
+                var getDetails = function (id, callback)
+                {
+                    var player = {
+                        '_id': id
+                    };
+                    var fields =
+                    {
+                        _id: 1,
+                        Name: 1,
+                        Cost: 1,
+                        Country: 1,
+                        Type: 1
+                    };
+                    mongoPlayers.getPlayer(player, fields, callback)
                 };
-                mongoPlayers.getPlayer(player, fields, callback)
-            };
-            var onFinish = function (err, documents)
-            {
+                var onFinish = function (err, documents)
+                {
+                    if (err)
+                    {
+                        //do something with the error
+                    }
+                    else
+                    {
+                        results.team = documents;
+                        res.render('home', {results: results});
+                    }
+                };
+
                 if (err)
                 {
-                    //do something with the error
+                    res.redirect('/');
                 }
                 else
                 {
-                    results.team = documents;
-                    res.render('home', {results: results});
+                    var document = [];
+                    document = doc.team;
+                    async.map(document, getDetails, onFinish);
                 }
-            };
 
-            if (err)
-            {
-                res.redirect('/');
             }
             else
             {
-                var document = [];
-                document = doc.team;
-                async.map(document, getDetails, onFinish);
+                res.clearCookie('name', { });
+                res.redirect('/');
             }
+
         };
         mongoUsers.fetch(credentials, onFetch);
     }
@@ -222,13 +236,13 @@ router.post('/getsquad', function (req, res)
         {
             if (err)
             {
-                log.log(err.message);
+                console.log(err.message);
                 //do something with the error
                 console.log(err.message);
             }
             else
             {
-                log.log(document);
+                console.log(document);
                 res.redirect('/home');
             }
         };
@@ -367,7 +381,7 @@ router.get('/players', function (req, res) // page for all players, only availab
             if (err)
             {
                 //do something with the error
-                log.log(err.message);
+                console.log(err.message);
 
             }
             else
