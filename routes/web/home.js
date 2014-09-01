@@ -338,7 +338,10 @@ router.get('/rules', function (req, res)
 {
     res.render('rules', { });
 });
-
+router.get('/rules', function (req, res)
+{
+    res.render('rules', { });
+});
 router.get('/sponsors', function (req, res) // sponsors page
 {
     res.render('sponsors', { });
