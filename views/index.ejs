@@ -111,8 +111,7 @@
     <div class="row" align="center">
         <ul class="breadcrumbs"
             style="background:rgba(30,30,30,0.9); border: none; box-shadow: inset 0 0 5px 3px rgba(255,255,255,0.2);">
-            <li class="current"><a href="#" style="color: lightsteelblue;">Index</a></li>
-
+            <li class="current"><a href="#" style="color: lightsteelblue;">Home</a></li>
             <li><a href="/rule" style="color:#ffffff;">Rules</a></li>
             <li><a href="/prizes" style="color:#ffffff;">Prizes</a></li>
             <li><a href="/sponsor" style="color:#ffffff;">Sponsors</a></li>
@@ -120,9 +119,12 @@
         </ul>
     </div>
     <div class="row" align="center">
-
+        <%if (response.length!=0) { %>
+        <p style="text-align: center;color: red;padding: 2%;font-weight: bold;margin: 1%;"><%= response %></p>
+        <% } else {} %>
         <div class="small-12 medium-12 large-12 columns"
              style="background:rgba(32,98,172,0.9); border-radius: 5px 5px 5px 5px;border:5px;box-shadow: inset 20px 0 20px -10px rgba(0,0,0,0.2), inset -20px 0 20px -10px rgba(0,0,0,0.2),inset 0 -20px 20px rgba(0,0,0,0.2),inset 0 20px 20px rgba(0,0,0,0.2);">
+
             <img src="/images/logo.png" style="width:50%;margin:3%;"/>
 
             <p style="margin-top:-5%;font-family: 'PT Sans', sans-serif;font-size: 180%;color: white;font-weight:normal ">

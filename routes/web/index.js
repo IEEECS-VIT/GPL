@@ -29,7 +29,7 @@ router.get('/', function (req, res) {
         res.redirect('/home');
     }
     else {
-        res.render('index', {response: "" });
+        res.render('index', {response : "" });
     }
 });
 
@@ -45,7 +45,7 @@ router.post('/login', function (req, res) {
         if (err) {
             console.log('MongoDB Down');
             // Make it more user friendly, output the error to the view
-            res.redirect('/');
+            res.render('index',{response : "Incorrect Username"});
         }
         else if (doc) {
             if (bcrypt.compareSync(password, doc['password_hash'])) {
@@ -54,13 +54,13 @@ router.post('/login', function (req, res) {
             }
             else {
                 console.log('Incorrect Credentials');
-                res.render('/',{response : "Incorrect Credentials"});
+                res.render('index', {response : "Incorrect Password"});
             }
         }
         else {
             console.log('No user exists');
             // Make it more user friendly, output the error to the view
-            res.redirect('/');
+            res.render('index',{response : "Incorrect Username"});
         }
     };
     mongoUsers.fetch(credentials, onFetch);
@@ -103,7 +103,7 @@ router.get('/register', function (req, res) {
         res.redirect('/home');
     }
     else {
-        res.render('register', { });
+        res.render('register', { response : "" });
     }
 });
 
@@ -148,7 +148,7 @@ router.post('/register', function (req, res) {
                     if (err) {
                         console.log(err.message);
                         // Make it more user friendly, output the error to the view
-                        res.redirect('/register');
+                        res.render('register', {response:"Team Name Already Exists"});
                     }
                     else {
                         var name = docs[0]['_id'];
@@ -160,7 +160,7 @@ router.post('/register', function (req, res) {
             }
             else {
                 console.log("Incorrect Password");
-                res.redirect('/register');
+                res.render('register',{response : "Passwords do not match"});
             }
         }
     };
@@ -214,6 +214,17 @@ router.get('/developer', function (req, res) // developers page
         var session = 0;
     }
     res.render('developer', {results: session });
+});
+router.get('/countdown', function (req, res) // page for countdown
+{
+    var session;
+    if (req.signedCookies.name) {
+        session = true;
+    }
+    else {
+        session = false;
+    }
+    res.render('countdown', {Session: session });
 });
 
 router.get('/prizes', function (req, res) // page to view prizes
