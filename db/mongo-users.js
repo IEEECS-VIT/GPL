@@ -110,7 +110,7 @@ exports.fetch = function (doc, callback)
                 }
                 else
                 {
-                    callback(true, null);
+                    callback(false, null);
                 }
             };
             collection.findOne(doc, onFetch);

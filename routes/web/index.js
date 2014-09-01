@@ -57,7 +57,7 @@ router.post('/login', function (req, res)
     {
         if (err)
         {
-            console.log('MongoDB Down');
+            console.log(err.message);
             // Make it more user friendly, output the error to the view
             res.render('index', {response: "Incorrect Username"});
         }
@@ -65,6 +65,7 @@ router.post('/login', function (req, res)
         {
             if (bcrypt.compareSync(password, doc['password_hash']))
             {
+                console.log("Login Successful" + teamName);
                 res.cookie('name', doc['_id'], {maxAge: 86400000, signed: true});
                 res.redirect('/home');
             }
