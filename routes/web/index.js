@@ -29,7 +29,7 @@ router.get('/', function (req, res) {
         res.redirect('/home');
     }
     else {
-        res.render('index', { });
+        res.render('index', {response: "" });
     }
 });
 
@@ -54,7 +54,7 @@ router.post('/login', function (req, res) {
             }
             else {
                 console.log('Incorrect Credentials');
-                res.redirect('/', {response : "Incorrect Credentials"});
+                res.render('/',{response : "Incorrect Credentials"});
             }
         }
         else {
