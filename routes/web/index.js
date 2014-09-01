@@ -23,6 +23,14 @@ var router = express.Router();
 
 var mongoInterest = require(path.join(__dirname, '..', '..', 'db', 'mongo-interest'));
 var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
+var log;
+if (process.env.LOGENTRIES_TOKEN)
+{
+    var logentries = require('node-logentries');
+    log = logentries.logger({
+                                token: process.env.LOGENTRIES_TOKEN
+                            });
+}
 
 router.get('/', function (req, res)
 {
