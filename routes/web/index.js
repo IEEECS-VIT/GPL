@@ -54,7 +54,7 @@ router.post('/login', function (req, res) {
             }
             else {
                 console.log('Incorrect Credentials');
-                res.redirect('/');
+                res.redirect('/', {response : "Incorrect Credentials"});
             }
         }
         else {
