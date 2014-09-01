@@ -221,7 +221,7 @@ router.get('/logout', function (req, res)
 
 router.get('/interest', function (req, res)
 {
-    res.render('interest', { });
+    res.redirect('/', { });
 });
 
 router.post('/interest', function (req, res) // interest form
