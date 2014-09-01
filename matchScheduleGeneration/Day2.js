@@ -1,6 +1,7 @@
 /**
  * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 10/8/14.
  */
+
 /*
  *  GraVITas Premier League
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
@@ -51,7 +52,7 @@ exports.gen_schedule = function ()
                 {
                     console.log(count);
 
-                    var arr = [], match_count = 1, j;
+                    var arr = [], match_count = 1, j = 0;
                     var onInsert = function (err, docs)
                     {
                         if (err)
@@ -64,42 +65,32 @@ exports.gen_schedule = function ()
                         }
                     };
 
-                    for (var i = 1; i <= count;)
+                    for (var i = 0; i < count / 8; i++)
                     {
-                        j = i + 2;
-                        arr[i] = match_count;
-                        arr[j] = match_count;
-                        var match =
+                        var team1 = [1, 2, 5, 6];
+                        var team2 = [3, 4, 7, 8];
+
+                        for (j = 0; j < team1.length; j++)
                         {
-                            "_id": match_count,
-                            "Team_1": i,
-                            "Team_2": j,
-                            "TimeStamp": new Date("6 Sep 2014 00:00:00 +0530 (IST)")
-                        };
-                        match_count++;
-                        i++;
-                        if (i % 2 == 0)
-                        {
-                            i *= 2;
+                            arr[8 * i + team1[j]] = match_count;
+                            arr[8 * i + team2[j]] = match_count;
+                            var match =
+                            {
+                                "_id": match_count,
+                                "Team_1": i,
+                                "Team_2": j,
+                                "TimeStamp": new Date("6 Sep 2014 00:00:00 +0530 (IST)")
+                            };
+                            match_count++;
+                            SchedulePush.insert(match, "matchday2", onInsert)
+
                         }
-
-
-                        SchedulePush.insert(match, "matchday2", onInsert)
                     }
-
-
-                    for (var i = 1; count >= i; ++i)
-                    {
-                        console.log(arr[i]);
-
-                    }
-
-
-                    //callback(null,true);
                 }
             };
             collection.count(onFetch);
         }
+
     };
     MongoClient.connect(mongoUri, onConnect);
 };
