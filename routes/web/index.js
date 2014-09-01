@@ -270,5 +270,15 @@ router.get('/trail', function (req, res) // trailer page
     }
     res.render('trail', {results: session });
 });
+router.get('/schedule', function (req, res) // schedule page
+{
+    if (req.signedCookies.name) {
+        var session = 1;
+    }
+    else {
+        var session = 0;
+    }
+    res.render('schedule', {results: session });
+});
 
 module.exports = router;
