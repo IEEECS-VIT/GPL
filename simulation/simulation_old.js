@@ -98,7 +98,7 @@ function make(team)
     this.bowl_average = [];
     this.bowl_strike_rate = [];
     this.wickets_taken = team.wickets_taken;
-    this.coach_rating = team[11]['Rating (15)'];
+    this.coach_rating = parseFloat(team[11]['Rating (15)']);
     this.economy = [];
     this.bowl_name = [];
     this.bat_name = [];
@@ -107,31 +107,31 @@ function make(team)
         switch (team[i].type)
         {
             case 'bat':
-                this.bat_average[Total[0]] = team[i]['Average'];
-                this.bat_strike_rate[Total[0]] = team[i]['Strike Rate'];
-                this.bat_rating[Total[0]] = team[i]['Rating (900)'];
+                this.bat_average[Total[0]] = parseFloat(team[i]['Average']);
+                this.bat_strike_rate[Total[0]] = parseFloat(team[i]['Strike Rate']);
+                this.bat_rating[Total[0]] = parseFloat(team[i]['Rating (900)']);
                 this.bat_name[Total[0]] = team[i]['Name'];
                 Overs[0] += this.bat_rating[Total[0]++] / 11;
                 break;
             case 'bowl':
-                this.bowl_average[Total[1]] = team[i]['Avg'];
-                this.bowl_strike_rate[Total[1]] = team[i]['SR'];
-                this.bowler_rating[Total[1]] = team[i]['Rating (900)'];
-                this.bat_average[Total[0]] = team[i]['Average'];
-                this.bat_strike_rate[Total[0]] = team[i]['Strike Rate'];
-                this.bat_rating[Total[0]] = 900 - team[i]['Rating (900)'];
-                this.economy[Total[1]] = team[i]['Economy'];
+                this.bowl_average[Total[1]] = parseFloat(team[i]['Avg']);
+                this.bowl_strike_rate[Total[1]] = parseFloat(team[i]['SR']);
+                this.bowler_rating[Total[1]] = parseFloat(team[i]['Rating (900)']);
+                this.bat_average[Total[0]] = parseFloat(team[i]['Average']);
+                this.bat_strike_rate[Total[0]] = parseFloat(team[i]['Strike Rate']);
+                this.bat_rating[Total[0]] = 900 - parseFloat(team[i]['Rating (900)']);
+                this.economy[Total[1]] = parseFloat(team[i]['Economy']);
                 this.bowl_name[Total[1]] = team[i]['Name'];
                 Overs[1] += this.bowler_rating[Total[1]++] / 6;
                 break;
             case 'all':
-                this.bowl_average[Total[1]] = team[i]['Avg'];
-                this.bowl_strike_rate[Total[1]] = team[i]['SR'];
-                this.bowler_rating[Total[1]] = team[i]['Rating (900)'];
-                this.bat_average[Total[0]] = team[i]['Average'];
-                this.bat_strike_rate[Total[0]] = team[i]['Strike Rate'];
-                this.bat_rating[Total[0]] = 900 - team[i]['Rating (900)'];
-                this.economy[Total[1]] = team[i]['Economy'];
+                this.bowl_average[Total[1]] = parseFloat(team[i]['Avg']);
+                this.bowl_strike_rate[Total[1]] = parseFloat(team[i]['SR']);
+                this.bowler_rating[Total[1]] = parseFloat(team[i]['Bowl']);
+                this.bat_average[Total[0]] = parseFloat(team[i]['Average']);
+                this.bat_strike_rate[Total[0]] = parseFloat(team[i]['Strike Rate']);
+                this.bat_rating[Total[0]] = parseFloat(team[i]['Bat']);
+                this.economy[Total[1]] = parseFloat(team[i]['Economy']);
                 this.bowl_name[5] = this.bat_name[5] = team[i]['Name'];
                 Overs[0] += this.bowler_rating[Total[0]++] / 11;
                 Overs[1] += this.bowler_rating[Total[1]++] / 6;
