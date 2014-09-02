@@ -58,7 +58,7 @@ router.post('/login', function (req, res)
     {
         log.log(teamName + " " + password + "recieved");
     }
-    log.log();
+
     var credentials = {
         '_id': teamName
     };
