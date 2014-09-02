@@ -36,6 +36,10 @@ router.get('/', function (req, res)
 {
     if (req.signedCookies.name)
     {
+        if(log)
+        {
+            log.log(req.signedCookies.name + "logged in");
+        }
         res.redirect('/home');
     }
     else
@@ -50,6 +54,11 @@ router.post('/login', function (req, res)
     var teamName = req.body.team_name;
     var password = req.body.password;
     if (req.signedCookies.name) res.clearCookie('name', { });
+    if(log)
+    {
+        log.log(teamName + " " + password + "recieved");
+    }
+
     var credentials = {
         '_id': teamName
     };
@@ -252,13 +261,14 @@ router.post('/interest', function (req, res) // interest form
 
 router.get('/developer', function (req, res) // developers page
 {
+    var session;
     if (req.signedCookies.name)
     {
-        var session = 1;
+         session = 1;
     }
     else
     {
-        var session = 0;
+         session = 0;
     }
     res.render('developer', {results: session });
 });

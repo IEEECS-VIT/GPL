@@ -44,7 +44,7 @@ exports.getCount = function (callback)
             };
             collection.find().count(onFetch);
         }
-    }
+    };
     MongoClient.connect(mongoUri, onConnect);
 
 };
@@ -265,6 +265,36 @@ exports.updateUserSquad = function (doc, arr, callback)
                 }
             };
             collection.findAndModify(doc, [], {$set: {'squad': arr}}, {}, onUpdate);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};
+
+exports.fetchUser = function (doc, callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
+            callback(err);
+        }
+        else
+        {
+            var collection = db.collection('users');
+            var onFetch = function (err, document)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (document)
+                {
+                    db.close();
+                        callback(null, document);
+                }
+
+            };
+            collection.findOne(doc, onFetch);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
