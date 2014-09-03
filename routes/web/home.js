@@ -21,10 +21,6 @@ var path = require('path');
 var async = require('async');
 var router = express.Router();
 
-var mongoPlayers = require(path.join(__dirname, '..', '..', 'db', 'mongo-players'));
-var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
-var mongoTeam = require(path.join(__dirname, '..', '..', 'db', 'mongo-team'));
-var mongoMatches = require(path.join(__dirname, '..', '..', 'db', 'mongo-matches'));
 var log;
 if (process.env.LOGENTRIES_TOKEN)
 {
@@ -33,6 +29,12 @@ if (process.env.LOGENTRIES_TOKEN)
                                 token: process.env.LOGENTRIES_TOKEN
                             });
 }
+
+var mongoPlayers = require(path.join(__dirname, '..', '..', 'db', 'mongo-players'));
+var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
+var mongoTeam = require(path.join(__dirname, '..', '..', 'db', 'mongo-team'));
+var mongoMatches = require(path.join(__dirname, '..', '..', 'db', 'mongo-matches'));
+
 
 router.get('/', function (req, res)
 {
@@ -44,11 +46,11 @@ router.get('/', function (req, res)
         };
         var onFetch = function (err, doc)
         {
-            if(err)
+            if (err)
             {
                 console.log(err);
             }
-            else if(doc)
+            else if (doc)
             {
                 results.user = doc;
                 if (doc.team.length == 0)

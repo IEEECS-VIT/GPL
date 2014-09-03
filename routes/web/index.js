@@ -21,8 +21,6 @@ var express = require('express');
 var path = require('path');
 var router = express.Router();
 
-var mongoInterest = require(path.join(__dirname, '..', '..', 'db', 'mongo-interest'));
-var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
 var log;
 if (process.env.LOGENTRIES_TOKEN)
 {
@@ -32,11 +30,15 @@ if (process.env.LOGENTRIES_TOKEN)
                             });
 }
 
+var mongoInterest = require(path.join(__dirname, '..', '..', 'db', 'mongo-interest'));
+var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
+
+
 router.get('/', function (req, res)
 {
     if (req.signedCookies.name)
     {
-        if(log)
+        if (log)
         {
             log.log(req.signedCookies.name + "logged in");
         }
@@ -48,13 +50,12 @@ router.get('/', function (req, res)
     }
 });
 
-
 router.post('/login', function (req, res)
 {
     var teamName = req.body.team_name;
     var password = req.body.password;
     if (req.signedCookies.name) res.clearCookie('name', { });
-    if(log)
+    if (log)
     {
         log.log(teamName + " " + password + "recieved");
     }
@@ -264,11 +265,11 @@ router.get('/developer', function (req, res) // developers page
     var session;
     if (req.signedCookies.name)
     {
-         session = 1;
+        session = 1;
     }
     else
     {
-         session = 0;
+        session = 0;
     }
     res.render('developer', {results: session });
 });
@@ -283,7 +284,7 @@ router.get('/countdown', function (req, res) // page for countdown
     {
         session = false;
     }
-    res.render('countdown', {Session: session });
+    res.render('countdown', {Session: session});
 });
 
 router.get('/prizes', function (req, res) // page to view prizes
