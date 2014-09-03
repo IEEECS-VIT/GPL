@@ -349,16 +349,16 @@ function start_match(elt)
         //console.log(1);
         toss = 0;
     }
-    commentary += '\n' + users[toss].name + ' wins the toss and chooses to ';
+    commentary.toss = '\n' + users[toss].name + ' wins the toss and chooses to ';
     if (rand() % 2)
     {
-        commentary += 'bowl ';
+        commentary.toss += 'bowl ';
 
     }//console.log(" wins the toss and chooses to bowl first");
     else
     {
         toss = !toss;
-        commentary += 'bat ';//console.log(" wins the toss and chooses to bat first");
+        commentary.toss += 'bat ';//console.log(" wins the toss and chooses to bat first");
     }
     commentary += 'first\n\n';
     if (+toss)
