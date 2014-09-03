@@ -377,7 +377,7 @@ function start_match(elt)
         }
     }
     current_bowler = previous_bowler;
-    commentary += team_object[+toss].bowl_name[previous_bowler] + ' to start proceedings from the pavillion end.....\n\n'; //console.log("\nBowler ", previous_bowler + 1, " to start proceedings from the pavillion end.....\n\n");
+    commentary.firstbowl1= team_object[+toss].bowl_name[previous_bowler] + ' to start proceedings from the pavillion end.....\n\n'; //console.log("\nBowler ", previous_bowler + 1, " to start proceedings from the pavillion end.....\n\n");
     dot = 0;
     for (i = 0; i < 20 && wickets[0] < 10; ++i)
     {
