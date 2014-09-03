@@ -1,8 +1,3 @@
-/**
- * Created by Amol on 12-Aug-2014.
- */
-
-
 /*
  *  GraVITas Premier League
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
@@ -65,4 +60,4 @@ exports.getSquad = function (doc, callback)
         }
     };
     MongoClient.connect(mongoUri, onConnect);
-}
+};

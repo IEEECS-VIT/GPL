@@ -34,6 +34,7 @@ exports.fetchPlayers = function (callback)
             var collection = db.collection('players');
             var onFetch = function (err, documents)
             {
+                db.close();
                 if (err)
                 {
                     callback(err, null);
