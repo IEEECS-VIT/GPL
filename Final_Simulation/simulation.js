@@ -1,11 +1,3 @@
-/**
- * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 2/9/14.
- */
-
-
-
-
-
 /*
  *  GraVITas Premier League
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
@@ -24,17 +16,59 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var async = require('async');
 var MongoClient = require('mongodb').MongoClient;
-var com = require('./commentary.js');
+var path = require('path');
+
+var com = require(path.join(__dirname, 'commentary'));
+
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
+
 var today = new Date();
 var dateMatchDay;
 var dot;
-var async = require('async');
+var users;
+var collectionName;
+var index = 0;
+var toss_state;
+var delivery_score;
+var batsman_performance_index;
+var current_bowler;
+var bowler_performance_index;
+var previous_bowler;
+var toss;
+var i;
+var j;
+var strike_index;
+var continuous_maximums;
+var fall_of_wicket;
+var winner_index;
+var commentary = '';
+var dismissed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var five_wicket_haul = [0, 0, 0, 0, 0, 0];
+var free_hit = 0, previous_partnership_index = -1;
+var current_partnership_index = 0;
+var partnership_balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var partnership_runs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var continuous_wickets = [0, 0, 0, 0, 0, 0];
+var milestone = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var previous_dismissal = -1;
+var extras = 0;
+var maidens = [0, 0, 0, 0, 0, 0];
+var previous_batsman = -1;
+var score = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var fours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var maximums = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var strike = [0, 1];
+var deliveries = [0, 0, 0, 0, 0, 0];
+var runs_conceded = [0, 0, 0, 0, 0, 0];
+var wickets_taken = [0, 0, 0, 0, 0, 0];
+var Total = [0, 0];
+var previous_over = 0;
+var wickets = [0, 0];
+var Overs = [0, 0];
 
-
-var users, collectionName, index = 0, toss_state, delivery_score, batsman_performance_index, current_bowler, bowler_performance_index, previous_bowler, toss, i, j, strike_index, continuous_maximums, fall_of_wicket, winner_index;
-var commentary = '', dismissed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], five_wicket_haul = [0, 0, 0, 0, 0, 0], free_hit = 0, previous_partnership_index = -1, current_partnership_index = 0, partnership_balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], partnership_runs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], continuous_wickets = [0, 0, 0, 0, 0, 0], milestone = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], previous_dismissal = -1, extras = 0, maidens = [0, 0, 0, 0, 0, 0], previous_batsman = -1, score = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], fours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], maximums = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], strike = [0, 1], deliveries = [0, 0, 0, 0, 0, 0], runs_conceded = [0, 0, 0, 0, 0, 0], wickets_taken = [0, 0, 0, 0, 0, 0], Total = [0, 0], previous_over = 0, wickets = [0, 0], Overs = [0, 0];
 exports.todaysMatches = function (callback)
 {
     var onConnect = function (err, db)
@@ -76,7 +110,7 @@ exports.todaysMatches = function (callback)
             }
             collectionName = 'matchday1';
             var collection = db.collection(collectionName);
-            collection.find({"_id":1}).toArray(callback);
+            collection.find({"_id": 1}).toArray(callback);
         }
 
     };
@@ -104,7 +138,6 @@ exports.team = function (elt, team1, team2, user1, user2)
     start_match(elt);
 };
 
-
 function Make(team)
 {
     var i;
@@ -120,8 +153,8 @@ function Make(team)
     this.economy = [];
     this.bowl_name = [];
     this.bat_name = [];
-    var average_bat_rating=0,average_bowl_rating=0;
-    var batsman_count= 0,bowler_count=0;
+    var average_bat_rating = 0, average_bowl_rating = 0;
+    var batsman_count = 0, bowler_count = 0;
     for (i = 0; i < 11; ++i)
     {
         switch (team[i].Type)
@@ -131,7 +164,7 @@ function Make(team)
                 this.bat_strike_rate[batsman_count] = parseFloat(team[i]['Strike Rate']);
                 this.bat_rating[batsman_count] = parseInt(team[i]['Rating (900)']);
                 this.bat_name[batsman_count] = team[i]['Name'];
-                average_bat_rating = average_bat_rating+parseInt(team[i]['Rating (900)']);
+                average_bat_rating = average_bat_rating + parseInt(team[i]['Rating (900)']);
                 batsman_count++;
                 break;
             case 'bowl':
@@ -155,9 +188,9 @@ function Make(team)
                 this.bat_strike_rate[batsman_count] = parseFloat(team[i]['Strike Rate']);
                 this.bat_rating[batsman_count] = parseInt(team[i]['Bat']);
                 this.economy[bowler_count] = parseFloat(team[i]['Economy']);
-                this.bowl_name[bowler_count] =  team[i]['Name'];
-                this.bat_name[batsman_count] =   team[i]['Name'];
-                average_bat_rating +=parseInt(team[i]['Bat']);
+                this.bowl_name[bowler_count] = team[i]['Name'];
+                this.bat_name[batsman_count] = team[i]['Name'];
+                average_bat_rating += parseInt(team[i]['Bat']);
                 average_bowl_rating += parseInt(team[i]['Bowl']);
                 batsman_count++;
                 bowler_count++;
@@ -165,8 +198,8 @@ function Make(team)
         }
 
     }
-    average_bat_rating=parseFloat(average_bat_rating/11);
-    average_bowl_rating=parseFloat(average_bowl_rating/6);
+    average_bat_rating = parseFloat(average_bat_rating / 11);
+    average_bowl_rating = parseFloat(average_bowl_rating / 6);
 
     for (i = 0; i < 11; ++i)
     {
@@ -176,9 +209,7 @@ function Make(team)
         }
         this.bat_rating[i] += parseFloat(this.bat_rating[i] / 10) - parseFloat(average_bat_rating / 10) + parseInt(this.coach_rating);
     }
-};
-
-
+}
 
 function comment()
 {
@@ -210,7 +241,7 @@ function comment()
     extras = strike_index = free_hit = current_partnership_index = Total[index] = dot = previous_bowler = 0;
     previous_batsman = previous_partnership_index = -1;
     commentary += '\n\n\n';
-};
+}
 
 
 function post_over()
@@ -231,8 +262,7 @@ function post_over()
     }
     previous_bowler = current_bowler;
 
-};
-
+}
 
 function score_runs()
 {
@@ -301,12 +331,11 @@ function score_runs()
         partnership_runs[current_partnership_index] += delivery_score;
 
     }
-};
-
+}
 
 function start_match(elt)
 {
-    var wickets1,wickets2,dot;
+    var wickets1, wickets2, dot;
     Overs[0] = Overs[1] = 120;
     Total[0] = Total[1] = 0;
     //console.log("\n", "Team ");
@@ -320,7 +349,7 @@ function start_match(elt)
         //console.log(1);
         toss = 0;
     }
-    commentary += '\n'+users[toss].name + ' wins the toss and chooses to ';
+    commentary += '\n' + users[toss].name + ' wins the toss and chooses to ';
     if (rand() % 2)
     {
         commentary += 'bowl ';
@@ -332,12 +361,13 @@ function start_match(elt)
         commentary += 'bat ';//console.log(" wins the toss and chooses to bat first");
     }
     commentary += 'first\n\n';
-    if(+toss)
-    {   var temp=users[0];
-        users[0]=users[1];
-        users[1]=temp;
+    if (+toss)
+    {
+        var temp = users[0];
+        users[0] = users[1];
+        users[1] = temp;
     }
-        wickets1 = wickets2 = strike_index = previous_bowler = 0;
+    wickets1 = wickets2 = strike_index = previous_bowler = 0;
     toss_state = toss;
     for (i = 1; i < 6; ++i)
     {
@@ -819,12 +849,11 @@ function start_match(elt)
         commentary += '\n';//console.log("\n");
     }
 
-
-    if(parseInt(winner_index) == -1)
+    if (parseInt(winner_index) == -1)
     {
-        var onAddTie = function(err,doc)
+        var onAddTie = function (err, doc)
         {
-            if(err)
+            if (err)
             {
                 console.log(err.message);
             }
@@ -833,9 +862,9 @@ function start_match(elt)
                 console.log(doc);
             }
         };
-        var onFinish = function(err,doc)
+        var onFinish = function (err, doc)
         {
-            if(err)
+            if (err)
             {
                 console.log(err.message);
             }
@@ -845,27 +874,27 @@ function start_match(elt)
             }
         };
         var credentials1 = {
-            "_id":users[0]._id
+            "_id": users[0]._id
         };
         var credentials2 = {
-            "_id":users[0]._id
+            "_id": users[0]._id
         };
-        addtie(credentials1,credentials2,onAddTie)
-        updateMatch(elt,commentary,onFinish);
+        addtie(credentials1, credentials2, onAddTie);
+        updateMatch(elt, commentary, onFinish);
     }
-    else if(parseInt(winner_index) == 0)
+    else if (parseInt(winner_index) == 0)
     {
         var winner =
         {
-            "_id":users[0]._id
+            "_id": users[0]._id
         };
         var loser =
         {
-            "_id":users[1]._id
+            "_id": users[1]._id
         };
-        var onAddResult = function(err,doc)
+        var onAddResult = function (err, doc)
         {
-            if(err)
+            if (err)
             {
                 console.log(err.message);
             }
@@ -874,9 +903,9 @@ function start_match(elt)
                 console.log(doc);
             }
         };
-        var onFinish = function(err,doc)
+        var onFinish = function (err, doc)
         {
-            if(err)
+            if (err)
             {
                 console.log(err.message);
             }
@@ -885,22 +914,22 @@ function start_match(elt)
                 console.log(doc);
             }
         };
-        addresult(winner,loser,onAddResult);
-        updateMatch(elt,commentary,onFinish);
+        addresult(winner, loser, onAddResult);
+        updateMatch(elt, commentary, onFinish);
     }
-    else if(parseInt(winner_index) == 1)
+    else if (parseInt(winner_index) == 1)
     {
         var winner =
         {
-            "_id":users[1]._id
+            "_id": users[1]._id
         };
         var loser =
         {
-            "_id":users[0]._id
+            "_id": users[0]._id
         };
-        var onAddResult = function(err,doc)
+        var onAddResult = function (err, doc)
         {
-            if(err)
+            if (err)
             {
                 console.log(err.message);
             }
@@ -909,9 +938,9 @@ function start_match(elt)
                 console.log(doc);
             }
         };
-        var onFinish = function(err,doc)
+        var onFinish = function (err, doc)
         {
-            if(err)
+            if (err)
             {
                 console.log(err.message);
             }
@@ -920,19 +949,17 @@ function start_match(elt)
                 console.log(doc);
             }
         };
-        addresult(winner,loser,onAddResult);
-        updateMatch(elt,commentary,onFinish);
+        addresult(winner, loser, onAddResult);
+        updateMatch(elt, commentary, onFinish);
 
     }
-};
+}
 
-
-
-function addtie(document1,document2,callback)
+function addtie(document1, document2, callback)
 {
-    var onConnect = function(err,db)
+    var onConnect = function (err, db)
     {
-        if(err)
+        if (err)
         {
             throw err;
         }
@@ -956,29 +983,28 @@ function addtie(document1,document2,callback)
                     callback(true, null);
                 }
             };
-            parallel_tasks.team1 = function(asyncCallback)
+            parallel_tasks.team1 = function (asyncCallback)
             {
-                var net_run_rate1 = 6*(  parseFloat(  (parseInt( users[0].runs_for )+parseInt(Total[0]) ) / ( parseInt( users[0].balls_for ) + parseInt(Overs[0])) ) - parseFloat(  (parseInt( users[0].runs_against )+parseInt(Total[1]) ) / ( parseInt( users[0].balls_against ) + parseInt(Overs[1])) ));
+                var net_run_rate1 = 6 * (  parseFloat((parseInt(users[0].runs_for) + parseInt(Total[0]) ) / ( parseInt(users[0].balls_for) + parseInt(Overs[0]))) - parseFloat((parseInt(users[0].runs_against) + parseInt(Total[1]) ) / ( parseInt(users[0].balls_against) + parseInt(Overs[1]))));
                 collection.findAndModify(document1, [], {$inc: {played: 1, points: 1, runs_for: Total[0], runs_against: Total[0], balls_for: Overs[0], balls_against: Overs[0]}}, {$set: { net_run_rate: net_run_rate1}}, {}, asyncCallback);
             };
-            parallel_tasks.team2 = function(asyncCallback)
+            parallel_tasks.team2 = function (asyncCallback)
             {
-                var net_run_rate2 = 6*(  parseFloat(  (parseInt( users[1].runs_for )+parseInt(Total[1]) ) / ( parseInt( users[1].balls_for ) + parseInt(Overs[1])) ) - parseFloat(  (parseInt( users[1].runs_against )+parseInt(Total[0]) ) / ( parseInt( users[1].balls_against ) + parseInt(Overs[0])) ));
+                var net_run_rate2 = 6 * (  parseFloat((parseInt(users[1].runs_for) + parseInt(Total[1]) ) / ( parseInt(users[1].balls_for) + parseInt(Overs[1]))) - parseFloat((parseInt(users[1].runs_against) + parseInt(Total[0]) ) / ( parseInt(users[1].balls_against) + parseInt(Overs[0]))));
                 collection.findAndModify(document2, [], {$inc: {played: 1, points: 1, runs_for: Total[0], runs_against: Total[0], balls_for: Overs[0], balls_against: Overs[0]}}, {$set: { net_run_rate: net_run_rate2}}, {}, asyncCallback);
             };
-            async.parallel(parallel_tasks,onUpdate);
+            async.parallel(parallel_tasks, onUpdate);
         }
     };
-    MongoClient.connect(mongoUri,onConnect);
-};
+    MongoClient.connect(mongoUri, onConnect);
+}
 
-
-function addresult(winner,loser,callback)
+function addresult(winner, loser, callback)
 {
-    var parallel_tasks ={};
-    var onConnect = function(err,db)
+    var parallel_tasks = {};
+    var onConnect = function (err, db)
     {
-        if(err)
+        if (err)
         {
             throw err;
         }
@@ -1001,31 +1027,31 @@ function addresult(winner,loser,callback)
                     callback(true, null);
                 }
             };
-            parallel_tasks.team1 = function(asyncCallback)
+            parallel_tasks.team1 = function (asyncCallback)
             {
-                var net_run_rate1 = 6*(  parseFloat(  (parseInt( users[0].runs_for )+parseInt(Total[0]) ) / ( parseInt( users[0].balls_for ) + parseInt(Overs[0])) ) - parseFloat(  (parseInt( users[0].runs_against )+parseInt(Total[1]) ) / ( parseInt( users[0].balls_against ) + parseInt(Overs[1])) ));
+                var net_run_rate1 = 6 * (  parseFloat((parseInt(users[0].runs_for) + parseInt(Total[0]) ) / ( parseInt(users[0].balls_for) + parseInt(Overs[0]))) - parseFloat((parseInt(users[0].runs_against) + parseInt(Total[1]) ) / ( parseInt(users[0].balls_against) + parseInt(Overs[1]))));
                 collection.findAndModify(winner, [], {$inc: {played: 1, points: 1, runs_for: Total[0], runs_against: Total[1], balls_for: Overs[0], balls_against: Overs[0]}}, {$set: { net_run_rate: net_run_rate1}}, {}, asyncCallback);
             };
-            parallel_tasks.team2 = function(asyncCallback)
+            parallel_tasks.team2 = function (asyncCallback)
             {
-                var net_run_rate2 = 6*(  parseFloat(  (parseInt( users[1].runs_for )+parseInt(Total[1]) ) / ( parseInt( users[1].balls_for ) + parseInt(Overs[1])) ) - parseFloat(  (parseInt( users[1].runs_against )+parseInt(Total[0]) ) / ( parseInt( users[1].balls_against ) + parseInt(Overs[0])) ));
+                var net_run_rate2 = 6 * (  parseFloat((parseInt(users[1].runs_for) + parseInt(Total[1]) ) / ( parseInt(users[1].balls_for) + parseInt(Overs[1]))) - parseFloat((parseInt(users[1].runs_against) + parseInt(Total[0]) ) / ( parseInt(users[1].balls_against) + parseInt(Overs[0]))));
                 collection.findAndModify(loser, [], {$inc: {played: 1, points: 1, runs_for: Total[1], runs_against: Total[0], balls_for: Overs[1], balls_against: Overs[0]}}, {$set: { net_run_rate: net_run_rate2}}, {}, asyncCallback);
             };
-            async.parallel(parallel_tasks,onUpdate);
+            async.parallel(parallel_tasks, onUpdate);
             collection.findAndModify(winner, [], {$inc: {played: 1, win: 1, points: 2, runs_for: Total[+winner_index], runs_against: Total[+!winner_index], balls_for: Overs[+winner_index], balls_against: Overs[+!winner_index]}}, {$set: { net_run_rate: 6 * (this.runs_for / this.balls_for - this.runs_against / this.balls_against)}}, {}, onUpdate);
 
             collection.findAndModify(loser, [], {$inc: {played: 1, runs_for: Total[+!winner_index], runs_against: Total[+winner_index], balls_for: Overs[+winner_index], balls_against: Overs[+!winner_index]}}, {$set: { net_run_rate: 6 * (this.runs_for / this.balls_for - this.runs_against / this.balls_against)}}, {}, onUpdate);
-            async.parallel(parallel_tasks,onUpdate);
+            async.parallel(parallel_tasks, onUpdate);
         }
     };
-    MongoClient.connect(mongoUri,onConnect);
-};
+    MongoClient.connect(mongoUri, onConnect);
+}
 
-function updateMatch(elt,commentary, callback)
+function updateMatch(elt, commentary, callback)
 {
-    var onConnect = function(err,db)
+    var onConnect = function (err, db)
     {
-        if(err)
+        if (err)
         {
             throw err;
         }
@@ -1054,6 +1080,5 @@ function updateMatch(elt,commentary, callback)
             collection.findAndModify(doc, [], {$set: {'commentary': commentary}}, {}, onUpdate)
         }
     };
-    MongoClient.connect(mongoUri,onConnect);
-};
-
+    MongoClient.connect(mongoUri, onConnect);
+}

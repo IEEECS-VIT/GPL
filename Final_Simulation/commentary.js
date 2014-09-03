@@ -1,6 +1,3 @@
-/**
- * Created by kunal on 15-08-2014.
- */
 /*
  *  GraVITas Premier League
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
@@ -18,6 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 module.exports =
 {
     dot: [

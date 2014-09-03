@@ -1,7 +1,3 @@
-/**
- * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 2/9/14.
- */
-
 /*
  *  GraVITas Premier League
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
@@ -19,11 +15,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-var simulator = require('./simulation.js');
-var path = require('path');
-var mongoTeam = require(path.join(__dirname,  '..', 'db', 'mongo-team'));
-var mongoUser = require(path.join(__dirname,  '..', 'db', 'mongo-users'));
+
 var async = require('async');
+var path = require('path');
+
+var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team'));
+var mongoUser = require(path.join(__dirname, '..', 'db', 'mongo-users'));
+var simulator = require(path.join(__dirname, 'simulation'));
 
 var log;
 if (process.env.LOGENTRIES_TOKEN)
@@ -90,17 +88,17 @@ var matchGenerator = function (err, docs)
                 else
                 {
 
-                  /*  for(i=0;i<12;i++)
-                    {
-                        console.log("Team 1:"+ results.team1[i].Name);
-                    }
-                    for(i=0;i<12;i++)
-                    {
-                        console.log("Team 2:"+ results.team2[i].Name);
-                    }
+                    /*  for(i=0;i<12;i++)
+                     {
+                     console.log("Team 1:"+ results.team1[i].Name);
+                     }
+                     for(i=0;i<12;i++)
+                     {
+                     console.log("Team 2:"+ results.team2[i].Name);
+                     }
 
-                    console.log("Player 1:" + results.user1.manager_name);
-                    console.log("Player 2:" + results.user2.manager_name);*/
+                     console.log("Player 1:" + results.user1.manager_name);
+                     console.log("Player 2:" + results.user2.manager_name);*/
                     simulator.team(elt, results.team1, results.team2, results.user1, results.user2);
 
                 }
