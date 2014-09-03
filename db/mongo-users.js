@@ -33,6 +33,7 @@ exports.getCount = function (callback)
             var collection = db.collection('users');
             var onFetch = function (err, count)
             {
+                db.close();
                 if (err)
                 {
                     throw err;
@@ -91,13 +92,13 @@ exports.fetch = function (doc, callback)
             var collection = db.collection('users');
             var onFetch = function (err, document)
             {
+                db.close();
                 if (err)
                 {
                     callback(err, null);
                 }
                 else if (document)
                 {
-                    db.close();
                     if (doc['_id'] === document['_id'])
                     {
                         callback(null, document);
@@ -188,6 +189,7 @@ exports.forgotPassword = function (doc, callback)
             var collection = db.collection('users');
             var onFetch = function (err, document)
             {
+                db.close();
                 if (err)
                 {
                     callback(err, null);
@@ -238,7 +240,6 @@ exports.updateUserTeam = function (doc, arr, callback)
         }
     };
     MongoClient.connect(mongoUri, onConnect);
-
 };
 
 exports.updateUserSquad = function (doc, arr, callback)
@@ -290,7 +291,7 @@ exports.fetchUser = function (doc, callback)
                 else if (document)
                 {
                     db.close();
-                        callback(null, document);
+                    callback(null, document);
                 }
 
             };
