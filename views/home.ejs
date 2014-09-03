@@ -121,6 +121,8 @@
             <p style="color: white;text-align: left;padding: 2%;margin: 1%">
                 Matches Played: <%= results.user.played %><br/>
                 Matches Won: <%= results.user.win %><br/>
+                Matches Lost: <%= results.user.played-results.user.win-(results.user.points-2*results.user.win) %><br/>
+                Matches Tied: <%= results.user.points-2*results.user.win %><br/>
                 Points: <%= results.user.points %><br/>
                 Net Run Rate: <%= results.user.net_run_rate %>
             </p>
