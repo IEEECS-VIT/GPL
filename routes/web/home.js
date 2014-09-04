@@ -152,47 +152,65 @@ router.get('/matches', function (req, res)
     {
         var teamName = req.signedCookies.name;
 
-        var credentials1 = {
-            'Team_1': teamName
+        var credentials = {
+            '_id':teamName
         };
-        var credentials2 = {
-            'Team_2': teamName
-        };
-        var parallel_tasks = {};
-        var response = {};
-        response.test = "False";
-        var onFinish = function (err, results)
+        var onFetch = function(err,doc)
         {
-            if (err)
+            if(err)
             {
-                //do something with the error
+                if(log)
+                {
+                    if (log) log.log('debug', {Error: err, Message: err.message});
+                }
             }
             else
             {
-                response["previousMatch"] = results.previousMatch;
-                response["nextMatch"] = results.nextMatch;
-                if (response["previousMatch"] != null || response["nextMatch"] != null)
+                var credentials1 = {
+                    'Team_1': doc.team_no
+                };
+                var credentials2 = {
+                    'Team_2': doc.team_no
+                };
+                var parallel_tasks = {};
+                var response = {};
+                response.test = "False";
+                var onFinish = function (err, results)
                 {
-                    response.test = "True";
-                }
-                res.render('matches', {response: response});
+                    if (err)
+                    {
+                        //do something with the error
+                    }
+                    else
+                    {
+                        response["previousMatch"] = results.previousMatch;
+                        response["nextMatch"] = results.nextMatch;
+                        if (response["previousMatch"] != null || response["nextMatch"] != null)
+                        {
+                            response.test = "True";
+                        }
+                        //console.log(response.previousMatch);
+                        console.log(response.nextMatch);
+                        res.render('matches', {response: response});
+                    }
+
+                };
+
+                parallel_tasks.previousMatch = function (asyncCallback)
+                {
+                    mongoMatches.fetchPreviousMatch(credentials1, credentials2, asyncCallback);
+                };
+                parallel_tasks.nextMatch = function (asyncCallback)
+                {
+                    mongoMatches.fetchNextMatch(credentials1, credentials2, asyncCallback);
+
+                };
+                async.parallel(parallel_tasks, onFinish);
+                res.render('matches', response);
+
             }
-
         };
-
-        parallel_tasks.previousMatch = function (asyncCallback)
-        {
-            mongoMatches.fetchPreviousMatch(credentials1, credentials2, asyncCallback);
-        };
-        parallel_tasks.nextMatch = function (asyncCallback)
-        {
-            mongoMatches.fetchNextMatch(credentials1, credentials2, asyncCallback);
-
-        };
-        async.parallel(parallel_tasks, onFinish);
-        res.render('matches', response);
-
-
+        mongoUsers.fetch(credentials,onFetch);
     }
     else
     {

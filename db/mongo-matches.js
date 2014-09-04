@@ -66,7 +66,7 @@ exports.fetchPreviousMatch = function (doc1, doc2, callback)
                     break;
 
             }
-            //collectionName='matchday1';
+            collectionName='matchday1';
             var collection = db.collection(collectionName);
             var onFetch = function (err, docs)
             {
@@ -106,6 +106,8 @@ exports.fetchPreviousMatch = function (doc1, doc2, callback)
 exports.fetchNextMatch = function (doc1, doc2, callback)
 {
     var parallelTasks = {};
+    console.log(doc1);
+    console.log(doc2);
     var onConnect = function (err, db)
     {
         if (err)
@@ -145,9 +147,12 @@ exports.fetchNextMatch = function (doc1, doc2, callback)
                     break;
 
             }
+            collectionName='matchday1';
 
             var onFetch = function (err, doc)
             {
+                console.log(doc.team1);
+                console.log(doc.team2);
                 var credentials = {};
                 if (err)
                 {
@@ -156,13 +161,13 @@ exports.fetchNextMatch = function (doc1, doc2, callback)
                 else if (doc.team1)
                 {
                     credentials = {
-                        '_id': doc.team1.Team_2
+                        'team_no': doc.team1.Team_2
                     };
                 }
                 else if (doc.team2)
                 {
                     credentials = {
-                        '_id': doc.team2.Team_1
+                        'team_no': doc.team2.Team_1
                     };
 
                 }

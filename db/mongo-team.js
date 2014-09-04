@@ -52,6 +52,7 @@ var getPlayer = function (id, callback)
 
 exports.getTeam = function (doc, callback)
 {
+    console.log(doc);
     var onConnect = function (err, db)
     {
         if (err)
@@ -70,6 +71,7 @@ exports.getTeam = function (doc, callback)
                 }
                 else
                 {
+
                     async.map(document.team, getPlayer, callback);
                 }
             };
