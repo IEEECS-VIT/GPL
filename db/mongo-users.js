@@ -19,6 +19,14 @@
 var MongoClient = require('mongodb').MongoClient;
 
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
+var log;
+if (process.env.LOGENTRIES_TOKEN)
+{
+    var logentries = require('node-logentries');
+    log = logentries.logger({
+                                token: process.env.LOGENTRIES_TOKEN
+                            });
+}
 
 exports.getCount = function (callback)
 {
@@ -99,6 +107,7 @@ exports.fetch = function (doc, callback)
                 }
                 else if (document)
                 {
+                    db.close();
                     if (doc['_id'] === document['_id'])
                     {
                         callback(null, document);
@@ -150,6 +159,7 @@ exports.getleader = function (doc, callback)
                         }
                         else
                         {
+                            db.close();
                             documents.push(document);
                             callback(null, documents);
                         }
@@ -198,10 +208,12 @@ exports.forgotPassword = function (doc, callback)
                 {
                     if (document)
                     {
+                        db.close();
                         callback(null, document);
                     }
                     else
                     {
+                        db.close();
                         callback(false, null);
                     }
 
@@ -233,6 +245,7 @@ exports.updateUserTeam = function (doc, arr, callback)
                 }
                 else
                 {
+                    db.close();
                     callback(true, document);
                 }
             };
@@ -262,6 +275,7 @@ exports.updateUserSquad = function (doc, arr, callback)
                 else
                 {
                     console.log("Done");
+                    db.close();
                     callback(null, document);
                 }
             };
@@ -300,3 +314,35 @@ exports.fetchUser = function (doc, callback)
     };
     MongoClient.connect(mongoUri, onConnect);
 };
+
+exports.update = function(query,update,callback)
+{
+    var onConnect = function(err,db)
+    {
+        if(err)
+        {
+            if (log) log.log('debug', {Error: err, Message: err.message});
+        }
+        else
+        {
+            var collection = db.collection("users");
+            var onUpdate = function(err,doc)
+            {
+                if(err)
+                {
+                    if (log) log.log('debug', {Error: err, Message: err.message});
+                    callback(true,null);
+                }
+                else
+                {
+                    db.close();
+                    callback(null,doc);
+                }
+            };
+            collection.findAndModify(query,{},update,{"upsert":true},onUpdate);
+
+        }
+    };
+    MongoClient.connect(mongoUri,onConnect);
+};
+

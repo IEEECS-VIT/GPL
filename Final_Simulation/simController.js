@@ -56,28 +56,18 @@ var matchGenerator = function (err, docs)
             parallel_tasks.team1 = function (asyncCallback)
             {
                 mongoTeam.getSquad(doc1, asyncCallback);
-                //console.log("Parallel Task1");
-
             };
-
-
             parallel_tasks.team2 = function (asyncCallback)
             {
                 mongoTeam.getSquad(doc2, asyncCallback);
-                //console.log("Parallel Task2");
-
             };
             parallel_tasks.user1 = function (asyncCallback)
             {
                 mongoUser.fetchUser(doc2, asyncCallback);
-                //console.log("Parallel Task3");
-
             };
             parallel_tasks.user2 = function (asyncCallback)
             {
                 mongoUser.fetchUser(doc2, asyncCallback);
-                //console.log("Parallel Task4");
-
             };
             var onFinish = function (err, results)
             {
@@ -87,19 +77,53 @@ var matchGenerator = function (err, docs)
                 }
                 else
                 {
+                    var onSimulate = function(err,docs)
+                    {
+                        if(err)
+                        {
+                            if (log) log.log('debug', {Error: err, Message: err.message});
+                        }
+                        else
+                        {
+                            if (log) log.log('info', {Status: "Simulation Complete", Docs: docs});
+                        }
+                    };
+                    var query = {};
+                    var update = {};
+                    if(results.team1.length==12 && results.team2.length==12)
+                    {
+                        simulator.team(elt, results.team1, results.team2, results.user1, results.user2);
+                    }
+                    else if(results.team1.length<12 && results.team2.length<12)
+                    {
+                        if (log) log.log('info', {Status: "Both Teams Forfeit"});
+                        query = {"_id" : results.user1._id};
+                        update = {$inc : {"played" : 1, "loss " : 1}};
+                        mongoUser.update(query,update,simulate_match);
+                        query = {"_id" : results.user2._id};
+                        mongoUser.update(query,update,simulate_match);
+                    }
+                    else if(results.team1.length<12)
+                    {
+                        if (log) log.log('info', {Status: "Team 1 Forfeit"});
+                        query = {"_id" : results.user1._id};
+                        update = {$inc : {"played" : 1, "loss " : 1}};
+                        mongoUser.update(query,update, onSimulate);
+                        query = {"_id" : results.user2._id};
+                        update = {$inc : {"played" : 1, "win " : 1 , "points" : 2}};
+                        mongoUser.update(query,update, onSimulate);
+                    }
+                    else if(results.team2.length<12)
+                    {
+                        if (log) log.log('info', {Status: "Team 2 Forfeit"});
+                        query = {"_id" : results.user2._id};
+                        update = {$inc : {"played" : 1, "loss " : 1}};
+                        mongoUser.update(query,update, onSimulate);
+                        query = {"_id" : results.user1._id};
+                        update = {$inc : {"played" : 1, "win " : 1 , "points" : 2}};
+                        mongoUser.update(query,update, onSimulate);
+                    }
 
-                    /*  for(i=0;i<12;i++)
-                     {
-                     console.log("Team 1:"+ results.team1[i].Name);
-                     }
-                     for(i=0;i<12;i++)
-                     {
-                     console.log("Team 2:"+ results.team2[i].Name);
-                     }
-
-                     console.log("Player 1:" + results.user1.manager_name);
-                     console.log("Player 2:" + results.user2.manager_name);*/
-                    simulator.team(elt, results.team1, results.team2, results.user1, results.user2);
 
                 }
             };
