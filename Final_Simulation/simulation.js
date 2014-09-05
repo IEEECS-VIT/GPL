@@ -340,12 +340,11 @@ function score_runs()
 
     }
 }
-
+Total[0] = Total[1] = 0;
 function start_match(elt)
 {
     var dot;
     Overs[0] = Overs[1] = 120;
-    Total[0] = Total[1] = 0;
     //console.log(" ", "Team ");
     if (rand() % 2)
     {
