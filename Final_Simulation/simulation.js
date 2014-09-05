@@ -246,7 +246,7 @@ function comment()
         five_wicket_haul[i] = continuous_wickets[i] = deliveries[i] = maidens[i] = runs_conceded[i] = wickets_taken[i] = 0;
     }
     commentary.push( 'Dot ball percentage: ' + dot * 100 / Overs[index] + ' %');//console.log("Dot ball percentage: ", dot * 100 / Overs[0], " %");
-    extras = strike_index = free_hit = current_partnership_index = Total[index] = dot = previous_bowler = 0;
+    extras = strike_index = free_hit = current_partnership_index = dot = previous_bowler = 0;
     previous_batsman = previous_partnership_index = -1;
     commentary.push( '   ');
 }
