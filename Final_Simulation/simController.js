@@ -40,6 +40,7 @@ var matchGenerator = function (err, docs)
     }
     else
     {
+        console.log(docs.length);
 
         var simulate_match = function (elt, i, arr)
         {
@@ -51,7 +52,7 @@ var matchGenerator = function (err, docs)
             var doc2 = {
                 "team_no": parseInt(elt.Team_2)
             };
-            console.log(doc1);
+            //console.log(doc1);
 
             parallel_tasks.team1 = function (asyncCallback)
             {
@@ -132,7 +133,7 @@ var matchGenerator = function (err, docs)
 
         };
 
-        docs.forEach(simulate_match);
+        async.map(docs,simulate_match,function(err,res){});
     }
 };
 console.log("Fetch Matches for Today");

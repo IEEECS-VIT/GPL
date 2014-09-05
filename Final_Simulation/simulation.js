@@ -118,7 +118,7 @@ exports.todaysMatches = function (callback)
             }
             collectionName = 'matchday1';
             var collection = db.collection(collectionName);
-            collection.find({"_id": 1}).toArray(callback);
+            collection.find().toArray(callback);
         }
 
     };
