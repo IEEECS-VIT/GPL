@@ -53,13 +53,7 @@
             <li><a href="/home/trailer" style="color:#ffffff;">Trailer</a></li>
         </ul>
     </div>
-    <% if(1){ %>
-    <div class="row"
-         style="background:rgba(0,123,184,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);margin-top:2%; ">
-        <h5 align="center" style="text-align: center; color: #ffffff;margin: 1%;padding: 2%;">The page will be active
-            when the games begin.</h5>
-    </div>
-    <% } else{ %>
+
     <div class="small-12">
         <ul class="radius tabs" data-tab="" style="margin-left: 31%;margin-top: 2%;">
             <li class="tab-title active" id="act1" onclick="tab(1)"><a href="#">Previous Match</a></li>
@@ -104,7 +98,7 @@
 
                             <p style="text-align: center;"><%= response["nextMatch"][i].Name %></p>
                         </li>
-                        <% } } %>
+                        <% } %>
 
                     </ul>
                 </div>

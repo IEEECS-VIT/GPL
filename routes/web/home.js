@@ -206,7 +206,7 @@ router.get('/matches', function (req, res)
 
                 };
                 async.parallel(parallel_tasks, onFinish);
-                res.render('matches', response);
+                //res.render('matches', response);
 
             }
         };

@@ -123,6 +123,7 @@ var matchGenerator = function (err, docs)
                         update = {$inc : {"played" : 1, "win " : 1 , "points" : 2}};
                         mongoUser.update(query,update, onSimulate);
                     }
+                    console.log("Finished Match");
 
 
                 }

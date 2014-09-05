@@ -22,7 +22,14 @@ var path = require('path');
 var mongoUser = require(path.join(__dirname, '..', 'db', 'mongo-users'));
 
 var com = require(path.join(__dirname, 'commentary'));
-
+var log;
+if (process.env.LOGENTRIES_TOKEN)
+{
+    var logentries = require('node-logentries');
+    log = logentries.logger({
+                                token: process.env.LOGENTRIES_TOKEN
+                            });
+}
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
 var today = new Date();
