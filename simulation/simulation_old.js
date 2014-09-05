@@ -776,7 +776,7 @@ else
     }
     commentary += '\n';//console.log("\n");
 }
-//if(Total[1]<Total[0]) {Overs[0]+=Overs[1]; Overs[1]=Overs[0]-Overs[0]; Overs[0]-=Overs[1]; Total[0]+=Total[1]; Total[1]=Total[0]-Total[1]; Total[0]-=Total[1];}
+if(Total[1]<Total[0]) {Overs[0]+=Overs[1]; Overs[1]=Overs[0]-Overs[0]; Overs[0]-=Overs[1]; Total[0]+=Total[1]; Total[1]=Total[0]-Total[1]; Total[0]-=Total[1];}
 exports.comm = commentary; //console.log(commentary);
 
 

@@ -19,6 +19,7 @@
 var async = require('async');
 var MongoClient = require('mongodb').MongoClient;
 var path = require('path');
+var mongoUser = require(path.join(__dirname, '..', 'db', 'mongo-users'));
 
 var com = require(path.join(__dirname, 'commentary'));
 
@@ -848,203 +849,98 @@ function start_match(elt)
         }
         commentary[commentary.length-1] += ' ';//console.log(" ");
     }
+    var  query,favour,against,net_run_rate,update;
+    if(parseInt(winner_index)==-1)
+    {
 
-    if (parseInt(winner_index) == -1)
-    {
-        var onAddTie = function (err, doc)
+        query = {"_id" : users[0]._id};
+        favour =(parseInt(users[0].runs_for)+parseInt(Total[0]))/(parseInt(users[0].balls_for) + parseInt(Overs[0]));
+        against = (parseInt(users[0].runs_against)+parseInt(Total[1]))/(parseInt(users[0].balls_against) + parseInt(Overs[1]));
+        net_run_rate = favour - against;
+        update = {$inc : {"played" : 1, "tied" : 1, "points" : 1, "balls_for" : Overs[0], "balls_against" : Overs[1], "runs_for" : Total[0], "runs_against" : Total[1]}, $set : { "net_rum_rate" : net_run_rate}};
+        var onUpdate = function(err,doc)
         {
-            if (err)
+            if(err)
             {
-                console.log(err.message);
+                if (log) log.log('debug', {Error: err, Message: err.message});
             }
             else
             {
-                console.log(doc);
+                if (log) log.log('info', {Error: err, Doc: doc});
             }
         };
-        var onFinish = function (err, doc)
-        {
-            if (err)
-            {
-                console.log(err.message);
-            }
-            else
-            {
-                console.log(doc);
-            }
-        };
-        var credentials1 = {
-            "_id": users[0]._id
-        };
-        var credentials2 = {
-            "_id": users[0]._id
-        };
-        addtie(credentials1, credentials2, onAddTie);
-        updateMatch(elt, commentary, onFinish);
+        mongoUser.update(query,update,onUpdate);
+        query = {"_id" : users[1]._id};
+        favour =(parseInt(users[1].runs_for)+parseInt(Total[1]))/(parseInt(users[1].balls_for) + parseInt(Overs[1]));
+        against = (parseInt(users[1].runs_against)+parseInt(Total[0]))/(parseInt(users[1].balls_against) + parseInt(Overs[0]));
+        net_run_rate = favour - against;
+        update = {$inc : {"played" : 1, "tied" : 1, "points" : 1, "balls_for" : Overs[1], "balls_against" : Overs[0], "runs_for" : Total[1], "runs_against" : Total[0]}, $set : { "net_rum_rate" : net_run_rate}};
+        mongoUser.update(query,update,onUpdate);
     }
-    else if (parseInt(winner_index) == 0)
+    else if(parseInt(winner_index)==0)
     {
-        var winner =
+        query = {"_id" : users[0]._id};
+        favour =(parseInt(users[0].runs_for)+parseInt(Total[0]))/(parseInt(users[0].balls_for) + parseInt(Overs[0]));
+        against = (parseInt(users[0].runs_against)+parseInt(Total[1]))/(parseInt(users[0].balls_against) + parseInt(Overs[1]));
+        net_run_rate = favour - against;
+        update = {$inc : {"played" : 1, "wins" : 1, "points" : 2, "balls_for" : Overs[0], "balls_against" : Overs[1], "runs_for" : Total[0], "runs_against" : Total[1]}, $set : { "net_rum_rate" : net_run_rate}};
+        var onUpdate = function(err,doc)
         {
-            "_id": users[0]._id
-        };
-        var loser =
-        {
-            "_id": users[1]._id
-        };
-        var onAddResult = function (err, doc)
-        {
-            if (err)
+            if(err)
             {
-                console.log(err.message);
+                if (log) log.log('debug', {Error: err, Message: err.message});
             }
             else
             {
-                console.log(doc);
+                if (log) log.log('info', {Error: err, Doc: doc});
             }
         };
-        var onFinish = function (err, doc)
-        {
-            if (err)
-            {
-                console.log(err.message);
-            }
-            else
-            {
-                console.log(doc);
-            }
-        };
-        addresult(winner, loser, onAddResult);
-        updateMatch(elt, commentary, onFinish);
+        mongoUser.update(query,update,onUpdate);
+        query = {"_id" : users[1]._id};
+        favour =(parseInt(users[1].runs_for)+parseInt(Total[1]))/(parseInt(users[1].balls_for) + parseInt(Overs[1]));
+        against = (parseInt(users[1].runs_against)+parseInt(Total[0]))/(parseInt(users[1].balls_against) + parseInt(Overs[0]));
+        net_run_rate = favour - against;
+        update = {$inc : {"played" : 1, "loss" : 1, "points" : 0, "balls_for" : Overs[1], "balls_against" : Overs[0], "runs_for" : Total[1], "runs_against" : Total[0]}, $set : { "net_rum_rate" : net_run_rate}};
+        mongoUser.update(query,update,onUpdate);
     }
-    else if (parseInt(winner_index) == 1)
+    else if(parseInt(winner_index)==1)
     {
-        var winner =
+        query = {"_id" : users[1]._id};
+        favour =(parseInt(users[1].runs_for)+parseInt(Total[1]))/(parseInt(users[1].balls_for) + parseInt(Overs[1]));
+        against = (parseInt(users[1].runs_against)+parseInt(Total[0]))/(parseInt(users[1].balls_against) + parseInt(Overs[0]));
+        net_run_rate = favour - against;
+        update = {$inc : {"played" : 1, "wins" : 1, "points" : 2, "balls_for" : Overs[1], "balls_against" : Overs[1], "runs_for" : Total[0], "runs_against" : Total[1]}, $set : { "net_rum_rate" : net_run_rate}};
+        var onUpdate = function(err,doc)
         {
-            "_id": users[1]._id
-        };
-        var loser =
-        {
-            "_id": users[0]._id
-        };
-        var onAddResult = function (err, doc)
-        {
-            if (err)
+            if(err)
             {
-                console.log(err.message);
+                if (log) log.log('debug', {Error: err, Message: err.message});
             }
             else
             {
-                console.log(doc);
+                if (log) log.log('info', {Error: err, Doc: doc});
             }
         };
-        var onFinish = function (err, doc)
-        {
-            if (err)
-            {
-                console.log(err.message);
-            }
-            else
-            {
-                console.log(doc);
-            }
-        };
-        addresult(winner, loser, onAddResult);
-        updateMatch(elt, commentary, onFinish);
-
+        mongoUser.update(query,update,onUpdate);
+        query = {"_id" : users[0]._id};
+        favour =(parseInt(users[0].runs_for)+parseInt(Total[0]))/(parseInt(users[0].balls_for) + parseInt(Overs[0]));
+        against = (parseInt(users[0].runs_against)+parseInt(Total[1]))/(parseInt(users[0].balls_against) + parseInt(Overs[1]));
+        net_run_rate = favour - against;
+        update = {$inc : {"played" : 1, "loss" : 1, "points" : 0, "balls_for" : Overs[0], "balls_against" : Overs[1], "runs_for" : Total[1], "runs_against" : Total[0]}, $set : { "net_rum_rate" : net_run_rate}};
+        mongoUser.update(query,update,onUpdate);
     }
-}
-
-function addtie(document1, document2, callback)
-{
-    var onConnect = function (err, db)
+    var onFinish = function(err,document)
     {
-        if (err)
+        if(err)
         {
-            throw err;
+            if (log) log.log('debug', {Error: err, Message: err.message});
         }
         else
         {
-            var parallel_tasks = {};
-            var collection = db.collection('users');
-            var onUpdate = function (err, document)
-            {
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else if (document)
-                {
-                    db.close();
-                    callback(null, document);
-                }
-                else
-                {
-                    callback(true, null);
-                }
-            };
-            parallel_tasks.team1 = function (asyncCallback)
-            {
-                var net_run_rate1 = 6 * (  parseFloat((parseInt(users[0].runs_for) + parseInt(Total[0]) ) / ( parseInt(users[0].balls_for) + parseInt(Overs[0]))) - parseFloat((parseInt(users[0].runs_against) + parseInt(Total[1]) ) / ( parseInt(users[0].balls_against) + parseInt(Overs[1]))));
-                collection.findAndModify(document1, [], {$inc: {played: 1, points: 1, runs_for: Total[0], runs_against: Total[0], balls_for: Overs[0], balls_against: Overs[0]}}, {$set: { net_run_rate: net_run_rate1}}, {}, asyncCallback);
-            };
-            parallel_tasks.team2 = function (asyncCallback)
-            {
-                var net_run_rate2 = 6 * (  parseFloat((parseInt(users[1].runs_for) + parseInt(Total[1]) ) / ( parseInt(users[1].balls_for) + parseInt(Overs[1]))) - parseFloat((parseInt(users[1].runs_against) + parseInt(Total[0]) ) / ( parseInt(users[1].balls_against) + parseInt(Overs[0]))));
-                collection.findAndModify(document2, [], {$inc: {played: 1, points: 1, runs_for: Total[0], runs_against: Total[0], balls_for: Overs[0], balls_against: Overs[0]}}, {$set: { net_run_rate: net_run_rate2}}, {}, asyncCallback);
-            };
-            async.parallel(parallel_tasks, onUpdate);
+            if (log) log.log('info', {Error: err, Doc: document});
         }
     };
-    MongoClient.connect(mongoUri, onConnect);
-}
-
-function addresult(winner, loser, callback)
-{
-    var parallel_tasks = {};
-    var onConnect = function (err, db)
-    {
-        if (err)
-        {
-            throw err;
-        }
-        else
-        {
-            var collection = db.collection('users');
-            var onUpdate = function (err, document)
-            {
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else if (document)
-                {
-                    db.close();
-                    callback(null, document);
-                }
-                else
-                {
-                    callback(true, null);
-                }
-            };
-            parallel_tasks.team1 = function (asyncCallback)
-            {
-                var net_run_rate1 = 6 * (  parseFloat((parseInt(users[0].runs_for) + parseInt(Total[0]) ) / ( parseInt(users[0].balls_for) + parseInt(Overs[0]))) - parseFloat((parseInt(users[0].runs_against) + parseInt(Total[1]) ) / ( parseInt(users[0].balls_against) + parseInt(Overs[1]))));
-                collection.findAndModify(winner, [], {$inc: {played: 1, points: 1, runs_for: Total[0], runs_against: Total[1], balls_for: Overs[0], balls_against: Overs[0]}}, {$set: { net_run_rate: net_run_rate1}}, {}, asyncCallback);
-            };
-            parallel_tasks.team2 = function (asyncCallback)
-            {
-                var net_run_rate2 = 6 * (  parseFloat((parseInt(users[1].runs_for) + parseInt(Total[1]) ) / ( parseInt(users[1].balls_for) + parseInt(Overs[1]))) - parseFloat((parseInt(users[1].runs_against) + parseInt(Total[0]) ) / ( parseInt(users[1].balls_against) + parseInt(Overs[0]))));
-                collection.findAndModify(loser, [], {$inc: {played: 1, points: 1, runs_for: Total[1], runs_against: Total[0], balls_for: Overs[1], balls_against: Overs[0]}}, {$set: { net_run_rate: net_run_rate2}}, {}, asyncCallback);
-            };
-            async.parallel(parallel_tasks, onUpdate);
-            collection.findAndModify(winner, [], {$inc: {played: 1, win: 1, points: 2, runs_for: Total[+winner_index], runs_against: Total[+!winner_index], balls_for: Overs[+winner_index], balls_against: Overs[+!winner_index]}}, {$set: { net_run_rate: 6 * (this.runs_for / this.balls_for - this.runs_against / this.balls_against)}}, {}, onUpdate);
-
-            collection.findAndModify(loser, [], {$inc: {played: 1, runs_for: Total[+!winner_index], runs_against: Total[+winner_index], balls_for: Overs[+winner_index], balls_against: Overs[+!winner_index]}}, {$set: { net_run_rate: 6 * (this.runs_for / this.balls_for - this.runs_against / this.balls_against)}}, {}, onUpdate);
-            async.parallel(parallel_tasks, onUpdate);
-        }
-    };
-    MongoClient.connect(mongoUri, onConnect);
+    updateMatch(elt,commentary,onFinish);
 }
 
 function updateMatch(elt, commentary, callback)
