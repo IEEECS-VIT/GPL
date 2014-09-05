@@ -242,7 +242,7 @@ function comment()
     commentary.push( 'Total: ' + Total[index] + ' / ' + wickets[index] + ' (' + parseInt(Overs[index] / 6) + '.' + Overs[index] % 6 + ' overs)  Runrate: ' + Total[index] * 6 / Overs[index] + ' Extras: ' + extras + '  Bowling Statistics:  Bowler Overs Maidens Wickets Runs conceded Economy  ');//console.log("Total[0]: ", Total[0], " / ", wickets[0], " (", parseInt(Overs[0] / 6) + "." + Overs[0] % 6, " overs)  Runrate: ", Total[0] * 6 / Overs[0], " Extras: ", extras, "  Bowling Statistics:  Bowler Overs Maidens Wickets Runs conceded Economy  ");
     for (i = 0; i < 6; i++)
     {
-        commentary.push( (i + 1) + ' ' + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + runs_conceded[i] * 6 / deliveries[i]);//console.log(i + 1, parseInt(deliveries[i] / 6) + "." + deliveries[i] % 6, maidens[i], wickets_taken[i], runs_conceded[i], runs_conceded[i] * 6 / deliveries[i]);
+        commentary.push( team_object[index].bowl_name[i] + ' ' + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + runs_conceded[i] * 6 / deliveries[i]);//console.log(i + 1, parseInt(deliveries[i] / 6) + "." + deliveries[i] % 6, maidens[i], wickets_taken[i], runs_conceded[i], runs_conceded[i] * 6 / deliveries[i]);
         five_wicket_haul[i] = continuous_wickets[i] = deliveries[i] = maidens[i] = runs_conceded[i] = wickets_taken[i] = 0;
     }
     commentary.push( 'Dot ball percentage: ' + dot * 100 / Overs[index] + ' %');//console.log("Dot ball percentage: ", dot * 100 / Overs[0], " %");
@@ -340,10 +340,11 @@ function score_runs()
 
     }
 }
-Total[0] = Total[1] = 0;
+
 function start_match(elt)
 {
-    var dot;
+    var dot=0;
+    Total[0] = Total[1] = 0;
     Overs[0] = Overs[1] = 120;
     //console.log(" ", "Team ");
     if (rand() % 2)
@@ -629,7 +630,7 @@ function start_match(elt)
             }//console.log(" Free Hit: ");
             else
             {
-                commentary.push( ' ' + i + '.' + j + team_object[+!toss].bowl_name[current_bowler] + ' to ' + team_object[+toss].bat_name[strike[+strike_index]] + ', ');
+                commentary.push( ' ' + i + '.' + j + ' ' + team_object[+!toss].bowl_name[current_bowler] + ' to ' + team_object[+toss].bat_name[strike[+strike_index]] + ', ');
             }//console.log(i + "." + j, " Bowler ", current_bowler + 1, " to Batsman ", strike[+strike_index] + 1, ", ");
             if (batsman_performance_index <= 0 && !free_hit)
             {
@@ -846,7 +847,7 @@ function start_match(elt)
         winner_index = +toss;
         if (Total[0] < Total[1])
         {
-            commentary[commentary.length-1] += (10 - wickets[1]) + ' wicket(score) !';//console.log(+toss + 1, " wins by ", 10 - wickets[1], " wicket(score) !");
+            commentary[commentary.length-1] += (10 - wickets[1]) + ' wicket(s) !';//console.log(+toss + 1, " wins by ", 10 - wickets[1], " wicket(score) !");
 
         }
         else
