@@ -23,6 +23,9 @@
     <title>Matches | GPL</title>
     <link type="text/css" rel="stylesheet" href="/bower_components/foundation/css/foundation.css"/>
     <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
+    <link href="/stylesheets/gplmain.css" rel="stylesheet" type="text/css"/>
+
+    <script src="/javascript/tabs.js"></script>
 </head>
 <body style="background-color:#646464;font-family: 'PT Sans', sans-serif;height:100%;">
 <div style="min-height: 100%">
@@ -54,58 +57,94 @@
         </ul>
     </div>
 
-    <div class="small-12">
-        <ul class="radius tabs" data-tab="" style="margin-left: 31%;margin-top: 2%;">
-            <li class="tab-title active" id="act1" onclick="tab(1)"><a href="#">Previous Match</a></li>
-            <li class="tab-title" id="noact2" onclick="tab(2)"><a href="#">Next Match</a></li>
+    <div class="small-12 large-12">
+        <div style="text-align:center;" align="center">
+            <ul class="radius tabs" data-tab="" style="margin-left: 37%">
+                <li class="tab-title active" id="act1" onclick="tab(1)"><a href="#">Previous Match</a></li>
+                <li class="tab-title" id="noact4" onclick="tab(4)"><a href="#">Next Match</a></li>
 
-        </ul>
+            </ul>
+        </div>
         <div class="row" align="center">
 
             <div class="small-12 medium-12 large-12 columns"
-                 style="background:rgba(0,123,184,0.5); border-radius: 0 0 5px 5px;border:5px;box-shadow: inset 20px 0 50px -10px rgba(0,0,0,0.4), inset -20px 0 50px -10px rgba(0,0,0,0.4),inset 0 -20px 50px rgba(0,0,0,0.4);">
+                 style="background:rgba(32,98,172,0.9); border-radius: 0 0 5px 5px;border:5px;box-shadow: inset 20px 0 50px -10px rgba(0,0,0,0.4), inset -20px 0 50px -10px rgba(0,0,0,0.4),inset 0 -20px 50px rgba(0,0,0,0.4);">
+                <div class="tabs-content">
+                    <div class="content active" id="panel1">
+                        <div class="large-12 medium-12 small-12">
+                            <h4 style="color:white">Commentary</h4>
 
-                <div class="content active" id="panel1">
-                    <div class="large-12 medium-12 small-12">
-                        <h4>Commentary</h4>
-                        <%= response["previousMatch"].commentary %>
+                            <ol style="text-align: left;color:white">
+                                <%for(var i=0;i<response["previousMatch"].commentary.length;i++){%>
+                                <li><%= response["previousMatch"].commentary[i] %></li>
+                                <%}%>
+                            </ol>
+
+                        </div>
                     </div>
-                </div>
-                <div class="content" id="panel2">
-                    <h3>Next Opponent<br/></h3>
-                    <h4>OPP</h4>
-                    <ul class="inline-list">
-                        <% for(var i = 0;i < 16;i++){ %>
-                        <li style="float:left">
-                            <% if (response["nextMatch"][i]._id <= 113){ %>
-                            <img src="/images/bat/<%= response["nextMatch"][i]._id %>.jpg"
-                                 style="width: 40%;margin: 0;float: left;"/>
+                    <div class="content" id="panel4">
+                        <h3 style="color:white">Next Opponent<br/></h3>
+                        <h4 style="color:white">OPP</h4>
+                        <table cellspacing="10px"
+                               style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
+                            <% for(var i = 0;i < response["nextMatch"].length;i++) { %>
+                            <% if(response["nextMatch"][i]._id > 303) { %>
+                            <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;"
+                                colspan="3">
+                                <img src="/images/coaches/<%= response["nextMatch"][i]._id %>.jpg" style="width: 40%; margin: 0"/>
 
-                            <p style="text-align: center;"><%= response["nextMatch"][i].Name %></p>
-                            <% } else if(response["nextMatch"][i]._id >= 114 && response["nextMatch"][i] <= 242) { %>
-                            <img src="/images/bowl/<%= response["nextMatch"][i]._id %>.jpg"
-                                 style="width: 40%;margin: 0;float: left;"/>
+                                <p style="text-align: center;">
+                                    <%= response["nextMatch"][i].Name %>
+                                </p>
 
-                            <p style="text-align: center;"><%= response["nextMatch"][i].Name %></p>
-                            <% } else if(response["nextMatch"][i]._id >= 243 && response["nextMatch"][i]._id <= 303) { %>
-                            <img src="/images/all/<%= response["nextMatch"][i]._id %>.jpg"
-                                 style="width: 40%;margin: 0;float: left;"/>
+                                <p style="text-align: center;">Coach</p>
+                            </td>
+                            <% } } %>
+                            <% k = 4;i = 0; var z = 1;for(i = 0;i < response["nextMatch"].length;i++) { %>
+                            <% if(k < 3){ %>
 
-                            <p style="text-align: center;"><%= response["nextMatch"][i].Name %></p>
-                            <% } else { %>
-                            <img src="/images/coaches/<%= response["nextMatch"][i]._id %>.jpg"
-                                 style="width: 40%;margin: 0;float: left;"/>
+                            <% if(response["nextMatch"][i]._id <= 303){ %>
+                            <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
+                                id="box<%= response["nextMatch"][i]._id %>">
 
-                            <p style="text-align: center;"><%= response["nextMatch"][i].Name %></p>
-                        </li>
-                        <% } %>
+                                <% if (response["nextMatch"][i]._id <= 113){ %>
+                                <img src="/images/bat/<%= response["nextMatch"][i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
-                    </ul>
+                                <p style="text-align: center;"><%= response["nextMatch"][i].Name %></p>
+
+                                <p style="text-align: center;">Batsman</p>
+                                <% } else if(response["nextMatch"][i]._id >= 114 && response["nextMatch"][i]._id <= 242) { %>
+                                <img src="/images/bowl/<%= response["nextMatch"][i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
+
+                                <p style="text-align: center;"><%= response["nextMatch"][i].Name %></p>
+
+                                <p style="text-align: center;">Bowler</p>
+                                <% } else if(response["nextMatch"][i]._id >= 243 && response["nextMatch"][i]._id <= 303) { %>
+                                <img src="/images/all/<%= response["nextMatch"][i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
+
+                                <p style="text-align: center;"><%= response["nextMatch"][i].Name %></p>
+
+                                <p style="text-align: center;">All Rounder</p>
+                                <% } %>
+                            </td>
+                            <% k++; } else {
+                                continue;
+                            } %>
+                            <% } else { if(z == 1) { %>
+                            <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                                <% z = 0;k = 0;i--;} else { %>
+                            </tr>
+                            <% k = 0;i--; %>
+                            <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
+                                <% } } } %>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <% } %>
+
 </div>
 <!--content-->
 <footer class="large-12" style="bottom:0; position:relative;">
