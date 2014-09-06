@@ -18,11 +18,12 @@
 
 var async = require('async');
 var path = require('path');
-
+var today = new Date();
 var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team'));
 var mongoUser = require(path.join(__dirname, '..', 'db', 'mongo-users'));
 var simulator = require(path.join(__dirname, 'simulation'));
-
+var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
+var MongoClient = require('mongodb').MongoClient;
 var log;
 if (process.env.LOGENTRIES_TOKEN)
 {
@@ -42,7 +43,7 @@ var matchGenerator = function (err, docs)
     {
         console.log(docs.length);
 
-        var simulate_match = function (elt, i, arr)
+        var simulate_match = function (elt, callback )
         {
 
             var parallel_tasks = {};
@@ -78,7 +79,7 @@ var matchGenerator = function (err, docs)
                 }
                 else
                 {
-                    var onSimulate = function(err,docs)
+                    var onSimulate = function(err)
                     {
                         if(err)
                         {
@@ -93,7 +94,7 @@ var matchGenerator = function (err, docs)
                     var update = {};
                     if(results.team1.length==12 && results.team2.length==12)
                     {
-                        simulator.team(elt, results.team1, results.team2, results.user1, results.user2);
+                        simulator.team(elt, results.team1, results.team2, results.user1, results.user2,callback);
                     }
                     else if(results.team1.length<12 && results.team2.length<12)
                     {
@@ -103,6 +104,7 @@ var matchGenerator = function (err, docs)
                         mongoUser.update(query,update,simulate_match);
                         query = {"_id" : results.user2._id};
                         mongoUser.update(query,update,simulate_match);
+                        callback(null,[]);
                     }
                     else if(results.team1.length<12)
                     {
@@ -113,6 +115,7 @@ var matchGenerator = function (err, docs)
                         query = {"_id" : results.user2._id};
                         update = {$inc : {"played" : 1, "win " : 1 , "points" : 2}};
                         mongoUser.update(query,update, onSimulate);
+                        callback(null,[]);
                     }
                     else if(results.team2.length<12)
                     {
@@ -123,6 +126,7 @@ var matchGenerator = function (err, docs)
                         query = {"_id" : results.user1._id};
                         update = {$inc : {"played" : 1, "win " : 1 , "points" : 2}};
                         mongoUser.update(query,update, onSimulate);
+                        callback(null,[]);
                     }
                     console.log("Finished Match");
 
@@ -132,10 +136,103 @@ var matchGenerator = function (err, docs)
             async.parallel(parallel_tasks, onFinish);
 
         };
-
-        async.map(docs,simulate_match,function(err,res){});
+        //for(var i=0;i<docs.length;i++) console.log(docs[i]._id);
+        async.map(docs,simulate_match,function(err,res)
+        {
+            if(err)
+            {
+                if (log) log.log('debug', {Error: err, Message: err.message});
+            }
+            else
+            {
+                var i;
+                for(i=0;i<docs.length;i++)
+                {
+                    console.log(docs[i]._id);
+                    console.log(res[i].commentary[0]);
+                    updateMatch(docs[i],res[i],function(err,doc)
+                    {
+                        if(err)
+                        {
+                            if (log) log.log('debug', {Error: err, Message: err.message});
+                        }
+                        else
+                        {
+                            if (log) log.log('info', {Status: "Simulation Complete", Docs: doc});
+                        }
+                    });
+                }
+            }
+        });
     }
 };
 console.log("Fetch Matches for Today");
 simulator.todaysMatches(matchGenerator);
+
+
+function updateMatch(elt, commentary, callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
+            throw err;
+        }
+        else
+        {
+            var day = today.getDate();
+            var collectionName;
+            switch (day)
+            {
+                case 0:
+                    collectionName = 'matchday4';
+                    break;
+                case 1:
+                    collectionName = 'matchday5';
+                    break;
+                case 2:
+                    collectionName = 'matchday6';
+                    break;
+                case 3:
+                    collectionName = 'matchday7';
+                    break;
+                case 4:
+                    collectionName = 'matchday1';
+                    break;
+                case 5:
+                    collectionName = 'matchday2';
+                    break;
+                case 6:
+                    collectionName = 'matchday3';
+                    break;
+                default :
+                    break;
+
+            }
+            collectionName = 'matchday1';
+            var collection = db.collection(collectionName);
+            var doc = {
+                "_id": elt._id
+            };
+            var onUpdate = function (err, document)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (document)
+                {
+                    db.close();
+                    callback(null, document);
+                }
+                else
+                {
+                    callback(true, null);
+                }
+            };
+            collection.update(doc, commentary, onUpdate)
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+}
 

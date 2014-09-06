@@ -118,7 +118,7 @@ exports.todaysMatches = function (callback)
             }
             collectionName = 'matchday1';
             var collection = db.collection(collectionName);
-            collection.find().toArray(callback);
+            collection.find({}).toArray(callback);
         }
 
     };
@@ -134,7 +134,7 @@ function rand()
 
 team_object = [];
 
-exports.team = function (elt, team1, team2, user1, user2)
+exports.team = function (elt, team1, team2, user1, user2,callback)
 {
     //console.log(team2);
 
@@ -143,7 +143,7 @@ exports.team = function (elt, team1, team2, user1, user2)
     //console.log(team_object[0]);
     //console.log(team_object[1]);
     users = [user1, user2];
-    start_match(elt);
+    start_match(elt, callback);
 };
 
 function Make(team)
@@ -219,7 +219,7 @@ function Make(team)
     }
 }
 commentary.length=0;
-function start_match(elt)
+function start_match(elt, callback)
 {
     var dot=0;
     Total[0] = Total[1] = 0;
@@ -1024,20 +1024,13 @@ function start_match(elt)
         update = {$inc : {"played" : 1, "loss" : 1, "points" : 0, "balls_for" : Overs[0], "balls_against" : Overs[1], "runs_for" : Total[1], "runs_against" : Total[0]}, $set : { "net_rum_rate" : net_run_rate}};
         mongoUser.update(query,update,onUpdate);
     }
-    var onFinish = function(err,document)
-    {
-        if(err)
-        {
-            if (log) log.log('debug', {Error: err, Message: err.message});
-        }
-        else
-        {
-            if (log) log.log('info', {Error: err, Doc: document});
-        }
-    };
-    updateMatch(elt,commentary,onFinish);
-}
 
+    //updateMatch(elt,commentary,onFinish);
+    //exports.commentary=commentary;
+    elt.commentary=commentary;
+    callback(null,elt);
+}
+/*
 function updateMatch(elt, commentary, callback)
 {
     var onConnect = function (err, db)
@@ -1073,3 +1066,4 @@ function updateMatch(elt, commentary, callback)
     };
     MongoClient.connect(mongoUri, onConnect);
 }
+*/
