@@ -65,7 +65,7 @@ exports.getTeam = function (doc, callback)
 
             var onFetch = function (err, document)
             {
-                if(document.team == null)
+                if(document.team.length==0)
                 {
                     callback(null,null);
                 }
@@ -75,7 +75,6 @@ exports.getTeam = function (doc, callback)
                 }
                 else
                 {
-
                     async.map(document.team, getPlayer, callback);
                 }
             };
