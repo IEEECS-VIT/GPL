@@ -78,7 +78,7 @@ var bat=[1000,1000];    // decrease to strengthen batting
 
 exports.todaysMatches = function (callback)
 {
-f    var onConnect = function (err, db)
+   var onConnect = function (err, db)
     {
         if (err)
         {
@@ -915,12 +915,12 @@ function start_match(elt)
             //commentary.push( 'Team');//console.log("Team ");
             if (wickets[0] > wickets[1])
             {
-                commentary[commentary.length-1] += users[+!toss]._id;
+                commentary[commentary.length-1] += users[+toss]._id;
                 winner_index = +!toss;
             }//console.log(+!toss + 1);
             else
             {
-                commentary[commentary.length-1] += users[+toss]._id;
+                commentary[commentary.length-1] += users[+!toss]._id;
                 winner_index = +toss;
             }//console.log(+toss + 1);
             commentary[commentary.length-1] += ' wins! (fewer wickets lost)  ';//console.log(" wins! (fewer wickets lost)  ");
@@ -928,16 +928,18 @@ function start_match(elt)
     }
     else
     {
-        commentary.push( ' ' + users[+toss]._id + ' wins by '); //console.log("Team ");
-        winner_index = +toss;
+       // commentary.push( ' ' + users[+toss]._id + ' wins by '); //console.log("Team ");
         if (Total[0] < Total[1])
         {
+            commentary.push(users[+toss]._id + ' wins by ');
             commentary[commentary.length-1] += (10 - wickets[1]) + ' wicket(s) !';//console.log(+toss + 1, " wins by ", 10 - wickets[1], " wicket(score) !");
-
+            winner_index=+toss;
         }
         else
         {
+            commentary.push(users[+!toss]._id + ' wins by ');
             commentary[commentary.length-1] += (Total[0] - Total[1]) + ' runs!';//console.log(+!toss + 1, " wins by ", Total[0] - Total[1], " runs!");
+            winner_index=+!toss;
         }
         commentary[commentary.length-1] += ' ';//console.log(" ");
     }
