@@ -36,7 +36,6 @@ var dateMatchDay;
 var dot;
 var users;
 var collectionName;
-var toss_state;
 var delivery_score;
 var batsman_performance_index;
 var current_bowler=-1;
@@ -79,7 +78,7 @@ var bat=[1000,1000];    // decrease to strengthen batting
 
 exports.todaysMatches = function (callback)
 {
-    var onConnect = function (err, db)
+f    var onConnect = function (err, db)
     {
         if (err)
         {
@@ -255,7 +254,6 @@ function start_match(elt)
         users[1] = temp;
     }
     wickets[0] = wickets[1] = strike_index = previous_bowler = 0;
-    toss_state = toss;
     for (i = 1; i < 6; ++i)
     {
         if (team_object[+toss].bowler_rating[i] > team_object[+toss].bowler_rating[previous_bowler])
@@ -561,7 +559,6 @@ function start_match(elt)
     extras = strike_index = free_hit = current_partnership_index = dot = previous_bowler = 0;
     previous_batsman = previous_partnership_index = -1;
     commentary.push( '   ');
-    toss_state = !toss_state;
 //console.log(commentary);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     for (i = 1; i < 6; i++)
