@@ -897,15 +897,15 @@ function start_match(elt)
             }//console.log("TIE ! ");
             else
             {
-                commentary.push( 'Team');//console.log("Team ");
+                //commentary.push( 'Team');//console.log("Team ");
                 if (Overs[1] > Overs[0])
                 {
-                    commentary[commentary.length-1] += (+!toss + 1);
+                    commentary[commentary.length-1] += users[+!toss]._id;
                     winner_index = +!toss;
                 }//console.log(+!toss + 1);
                 else
                 {
-                    commentary[commentary.length-1] += (+toss + 1);
+                    commentary[commentary.length-1] += users[+toss]._id;
                     winner_index = +toss;
                 }//console.log(+toss + 1);
                 commentary[commentary.length-1] += ' wins! (higher run rate)  ';//console.log(" wins! (higher run rate)  ");
@@ -913,15 +913,15 @@ function start_match(elt)
         }
         else
         {
-            commentary.push( 'Team');//console.log("Team ");
+            //commentary.push( 'Team');//console.log("Team ");
             if (wickets[0] > wickets[1])
             {
-                commentary[commentary.length-1] += (+!toss + 1);
+                commentary[commentary.length-1] += users[+!toss]._id;
                 winner_index = +!toss;
             }//console.log(+!toss + 1);
             else
             {
-                commentary[commentary.length-1] += (+toss + 1);
+                commentary[commentary.length-1] += users[+toss]._id;
                 winner_index = +toss;
             }//console.log(+toss + 1);
             commentary[commentary.length-1] += ' wins! (fewer wickets lost)  ';//console.log(" wins! (fewer wickets lost)  ");
@@ -929,7 +929,7 @@ function start_match(elt)
     }
     else
     {
-        commentary.push( 'Team ' + (+toss + 1) + ' wins by '); //console.log("Team ");
+        commentary.push( ' ' + users[+toss]._id + ' wins by '); //console.log("Team ");
         winner_index = +toss;
         if (Total[0] < Total[1])
         {
