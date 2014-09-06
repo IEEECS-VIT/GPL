@@ -106,8 +106,6 @@ exports.fetchPreviousMatch = function (doc1, doc2, callback)
 exports.fetchNextMatch = function (doc1, doc2, callback)
 {
     var parallelTasks = {};
-    console.log(doc1);
-    console.log(doc2);
     var onConnect = function (err, db)
     {
         if (err)
@@ -151,20 +149,18 @@ exports.fetchNextMatch = function (doc1, doc2, callback)
 
             var onFetch = function (err, doc)
             {
-                console.log(doc.team1);
-                console.log(doc.team2);
                 var credentials = {};
                 if (err)
                 {
                     throw err;
                 }
-                else if (doc.team1)
+                else if (doc.team1 == doc1.Team_1 || doc.team1 == doc2.Team_2)
                 {
                     credentials = {
                         'team_no': doc.team1.Team_2
                     };
                 }
-                else if (doc.team2)
+                else if (doc.team2 == doc1.Team_1 || doc.team1 == doc2.Team_2)
                 {
                     credentials = {
                         'team_no': doc.team2.Team_1
