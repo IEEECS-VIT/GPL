@@ -1026,7 +1026,7 @@ function start_match(elt, callback)
 
     //updateMatch(elt,commentary,onFinish);
     //exports.commentary=commentary;
-    elt.commentary=commentary;
+    //elt.commentary=commentary;
     callback(null,elt);
 }
 /*
