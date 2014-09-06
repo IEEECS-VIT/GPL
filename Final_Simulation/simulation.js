@@ -75,7 +75,7 @@ var previous_over = 0;
 var wickets = [0, 0];
 var Overs = [0, 0];
 var bowl=[1000,1000,1000]; // increase to strengthen bowling
-var bat=[700,700];    // decrease to strengthen batting
+var bat=[1000,1000];    // decrease to strengthen batting
 
 exports.todaysMatches = function (callback)
 {
