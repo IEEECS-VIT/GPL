@@ -95,10 +95,6 @@ router.post('/login', function (req, res)
     mongoUsers.fetch(credentials, onFetch);
 });
 
-router.get('/forgot', function (req, res) //forgot password page
-{
-    res.render('forgot', { });
-});
 
 router.post('/forgot', function (req, res)
 {
