@@ -65,13 +65,16 @@ exports.getTeam = function (doc, callback)
 
             var onFetch = function (err, document)
             {
-                if (err)
+                if(document.team.length==0)
+                {
+                    callback(null,null);
+                }
+                else if (err)
                 {
                     callback(err, null);
                 }
                 else
                 {
-
                     async.map(document.team, getPlayer, callback);
                 }
             };
