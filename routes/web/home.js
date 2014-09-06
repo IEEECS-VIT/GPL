@@ -179,7 +179,7 @@ router.get('/matches', function (req, res)
                 {
                     if (err)
                     {
-                        //do something with the error
+                        if (log) log.log('debug', {Error: err, Message: err.message});
                     }
                     else
                     {
