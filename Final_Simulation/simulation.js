@@ -427,6 +427,7 @@ function start_match(elt)
                     --balls[strike[+strike_index]];
                     --deliveries[current_bowler];
                     ++Total[0];
+                delivery_score=0;
                 }
                 else
                 {
@@ -739,6 +740,7 @@ function start_match(elt)
                     --balls[strike[+strike_index]];
                     --deliveries[current_bowler];
                     ++Total[1];
+                    delivery_score=0;
                 }
                 else
                 {
