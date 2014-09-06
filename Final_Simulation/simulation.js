@@ -44,7 +44,7 @@ var previous_bowler=-1;
 var toss;
 var i;
 var j;
-var strike_index;
+var strike_index=0;
 var continuous_maximums;
 var fall_of_wicket;
 var winner_index;
@@ -73,8 +73,8 @@ var Total = [0, 0];
 var previous_over = 0;
 var wickets = [0, 0];
 var Overs = [0, 0];
-var bowl=[1000,1000,1000]; // increase to strengthen bowling
-var bat=[1000,1000];    // decrease to strengthen batting
+var bowl=[1200,1200,1200]; // increase to strengthen bowling
+var bat=[1100,1100];    // decrease to strengthen batting
 
 exports.todaysMatches = function (callback)
 {
@@ -223,7 +223,7 @@ function start_match(elt, callback)
     var dot=0;
     Total[0] = Total[1] = 0;
     Overs[0] = Overs[1] = 120;
-    commentary.length=0;
+    elt.commentary.length=0;
     //console.log(" ", "Team ");
     if (rand() % 2)
     {
@@ -238,15 +238,15 @@ function start_match(elt, callback)
     elt.commentary.push(' ' + users[toss]._id + ' wins the toss and chooses to ');
     if (rand() % 2)
     {
-        commentary[commentary.length-1] += 'bowl ';
+        elt.commentary[elt.commentary.length-1] += 'bowl ';
 
     }//console.log(" wins the toss and chooses to bowl first");
     else
     {
         toss = !toss;
-        commentary[commentary.length-1] += 'bat ';//console.log(" wins the toss and chooses to bat first");
+        elt.commentary[elt.commentary.length-1] += 'bat ';//console.log(" wins the toss and chooses to bat first");
     }
-    commentary[commentary.length-1] += 'first  ';
+    elt.commentary[elt.commentary.length-1] += 'first  ';
     if (+toss)
     {
         var temp = users[0];
@@ -434,7 +434,7 @@ function start_match(elt, callback)
                     switch (delivery_score)
                     {
                         case 0:
-                            elt.commentary.push( 'no run, ' + com.dot[rand() % com.dot.length]);//console.log(" no run");
+                            elt.commentary.push( 'No run, ' + com.dot[rand() % com.dot.length]);//console.log(" No run");
                             //console.log(com.dot[rand()%com.dot.length]);
                             ++dot;
                             break;
@@ -531,7 +531,8 @@ function start_match(elt, callback)
         previous_bowler = current_bowler;
     }
     strike = [0, 1];
-    elt.commentary.push( ' Scorecard:   Runs Balls Strike Rate Fours Sixes  ');//console.log(" Scorecard:   Runs Balls Strike Rate Fours Sixes  ");
+    elt.commentary.push( ' Scorecard: ');
+    commentary.push('Runs Balls Strike Rate Fours Sixes');//console.log(" Scorecard:   Runs Balls Strike Rate Fours Sixes  ");
     for (i = 0; i < 11; ++i)
     {
         if (!balls[i])
@@ -541,7 +542,7 @@ function start_match(elt, callback)
         else
         {
             elt.commentary.push( team_object[+!toss].bat_name[i] + ' ' + score[i] + ' ' + balls[i] + ' ' + (score[i] * 100 / balls[i]).toFixed(2) + ' ' + fours[i] + ' ' + maximums[i]);//console.log(score[i], balls[i], score[i] * 100 / balls[i], fours[i], maximums[i]);
-            if (!dismissed[i]) elt.commentary.push( '  (not out)');//console.log("  (not out)");
+            if (!dismissed[i]) elt.commentary[commentary.length-1]=( '  (not out)');//console.log("  (not out)");
         }
         if (i < 10)
         {
@@ -746,7 +747,7 @@ function start_match(elt, callback)
                     switch (delivery_score)
                     {
                         case 0:
-                            elt.commentary.push( 'no run, ' + com.dot[rand() % com.dot.length]);//console.log(" no run");
+                            elt.commentary.push( 'No run, ' + com.dot[rand() % com.dot.length]);//console.log(" No run");
                             //console.log(com.dot[rand()%com.dot.length]);
                             ++dot;
                             break;
@@ -821,7 +822,7 @@ function start_match(elt, callback)
         }
         elt.commentary.push( '  Current score: ' + Total[1] + ' / ' + wickets[1] + '  Runrate: ' + (Total[1] / (i + 1)).toFixed(2));//console.log("  Current score: ", Total[1], " / ", wickets[1], "  Runrate: ", Total[1] / (i + 1));
         if (Total[1] > Total[0]) break;
-        elt.commentary.push( ', RRR: ' + ((Total[0] + 1 - Total[1]) / (19 - i)).toFixed(2) + '  Equation: ' + (Total[0] + 1 - Total[1]) + ' runs needed from ' + 114 - 6 * i + ' balls. ');//console.log(", RRR: ", (Total[0] + 1 - Total[1]) / (19 - i), "  Equation: ", (Total[0] + 1 - Total[1]), " runs needed from ", 114 - 6 * i, " balls. ");
+        elt.commentary.push( ', RRR: ' + parseFloat(((Total[0] + 1 - Total[1]) / (19 - i))).toFixed(2) + '  Equation: ' + parseInt(Total[0] + 1 - Total[1]) + ' runs needed from ' + parseInt(114 - 6 * i) + ' balls. ');//console.log(", RRR: ", (Total[0] + 1 - Total[1]) / (19 - i), "  Equation: ", (Total[0] + 1 - Total[1]), " runs needed from ", 114 - 6 * i, " balls. ");
         if (strike[+strike_index] < 11) elt.commentary.push( ' ' + team_object[+toss].bat_name[strike[+strike_index]] + ' : ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ') ');//console.log("Batsman: ", strike[+strike_index] + 1, " : ", score[strike[+strike_index]], " (", balls[strike[+strike_index]], ") ");
         if (strike[+!strike_index] < 11) elt.commentary.push( ' ' + team_object[+toss].bat_name[strike[+!strike_index]] + ' : ' + score[strike[+!strike_index]] + ' (' + balls[strike[+!strike_index]] + ') Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + '), runrate: ' + partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index]);//console.log("Batsman: ", strike[+!strike_index] + 1, " : ", score[strike[+!strike_index]], " (", balls[strike[+!strike_index]], ") Partnership: ", partnership_runs[current_partnership_index], "(", partnership_balls[current_partnership_index], "), runrate: ", partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index]);
         if (previous_batsman > -1)
@@ -856,7 +857,8 @@ function start_match(elt, callback)
         previous_bowler = current_bowler;
     }
 
-    elt.commentary.push( ' Scorecard:   Runs Balls Strike Rate Fours Sixes  ');//console.log(" Scorecard:   Runs Balls Strike Rate Fours Sixes  ");
+    elt.commentary.push( ' Scorecard:');
+    commentary.push('Runs   Balls Strike Rate Fours Sixes  ');//console.log(" Scorecard:   Runs Balls Strike Rate Fours Sixes  ");
     for (i = 0; i < 11; ++i)
     {
         if (!balls[i])
@@ -866,7 +868,7 @@ function start_match(elt, callback)
         else
         {
             elt.commentary.push( team_object[+toss].bat_name[i] + ' ' + score[i] + ' ' + balls[i] + ' ' + (score[i] * 100 / balls[i]).toFixed(2) + ' ' + fours[i] + ' ' + maximums[i]);//console.log(score[i], balls[i], score[i] * 100 / balls[i], fours[i], maximums[i]);
-            if (!dismissed[i]) elt.commentary.push( '  (not out)');//console.log("  (not out)");
+            if (!dismissed[i]) elt.commentary[commentary.length-1]=( '  (not out)');//console.log("  (not out)");
         }
         if (i < 10)
         {
