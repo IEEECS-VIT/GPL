@@ -39,9 +39,9 @@ var collectionName;
 var toss_state;
 var delivery_score;
 var batsman_performance_index;
-var current_bowler;
+var current_bowler=-1;
 var bowler_performance_index;
-var previous_bowler;
+var previous_bowler=-1;
 var toss;
 var i;
 var j;
@@ -75,7 +75,7 @@ var previous_over = 0;
 var wickets = [0, 0];
 var Overs = [0, 0];
 var bowl=[1000,1000,1000]; // increase to strengthen bowling
-var bat=[750,750];    // decrease to strengthen batting
+var bat=[700,700];    // decrease to strengthen batting
 
 exports.todaysMatches = function (callback)
 {
@@ -183,7 +183,7 @@ function Make(team)
                 this.bat_strike_rate[batsman_count] = parseFloat(team[i]['Strike Rate']);
                 this.bat_rating[batsman_count] = 900 - parseInt(team[i]['Rating (900)']);
                 this.economy[bowler_count] = parseFloat(team[i]['Economy']);
-                this.bowl_name[bowler_count] = team[i]['Name'];
+                this.bowl_name[bowler_count] = this.bat_name[batsman_count] = team[i]['Name'] = team[i]['Name'];
                 average_bowl_rating = average_bowl_rating + parseInt(team[i]['Rating (900)']);
                 bowler_count++;
                 batsman_count++;
@@ -218,7 +218,7 @@ function Make(team)
         this.bat_rating[i] += parseFloat(this.bat_rating[i] / 10) - parseFloat(average_bat_rating / 10) + parseInt(this.coach_rating);
     }
 }
-
+commentary.length=0;
 function start_match(elt)
 {
     var dot=0;
@@ -842,7 +842,7 @@ function start_match(elt)
         }
         commentary.push( '  ' + team_object[+!toss].bowl_name[current_bowler] + ': ' + parseInt(deliveries[current_bowler] / 6) + '.' + deliveries[current_bowler] % 6 + '-' + maidens[current_bowler] + '-' + wickets_taken[current_bowler] + '-' + runs_conceded[current_bowler] + '-' + (runs_conceded[current_bowler] * 6 / deliveries[current_bowler]).toFixed(2) + '  ');//console.log(" Bowler ", current_bowler + 1, ": ", parseInt(deliveries[current_bowler] / 6) + "." + deliveries[current_bowler] % 6, "-", maidens[current_bowler], "-", wickets_taken[current_bowler], "-", runs_conceded[current_bowler] * 6 / deliveries[current_bowler], "  ");
         if (i < 19 && (Total[0] + 1 - Total[1]) / (19 - i) > 36) commentary.push( 'The team might as well hop onto the team bus now.... ');//console.log("The team might as well hop onto the team bus now.... ");
-        if (deliveries[current_bowler] == 24) commentary.push( 'And that brings an end to Bowler ' + team_object[+toss].bowl_name[current_bowler] + '\'s spell.  ');//console.log("And that brings an end to Bowler ", current_bowler + 1, "'score spell.  ");
+        if (deliveries[current_bowler] == 24) commentary.push( 'And that brings an end to Bowler ' + team_object[+toss].bowler_name[current_bowler] + '\'s spell.  ');//console.log("And that brings an end to Bowler ", current_bowler + 1, "'score spell.  ");
         for (j = 0; j < 6; ++j)
         {
             if (deliveries[j] <= 18 && j != previous_bowler)
