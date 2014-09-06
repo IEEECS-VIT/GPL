@@ -126,11 +126,12 @@ exports.getSquad = function (doc, callback)
 
             var onFetch = function (err, document)
             {
+                console.log(document);
                 if (err)
                 {
                     callback(err, null);
                 }
-                else
+                else if(document.team.length != 0)
                 {
 
                     for (var i = 0; i < 16; i++)
@@ -142,7 +143,12 @@ exports.getSquad = function (doc, callback)
                     }
                     async.map(document.squad, getPlayer, onFinish);
                 }
+                else
+                {
+                    callback(null,[]);
+                }
             };
+            console.log("Team "+ doc.team_no);
             collection.findOne(doc, onFetch);
         }
     };

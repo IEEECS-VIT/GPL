@@ -151,7 +151,7 @@ exports.fetchNextMatch = function (doc1, doc2, callback)
 
             var onFetch = function (err, doc)
             {
-                console.log("Team 1" + doc.team1.Team_1);
+                //console.log("Team 1" + doc.team1.Team_1);
                 //console.log("Team 2" + doc.team2.Team_2);
                 var credentials = {};
                 if (err)
