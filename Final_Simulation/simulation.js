@@ -537,7 +537,7 @@ function start_match(elt)
     {
         if (!balls[i])
         {
-            commentary.push( '  DNB ');
+            commentary.push( team_object[+!toss].bat_name[i] + '  DNB ');
         }//console.log("  DNB ");
         else
         {
@@ -863,11 +863,11 @@ function start_match(elt)
     {
         if (!balls[i])
         {
-            commentary.push( '  DNB ');
+            commentary.push( team_object[+toss].bat_name[i] + ' DNB ');
         }//console.log("  DNB ");
         else
         {
-            commentary.push( team_object[+toss].bowl_name[i] + ' ' + score[i] + ' ' + balls[i] + ' ' + (score[i] * 100 / balls[i]).toFixed(2) + ' ' + fours[i] + ' ' + maximums[i]);//console.log(score[i], balls[i], score[i] * 100 / balls[i], fours[i], maximums[i]);
+            commentary.push( team_object[+toss].bat_name[i] + ' ' + score[i] + ' ' + balls[i] + ' ' + (score[i] * 100 / balls[i]).toFixed(2) + ' ' + fours[i] + ' ' + maximums[i]);//console.log(score[i], balls[i], score[i] * 100 / balls[i], fours[i], maximums[i]);
             if (!dismissed[i]) commentary.push( '  (not out)');//console.log("  (not out)");
         }
         if (i < 10)
