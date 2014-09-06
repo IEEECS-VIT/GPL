@@ -19,14 +19,17 @@
 """
 
 import os
+
 import webapp2
 import jinja2
 
+
 # This is required to use Jinja2
 JINJA_ENVIRONMENT = jinja2.Environment(
-loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
-extensions=['jinja2.ext.autoescape'],
-autoescape=True)
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'],
+    autoescape=True)
+
 
 class ErrorHandler(webapp2.RequestHandler):
     def get(self):
@@ -41,6 +44,6 @@ class MaintenanceHandler(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
-    ('/error', ErrorHandler),
-    ('/maintenance', MaintenanceHandler),
-], debug=True)
+                                  ('/error', ErrorHandler),
+                                  ('/maintenance', MaintenanceHandler),
+                              ], debug=True)
