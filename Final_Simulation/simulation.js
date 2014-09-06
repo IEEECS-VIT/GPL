@@ -1068,7 +1068,7 @@ function updateMatch(elt, commentary, callback)
                     callback(true, null);
                 }
             };
-            collection.findAndModify(doc, [], {$set: {'commentary': commentary}}, {}, onUpdate)
+            collection.findAndModify(doc, {}, {$set: {'commentary': commentary}}, {}, onUpdate)
         }
     };
     MongoClient.connect(mongoUri, onConnect);
