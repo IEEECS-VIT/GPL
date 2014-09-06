@@ -149,7 +149,7 @@ var matchGenerator = function (err, docs)
                 for(i=0;i<docs.length;i++)
                 {
                     console.log(docs[i]._id);
-                    console.log(res[i].commentary[0]);
+                    console.log(res[i]);
                     updateMatch(docs[i],res[i],function(err,doc)
                     {
                         if(err)
