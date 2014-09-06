@@ -181,7 +181,7 @@ function Make(team)
                 this.bat_strike_rate[batsman_count] = parseFloat(team[i]['Strike Rate']);
                 this.bat_rating[batsman_count] = 900 - parseInt(team[i]['Rating (900)']);
                 this.economy[bowler_count] = parseFloat(team[i]['Economy']);
-                this.bowl_name[bowler_count] = this.bat_name[batsman_count] = team[i]['Name'] = team[i]['Name'];
+                this.bowl_name[bowler_count] = this.bat_name[batsman_count] = team[i]['Name'];
                 average_bowl_rating = average_bowl_rating + parseInt(team[i]['Rating (900)']);
                 bowler_count++;
                 batsman_count++;
