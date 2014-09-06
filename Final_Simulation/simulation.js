@@ -842,7 +842,7 @@ function start_match(elt)
         }
         commentary.push( '  ' + team_object[+!toss].bowl_name[current_bowler] + ': ' + parseInt(deliveries[current_bowler] / 6) + '.' + deliveries[current_bowler] % 6 + '-' + maidens[current_bowler] + '-' + wickets_taken[current_bowler] + '-' + runs_conceded[current_bowler] + '-' + (runs_conceded[current_bowler] * 6 / deliveries[current_bowler]).toFixed(2) + '  ');//console.log(" Bowler ", current_bowler + 1, ": ", parseInt(deliveries[current_bowler] / 6) + "." + deliveries[current_bowler] % 6, "-", maidens[current_bowler], "-", wickets_taken[current_bowler], "-", runs_conceded[current_bowler] * 6 / deliveries[current_bowler], "  ");
         if (i < 19 && (Total[0] + 1 - Total[1]) / (19 - i) > 36) commentary.push( 'The team might as well hop onto the team bus now.... ');//console.log("The team might as well hop onto the team bus now.... ");
-        if (deliveries[current_bowler] == 24) commentary.push( 'And that brings an end to Bowler ' + team_object[+toss].bowler_name[current_bowler] + '\'s spell.  ');//console.log("And that brings an end to Bowler ", current_bowler + 1, "'score spell.  ");
+        if (deliveries[current_bowler] == 24) commentary.push( 'And that brings an end to Bowler ' + team_object[+toss].bowl_name[current_bowler] + '\'s spell.  ');//console.log("And that brings an end to Bowler ", current_bowler + 1, "'score spell.  ");
         for (j = 0; j < 6; ++j)
         {
             if (deliveries[j] <= 18 && j != previous_bowler)
