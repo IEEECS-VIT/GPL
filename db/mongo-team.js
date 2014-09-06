@@ -65,7 +65,11 @@ exports.getTeam = function (doc, callback)
 
             var onFetch = function (err, document)
             {
-                if (err)
+                if(document.team == null)
+                {
+                    callback(null,null);
+                }
+                else if (err)
                 {
                     callback(err, null);
                 }
