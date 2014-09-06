@@ -65,9 +65,11 @@ exports.getTeam = function (doc, callback)
 
             var onFetch = function (err, document)
             {
+                console.log("Length " + document.team.length);
                 if(document.team.length==0)
                 {
-                    callback(null,null);
+                    console.log("REached");
+                    callback(null,[]);
                 }
                 else if (err)
                 {
