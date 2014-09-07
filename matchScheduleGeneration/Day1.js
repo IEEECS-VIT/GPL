@@ -75,7 +75,8 @@ exports.gen_schedule = function ()
                             "_id": match_count,
                             "Team_1": i,
                             "Team_2": j,
-                            "TimeStamp": new Date("5 Sep 2014 00:00:00 +0530 (IST)")
+                            "TimeStamp": new Date("5 Sep 2014 00:00:00 +0530 (IST)"),
+                            "commentary": []
                         };
                         match_count++;
 

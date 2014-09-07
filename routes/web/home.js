@@ -185,6 +185,7 @@ router.get('/matches', function (req, res)
                     {
                         response["previousMatch"] = results.previousMatch;
                         response["nextMatch"] = results.nextMatch;
+
                         if (response["previousMatch"] != null || response["nextMatch"] != null)
                         {
                             response.test = "True";

@@ -45,6 +45,7 @@ var matchGenerator = function (err, docs)
 
         var simulate_match = function (elt, callback )
         {
+            console.log("Element " + elt.Team_1);
 
             var parallel_tasks = {};
             var doc1 = {
@@ -53,7 +54,8 @@ var matchGenerator = function (err, docs)
             var doc2 = {
                 "team_no": parseInt(elt.Team_2)
             };
-            //console.log(doc1);
+
+            console.log(doc1.team_no);
 
             parallel_tasks.team1 = function (asyncCallback)
             {
@@ -98,35 +100,38 @@ var matchGenerator = function (err, docs)
                     }
                     else if(results.team1.length<12 && results.team2.length<12)
                     {
+                        console.log("Both Teams Forfeit");
                         if (log) log.log('info', {Status: "Both Teams Forfeit"});
                         query = {"_id" : results.user1._id};
                         update = {$inc : {"played" : 1, "loss " : 1}};
                         mongoUser.update(query,update,simulate_match);
                         query = {"_id" : results.user2._id};
                         mongoUser.update(query,update,simulate_match);
-                        callback(null,[]);
+                        callback(null,elt);
                     }
                     else if(results.team1.length<12)
                     {
+                        console.log("Team 1 Forfeit");
                         if (log) log.log('info', {Status: "Team 1 Forfeit"});
                         query = {"_id" : results.user1._id};
-                        update = {$inc : {"played" : 1, "loss " : 1}};
+                        update = {$inc : {"played" : 1, "loss" : 1}};
                         mongoUser.update(query,update, onSimulate);
                         query = {"_id" : results.user2._id};
-                        update = {$inc : {"played" : 1, "win " : 1 , "points" : 2}};
+                        update = {$inc : {"played" : 1, "win" : 1 , "points" : 2}};
                         mongoUser.update(query,update, onSimulate);
-                        callback(null,[]);
+                        callback(null,elt);
                     }
                     else if(results.team2.length<12)
                     {
+                        console.log("Team 2 Forfeit");
                         if (log) log.log('info', {Status: "Team 2 Forfeit"});
                         query = {"_id" : results.user2._id};
-                        update = {$inc : {"played" : 1, "loss " : 1}};
+                        update = {$inc : {"played" : 1, "loss" : 1}};
                         mongoUser.update(query,update, onSimulate);
                         query = {"_id" : results.user1._id};
-                        update = {$inc : {"played" : 1, "win " : 1 , "points" : 2}};
+                        update = {$inc : {"played" : 1, "win" : 1 , "points" : 2}};
                         mongoUser.update(query,update, onSimulate);
-                        callback(null,[]);
+                        callback(null,elt);
                     }
                     console.log("Finished Match");
 
@@ -230,7 +235,7 @@ function updateMatch(elt, commentary, callback)
                     callback(true, null);
                 }
             };
-            collection.update(doc, commentary, onUpdate)
+            collection.findAndModify(doc,{}, commentary,{upsert : true} , onUpdate)
         }
     };
     MongoClient.connect(mongoUri, onConnect);
