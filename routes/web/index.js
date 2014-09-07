@@ -218,51 +218,55 @@ router.get('/prizes', function (req, res) // page to view prizes
 
 router.get('/rule', function (req, res)
 {
+    var session;
     if (req.signedCookies.name)
     {
-        var session = 1;
+        session = 1;
     }
     else
     {
-        var session = 0;
+        session = 0;
     }
     res.render('rule', {results: session });
 });
 
 router.get('/sponsor', function (req, res) // sponsors page
 {
+    var session;
     if (req.signedCookies.name)
     {
-        var session = 1;
+        session = 1;
     }
     else
     {
-        var session = 0;
+        session = 0;
     }
     res.render('sponsor', {results: session });
 });
 
 router.get('/trail', function (req, res) // trailer page
 {
+    var session;
     if (req.signedCookies.name)
     {
-        var session = 1;
+        session = 1;
     }
     else
     {
-        var session = 0;
+        session = 0;
     }
     res.render('trail', {results: session });
 });
 router.get('/schedule', function (req, res) // schedule page
 {
+    var session;
     if (req.signedCookies.name)
     {
-        var session = 1;
+        session = 1;
     }
     else
     {
-        var session = 0;
+        session = 0;
     }
     res.render('schedule', {results: session });
 });
