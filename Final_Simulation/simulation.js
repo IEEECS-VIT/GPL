@@ -970,7 +970,7 @@ function start_match(elt, callback)
         favour =(parseInt(users[1].runs_for)+parseInt(Total[1]))/(parseInt(users[1].balls_for) + parseInt(Overs[1]));
         against = (parseInt(users[1].runs_against)+parseInt(Total[0]))/(parseInt(users[1].balls_against) + parseInt(Overs[0]));
         net_run_rate = favour - against;
-        update = {$inc : {"played" : 1, "tied" : 1, "points" : 1, "balls_for" : Overs[1], "balls_against" : Overs[0], "runs_for" : Total[1], "runs_against" : Total[0]}, $set : { "net_rum_rate" : net_run_rate}};
+        update = {$inc : {"played" : 1, "tied" : 1, "points" : 1, "balls_for" : Overs[1], "balls_against" : Overs[0], "runs_for" : Total[1], "runs_against" : Total[0]}, $set : { "net_run_rate" : net_run_rate}};
         mongoUser.update(query,update,onUpdate);
     }
     else if(parseInt(winner_index)==0)
@@ -979,7 +979,7 @@ function start_match(elt, callback)
         favour =(parseInt(users[0].runs_for)+parseInt(Total[0]))/(parseInt(users[0].balls_for) + parseInt(Overs[0]));
         against = (parseInt(users[0].runs_against)+parseInt(Total[1]))/(parseInt(users[0].balls_against) + parseInt(Overs[1]));
         net_run_rate = favour - against;
-        update = {$inc : {"played" : 1, "wins" : 1, "points" : 2, "balls_for" : Overs[0], "balls_against" : Overs[1], "runs_for" : Total[0], "runs_against" : Total[1]}, $set : { "net_rum_rate" : net_run_rate}};
+        update = {$inc : {"played" : 1, "wins" : 1, "points" : 2, "balls_for" : Overs[0], "balls_against" : Overs[1], "runs_for" : Total[0], "runs_against" : Total[1]}, $set : { "net_run_rate" : net_run_rate}};
         var onUpdate = function(err,doc)
         {
             if(err)
@@ -996,7 +996,7 @@ function start_match(elt, callback)
         favour =(parseInt(users[1].runs_for)+parseInt(Total[1]))/(parseInt(users[1].balls_for) + parseInt(Overs[1]));
         against = (parseInt(users[1].runs_against)+parseInt(Total[0]))/(parseInt(users[1].balls_against) + parseInt(Overs[0]));
         net_run_rate = favour - against;
-        update = {$inc : {"played" : 1, "loss" : 1, "points" : 0, "balls_for" : Overs[1], "balls_against" : Overs[0], "runs_for" : Total[1], "runs_against" : Total[0]}, $set : { "net_rum_rate" : net_run_rate}};
+        update = {$inc : {"played" : 1, "loss" : 1, "points" : 0, "balls_for" : Overs[1], "balls_against" : Overs[0], "runs_for" : Total[1], "runs_against" : Total[0]}, $set : { "net_run_rate" : net_run_rate}};
         mongoUser.update(query,update,onUpdate);
     }
     else if(parseInt(winner_index)==1)
@@ -1005,7 +1005,7 @@ function start_match(elt, callback)
         favour =(parseInt(users[1].runs_for)+parseInt(Total[1]))/(parseInt(users[1].balls_for) + parseInt(Overs[1]));
         against = (parseInt(users[1].runs_against)+parseInt(Total[0]))/(parseInt(users[1].balls_against) + parseInt(Overs[0]));
         net_run_rate = favour - against;
-        update = {$inc : {"played" : 1, "wins" : 1, "points" : 2, "balls_for" : Overs[1], "balls_against" : Overs[1], "runs_for" : Total[0], "runs_against" : Total[1]}, $set : { "net_rum_rate" : net_run_rate}};
+        update = {$inc : {"played" : 1, "wins" : 1, "points" : 2, "balls_for" : Overs[1], "balls_against" : Overs[1], "runs_for" : Total[0], "runs_against" : Total[1]}, $set : { "net_run_rate" : net_run_rate}};
         var onUpdate = function(err,doc)
         {
             if(err)
