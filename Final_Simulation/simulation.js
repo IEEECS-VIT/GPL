@@ -303,7 +303,7 @@ function start_match(elt, callback)
             }//console.log(" Free Hit: ");
             else
             {
-                elt.commentary.push(' ' + i + '.' + j + ' ' + team_object[+toss].bowl_name[current_bowler] + ' to ' + team_object[+!toss].bat_name[strike[+strike_index]] + ', ');
+                elt.commentary.push(i + '.' + j + ' ' + team_object[+toss].bowl_name[current_bowler] + ' to ' + team_object[+!toss].bat_name[strike[+strike_index]] + ', ');
             }//console.log(i + "." + j, " Bowler ", current_bowler + 1, " to Batsman ", strike[+strike_index] + 1, ", ");
             if (batsman_performance_index <= 0 && !free_hit)
             {
@@ -550,7 +550,9 @@ function start_match(elt, callback)
         }
         balls[i] = fours[i] = maximums[i] = dismissed[i] = milestone[i] = score[i] = balls[i] = fours[i] = maximums[i] = 0;
     }
-    elt.commentary.push( 'Total: ' + Total[0] + ' / ' + wickets[0] + ' (' + parseInt(Overs[0] / 6) + '.' + Overs[0] % 6 + ' overs)  Runrate: ' + (Total[0] * 6 / Overs[0]).toFixed(2) + ' Extras: ' + extras + '  Bowling Statistics:  Bowler Overs Maidens Wickets Runs conceded Economy  ');//console.log("Total[0]: ", Total[0], " / ", wickets[0], " (", parseInt(Overs[0] / 6) + "." + Overs[0] % 6, " overs)  Runrate: ", Total[0] * 6 / Overs[0], " Extras: ", extras, "  Bowling Statistics:  Bowler Overs Maidens Wickets Runs conceded Economy  ");
+    elt.commentary.push('Total: ' + Total[0] + ' / ' + wickets[0] + ' (' + parseInt(Overs[0] / 6) + '.' + Overs[0] % 6 + ' overs)  Runrate: ' + (Total[0] * 6 / Overs[0]).toFixed(2) + ' Extras: ' + extras);
+    elt.commentary.push(' Bowling Statistics:');
+    elt.commentary.push('  Bowler Overs Maidens Wickets Runs conceded Economy  ');//console.log("Total[0]: ", Total[0], " / ", wickets[0], " (", parseInt(Overs[0] / 6) + "." + Overs[0] % 6, " overs)  Runrate: ", Total[0] * 6 / Overs[0], " Extras: ", extras, "  Bowling Statistics:  Bowler Overs Maidens Wickets Runs conceded Economy  ");
     for (i = 0; i < 6; i++)
     {
         elt.commentary.push( team_object[+toss].bowl_name[i] + ' ' + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + (runs_conceded[i] * 6 / deliveries[i]).toFixed(2));//console.log(i + 1, parseInt(deliveries[i] / 6) + "." + deliveries[i] % 6, maidens[i], wickets_taken[i], runs_conceded[i], runs_conceded[i] * 6 / deliveries[i]);
@@ -611,7 +613,7 @@ function start_match(elt, callback)
             }//console.log(" Free Hit: ");
             else
             {
-                elt.commentary.push( ' ' + i + '.' + j + ' ' + team_object[+!toss].bowl_name[current_bowler] + ' to ' + team_object[+toss].bat_name[strike[+strike_index]] + ', ');
+                elt.commentary.push(i + '.' + j + ' ' + team_object[+!toss].bowl_name[current_bowler] + ' to ' + team_object[+toss].bat_name[strike[+strike_index]] + ', ');
             }//console.log(i + "." + j, " Bowler ", current_bowler + 1, " to Batsman ", strike[+strike_index] + 1, ", ");
             if (batsman_performance_index <= 0 && !free_hit)
             {
@@ -810,7 +812,7 @@ function start_match(elt, callback)
         if (continuous_maximums == 6) elt.commentary.push( ' Six G.P.L maximums in the previous over ! What an effort by ' + team_object[+toss].bat_name[strike[+strike_index]] + '. The crowd is ecstatic, ' + team_object[+!toss].bowl_name[current_bowler] + ' is absolutely flabbergasted. ');//console.log(" Six G.P.L maximums in the previous over ! What an effort by Batsman.", strike[+strike_index], ". The crowd is ecstatic, Bowler ", current_bowler, " is absolutely flabbergasted. ");
         runs_conceded[current_bowler] += previous_over;
         strike_index = !strike_index;
-        elt.commentary.push( ' Last over: ');//console.log(" Last over: ");
+        elt.commentary.push(' LAST OVER: ');//console.log(" Last over: ");
         if (previous_over)
         {
             commentary[commentary.length-1] += previous_over + " run(s)";
@@ -876,7 +878,9 @@ function start_match(elt, callback)
         }
         balls[i] = fours[i] = maximums[i] = dismissed[i] = milestone[i] = score[i] = balls[i] = fours[i] = maximums[i] = 0;
     }
-    elt.commentary.push( 'Total: ' + Total[1] + ' / ' + wickets[1] + ' (' + parseInt(Overs[1] / 6) + '.' + Overs[1] % 6 + ' overs)  Runrate: ' + (Total[1] * 6 / Overs[1]).toFixed(2) + ' Extras: ' + extras + ' Bowling Statistics:  Bowler Overs Maidens Wickets Runs conceded Economy  ');//console.log("Total[0]: ", Total[0], " / ", wickets[0], " (", parseInt(Overs[0] / 6) + "." + Overs[0] % 6, " overs)  Runrate: ", Total[0] * 6 / Overs[0], " Extras: ", extras, "  Bowling Statistics:  Bowler Overs Maidens Wickets Runs conceded Economy  ");
+    elt.commentary.push('Total: ' + Total[1] + ' / ' + wickets[1] + ' (' + parseInt(Overs[1] / 6) + '.' + Overs[1] % 6 + ' overs)  Runrate: ' + (Total[1] * 6 / Overs[1]).toFixed(2) + ' Extras: ' + extras);
+    elt.commentary.push(' Bowling Statistics:  ');
+    elt.commentary.push('Bowler Overs Maidens Wickets Runs conceded Economy  ');//console.log("Total[0]: ", Total[0], " / ", wickets[0], " (", parseInt(Overs[0] / 6) + "." + Overs[0] % 6, " overs)  Runrate: ", Total[0] * 6 / Overs[0], " Extras: ", extras, "  Bowling Statistics:  Bowler Overs Maidens Wickets Runs conceded Economy  ");
     for (i = 0; i < 6; i++)
     {
         elt.commentary.push( team_object[+!toss].bowl_name[i] + ' ' + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + (runs_conceded[i] * 6 / deliveries[i]).toFixed(2));//console.log(i + 1, parseInt(deliveries[i] / 6) + "." + deliveries[i] % 6, maidens[i], wickets_taken[i], runs_conceded[i], runs_conceded[i] * 6 / deliveries[i]);
@@ -953,7 +957,7 @@ function start_match(elt, callback)
         favour =(parseInt(users[0].runs_for)+parseInt(Total[0]))/(parseInt(users[0].balls_for) + parseInt(Overs[0]));
         against = (parseInt(users[0].runs_against)+parseInt(Total[1]))/(parseInt(users[0].balls_against) + parseInt(Overs[1]));
         net_run_rate = favour - against;
-        update = {$inc : {"played" : 1, "tied" : 1, "points" : 1, "balls_for" : Overs[0], "balls_against" : Overs[1], "runs_for" : Total[0], "runs_against" : Total[1]}, $set : { "net_rum_rate" : net_run_rate}};
+        update = {$inc: {"played": 1, "tied": 1, "points": 1, "balls_for": Overs[0], "balls_against": Overs[1], "runs_for": Total[0], "runs_against": Total[1]}, $set: { "net_run_rate": net_run_rate}};
         var onUpdate = function(err,doc)
         {
             if(err)
@@ -1022,7 +1026,7 @@ function start_match(elt, callback)
         favour =(parseInt(users[0].runs_for)+parseInt(Total[0]))/(parseInt(users[0].balls_for) + parseInt(Overs[0]));
         against = (parseInt(users[0].runs_against)+parseInt(Total[1]))/(parseInt(users[0].balls_against) + parseInt(Overs[1]));
         net_run_rate = favour - against;
-        update = {$inc : {"played" : 1, "loss" : 1, "points" : 0, "balls_for" : Overs[0], "balls_against" : Overs[1], "runs_for" : Total[1], "runs_against" : Total[0]}, $set : { "net_rum_rate" : net_run_rate}};
+        update = {$inc: {"played": 1, "loss": 1, "points": 0, "balls_for": Overs[0], "balls_against": Overs[1], "runs_for": Total[1], "runs_against": Total[0]}, $set: { "net_run_rate": net_run_rate}};
         mongoUser.update(query,update,onUpdate);
     }
 
