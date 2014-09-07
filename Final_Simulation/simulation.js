@@ -812,7 +812,7 @@ function start_match(elt, callback)
         if (continuous_maximums == 6) elt.commentary.push( ' Six G.P.L maximums in the previous over ! What an effort by ' + team_object[+toss].bat_name[strike[+strike_index]] + '. The crowd is ecstatic, ' + team_object[+!toss].bowl_name[current_bowler] + ' is absolutely flabbergasted. ');//console.log(" Six G.P.L maximums in the previous over ! What an effort by Batsman.", strike[+strike_index], ". The crowd is ecstatic, Bowler ", current_bowler, " is absolutely flabbergasted. ");
         runs_conceded[current_bowler] += previous_over;
         strike_index = !strike_index;
-        elt.commentary.push(' LAST OVER: ');//console.log(" Last over: ");
+        elt.commentary.push(' Last Over: ');//console.log(" Last over: ");
         if (previous_over)
         {
             commentary[commentary.length-1] += previous_over + " run(s)";
