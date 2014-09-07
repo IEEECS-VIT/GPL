@@ -107,7 +107,7 @@
                                 <% }else if(response["previousMatch"].commentary[i][0] == ' ' && response["previousMatch"].commentary[i][1] == 'L' && response["previousMatch"].commentary[i][2] == 'a'){ t = 1; %>
                                 <div style="background: rgba(50,50,255,0.2); border: 1px solid rgba(255,255,255,0.3);border-radius: 5px;margin-bottom: 2%"
                                      class="large-12 small-12 medium-12 columns">
-                                    <% count = 0; for(var t = i;t<i+7;t++){ if((!isNaN(parseInt(response["previousMatch"].commentary[t][0]))) || ( response["previousMatch"].commentary[i][0] == 'S' && response["previousMatch"].commentary[i][1] == 'c')) {  i--; i+=count; break; } else { ++count;%>
+                                    <% count = 0; for(var t = i;t<i+25;t++){ if((!isNaN(parseInt(response["previousMatch"].commentary[t][0]))) || ( response["previousMatch"].commentary[t][1] == 'S' && response["previousMatch"].commentary[t][0] == ' ' && response["previousMatch"].commentary[t][2] == 'c')) {  i--; i+=count; break; } else { ++count;%>
 
                                     <li>
                                         <b style="color:rgba(255,255,255,1);border-radius: 360px;padding: 0.2% 1%"><%= response["previousMatch"].commentary[t] %></b>
