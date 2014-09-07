@@ -542,7 +542,7 @@ function start_match(elt, callback)
         else
         {
             elt.commentary.push( team_object[+!toss].bat_name[i] + ' ' + score[i] + ' ' + balls[i] + ' ' + (score[i] * 100 / balls[i]).toFixed(2) + ' ' + fours[i] + ' ' + maximums[i]);//console.log(score[i], balls[i], score[i] * 100 / balls[i], fours[i], maximums[i]);
-            if (!dismissed[i]) elt.commentary[commentary.length-1]=( '  (not out)');//console.log("  (not out)");
+            if (!dismissed[i]) elt.commentary.push( '  (not out)');//console.log("  (not out)");
         }
         if (i < 10)
         {
@@ -840,7 +840,7 @@ function start_match(elt, callback)
         }
         elt.commentary.push( '  ' + team_object[+!toss].bowl_name[current_bowler] + ': ' + parseInt(deliveries[current_bowler] / 6) + '.' + deliveries[current_bowler] % 6 + '-' + maidens[current_bowler] + '-' + wickets_taken[current_bowler] + '-' + runs_conceded[current_bowler] + '-' + (runs_conceded[current_bowler] * 6 / deliveries[current_bowler]).toFixed(2) + '  ');//console.log(" Bowler ", current_bowler + 1, ": ", parseInt(deliveries[current_bowler] / 6) + "." + deliveries[current_bowler] % 6, "-", maidens[current_bowler], "-", wickets_taken[current_bowler], "-", runs_conceded[current_bowler] * 6 / deliveries[current_bowler], "  ");
         if (i < 19 && (Total[0] + 1 - Total[1]) / (19 - i) > 36) elt.commentary.push( 'The team might as well hop onto the team bus now.... ');//console.log("The team might as well hop onto the team bus now.... ");
-        if (deliveries[current_bowler] == 24) elt.commentary.push( 'And that brings an end to Bowler ' + team_object[+toss].bowl_name[current_bowler] + '\'s spell.  ');//console.log("And that brings an end to Bowler ", current_bowler + 1, "'score spell.  ");
+        if (deliveries[current_bowler] == 24) elt.commentary.push( 'And that brings an end to Bowler ' + team_object[+!toss].bowl_name[current_bowler] + '\'s spell.  ');//console.log("And that brings an end to Bowler ", current_bowler + 1, "'score spell.  ");
         for (j = 0; j < 6; ++j)
         {
             if (deliveries[j] <= 18 && j != previous_bowler)
@@ -868,7 +868,7 @@ function start_match(elt, callback)
         else
         {
             elt.commentary.push( team_object[+toss].bat_name[i] + ' ' + score[i] + ' ' + balls[i] + ' ' + (score[i] * 100 / balls[i]).toFixed(2) + ' ' + fours[i] + ' ' + maximums[i]);//console.log(score[i], balls[i], score[i] * 100 / balls[i], fours[i], maximums[i]);
-            if (!dismissed[i]) elt.commentary[commentary.length-1]=( '  (not out)');//console.log("  (not out)");
+            if (!dismissed[i]) elt.commentary.push( '  (not out)');//console.log("  (not out)");
         }
         if (i < 10)
         {
