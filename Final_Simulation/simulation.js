@@ -373,7 +373,7 @@ function start_match(elt, callback)
                 else if (score[strike[+strike_index]] >= 90 && score[strike[+strike_index]] < 100) elt.commentary.push(' He\'ll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team. ');//console.log(" He'll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team. ");
                 if (continuous_wickets[current_bowler] == 3)
                 {
-                    elt.commentary.push(' And that is also a hattrick for bowler ' + team_object[!toss].bowl_name[current_bowler] + '! Fantastic bowling in the time of need.');//console.log(" And that is also a hattrick for bowler ", current_bowler + 1, "! Fantastic bowling in the time of need.");
+                    elt.commentary.push(' And that is also a hattrick for bowler ' + team_object[+!toss].bowl_name[current_bowler] + '! Fantastic bowling in the time of need.');//console.log(" And that is also a hattrick for bowler ", current_bowler + 1, "! Fantastic bowling in the time of need.");
                     continuous_wickets[current_bowler] = 0;
                 }
                 elt.commentary.push('  ' + team_object[+!toss].bat_name[strike[+strike_index]]);//console.log(" Batsman ", strike[+strike_index] + 1);
