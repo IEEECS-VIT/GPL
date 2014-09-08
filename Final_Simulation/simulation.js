@@ -118,7 +118,11 @@ exports.todaysMatches = function (callback)
             collectionName = 'matchday1';
 
             var collection = db.collection(collectionName);
-            collection.find({}).toArray(callback);
+            collection.find({}).toArray(function (err, docs)
+                                        {
+                                            db.close();
+                                            callback(err, docs);
+                                        });
         }
 
     };

@@ -165,7 +165,8 @@ var matchGenerator = function (err, docs)
             else
             {
                 db.close();
-                if (log) log.log('info', {Status: "Simulation Complete", Docs: doc});
+                console.log('Simulation Complete');
+                if (log) log.log('info', {Status: "Simulation Complete", Docs: docs});
             }
         });
     }
@@ -223,6 +224,7 @@ function updateMatch(elt, commentary, callback)
             callback(true, null);
         }
     };
+    console.log('Updating ' + doc._id);
     collection.findAndModify(doc, {}, commentary, {upsert: true}, onUpdate)
 
 }
