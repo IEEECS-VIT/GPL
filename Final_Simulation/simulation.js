@@ -225,13 +225,13 @@ function Make(team)
         this.bat_rating[i] += parseFloat(this.bat_rating[i] / 10) - parseFloat(average_bat_rating / 10) + parseInt(this.coach_rating);
     }
 }
-commentary.length = 0;
+
 function start_match(elt, callback)
 {
     var dot = 0;
     Total[0] = Total[1] = 0;
     Overs[0] = Overs[1] = 120;
-    elt.commentary.length = 0;
+    elt.commentary = [];
     //console.log(" ", "Team ");
     if (rand() % 2)
     {

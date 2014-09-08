@@ -170,13 +170,13 @@ exports.getleader = function (doc, callback)
                 }
             };
             var options =
-            {
-                "limit": 10,
-                "sort": [
-                    ['points', 'desc'],
-                    ['net_run_rate', 'desc']
-                ]
-            };
+                {
+                    "limit": 10,
+                    "sort": [
+                        ['points', 'desc'],
+                        ['net_run_rate', 'desc']
+                    ]
+                };
 
             collection.find({}, options).toArray(onFetch);
             //collection.find({},onFetch);
@@ -315,34 +315,34 @@ exports.fetchUser = function (doc, callback)
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.update = function(query,update,callback)
+exports.update = function (query, update, callback)
 {
-    var onConnect = function(err,db)
+    var onConnect = function (err, db)
     {
-        if(err)
+        if (err)
         {
             if (log) log.log('debug', {Error: err, Message: err.message});
         }
         else
         {
             var collection = db.collection("users");
-            var onUpdate = function(err,doc)
+            var onUpdate = function (err, doc)
             {
-                if(err)
+                db.close();
+                if (err)
                 {
                     if (log) log.log('debug', {Error: err, Message: err.message});
-                    callback(true,null);
+                    callback(true, null);
                 }
                 else
                 {
-                    db.close();
-                    callback(null,doc);
+                    callback(null, doc);
                 }
             };
-            collection.findAndModify(query,{},update,{"upsert":true},onUpdate);
+            collection.findAndModify(query, {}, update, {"upsert": true}, onUpdate);
 
         }
     };
-    MongoClient.connect(mongoUri,options,onConnect);
+    MongoClient.connect(mongoUri, options, onConnect);
 };
 
