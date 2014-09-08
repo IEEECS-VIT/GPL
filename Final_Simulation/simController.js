@@ -116,9 +116,9 @@ var matchGenerator = function (err, docs)
                         if (log) log.log('info', {Status: "Both Teams Forfeit"});
                         query = {"_id": results.user1._id};
                         update = {$inc: {"played": 1, "loss ": 1}};
-                        mongoUserUpdate(query, update, simulate_match);
+                        mongoUserUpdate(query, update, onSimulate);
                         query = {"_id": results.user2._id};
-                        mongoUserUpdate(query, update, simulate_match);
+                        mongoUserUpdate(query, update, onSimulate);
                         callback(null, elt);
                     }
                     else if (results.team1.length < 12)
