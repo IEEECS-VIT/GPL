@@ -75,6 +75,7 @@ var wickets = [0, 0];
 var Overs = [0, 0];
 var bowl = [1200, 1200, 1200]; // increase to strengthen bowling
 var bat = [1100, 1100];    // decrease to strengthen batting
+var simControl = require(path.join(__dirname,'simController'));
 
 exports.todaysMatches = function (callback)
 {
@@ -118,7 +119,7 @@ exports.todaysMatches = function (callback)
             collectionName = 'matchday1';
 
             var collection = db.collection(collectionName);
-            collection.find({}).toArray(function (err, docs)
+            collection.find({"_id":1}).toArray(function (err, docs)
                                         {
                                             db.close();
                                             callback(err, docs);
@@ -958,12 +959,16 @@ function start_match(elt, callback)
         elt.commentary[elt.commentary.length - 1] += ' ';//console.log(" ");
     }
     var query, favour, against, net_run_rate, update;
+    console.log("Winner Index " + winner_index);
     if (parseInt(winner_index) == -1)
     {
 
         query = {"_id": users[0]._id};
+        console.log("Index 1 " + query._id);
         favour = (parseInt(users[0].runs_for) + parseInt(Total[0])) / (parseInt(users[0].balls_for) + parseInt(Overs[0]));
+        console.log("Favour "+ favour);
         against = (parseInt(users[0].runs_against) + parseInt(Total[1])) / (parseInt(users[0].balls_against) + parseInt(Overs[1]));
+        console.log("Against "+ against);
         net_run_rate = favour - against;
         update = {$inc: {"played": 1, "tied": 1, "points": 1, "balls_for": Overs[0], "balls_against": Overs[1], "runs_for": Total[0], "runs_against": Total[1]}, $set: { "net_run_rate": net_run_rate}};
         var onUpdate = function (err, doc)
@@ -977,19 +982,28 @@ function start_match(elt, callback)
                 if (log) log.log('info', {Error: err, Doc: doc});
             }
         };
-        mongoUser.update(query, update, onUpdate);
-        query = {"_id": users[1]._id};
-        favour = (parseInt(users[1].runs_for) + parseInt(Total[1])) / (parseInt(users[1].balls_for) + parseInt(Overs[1]));
-        against = (parseInt(users[1].runs_against) + parseInt(Total[0])) / (parseInt(users[1].balls_against) + parseInt(Overs[0]));
-        net_run_rate = favour - against;
-        update = {$inc: {"played": 1, "tied": 1, "points": 1, "balls_for": Overs[1], "balls_against": Overs[0], "runs_for": Total[1], "runs_against": Total[0]}, $set: { "net_run_rate": net_run_rate}};
-        mongoUser.update(query, update, onUpdate);
+        simControl.mongoUserUpdate(query, update, function(err,doc)
+        {
+            query = {"_id": users[1]._id};
+            console.log("Index 2 " + query._id);
+            favour = (parseInt(users[1].runs_for) + parseInt(Total[1])) / (parseInt(users[1].balls_for) + parseInt(Overs[1]));
+            console.log("Favour "+ favour);
+            against = (parseInt(users[1].runs_against) + parseInt(Total[0])) / (parseInt(users[1].balls_against) + parseInt(Overs[0]));
+            console.log("Against "+ against);
+            net_run_rate = favour - against;
+            update = {$inc: {"played": 1, "tied": 1, "points": 1, "balls_for": Overs[1], "balls_against": Overs[0], "runs_for": Total[1], "runs_against": Total[0]}, $set: { "net_run_rate": net_run_rate}};
+            simControl.mongoUserUpdate(query, update, onUpdate);
+        });
+
     }
     else if (parseInt(winner_index) == 0)
     {
         query = {"_id": users[0]._id};
+        console.log("Index 1 " + query._id);
         favour = (parseInt(users[0].runs_for) + parseInt(Total[0])) / (parseInt(users[0].balls_for) + parseInt(Overs[0]));
+        console.log("Favour "+ favour);
         against = (parseInt(users[0].runs_against) + parseInt(Total[1])) / (parseInt(users[0].balls_against) + parseInt(Overs[1]));
+        console.log("Against "+ against);
         net_run_rate = favour - against;
         update = {$inc: {"played": 1, "wins": 1, "points": 2, "balls_for": Overs[0], "balls_against": Overs[1], "runs_for": Total[0], "runs_against": Total[1]}, $set: { "net_run_rate": net_run_rate}};
         var onUpdate = function (err, doc)
@@ -1003,19 +1017,27 @@ function start_match(elt, callback)
                 if (log) log.log('info', {Error: err, Doc: doc});
             }
         };
-        mongoUser.update(query, update, onUpdate);
-        query = {"_id": users[1]._id};
-        favour = (parseInt(users[1].runs_for) + parseInt(Total[1])) / (parseInt(users[1].balls_for) + parseInt(Overs[1]));
-        against = (parseInt(users[1].runs_against) + parseInt(Total[0])) / (parseInt(users[1].balls_against) + parseInt(Overs[0]));
-        net_run_rate = favour - against;
-        update = {$inc: {"played": 1, "loss": 1, "points": 0, "balls_for": Overs[1], "balls_against": Overs[0], "runs_for": Total[1], "runs_against": Total[0]}, $set: { "net_run_rate": net_run_rate}};
-        mongoUser.update(query, update, onUpdate);
+        simControl.mongoUserUpdate(query, update, function(err,doc)
+        {
+            query = {"_id": users[1]._id};
+            console.log("Index 2 " + query._id);
+            favour = (parseInt(users[1].runs_for) + parseInt(Total[1])) / (parseInt(users[1].balls_for) + parseInt(Overs[1]));
+            console.log("Favour "+ favour);
+            against = (parseInt(users[1].runs_against) + parseInt(Total[0])) / (parseInt(users[1].balls_against) + parseInt(Overs[0]));
+            console.log("Against "+ against);
+            net_run_rate = favour - against;
+            update = {$inc: {"played": 1, "loss": 1, "points": 0, "balls_for": Overs[1], "balls_against": Overs[0], "runs_for": Total[1], "runs_against": Total[0]}, $set: { "net_run_rate": net_run_rate}};
+            simControl.mongoUserUpdate(query, update, onUpdate);
+        });
     }
     else if (parseInt(winner_index) == 1)
     {
         query = {"_id": users[1]._id};
+        console.log("Index 1 " + query._id);
         favour = (parseInt(users[1].runs_for) + parseInt(Total[1])) / (parseInt(users[1].balls_for) + parseInt(Overs[1]));
+        console.log("Favour "+ favour);
         against = (parseInt(users[1].runs_against) + parseInt(Total[0])) / (parseInt(users[1].balls_against) + parseInt(Overs[0]));
+        console.log("Against "+ against);
         net_run_rate = favour - against;
         update = {$inc: {"played": 1, "wins": 1, "points": 2, "balls_for": Overs[1], "balls_against": Overs[1], "runs_for": Total[0], "runs_against": Total[1]}, $set: { "net_run_rate": net_run_rate}};
         var onUpdate = function (err, doc)
@@ -1029,54 +1051,18 @@ function start_match(elt, callback)
                 if (log) log.log('info', {Error: err, Doc: doc});
             }
         };
-        mongoUser.update(query, update, onUpdate);
-        query = {"_id": users[0]._id};
-        favour = (parseInt(users[0].runs_for) + parseInt(Total[0])) / (parseInt(users[0].balls_for) + parseInt(Overs[0]));
-        against = (parseInt(users[0].runs_against) + parseInt(Total[1])) / (parseInt(users[0].balls_against) + parseInt(Overs[1]));
-        net_run_rate = favour - against;
-        update = {$inc: {"played": 1, "loss": 1, "points": 0, "balls_for": Overs[0], "balls_against": Overs[1], "runs_for": Total[1], "runs_against": Total[0]}, $set: { "net_run_rate": net_run_rate}};
-        mongoUser.update(query, update, onUpdate);
+        simControl.mongoUserUpdate(query, update, function(err,doc)
+        {
+            query = {"_id": users[0]._id};
+            console.log("Index 2 " + query._id);
+            favour = (parseInt(users[0].runs_for) + parseInt(Total[0])) / (parseInt(users[0].balls_for) + parseInt(Overs[0]));
+            console.log("Favour "+ favour);
+            against = (parseInt(users[0].runs_against) + parseInt(Total[1])) / (parseInt(users[0].balls_against) + parseInt(Overs[1]));
+            console.log("Against "+ against);
+            net_run_rate = favour - against;
+            update = {$inc: {"played": 1, "loss": 1, "points": 0, "balls_for": Overs[0], "balls_against": Overs[1], "runs_for": Total[1], "runs_against": Total[0]}, $set: { "net_run_rate": net_run_rate}};
+            simControl.mongoUserUpdate(query, update, onUpdate);
+        });
     }
-
-    //updateMatch(elt,commentary,onFinish);
-    //exports.commentary=commentary;
-    //elt.commentary=commentary;
     callback(null, elt);
 }
-/*
- function updateMatch(elt,elt.commentary, callback)
- {
- var onConnect = function (err, db)
- {
- if (err)
- {
- throw err;
- }
- else
- {
- var collection = db.collection(collectionName);
- var doc = {
- "_id": elt._id
- };
- var onUpdate = function (err, document)
- {
- if (err)
- {
- callback(err, null);
- }
- else if (document)
- {
- db.close();
- callback(null, document);
- }
- else
- {
- callback(true, null);
- }
- };
- collection.findAndModify(doc, {}, {$set: {'commentary':elt.commentary}}, {}, onUpdate)
- }
- };
- MongoClient.connect(mongoUri, onConnect);
- }
- */

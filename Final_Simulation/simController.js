@@ -115,10 +115,10 @@ var matchGenerator = function (err, docs)
                         if (log) log.log('info', {Status: "Both Teams Forfeit"});
                         query = {"_id": results.user1._id};
                         update = {$inc: {"played": 1, "loss ": 1}};
-                        mongoUserUpdate(query, update, function (err, res)
+                        this.mongoUserUpdate(query, update, function (err, res)
                         {
                             query = {"_id": results.user2._id};
-                            mongoUserUpdate(query, update, callback);
+                            this.mongoUserUpdate(query, update, callback);
                         });
                     }
                     else if (results.team1.length < 12)
@@ -127,11 +127,11 @@ var matchGenerator = function (err, docs)
                         if (log) log.log('info', {Status: "Team 1 Forfeit"});
                         query = {"_id": results.user1._id};
                         update = {$inc: {"played": 1, "loss": 1}};
-                        mongoUserUpdate(query, update, function (err, res)
+                        this.mongoUserUpdate(query, update, function (err, res)
                         {
                             query = {"_id": results.user2._id};
                             update = {$inc: {"played": 1, "win": 1, "points": 2}};
-                            mongoUserUpdate(query, update, callback);
+                            this.mongoUserUpdate(query, update, callback);
                         });
                     }
                     else if (results.team2.length < 12)
@@ -140,11 +140,11 @@ var matchGenerator = function (err, docs)
                         if (log) log.log('info', {Status: "Team 2 Forfeit"});
                         query = {"_id": results.user2._id};
                         update = {$inc: {"played": 1, "loss": 1}};
-                        mongoUserUpdate(query, update, function (err, res)
+                        this.mongoUserUpdate(query, update, function (err, res)
                         {
                             query = {"_id": results.user1._id};
                             update = {$inc: {"played": 1, "win": 1, "points": 2}};
-                            mongoUserUpdate(query, update, callback);
+                            this.mongoUserUpdate(query, update, callback);
                         });
                     }
                     console.log("Finished Match");
@@ -172,7 +172,7 @@ var matchGenerator = function (err, docs)
     }
 };
 
-function updateMatch(elt, commentary, callback)
+var updateMatch = function(elt, commentary, callback)
 {
 
     var day = today.getDate();
@@ -229,7 +229,7 @@ function updateMatch(elt, commentary, callback)
 
 }
 
-var mongoUserUpdate = function (query, update, callback)
+exports.mongoUserUpdate = function (query, update, callback)
 {
     var collection = db.collection("users");
     var onUpdate = function (err, doc)
