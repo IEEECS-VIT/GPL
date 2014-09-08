@@ -27,7 +27,7 @@ if (process.env.LOGENTRIES_TOKEN)
                                 token: process.env.LOGENTRIES_TOKEN
                             });
 }
-
+var options = { server: { socketOptions: { connectTimeoutMS: 50000 }}};
 exports.getCount = function (callback)
 {
     var onConnect = function (err, db)
@@ -343,6 +343,6 @@ exports.update = function(query,update,callback)
 
         }
     };
-    MongoClient.connect(mongoUri,onConnect);
+    MongoClient.connect(mongoUri,options,onConnect);
 };
 
