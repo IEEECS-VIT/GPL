@@ -45,7 +45,7 @@ exports.gen_schedule = function ()
                 db.close();
                 if (err)
                 {
-                    console.log("Error");
+                    console.log(err.message);
                     callback(err, null);
                 }
                 else
