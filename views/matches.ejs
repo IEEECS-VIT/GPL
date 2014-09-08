@@ -73,6 +73,9 @@
                     <div class="content active" id="panel1">
                         <div class="large-12 medium-12 small-12">
                             <h3 style="color:white;font-weight: bolder;">Commentary</h3>
+                            <%if(response["previousMatch"].commentary==null) {%>
+                                <p style="text-align: center;color: white;font-weight: bold;">Commentary Unavailable!</p>
+                            <% } else { %>
                             <ul style="text-align: left;color:white;list-style:none;">
                                 <h4 style="color: white;font-weight: bold;text-align: center;"><%= response["previousMatch"].commentary[0]%></h4>
                                 <% var t;var count=0; var e = 0; for(var i = 1;i < response["previousMatch"].commentary.length-1;i++){
@@ -125,7 +128,7 @@
                                 <% }} %>
                                 <h4 style="font-weight: bold;color: #ffffff;text-align: center;"><%= response["previousMatch"].commentary[response["previousMatch"].commentary.length-1]%></h4>
                             </ul>
-
+                            <% } %>
                         </div>
                     </div>
                     <div class="content" id="panel4">
