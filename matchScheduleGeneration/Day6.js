@@ -78,7 +78,7 @@ exports.gen_schedule = function ()
                             {
                                 "_id": match_count,
                                 "Team_1": 8 * i + team1[j],
-                                "Team_2": 8 * i + team1[j],
+                                "Team_2": 8 * i + team2[j],
                                 "TimeStamp": new Date("14 Sep 2014 00:00:00 +0530 (IST)"),
                                 "commentary": []
                             };
