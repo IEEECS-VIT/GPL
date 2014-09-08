@@ -32,10 +32,11 @@ var MongoClient = require('mongodb').MongoClient.connect(mongoUri, {
     },
     server: {
         socketOptions: {
-            connectTimeoutMS: 500
+            connectTimeoutMS: 500,
+            keepAlive: 1
         },
         auto_reconnect: true,
-        poolSize: 100
+        poolSize: 10
     },
     replSet: {},
     mongos: {}
