@@ -26,16 +26,7 @@ var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb:/
 
 var db;
 var MongoClient = require('mongodb').MongoClient.connect(mongoUri, {
-    server: {
-        socketOptions: {
-            connectTimeoutMS: 1000,
-            keepAlive: 1000
-        },
-        auto_reconnect: true
-    },
-    db: {
-        native_parser: true
-    }
+    native_parser: true, auto_reconnect: true
 }, function (err, database)
                                                          {
                                                              if (err) throw err;
