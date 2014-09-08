@@ -52,7 +52,7 @@ exports.gen_schedule = function ()
                 {
                     console.log(count);
 
-                    var arr = [], match_count = 1, j = 0;
+                    var match_count = 1, j = 0;
                     var onInsert = function (err, docs)
                     {
                         if (err)
@@ -72,14 +72,12 @@ exports.gen_schedule = function ()
 
                         for (j = 0; j < team1.length; j++)
                         {
-                            arr[8 * i + team1[j]] = match_count;
-                            arr[8 * i + team2[j]] = match_count;
                             var match =
                             {
                                 "_id": match_count,
-                                "Team_1": i,
-                                "Team_2": j,
-                                "TimeStamp": new Date("6 Sep 2014 00:00:00 +0530 (IST)"),
+                                "Team_1": 8 * i + team1[j],
+                                "Team_2": 8 * i + team2[j],
+                                "TimeStamp": new Date("10 Sep 2014 00:00:00 +0530 (IST)"),
                                 "commentary": []
                             };
                             match_count++;
