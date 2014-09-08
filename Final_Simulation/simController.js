@@ -25,13 +25,24 @@ var simulator = require(path.join(__dirname, 'simulation'));
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
 var db;
-var MongoClient = require('mongodb').MongoClient.connect(mongoUri, function (err, database)
-{
-    if (err) throw err;
-    db = database;
-    console.log("Fetch Matches for Today");
-    simulator.todaysMatches(matchGenerator);
-});
+var MongoClient = require('mongodb').MongoClient.connect(mongoUri, {
+    server: {
+        socketOptions: {
+            connectTimeoutMS: 1000,
+            keepAlive: 1000
+        },
+        auto_reconnect: true
+    },
+    db: {
+        native_parser: true
+    }
+}, function (err, database)
+                                                         {
+                                                             if (err) throw err;
+                                                             db = database;
+                                                             console.log("Fetch Matches for Today");
+                                                             simulator.todaysMatches(matchGenerator);
+                                                         });
 
 var log;
 if (process.env.LOGENTRIES_TOKEN)
