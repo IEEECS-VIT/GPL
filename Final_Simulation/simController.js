@@ -265,7 +265,6 @@ var mongoFetchUser = function (doc, callback)
     var collection = db.collection('users');
     var onFetch = function (err, document)
     {
-        db.close();
         if (err)
         {
             callback(err, null);
