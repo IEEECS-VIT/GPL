@@ -25,7 +25,7 @@ var simulator = require(path.join(__dirname, 'simulation'));
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
 var db;
-var MongoClient = require('mongodb').MongoClient(mongoUri, function (err, database)
+var MongoClient = require('mongodb').MongoClient.connect(mongoUri, function (err, database)
 {
     if (err) throw err;
     db = database;
