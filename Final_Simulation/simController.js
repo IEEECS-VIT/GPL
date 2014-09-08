@@ -214,7 +214,7 @@ function updateMatch(elt, commentary, callback)
                     break;
 
             }
-            collectionName = 'matchday1';
+
             var collection = db.collection(collectionName);
             var doc = {
                 "_id": elt._id
