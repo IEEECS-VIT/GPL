@@ -93,22 +93,21 @@ var matchGenerator = function (err, docs)
                 }
                 else
                 {
-                    var onSimulate = function (err)
-                    {
-                        if (err)
-                        {
-                            if (log) log.log('debug', {Error: err, Message: err.message});
-                        }
-                        else
-                        {
-                            if (log) log.log('info', {Status: "Simulation Complete", Docs: docs});
-                        }
-                    };
                     var query = {};
                     var update = {};
                     if (results.team1.length == 12 && results.team2.length == 12)
                     {
-                        simulator.team(elt, results.team1, results.team2, results.user1, results.user2, callback);
+                        simulator.team(elt, results.team1, results.team2, results.user1, results.user2, function (err, doc)
+                        {
+                            if (err)
+                            {
+                                if (log) log.log('debug', {Error: err, Message: err.message});
+                            }
+                            else
+                            {
+                                updateMatch({_id: doc._id}, doc, callback);
+                            }
+                        });
                     }
                     else if (results.team1.length < 12 && results.team2.length < 12)
                     {
@@ -116,10 +115,11 @@ var matchGenerator = function (err, docs)
                         if (log) log.log('info', {Status: "Both Teams Forfeit"});
                         query = {"_id": results.user1._id};
                         update = {$inc: {"played": 1, "loss ": 1}};
-                        mongoUserUpdate(query, update, onSimulate);
-                        query = {"_id": results.user2._id};
-                        mongoUserUpdate(query, update, onSimulate);
-                        callback(null, elt);
+                        mongoUserUpdate(query, update, function (err, res)
+                        {
+                            query = {"_id": results.user2._id};
+                            mongoUserUpdate(query, update, callback);
+                        });
                     }
                     else if (results.team1.length < 12)
                     {
@@ -127,11 +127,12 @@ var matchGenerator = function (err, docs)
                         if (log) log.log('info', {Status: "Team 1 Forfeit"});
                         query = {"_id": results.user1._id};
                         update = {$inc: {"played": 1, "loss": 1}};
-                        mongoUserUpdate(query, update, onSimulate);
-                        query = {"_id": results.user2._id};
-                        update = {$inc: {"played": 1, "win": 1, "points": 2}};
-                        mongoUserUpdate(query, update, onSimulate);
-                        callback(null, elt);
+                        mongoUserUpdate(query, update, function (err, res)
+                        {
+                            query = {"_id": results.user2._id};
+                            update = {$inc: {"played": 1, "win": 1, "points": 2}};
+                            mongoUserUpdate(query, update, callback);
+                        });
                     }
                     else if (results.team2.length < 12)
                     {
@@ -139,11 +140,12 @@ var matchGenerator = function (err, docs)
                         if (log) log.log('info', {Status: "Team 2 Forfeit"});
                         query = {"_id": results.user2._id};
                         update = {$inc: {"played": 1, "loss": 1}};
-                        mongoUserUpdate(query, update, onSimulate);
-                        query = {"_id": results.user1._id};
-                        update = {$inc: {"played": 1, "win": 1, "points": 2}};
-                        mongoUserUpdate(query, update, onSimulate);
-                        callback(null, elt);
+                        mongoUserUpdate(query, update, function (err, res)
+                        {
+                            query = {"_id": results.user1._id};
+                            update = {$inc: {"played": 1, "win": 1, "points": 2}};
+                            mongoUserUpdate(query, update, callback);
+                        });
                     }
                     console.log("Finished Match");
 
@@ -162,23 +164,8 @@ var matchGenerator = function (err, docs)
             }
             else
             {
-                var i;
-                for (i = 0; i < docs.length; i++)
-                {
-                    console.log(docs[i]._id);
-                    console.log(res[i]);
-                    updateMatch(docs[i], res[i], function (err, doc)
-                    {
-                        if (err)
-                        {
-                            if (log) log.log('debug', {Error: err, Message: err.message});
-                        }
-                        else
-                        {
-                            if (log) log.log('info', {Status: "Simulation Complete", Docs: doc});
-                        }
-                    });
-                }
+                db.close();
+                if (log) log.log('info', {Status: "Simulation Complete", Docs: doc});
             }
         });
     }
@@ -216,7 +203,7 @@ function updateMatch(elt, commentary, callback)
             break;
 
     }
-
+    collectionName = 'matchday1';
     var collection = db.collection(collectionName);
     var doc = {
         "_id": elt._id
