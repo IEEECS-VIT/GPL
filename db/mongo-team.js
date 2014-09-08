@@ -127,26 +127,35 @@ exports.getSquad = function (doc, callback)
             var onFetch = function (err, document)
             {
                 console.log(document);
-                if (err)
+                if(document)
                 {
-                    callback(err, null);
-                }
-                else if(document.team.length != 0)
-                {
-
-                    for (var i = 0; i < 16; i++)
+                    if (err)
                     {
-                        if (parseInt(document.team[i]) >= parseInt(304))
-                        {
-                            coach = parseInt(document.team[i]);
-                        }
+                        callback(err, null);
                     }
-                    async.map(document.squad, getPlayer, onFinish);
+                    else if(document.team.length != 0)
+                    {
+
+                        for (var i = 0; i < 16; i++)
+                        {
+                            if (parseInt(document.team[i]) >= parseInt(304))
+                            {
+                                coach = parseInt(document.team[i]);
+                            }
+                        }
+                        async.map(document.squad, getPlayer, onFinish);
+                    }
+                    else
+                    {
+                        callback(null,[]);
+                    }
+
                 }
                 else
                 {
                     callback(null,[]);
                 }
+
             };
             console.log("Team "+ doc.team_no);
             collection.findOne(doc, onFetch);
