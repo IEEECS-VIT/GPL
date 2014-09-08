@@ -29,6 +29,8 @@ var MongoClient = require('mongodb').MongoClient.connect(mongoUri, function (err
 {
     if (err) throw err;
     db = database;
+    console.log("Fetch Matches for Today");
+    simulator.todaysMatches(matchGenerator);
 });
 
 var log;
@@ -179,9 +181,6 @@ var matchGenerator = function (err, docs)
         });
     }
 };
-console.log("Fetch Matches for Today");
-simulator.todaysMatches(matchGenerator);
-
 
 function updateMatch(elt, commentary, callback)
 {
