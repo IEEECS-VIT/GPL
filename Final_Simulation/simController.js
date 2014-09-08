@@ -25,14 +25,10 @@ var simulator = require(path.join(__dirname, 'simulation'));
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
 var db;
-var dbOptions = {
-    server: {
-        auto_reconnect: true,
-        poolSize: 20,
-        socketOptions: {keepAlive: 1}
-    }
-};
-var MongoClient = require('mongodb').MongoClient.connect(mongoUri, dbOptions, function (err, database)
+var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 }, auto_reconnect: true,
+    poolSize: 20 },
+    replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } } };
+var MongoClient = require('mongodb').MongoClient.connect(mongoUri, options, function (err, database)
 {
     if (err) throw err;
     db = database;
