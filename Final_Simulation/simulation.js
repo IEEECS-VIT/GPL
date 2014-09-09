@@ -119,7 +119,7 @@ exports.todaysMatches = function (callback)
             collectionName = 'matchday1';
 
             var collection = db.collection(collectionName);
-            collection.find({"_id":1}).toArray(function (err, docs)
+            collection.find().toArray(function (err, docs)
                                         {
                                             db.close();
                                             callback(err, docs);
@@ -244,7 +244,7 @@ function start_match(elt, callback)
         //console.log(1);
         toss = 0;
     }
-    elt.commentary.push(' ' + users[toss]._id + ' wins the toss and chooses to ');
+    elt.commentary.push(' ' + users[+toss]._id + ' wins the toss and chooses to ');
     if (rand() % 2)
     {
         elt.commentary[elt.commentary.length - 1] += 'bowl ';
@@ -256,7 +256,7 @@ function start_match(elt, callback)
         elt.commentary[elt.commentary.length - 1] += 'bat ';//console.log(" wins the toss and chooses to bat first");
     }
     elt.commentary[elt.commentary.length - 1] += 'first  ';
-    if (+!toss)
+    if (+toss)
     {
         var temp = users[0];
         var temp2=users[1];
@@ -391,7 +391,7 @@ function start_match(elt, callback)
                 {
                     elt.commentary[elt.commentary.length - 1] += ' runout';
                 }//console.log(" runout");
-                elt.commentary[elt.commentary.length - 1] += ' ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ' balls' + ' ' + fours[strike[+strike_index]] + 'X4\'s ' + maximums[strike[+strike_index]] + 'X6\'s) SR: ' + score[strike[+strike_index]] * 100 / balls[strike[+strike_index]] + ' Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + ')' + ', Runrate: ' + partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index];//console.log(" ", score[strike[+strike_index]], " (", balls[strike[+strike_index]], " balls", " ", fours[strike[+strike_index]], "X4'score ", maximums[strike[+strike_index]], "X6'score) SR: ", score[strike[+strike_index]] * 100 / balls[strike[+strike_index]], " Partnership: ", partnership_runs[current_partnership_index], "(", partnership_balls[current_partnership_index], ")", ", Runrate: ", partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index]);
+                elt.commentary[elt.commentary.length - 1] += ' ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ' balls' + ' ' + fours[strike[+strike_index]] + 'X4\'s ' + maximums[strike[+strike_index]] + 'X6\'s) SR: ' + (score[strike[+strike_index]] * 100 / balls[strike[+strike_index]]).toFixed(2) + ' Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + ')' + ', Runrate: ' + (partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index]).toFixed(2);//console.log(" ", score[strike[+strike_index]], " (", balls[strike[+strike_index]], " balls", " ", fours[strike[+strike_index]], "X4'score ", maximums[strike[+strike_index]], "X6'score) SR: ", score[strike[+strike_index]] * 100 / balls[strike[+strike_index]], " Partnership: ", partnership_runs[current_partnership_index], "(", partnership_balls[current_partnership_index], ")", ", Runrate: ", partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index]);
                 ++current_partnership_index;
                 strike[+strike_index] = (strike[+strike_index] > strike[+!strike_index] ? strike[+strike_index] : strike[+!strike_index]) + 1;
                 if (batsman_performance_index <= -0 && batsman_performance_index >= -0.5 && rand() % 2)
@@ -706,7 +706,7 @@ function start_match(elt, callback)
                 {
                     elt.commentary[elt.commentary.length - 1] += ' runout';
                 }//console.log(" runout");
-                elt.commentary.push(' ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ' balls' + ' ' + fours[strike[+strike_index]] + 'X4\'s ' + maximums[strike[+strike_index]] + 'X6\'s) SR: ' + score[strike[+strike_index]] * 100 / balls[strike[+strike_index]] + ' Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + ')' + ', Runrate: ' + partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index]);//console.log(" ", score[strike[+strike_index]], " (", balls[strike[+strike_index]], " balls", " ", fours[strike[+strike_index]], "X4'score ", maximums[strike[+strike_index]], "X6'score) SR: ", score[strike[+strike_index]] * 100 / balls[strike[+strike_index]], " Partnership: ", partnership_runs[current_partnership_index], "(", partnership_balls[current_partnership_index], ")", ", Runrate: ", partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index]);
+                elt.commentary.push(' ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ' balls' + ' ' + fours[strike[+strike_index]] + 'X4\'s ' + maximums[strike[+strike_index]] + 'X6\'s) SR: ' + (score[strike[+strike_index]] * 100 / balls[strike[+strike_index]]).toFixed(2) + ' Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + ')' + ', Runrate: ' + (partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index])).toFixed(2);//console.log(" ", score[strike[+strike_index]], " (", balls[strike[+strike_index]], " balls", " ", fours[strike[+strike_index]], "X4'score ", maximums[strike[+strike_index]], "X6'score) SR: ", score[strike[+strike_index]] * 100 / balls[strike[+strike_index]], " Partnership: ", partnership_runs[current_partnership_index], "(", partnership_balls[current_partnership_index], ")", ", Runrate: ", partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index]);
                 ++current_partnership_index;
                 strike[+strike_index] = (strike[+strike_index] > strike[+!strike_index] ? strike[+strike_index] : strike[+!strike_index]) + 1;
                 if (batsman_performance_index <= -0 && batsman_performance_index >= -0.5 && rand() % 2)
@@ -967,9 +967,9 @@ function start_match(elt, callback)
         query = {"_id": users[0]._id};
         console.log("Index 1 " + query._id);
         favour = (parseInt(users[0].runs_for) + parseInt(Total[0])) / (parseInt(users[0].balls_for) + parseInt(Overs[0]));
-        console.log("Favour "+ favour);
+        console.log("Favour "+ parseFloat(favour));
         against = (parseInt(users[0].runs_against) + parseInt(Total[1])) / (parseInt(users[0].balls_against) + parseInt(Overs[1]));
-        console.log("Against "+ against);
+        console.log("Against "+ parseFloat(against));
         net_run_rate = favour - against;
         update = {$inc: {"played": 1, "tied": 1, "points": 1, "balls_for": Overs[0], "balls_against": Overs[1], "runs_for": Total[0], "runs_against": Total[1]}, $set: { "net_run_rate": net_run_rate}};
         var onUpdate = function (err, doc)
