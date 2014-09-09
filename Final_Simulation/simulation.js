@@ -256,11 +256,12 @@ function start_match(elt, callback)
         elt.commentary[elt.commentary.length - 1] += 'bat ';//console.log(" wins the toss and chooses to bat first");
     }
     elt.commentary[elt.commentary.length - 1] += 'first  ';
-    if (+toss)
+    if (+!toss)
     {
         var temp = users[0];
-        users[0] = users[1];
+        var temp2=users[1];
         users[1] = temp;
+        users[0]=temp2;
     }
     wickets[0] = wickets[1] = strike_index = previous_bowler = 0;
     for (i = 1; i < 6; ++i)
