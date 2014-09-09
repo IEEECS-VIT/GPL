@@ -114,12 +114,12 @@
                                 <% }else if(response["previousMatch"].commentary[i][0] == ' ' && response["previousMatch"].commentary[i][1] == 'L' && response["previousMatch"].commentary[i][2] == 'a'){ t = 1; %>
                                 <div style="background: rgba(50,50,255,0.2); border: 1px solid rgba(255,255,255,0.3);border-radius: 5px;margin-bottom: 2%"
                                      class="large-12 small-12 medium-12 columns">
-                                    <% count = 0; for(var t = i;t<i+2;t++){++count;%>
+                                    <% count = 0; for(var q = i;q<i+25;q++){ if((response["previousMatch"].commentary[q][1]=='.')||(response["previousMatch"].commentary[q][2]=='.')||(response["previousMatch"].commentary[q][0] == ' ' && response["previousMatch"].commentary[q][1] == 'S' && response["previousMatch"].commentary[q][2] == 'c'&& response["previousMatch"].commentary[q][3] == 'o' && response["previousMatch"].commentary[q][4] == 'r' && response["previousMatch"].commentary[q][5] == 'e'&& response["previousMatch"].commentary[q][6] == 'c')) { i--; i+=count; break;} else { ++count;%>
 
                                     <li>
-                                        <b style="color:rgba(255,255,255,1);border-radius: 360px;padding: 0.2% 1%"><%= response["previousMatch"].commentary[t] %></b>
+                                        <b style="color:rgba(255,255,255,1);border-radius: 360px;padding: 0.2% 1%"><%= response["previousMatch"].commentary[q] %></b>
                                     </li>
-                                    <% } e=1; %>
+                                    <% } } %>
                                 </div>
 
                                 <hr />
