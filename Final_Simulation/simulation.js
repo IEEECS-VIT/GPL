@@ -34,7 +34,7 @@ var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb:/
 var today = new Date();
 var dateMatchDay;
 var dot;
-var users;
+var users = [];
 var collectionName;
 var delivery_score;
 var batsman_performance_index;
@@ -119,7 +119,7 @@ exports.todaysMatches = function (callback)
             collectionName = 'matchday1';
 
             var collection = db.collection(collectionName);
-            collection.find().toArray(function (err, docs)
+            collection.find({"_id":1}).toArray(function (err, docs)
                                         {
                                             db.close();
                                             callback(err, docs);
@@ -150,7 +150,11 @@ exports.team = function (elt, team1, team2, user1, user2, callback)
     team_object[1] = new Make(team2);
     //console.log(team_object[0]);
     //console.log(team_object[1]);
-    users = [user1, user2];
+    users.push(user1);
+    users.push(user2);
+    //users = [user1, user2];
+    console.log("Test User Index " + user1._id);
+    console.log("Test User Index " + user2._id);
     start_match(elt, callback);
 };
 
@@ -258,10 +262,14 @@ function start_match(elt, callback)
     elt.commentary[elt.commentary.length - 1] += 'first  ';
     if (+toss)
     {
+        console.log("User Index " + users[0]._id);
+        console.log("User Index " + users[1]._id);
         var temp = users[0];
         var temp2=users[1];
         users[1] = temp;
         users[0]=temp2;
+        console.log("User Index " + users[0]._id);
+        console.log("User Index " + users[1]._id);
     }
     wickets[0] = wickets[1] = strike_index = previous_bowler = 0;
     for (i = 1; i < 6; ++i)
@@ -961,6 +969,8 @@ function start_match(elt, callback)
     }
     var query, favour, against, net_run_rate, update;
     console.log("Winner Index " + winner_index);
+    console.log("Winner Index " + users[0]._id);
+    console.log("Winner Index " + users[1]._id);
     if (parseInt(winner_index) == -1)
     {
 

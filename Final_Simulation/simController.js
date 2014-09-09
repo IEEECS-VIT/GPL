@@ -79,7 +79,7 @@ var matchGenerator = function (err, docs)
             };
             parallel_tasks.user1 = function (asyncCallback)
             {
-                mongoFetchUser(doc2, asyncCallback);
+                mongoFetchUser(doc1, asyncCallback);
             };
             parallel_tasks.user2 = function (asyncCallback)
             {
