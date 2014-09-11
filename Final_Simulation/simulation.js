@@ -84,7 +84,6 @@ var wickets = [0, 0];
 var Overs = [0, 0];
 var bowl = [1200, 1200, 1200]; // increase to strengthen bowling
 var bat = [1100, 1100];    // decrease to strengthen batting
-var simControl = require(path.join(__dirname,'simController'));
 
 exports.todaysMatches = function (callback)
 {
@@ -991,7 +990,7 @@ function start_match(elt, callback)
                 if (log) log.log('info', {Error: err, Doc: doc});
             }
         };
-        simControl.mongoUserUpdate(query, update, function(err,doc)
+        mongoUserUpdate(query, update, function (err, doc)
         {
             query = {"_id": users[1]._id};
             console.log("Index 2 " + query._id);
