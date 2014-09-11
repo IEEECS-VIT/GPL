@@ -131,7 +131,7 @@ exports.todaysMatches = function (callback)
     var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 }, auto_reconnect: true,
         poolSize: 20 },
         replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } } };
-    MongoClient.connect(mongoUri, options, onConnect);
+    require('mongodb').MongoClient.connect(mongoUri, options, onConnect);
 
 
 };
