@@ -21,15 +21,7 @@ var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb:/
 var path = require('path');
 var mongoUser = require(path.join(__dirname, '..', 'db', 'mongo-users'));
 var db;
-var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 }, auto_reconnect: true,
-    poolSize: 100 }};
-var MongoClient = require('mongodb').MongoClient.connect(mongoUri, options, function (err, database)
-{
-    if (err) throw err;
-    db = database;
-    console.log("Fetch Matches for Today");
-    simulator.todaysMatches(matchGenerator);
-});
+
 var com = require(path.join(__dirname, 'commentary'));
 var log;
 if (process.env.LOGENTRIES_TOKEN)
@@ -39,7 +31,6 @@ if (process.env.LOGENTRIES_TOKEN)
                                 token: process.env.LOGENTRIES_TOKEN
                             });
 }
-var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 var today = new Date();
 var dateMatchDay;
 var dot;
@@ -84,11 +75,13 @@ var wickets = [0, 0];
 var Overs = [0, 0];
 var bowl = [1200, 1200, 1200]; // increase to strengthen bowling
 var bat = [1100, 1100];    // decrease to strengthen batting
+var simControl = require(path.join(__dirname,'simController'));
 
 exports.todaysMatches = function (callback)
 {
-    var onConnect = function (err, db)
+    var onConnect = function (err, database)
     {
+        db = database;
         if (err)
         {
             throw err;
@@ -138,7 +131,7 @@ exports.todaysMatches = function (callback)
     var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 }, auto_reconnect: true,
         poolSize: 20 },
         replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } } };
-    MongoClient.connect(mongoUri, options, onConnect);
+    require('mongodb').MongoClient.connect(mongoUri, options, onConnect);
 
 
 };
@@ -977,7 +970,7 @@ function start_match(elt, callback)
         console.log("Favour "+ parseFloat(favour));
         against = (parseInt(users[0].runs_against) + parseInt(Total[1])) / (parseInt(users[0].balls_against) + parseInt(Overs[1]));
         console.log("Against "+ parseFloat(against));
-        net_run_rate = favour - against;
+        net_run_rate = (favour - against).toFixed(2);
         update = {$inc: {"played": 1, "tied": 1, "points": 1, "balls_for": Overs[0], "balls_against": Overs[1], "runs_for": Total[0], "runs_against": Total[1]}, $set: { "net_run_rate": net_run_rate}};
         var onUpdate = function (err, doc)
         {
@@ -990,7 +983,7 @@ function start_match(elt, callback)
                 if (log) log.log('info', {Error: err, Doc: doc});
             }
         };
-        mongoUserUpdate(query, update, function (err, doc)
+        mongoUserUpdate(query, update, function(err,doc)
         {
             query = {"_id": users[1]._id};
             console.log("Index 2 " + query._id);
