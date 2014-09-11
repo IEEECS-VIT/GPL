@@ -115,10 +115,10 @@ var matchGenerator = function (err, docs)
                         if (log) log.log('info', {Status: "Both Teams Forfeit"});
                         query = {"_id": results.user1._id};
                         update = {$inc: {"played": 1, "loss ": 1}};
-                        this.mongoUserUpdate(query, update, function (err, res)
+                        mongoUserUpdate(query, update, function (err, res)
                         {
                             query = {"_id": results.user2._id};
-                            this.mongoUserUpdate(query, update, callback);
+                            mongoUserUpdate(query, update, callback);
                         });
                     }
                     else if (results.team1.length < 12)
@@ -127,11 +127,11 @@ var matchGenerator = function (err, docs)
                         if (log) log.log('info', {Status: "Team 1 Forfeit"});
                         query = {"_id": results.user1._id};
                         update = {$inc: {"played": 1, "loss": 1}};
-                        this.mongoUserUpdate(query, update, function (err, res)
+                        mongoUserUpdate(query, update, function (err, res)
                         {
                             query = {"_id": results.user2._id};
                             update = {$inc: {"played": 1, "win": 1, "points": 2}};
-                            this.mongoUserUpdate(query, update, callback);
+                            mongoUserUpdate(query, update, callback);
                         });
                     }
                     else if (results.team2.length < 12)
@@ -140,11 +140,11 @@ var matchGenerator = function (err, docs)
                         if (log) log.log('info', {Status: "Team 2 Forfeit"});
                         query = {"_id": results.user2._id};
                         update = {$inc: {"played": 1, "loss": 1}};
-                        this.mongoUserUpdate(query, update, function (err, res)
+                        mongoUserUpdate(query, update, function (err, res)
                         {
                             query = {"_id": results.user1._id};
                             update = {$inc: {"played": 1, "win": 1, "points": 2}};
-                            this.mongoUserUpdate(query, update, callback);
+                            mongoUserUpdate(query, update, callback);
                         });
                     }
                     console.log("Finished Match");
@@ -227,9 +227,9 @@ var updateMatch = function(elt, commentary, callback)
     console.log('Updating ' + doc._id);
     collection.findAndModify(doc, {}, commentary, {upsert: true}, onUpdate)
 
-}
+};
 
-exports.mongoUserUpdate = function (query, update, callback)
+var mongoUserUpdate = function (query, update, callback)
 {
     var collection = db.collection("users");
     var onUpdate = function (err, doc)
