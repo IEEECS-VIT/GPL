@@ -21,15 +21,7 @@ var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb:/
 var path = require('path');
 var mongoUser = require(path.join(__dirname, '..', 'db', 'mongo-users'));
 var db;
-var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 }, auto_reconnect: true,
-    poolSize: 100 }};
-var MongoClient = require('mongodb').MongoClient.connect(mongoUri, options, function (err, database)
-{
-    if (err) throw err;
-    db = database;
-    console.log("Fetch Matches for Today");
-    simulator.todaysMatches(matchGenerator);
-});
+
 var com = require(path.join(__dirname, 'commentary'));
 var log;
 if (process.env.LOGENTRIES_TOKEN)
@@ -39,7 +31,6 @@ if (process.env.LOGENTRIES_TOKEN)
                                 token: process.env.LOGENTRIES_TOKEN
                             });
 }
-var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 var today = new Date();
 var dateMatchDay;
 var dot;
@@ -88,8 +79,9 @@ var simControl = require(path.join(__dirname,'simController'));
 
 exports.todaysMatches = function (callback)
 {
-    var onConnect = function (err, db)
+    var onConnect = function (err, database)
     {
+        db = database;
         if (err)
         {
             throw err;
