@@ -970,7 +970,7 @@ function start_match(elt, callback)
         console.log("Favour "+ parseFloat(favour));
         against = (parseInt(users[0].runs_against) + parseInt(Total[1])) / (parseInt(users[0].balls_against) + parseInt(Overs[1]));
         console.log("Against "+ parseFloat(against));
-        net_run_rate = favour - against;
+        net_run_rate = (favour - against).toFixed(2);
         update = {$inc: {"played": 1, "tied": 1, "points": 1, "balls_for": Overs[0], "balls_against": Overs[1], "runs_for": Total[0], "runs_against": Total[1]}, $set: { "net_run_rate": net_run_rate}};
         var onUpdate = function (err, doc)
         {
@@ -983,7 +983,7 @@ function start_match(elt, callback)
                 if (log) log.log('info', {Error: err, Doc: doc});
             }
         };
-        simControl.mongoUserUpdate(query, update, function(err,doc)
+        mongoUserUpdate(query, update, function(err,doc)
         {
             query = {"_id": users[1]._id};
             console.log("Index 2 " + query._id);
