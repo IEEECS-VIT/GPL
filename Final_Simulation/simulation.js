@@ -252,13 +252,13 @@ function start_match(elt, callback)
         elt.commentary[elt.commentary.length - 1] += 'bat ';//console.log(" wins the toss and chooses to bat first");
     }
     elt.commentary[elt.commentary.length - 1] += 'first  ';
-   /* if (+toss)
+    if (+toss)
     {
         var temp = users[0];
         var temp2 = users[1];
         users[1] = temp;
         users[0] = temp2;
-    }*/
+    }
     wickets[0] = wickets[1] = strike_index = previous_bowler = 0;
     for (i = 1; i < 6; ++i)
     {
@@ -995,7 +995,7 @@ function start_match(elt, callback)
         });
 
     }
-    else
+    /*else
     {
         var onUpdate = function (err, doc)
         {
@@ -1026,8 +1026,8 @@ function start_match(elt, callback)
         net_run_rate = (favour - against).toFixed(2);
         update = {$inc: {"played": 1, "loss": 1, "balls_for": Overs[+!winner_index], "balls_against": Overs[+winner_index], "runs_for": Total[+!winner_index], "runs_against": Total[+winner_index]}, $set: { "net_run_rate": net_run_rate}};
         mongoUserUpdate(query, update, onUpdate);
-    }
-    /*else if (parseInt(winner_index) == 0)
+    }*/
+    else if (parseInt(winner_index) == 0)
     {
         query = {"_id": users[0]._id};
         console.log("Index 1 " + query._id);
@@ -1095,7 +1095,7 @@ function start_match(elt, callback)
             mongoUserUpdate(query, update, onUpdate);
         });
     }
-    callback(null, elt);*/
+    callback(null, elt);
 }
 
 var mongoUserUpdate = function (query, update, callback)
