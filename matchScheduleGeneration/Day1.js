@@ -34,7 +34,7 @@ exports.gen_schedule = function ()
     {
         if (err)
         {
-            //callback(err);
+            callback(err);
         }
         else
         {
