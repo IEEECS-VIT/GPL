@@ -35,9 +35,9 @@ var day6 = require("./Day6.js");
 var day7 = require("./Day7.js");
 
 
-//day1.gen_schedule();
-//day2.gen_schedule();
-//day3.gen_schedule();
+day1.gen_schedule();
+day2.gen_schedule();
+day3.gen_schedule();
 day4.gen_schedule();
 day5.gen_schedule();
 day6.gen_schedule();
