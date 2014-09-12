@@ -252,13 +252,13 @@ function start_match(elt, callback)
         elt.commentary[elt.commentary.length - 1] += 'bat ';//console.log(" wins the toss and chooses to bat first");
     }
     elt.commentary[elt.commentary.length - 1] += 'first  ';
-    if (+toss)
+   /* if (+toss)
     {
         var temp = users[0];
-        var temp2=users[1];
+        var temp2 = users[1];
         users[1] = temp;
-        users[0]=temp2;
-    }
+        users[0] = temp2;
+    }*/
     wickets[0] = wickets[1] = strike_index = previous_bowler = 0;
     for (i = 1; i < 6; ++i)
     {
@@ -928,12 +928,12 @@ function start_match(elt, callback)
             if (wickets[0] > wickets[1])
             {
                 elt.commentary[elt.commentary.length - 1] += users[+toss]._id;
-                winner_index = +!toss;
+                winner_index = +toss;
             }//console.log(+!toss + 1);
             else
             {
                 elt.commentary[elt.commentary.length - 1] += users[+!toss]._id;
-                winner_index = +toss;
+                winner_index = +!toss;
             }//console.log(+toss + 1);
             elt.commentary[elt.commentary.length - 1] += ' wins! (fewer wickets lost)  ';//console.log(" wins! (fewer wickets lost)  ");
         }
@@ -1010,21 +1010,21 @@ function start_match(elt, callback)
         };
         query = {"_id": users[+winner_index]._id};
         console.log("Index 1 " + query._id);
-        favour = (parseInt(users[+winner_index].runs_for) + parseInt(Total[0])) / (parseInt(users[+winner_index].balls_for) + parseInt(Overs[0]));
+        favour = (parseInt(users[+winner_index].runs_for) + parseInt(Total[+winner_index])) / (parseInt(users[+winner_index].balls_for) + parseInt(Overs[+winner_index]));
         console.log("Favour "+ favour);
-        against = (parseInt(users[+winner_index].runs_against) + parseInt(Total[1])) / (parseInt(users[+winner_index].balls_against) + parseInt(Overs[1]));
+        against = (parseInt(users[+winner_index].runs_against) + parseInt(Total[+!winner_index])) / (parseInt(users[+winner_index].balls_against) + parseInt(Overs[+!winner_index]));
         console.log("Against "+ against);
         net_run_rate = (favour - against).toFixed(2);
-        update = {$inc: {"played": 1, "wins": 1, "points": 2, "balls_for": Overs[0], "balls_against": Overs[1], "runs_for": Total[0], "runs_against": Total[1]}, $set: { "net_run_rate": net_run_rate}};
+        update = {$inc: {"played": 1, "wins": 1, "points": 2, "balls_for": Overs[+winner_index], "balls_against": Overs[+!winner_index], "runs_for": Total[+winner_index], "runs_against": Total[+!winner_index]}, $set: { "net_run_rate": net_run_rate}};
         mongoUserUpdate(query, update, onUpdate);
         query = {"_id": users[+!winner_index]._id};
         console.log("Index 2 " + query._id);
-        favour = (parseInt(users[+!winner_index].runs_for) + parseInt(Total[1])) / (parseInt(users[+!winner_index].balls_for) + parseInt(Overs[1]));
+        favour = (parseInt(users[+!winner_index].runs_for) + parseInt(Total[+!winner_index])) / (parseInt(users[+!winner_index].balls_for) + parseInt(Overs[+!winner_index]));
         console.log("Favour "+ favour);
-        against = (parseInt(users[+!winner_index].runs_against) + parseInt(Total[0])) / (parseInt(users[+!winner_index].balls_against) + parseInt(Overs[0]));
+        against = (parseInt(users[+!winner_index].runs_against) + parseInt(Total[+winner_index])) / (parseInt(users[+!winner_index].balls_against) + parseInt(Overs[+winner_index]));
         console.log("Against "+ against);
         net_run_rate = (favour - against).toFixed(2);
-        update = {$inc: {"played": 1, "loss": 1, "balls_for": Overs[1], "balls_against": Overs[0], "runs_for": Total[1], "runs_against": Total[0]}, $set: { "net_run_rate": net_run_rate}};
+        update = {$inc: {"played": 1, "loss": 1, "balls_for": Overs[+!winner_index], "balls_against": Overs[+winner_index], "runs_for": Total[+!winner_index], "runs_against": Total[+winner_index]}, $set: { "net_run_rate": net_run_rate}};
         mongoUserUpdate(query, update, onUpdate);
     }
     /*else if (parseInt(winner_index) == 0)
