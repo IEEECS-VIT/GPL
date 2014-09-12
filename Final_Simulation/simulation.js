@@ -1094,8 +1094,8 @@ function start_match(elt, callback)
             update = {$inc: {"played": 1, "loss": 1, "points": 0, "balls_for": Overs[0], "balls_against": Overs[1], "runs_for": Total[1], "runs_against": Total[0]}, $set: { "net_run_rate": net_run_rate}};
             mongoUserUpdate(query, update, onUpdate);
         });
-    }*/
-    callback(null, elt);
+    }
+    callback(null, elt);*/
 }
 
 var mongoUserUpdate = function (query, update, callback)
