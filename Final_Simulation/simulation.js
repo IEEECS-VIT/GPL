@@ -50,7 +50,8 @@ var winner_index;
 var commentary = [];
 var dismissed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var five_wicket_haul = [0, 0, 0, 0, 0, 0];
-var free_hit = 0, previous_partnership_index = -1;
+var free_hit = 0;
+var previous_partnership_index = -1;
 var current_partnership_index = 0;
 var partnership_balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var partnership_runs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -252,13 +253,13 @@ function start_match(elt, callback)
         elt.commentary[elt.commentary.length - 1] += 'bat ';//console.log(" wins the toss and chooses to bat first");
     }
     elt.commentary[elt.commentary.length - 1] += 'first  ';
-    if (+toss)
+    /*if (+toss)
     {
         var temp = users[0];
         var temp2 = users[1];
         users[1] = temp;
         users[0] = temp2;
-    }
+    }*/
     wickets[0] = wickets[1] = strike_index = previous_bowler = 0;
     for (i = 1; i < 6; ++i)
     {
@@ -1056,7 +1057,7 @@ function start_match(elt, callback)
             console.log("Favour "+ favour);
             against = (parseInt(users[+!winner_index].runs_against) + parseInt(Total[+winner_index])) / (parseInt(users[+!winner_index].balls_against) + parseInt(Overs[+winner_index]));
             console.log("Against "+ against);
-            net_run_rate = favour - against;
+            net_run_rate = (favour - against).toFixed(2);
             update = {$inc: {"played": 1, "loss": 1, "balls_for": Overs[+!winner_index], "balls_against": Overs[+winner_index], "runs_for": Total[+!winner_index], "runs_against": Total[+winner_index]}, $set: { "net_run_rate": net_run_rate}};
             mongoUserUpdate(query, update, onUpdate);
         });
