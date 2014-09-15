@@ -981,4 +981,5 @@ function start_match(elt, callback)
         winner_index:winner_index
     }
     callback(null, elt);
+    console.log('Match done');
 }
