@@ -30,6 +30,7 @@ if (process.env.LOGENTRIES_TOKEN)
                                 token: process.env.LOGENTRIES_TOKEN
                             });
 }
+var today = new Date();
 exports.todaysMatches = function (callback)
 {
     var onConnect = function (err, database)
@@ -197,7 +198,6 @@ var mongoUserUpdate = function (query, update, callback)
 
 function start_match(elt, callback)
 {
-    var today = new Date();
     var dateMatchDay;
     var users = [];
     var collectionName;
