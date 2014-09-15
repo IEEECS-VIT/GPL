@@ -1,5 +1,5 @@
 /**
- * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 10/8/14.
+ * Created by Kunal Nagpal on 15-09-2014.
  */
 /*
  *  GraVITas Premier League
@@ -67,20 +67,20 @@ exports.gen_schedule = function ()
 
                     for (i = 1; i <= count; i = i + 2)
                     {
-                        j = i + 1;
+                        if(team[i].ko)
                         arr[i] = match_count;
-                        arr[j] = match_count;
+                        arr[i+1] = match_count;
                         var match =
                         {
                             "_id": match_count,
                             "Team_1": i,
-                            "Team_2": j,
+                            "Team_2": i+1,
                             "TimeStamp": new Date("9 Sep 2014 00:00:00 +0530 (IST)"),
                             "commentary": []
                         };
                         match_count++;
 
-                        SchedulePush.insert(match, "matchday1", onInsert)
+                        SchedulePush.insert(match, "knockout", onInsert)
                     }
 
 
@@ -91,7 +91,7 @@ exports.gen_schedule = function ()
                     }
 
 
-                    callback(null,true);
+                    //callback(null,true);
                 }
             };
             collection.count(onFetch);

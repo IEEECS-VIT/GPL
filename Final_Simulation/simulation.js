@@ -30,52 +30,6 @@ if (process.env.LOGENTRIES_TOKEN)
                                 token: process.env.LOGENTRIES_TOKEN
                             });
 }
-var today = new Date();
-var dateMatchDay;
-var dot;
-var users = [];
-var collectionName;
-var delivery_score;
-var batsman_performance_index;
-var current_bowler = -1;
-var bowler_performance_index;
-var previous_bowler = -1;
-var toss;
-var i;
-var j;
-var strike_index = 0;
-var continuous_maximums;
-var fall_of_wicket;
-var winner_index;
-var commentary = [];
-var dismissed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var five_wicket_haul = [0, 0, 0, 0, 0, 0];
-var free_hit = 0;
-var previous_partnership_index = -1;
-var current_partnership_index = 0;
-var partnership_balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var partnership_runs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var continuous_wickets = [0, 0, 0, 0, 0, 0];
-var milestone = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var previous_dismissal = -1;
-var extras = 0;
-var maidens = [0, 0, 0, 0, 0, 0];
-var previous_batsman = -1;
-var score = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var fours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var maximums = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var strike = [0, 1];
-var deliveries = [0, 0, 0, 0, 0, 0];
-var runs_conceded = [0, 0, 0, 0, 0, 0];
-var wickets_taken = [0, 0, 0, 0, 0, 0];
-var Total = [0, 0];
-var previous_over = 0;
-var wickets = [0, 0];
-var Overs = [0, 0];
-var bowl = [1200, 1200, 1200]; // increase to strengthen bowling
-var bat = [1100, 1100];    // decrease to strengthen batting
-
 exports.todaysMatches = function (callback)
 {
     var onConnect = function (err, database)
@@ -154,7 +108,6 @@ exports.team = function (elt, team1, team2, user1, user2, callback)
 function Make(team)
 {
     var i;
-    Overs[0] = Overs[1] = 0;
     this.bat_rating = [];
     this.bat_average = [];
     this.bat_strike_rate = [];
@@ -244,6 +197,50 @@ var mongoUserUpdate = function (query, update, callback)
 
 function start_match(elt, callback)
 {
+    var today = new Date();
+    var dateMatchDay;
+    var users = [];
+    var collectionName;
+    var delivery_score;
+    var batsman_performance_index;
+    var current_bowler = -1;
+    var bowler_performance_index;
+    var previous_bowler = -1;
+    var toss;
+    var i;
+    var j;
+    var strike_index = 0;
+    var continuous_maximums;
+    var fall_of_wicket;
+    var winner_index;
+    var commentary = [];
+    var dismissed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var five_wicket_haul = [0, 0, 0, 0, 0, 0];
+    var free_hit = 0;
+    var previous_partnership_index = -1;
+    var current_partnership_index = 0;
+    var partnership_balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var partnership_runs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var continuous_wickets = [0, 0, 0, 0, 0, 0];
+    var milestone = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var previous_dismissal = -1;
+    var extras = 0;
+    var maidens = [0, 0, 0, 0, 0, 0];
+    var previous_batsman = -1;
+    var score = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var fours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var maximums = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var strike = [0, 1];
+    var deliveries = [0, 0, 0, 0, 0, 0];
+    var runs_conceded = [0, 0, 0, 0, 0, 0];
+    var wickets_taken = [0, 0, 0, 0, 0, 0];
+    var Total = [0, 0];
+    var previous_over = 0;
+    var wickets = [0, 0];
+    var Overs = [0, 0];
+    var bowl = [1200, 1200, 1200]; // increase to strengthen bowling
+    var bat = [1100, 1100];    // decrease to strengthen batting
     var dot = 0;
     Total[0] = Total[1] = 0;
     Overs[0] = Overs[1] = 120;
@@ -974,61 +971,14 @@ function start_match(elt, callback)
         }
         elt.commentary[elt.commentary.length - 1] += ' ';//console.log(" ");
     }
-    var query, favour, against, net_run_rate, update;
     console.log("Winner Index " + winner_index);
     console.log("Winner " + users[+winner_index]._id);
     console.log("Loser " + users[+!winner_index]._id);
-    var onUpdate = function (err, doc)
-    {
-        if (err)
-        {
-            if (log) log.log('debug', {Error: err, Message: err.message});
-        }
-        else
-        {
-            if (log) log.log('info', {Error: err, Doc: doc});
-        }
-    };
-    if (parseInt(winner_index) == -1)
-    {
-        query = {"_id": users[0]._id};
-        console.log("Index 1 " + query._id);
-        favour = (parseInt(users[0].runs_for) + parseInt(Total[0])) / (parseInt(users[0].balls_for) + parseInt(Overs[0]));
-        console.log("Favour " + parseFloat(favour));
-        against = (parseInt(users[0].runs_against) + parseInt(Total[1])) / (parseInt(users[0].balls_against) + parseInt(Overs[1]));
-        console.log("Against " + parseFloat(against));
-        net_run_rate = (favour - against).toFixed(2);
-        update = {$inc: {"played": 1, "tied": 1, "points": 1, "balls_for": Overs[0], "balls_against": Overs[1], "runs_for": Total[0], "runs_against": Total[1]}, $set: { "net_run_rate": net_run_rate}};
-        query = {"_id": users[1]._id};
-        console.log("Index 2 " + query._id);
-        favour = (parseInt(users[1].runs_for) + parseInt(Total[1])) / (parseInt(users[1].balls_for) + parseInt(Overs[1]));
-        console.log("Favour " + favour);
-        against = (parseInt(users[1].runs_against) + parseInt(Total[0])) / (parseInt(users[1].balls_against) + parseInt(Overs[0]));
-        console.log("Against " + against);
-        net_run_rate = (favour - against).toFixed(2);
-        update = {$inc: {"played": 1, "tied": 1, "points": 1, "balls_for": Overs[1], "balls_against": Overs[0], "runs_for": Total[1], "runs_against": Total[0]}, $set: { "net_run_rate": net_run_rate}};
-        mongoUserUpdate(query, update, onUpdate);
-    }
-    else
-    {
-        query = {"_id": users[+winner_index]._id};
-        console.log("Index 1 " + query._id);
-        favour = (parseInt(users[+winner_index].runs_for) + parseInt(Total[+winner_index])) / (parseInt(users[+winner_index].balls_for) + parseInt(Overs[+winner_index]));
-        console.log("Favour " + favour);
-        against = (parseInt(users[+winner_index].runs_against) + parseInt(Total[+!winner_index])) / (parseInt(users[+winner_index].balls_against) + parseInt(Overs[+!winner_index]));
-        console.log("Against " + against);
-        net_run_rate = (favour - against).toFixed(2);
-        update = {$inc: {"played": 1, "win": 1, "points": 2, "balls_for": Overs[+winner_index], "balls_against": Overs[+!winner_index], "runs_for": Total[+winner_index], "runs_against": Total[+!winner_index]}, $set: { "net_run_rate": net_run_rate}};
-        mongoUserUpdate(query, update, onUpdate);
-        query = {"_id": users[+!winner_index]._id};
-        console.log("Index 2 " + query._id);
-        favour = (parseInt(users[+!winner_index].runs_for) + parseInt(Total[+!winner_index])) / (parseInt(users[+!winner_index].balls_for) + parseInt(Overs[+!winner_index]));
-        console.log("Favour " + favour);
-        against = (parseInt(users[+!winner_index].runs_against) + parseInt(Total[+winner_index])) / (parseInt(users[+!winner_index].balls_against) + parseInt(Overs[+winner_index]));
-        console.log("Against " + against);
-        net_run_rate = (favour - against).toFixed(2);
-        update = {$inc: {"played": 1, "loss": 1, "balls_for": Overs[+!winner_index], "balls_against": Overs[+winner_index], "runs_for": Total[+!winner_index], "runs_against": Total[+winner_index]}, $set: { "net_run_rate": net_run_rate}};
-        mongoUserUpdate(query, update, onUpdate);
+    exports.match_end={
+        users:users,
+        Total:Total,
+        Overs:Overs,
+        winner_index:winner_index
     }
     callback(null, elt);
 }

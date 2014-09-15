@@ -92,9 +92,23 @@ var matchGenerator = function (err, docs)
                     console.log(err.message);
                 }
                 else
-                {
+                {   var verdict=require('./simulation.js');
                     var query = {};
                     var update = {};
+                    var favour;
+                    var against;
+                    var net_run_rate;
+                    var onUpdate = function (err, doc)
+                    {
+                        if (err)
+                        {
+                            if (log) log.log('debug', {Error: err, Message: err.message});
+                        }
+                        else
+                        {
+                            if (log) log.log('info', {Error: err, Doc: doc});
+                        }
+                    };
                     if (results.team1.length == 12 && results.team2.length == 12)
                     {
                         simulator.team(elt, results.team1, results.team2, results.user1, results.user2, function (err, doc)
@@ -108,6 +122,47 @@ var matchGenerator = function (err, docs)
                                 updateMatch({_id: doc._id}, doc, callback);
                             }
                         });
+                        if (parseInt(simulator.winner_index) == -1)
+                        {
+                            query = {"_id": verdict.match_end.users[0]._id};
+                            console.log("Index 1 " + query._id);
+                            favour = (parseInt(verdict.match_end.users[0].runs_for) + parseInt(verdict.match_end.Total[0])) / (parseInt(verdict.match_end.users[0].balls_for) + parseInt(verdict.match_end.Overs[0]));
+                            console.log("Favour " + parseFloat(favour));
+                            against = (parseInt(verdict.match_end.users[0].runs_against) + parseInt(verdict.match_end.Total[1])) / (parseInt(verdict.match_end.users[0].balls_against) + parseInt(verdict.match_end.Overs[1]));
+                            console.log("Against " + parseFloat(against));
+                            net_run_rate = (favour - against).toFixed(2);
+                            update = {$inc: {"played": 1, "tied": 1, "points": 1, "balls_for": verdict.match_end.Overs[0], "balls_against": verdict.match_end.Overs[1], "runs_for": verdict.match_end.Total[0], "runs_against": verdict.match_end.Total[1]}, $set: { "net_run_rate": net_run_rate}};
+                            query = {"_id": verdict.match_end.users[1]._id};
+                            console.log("Index 2 " + query._id);
+                            favour = (parseInt(verdict.match_end.users[1].runs_for) + parseInt(verdict.match_end.Total[1])) / (parseInt(verdict.match_end.users[1].balls_for) + parseInt(verdict.match_end.Overs[1]));
+                            console.log("Favour " + favour);
+                            against = (parseInt(verdict.match_end.users[1].runs_against) + parseInt(verdict.match_end.Total[0])) / (parseInt(verdict.match_end.users[1].balls_against) + parseInt(verdict.match_end.Overs[0]));
+                            console.log("Against " + against);
+                            net_run_rate = (favour - against).toFixed(2);
+                            update = {$inc: {"played": 1, "tied": 1, "points": 1, "balls_for": verdict.match_end.Overs[1], "balls_against": verdict.match_end.Overs[0], "runs_for": verdict.match_end.Total[1], "runs_against": verdict.match_end.Total[0]}, $set: { "net_run_rate": net_run_rate}};
+                            mongoUserUpdate(query, update, onUpdate);
+                        }
+                        else
+                        {
+                            query = {"_id": verdict.match_end.users[+simulator.winner_index]._id};
+                            console.log("Index 1 " + query._id);
+                            favour = (parseInt(verdict.match_end.users[+simulator.winner_index].runs_for) + parseInt(verdict.match_end.Total[+simulator.winner_index])) / (parseInt(verdict.match_end.users[+simulator.winner_index].balls_for) + parseInt(verdict.match_end.Overs[+simulator.winner_index]));
+                            console.log("Favour " + favour);
+                            against = (parseInt(verdict.match_end.users[+simulator.winner_index].runs_against) + parseInt(verdict.match_end.Total[+!simulator.winner_index])) / (parseInt(verdict.match_end.users[+simulator.winner_index].balls_against) + parseInt(verdict.match_end.Overs[+!simulator.winner_index]));
+                            console.log("Against " + against);
+                            net_run_rate = (favour - against).toFixed(2);
+                            update = {$inc: {"played": 1, "win": 1, "points": 2, "balls_for": verdict.match_end.Overs[+simulator.winner_index], "balls_against": verdict.match_end.Overs[+!simulator.winner_index], "runs_for": verdict.match_end.Total[+simulator.winner_index], "runs_against": verdict.match_end.Total[+!simulator.winner_index]}, $set: { "net_run_rate": net_run_rate}};
+                            mongoUserUpdate(query, update, onUpdate);
+                            query = {"_id": verdict.match_end.users[+!simulator.winner_index]._id};
+                            console.log("Index 2 " + query._id);
+                            favour = (parseInt(verdict.match_end.users[+!simulator.winner_index].runs_for) + parseInt(verdict.match_end.Total[+!simulator.winner_index])) / (parseInt(verdict.match_end.users[+!simulator.winner_index].balls_for) + parseInt(verdict.match_end.Overs[+!simulator.winner_index]));
+                            console.log("Favour " + favour);
+                            against = (parseInt(verdict.match_end.users[+!simulator.winner_index].runs_against) + parseInt(verdict.match_end.Total[+simulator.winner_index])) / (parseInt(verdict.match_end.users[+!simulator.winner_index].balls_against) + parseInt(verdict.match_end.Overs[+simulator.winner_index]));
+                            console.log("Against " + against);
+                            net_run_rate = (favour - against).toFixed(2);
+                            update = {$inc: {"played": 1, "loss": 1, "balls_for": verdict.match_end.Overs[+!simulator.winner_index], "balls_against": verdict.match_end.Overs[+simulator.winner_index], "runs_for": verdict.match_end.Total[+!simulator.winner_index], "runs_against": verdict.match_end.Total[+simulator.winner_index]}, $set: { "net_run_rate": net_run_rate}};
+                            mongoUserUpdate(query, update, onUpdate);
+                        }
                     }
                     else if (results.team1.length < 12 && results.team2.length < 12)
                     {
