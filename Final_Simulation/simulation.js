@@ -977,7 +977,7 @@ function start_match(elt, callback)
         Total:Total,
         Overs:Overs,
         winner_index:winner_index
-    }
+    };
     callback(null, elt);
     console.log('Match done');
 }
