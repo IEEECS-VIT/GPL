@@ -42,7 +42,6 @@ exports.todaysMatches = function (callback)
         }
         else
         {
-
             var day = today.getDate();
             switch (day)
             {
@@ -96,7 +95,7 @@ function rand()
 }
 
 team_object = [];
-
+var users = [];
 exports.team = function (elt, team1, team2, user1, user2, callback)
 {
     team_object[0] = new Make(team1);
@@ -199,7 +198,6 @@ var mongoUserUpdate = function (query, update, callback)
 function start_match(elt, callback)
 {
     var dateMatchDay;
-    var users = [];
     var collectionName;
     var delivery_score;
     var batsman_performance_index;
@@ -974,7 +972,7 @@ function start_match(elt, callback)
     console.log("Winner Index " + winner_index);
     console.log("Winner " + users[+winner_index]._id);
     console.log("Loser " + users[+!winner_index]._id);
-    exports.match_end={
+    elt.match_end={
         users:users,
         Total:Total,
         Overs:Overs,
