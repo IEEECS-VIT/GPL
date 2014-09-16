@@ -92,7 +92,8 @@ var matchGenerator = function (err, docs)
                     console.log(err.message);
                 }
                 else
-                {   var onUpdate = function (err, doc)
+                {   var query, update;
+                    var onUpdate = function (err, doc)
                     {
                         if (err)
                         {
@@ -114,7 +115,7 @@ var matchGenerator = function (err, docs)
                             else
                             {
                                updateMatch({_id: doc._id}, {commentary: doc.commentary}, function(err,doc) {
-                                var update, query, favour, against, net_run_rate;
+                                var favour, against, net_run_rate;
                                    if (parseInt(elt.match_end.winner_index) == -1)
                                    {
                                        query = {"_id": elt.match_end.users[0]._id};

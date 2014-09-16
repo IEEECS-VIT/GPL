@@ -25,7 +25,11 @@ var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb:/
 
 var SchedulePush = require("./SchedulePush.js");
 
-
+var callback=function(err,arg)
+{
+    if(err) console.log(err.message);
+    else console.log(arg);
+}
 exports.gen_schedule = function ()
 {
 
