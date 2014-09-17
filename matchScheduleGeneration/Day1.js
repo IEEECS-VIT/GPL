@@ -29,7 +29,7 @@ var callback=function(err,arg)
 {
     if(err) console.log(err.message);
     else console.log(arg);
-}
+};
 exports.gen_schedule = function ()
 {
 
@@ -103,6 +103,5 @@ exports.gen_schedule = function ()
 
     };
     MongoClient.connect(mongoUri, onConnect);
-
 
 };
