@@ -116,6 +116,7 @@ function Make(team)
         this.bat_rating[i] += parseFloat(this.bat_rating[i] / 10) - parseFloat(average_bat_rating / 10) + parseInt(this.coach_rating);
     }
 }
+    var com = require('./commentary.js');
     var team_object = [];
     team_object[0] = new Make(data.team1);
     team_object[1] = new Make(data.team2);
