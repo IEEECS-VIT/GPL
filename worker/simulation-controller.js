@@ -74,7 +74,7 @@ exports.initSimulation = function (day, masterCallback)
             {
                 async.map(doc.squad, getEachRating, onGetRating);
             };
-            database.collection('users').findOne(query, getRating);
+            database.collection('users').findOne(query, getRating(err,doc));
         };
 
         var updateData = function (err, newData)
