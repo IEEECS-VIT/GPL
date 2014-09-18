@@ -77,6 +77,7 @@ exports.initSimulation = function (day, masterCallback)
                   if(doc.team[i]>=304)
                   {
                       doc.squad.push(doc.team[i]);
+                      break;
                   }
                 }
                 async.map(doc.squad, getEachRating, onGetRating);
