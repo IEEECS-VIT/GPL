@@ -25,14 +25,14 @@ exports.simulate = function (data, callback)
         ++data.team[0].loss;
         ++data.team[1].loss;
     }
-    else if (data.team[0].ratings.length < 12)
+    else if (data.team[0].length < 12)
     {
         console.log(data.team[0]._id + " forfeits the match");
         ++data.team[1].win;
         data.team[1].points += 2;
         ++data.team[0].loss;
     }
-    else if (data.team[1].ratings.length < 12)
+    else if (data.team[1].length < 12)
     {
         console.log(data.team[1]._id + " forfeits the match");
         ++data.team[0].win;
