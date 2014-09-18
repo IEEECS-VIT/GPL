@@ -55,7 +55,7 @@ exports.initSimulation = function (day, masterCallback)
             },
             team2: function (asyncCallback)
             {
-                getTeamDetails({team_no: parseInt(doc.Team_1)}, asyncCallback);
+                getTeamDetails({team_no: parseInt(doc.Team_2)}, asyncCallback);
             }
         };
 
