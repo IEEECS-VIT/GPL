@@ -71,7 +71,14 @@ exports.initSimulation = function (day, masterCallback)
                 asyncCallback(err, doc);
             };
             var getRating = function (err, doc)
-            {
+            {   var i;
+                for(i in doc.team)
+                {
+                  if(doc.team[i]>=304)
+                  {
+                      doc.squad.push(doc.team[i]);
+                  }
+                }
                 async.map(doc.squad, getEachRating, onGetRating);
             };
             database.collection('users').findOne(query, getRating);

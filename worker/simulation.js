@@ -55,6 +55,10 @@ else
             this.bowl_average = [];
             this.bowl_strike_rate = [];
             this.coach_rating = parseInt(team[11]['Rating (15)']);
+            if(this.coach_rating.toString()=='NaN')
+            {
+                this.coach_rating = -15;
+            }
             this.economy = [];
             this.bowl_name = [];
             this.bat_name = [];
@@ -72,7 +76,7 @@ else
                         this.bat_rating[batsman_count] = parseInt(team[i]['Rating (900)']);
                         this.bat_name[batsman_count] = team[i]['Name'];
                         average_bat_rating = average_bat_rating + parseInt(team[i]['Rating (900)']);
-                        batsman_count++;
+                        ++batsman_count;
                         break;
                     case 'bowl':
                         this.bowl_average[bowler_count] = parseFloat(team[i]['Avg']);
@@ -84,8 +88,8 @@ else
                         this.economy[bowler_count] = parseFloat(team[i]['Economy']);
                         this.bowl_name[bowler_count] = this.bat_name[batsman_count] = team[i]['Name'];
                         average_bowl_rating = average_bowl_rating + parseInt(team[i]['Rating (900)']);
-                        bowler_count++;
-                        batsman_count++;
+                        ++bowler_count;
+                        ++batsman_count;
                         break;
                     case 'all':
                         this.bowl_average[bowler_count] = parseFloat(team[i]['Avg']);
@@ -99,8 +103,8 @@ else
                         this.bat_name[batsman_count] = team[i]['Name'];
                         average_bat_rating += parseInt(team[i]['Bat']);
                         average_bowl_rating += parseInt(team[i]['Bowl']);
-                        batsman_count++;
-                        bowler_count++;
+                        ++batsman_count;
+                        ++bowler_count;
                         break;
                 }
 
@@ -892,7 +896,7 @@ else
     ++data.team[+!winner_index].played;
     for(i=0 ; i<2 ; ++i)
     {
-        for (j=0; j<data.team[i].squad.length ; ++j)
+        for (j in data.team[i].squad)
         {
             data.team[i].squad[j]=data.team[i].squad[j]._id;
         }
