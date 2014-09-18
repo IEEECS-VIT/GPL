@@ -61,7 +61,6 @@ exports.initSimulation = function (day, masterCallback)
 
         var getTeamDetails = function (query, asyncCallback)
         {
-            var collection = database.collection('users');
             var getEachRating = function (elt, subCallback)
             {
                 database.collection('players').findOne({_id: elt}, subCallback);
@@ -75,12 +74,36 @@ exports.initSimulation = function (day, masterCallback)
             {
                 async.map(doc.squad, getEachRating, onGetRating);
             };
-            collection.findOne(query, getRating);
+            database.collection('users').findOne(query, getRating);
         };
 
         var updateData = function (err, newData)
         {
-            // callback()
+            var updateUser = function (newDoc, asyncCallback)
+            {
+                database.collection('users').update(newDoc, newDoc, asyncCallback);
+            };
+
+            var updateMatch = function (newDoc, asyncCallback)
+            {
+                database.collection('players').update(newDoc, newDoc, asyncCallback);
+            };
+
+            var parallelTasks2 = [
+                function (asyncCallback)
+                {
+                    updateUser(newData.team1, asyncCallback);
+                },
+                function (asyncCallback)
+                {
+                    updateUser(newData.team2, asyncCallback);
+                },
+                function (asyncCallback)
+                {
+                    updateMatch(newData.match, asyncCallback);
+                }
+            ];
+            async.parallel(parallelTasks2, callback)
         };
 
         var onTeamDetails = function (err, results)
@@ -90,10 +113,7 @@ exports.initSimulation = function (day, masterCallback)
                 team2: results.team2,
                 match: doc
             };
-            // simulator.simulate(data, updateData);
-            if (log) log.log('info', data);
-            console.log(data);
-            callback(err, data);
+            simulator.simulate(data, updateData);
         };
 
         async.parallel(parallelTasks, onTeamDetails);
