@@ -902,12 +902,12 @@ exports.simulate = function (data, callback)
         ++data.team[+!winner_index].played;
     }
 
-    for (i = 0; i < 2; ++i)
-    {
-        for (j in data.team[i].squad)
-        {
-            data.team[i].squad[j] = data.team[i].squad[j]._id;
-        }
-    }
-    callback(null, data);
+    delete data.team[0].ratings;
+    delete data.team[1].ratings;
+    var newData = {
+        team1: data.team[0],
+        team2: data.team[1],
+        match: data.match
+    };
+    callback(null, newData);
 };
