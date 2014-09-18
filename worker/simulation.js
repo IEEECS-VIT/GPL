@@ -15,7 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-exports.simulate= function (data, callback)
+exports.simulate = function (data, callback)
 {
     console.log(data.team[0].name + ' vs ' + data.team[1].name);
     if (data.team[0].squad.length < 12 && data.team[1].squad.length < 12)
@@ -33,12 +33,12 @@ exports.simulate= function (data, callback)
     }
     else if (data.team[1].squad.length < 12)
     {
-        console.log(data.team[1]._id  + " forfeits the match");
+        console.log(data.team[1]._id + " forfeits the match");
         ++data.team[0].win;
         data.team[0].points += 2;
         ++data.team[1].loss;
     }
-else
+    else
     {
         function rand()
         {
@@ -55,7 +55,7 @@ else
             this.bowl_average = [];
             this.bowl_strike_rate = [];
             this.coach_rating = parseInt(team[11]['Rating (15)']);
-            if(this.coach_rating.toString()=='NaN')
+            if (this.coach_rating.toString() == 'NaN')
             {
                 this.coach_rating = -15;
             }
@@ -850,11 +850,11 @@ else
 
                 if (wickets[0] > wickets[1])
                 {
-                   winner_index = +toss;
+                    winner_index = +toss;
                 }
                 else
                 {
-                   winner_index = +!toss;
+                    winner_index = +!toss;
                 }
                 data.match.commentary[data.match.commentary.length - 1] += data.team[+winner_index]._id + ' wins! (fewer wickets lost)  ';
             }
@@ -889,19 +889,17 @@ else
         data.team[+!winner_index].balls_against += Overs[+winner_index];
         data.team[+winner_index].runs_against += Total[+!winner_index];
         data.team[+!winner_index].runs_against += Total[+winner_index];
-        data.team[+winner_index].net_run_rate = ((data.team[+winner_index].runs_for)/(data.team[+winner_index].balls_for) - (data.team[+winner_index].runs_against)/(data.team[+winner_index].balls_against))*6;
-        data.team[+!winner_index].net_run_rate = ((data.team[+!winner_index].runs_for)/(data.team[+!winner_index].balls_for) - (data.team[+!winner_index].runs_against)/(data.team[+!winner_index].balls_against))*6;
+        data.team[+winner_index].net_run_rate = ((data.team[+winner_index].runs_for) / (data.team[+winner_index].balls_for) - (data.team[+winner_index].runs_against) / (data.team[+winner_index].balls_against)) * 6;
+        data.team[+!winner_index].net_run_rate = ((data.team[+!winner_index].runs_for) / (data.team[+!winner_index].balls_for) - (data.team[+!winner_index].runs_against) / (data.team[+!winner_index].balls_against)) * 6;
     }
-    console.log(data.team[+winner_index]);
-    console.log(data.team[+!winner_index]);
     ++data.team[+winner_index].played;
     ++data.team[+!winner_index].played;
-    for(i=0 ; i<2 ; ++i)
+    for (i = 0; i < 2; ++i)
     {
         for (j in data.team[i].squad)
         {
-            data.team[i].squad[j]=data.team[i].squad[j]._id;
+            data.team[i].squad[j] = data.team[i].squad[j]._id;
         }
     }
-      callback(null, data);
+    callback(null, data);
 };
