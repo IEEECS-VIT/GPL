@@ -17,7 +17,7 @@
  */
 exports.simulate= function (data, callback)
 {
-    console.log(data.team[0]._id + ' vs ' + data.team[1]._id);
+    console.log(data.team[0].name + ' vs ' + data.team[1].name);
     if (data.team[0].squad.length < 12 && data.team[1].squad.length < 12)
     {
         console.log("Both teams forfeit");
