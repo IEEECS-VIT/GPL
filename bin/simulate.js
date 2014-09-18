@@ -16,3 +16,19 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var path = require('path');
+
+var simulationControl = require(path.join(__dirname, '..', 'worker', 'simulation-controller'));
+
+if (process.argv.length !== 3)
+{
+    console.log('Please Enter the Match Day as argument');
+}
+else
+{
+    var day = parseInt(process.argv[2]);
+    simulationControl.initSimulation(day, function ()
+    {
+        console.log('Simulation of Matches for Day ' + day + ' is complete');
+    });
+}

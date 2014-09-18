@@ -44,39 +44,97 @@ var databaseOptions = {
 };
 var database;
 
-exports.initSimulation = function (masterCallback)
+exports.initSimulation = function (day, masterCallback)
 {
+    var forEachMatch = function (doc, callback)
+    {
+        var parallelTasks = {
+            team1: function (asyncCallback)
+            {
+                getTeamDetails({team_no: parseInt(doc.Team_1)}, asyncCallback);
+            },
+            team2: function (asyncCallback)
+            {
+                getTeamDetails({team_no: parseInt(doc.Team_1)}, asyncCallback);
+            }
+        };
+
+        var getTeamDetails = function (query, asyncCallback)
+        {
+            var collection = database.collection('users');
+            var getEachRating = function (elt, subCallback)
+            {
+                database.collection('players').findOne({_id: elt}, subCallback);
+            };
+            var onGetRating = function (err, results)
+            {
+                doc.squad = results;
+                asyncCallback(err, doc);
+            };
+            var getRating = function (err, doc)
+            {
+                async.map(doc.squad, getEachRating, onGetRating);
+            };
+            collection.findOne(query, getRating);
+        };
+
+        var updateData = function (err, newData)
+        {
+            // callback()
+        };
+
+        var onTeamDetails = function (err, results)
+        {
+            var data = {
+                team1: results.team1,
+                team2: results.team2,
+                match: doc
+            };
+            // simulator.simulate(data, updateData);
+            if (log) log.log('info', data);
+            console.log(data);
+            callback(err, data);
+        };
+
+        async.parallel(parallelTasks, onTeamDetails);
+    };
+
+    var onFinish = function (err, results)
+    {
+        database.close();
+        masterCallback(err, results);
+    };
+
     var getAllMatches = function (err, callback)
     {
         var collectionName;
-        var day = today.getDate();
         switch (day)
         {
-            case 0:
-                collectionName = 'matchday4';
-                break;
             case 1:
-                collectionName = 'matchday5';
-                break;
-            case 2:
-                collectionName = 'matchday6';
-                break;
-            case 3:
-                collectionName = 'matchday7';
-                break;
-            case 4:
                 collectionName = 'matchday1';
                 break;
-            case 5:
+            case 2:
                 collectionName = 'matchday2';
                 break;
-            case 6:
+            case 3:
                 collectionName = 'matchday3';
                 break;
-            default :
+            case 4:
+                collectionName = 'matchday4';
+                break;
+            case 5:
+                collectionName = 'matchday5';
+                break;
+            case 6:
+                collectionName = 'matchday6';
+                break;
+            case 7:
+                collectionName = 'matchday7';
+                break;
+            default:
+                throw 'Invalid Day';
                 break;
         }
-        collectionName = 'matchday1';
 
         var collection = database.collection(collectionName);
         collection.find().toArray(callback)
@@ -94,48 +152,6 @@ exports.initSimulation = function (masterCallback)
         {
             async.map(docs, forEachMatch, onFinish);
         }
-    };
-
-    var forEachMatch = function (doc, callback)
-    {
-        var parallelTasks = {
-            team1: function (asyncCallback)
-            {
-                getTeamDetails({team_no: parseInt(doc.Team_1)}, asyncCallback);
-            },
-            team2: function (asyncCallback)
-            {
-                getTeamDetails({team_no: parseInt(doc.Team_1)}, asyncCallback);
-            }
-        };
-
-        var getTeamDetails = function (query, asyncCallback)
-        {
-
-        };
-
-        var updateData = function (err, newData)
-        {
-            // callback()
-        };
-
-        var onTeamDetails = function (err, results)
-        {
-            var data = {
-                team1: results.team1,
-                team2: results.team2,
-                match: doc
-            };
-            simulator.simulate(data, updateData);
-        };
-
-        async.parallel(parallelTasks, onTeamDetails);
-    };
-
-    var onFinish = function (err, results)
-    {
-        database.close();
-        masterCallback(err, results);
     };
 
     var onConnect = function (err, db)
