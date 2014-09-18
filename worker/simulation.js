@@ -15,6 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 exports.simulate = function (data, callback)
 {
     console.log(data.team[0]._id + ' vs ' + data.team[1]._id);
@@ -23,6 +24,8 @@ exports.simulate = function (data, callback)
         console.log("Both teams forfeit");
         ++data.team[0].loss;
         ++data.team[1].loss;
+        ++data.team[0].played;
+        ++data.team[1].played;
     }
     else if (data.team[0].squad.length < 12)
     {
@@ -30,6 +33,8 @@ exports.simulate = function (data, callback)
         ++data.team[1].win;
         data.team[1].points += 2;
         ++data.team[0].loss;
+        ++data.team[0].played;
+        ++data.team[1].played;
     }
     else if (data.team[1].squad.length < 12)
     {
@@ -37,6 +42,8 @@ exports.simulate = function (data, callback)
         ++data.team[0].win;
         data.team[0].points += 2;
         ++data.team[1].loss;
+        ++data.team[0].played;
+        ++data.team[1].played;
     }
     else
     {
@@ -891,9 +898,10 @@ exports.simulate = function (data, callback)
         data.team[+!winner_index].runs_against += Total[+winner_index];
         data.team[+winner_index].net_run_rate = ((data.team[+winner_index].runs_for) / (data.team[+winner_index].balls_for) - (data.team[+winner_index].runs_against) / (data.team[+winner_index].balls_against)) * 6;
         data.team[+!winner_index].net_run_rate = ((data.team[+!winner_index].runs_for) / (data.team[+!winner_index].balls_for) - (data.team[+!winner_index].runs_against) / (data.team[+!winner_index].balls_against)) * 6;
+        ++data.team[+winner_index].played;
+        ++data.team[+!winner_index].played;
     }
-    ++data.team[+winner_index].played;
-    ++data.team[+!winner_index].played;
+
     for (i = 0; i < 2; ++i)
     {
         for (j in data.team[i].squad)

@@ -134,10 +134,7 @@ exports.initSimulation = function (day, masterCallback)
                 ],
                 match: doc
             };
-            if (!results.team1 || !results.team2 || !results.match)
-            {
-                console.log(data);
-            }
+
             simulator.simulate(data, updateData);
         };
 
