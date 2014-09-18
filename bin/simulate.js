@@ -23,6 +23,7 @@ var simulationControl = require(path.join(__dirname, '..', 'worker', 'simulation
 if (process.argv.length !== 3)
 {
     console.log('Please Enter the Match Day as argument');
+    process.exit(1);
 }
 else
 {
@@ -30,5 +31,6 @@ else
     simulationControl.initSimulation(day, function ()
     {
         console.log('Simulation of Matches for Day ' + day + ' is complete');
+        process.exit(0);
     });
 }

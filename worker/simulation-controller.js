@@ -102,7 +102,16 @@ exports.initSimulation = function (day, masterCallback)
     var onFinish = function (err, results)
     {
         database.close();
-        masterCallback(err, results);
+        if (err)
+        {
+            console.log(err.message);
+            if (log) log.log('debug', {Error: err.message});
+            throw err;
+        }
+        else
+        {
+            masterCallback(err, results);
+        }
     };
 
     var getAllMatches = function (err, callback)
