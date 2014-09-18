@@ -892,6 +892,8 @@ else
         data.team[+winner_index].net_run_rate = ((data.team[+winner_index].runs_for)/(data.team[+winner_index].balls_for) - (data.team[+winner_index].runs_against)/(data.team[+winner_index].balls_against))*6;
         data.team[+!winner_index].net_run_rate = ((data.team[+!winner_index].runs_for)/(data.team[+!winner_index].balls_for) - (data.team[+!winner_index].runs_against)/(data.team[+!winner_index].balls_against))*6;
     }
+    console.log(data.team[+winner_index]);
+    console.log(data.team[+!winner_index]);
     ++data.team[+winner_index].played;
     ++data.team[+!winner_index].played;
     for(i=0 ; i<2 ; ++i)
