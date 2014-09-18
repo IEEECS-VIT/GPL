@@ -51,11 +51,11 @@ exports.initSimulation = function (day, masterCallback)
         var parallelTasks = {
             team1: function (asyncCallback)
             {
-                getTeamDetails({team_no: parseInt(doc.Team_1)}, asyncCallback);
+                getTeamDetails({team_no: doc.Team_1}, asyncCallback);
             },
             team2: function (asyncCallback)
             {
-                getTeamDetails({team_no: parseInt(doc.Team_2)}, asyncCallback);
+                getTeamDetails({team_no: doc.Team_2}, asyncCallback);
             }
         };
 
@@ -72,6 +72,7 @@ exports.initSimulation = function (day, masterCallback)
             };
             var getRating = function (err, doc)
             {
+                if (!doc) console.log(query);
                 if (doc.team.length < 16 || doc.squad < 11)
                 {
                     asyncCallback(err, doc);
