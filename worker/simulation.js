@@ -19,7 +19,7 @@
 exports.simulate = function (data, callback)
 {
     console.log(data.team[0]._id + ' vs ' + data.team[1]._id);
-    if (data.team[0].squad.length < 12 && data.team[1].squad.length < 12)
+    if (data.team[0].ratings.length < 12 && data.team[1].ratings.length < 12)
     {
         console.log("Both teams forfeit");
         ++data.team[0].loss;
@@ -27,7 +27,7 @@ exports.simulate = function (data, callback)
         ++data.team[0].played;
         ++data.team[1].played;
     }
-    else if (data.team[0].squad.length < 12)
+    else if (data.team[0].ratings.length < 12)
     {
         console.log(data.team[0]._id + " forfeits the match");
         ++data.team[1].win;
@@ -36,7 +36,7 @@ exports.simulate = function (data, callback)
         ++data.team[0].played;
         ++data.team[1].played;
     }
-    else if (data.team[1].squad.length < 12)
+    else if (data.team[1].ratings.length < 12)
     {
         console.log(data.team[1]._id + " forfeits the match");
         ++data.team[0].win;
@@ -131,8 +131,8 @@ exports.simulate = function (data, callback)
 
         var com = require('./commentary.js');
         var team_object = [];
-        team_object[0] = new Make(data.team[0].squad);
-        team_object[1] = new Make(data.team[1].squad);
+        team_object[0] = new Make(data.team[0].ratings);
+        team_object[1] = new Make(data.team[1].ratings);
         var delivery_score;
         var batsman_performance_index;
         var current_bowler;
