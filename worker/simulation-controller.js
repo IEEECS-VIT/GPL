@@ -67,20 +67,27 @@ exports.initSimulation = function (day, masterCallback)
             };
             var onGetRating = function (err, results)
             {
-                doc.squad = results;
+                doc.ratings = results;
                 asyncCallback(err, doc);
             };
             var getRating = function (err, doc)
-            {   var i;
-                for(i in doc.team)
+            {
+                if (doc.team.length < 16 || doc.squad < 11)
                 {
-                  if(doc.team[i]>=304)
-                  {
-                      doc.squad.push(doc.team[i]);
-                      break;
-                  }
+                    asyncCallback(err, doc);
                 }
-                async.map(doc.squad, getEachRating, onGetRating);
+                else
+                {
+                    var addCoach = function (elt, i, arr)
+                    {
+                        if (elt >= 304)
+                        {
+                            doc.squad.push(elt);
+                        }
+                    };
+                    doc.team.forEach(addCoach);
+                    async.map(doc.squad, getEachRating, onGetRating);
+                }
             };
             database.collection('users').findOne(query, getRating);
         };
@@ -117,7 +124,10 @@ exports.initSimulation = function (day, masterCallback)
         var onTeamDetails = function (err, results)
         {
             var data = {
-                team: [results.team1, results.team2],
+                team: [
+                    results.team1,
+                    results.team2
+                ],
                 match: doc
             };
             simulator.simulate(data, updateData);
