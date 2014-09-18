@@ -109,7 +109,7 @@ exports.initSimulation = function (day, masterCallback)
         var onTeamDetails = function (err, results)
         {
             var data = {
-                team: [results.team1,results.team2],
+                team: [results.team1, results.team2],
                 match: doc
             };
             simulator.simulate(data, updateData);
