@@ -15,9 +15,9 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-//console.log(doc.+' vs '+doc.);
 exports.simulate= function (data, callback)
 {
+    console.log(data.team[0]._id + ' vs ' + data.team[1]._id);
     if (data.team[0].squad.length < 12 && data.team[1].squad.length < 12)
     {
         console.log("Both teams forfeit");

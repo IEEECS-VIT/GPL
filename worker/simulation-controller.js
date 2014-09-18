@@ -86,7 +86,7 @@ exports.initSimulation = function (day, masterCallback)
 
             var updateMatch = function (newDoc, asyncCallback)
             {
-                database.collection('players').update(newDoc, newDoc, asyncCallback);
+                database.collection('matchday'+day).update(newDoc, newDoc, asyncCallback);
             };
 
             var parallelTasks2 = [
