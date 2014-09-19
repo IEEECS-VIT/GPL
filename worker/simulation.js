@@ -25,7 +25,7 @@ exports.simulate = function (data, callback)
     console.log(data.team[0]._id + ' vs ' + data.team[1]._id);
     if (data.team[0].ratings.length < 12 && data.team[1].ratings.length < 12)
     {
-        console.log('Both ' + data.team[0] + ' and ' + data.team[1] + ' forfeit');
+        console.log('Both teams forfeit');
         ++data.team[0].loss;
         ++data.team[1].loss;
     }
