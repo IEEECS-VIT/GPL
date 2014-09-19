@@ -46,36 +46,38 @@ var database;
 
 exports.initSimulation = function (day, masterCallback)
 {
-    var forEachMatch = function (doc, callback)
+    var forEachMatch = function (matchDoc, callback)
     {
         var parallelTasks = {
             team1: function (asyncCallback)
             {
-                getTeamDetails({team_no: doc.Team_1}, asyncCallback);
+                getTeamDetails({team_no: matchDoc.Team_1}, asyncCallback);
             },
             team2: function (asyncCallback)
             {
-                getTeamDetails({team_no: doc.Team_2}, asyncCallback);
+                getTeamDetails({team_no: matchDoc.Team_2}, asyncCallback);
             }
         };
 
         var getTeamDetails = function (query, asyncCallback)
         {
-            var getEachRating = function (elt, subCallback)
+            var getRating = function (err, userDoc)
             {
-                database.collection('players').findOne({_id: elt}, subCallback);
-            };
-            var onGetRating = function (err, results)
-            {
-                doc.ratings = results;
-                asyncCallback(err, doc);
-            };
-            var getRating = function (err, doc)
-            {
-                if (doc.squad.length < 11)
+                var getEachRating = function (elt, subCallback)
                 {
-                    doc.ratings = [];
-                    asyncCallback(err, doc);
+                    database.collection('players').findOne({_id: elt}, subCallback);
+                };
+
+                var onGetRating = function (err, results)
+                {
+                    userDoc.ratings = results;
+                    asyncCallback(err, userDoc);
+                };
+
+                if (userDoc.squad.length < 11)
+                {
+                    userDoc.ratings = [];
+                    asyncCallback(err, userDoc);
                 }
                 else
                 {
@@ -83,11 +85,11 @@ exports.initSimulation = function (day, masterCallback)
                     {
                         if (elt >= 304)
                         {
-                            doc.squad.push(elt);
+                            userDoc.squad.push(elt);
                         }
                     };
-                    doc.team.forEach(addCoach);
-                    async.map(doc.squad, getEachRating, onGetRating);
+                    userDoc.team.forEach(addCoach);
+                    async.map(userDoc.squad, getEachRating, onGetRating);
                 }
             };
             database.collection('users').findOne(query, getRating);
@@ -129,7 +131,7 @@ exports.initSimulation = function (day, masterCallback)
                     results.team1,
                     results.team2
                 ],
-                match: doc
+                match: matchDoc
             };
 
             simulator.simulate(data, updateData);
