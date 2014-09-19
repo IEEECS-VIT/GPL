@@ -133,7 +133,7 @@ exports.initSimulation = function (day, masterCallback)
                 ],
                 match: matchDoc
             };
-            console.log(data.team.team1._id + ' vs ' + data.team.team2._id);
+            console.log(data.team[0]._id + ' vs ' + data.team[1]._id);
             simulator.simulate(data, updateData);
         };
 
