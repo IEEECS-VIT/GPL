@@ -72,12 +72,9 @@ exports.initSimulation = function (day, masterCallback)
             };
             var getRating = function (err, doc)
             {
-                if (!doc)
+                if (doc.squad.length < 11)
                 {
-                    console.log(query);
-                }
-                else if (doc.team.length < 16 || doc.squad < 11)
-                {
+                    doc.ratings = [];
                     asyncCallback(err, doc);
                 }
                 else

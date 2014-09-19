@@ -16,25 +16,29 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var path = require('path');
+
+var com = require(path.join(__dirname, 'commentary'));
+
 exports.simulate = function (data, callback)
 {
     console.log(data.team[0]._id + ' vs ' + data.team[1]._id);
-    if (data.team[0].length < 12 && data.team[1].length < 12)
+    if (data.team[0].ratings.length < 12 && data.team[1].ratings.length < 12)
     {
-        console.log("Both teams forfeit");
+        console.log('Both ' + data.team[0] + ' and ' + data.team[1] + ' forfeit');
         ++data.team[0].loss;
         ++data.team[1].loss;
     }
-    else if (data.team[0].length < 12)
+    else if (data.team[0].ratings.length < 12)
     {
-        console.log(data.team[0]._id + " forfeits the match");
+        console.log(data.team[0]._id + ' forfeits the match');
         ++data.team[1].win;
         data.team[1].points += 2;
         ++data.team[0].loss;
     }
-    else if (data.team[1].length < 12)
+    else if (data.team[1].ratings.length < 12)
     {
-        console.log(data.team[1]._id + " forfeits the match");
+        console.log(data.team[1]._id + ' forfeits the match');
         ++data.team[0].win;
         data.team[0].points += 2;
         ++data.team[1].loss;
@@ -123,7 +127,6 @@ exports.simulate = function (data, callback)
             }
         }
 
-        var com = require('./commentary.js');
         var team_object = [];
         team_object[0] = new Make(data.team[0].ratings);
         team_object[1] = new Make(data.team[1].ratings);
@@ -737,7 +740,7 @@ exports.simulate = function (data, callback)
             data.match.commentary.push(' Last Over: ');
             if (previous_over)
             {
-                data.match.commentary[data.match.commentary.length - 1] += previous_over + " run(s)";
+                data.match.commentary.push(previous_over + ' run(s)');
             }
             else
             {
