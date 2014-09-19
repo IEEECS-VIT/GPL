@@ -141,7 +141,7 @@ exports.simulate = function (data, callback)
         var strike_index;
         var continuous_maximums;
         var fall_of_wicket;
-        var winner_index;
+        var winner_index=-1;
         var dismissed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         var five_wicket_haul = [0, 0, 0, 0, 0, 0];
         var free_hit = 0;
