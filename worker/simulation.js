@@ -879,22 +879,25 @@ exports.simulate = function (data, callback)
             }
             data.match.commentary[data.match.commentary.length - 1] += ' ';
         }
-        console.log("Winner Index " + winner_index);
-        console.log("Winner " + data.team[+winner_index]._id);
-        console.log("Loser " + data.team[+!winner_index]._id);
-        ++data.team[+!winner_index].loss;
-        ++data.team[+winner_index].win;
-        data.team[+winner_index].points += 2;
-        data.team[+winner_index].balls_for += Overs[+winner_index];
-        data.team[+!winner_index].balls_for += Overs[+!winner_index];
-        data.team[+winner_index].runs_for += Total[+winner_index];
-        data.team[+!winner_index].runs_for += Total[+!winner_index];
-        data.team[+winner_index].balls_against += Overs[+!winner_index];
-        data.team[+!winner_index].balls_against += Overs[+winner_index];
-        data.team[+winner_index].runs_against += Total[+!winner_index];
-        data.team[+!winner_index].runs_against += Total[+winner_index];
-        data.team[+winner_index].net_run_rate = ((data.team[+winner_index].runs_for) / (data.team[+winner_index].balls_for) - (data.team[+winner_index].runs_against) / (data.team[+winner_index].balls_against)) * 6;
-        data.team[+!winner_index].net_run_rate = ((data.team[+!winner_index].runs_for) / (data.team[+!winner_index].balls_for) - (data.team[+!winner_index].runs_against) / (data.team[+!winner_index].balls_against)) * 6;
+        if(parseInt(winner_index)!=-1)
+            {
+                console.log("Winner Index " + winner_index);
+                console.log("Winner " + data.team[+winner_index]._id);
+                console.log("Loser " + data.team[+!winner_index]._id);
+                ++data.team[+!winner_index].loss;
+                ++data.team[+winner_index].win;
+                data.team[+winner_index].points += 2;
+            }
+            data.team[+winner_index].balls_for += Overs[+winner_index];
+            data.team[+!winner_index].balls_for += Overs[+!winner_index];
+            data.team[+winner_index].runs_for += Total[+winner_index];
+            data.team[+!winner_index].runs_for += Total[+!winner_index];
+            data.team[+winner_index].balls_against += Overs[+!winner_index];
+            data.team[+!winner_index].balls_against += Overs[+winner_index];
+            data.team[+winner_index].runs_against += Total[+!winner_index];
+            data.team[+!winner_index].runs_against += Total[+winner_index];
+            data.team[+winner_index].net_run_rate = ((data.team[+winner_index].runs_for) / (data.team[+winner_index].balls_for) - (data.team[+winner_index].runs_against) / (data.team[+winner_index].balls_against)) * 6;
+            data.team[+!winner_index].net_run_rate = ((data.team[+!winner_index].runs_for) / (data.team[+!winner_index].balls_for) - (data.team[+!winner_index].runs_against) / (data.team[+!winner_index].balls_against)) * 6;
 
     }
     ++data.team[0].played;
