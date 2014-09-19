@@ -22,29 +22,29 @@ var com = require(path.join(__dirname, 'commentary'));
 
 exports.simulate = function (data, callback)
 {
-    console.log(data.team[0]._id + ' vs ' + data.team[1]._id);
     if (data.team[0].ratings.length < 12 && data.team[1].ratings.length < 12)
     {
-        console.log('Both teams forfeit');
+        console.log(data.team[0]._id + 'and ' + data.team[1]._id + 'forfeit the match');
         ++data.team[0].loss;
         ++data.team[1].loss;
     }
     else if (data.team[0].ratings.length < 12)
     {
-        console.log(data.team[0]._id + ' forfeits the match');
+        console.log(data.team[0]._id + ' forfeits the match, ' + data.team[1]._id + ' wins');
         ++data.team[1].win;
         data.team[1].points += 2;
         ++data.team[0].loss;
     }
     else if (data.team[1].ratings.length < 12)
     {
-        console.log(data.team[1]._id + ' forfeits the match');
+        console.log(data.team[1]._id + ' forfeits the match, ' + data.team[0]._id + ' wins');
         ++data.team[0].win;
         data.team[0].points += 2;
         ++data.team[1].loss;
     }
     else
     {
+        console.log(data.team[0]._id + ' vs ' + data.team[1]._id + ' is now being simulated');
         function rand()
         {
             return parseInt(Math.random() * 1000000000000000);
@@ -141,7 +141,7 @@ exports.simulate = function (data, callback)
         var strike_index;
         var continuous_maximums;
         var fall_of_wicket;
-        var winner_index=-1;
+        var winner_index = -1;
         var dismissed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         var five_wicket_haul = [0, 0, 0, 0, 0, 0];
         var free_hit = 0;
@@ -879,7 +879,7 @@ exports.simulate = function (data, callback)
             }
             data.match.commentary[data.match.commentary.length - 1] += ' ';
         }
-        if(parseInt(winner_index)!=-1)
+        if (parseInt(winner_index) != -1)
         {
             console.log("Winner Index " + winner_index);
             console.log("Winner " + data.team[+winner_index]._id);
@@ -903,7 +903,7 @@ exports.simulate = function (data, callback)
     ++data.team[1].played;
     delete data.team[0].ratings;
     delete data.team[1].ratings;
-    console.log(data);
+    // console.log(data);
     var newData = {
         team1: data.team[0],
         team2: data.team[1],

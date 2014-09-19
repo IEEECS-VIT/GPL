@@ -97,14 +97,14 @@ exports.initSimulation = function (day, masterCallback)
 
         var updateData = function (err, newData)
         {
-            var updateUser = function (newDoc, asyncCallback)
+            var updateUser = function (newUserDoc, asyncCallback)
             {
-                database.collection('users').update(newDoc, newDoc, asyncCallback);
+                database.collection('users').update({_id: newUserDoc._id}, newUserDoc, asyncCallback);
             };
 
-            var updateMatch = function (newDoc, asyncCallback)
+            var updateMatch = function (newMatchDoc, asyncCallback)
             {
-                database.collection('matchday' + day).update(newDoc, newDoc, asyncCallback);
+                database.collection('matchday' + day).update({_id: newMatchDoc._id}, newMatchDoc, asyncCallback);
             };
 
             var parallelTasks2 = [
@@ -121,6 +121,7 @@ exports.initSimulation = function (day, masterCallback)
                     updateMatch(newData.match, asyncCallback);
                 }
             ];
+            console.log(newData.team1._id + ' and ' + newData.team2._id + ' are now being updated');
             async.parallel(parallelTasks2, callback)
         };
 
@@ -133,7 +134,7 @@ exports.initSimulation = function (day, masterCallback)
                 ],
                 match: matchDoc
             };
-            console.log(data.team[0]._id + ' vs ' + data.team[1]._id);
+
             simulator.simulate(data, updateData);
         };
 
