@@ -121,7 +121,7 @@ exports.initSimulation = function (day, masterCallback)
                     updateMatch(newData.match, asyncCallback);
                 }
             ];
-            console.log(newData.team1._id + ' and ' + newData.team2._id + ' are now being updated');
+            console.log('Teams ' + newData.team1._id + ' and ' + newData.team2._id + ', and Match ' + newData.match._id + ' are now being updated');
             async.parallel(parallelTasks2, callback)
         };
 
