@@ -24,7 +24,7 @@ exports.simulate = function (data, callback)
 {
     if (data.team[0].ratings.length < 12 && data.team[1].ratings.length < 12)
     {
-        console.log(data.team[0]._id + 'and ' + data.team[1]._id + 'forfeit the match');
+        console.log(data.team[0]._id + 'and ' + data.team[1]._id + ' forfeit the match');
         ++data.team[0].loss;
         ++data.team[1].loss;
     }
@@ -740,7 +740,7 @@ exports.simulate = function (data, callback)
             data.match.commentary.push(' Last Over: ');
             if (previous_over)
             {
-                data.match.commentary.push(previous_over + ' run(s)');
+                data.match.commentary[data.match.commentary.length - 1] += previous_over + ' run(s)';
             }
             else
             {
@@ -881,9 +881,7 @@ exports.simulate = function (data, callback)
         }
         if (parseInt(winner_index) != -1)
         {
-            console.log("Winner Index " + winner_index);
-            console.log("Winner " + data.team[+winner_index]._id);
-            console.log("Loser " + data.team[+!winner_index]._id);
+            console.log(data.team[+winner_index]._id + ' wins against ' + data.team[+!winner_index]._id);
             ++data.team[+!winner_index].loss;
             ++data.team[+winner_index].win;
             data.team[+winner_index].points += 2;
