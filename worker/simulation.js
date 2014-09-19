@@ -903,7 +903,7 @@ exports.simulate = function (data, callback)
     ++data.team[1].played;
     delete data.team[0].ratings;
     delete data.team[1].ratings;
-    console.log(data.match);
+    console.log(data);
     var newData = {
         team1: data.team[0],
         team2: data.team[1],
