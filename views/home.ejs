@@ -60,7 +60,7 @@
             <h4 style="color: white;text-align: left;margin:1%"></h4>
             <table cellspacing="10px"
                    style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
-                <% for(var i = 0;i < results.team.length;i++) { %>
+                <% var f=false; for(var i = 0;i < results.team.length;i++) { %>
                 <% if(results.team[i]._id > 303) { %>
                 <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;"
                     colspan="3">
@@ -72,7 +72,19 @@
 
                     <p style="text-align: center;">Coach</p>
                 </td>
-                <% } } %>
+                <% f=true; } } if(!f) { %>
+                <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;"
+                    colspan="3">
+                    <img src="/images/coaches/323.jpg"
+                         style="width: 40%; margin: 0"/>
+
+                    <p style="text-align: center;">
+                        Ray Jennings
+                    </p>
+
+                    <p style="text-align: center;">Coach</p>
+                </td>
+                <% } %>
                 <% k = 4;i = 0; var z = 1;for(i = 0;i < results.team.length;i++) { %>
                 <% if(k < 3){ %>
 
