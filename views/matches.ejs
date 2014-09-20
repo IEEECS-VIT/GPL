@@ -73,7 +73,7 @@
                     <div class="content active" id="panel1">
                         <div class="large-12 medium-12 small-12">
                             <h3 style="color:white;font-weight: bolder;">Commentary</h3>
-                            <% if(response["previousMatch"].commentary) { %>
+                            <% if(response["previousMatch"].commentary.length === 0) { %>
                             <p style="text-align: center;color: white;font-weight: bold;">Commentary Unavailable! </p>
                             <% } else { %>
                             <ul style="text-align: left;color:white;list-style:none;">

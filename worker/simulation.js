@@ -906,10 +906,10 @@ exports.simulate = function (data, callback)
     }
     ++data.team[0].played;
     ++data.team[1].played;
+    data.team[0].squad.pop();
+    data.team[1].squad.pop();
     delete data.team[0].ratings;
     delete data.team[1].ratings;
-    data.team[0].ratings.pop();
-    data.team[1].ratings.pop();
     // console.log(data);
     var newData = {
         team1: data.team[0],
