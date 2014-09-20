@@ -143,7 +143,7 @@
                                style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
 
                             <% var f = false; for(var i = 0;i < response["nextMatch"].length;i++) { %>
-                            <% if((response["nextMatch"][i]._id > 303)&&(response["nextMatch"][i])) { %>
+                            <% if((response["nextMatch"][i]._id > 303)&&(response["nextMatch"][i]).toString=="NaN") { %>
                             <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;"
                                 colspan="3">
                                 <img src="/images/coaches/<%= response["nextMatch"][i]._id %>.jpg"
