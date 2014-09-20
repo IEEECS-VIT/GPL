@@ -131,6 +131,7 @@ exports.simulate = function (data, callback)
         team_object[0] = new Make(data.team[0].ratings);
         team_object[1] = new Make(data.team[1].ratings);
         var winner;
+        var temp;
         var delivery_score;
         var batsman_performance_index;
         var current_bowler;
@@ -335,10 +336,10 @@ exports.simulate = function (data, callback)
                     batsman_performance_index = i;
                     if (j == 6)
                     {
-                        j = 0;
+                        temp = 0;
                         ++batsman_performance_index;
                     }
-                    fall_of_wicket = Total[0] + ' / ' + wickets[0] + ', ' + batsman_performance_index + '.' + j;
+                    fall_of_wicket = Total[0] + ' / ' + wickets[0] + ', ' + batsman_performance_index + '.' + temp;
                 }
                 else
                 {
@@ -642,10 +643,11 @@ exports.simulate = function (data, callback)
                     batsman_performance_index = i;
                     if (j == 6)
                     {
-                        j = 0;
+                        temp = 0;
                         ++batsman_performance_index;
+
                     }
-                    fall_of_wicket = Total[1] + ' / ' + wickets[1] + ', ' + batsman_performance_index + '.' + j;
+                    fall_of_wicket = Total[1] + ' / ' + wickets[1] + ', ' + batsman_performance_index + '.' + temp;
                 }
                 else
                 {
