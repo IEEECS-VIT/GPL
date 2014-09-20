@@ -130,6 +130,7 @@ exports.simulate = function (data, callback)
         var team_object = [];
         team_object[0] = new Make(data.team[0].ratings);
         team_object[1] = new Make(data.team[1].ratings);
+        var winner;
         var delivery_score;
         var batsman_performance_index;
         var current_bowler;
@@ -841,10 +842,12 @@ exports.simulate = function (data, callback)
                     if (Overs[1] > Overs[0])
                     {
                         winner_index = +!toss;
+                        winner = 0;
                     }
                     else
                     {
                         winner_index = +toss;
+                        winner = 1;
                     }
                     data.match.commentary[data.match.commentary.length - 1] += data.team[+winner_index]._id + ' wins! (higher run rate)  ';
                 }
@@ -855,10 +858,12 @@ exports.simulate = function (data, callback)
                 if (wickets[0] > wickets[1])
                 {
                     winner_index = +toss;
+                    winner = 1;
                 }
                 else
                 {
                     winner_index = +!toss;
+                    winner = 0;
                 }
                 data.match.commentary[data.match.commentary.length - 1] += data.team[+winner_index]._id + ' wins! (fewer wickets lost)  ';
             }
@@ -870,12 +875,14 @@ exports.simulate = function (data, callback)
                 data.match.commentary.push(data.team[+toss]._id + ' wins by ');
                 data.match.commentary[data.match.commentary.length - 1] += (10 - wickets[1]) + ' wicket(s) !';
                 winner_index = +toss;
+                winner = 1;
             }
             else
             {
                 data.match.commentary.push(data.team[+!toss]._id + ' wins by ');
                 data.match.commentary[data.match.commentary.length - 1] += (Total[0] - Total[1]) + ' runs!';
                 winner_index = +!toss;
+                winner = 0;
             }
             data.match.commentary[data.match.commentary.length - 1] += ' ';
         }
@@ -885,14 +892,14 @@ exports.simulate = function (data, callback)
             ++data.team[+!winner_index].loss;
             ++data.team[+winner_index].win;
             data.team[+winner_index].points += 2;
-            data.team[+winner_index].balls_for += Overs[+winner_index];
-            data.team[+!winner_index].balls_for += Overs[+!winner_index];
-            data.team[+winner_index].runs_for += Total[+winner_index];
-            data.team[+!winner_index].runs_for += Total[+!winner_index];
-            data.team[+winner_index].balls_against += Overs[+!winner_index];
-            data.team[+!winner_index].balls_against += Overs[+winner_index];
-            data.team[+winner_index].runs_against += Total[+!winner_index];
-            data.team[+!winner_index].runs_against += Total[+winner_index];
+            data.team[+winner_index].balls_for += Overs[+winner];
+            data.team[+!winner_index].balls_for += Overs[+!winner];
+            data.team[+winner_index].runs_for += Total[+winner];
+            data.team[+!winner_index].runs_for += Total[+!winner];
+            data.team[+winner_index].balls_against += Overs[+!winner];
+            data.team[+!winner_index].balls_against += Overs[+winner];
+            data.team[+winner_index].runs_against += Total[+!winner];
+            data.team[+!winner_index].runs_against += Total[+winner];
             data.team[+winner_index].net_run_rate = (((data.team[+winner_index].runs_for) / (data.team[+winner_index].balls_for) - (data.team[+winner_index].runs_against) / (data.team[+winner_index].balls_against)) * 6).toFixed(2);
             data.team[+!winner_index].net_run_rate = (((data.team[+!winner_index].runs_for) / (data.team[+!winner_index].balls_for) - (data.team[+!winner_index].runs_against) / (data.team[+!winner_index].balls_against)) * 6).toFixed(2);
         }
