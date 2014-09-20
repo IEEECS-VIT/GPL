@@ -62,7 +62,7 @@ exports.simulate = function (data, callback)
             this.coach_rating = parseInt(team[11]['Rating (15)']);
             if (this.coach_rating.toString() == 'NaN')
             {
-                this.coach_rating = -15;
+                this.coach_rating = -50;
             }
             this.economy = [];
             this.bowl_name = [];
