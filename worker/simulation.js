@@ -121,9 +121,10 @@ exports.simulate = function (data, callback)
             {
                 if (i < 6)
                 {
-                    this.bowler_rating[i] += parseFloat(this.bowler_rating[i] / 5) - parseFloat(average_bowl_rating / 5) + parseInt(this.coach_rating);
+                    this.bowler_rating[i] += parseFloat(this.bowler_rating[i] )/5 - parseFloat(average_bowl_rating)/30 + parseInt(this.coach_rating);
                 }
-                this.bat_rating[i] += parseFloat(this.bat_rating[i] / 10) - parseFloat(average_bat_rating / 10) + parseInt(this.coach_rating);
+                this.bat_rating[i] += parseFloat(this.bat_rating[i]) / 10 - parseFloat(average_bat_rating)/110 + parseInt(this.coach_rating);
+                this.bat_rating = (this.bat_rating < 0)? ((this.coach_rating < 0)? (0) : (this.coach_rating)):(this.bat_rating);
             }
         }
 
