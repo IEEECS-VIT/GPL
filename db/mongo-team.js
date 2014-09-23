@@ -61,14 +61,14 @@ exports.getTeam = function (doc, callback)
         }
         else
         {
-            var collection = db.collection('users');
+            var collection = db.collection('round2');
 
             var onFetch = function (err, document)
             {
                 console.log("Length " + document.team.length);
                 if(document.team.length==0)
                 {
-                    console.log("REached");
+                    console.log("Reached");
                     callback(null,[]);
                 }
                 else if (err)
@@ -97,7 +97,7 @@ exports.getSquad = function (doc, callback)
         }
         else
         {
-            var collection = db.collection('users');
+            var collection = db.collection('round2');
             var onFinish = function (err, documents)
             {
                 var onGetCoach = function (err, doc)

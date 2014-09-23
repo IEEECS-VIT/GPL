@@ -179,7 +179,7 @@ function Make(team)
 
 var mongoUserUpdate = function (query, update, callback)
 {
-    var collection = db.collection("users");
+    var collection = db.collection("round2");
     var onUpdate = function (err, doc)
     {
         if (err)
@@ -266,13 +266,6 @@ function start_match(elt, callback)
         elt.commentary[elt.commentary.length - 1] += 'bat ';//console.log(" wins the toss and chooses to bat first");
     }
     elt.commentary[elt.commentary.length - 1] += 'first  ';
-    /*if (+toss)
-     {
-     var temp = users[0];
-     var temp2 = users[1];
-     users[1] = temp;
-     users[0] = temp2;
-     }*/
     wickets[0] = wickets[1] = strike_index = previous_bowler = 0;
     for (i = 1; i < 6; ++i)
     {
@@ -938,7 +931,6 @@ function start_match(elt, callback)
         }
         else
         {
-            //elt.commentary.push( 'Team');//console.log("Team ");
             if (wickets[0] > wickets[1])
             {
                 elt.commentary[elt.commentary.length - 1] += users[+toss]._id;
@@ -954,7 +946,6 @@ function start_match(elt, callback)
     }
     else
     {
-        // elt.commentary.push( ' ' + users[+toss]._id + ' wins by '); //console.log("Team ");
         if (Total[0] < Total[1])
         {
             elt.commentary.push(users[+toss]._id + ' wins by ');
@@ -967,7 +958,7 @@ function start_match(elt, callback)
             elt.commentary[elt.commentary.length - 1] += (Total[0] - Total[1]) + ' runs!';//console.log(+!toss + 1, " wins by ", Total[0] - Total[1], " runs!");
             winner_index = +!toss;
         }
-        elt.commentary[elt.commentary.length - 1] += ' ';//console.log(" ");
+        elt.commentary[elt.commentary.length - 1] += ' ';
     }
     console.log("Winner Index " + winner_index);
     console.log("Winner " + users[+winner_index]._id);

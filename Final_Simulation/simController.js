@@ -286,7 +286,7 @@ var updateMatch = function(elt, commentary, callback)
 
 var mongoUserUpdate = function (query, update, callback)
 {
-    var collection = db.collection("users");
+    var collection = db.collection("round2");
     var onUpdate = function (err, doc)
     {
         if (err)
@@ -304,7 +304,7 @@ var mongoUserUpdate = function (query, update, callback)
 
 var mongoFetchUser = function (doc, callback)
 {
-    var collection = db.collection('users');
+    var collection = db.collection('round2');
     var onFetch = function (err, document)
     {
         if (err)
@@ -324,7 +324,7 @@ var mongoGetSquad = function (doc, callback)
 {
     var coach;
 
-    var collection = db.collection('users');
+    var collection = db.collection('round2');
     var onFinish = function (err, documents)
     {
         var onGetCoach = function (err, doc)
