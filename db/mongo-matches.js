@@ -66,7 +66,7 @@ exports.fetchPreviousMatch = function (doc1, doc2, callback)
                     break;
 
             }
-            collectionName='matchday7';
+            collectionName='matchday1';
             var collection = db.collection(collectionName);
             var onFetch = function (err, docs)
             {
