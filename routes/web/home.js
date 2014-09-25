@@ -113,7 +113,7 @@ router.get('/', function (req, res)
     }
 });
 
-router.get('/leaderboard', function (req, res) // Leaderboard/Standings
+/*router.get('/leaderboard', function (req, res) // Leaderboard/Standings
 {
     if (req.signedCookies.name)                           // if cookies exists then access the database
     {
@@ -146,6 +146,7 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
 
 
 });
+*/
 router.get('/matches', function (req, res)
 {
     if (req.signedCookies.name)
