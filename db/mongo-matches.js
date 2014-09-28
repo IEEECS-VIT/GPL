@@ -66,7 +66,7 @@ exports.fetchPreviousMatch = function (doc1, doc2, callback)
                     break;
 
             }
-            collectionName='matchday2';   // Collection controller for match day information. To be changed before each match
+            collectionName='matchday3';   // Collection controller for match day information. To be changed before each match
             var collection = db.collection(collectionName);
             var onFetch = function (err, docs)
             {
