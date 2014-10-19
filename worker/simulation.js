@@ -16,11 +16,8 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 var path = require('path');
-
 var com = require(path.join(__dirname, 'commentary'));
-
 exports.simulate = function (data, callback)
 {
     if (data.team[0].ratings.length < 12 && data.team[1].ratings.length < 12)
@@ -50,8 +47,8 @@ exports.simulate = function (data, callback)
         {
             return parseInt(Math.random() * 1000000000000000);
         }
-
-        function Make(team)
+        var mean_rating = [];
+        function Make(team,arg)
         {
             var i;
             this.bat_rating = [];
@@ -115,9 +112,9 @@ exports.simulate = function (data, callback)
                 }
 
             }
+            mean_rating[arg] = ( average_bat_rating + average_bowl_rating ) / 17;
             average_bat_rating = parseFloat(average_bat_rating / 11);
             average_bowl_rating = parseFloat(average_bowl_rating / 6);
-
             for (i = 0; i < 11; ++i)
             {
                 if (i < 6)
@@ -128,10 +125,9 @@ exports.simulate = function (data, callback)
                 this.bat_rating = (this.bat_rating < 0)? ((this.coach_rating < 0)? (0) : (this.coach_rating)):(this.bat_rating);
             }
         }
-
         var team_object = [];
-        team_object[0] = new Make(data.team[0].ratings);
-        team_object[1] = new Make(data.team[1].ratings);
+        team_object[0] = new Make(data.team[0].ratings,0);
+        team_object[1] = new Make(data.team[1].ratings,1);
         var winner;
         var temp;
         var delivery_score;
@@ -174,22 +170,19 @@ exports.simulate = function (data, callback)
         var bowl = [1200, 1200, 1200]; // increase to strengthen bowling
         var bat = [1100, 1100];    // decrease to strengthen batting
         var dot;
+        var wicket_sequence = [];
+        var last_five_overs = [];
+        var counter = 0;
         Total[0] = Total[1] = 0;
         Overs[0] = Overs[1] = 120;
         data.match.commentary = [];
-        if (rand() % 2)
-        {
-            toss = 1;
-        }
-        else
-        {
-            toss = 0;
-        }
+        toss = rand()%2;
+        mean_rating[0] = (parseFloat(mean_rating[0] * 100)/(mean_rating[0]+mean_rating[1])).toFixed(2);
+        data.match.commentary.push(' Winning chances: ' + data.team[0]._id + ' :' + mean_rating[0] +' %, ' + data.team[1]._id + ' :' + (100 - mean_rating[0]) +' %');
         data.match.commentary.push(' ' + data.team[+toss]._id + ' wins the toss and chooses to ');
         if (rand() % 2)
         {
             data.match.commentary[data.match.commentary.length - 1] += 'bowl ';
-
         }
         else
         {
@@ -228,7 +221,10 @@ exports.simulate = function (data, callback)
                 delivery_score = team_object[+!toss].bat_rating[strike[+strike_index]] - team_object[+toss].bowler_rating[current_bowler];
                 bowler_performance_index = (team_object[+toss].bowler_rating[current_bowler]) / ((rand() % (team_object[+toss].bowl_average[strike[+strike_index]] * team_object[+toss].bowler_rating[current_bowler] / bowl[0] + 1) + team_object[+toss].bowl_average[current_bowler] * team_object[+toss].bowler_rating[current_bowler] / 1000) * (rand() % (team_object[+toss].bowl_strike_rate[current_bowler] * team_object[+toss].bowler_rating[current_bowler] / bowl[1] + 1) + team_object[+toss].bowl_strike_rate[current_bowler] * team_object[+toss].bowler_rating[current_bowler] / 1000) * (rand() % (team_object[+toss].economy[current_bowler] * team_object[+toss].bowler_rating[current_bowler] / bowl[2] + 1) + team_object[+toss].economy[current_bowler] * team_object[+toss].bowler_rating[current_bowler] / 1000));
                 batsman_performance_index = (rand() % (team_object[+!toss].bat_average[strike[+strike_index]] * team_object[+!toss].bat_rating[strike[+strike_index]] / bat[0] + 1) + team_object[+!toss].bat_average[strike[+strike_index]] * (1000 - team_object[+!toss].bat_rating[strike[+strike_index]]) / 1000) * (rand() % (team_object[+!toss].bat_strike_rate[strike[+strike_index]] * team_object[+!toss].bat_rating[strike[+strike_index]] / bat[1] + 1) + team_object[+!toss].bat_strike_rate[strike[+strike_index]] * (1000 - team_object[+!toss].bat_rating[strike[+strike_index]]) / 1000) / team_object[+toss].bowler_rating[current_bowler];
-                if (!delivery_score) delivery_score = 1;
+                if (!delivery_score)
+                {
+                    delivery_score = 1;
+                }
                 delivery_score += 1;
                 if (batsman_performance_index > bowler_performance_index)
                 {
@@ -244,7 +240,7 @@ exports.simulate = function (data, callback)
                 if (free_hit)
                 {
                     data.match.commentary.push(' Free Hit: ');
-                }//console.log(" Free Hit: ");
+                }
                 else
                 {
                     data.match.commentary.push(i + '.' + j + ' ' + team_object[+toss].bowl_name[current_bowler] + ' to ' + team_object[+!toss].bat_name[strike[+strike_index]] + ', ');
@@ -253,7 +249,7 @@ exports.simulate = function (data, callback)
                 {
                     previous_batsman = strike[+strike_index];
                     dismissed[strike[+strike_index]] = 1;
-                    data.match.commentary.push('OUT ');//console.log("OUT ");
+                    data.match.commentary.push('OUT ');
                     previous_dismissal = current_bowler;
                     ++continuous_wickets[current_bowler];
                     previous_partnership_index = current_partnership_index;
@@ -284,7 +280,6 @@ exports.simulate = function (data, callback)
                             score[strike[+strike_index]] += delivery_score;
                             previous_over += delivery_score;
                             Total[0] += delivery_score;
-
                         }
                         if (rand() % 2)
                         {
@@ -295,8 +290,15 @@ exports.simulate = function (data, callback)
                         continuous_wickets[current_bowler] = 0;
                         --wickets_taken[current_bowler];
                     }
-                    if (balls[strike[+strike_index]] == 1)data.match.commentary[data.match.commentary.length - 1] += ' first ball ';
-                    if (!score[strike[+strike_index]])data.match.commentary[data.match.commentary.length - 1] += ' for a duck ! ';
+                    wicket_sequence.push(Total[0] + ' / ' + wickets[0] + ' ' + team_object[+!toss].bat_name[strike[+strike_index]] + ' ' + team_object[+toss].bowl_name[current_bowler] +' Overs: ' + i + ' . ' + j);
+                    if (balls[strike[+strike_index]] == 1)
+                    {
+                        data.match.commentary[data.match.commentary.length - 1] += ' first ball ';
+                    }
+                    if (!score[strike[+strike_index]])
+                    {
+                        data.match.commentary[data.match.commentary.length - 1] += ' for a duck ! ';
+                    }
                     if (wickets_taken[current_bowler] == 5 && !five_wicket_haul[current_bowler])
                     {
                         five_wicket_haul[current_bowler] = 1;
@@ -306,7 +308,10 @@ exports.simulate = function (data, callback)
                     {
                         data.match.commentary.push(' looks like there won\'t be any fifty for ' + team_object[+!toss].bat_name[strike[+strike_index]] + ', he came so close, and was yet so far. ');
                     }
-                    else if (score[strike[+strike_index]] >= 90 && score[strike[+strike_index]] < 100) data.match.commentary.push(' He\'ll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team. ');//console.log(" He'll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team. ");
+                    else if (score[strike[+strike_index]] >= 90 && score[strike[+strike_index]] < 100)
+                    {
+                        data.match.commentary.push(' He\'ll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team. ');
+                    }
                     if (continuous_wickets[current_bowler] == 3)
                     {
                         data.match.commentary.push(' And that is also a hattrick for bowler ' + team_object[+!toss].bowl_name[current_bowler] + '! Fantastic bowling in the time of need.');
@@ -346,7 +351,10 @@ exports.simulate = function (data, callback)
                 else
                 {
                     delivery_score = parseInt(batsman_performance_index);
-                    if (delivery_score < 0) delivery_score = 0;
+                    if (delivery_score < 0)
+                    {
+                        delivery_score = 0;
+                    }
                     continuous_wickets[current_bowler] = 0;
                     if (delivery_score > 6)
                     {
@@ -375,14 +383,12 @@ exports.simulate = function (data, callback)
                         {
                             case 0:
                                 data.match.commentary.push('No run, ' + com.dot[rand() % com.dot.length]);
-
                                 ++dot;
                                 break;
                             case 5:
                                 delivery_score -= 1;
                             case 4:
                                 data.match.commentary.push('FOUR, ' + com.four[rand() % com.four.length]);
-
                                 ++fours[strike[+strike_index]];
                                 break;
                             case 6:
@@ -402,12 +408,14 @@ exports.simulate = function (data, callback)
                             default:
                                 break;
                         }
-                        if (delivery_score != 6) continuous_maximums = 0;
+                        if (delivery_score != 6)
+                        {
+                            continuous_maximums = 0;
+                        }
                         previous_over += delivery_score;
                         score[strike[+strike_index]] += delivery_score;
                         Total[0] += delivery_score;
                         partnership_runs[current_partnership_index] += delivery_score;
-
                     }
                     if (!milestone[strike[+strike_index]] && score[strike[+strike_index]] >= 50)
                     {
@@ -419,10 +427,16 @@ exports.simulate = function (data, callback)
                         ++milestone[strike[+strike_index]];
                         data.match.commentary.push(' What a wonderful way to bring up his century.');
                     }
-                    if (delivery_score % 2) strike_index = !strike_index;
+                    if (delivery_score % 2)
+                    {
+                        strike_index = !strike_index;
+                    }
                 }
             }
-            if (continuous_maximums == 6) data.match.commentary.push(' Six G.P.L maximums in the previous over ! What an effort by ' + team_object[+!toss].bat_name[strike[+strike_index]] + '. The crowd is ecstatic, ' + team_object[+toss].bowl_name[current_bowler] + ' is absolutely flabbergasted. ');//console.log(" Six G.P.L maximums in the previous over ! What an effort by Batsman.", strike[+strike_index], ". The crowd is ecstatic, Bowler ", current_bowler, " is absolutely flabbergasted. ");
+            if (continuous_maximums == 6)
+            {
+                data.match.commentary.push(' Six G.P.L maximums in the previous over ! What an effort by ' + team_object[+!toss].bat_name[strike[+strike_index]] + '. The crowd is ecstatic, ' + team_object[+toss].bowl_name[current_bowler] + ' is absolutely flabbergasted. ');
+            }
             runs_conceded[current_bowler] += previous_over;
             strike_index = !strike_index;
             data.match.commentary.push(' Last over: ');
@@ -432,12 +446,21 @@ exports.simulate = function (data, callback)
             }
             else
             {
-                if (j == 7)data.match.commentary[data.match.commentary.length - 1] = ' maiden';
+                if (j == 7)
+                {
+                    data.match.commentary[data.match.commentary.length - 1] = ' maiden';
+                }
                 maidens[current_bowler] += 1;
             }
             data.match.commentary.push('  Current score: ' + Total[0] + ' / ' + wickets[0] + '  Runrate: ' + (Total[0] / (i + 1)).toFixed(2));
-            if (strike[+strike_index] < 11) data.match.commentary.push(' ' + team_object[+!toss].bat_name[strike[+strike_index]] + ' : ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ') ');
-            if (strike[+!strike_index] < 11) data.match.commentary.push(' ' + team_object[+!toss].bat_name[strike[+!strike_index]] + ' : ' + score[strike[+!strike_index]] + ' (' + balls[strike[+!strike_index]] + ') Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + ') runrate: ' + (partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index])).toFixed(2);
+            if (strike[+strike_index] < 11)
+            {
+                data.match.commentary.push(' ' + team_object[+!toss].bat_name[strike[+strike_index]] + ' : ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ') ');
+            }
+            if (strike[+!strike_index] < 11)
+            {
+                data.match.commentary.push(' ' + team_object[+!toss].bat_name[strike[+!strike_index]] + ' : ' + score[strike[+!strike_index]] + ' (' + balls[strike[+!strike_index]] + ') Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + ') runrate: ' + (partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index])).toFixed(2);
+            }
             if (previous_batsman > -1)
             {
                 data.match.commentary.push(' Previous Wicket: ' + team_object[+!toss].bat_name[previous_batsman] + ': ' + score[previous_batsman] + '(' + balls[previous_batsman] + ')');
@@ -452,7 +475,23 @@ exports.simulate = function (data, callback)
                 data.match.commentary.push(' Partnership: ' + partnership_runs[previous_partnership_index] + '(' + partnership_balls[previous_partnership_index] + '), runrate: ' + (partnership_runs[previous_partnership_index] * 6 / partnership_balls[previous_partnership_index]).toFixed(2) + ' Fall of wicket: ' + fall_of_wicket);
             }
             data.match.commentary.push('  ' + team_object[+toss].bowl_name[current_bowler] + ': ' + deliveries[current_bowler] / 6 + '.' + deliveries[current_bowler] % 6 + '-' + maidens[current_bowler] + '-' + wickets_taken[current_bowler] + '-' + (runs_conceded[current_bowler] * 6 / deliveries[current_bowler]).toFixed(2) + '  ');
-            if (deliveries[current_bowler] == 24) data.match.commentary.push('And that brings an end to Bowler ' + team_object[+toss].bowl_name[current_bowler] + '\'s spell.  ');
+            if (deliveries[current_bowler] == 24)
+            {
+                data.match.commentary.push('And that brings an end to Bowler ' + team_object[+toss].bowl_name[current_bowler] + '\'s spell.  ');
+            }
+            if(i < 5)
+            {
+                last_five_overs[counter] = previous_over;
+            }
+            else
+            {   if(counter > 4)
+                {
+                 counter = 0;
+                }
+              last_five_overs[counter] = previous_over;
+              data.match.commentary.push(' Last 5 overs: ' + last_five_overs + ', runrate: ' + (parseFloat(last_five_overs)/5).toFixed(2));
+            }
+            ++counter;
             for (j = 0; j < 6; ++j)
             {
                 if (deliveries[j] <= 18 && j != previous_bowler)
@@ -464,23 +503,29 @@ exports.simulate = function (data, callback)
             current_bowler = delivery_score;
             for (j = delivery_score + 1; j < 6; ++j)
             {
-                if (deliveries[j] <= 18 && team_object[+!toss].bowler_rating[j] > team_object[+!toss].bowler_rating[current_bowler] && j != previous_bowler) current_bowler = j;
+                if (deliveries[j] <= 18 && team_object[+!toss].bowler_rating[j] > team_object[+!toss].bowler_rating[current_bowler] && j != previous_bowler)
+                {
+                    current_bowler = j;
+                }
             }
             previous_bowler = current_bowler;
         }
         strike = [0, 1];
-        data.match.commentary.push(' Scorecard: ');
-        data.match.commentary.push('Runs Balls Strike Rate Fours Sixes');
+        data.match.scorecard.push(' Scorecard: ');
+        data.match.scorecard.push('Runs Balls Strike Rate Fours Sixes');
         for (i = 0; i < 11; ++i)
         {
             if (!balls[i])
             {
-                data.match.commentary.push(team_object[+!toss].bat_name[i] + '  DNB ');
+                data.match.scorecard.push(team_object[+!toss].bat_name[i] + '  DNB ');
             }
             else
             {
-                data.match.commentary.push(team_object[+!toss].bat_name[i] + ' ' + score[i] + ' ' + balls[i] + ' ' + (score[i] * 100 / balls[i]).toFixed(2) + ' ' + fours[i] + ' ' + maximums[i]);
-                if (!dismissed[i]) data.match.commentary.push('  (not out)');
+                data.match.scorecard.push(team_object[+!toss].bat_name[i] + ' ' + score[i] + ' ' + balls[i] + ' ' + (score[i] * 100 / balls[i]).toFixed(2) + ' ' + fours[i] + ' ' + maximums[i]);
+                if (!dismissed[i])
+                {
+                    data.match.scorecard.push('  (not out)');
+                }
             }
             if (i < 10)
             {
@@ -488,19 +533,22 @@ exports.simulate = function (data, callback)
             }
             balls[i] = fours[i] = maximums[i] = dismissed[i] = milestone[i] = score[i] = balls[i] = fours[i] = maximums[i] = 0;
         }
-        data.match.commentary.push('Total: ' + Total[0] + ' / ' + wickets[0] + ' (' + parseInt(Overs[0] / 6) + '.' + Overs[0] % 6 + ' overs)  Runrate: ' + (Total[0] * 6 / Overs[0]).toFixed(2) + ' Extras: ' + extras);
-        data.match.commentary.push(' Bowling Statistics:');
-        data.match.commentary.push('  Bowler Overs Maidens Wickets Runs conceded Economy  ');
+        data.match.scorecard.push('Total: ' + Total[0] + ' / ' + wickets[0] + ' (' + parseInt(Overs[0] / 6) + '.' + Overs[0] % 6 + ' overs)  Runrate: ' + (Total[0] * 6 / Overs[0]).toFixed(2) + ' Extras: ' + extras);
+        data.match.scorecard.push(' Bowling Statistics:');
+        data.match.scorecard.push('  Bowler Overs Maidens Wickets Runs conceded Economy  ');
         for (i = 0; i < 6; i++)
         {
-            data.match.commentary.push(team_object[+toss].bowl_name[i] + ' ' + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + (runs_conceded[i] * 6 / deliveries[i]).toFixed(2));
+            data.match.scorecard.push(team_object[+toss].bowl_name[i] + ' ' + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + (runs_conceded[i] * 6 / deliveries[i]).toFixed(2));
             five_wicket_haul[i] = continuous_wickets[i] = deliveries[i] = maidens[i] = runs_conceded[i] = wickets_taken[i] = 0;
         }
+        data.match.scorecard.push(wicket_sequence); // use typeof(a[]=='object') to format for commentary display section')
         data.match.commentary.push('Dot ball percentage: ' + (dot * 100 / Overs[0]).toFixed(2) + ' %');
-        extras = strike_index = free_hit = current_partnership_index = dot = previous_bowler = 0;
+        extras = strike_index = counter = free_hit = current_partnership_index = dot = previous_bowler = 0;
         previous_batsman = previous_partnership_index = -1;
         data.match.commentary.push('   ');
+        wicket_sequence = [];
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        var hope = true;
         for (i = 1; i < 6; i++)
         {
             if (team_object[+!toss].bowler_rating[i] > team_object[+!toss].bowler_rating[previous_bowler])
@@ -530,7 +578,10 @@ exports.simulate = function (data, callback)
                 delivery_score = team_object[+toss].bat_rating[strike[+strike_index]] - team_object[+!toss].bowler_rating[current_bowler];
                 bowler_performance_index = (team_object[+!toss].bowler_rating[current_bowler]) / ((rand() % (team_object[+!toss].bowl_average[strike[+strike_index]] * team_object[+!toss].bowler_rating[current_bowler] / bowl[0] + 1) + team_object[+!toss].bowl_average[current_bowler] * team_object[+!toss].bowler_rating[current_bowler] / 1000) * (rand() % (team_object[+!toss].bowl_strike_rate[current_bowler] * team_object[+!toss].bowler_rating[current_bowler] / bowl[1] + 1) + team_object[+!toss].bowl_strike_rate[current_bowler] * team_object[+!toss].bowler_rating[current_bowler] / 1000) * (rand() % (team_object[+!toss].economy[current_bowler] * team_object[+!toss].bowler_rating[current_bowler] / bowl[2] + 1) + team_object[+!toss].economy[current_bowler] * team_object[+!toss].bowler_rating[current_bowler] / 1000));
                 batsman_performance_index = (rand() % (team_object[+toss].bat_average[strike[+strike_index]] * team_object[+toss].bat_rating[strike[+strike_index]] / bat[0] + 1) + team_object[+toss].bat_average[strike[+strike_index]] * (1000 - team_object[+toss].bat_rating[strike[+strike_index]]) / 1000) * (rand() % (team_object[+toss].bat_strike_rate[strike[+strike_index]] * team_object[+toss].bat_rating[strike[+strike_index]] / bat[1] + 1) + team_object[+toss].bat_strike_rate[strike[+strike_index]] * (1000 - team_object[+toss].bat_rating[strike[+strike_index]]) / 1000) / team_object[+!toss].bowler_rating[current_bowler];
-                if (!delivery_score) delivery_score = 1;
+                if (!delivery_score)
+                {
+                    delivery_score = 1;
+                }
                 delivery_score += 1;
                 if (batsman_performance_index > bowler_performance_index)
                 {
@@ -600,10 +651,20 @@ exports.simulate = function (data, callback)
                             data.match.commentary.push(' What an emphatic victory ! ');
                             break;
                         }
-                        else if (Total[1] == Total[0]) data.match.commentary.push('Scores are level...');
+                        else if (Total[1] == Total[0])
+                        {
+                            data.match.commentary.push('Scores are level...');
+                        }
                     }
-                    if (balls[strike[+strike_index]] == 1)data.match.commentary[data.match.commentary.length - 1] += ' first ball ';
-                    if (!score[strike[+strike_index]])data.match.commentary[data.match.commentary.length - 1] += 'for a duck !';
+                    wicket_sequence.push(Total[1] + ' / ' + wickets[1] + ' ' + team_object[+toss].bat_name[strike[+strike_index]] + ' ' + team_object[+!toss].bowl_name[current_bowler] + ' Overs: ' + i + ' . ' + j);
+                    if (balls[strike[+strike_index]] == 1)
+                    {
+                        data.match.commentary[data.match.commentary.length - 1] += ' first ball ';
+                    }
+                    if (!score[strike[+strike_index]])
+                    {
+                        data.match.commentary[data.match.commentary.length - 1] += 'for a duck !';
+                    }
                     if (wickets_taken[current_bowler] == 5 && !five_wicket_haul[current_bowler])
                     {
                         five_wicket_haul[current_bowler] = 1;
@@ -654,7 +715,10 @@ exports.simulate = function (data, callback)
                 else
                 {
                     delivery_score = parseInt(batsman_performance_index);
-                    if (delivery_score < 0) delivery_score = 0;
+                    if (delivery_score < 0)
+                    {
+                        delivery_score = 0;
+                    }
                     continuous_wickets[current_bowler] = 0;
                     if (delivery_score > 6)
                     {
@@ -708,7 +772,10 @@ exports.simulate = function (data, callback)
                             default:
                                 break;
                         }
-                        if (delivery_score != 6) continuous_maximums = 0;
+                        if (delivery_score != 6)
+                        {
+                            continuous_maximums = 0;
+                        }
                         previous_over += delivery_score;
                         score[strike[+strike_index]] += delivery_score;
                         Total[1] += delivery_score;
@@ -735,11 +802,17 @@ exports.simulate = function (data, callback)
                         ++milestone[strike[+strike_index]];
                         data.match.commentary.push(' what a wonderful way to bring up his century.');
                     }
-                    if (delivery_score % 2) strike_index = !strike_index;
+                    if (delivery_score % 2)
+                    {
+                        strike_index = !strike_index;
+                    }
                 }
             }
 
-            if (continuous_maximums == 6) data.match.commentary.push(' Six G.P.L maximums in the previous over ! What an effort by ' + team_object[+toss].bat_name[strike[+strike_index]] + '. The crowd is ecstatic, ' + team_object[+!toss].bowl_name[current_bowler] + ' is absolutely flabbergasted. ');
+            if (continuous_maximums == 6)
+            {
+                data.match.commentary.push(' Six G.P.L maximums in the previous over ! What an effort by ' + team_object[+toss].bat_name[strike[+strike_index]] + '. The crowd is ecstatic, ' + team_object[+!toss].bowl_name[current_bowler] + ' is absolutely flabbergasted. ');
+            }
             runs_conceded[current_bowler] += previous_over;
             strike_index = !strike_index;
             data.match.commentary.push(' Last Over: ');
@@ -749,17 +822,29 @@ exports.simulate = function (data, callback)
             }
             else
             {
-                if (j == 7)data.match.commentary[data.match.commentary.length - 1] += 'maiden';
+                if (j == 7)
+                {
+                    data.match.commentary[data.match.commentary.length - 1] += 'maiden';
+                }
                 maidens[current_bowler] += 1;
             }
             data.match.commentary.push('  Current score: ' + Total[1] + ' / ' + wickets[1] + '  Runrate: ' + (Total[1] / (i + 1)).toFixed(2));
-            if (Total[1] > Total[0]) break;
-            data.match.commentary.push(', RRR: ' + parseFloat(((Total[0] + 1 - Total[1]) / (19 - i))).toFixed(2) + '  Equation: ' + parseInt(Total[0] + 1 - Total[1]) + ' runs needed from ' + parseInt(114 - 6 * i) + ' balls. ');
-            if (strike[+strike_index] < 11) data.match.commentary.push(' ' + team_object[+toss].bat_name[strike[+strike_index]] + ' : ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ') ');
-            if (strike[+!strike_index] < 11) data.match.commentary.push(' ' + team_object[+toss].bat_name[strike[+!strike_index]] + ' : ' + score[strike[+!strike_index]] + ' (' + balls[strike[+!strike_index]] + ') Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + '), runrate: ' + (partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index])).toFixed(2);
+            if (Total[1] > Total[0])
+            {
+                break;
+            }
+            data.match.commentary.push(', RRR: ' + parseFloat(((Total[0] + 1 - Total[1]) / (19 - i))).toFixed(2) + '  Equation: ' + data.team[+toss]._id + ' needs ' + (Total[0] + 1 - Total[1]) + ' runs from ' + parseInt(114 - 6 * i) + ' balls with ' + (10 - wickets[1]) + ' wickets remaining');
+            if (strike[+strike_index] < 11)
+            {
+                data.match.commentary.push(' ' + team_object[+toss].bat_name[strike[+strike_index]] + ' : ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ') ');
+            }
+            if (strike[+!strike_index] < 11)
+            {
+                data.match.commentary.push(' ' + team_object[+toss].bat_name[strike[+!strike_index]] + ' : ' + score[strike[+!strike_index]] + ' (' + balls[strike[+!strike_index]] + ') Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + '), runrate: ' + (partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index])).toFixed(2);
+            }
             if (previous_batsman > -1)
             {
-                data.match.commentary.push(' Previous Wicket: ' + team_object[+toss].bat_name[previous_batsman] + ': ' + score[previous_batsman] + '(' + balls[previous_batsman] + ')');//console.log(" Previous Wicket: Batsman ", previous_batsman + 1, ": ", score[previous_batsman], "(", balls[previous_batsman], ")");
+                data.match.commentary.push(' Previous Wicket: ' + team_object[+toss].bat_name[previous_batsman] + ': ' + score[previous_batsman] + '(' + balls[previous_batsman] + ')');
                 if (previous_dismissal > -1)
                 {
                     data.match.commentary.push(', Dismissed by: ' + team_object[+!toss].bowl_name[previous_dismissal]);
@@ -771,8 +856,28 @@ exports.simulate = function (data, callback)
                 data.match.commentary.push(' Partnership: ' + partnership_runs[previous_partnership_index] + '(' + partnership_balls[previous_partnership_index] + '), runrate: ' + (partnership_runs[previous_partnership_index] * 6 / partnership_balls[previous_partnership_index]).toFixed(2) + ' Fall of wicket: ' + fall_of_wicket);
             }
             data.match.commentary.push('  ' + team_object[+!toss].bowl_name[current_bowler] + ': ' + parseInt(deliveries[current_bowler] / 6) + '.' + deliveries[current_bowler] % 6 + '-' + maidens[current_bowler] + '-' + wickets_taken[current_bowler] + '-' + runs_conceded[current_bowler] + '-' + (runs_conceded[current_bowler] * 6 / deliveries[current_bowler]).toFixed(2) + '  ');
-            if (i < 19 && (Total[0] + 1 - Total[1]) / (19 - i) > 36) data.match.commentary.push('The team might as well hop onto the team bus now.... ');
-            if (deliveries[current_bowler] == 24) data.match.commentary.push('And that brings an end to Bowler ' + team_object[+!toss].bowl_name[current_bowler] + '\'s spell.  ');
+            if (i < 19 && (Total[0] + 1 - Total[1]) / (19 - i) > 36 && hope)
+            {
+                data.match.commentary.push(data.team[+toss]._id + ' might as well hop onto the team bus now.... ');
+                hope=false;
+            }
+            if (deliveries[current_bowler] == 24)
+            {
+                data.match.commentary.push('And that brings an end to Bowler ' + team_object[+!toss].bowl_name[current_bowler] + '\'s spell.  ');
+            }
+            if(i < 5)
+            {
+                last_five_overs[counter] = previous_over;
+            }
+            else
+            {   if(counter > 4)
+            {
+                counter = 0;
+            }
+                last_five_overs[counter] = previous_over;
+                data.match.commentary.push(' Last 5 overs: ' + last_five_overs + ', runrate: ' + (parseFloat(last_five_overs)/5).toFixed(2));
+            }
+            ++counter;
             for (j = 0; j < 6; ++j)
             {
                 if (deliveries[j] <= 18 && j != previous_bowler)
@@ -784,23 +889,28 @@ exports.simulate = function (data, callback)
             current_bowler = delivery_score;
             for (j = delivery_score + 1; j < 6; ++j)
             {
-                if (deliveries[j] <= 18 && team_object[+!toss].bowler_rating[j] > team_object[+!toss].bowler_rating[current_bowler] && j != previous_bowler) current_bowler = j;
+                if (deliveries[j] <= 18 && team_object[+!toss].bowler_rating[j] > team_object[+!toss].bowler_rating[current_bowler] && j != previous_bowler)
+                {
+                    current_bowler = j;
+                }
             }
             previous_bowler = current_bowler;
         }
-
-        data.match.commentary.push(' Scorecard:');
-        data.match.commentary.push('Runs   Balls Strike Rate Fours Sixes  ');
+        data.match.scorecard.push(' Scorecard:');
+        data.match.scorecard.push('Runs   Balls Strike Rate Fours Sixes  ');
         for (i = 0; i < 11; ++i)
         {
             if (!balls[i])
             {
-                data.match.commentary.push(team_object[+toss].bat_name[i] + ' DNB ');
-            }//console.log("  DNB ");
+                data.match.scorecard.push(team_object[+toss].bat_name[i] + ' DNB ');
+            }
             else
             {
-                data.match.commentary.push(team_object[+toss].bat_name[i] + ' ' + score[i] + ' ' + balls[i] + ' ' + (score[i] * 100 / balls[i]).toFixed(2) + ' ' + fours[i] + ' ' + maximums[i]);
-                if (!dismissed[i]) data.match.commentary.push('  (not out)');//console.log("  (not out)");
+                data.match.scorecard.push(team_object[+toss].bat_name[i] + ' ' + score[i] + ' ' + balls[i] + ' ' + (score[i] * 100 / balls[i]).toFixed(2) + ' ' + fours[i] + ' ' + maximums[i]);
+                if (!dismissed[i])
+                {
+                    data.match.scorecard.push('  (not out)');
+                }
             }
             if (i < 10)
             {
@@ -808,14 +918,15 @@ exports.simulate = function (data, callback)
             }
             balls[i] = fours[i] = maximums[i] = dismissed[i] = milestone[i] = score[i] = balls[i] = fours[i] = maximums[i] = 0;
         }
-        data.match.commentary.push('Total: ' + Total[1] + ' / ' + wickets[1] + ' (' + parseInt(Overs[1] / 6) + '.' + Overs[1] % 6 + ' overs)  Runrate: ' + (Total[1] * 6 / Overs[1]).toFixed(2) + ' Extras: ' + extras);
-        data.match.commentary.push(' Bowling Statistics:  ');
-        data.match.commentary.push('Bowler Overs Maidens Wickets Runs conceded Economy  ');
+        data.match.scorecard.push('Total: ' + Total[1] + ' / ' + wickets[1] + ' (' + parseInt(Overs[1] / 6) + '.' + Overs[1] % 6 + ' overs)  Runrate: ' + (Total[1] * 6 / Overs[1]).toFixed(2) + ' Extras: ' + extras);
+        data.match.scorecard.push(' Bowling Statistics:  ');
+        data.match.scorecard.push('Bowler Overs Maidens Wickets Runs conceded Economy  ');
         for (i = 0; i < 6; i++)
         {
-            data.match.commentary.push(team_object[+!toss].bowl_name[i] + ' ' + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + (runs_conceded[i] * 6 / deliveries[i]).toFixed(2));
+            data.match.scorecard.push(team_object[+!toss].bowl_name[i] + ' ' + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + (runs_conceded[i] * 6 / deliveries[i]).toFixed(2));
             five_wicket_haul[i] = continuous_wickets[i] = deliveries[i] = maidens[i] = runs_conceded[i] = wickets_taken[i] = 0;
         }
+        data.match.scorecard.push(wicket_sequence); // use (typeof(a[])=='object') for commentary display section
         data.match.commentary.push('Dot ball percentage: ' + (dot * 100 / Overs[1]).toFixed(2) + ' %');
         data.match.commentary.push('   ');
 
@@ -914,7 +1025,6 @@ exports.simulate = function (data, callback)
     data.team[1].squad.pop();
     delete data.team[0].ratings;
     delete data.team[1].ratings;
-    // console.log(data);
     var newData = {
         team1: data.team[0],
         team2: data.team[1],

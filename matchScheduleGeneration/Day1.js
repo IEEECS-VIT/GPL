@@ -80,7 +80,8 @@ exports.gen_schedule = function ()
                             "Team_1": i,
                             "Team_2": j,
                             "TimeStamp": new Date("9 Sep 2014 00:00:00 +0530 (IST)"),
-                            "commentary": []
+                            "commentary": [],
+                            "scorecard":[]
                         };
                         match_count++;
 

@@ -80,7 +80,8 @@ exports.gen_schedule = function ()
                                 "Team_1": 8 * i + team1[j],
                                 "Team_2": 8 * i + team2[j],
                                 "TimeStamp": new Date("12 Sep 2014 00:00:00 +0530 (IST)"),
-                                "commentary": []
+                                "commentary": [],
+                                "scorecard":[]
                             };
                             match_count++;
                             SchedulePush.insert(match, "matchday4", onInsert)
