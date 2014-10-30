@@ -38,7 +38,7 @@ exports.gen_schedule = function ()
         }
         else
         {
-            var collection = db.collection('round3');
+            var collection = db.collection('users');
 
             var onFetch = function (err, count)
             {
