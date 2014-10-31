@@ -92,14 +92,14 @@ exports.initSimulation = function (day, masterCallback)
                     async.map(userDoc.squad, getEachRating, onGetRating);
                 }
             };
-            database.collection('users').findOne(query, getRating);
+            database.collection('round2').findOne(query, getRating);
         };
 
         var updateData = function (err, newData)
         {
             var updateUser = function (newUserDoc, asyncCallback)
             {
-                database.collection('users').update({_id: newUserDoc._id}, newUserDoc, asyncCallback);
+                database.collection('round2').update({_id: newUserDoc._id}, newUserDoc, asyncCallback);
             };
 
             var updateMatch = function (newMatchDoc, asyncCallback)
