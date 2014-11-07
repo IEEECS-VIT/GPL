@@ -19,7 +19,7 @@
 var async = require('async');
 var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
-
+var match = require('matchCollection');
 var log;
 if (process.env.LOGENTRIES_TOKEN)
 {
@@ -92,14 +92,14 @@ exports.initSimulation = function (day, masterCallback)
                     async.map(userDoc.squad, getEachRating, onGetRating);
                 }
             };
-            database.collection('round2').findOne(query, getRating);
+            database.collection(match).findOne(query, getRating);
         };
 
         var updateData = function (err, newData)
         {
             var updateUser = function (newUserDoc, asyncCallback)
             {
-                database.collection('round2').update({_id: newUserDoc._id}, newUserDoc, asyncCallback);
+                database.collection(match).update({_id: newUserDoc._id}, newUserDoc, asyncCallback);
             };
 
             var updateMatch = function (newMatchDoc, asyncCallback)

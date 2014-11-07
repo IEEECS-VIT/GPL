@@ -489,7 +489,7 @@ exports.simulate = function (data, callback)
                  counter = 0;
                 }
               last_five_overs[counter] = previous_over;
-              data.match.commentary.push(' Last 5 overs: ' + last_five_overs + ', runrate: ' + (parseFloat(last_five_overs)/5).toFixed(2));
+              data.match.commentary.push(' Last 5 overs: ' + last_five_overs + ', runrate: ' + (parseFloat(last_five_overs[0] + last_five_overs[1] + last_five_overs[2] + last_five_overs[3] + last_five_overs[4])/5).toFixed(2));
             }
             ++counter;
             for (j = 0; j < 6; ++j)
@@ -511,7 +511,7 @@ exports.simulate = function (data, callback)
             previous_bowler = current_bowler;
         }
         strike = [0, 1];
-        data.match.commentary.push(' commentary: ');
+        data.match.commentary.push(' Scorecard: ');
         data.match.commentary.push('Runs Balls Strike Rate Fours Sixes');
         for (i = 0; i < 11; ++i)
         {
@@ -875,7 +875,7 @@ exports.simulate = function (data, callback)
                 counter = 0;
             }
                 last_five_overs[counter] = previous_over;
-                data.match.commentary.push(' Last 5 overs: ' + last_five_overs + ', runrate: ' + (parseFloat(last_five_overs)/5).toFixed(2));
+                data.match.commentary.push(' Last 5 overs: ' + last_five_overs + ', runrate: ' + (parseFloat(last_five_overs[0] + last_five_overs[1] + last_five_overs[2] + last_five_overs[3] + last_five_overs[4])/5).toFixed(2));
             }
             ++counter;
             for (j = 0; j < 6; ++j)

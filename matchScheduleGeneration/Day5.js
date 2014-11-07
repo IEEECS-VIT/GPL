@@ -20,7 +20,7 @@
  */
 
 var MongoClient = require('mongodb').MongoClient;
-
+var match = require('matchCollection');
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
 var SchedulePush = require("./SchedulePush.js");
@@ -38,7 +38,7 @@ exports.gen_schedule = function ()
         }
         else
         {
-            var collection = db.collection('round2');
+            var collection = db.collection(match);
 
             var onFetch = function (err, count)
             {
