@@ -20,7 +20,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 var MongoClient = require('mongodb').MongoClient;
-var match = require('matchCollection');
+var path = require('path');
+var match = require(path.join(__dirname, 'matchCollection'));
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
 var SchedulePush = require("./SchedulePush.js");
