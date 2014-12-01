@@ -1,6 +1,4 @@
-// Created by Kunal Nagpal <kunagpal@gmail.com> on 10/8/14
 /*
- *  GraVITas Premier League
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -489,7 +487,8 @@ exports.simulate = function (data, callback)
                  counter = 0;
                 }
               last_five_overs[counter] = previous_over;
-              data.match.commentary.push(' Last 5 overs: ' + last_five_overs + ', runrate: ' + (parseFloat(last_five_overs[0] + last_five_overs[1] + last_five_overs[2] + last_five_overs[3] + last_five_overs[4])/5).toFixed(2));
+              temp = last_five_overs[0] + last_five_overs[1] + last_five_overs[2] + last_five_overs[3] + last_five_overs[4];
+              data.match.commentary.push(' Last 5 overs: ' + temp + ' runs, runrate: ' + (parseFloat(temp)/5).toFixed(2));
             }
             ++counter;
             for (j = 0; j < 6; ++j)
@@ -875,7 +874,8 @@ exports.simulate = function (data, callback)
                 counter = 0;
             }
                 last_five_overs[counter] = previous_over;
-                data.match.commentary.push(' Last 5 overs: ' + last_five_overs + ', runrate: ' + (parseFloat(last_five_overs[0] + last_five_overs[1] + last_five_overs[2] + last_five_overs[3] + last_five_overs[4])/5).toFixed(2));
+                temp = last_five_overs[0] + last_five_overs[1] + last_five_overs[2] + last_five_overs[3] + last_five_overs[4];
+                data.match.commentary.push(' Last 5 overs: ' + temp + ' runs, runrate: ' + (parseFloat(temp)/5).toFixed(2));
             }
             ++counter;
             for (j = 0; j < 6; ++j)

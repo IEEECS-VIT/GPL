@@ -1,5 +1,5 @@
-// Created by Kunal Nagpal <kunagpal@gmail.com> on 10/8/14
 /*
+    Created by Kunal Nagpal <kunagpal@gmail.com> on 10/8/14
  *  GraVITas Premier League
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
@@ -15,7 +15,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+*/
 
 module.exports =
 {
