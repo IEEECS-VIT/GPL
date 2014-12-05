@@ -19,7 +19,8 @@
 var async = require('async');
 var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
-var match = require('matchCollection');
+var path = require('path');
+var match = require(path.join(__dirname,'..\matchCollection'));
 var log;
 if (process.env.LOGENTRIES_TOKEN)
 {
