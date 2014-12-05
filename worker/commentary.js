@@ -31,7 +31,7 @@ module.exports =
         "makes a bit of room and looks to smash that over the off side and he's beaten",
         "makes a hint of room and the bowler follows him by drifting on the pads, he can only drive back to the bowler",
         "the batsman seems happy to defend",
-        "missed out, this was short and Smith could only smack this back to the bowler",
+        "missed out, this was short and he could only smack this back to the bowler",
         "can only mistime it to short midwicket",
         "doesn't give him much room as he steers it to point",
         "keeps it nice and straight, goes back and defends",
