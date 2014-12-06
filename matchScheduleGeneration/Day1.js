@@ -21,7 +21,7 @@
 
 var MongoClient = require('mongodb').MongoClient;
 var path = require('path');
-var match = require(path.join(__dirname, '../matchCollection.js'));
+var match = require(path.join(__dirname, '..','matchCollection.js'));
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
 var SchedulePush = require("./SchedulePush.js");
