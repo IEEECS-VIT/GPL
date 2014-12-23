@@ -30,10 +30,10 @@ if (process.env.LOGENTRIES_TOKEN)
                             });
 }
 
-var mongoPlayers = require(path.join(__dirname, '..', '..', 'db', 'mongo-players'));
-var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
-var mongoTeam = require(path.join(__dirname, '..', '..', 'db', 'mongo-team'));
-var mongoMatches = require(path.join(__dirname, '..', '..', 'db', 'mongo-matches'));
+var mongoPlayers = require(path.join(__dirname, '..', '..', 'db', 'mongo-players.js'));
+var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users.js'));
+var mongoTeam = require(path.join(__dirname, '..', '..', 'db', 'mongo-team.js'));
+var mongoMatches = require(path.join(__dirname, '..', '..', 'db', 'mongo-matches.js'));
 
 
 router.get('/', function (req, res)
@@ -60,16 +60,17 @@ router.get('/', function (req, res)
 
                 var getDetails = function (id, callback)
                 {
-                    var player = {
+                    var player =
+                    {
                         '_id': id
                     };
                     var fields =
                     {
-                        _id: 1,
-                        Name: 1,
-                        Cost: 1,
-                        Country: 1,
-                        Type: 1
+                        _id : 1,
+                        Name : 1,
+                        Cost : 1,
+                        Country : 1,
+                        Type : 1
                     };
                     mongoPlayers.getPlayer(player, fields, callback)
                 };
@@ -363,10 +364,44 @@ router.post('/getTeam', function (req, res)
     async.map(players, getCost, onFinish);
 
     var teamName = req.signedCookies.name;
-    var credentials = {
+    var credentials =
+    {
         _id: teamName
     };
-    mongoUsers.updateUserTeam(credentials, players, onUpdate);
+    var stats = {};
+    for(i in players)
+    {
+        if(players[i] > 303)
+        {
+            continue;
+        }
+        stats[players[i].toString()] = {};
+        stats[players[i].toString()]._id = players[i];
+        stats[players[i].toString()].matches = 0;
+        stats[players[i].toString()].runs_scored = 0;
+        if((players[i] > 0 && players[i] < 114) || (players[i] > 242 && players[i] < 304))
+        {
+            stats[players[i].toString()].balls = 0;
+            stats[players[i].toString()].outs = 0;
+            stats[players[i].toString()].notouts = 0;
+            stats[players[i].toString()].strike_rate = 0.0;
+            stats[players[i].toString()].average = 0.0;
+            stats[players[i].toString()].high = 0;
+            stats[players[i].toString()].low = -1;
+            stats[players[i].toString()].fours = 0;
+            stats[players[i].toString()].sixes = 0;
+        }
+        else if(players[i] > 113 && players[i] < 304)
+        {
+            stats[players[i].toString()].runs_given = 0;
+            stats[players[i].toString()].wickets_taken = 0;
+            stats[players[i].toString()].economy = 0.0;
+            stats[players[i].toString()].overs = 0;
+            stats[players[i].toString()].avg = 0.0;
+            stats[players[i].toString()].sr = 0.0;
+        }
+    }
+        mongoUsers.updateUserTeam(credentials, players, stats ,onUpdate);
 });
 
 

@@ -56,7 +56,8 @@
         "async": "~0.9.0",
         "bcrypt": "~0.8.0",
         "node-logentries": "~0.1.4",
-        "newrelic": "~1.11.3"
+        "newrelic": "~1.11.3",
+        "universal-analytics": "~0.3.6"
     },
     "repository": {
         "type": "git",

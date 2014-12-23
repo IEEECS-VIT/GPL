@@ -19,8 +19,7 @@
 var async = require('async');
 var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
-var path = require('path');
-var match = require(path.join(__dirname,'..','matchCollection.js'));
+var match = require(path.join(__dirname,'..','matchCollection'));
 var log;
 if (process.env.LOGENTRIES_TOKEN)
 {
@@ -128,7 +127,8 @@ exports.initSimulation = function (day, masterCallback)
 
         var onTeamDetails = function (err, results)
         {
-            var data = {
+            var data =
+            {
                 team: [
                     results.team1,
                     results.team2

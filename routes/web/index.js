@@ -165,25 +165,41 @@ router.post('/register', function (req, res)
             {
                 var salt = bcrypt.genSaltSync(10);
                 var hashedPassword = bcrypt.hashSync(password, salt);
-                var newUser = {
-
-                    _id: teamName,
-                    team_no: team_no,
-                    password_hash: hashedPassword,
-                    manager_name: managerName,
-                    email: email,
-                    phone: phone,
-                    squad: [],
-                    team: [],
-                    win: 0,
-                    played: 0,
-                    points: 0,
+                var newUser =
+                {
+                    _id : teamName,
+                    team_no : team_no,
+                    password_hash : hashedPassword,
+                    manager_name : managerName,
+                    email : email,
+                    phone : phone,
+                    squad : [],
+                    team : [],
+                    win : 0,
+                    loss : 0,
+                    tied : 0,
+                    played : 0,
+                    points : 0,
+                    ratio : 0.0,
                     runs_for: 0,
-                    runs_against: 0,
-                    balls_for: 0,
+                    runs_against : 0,
+                    balls_for : 0,
                     balls_against: 0,
                     net_run_rate: 0.0,
-                    form : 0
+                    wickets_taken : 0,
+                    wickets_lost : 0,
+                    form : 0.0,
+                    morale : 0.0,
+                    streak: 0,
+                    avg_runs_for : 0.0,
+                    avg_runs_against : 0.0,
+                    avg_wickets_lost : 0.0,
+                    avg_wickets_taken : 0.0,
+                    avg_overs_for : 0.0,
+                    avg_overs_against : 0.0,
+                    highest_total : 0,
+                    lowest_total : 0,
+                    stats : {}
                 };
                 var onInsert = function (err, docs)
                 {

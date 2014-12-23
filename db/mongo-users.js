@@ -227,7 +227,7 @@ exports.forgotPassword = function (doc, callback)
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.updateUserTeam = function (doc, arr, callback)
+exports.updateUserTeam = function (doc, arr, stats, callback)
 {
     var onConnect = function (err, db)
     {
@@ -250,13 +250,13 @@ exports.updateUserTeam = function (doc, arr, callback)
                     callback(true, document);
                 }
             };
-            collection.findAndModify(doc, [], {$set: {'team': arr}}, {}, onUpdate)
+            collection.findAndModify(doc, [], {$set: {'team': arr, 'stats' : stats}}, {}, onUpdate)
         }
     };
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.updateround2quad = function (doc, arr, callback)
+exports.updateMatchSquad = function (doc, arr, callback)
 {
     var onConnect = function (err, db)
     {
