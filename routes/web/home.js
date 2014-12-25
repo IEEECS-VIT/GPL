@@ -375,30 +375,30 @@ router.post('/getTeam', function (req, res)
         {
             continue;
         }
-        stats[players[i].toString()] = {};
-        stats[players[i].toString()]._id = players[i];
-        stats[players[i].toString()].matches = 0;
-        stats[players[i].toString()].runs_scored = 0;
+        stats[players[i]] = {};
+        stats[players[i]]._id = players[i];
+        stats[players[i]].matches = 0;
+        stats[players[i]].runs_scored = 0;
         if((players[i] > 0 && players[i] < 114) || (players[i] > 242 && players[i] < 304))
         {
-            stats[players[i].toString()].balls = 0;
-            stats[players[i].toString()].outs = 0;
-            stats[players[i].toString()].notouts = 0;
-            stats[players[i].toString()].strike_rate = 0.0;
-            stats[players[i].toString()].average = 0.0;
-            stats[players[i].toString()].high = 0;
-            stats[players[i].toString()].low = -1;
-            stats[players[i].toString()].fours = 0;
-            stats[players[i].toString()].sixes = 0;
+            stats[players[i]].balls = 0;
+            stats[players[i]].outs = 0;
+            stats[players[i]].notouts = 0;
+            stats[players[i]].strike_rate = 0.0;
+            stats[players[i]].average = 0.0;
+            stats[players[i]].high = 0;
+            stats[players[i]].low = -1;
+            stats[players[i]].fours = 0;
+            stats[players[i]].sixes = 0;
         }
         else if(players[i] > 113 && players[i] < 304)
         {
-            stats[players[i].toString()].runs_given = 0;
-            stats[players[i].toString()].wickets_taken = 0;
-            stats[players[i].toString()].economy = 0.0;
-            stats[players[i].toString()].overs = 0;
-            stats[players[i].toString()].avg = 0.0;
-            stats[players[i].toString()].sr = 0.0;
+            stats[players[i]].runs_given = 0;
+            stats[players[i]].wickets_taken = 0;
+            stats[players[i]].economy = 0.0;
+            stats[players[i]].overs = 0;
+            stats[players[i]].avg = 0.0;
+            stats[players[i]].sr = 0.0;
         }
     }
         mongoUsers.updateUserTeam(credentials, players, stats ,onUpdate);
