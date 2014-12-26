@@ -391,7 +391,7 @@ router.post('/getTeam', function (req, res)
             stats[players[i]].fours = 0;
             stats[players[i]].sixes = 0;
         }
-        if(players[i] > 112 && players[i] < 304)
+        if(players[i] > 113 && players[i] < 304)
         {
             stats[players[i]].runs_given = 0;
             stats[players[i]].wickets_taken = 0;
