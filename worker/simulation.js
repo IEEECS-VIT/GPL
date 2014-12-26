@@ -24,14 +24,14 @@ exports.simulate = function (data, callback)
     }
     else if (data.team[0].ratings.length < 12)
     {
-        console.log(data.team[0]._id + ' forfeits the match, ' + data.team[1]._id + ' wins');
+        console.log(data.team[0]._id + ' forfeits the match, ' + data.team[1]._id + ' wins by default clause');
         ++data.team[1].win;
         data.team[1].points += 2;
         ++data.team[0].loss;
     }
     else if (data.team[1].ratings.length < 12)
     {
-        console.log(data.team[1]._id + ' forfeits the match, ' + data.team[0]._id + ' wins');
+        console.log(data.team[1]._id + ' forfeits the match, ' + data.team[0]._id + ' wins by default clause');
         ++data.team[0].win;
         data.team[0].points += 2;
         ++data.team[1].loss;
@@ -70,7 +70,7 @@ exports.simulate = function (data, callback)
             this.bowl_average = [];
             this.bowl_strike_rate = [];
             this.coach_rating = parseInt(team[11]['Rating (15)']);
-            if (this.coach_rating.toString() == 'NaN')
+            if (!this.coach_rating)
             {
                 this.coach_rating = -50;
             }
@@ -122,7 +122,6 @@ exports.simulate = function (data, callback)
                         ++bowler_count;
                         break;
                 }
-
             }
             mean_rating[arg] = ( average_bat_rating + average_bowl_rating ) / 17;
             average_bat_rating = parseFloat(average_bat_rating / 11);
@@ -209,6 +208,12 @@ exports.simulate = function (data, callback)
             data.match.commentary[data.match.commentary.length - 1] += 'bat ';
         }
         data.match.commentary[data.match.commentary.length - 1] += 'first  ';
+        data.match.commentary.push('Batting orders:');
+        data.match.commentary.push(data.team[+!toss]._id + ' | ' + data.team[+toss]._id);
+        for(i = 0; i < 12; ++i)
+        {
+            data.match.commentary.push(data.team[+!toss].ratings[i].Name + (data.team[+!toss].ratings[i].Type) + ' | ' + data.team[+toss].ratings[i].Name + (data.team[+toss].ratings[i].Type));
+        }
         wickets[0] = wickets[1] = strike_index = previous_bowler = 0;
         for (i = 1; i < 6; ++i)
         {
