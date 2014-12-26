@@ -191,14 +191,15 @@ router.post('/register', function (req, res)
                     form : 0.0,
                     morale : 0.0,
                     streak: 0,
+                    all_outs: 0,
                     avg_runs_for : 0.0,
                     avg_runs_against : 0.0,
                     avg_wickets_lost : 0.0,
                     avg_wickets_taken : 0.0,
                     avg_overs_for : 0.0,
                     avg_overs_against : 0.0,
-                    highest_total : 0,
-                    lowest_total : 0,
+                    highest_total : -1,
+                    lowest_total : Number.MAX_VALUE,
                     stats : {}
                 };
                 var onInsert = function (err, docs)
