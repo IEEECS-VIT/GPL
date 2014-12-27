@@ -130,10 +130,10 @@ exports.simulate = function (data, callback)
             {
                 if (i < 6)
                 {
-                    this.bowler_rating[i] += parseFloat(this.bowler_rating[i] )/5 - parseFloat(average_bowl_rating)/30 + parseInt(this.coach_rating);
+                    this.bowler_rating[i] += parseFloat(this.bowler_rating[i] ) / 5 - parseFloat(average_bowl_rating) / 30 + parseInt(this.coach_rating);
                 }
-                this.bat_rating[i] += parseFloat(this.bat_rating[i]) / 10 - parseFloat(average_bat_rating)/110 + parseInt(this.coach_rating);
-                this.bat_rating = (this.bat_rating < 0)? ((this.coach_rating < 0)? (0) : (this.coach_rating)):(this.bat_rating);
+                this.bat_rating[i] += parseFloat(this.bat_rating[i]) / 10 - parseFloat(average_bat_rating) / 110 + parseInt(this.coach_rating);
+                this.bat_rating = (this.bat_rating < 0)? ((this.coach_rating < 0) ? (0) : (this.coach_rating)):(this.bat_rating);
             }
         }
         var team_object = [];
@@ -151,6 +151,11 @@ exports.simulate = function (data, callback)
         var toss;
         var i;
         var j;
+        var MoM =
+        {
+
+        };
+        var points = -1;
         var strike_index;
         var continuous_maximums;
         var fall_of_wicket;
@@ -356,8 +361,14 @@ exports.simulate = function (data, callback)
                     {
                         control[strike[+strike_index]] *= (balls[strike[+strike_index]] - 1)/ (balls[strike[+strike_index]]);
                     }
+                    temp = score[strike[+strike_index]] * (1 - Math.exp(-Math.pow((fours[strike[+strike_index]] * maximums[strike[+strike_index]]),1 / (1 - control[strike[+strike_index]])) / (balls[strike[+strike_index]] + team_object[+!toss].bat_rating[strike[+strike_index]])));
+                    if(points < temp)
+                    {
+                        points = temp;
+                        // other referential markers to be placed here
+                    }
                     data.match.commentary[data.match.commentary.length - 1] += ' ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ' balls' + ' ' + fours[strike[+strike_index]] + 'X4\'s ' + maximums[strike[+strike_index]] + 'X6\'s) SR: ' + (score[strike[+strike_index]] * 100 / balls[strike[+strike_index]]).toFixed(2) + 'Control: ' + control[strike[+strike_index]] * 100 + ' Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + ')' + ', Runrate: ' + (partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index]).toFixed(2);
-                    frustration[strike_index] = 0;
+                    frustration[+strike_index] = 0;
                     ++current_partnership_index;
                     control[strike[+strike_index]] = 0;
                     strike[+strike_index] = (strike[+strike_index] > strike[+!strike_index] ? strike[+strike_index] : strike[+!strike_index]) + 1;
@@ -370,7 +381,7 @@ exports.simulate = function (data, callback)
                     {
                         Overs[0] = 6 * i + j;
                         data.match.commentary.push(' And that wraps up the innings. ');
-                        ++data.team[+toss].all_outs;
+                        ++data.team[+!toss].all_outs;
                         break;
                     }
                     batsman_performance_index = i;
@@ -616,7 +627,7 @@ exports.simulate = function (data, callback)
             {
                 partnership_runs[i] = partnership_balls[i] = 0;
             }
-            balls[i] = fours[i] = maximums[i] = dismissed[i] = milestone[i] = score[i] = balls[i] = fours[i] = maximums[i] = control[i] =0;
+            balls[i] = fours[i] = maximums[i] = dismissed[i] = milestone[i] = score[i] = balls[i] = fours[i] = maximums[i] = control[i] = 0;
         }
         data.match.scorecard.push('Total: ' + Total[0] + ' / ' + wickets[0] + ' (' + parseInt(Overs[0] / 6) + '.' + Overs[0] % 6 + ' overs)  Runrate: ' + (Total[0] * 6 / Overs[0]).toFixed(2) + ' Extras: ' + extras);
         data.match.scorecard.push(' Bowling Statistics:');
@@ -781,6 +792,12 @@ exports.simulate = function (data, callback)
                     {
                         control[strike[+strike_index]] *= ((balls[strike[+strike_index]] - 1)/ (balls[strike[+strike_index]])).toFixed(2);
                     }
+                    temp = score[strike[+strike_index]] * (1 - Math.exp(-Math.pow((fours[strike[+strike_index]] * maximums[strike[+strike_index]]),1 / (1 - control[strike[+strike_index]])) / (balls[strike[+strike_index]] + team_object[+toss].bat_rating[strike[+strike_index]])));
+                    if(points < temp)
+                    {
+                        points = temp;
+                        // other referential markers to be placed here
+                    }
                     data.match.commentary.push(' ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ' balls' + ' ' + fours[strike[+strike_index]] + 'X4\'s ' + maximums[strike[+strike_index]] + 'X6\'s) SR: ' + (score[strike[+strike_index]] * 100 / balls[strike[+strike_index]]).toFixed(2) + 'Control: ' + control[strike[+strike_index]] * 100  + '%, Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + ')' + ', Runrate: ' + (partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index])).toFixed(2);
                     ++current_partnership_index;
                     strike[+strike_index] = (strike[+strike_index] > strike[+!strike_index] ? strike[+strike_index] : strike[+!strike_index]) + 1;
@@ -796,7 +813,7 @@ exports.simulate = function (data, callback)
                     {
                         Overs[1] = 6 * i + j;
                         data.match.commentary.push(' And that wraps up the innings. ');
-                        ++data.team[+!toss].all_outs;
+                        ++data.team[+toss].all_outs;
                         break;
                     }
                     batsman_performance_index = i;
