@@ -53,6 +53,10 @@ exports.simulate = function (data, callback)
         var three = require(path.join(__dirname, 'commentary', 'score', 'three.js'));
         var four = require(path.join(__dirname, 'commentary', 'score', 'four.js'));
         var six = require(path.join(__dirname, 'commentary', 'score', 'six.js'));
+        var start = require(path.join(__dirname, 'commentary', 'misc', 'start.js'));
+        var mid = require(path.join(__dirname, 'commentary', 'misc', 'mid.js'));
+        var end = require(path.join(__dirname, 'commentary', 'misc', 'end.js'));
+        var record = require(path.join(__dirname, 'commentary', 'misc', 'record.js'));
         var form = ['poor', 'average', 'good', 'excellent'];
         console.log(data.team[0]._id + ' vs ' + data.team[1]._id + ' is now being simulated');
         function rand()
@@ -229,6 +233,7 @@ exports.simulate = function (data, callback)
             }
         }
         current_bowler = previous_bowler;
+        data.match.commentary.push(start[rand() % start.length]);
         data.match.commentary.push(team_object[+toss].bowl_name[previous_bowler] + ' to start proceedings from the pavillion end.....  ');
         dot = 0;
         desperation[0] = +(data.team[+!toss].streak < 0) * (1 - team_object[+!toss].bat_rating[strike[0]] / 1000) * Math.abs(data.team[+!toss].streak) * (mean_rating[+toss]) / 1000;
@@ -588,6 +593,7 @@ exports.simulate = function (data, callback)
             ++data.team[+!toss].stats[data.team[+!toss].squad[i]].matches;
             if((data.team[+!toss].squad[i] > 0 && data.team[+!toss].squad[i] < 114) || (data.team[+!toss].squad[i] > 242 && data.team[+!toss].squad[i] < 304))
             {
+                data.team[+!toss].stats[data.team[+!toss].squad[i]].recent.push(score[j]);
                 data.team[+!toss].stats[data.team[+!toss].squad[i]].runs_scored += score[j];
                 data.team[+!toss].stats[data.team[+!toss].squad[i]].balls += balls[j];
                 if(dismissed[j])
@@ -672,6 +678,7 @@ exports.simulate = function (data, callback)
         data.match.scorecard.push('   ');
         wicket_sequence = [];
         frustration = [0, 0];
+        data.match.commentary.push(mid[rand() % mid.length]);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         var hope = true;
         desperation[0] = +(data.team[+toss].streak < 0) * (1 - team_object[+toss].bat_rating[strike[0]] / 1000) * data.team[+toss].streak * ((Total[0] + 1) / 5000) * mean_rating[+!toss] / team_object[+toss].bat_strike_rate[strike[0]];
@@ -1058,6 +1065,7 @@ exports.simulate = function (data, callback)
             }
             previous_bowler = current_bowler;
         }
+        data.match.commentary.push(end[rand() % end.length]);
         j = 0;
         for(i in data.team[+toss].squad)
         {
@@ -1069,6 +1077,7 @@ exports.simulate = function (data, callback)
             ++data.team[+toss].stats[data.team[+toss].squad[i]].matches;
             if((data.team[+toss].squad[i] > 0 && data.team[+toss].squad[i] < 114) || (data.team[+toss].squad[i] > 242 && data.team[+toss].squad[i] < 304))
             {
+                data.team[+toss].stats[data.team[+toss].squad[i]].recent.push(score[j]);
                 data.team[+toss].stats[data.team[+toss].squad[i]].runs_scored += score[j];
                 data.team[+toss].stats[data.team[+toss].squad[i]].balls += balls[j];
                 if(dismissed[j])

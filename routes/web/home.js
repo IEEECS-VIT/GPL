@@ -390,6 +390,7 @@ router.post('/getTeam', function (req, res)
             stats[players[i]].low = Number.MAX_VALUE;
             stats[players[i]].fours = 0;
             stats[players[i]].sixes = 0;
+            stats[players[i]].recent = [];
         }
         if(players[i] > 113 && players[i] < 304)
         {
