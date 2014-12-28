@@ -589,8 +589,8 @@ exports.simulate = function (data, callback)
             {
                 continue;
             }
-            data.team[+!toss].stats[data.team[+!toss].squad[i]]._id = data.team[+!toss].squad[i];
             ++data.team[+!toss].stats[data.team[+!toss].squad[i]].matches;
+            data.team[+!toss].stats[data.team[+!toss].squad[i]].catches += catches[i];
             if((data.team[+!toss].squad[i] > 0 && data.team[+!toss].squad[i] < 114) || (data.team[+!toss].squad[i] > 242 && data.team[+!toss].squad[i] < 304))
             {
                 data.team[+!toss].stats[data.team[+!toss].squad[i]].recent.push(score[j]);
@@ -1073,8 +1073,8 @@ exports.simulate = function (data, callback)
             {
                 continue;
             }
-            data.team[+toss].stats[data.team[+toss].squad[i]]._id = data.team[+toss].squad[i];
             ++data.team[+toss].stats[data.team[+toss].squad[i]].matches;
+            data.team[+toss].stats[data.team[+toss].squad[i]].catches += catches[i];
             if((data.team[+toss].squad[i] > 0 && data.team[+toss].squad[i] < 114) || (data.team[+toss].squad[i] > 242 && data.team[+toss].squad[i] < 304))
             {
                 data.team[+toss].stats[data.team[+toss].squad[i]].recent.push(score[j]);

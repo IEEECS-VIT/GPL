@@ -93,8 +93,7 @@ router.get('/', function (req, res)
                 }
                 else
                 {
-                    var document = [];
-                    document = doc.team;
+                    var document = doc.team;
                     async.map(document, getDetails, onFinish);
                 }
 
@@ -352,7 +351,7 @@ router.post('/getTeam', function (req, res)
             console.log(documents);
             for (var i = parseInt(0); i < documents.length; i++)
             {
-                cost = (cost - 0) + (documents[i].Cost - 0);
+                cost += documents[i].Cost;
                 if (cost > 10000000)
                 {
                     res.redirect('/home/players', {err: "Cost Exceeded"});
@@ -378,9 +377,10 @@ router.post('/getTeam', function (req, res)
         stats[players[i]] = {};
         stats[players[i]]._id = players[i];
         stats[players[i]].matches = 0;
-        stats[players[i]].runs_scored = 0;
+        stats[players[i]].catches = 0;
         if((players[i] > 0 && players[i] < 114) || (players[i] > 242 && players[i] < 304))
         {
+            stats[players[i]].runs_scored = 0;
             stats[players[i]].balls = 0;
             stats[players[i]].outs = 0;
             stats[players[i]].notouts = 0;
