@@ -18,6 +18,7 @@
 */
 module.exports =
     [
+        "",
         "he gives him width and he chops it wide of backward point and they take three",
         "shortish and angled into him, he moved outside leg and cuts it behind point. The sweeper and he pulls it back right  on the boundary",
         "easy peasy for the striker as he whips this length delivery through midwicket to pick up three runs",

@@ -18,6 +18,7 @@
  */
 module.exports =
     [
+        "",
         "tries to scoop this from way outside off stump, but he edges it into his body instead, scampers a single",
         "cranks up and has a slog, but he can only mishit it tamely through midwicket",
         "slower one picked from outside off and slogged on the bounce to deep midwicket",

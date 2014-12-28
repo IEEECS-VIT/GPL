@@ -18,6 +18,7 @@
 */
 module.exports =
 [
+    "",
     "That is a strange way to prevent the batsman from hitting the ball, but it seems to be working. Wide signalled by  the umpire.",
     "That is just criminal, to bowl deliveries like that in this format of the game. The batting team on the other hand,  has no complaints",
     "he strays wide down the leg side",

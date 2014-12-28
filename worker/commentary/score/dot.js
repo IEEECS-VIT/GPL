@@ -18,6 +18,7 @@
 */
 module.exports =
     [
+        "",
         "short ball and a slower one, he softly pulls it to short fine leg",
         "this was jammed full outside off, looks to dig it out",
         "drifting down the leg side and nearly clipped the leg stump on the way through",

@@ -17,7 +17,9 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 module.exports =
-    [   "oops! The yorker ends up a full toss and he has mauled it over cow corner. ",
+    [
+        "",
+        "oops! The yorker ends up a full toss and he has mauled it over cow corner. ",
         "switch hit alert! This was a low full toss on off stump, the batsman changed his grip and swept it right-handed over  short fine leg, which was short third man until a second ago",
         "low full toss outside off, the batsman does what he has been doing so often. Backs away and hammers it over the  boundary. This time the crowd over extra cover scurries to return the ball",
         "this time he misses his length and the batsman has swept him mightily into the stands behind square leg. Sunk down  into his knees and swung the arms quite freely. That was massive",

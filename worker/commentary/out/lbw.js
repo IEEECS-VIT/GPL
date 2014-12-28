@@ -18,6 +18,7 @@
 */
 module.exports =
 [
+    "",
     "The batsman had no clue about this ball.. He played back to it and was hit right in front.",
     "This was the one that went in and the batsman looked to work it away on the leg side, got hit right in front of the  middle stump.. Easy decision for the umpire",
     "gone! This is full, fast and hitting middle and leg stump. The batsman is too slow to bring his bat down and is  caught plumb in front. He falls over as he tries to flick it",
