@@ -296,7 +296,7 @@ exports.simulate = function (data, callback)
                     if (batsman_performance_index <= 0 && batsman_performance_index > -0.5)
                     {
                         data.match.commentary.push(caught[rand() % caught.length]);
-                        temp = rand() % 11;
+                        temp = parseInt(Math.abs(batsman_performance_index * 22));
                     }
                     else if (batsman_performance_index <= -0.5 && batsman_performance_index > -1)
                     {
@@ -395,7 +395,7 @@ exports.simulate = function (data, callback)
                     ++current_partnership_index;
                     control[strike[+strike_index]] = 0;
                     strike[+strike_index] = (strike[+strike_index] > strike[+!strike_index] ? strike[+strike_index] : strike[+!strike_index]) + 1;
-                    if (batsman_performance_index <= 0 && batsman_performance_index >= -0.5 && rand() % 2)
+                    if (temp != -1 && rand() % 2)
                     {
                         strike_index = !strike_index;
                         data.match.commentary.push(' The two batsmen crossed over while the catch was being taken.');
@@ -750,7 +750,7 @@ exports.simulate = function (data, callback)
                     if (batsman_performance_index <= 0 && batsman_performance_index > -0.5)
                     {
                         data.match.commentary.push(caught[rand() % caught.length]);
-                        temp = rand() % 11;
+                        temp = parseInt(Math.abs(batsman_performance_index * 22));
                     }
                     else if (batsman_performance_index <= -0.5 && batsman_performance_index > -1)
                     {
@@ -856,7 +856,7 @@ exports.simulate = function (data, callback)
                     desperation[+strike_index] = +(data.team[+toss].streak < 0) * (1 - team_object[+toss].bat_rating[strike[+strike_index]] / 1000) * data.team[+toss].streak * ((Total[0] - Total[1] + 1) / 5000) * mean_rating[+!toss] / team_object[+toss].bat_strike_rate[strike[+strike_index]];
                     frustration[+strike_index] = 0;
                     control[strike[+strike_index]] = 0;
-                    if (batsman_performance_index <= 0 && batsman_performance_index >= -0.5 && rand() % 2)
+                    if (temp != -1 && rand() % 2)
                     {
                         strike_index = !strike_index;
                         data.match.commentary.push(' The two batsmen crossed over while the catch was being taken.');
