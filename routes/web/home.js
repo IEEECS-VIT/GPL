@@ -378,6 +378,7 @@ router.post('/getTeam', function (req, res)
         stats[players[i]]._id = players[i];
         stats[players[i]].matches = 0;
         stats[players[i]].catches = 0;
+        stats[players[i]].MoM = 0;
         if((players[i] > 0 && players[i] < 114) || (players[i] > 242 && players[i] < 304))
         {
             stats[players[i]].runs_scored = 0;
@@ -402,7 +403,7 @@ router.post('/getTeam', function (req, res)
             stats[players[i]].sr = 0.0;
         }
     }
-        mongoUsers.updateUserTeam(credentials, players, stats ,onUpdate);
+        mongoUsers.updateUserTeam(credentials, players, stats, onUpdate);
 });
 
 

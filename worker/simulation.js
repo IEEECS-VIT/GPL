@@ -1266,19 +1266,19 @@ exports.simulate = function (data, callback)
             data.team[+!winner_index].wickets_taken += wickets[+winner];
             data.team[+winner_index].wickets_lost += wickets[+winner];
             data.team[+!winner_index].wickets_lost += wickets[+!winner];
-            data.team[+winner_index].streak = (data.team[+winner_index].streak < 0) ? (1) : (data.team[+winner_index].streak + 1);
-            data.team[+!winner_index].streak = (data.team[+!winner_index].streak > 0) ? (0) : (data.team[+!winner_index].streak - 1);
-            data.team[+winner_index].form += (Overs[+winner] * mean_rating[+!winner] / Total[+winner] - Overs[+!winner] * mean_rating[+winner] / Total[+!winner]) / 6;
-            data.team[+!winner_index].form += (Overs[+!winner] * mean_rating[+winner] / Total[+!winner] - Overs[+winner] * mean_rating[+!winner] / Total[+winner])/ 6;
-            data.team[+winner_index].net_run_rate = (((data.team[+winner_index].runs_for) / (data.team[+winner_index].balls_for) - (data.team[+winner_index].runs_against) / (data.team[+winner_index].balls_against)) * 6).toFixed(2);
-            data.team[+!winner_index].net_run_rate = (((data.team[+!winner_index].runs_for) / (data.team[+!winner_index].balls_for) - (data.team[+!winner_index].runs_against) / (data.team[+!winner_index].balls_against)) * 6).toFixed(2);
+            data.team[+winner].ratio = data.team[+winner].win / (data.team[+winner].loss ? data.team[+winner].loss : 1 );
+            data.team[+!winner].ratio = data.team[+!winner].win / (data.team[+!winner].loss ? data.team[+!winner].loss : 1);
+            data.team[+winner].streak = (data.team[+winner].streak < 0) ? (1) : (data.team[+winner].streak + 1);
+            data.team[+!winner].streak = (data.team[+!winner].streak > 0) ? (0) : (data.team[+!winner].streak - 1);
+            data.team[+winner_index].form += ((Overs[+winner] * mean_rating[+!winner] / Total[+winner]) - (Overs[+!winner] * mean_rating[+winner] / Total[+!winner])) / 6;
+            data.team[+!winner_index].form += ((Overs[+!winner] * mean_rating[+winner] / Total[+!winner]) - (Overs[+winner] * mean_rating[+!winner] / Total[+winner]))/ 6;
+            data.team[+winner].net_run_rate = (((data.team[+winner].runs_for) / (data.team[+winner].balls_for) - (data.team[+winner].runs_against) / (data.team[+winner].balls_against)) * 6).toFixed(2);
+            data.team[+!winner].net_run_rate = (((data.team[+!winner].runs_for) / (data.team[+!winner].balls_for) - (data.team[+!winner].runs_against) / (data.team[+!winner].balls_against)) * 6).toFixed(2);
         }
         data.match.commentary.push('Man of the Match: ' + MoM);
     }
     ++data.team[0].played;
     ++data.team[1].played;
-    data.team[0].ratio = data.team[0].win / data.team[0].loss;
-    data.team[1].ratio = data.team[1].win / data.team[1].loss;
     data.team[0].avg_runs_for = data.team[0].runs_for / data.team[0].played;
     data.team[1].avg_runs_for = data.team[1].runs_for / data.team[1].played;
     data.team[0].avg_runs_against = data.team[0].runs_against / data.team[0].played;
