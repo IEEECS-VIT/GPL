@@ -168,6 +168,7 @@ router.post('/register', function (req, res)
                 var newUser =
                 {
                     _id : teamName,
+                    dob : new Date(),
                     team_no : team_no,
                     password_hash : hashedPassword,
                     manager_name : managerName,
@@ -188,7 +189,8 @@ router.post('/register', function (req, res)
                     net_run_rate: 0.0,
                     wickets_taken : 0,
                     wickets_lost : 0,
-                    form : 0.0,
+                    toss : 0,
+                    form : 1,
                     morale : 0.0,
                     streak: 0,
                     all_outs: 0,
