@@ -673,6 +673,7 @@ exports.simulate = function (data, callback)
             data.match.scorecard.push(team_object[+toss].bowl_name[i] + ' ' + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + (runs_conceded[i] * 6 / deliveries[i]).toFixed(2));
             five_wicket_haul[i] = continuous_wickets[i] = deliveries[i] = maidens[i] = runs_conceded[i] = wickets_taken[i] = dot_deliveries[i] = 0;
         }
+        data.match.scorecard.push('Fall of wickets: ');
         data.match.scorecard.push(wicket_sequence); // use typeof(a[]=='object') to format for commentary display section')
         data.match.scorecard.push('Dot ball percentage: ' + (dot * 100 / Overs[0]).toFixed(2) + ' %');
         extras = strike_index = free_hit = current_partnership_index = dot = previous_bowler = 0;
@@ -1158,6 +1159,7 @@ exports.simulate = function (data, callback)
             data.match.scorecard.push(team_object[+!toss].bowl_name[i] + ' ' + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + (runs_conceded[i] * 6 / deliveries[i]).toFixed(2));
             five_wicket_haul[i] = continuous_wickets[i] = deliveries[i] = maidens[i] = runs_conceded[i] = wickets_taken[i] = 0;
         }
+        data.match.scorecard.push('Fall of wickets: ');
         data.match.scorecard.push(wicket_sequence); // use (typeof(a[])=='object') for commentary display section
         data.match.scorecard.push('Dot ball percentage: ' + (dot * 100 / Overs[1]).toFixed(2) + ' %');
         data.match.scorecard.push('   ');
