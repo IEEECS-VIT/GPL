@@ -119,25 +119,26 @@ exports.simulate = function (data, callback)
             }
         }
         var path = require('path');
-        var freehit = require(path.join(__dirname, 'commentary', 'extra', 'freehit'));
-        var wide = require(path.join(__dirname, 'commentary', 'extra', 'wide'));
-        var caught = require(path.join(__dirname, 'commentary', 'out', 'caught'));
-        var bowled = require(path.join(__dirname, 'commentary', 'out', 'bowled'));
         var lbw = require(path.join(__dirname, 'commentary', 'out', 'lbw'));
-        var runout = require(path.join(__dirname, 'commentary', 'out', 'runout'));
-        var stumped = require(path.join(__dirname, 'commentary', 'out', 'stumped'));
-        var zero = require(path.join(__dirname, 'commentary', 'score', 'dot'));
-        var one = require(path.join(__dirname, 'commentary', 'score', 'one'));
-        var two = require(path.join(__dirname, 'commentary', 'score', 'two'));
-        var three = require(path.join(__dirname, 'commentary', 'score', 'three'));
-        var four = require(path.join(__dirname, 'commentary', 'score', 'four'));
-        var six = require(path.join(__dirname, 'commentary', 'score', 'six'));
-        var start = require(path.join(__dirname, 'commentary', 'misc', 'start'));
+        var mom = require(path.join(__dirname, 'commentary', 'misc', 'mom'));
         var mid = require(path.join(__dirname, 'commentary', 'misc', 'mid'));
         var end = require(path.join(__dirname, 'commentary', 'misc', 'end'));
+        var one = require(path.join(__dirname, 'commentary', 'score', 'one'));
+        var two = require(path.join(__dirname, 'commentary', 'score', 'two'));
+        var six = require(path.join(__dirname, 'commentary', 'score', 'six'));
+        var zero = require(path.join(__dirname, 'commentary', 'score', 'dot'));
         var half = require(path.join(__dirname, 'commentary', 'misc', 'half'));
         var full = require(path.join(__dirname, 'commentary', 'misc', 'full'));
         var miss = require(path.join(__dirname, 'commentary', 'misc', 'miss'));
+        var four = require(path.join(__dirname, 'commentary', 'score', 'four'));
+        var wide = require(path.join(__dirname, 'commentary', 'extra', 'wide'));
+        var start = require(path.join(__dirname, 'commentary', 'misc', 'start'));
+        var caught = require(path.join(__dirname, 'commentary', 'out', 'caught'));
+        var bowled = require(path.join(__dirname, 'commentary', 'out', 'bowled'));
+        var runout = require(path.join(__dirname, 'commentary', 'out', 'runout'));
+        var three = require(path.join(__dirname, 'commentary', 'score', 'three'));
+        var stumped = require(path.join(__dirname, 'commentary', 'out', 'stumped'));
+        var freehit = require(path.join(__dirname, 'commentary', 'extra', 'freehit'));
         var MoM = {};
         var mean_rating = [];
         var desperation = [];
@@ -153,6 +154,15 @@ exports.simulate = function (data, callback)
         var bowl = [1200, 1200, 1200]; // increase to strengthen bowling
         var maidens = [0, 0, 0, 0, 0, 0];
         var deliveries = [0, 0, 0, 0, 0, 0];
+        var deliveries_bowled =
+        [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        ];
         var runs_conceded = [0, 0, 0, 0, 0, 0];
         var wickets_taken = [0, 0, 0, 0, 0, 0];
         var dot_deliveries = [0, 0, 0, 0, 0, 0];
@@ -275,6 +285,7 @@ exports.simulate = function (data, callback)
                 ++deliveries[current_bowler];
                 ++balls[strike[+strike_index]];
                 ++balls_faced[+strike_index][current_bowler];
+                ++deliveries_bowled[current_bowler][strike[+strike_index]];
                 ++partnership_balls[current_partnership_index];
                 if (free_hit)
                 {
@@ -440,12 +451,14 @@ exports.simulate = function (data, callback)
                         }
                         --j;
                         ++extras;
-                        --partnership_balls[current_partnership_index];
-                        ++partnership_runs[current_partnership_index];
-                        --balls[strike[+strike_index]];
-                        --deliveries[current_bowler];
                         ++Total[0];
                         delivery_score = 0;
+                        --deliveries[current_bowler];
+                        --balls[strike[+strike_index]];
+                        --balls_faced[+strike_index][current_bowler];
+                        ++partnership_runs[current_partnership_index];
+                        --partnership_balls[current_partnership_index];
+                        --deliveries_bowled[current_bowler][strike[+strike_index]];
                     }
                     else
                     {
@@ -675,6 +688,7 @@ exports.simulate = function (data, callback)
             }
             data.match.scorecard.push(team_object[+toss].bowl_name[i] + ' ' + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + (runs_conceded[i] * 6 / deliveries[i]).toFixed(2));
             five_wicket_haul[i] = continuous_wickets[i] = deliveries[i] = maidens[i] = runs_conceded[i] = wickets_taken[i] = dot_deliveries[i] = 0;
+            deliveries_bowled[i] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         }
         data.match.scorecard.push('Fall of wickets: ');
         data.match.scorecard.push(wicket_sequence); // use typeof(a[]=='object') to format for commentary display section')
@@ -736,6 +750,7 @@ exports.simulate = function (data, callback)
                 ++balls[strike[+strike_index]];
                 ++balls_faced[+strike_index][current_bowler];
                 ++partnership_balls[current_partnership_index];
+                ++deliveries_bowled[current_bowler][strike[+strike_index]];
                 if(free_hit)
                 {
                     data.match.commentary.push(' Free Hit: ');
@@ -914,6 +929,7 @@ exports.simulate = function (data, callback)
                         --balls[strike[+strike_index]];
                         ++partnership_runs[current_partnership_index];
                         --partnership_balls[current_partnership_index];
+                        --deliveries_bowled[current_bowler][strike[+strike_index]];
                     }
                     else
                     {
@@ -1278,18 +1294,20 @@ exports.simulate = function (data, callback)
             data.team[+!winner_index].wickets_taken += wickets[+winner];
             data.team[+winner_index].wickets_lost += wickets[+winner];
             data.team[+!winner_index].wickets_lost += wickets[+!winner];
-            data.team[+winner].ratio = data.team[+winner].win / (data.team[+winner].loss ? data.team[+winner].loss : 1 );
-            data.team[+!winner].ratio = data.team[+!winner].win / (data.team[+!winner].loss ? data.team[+!winner].loss : 1);
             data.team[+winner].streak = (data.team[+winner].streak < 0) ? (1) : (data.team[+winner].streak + 1);
             data.team[+!winner].streak = (data.team[+!winner].streak > 0) ? (0) : (data.team[+!winner].streak - 1);
+            data.team[+winner].ratio = data.team[+winner].win / (data.team[+winner].loss ? data.team[+winner].loss : 1 );
+            data.team[+!winner].ratio = data.team[+!winner].win / (data.team[+!winner].loss ? data.team[+!winner].loss : 1);
             data.team[+winner_index].form += ((Overs[+winner] * mean_rating[+!winner] / Total[+winner]) - (Overs[+!winner] * mean_rating[+winner] / Total[+!winner])) / 6;
             data.team[+!winner_index].form += ((Overs[+!winner] * mean_rating[+winner] / Total[+!winner]) - (Overs[+winner] * mean_rating[+!winner] / Total[+winner]))/ 6;
             data.team[+winner].net_run_rate = (((data.team[+winner].runs_for) / (data.team[+winner].balls_for) - (data.team[+winner].runs_against) / (data.team[+winner].balls_against)) * 6).toFixed(2);
             data.team[+!winner].net_run_rate = (((data.team[+!winner].runs_for) / (data.team[+!winner].balls_for) - (data.team[+!winner].runs_against) / (data.team[+!winner].balls_against)) * 6).toFixed(2);
         }
-        data.match.commentary.push(end[rand() % end.length]);
-        data.match.commentary.push('Man of the Match: ' + data.team[MoM.team].ratings[MoM.id].Name);
         ++data.team[MoM.team].stats[MoM.id].MoM;
+        temp = (data.team[MoM.team].ratings[MoM.id].Type == 'bat') ? (mom.bat) : ((data.team[MoM.team].ratings[MoM.id].Type == 'bowl') ? (mom.bowl) : (mom.all));
+        data.match.commentary.push('Man of the Match: ' + data.team[MoM.team].ratings[MoM.id].Name);
+        data.match.commentary.push(temp[rand() % temp.length]);
+        data.match.commentary.push(end[rand() % end.length]);
     }
     ++data.team[0].played;
     ++data.team[1].played;
