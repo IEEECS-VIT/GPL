@@ -18,6 +18,7 @@
 */
 module.exports =
 [
+    "",
     "He tries to punch this short of length delivery through cover, there is no room, and he ends up chopping this on to  the stumps..",
     "What's happening! You don't expect such loose shots from the batsman. Another tame delivery just outside off and he   has a lazy waft at that one, ends up chopping it on to his stumps",
     "he's tried to force a length ball over mid-on, but mishit it, and the fielder has plenty of time to take the dolly",
