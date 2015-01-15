@@ -25,14 +25,14 @@ exports.simulate = function (data, callback)
     }
     else if (data.team[0].ratings.length < 12)
     {
-        console.log(data.team[0]._id + ' forfeits the match, ' + data.team[1]._id + ' wins by default clause');
+        console.log(data.team[0]._id + ' forfeits the match, ' + data.team[1]._id + ' wins by default');
         ++data.team[1].win;
         data.team[1].points += 2;
         ++data.team[0].loss;
     }
     else if (data.team[1].ratings.length < 12)
     {
-        console.log(data.team[1]._id + ' forfeits the match, ' + data.team[0]._id + ' wins by default clause');
+        console.log(data.team[1]._id + ' forfeits the match, ' + data.team[0]._id + ' wins by default');
         ++data.team[0].win;
         data.team[0].points += 2;
         ++data.team[1].loss;
@@ -44,7 +44,7 @@ exports.simulate = function (data, callback)
         {
             return parseInt(Math.random() * 1000000000000000);
         }
-        function Make(team,arg)
+        function Make(team, arg)
         {
             var i;
             this.economy = [];
@@ -681,7 +681,8 @@ exports.simulate = function (data, callback)
             balls[i] = fours[i] = maximums[i] = dismissed[i] = milestone[i] = score[i] = balls[i] = fours[i] = maximums[i] = control[i] = catches[i] = dot_balls[i] = 0;
         }
         data.match.scorecard.push('Total: ' + Total[0] + ' / ' + wickets[0] + ' (' + parseInt(Overs[0] / 6) + '.' + Overs[0] % 6 + ' overs)  Runrate: ' + (Total[0] * 6 / Overs[0]).toFixed(2) + ' Extras: ' + extras);
-        data.match.scorecard.push(' Runs scored in boundaries: ' + temp + ' of ' + Total[0] + ' (' + (temp * 100 / Total[0]).toFixed(2) + ') ');
+        data.match.scorecard.push(' Runs scored in boundaries: ' + temp + ' of ' + Total[0] + ' (' + (temp * 100 / Total[0]).toFixed(2) + ' %) ');
+        data.match.scorecard.push(' Bowling Statistics:');
         data.match.scorecard.push(' Bowling Statistics:');
         data.match.scorecard.push('  Bowler Overs Maidens Wickets Runs conceded Economy  ');
         for (i = 0; i < 6; i++)
@@ -1187,7 +1188,7 @@ exports.simulate = function (data, callback)
             balls[i] = fours[i] = maximums[i] = dismissed[i] = milestone[i] = score[i] = balls[i] = fours[i] = maximums[i] = control[i] = 0;
         }
         data.match.scorecard.push('Total: ' + Total[1] + ' / ' + wickets[1] + ' (' + parseInt(Overs[1] / 6) + '.' + Overs[1] % 6 + ' overs)  Runrate: ' + (Total[1] * 6 / Overs[1]).toFixed(2) + ' Extras: ' + extras);
-        data.match.scorecard.push(' Runs scored in boundaries: ' + temp + ' of ' + Total[1] + ' (' + (temp * 100 / Total[1]).toFixed(2) + ') ');
+        data.match.scorecard.push(' Runs scored in boundaries: ' + temp + ' of ' + Total[1] + ' (' + (temp * 100 / Total[1]).toFixed(2) + ' %) ');
         data.match.scorecard.push(' Bowling Statistics:  ');
         data.match.scorecard.push('Bowler Overs Maidens Wickets Runs conceded Economy  ');
         for (i = 0; i < 6; i++)
@@ -1332,8 +1333,8 @@ exports.simulate = function (data, callback)
             data.team[+!winner].net_run_rate = (((data.team[+!winner].runs_for) / (data.team[+!winner].balls_for) - (data.team[+!winner].runs_against) / (data.team[+!winner].balls_against)) * 6).toFixed(2);
         }
         ++data.team[MoM.team].stats[MoM.id].MoM;
-        temp = (data.team[MoM.team].ratings[MoM.id].Type == 'bat') ? (mom.bat) : ((data.team[MoM.team].ratings[MoM.id].Type == 'bowl') ? (mom.bowl) : (mom.all));
         data.match.commentary.push('Man of the Match: ' + data.team[MoM.team].ratings[MoM.id].Name);
+        temp = (data.team[MoM.team].ratings[MoM.id].Type == 'bat') ? (mom.bat) : ((data.team[MoM.team].ratings[MoM.id].Type == 'bowl') ? (mom.bowl) : (mom.all));
         data.match.commentary.push(temp[rand() % temp.length]);
         data.match.commentary.push(end[rand() % end.length]);
     }

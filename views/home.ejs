@@ -140,14 +140,30 @@
         <div class="large-4 small-12 medium-12 right"
              style="background:rgba(20,20,20,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-right:3%;margin-top: 3%;">
             <h4 style="color: white;text-align: center;margin: 1%;padding: 2%;">Team Statistics</h4>
-
             <p style="color: white;text-align: left;padding: 2%;margin: 1%">
                 Matches Played: <%= results.user.played %><br/>
                 Matches Won: <%= results.user.win %><br/>
                 Matches Lost: <%= results.user.loss %><br/>
                 Matches Tied: <%= results.user.tied %><br/>
                 Points: <%= results.user.points %><br/>
-                Net Run Rate: <%= results.user.net_run_rate %>
+                Runs for: <%= results.user.runs_for %><br/>
+                Runs against: <%= results.user.runs_against %><br/>
+                Overs batted: <%= results.user.balls_for %><br/>
+                Overs bowled: <%= results.user.balls_against %><br/>
+                Wickets taken: <%= results.user.wickets_taken %><br/>
+                Wickets lost: <%= results.user.wickets_lost %><br/>
+                Streak: <%= results.user.streak %><br/>
+                All outs: <%= results.user.all_outs %><br/>
+                Average runs scored: <%= results.user.avg_runs_for %><br/>
+                Average runs conceded: <%= results.user.avg_runs_against %><br/>
+                Average wickets taken: <%= results.user.avg_wickets_taken %><br/>
+                Average wickets lost: <%= results.user.avg_wickets_lost %><br/>
+                Average overs batted: <%= results.user.avg_overs_for %><br/>
+                Average overs bowled: <%= results.user.avg_overs_against %><br/>
+                Highest total: <%= results.user.highest_total %><br/>
+                Lowest total: <%= results.user.lowest_total %><br/>
+                Net Run Rate: <%= results.user.net_run_rate %><br/>
+                Win - loss ratio: <%= results.user.ratio %><br/>
             </p>
         </div>
     </div>
