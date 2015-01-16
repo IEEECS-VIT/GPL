@@ -1218,11 +1218,11 @@ exports.simulate = function (data, callback)
         data.match.scorecard.push(wicket_sequence); // use (typeof(a[])=='object') for commentary display section
         data.match.scorecard.push('Dot ball percentage: ' + (dot * 100 / Overs[1]).toFixed(2) + ' %');
         data.match.scorecard.push('   ');
-        if (!(Total[0] - Total[1]))
+        if (Total[0] == Total[1])
         {
-            if (!(wickets[0] - wickets[1]))
+            if (wickets[0] == wickets[1])
             {
-                if (!(Overs[0] - Overs[1]))
+                if (Overs[0] == Overs[1])
                 {
                     data.match.commentary.push('TIE ! ');
                     if(data.team[0].highest_total < Total[0])
