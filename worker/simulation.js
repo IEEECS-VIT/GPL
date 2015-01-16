@@ -408,7 +408,7 @@ exports.simulate = function (data, callback)
                     }
                     temp /= balls[strike[+strike_index]];
                     temp -= team_object[+!toss].bat_rating[strike[+strike_index]];
-                    temp = score[strike[+strike_index]] * (1 - Math.exp(-(Math.pow(fours[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]])) + Math.pow(maximums[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]]))) / (balls[strike[+strike_index]] + team_object[+!toss].bat_rating[strike[+strike_index]] + temp )));
+                    temp += score[strike[+strike_index]] * (1 - Math.exp(-(Math.pow(fours[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]])) + Math.pow(maximums[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]]))) / (balls[strike[+strike_index]] + team_object[+!toss].bat_rating[strike[+strike_index]])));
                     if(points < temp)
                     {
                         MoM.team = +!toss;
@@ -698,7 +698,7 @@ exports.simulate = function (data, callback)
             }
             temp /= deliveries[i];
             temp -= team_object[+toss].bowler_rating[i];
-            temp = (wickets[i] * 20) * (1 - Math.exp(-Math.pow((dot_deliveries[i] + 1) * 6 , wickets_taken[i]) / (team_object[+toss].bowler_rating[i] + deliveries[i] + runs_conceded[i] + temp)));
+            temp += (wickets[i] * 20) * (1 - Math.exp(-Math.pow((dot_deliveries[i] + 1) * 6 , wickets_taken[i]) / (team_object[+toss].bowler_rating[i] + deliveries[i] + runs_conceded[i])));
             if(points < temp)
             {
                 MoM.team = +toss;
@@ -893,7 +893,7 @@ exports.simulate = function (data, callback)
                     }
                     temp /= balls[strike[+strike_index]];
                     temp -= team_object[+toss].bat_rating[strike[+strike_index]];
-                    temp = score[strike[+strike_index]] * (1 - Math.exp(-(Math.pow(fours[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]])) + Math.pow(maximums[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]]))) / (balls[strike[+strike_index]] + team_object[+toss].bat_rating[strike[+strike_index]] + temp)));
+                    temp += score[strike[+strike_index]] * (1 - Math.exp(-(Math.pow(fours[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]])) + Math.pow(maximums[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]]))) / (balls[strike[+strike_index]] + team_object[+toss].bat_rating[strike[+strike_index]])));
                     if(points < temp)
                     {
                         MoM.team = +toss;
@@ -1204,7 +1204,7 @@ exports.simulate = function (data, callback)
             }
             temp /= deliveries[i];
             temp -= team_object[+!toss].bowler_rating[i];
-            temp = (wickets[i] * 20) * (1 - Math.exp(-Math.pow((dot_deliveries[i] + 1) * 6 , wickets_taken[i]) / (team_object[+!toss].bowler_rating[i] + deliveries[i] + runs_conceded[i] + temp)));
+            temp += (wickets[i] * 20) * (1 - Math.exp(-Math.pow((dot_deliveries[i] + 1) * 6 , wickets_taken[i]) / (team_object[+!toss].bowler_rating[i] + deliveries[i] + runs_conceded[i])));
             if(points < temp)
             {
                 MoM.team = +!toss;
