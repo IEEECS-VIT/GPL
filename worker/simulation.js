@@ -40,7 +40,7 @@ exports.simulate = function (data, callback)
     else
     {
         console.log(data.team[0]._id + ' vs ' + data.team[1]._id + ' is now being simulated');
-        function rand(arg)
+        var rand = function(arg)
         {
             if(!arg)
             {
@@ -48,7 +48,7 @@ exports.simulate = function (data, callback)
             }
             else return parseInt(Math.random() * 1000000000000000) % arg;
         }
--        function Make(team, arg)
+        var Make = function(team, arg)
         {
             var i;
             this.economy = [];
@@ -661,20 +661,20 @@ exports.simulate = function (data, callback)
         }
         strike = [0, 1];
         data.match.scorecard.push(' Scorecard: ');
-        data.match.scorecard.push('Runs Balls Strike Rate Fours Sixes Dot balls Control');
+        data.match.scorecard.push(['Runs', 'Balls', 'Strike Rate', 'Fours', 'Sixes', 'Dot balls', 'Control']);
         temp = 0;
         for (i = 0; i < 11; ++i)
         {
             if (!balls[i] && !dismissed[i])
             {
-                data.match.scorecard.push(team_object[+!toss].bat_name[i] + '  DNB ');
+                data.match.scorecard.push([team_object[+!toss].bat_name[i], '  DNB ']);
             }
             else
             {
-                data.match.scorecard.push(team_object[+!toss].bat_name[i] + ' ' + score[i] + ' ' + balls[i] + ' ' + (score[i] * 100 / balls[i]).toFixed(2) + ' ' + fours[i] + ' ' + maximums[i] + ' ' + dot_balls[i] +' ' + control[i] * 100);
+                data.match.scorecard.push([team_object[+!toss].bat_name[i], score[i], balls[i], (score[i] * 100 / balls[i]).toFixed(2), fours[i], maximums[i], dot_balls[i], control[i] * 100]);
                 if (!dismissed[i])
                 {
-                    data.match.scorecard[data.match.scorecard.length - 1] += '  (not out)';
+                    data.match.scorecard[data.match.scorecard.length - 1].push('  (not out)');
                 }
             }
             if (i < 10)
@@ -687,8 +687,7 @@ exports.simulate = function (data, callback)
         data.match.scorecard.push('Total: ' + Total[0] + ' / ' + wickets[0] + ' (' + parseInt(Overs[0] / 6) + '.' + Overs[0] % 6 + ' overs)  Runrate: ' + (Total[0] * 6 / Overs[0]).toFixed(2) + ' Extras: ' + extras);
         data.match.scorecard.push(' Runs scored in boundaries: ' + temp + ' of ' + Total[0] + ' (' + (temp * 100 / Total[0]).toFixed(2) + ' %) ');
         data.match.scorecard.push(' Bowling Statistics:');
-        data.match.scorecard.push(' Bowling Statistics:');
-        data.match.scorecard.push('  Bowler Overs Maidens Wickets Runs conceded Economy  ');
+        data.match.scorecard.push(['  Bowler', 'Overs', 'Maidens', 'Wickets', 'Runs conceded', 'Economy  ']);
         for (i = 0; i < 6; i++)
         {
             temp = 0;
@@ -705,7 +704,7 @@ exports.simulate = function (data, callback)
                 points = Math.round(temp);
                 MoM.id = team_object[+toss].bowl_index[i];
             }
-            data.match.scorecard.push(team_object[+toss].bowl_name[i] + ' ' + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + (runs_conceded[i] * 6 / deliveries[i]).toFixed(2));
+            data.match.scorecard.push([team_object[+toss].bowl_name[i], parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6, maidens[i], wickets_taken[i], runs_conceded[i], (runs_conceded[i] * 6 / deliveries[i]).toFixed(2)]);
             five_wicket_haul[i] = continuous_wickets[i] = deliveries[i] = maidens[i] = runs_conceded[i] = wickets_taken[i] = dot_deliveries[i] = 0;
             deliveries_bowled[i] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         }
@@ -1168,20 +1167,20 @@ exports.simulate = function (data, callback)
             }
         }
         data.match.scorecard.push(' Scorecard:');
-        data.match.scorecard.push('Runs   Balls Strike Rate Fours Sixes Dot balls Control');
+        data.match.scorecard.push(['Runs', 'Balls', 'Strike Rate', 'Fours', 'Sixes', 'Dot balls', 'Control']);
         temp = 0;
         for (i = 0; i < 11; ++i)
         {
             if (!balls[i] && !dismissed[i])
             {
-                data.match.scorecard.push(team_object[+toss].bat_name[i] + ' DNB ');
+                data.match.scorecard.push([team_object[+toss].bat_name[i], ' DNB ']);
             }
             else
             {
-                data.match.scorecard.push(team_object[+toss].bat_name[i] + ' ' + score[i] + ' ' + balls[i] + ' ' + (score[i] * 100 / balls[i]).toFixed(2) + ' ' + fours[i] + ' ' + maximums[i] + ' ' + dot_balls[i] + ' ' + control[i] * 100);
+                data.match.scorecard.push([team_object[+toss].bat_name[i], score[i], balls[i], (score[i] * 100 / balls[i]).toFixed(2), fours[i], maximums[i], dot_balls[i], control[i] * 100]);
                 if (!dismissed[i])
                 {
-                    data.match.scorecard[data.match.scorecard.length - 1] += '  (not out)';
+                    data.match.scorecard[data.match.scorecard.length - 1].push('  (not out)');
                 }
             }
             if (i < 10)
@@ -1194,7 +1193,7 @@ exports.simulate = function (data, callback)
         data.match.scorecard.push('Total: ' + Total[1] + ' / ' + wickets[1] + ' (' + parseInt(Overs[1] / 6) + '.' + Overs[1] % 6 + ' overs)  Runrate: ' + (Total[1] * 6 / Overs[1]).toFixed(2) + ' Extras: ' + extras);
         data.match.scorecard.push(' Runs scored in boundaries: ' + temp + ' of ' + Total[1] + ' (' + (temp * 100 / Total[1]).toFixed(2) + ' %) ');
         data.match.scorecard.push(' Bowling Statistics:  ');
-        data.match.scorecard.push('Bowler Overs Maidens Wickets Runs conceded Economy  ');
+        data.match.scorecard.push(['Bowler', 'Overs', 'Maidens', 'Wickets', 'Runs conceded', 'Economy  ']);
         for (i = 0; i < 6; i++)
         {
             temp = 0;
@@ -1211,7 +1210,7 @@ exports.simulate = function (data, callback)
                 points = Math.round(temp);
                 MoM.id = team_object[+!toss].bowl_index[i];
             }
-            data.match.scorecard.push(team_object[+!toss].bowl_name[i] + ' ' + parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6 + ' ' + maidens[i] + ' ' + wickets_taken[i] + ' ' + runs_conceded[i] + ' ' + (runs_conceded[i] * 6 / deliveries[i]).toFixed(2));
+            data.match.scorecard.push([team_object[+!toss].bowl_name[i], parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6, maidens[i], wickets_taken[i], runs_conceded[i], (runs_conceded[i] * 6 / deliveries[i]).toFixed(2)]);
             five_wicket_haul[i] = continuous_wickets[i] = deliveries[i] = maidens[i] = runs_conceded[i] = wickets_taken[i] = 0;
         }
         data.match.scorecard.push('Fall of wickets: ');
