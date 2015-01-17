@@ -187,6 +187,7 @@ exports.simulate = function (data, callback)
         var balls_faced = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
         var i;
         var j;
+        var k;
         var dot;
         var winner;
         var extras = 0;
@@ -1336,8 +1337,8 @@ exports.simulate = function (data, callback)
             data.team[+!winner].net_run_rate = (((data.team[+!winner].runs_for) / (data.team[+!winner].balls_for) - (data.team[+!winner].runs_against) / (data.team[+!winner].balls_against)) * 6).toFixed(2);
         }
         ++data.team[MoM.team].stats[MoM.id].MoM;
-        data.match.commentary.push('Man of the Match: ' + data.team[MoM.team].ratings[MoM.id].Name);
-        temp = (data.team[MoM.team].ratings[MoM.id].Type == 'bat') ? (mom.bat) : ((data.team[MoM.team].ratings[MoM.id].Type == 'bowl') ? (mom.bowl) : (mom.all));
+        data.match.commentary.push('Man of the Match: ' + data.team[MoM.team].ratings[MoM.id].Name + '( ' + data.team[MoM.team]._id + ')');
+        temp = ((data.team[MoM.team].ratings[MoM.id].Type == 'bat') ? (mom.bat) : ((data.team[MoM.team].ratings[MoM.id].Type == 'bowl') ? (mom.bowl) : (mom.all)));
         data.match.commentary.push(temp[rand(temp.length)]);
         data.match.commentary.push(end[rand(end.length)]);
     }

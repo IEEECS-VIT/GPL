@@ -47,7 +47,7 @@ exports.simulate = function (data, callback)
                 return Math.random();
             }
             else return parseInt(Math.random() * 1000000000000000) % arg;
-        }
+        };
         var  Make = function(team, arg)
         {
             var i;
@@ -121,7 +121,7 @@ exports.simulate = function (data, callback)
                 this.bat_rating[i] += parseFloat(this.bat_rating[i]) / 10 - parseFloat(this.average_bat_rating) / 110 + parseInt(this.coach_rating);
                 this.bat_rating = (this.bat_rating < 0)? ((this.coach_rating < 0) ? (0) : (this.coach_rating)):(this.bat_rating);
             }
-        }
+        };
         var path = require('path');
         var lbw = require(path.join(__dirname, 'commentary', 'out', 'lbw'));
         var mom = require(path.join(__dirname, 'commentary', 'misc', 'mom'));
@@ -187,9 +187,12 @@ exports.simulate = function (data, callback)
         var balls_faced = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
         var i;
         var j;
+        var k;
         var dot;
+        var loop;
         var winner;
         var extras = 0;
+        var toss_index;
         var points = -1;
         var free_hit = 0;
         var strike_index;
@@ -240,6 +243,7 @@ exports.simulate = function (data, callback)
             data.match.commentary.push(data.team[+!toss].ratings[i].Name + '(' + data.team[+!toss].ratings[i].Type + ') | (' + data.team[+toss].ratings[i].Name + (data.team[+toss].ratings[i].Type) + ')');
         }
         wickets[0] = wickets[1] = strike_index = previous_bowler = 0;
+        toss_index = !toss;
         for (i = 1; i < 6; ++i)
         {
             if (team_object[+toss].bowler_rating[i] > team_object[+toss].bowler_rating[previous_bowler])
@@ -720,6 +724,10 @@ exports.simulate = function (data, callback)
         data.match.commentary.push(mid[rand(mid.length)]);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         var hope = true;
+        for(loop = 0; loop < 2; ++loop)
+        {
+
+        }
         desperation[0] = +(data.team[+toss].streak < 0) * (1 - team_object[+toss].bat_rating[strike[0]] / 1000) * data.team[+toss].streak * ((Total[0] + 1) / 5000) * mean_rating[+!toss] / team_object[+toss].bat_strike_rate[strike[0]];
         desperation[1] = +(data.team[+toss].streak < 0) * (1 - team_object[+toss].bat_rating[strike[1]] / 1000) * data.team[+toss].streak * ((Total[0] + 1) / 5000) * mean_rating[+!toss] / team_object[+toss].bat_strike_rate[strike[1]];
         for (i = 1; i < 6; i++)
@@ -1336,7 +1344,7 @@ exports.simulate = function (data, callback)
             data.team[+!winner].net_run_rate = (((data.team[+!winner].runs_for) / (data.team[+!winner].balls_for) - (data.team[+!winner].runs_against) / (data.team[+!winner].balls_against)) * 6).toFixed(2);
         }
         ++data.team[MoM.team].stats[MoM.id].MoM;
-        data.match.commentary.push('Man of the Match: ' + data.team[MoM.team].ratings[MoM.id].Name);
+        data.match.commentary.push('Man of the Match: ' + data.team[MoM.team].ratings[MoM.id].Name + '( ' + data.team[MoM.team]._id + ')');
         temp = (data.team[MoM.team].ratings[MoM.id].Type == 'bat') ? (mom.bat) : ((data.team[MoM.team].ratings[MoM.id].Type == 'bowl') ? (mom.bowl) : (mom.all));
         data.match.commentary.push(temp[rand(temp.length)]);
         data.match.commentary.push(end[rand(end.length)]);
