@@ -79,6 +79,7 @@ exports.simulate = function (data, callback)
                         ++this.batsman_count;
                         break;
                     case 'bowl':
+                        this.bowl_index.push(i);
                         this.economy[this.bowler_count] = parseFloat(team[i]['Economy']);
                         this.bowl_average[this.bowler_count] = parseFloat(team[i]['Avg']);
                         this.bowl_strike_rate[this.bowler_count] = parseFloat(team[i]['SR']);
@@ -88,7 +89,6 @@ exports.simulate = function (data, callback)
                         this.bat_rating[this.batsman_count] = 900 - parseInt(team[i]['Rating (900)']);
                         this.bowl_name[this.bowler_count] = this.bat_name[this.batsman_count] = team[i]['Name'];
                         this.average_bowl_rating = this.average_bowl_rating + parseInt(team[i]['Rating (900)']);
-                        this.bowl_index.push(i);
                         ++this.bowler_count;
                         ++this.batsman_count;
                         break;
@@ -1246,14 +1246,14 @@ exports.simulate = function (data, callback)
                     ++data.team[1].tied;
                     ++data.team[0].points;
                     ++data.team[1].points;
-                    data.team[0].balls_for += Overs[0];
-                    data.team[1].balls_for += Overs[1];
                     data.team[0].runs_for += Total[0];
                     data.team[1].runs_for += Total[1];
-                    data.team[0].balls_against += Overs[1];
-                    data.team[1].balls_against += Overs[0];
+                    data.team[0].balls_for += Overs[0];
+                    data.team[1].balls_for += Overs[1];
                     data.team[0].runs_against += Total[1];
                     data.team[1].runs_against += Total[0];
+                    data.team[0].balls_against += Overs[1];
+                    data.team[1].balls_against += Overs[0];
                     data.team[0].wickets_taken += wickets[0];
                     data.team[1].wickets_taken += wickets[1];
                     data.team[0].wickets_fallen += wickets[0];

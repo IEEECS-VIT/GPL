@@ -5,7 +5,7 @@
     "homepage": "http://www.gravitaspremierleague.com/",
     "bugs": {
         "url": "https://github.com/IEEECS-VIT/GPL/issues",
-        "email": "neelam.aneesh@gmail.com"
+        "email": "ieeecs@vit.ac.in"
     },
     "private": true,
     "main": "./bin/www",
