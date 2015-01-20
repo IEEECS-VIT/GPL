@@ -61,7 +61,7 @@ exports.simulate = function (data, callback)
             this.bat_rating = [];
             this.bowl_index = [];
             this.bat_avg = [];
-            this.bowl_average = [];
+            this.bowl_avg = [];
             this.bowl_rating = [];
             this.bat_strike_rate = [];
             this.bowl_strike_rate = [];
@@ -83,7 +83,7 @@ exports.simulate = function (data, callback)
                         this.bowl_name.push(team[i]['Name']);
                         this.economy.push(team[i]['Economy']);
                         this.bat_avg.push(team[i]['Average']);
-                        this.bowl_average.push(team[i]['Avg']);
+                        this.bowl_avg.push(team[i]['Avg']);
                         this.bowl_strike_rate.push(team[i]['SR']);
                         this.bowl_rating.push(team[i]['Rating (900)']);
                         this.avg_bowl_rating += team[i]['Rating (900)'];
@@ -98,7 +98,7 @@ exports.simulate = function (data, callback)
                         this.economy.push(team[i]['Economy']);
                         this.avg_bat_rating += team[i]['Bat'];
                         this.bat_avg.push(team[i]['Average']);
-                        this.bowl_average.push(team[i]['Avg']);
+                        this.bowl_avg.push(team[i]['Avg']);
                         this.bowl_rating.push(team[i]['Bowl']);
                         this.avg_bowl_rating += team[i]['Bowl'];
                         this.bowl_strike_rate.push(team[i]['SR']);
@@ -109,14 +109,15 @@ exports.simulate = function (data, callback)
             mean_rating[arg] = ( this.avg_bat_rating + this.avg_bowl_rating ) / (this.bat_name.length + this.bowl_name.length);
             this.avg_bat_rating /= this.bat_name.length;
             this.avg_bowl_rating /= this.bowl_name.length;
-            for (i = 0; i < 11; ++i)
+            for(i in this.bowl_rating)
             {
-                if (i < 6)
-                {
-                    this.bowl_rating[i] += parseFloat(this.bowl_rating[i] ) / (this.bowl_name.length - 1) - parseFloat(this.avg_bowl_rating) / (this.bowl_name.length * (this.bowl_name.length - 1)) + parseInt(this.coach_rating);
-                }
-                this.bat_rating[i] += parseFloat(this.bat_rating[i]) / (this.bat_name.length - 1) - parseFloat(this.avg_bat_rating) / (this.bat_name.length * (this.bat_name.length - 1)) + parseInt(this.coach_rating);
-                this.bat_rating[i] = (this.bat_rating < 0)? ((this.coach_rating < 0) ? (0) : (this.coach_rating)):(this.bat_rating);
+                this.bowl_rating[i] += parseFloat(this.bowl_rating[i] ) / (this.bowl_name.length - 1) - parseFloat(this.avg_bowl_rating) / (this.bowl_name.length * (this.bowl_name.length - 1)) + parseInt(this.coach_rating);
+                this.bowl_rating[i] = (this.bowl_rating < 0) ? ((this.coach_rating < 0) ? (0) : (this.coach_rating)) : (this.bowl_rating);
+            }
+            for(i in this.bat_rating)
+            {
+                this.bat_rating[i] += parseFloat(this.bat_rating[i] ) / (this.bat_name.length - 1) - parseFloat(this.avg_bat_rating) / (this.bat_name.length * (this.bat_name.length - 1)) + parseInt(this.coach_rating);
+                this.bat_rating[i] = (this.bat_rating < 0) ? ((this.coach_rating < 0) ? (0) : (this.coach_rating)) : (this.bat_rating);
             }
         }
         var path = require('path');
@@ -269,7 +270,7 @@ exports.simulate = function (data, callback)
             for (j = 1; j <= 6; ++j)
             {
                 delivery_score = team_object[+!toss].bat_rating[strike[+strike_index]] - team_object[+toss].bowl_rating[current_bowler];
-                bowler_performance_index = (team_object[+toss].bowl_rating[current_bowler]) / ((rand(team_object[+toss].bowl_average[strike[+strike_index]] * team_object[+toss].bowl_rating[current_bowler] / bowl[0] + 1) + team_object[+toss].bowl_average[current_bowler] * team_object[+toss].bowl_rating[current_bowler] / 1000) * (rand(team_object[+toss].bowl_strike_rate[current_bowler] * team_object[+toss].bowl_rating[current_bowler] / bowl[1] + 1) + team_object[+toss].bowl_strike_rate[current_bowler] * team_object[+toss].bowl_rating[current_bowler] / 1000) * (rand(team_object[+toss].economy[current_bowler] * team_object[+toss].bowl_rating[current_bowler] / bowl[2] + 1) + team_object[+toss].economy[current_bowler] * team_object[+toss].bowl_rating[current_bowler] / 1000));
+                bowler_performance_index = (team_object[+toss].bowl_rating[current_bowler]) / ((rand(team_object[+toss].bowl_avg[strike[+strike_index]] * team_object[+toss].bowl_rating[current_bowler] / bowl[0] + 1) + team_object[+toss].bowl_avg[current_bowler] * team_object[+toss].bowl_rating[current_bowler] / 1000) * (rand(team_object[+toss].bowl_strike_rate[current_bowler] * team_object[+toss].bowl_rating[current_bowler] / bowl[1] + 1) + team_object[+toss].bowl_strike_rate[current_bowler] * team_object[+toss].bowl_rating[current_bowler] / 1000) * (rand(team_object[+toss].economy[current_bowler] * team_object[+toss].bowl_rating[current_bowler] / bowl[2] + 1) + team_object[+toss].economy[current_bowler] * team_object[+toss].bowl_rating[current_bowler] / 1000));
                 batsman_performance_index = (rand(team_object[+!toss].bat_avg[strike[+strike_index]] * team_object[+!toss].bat_rating[strike[+strike_index]] / bat[0] + 1) + team_object[+!toss].bat_avg[strike[+strike_index]] * (1000 - team_object[+!toss].bat_rating[strike[+strike_index]]) / 1000) * (rand(team_object[+!toss].bat_strike_rate[strike[+strike_index]] * team_object[+!toss].bat_rating[strike[+strike_index]] / bat[1] + 1) + team_object[+!toss].bat_strike_rate[strike[+strike_index]] * (1000 - team_object[+!toss].bat_rating[strike[+strike_index]]) / 1000) / team_object[+toss].bowl_rating[current_bowler] + Math.pow(-1, (rand(2))) * ((frustration[strike_index] >= 3) ? frustration[strike_index]: 0);
                 if (!delivery_score)
                 {
@@ -747,7 +748,7 @@ exports.simulate = function (data, callback)
             for (j = 1; j <= 6; ++j)
             {
                 delivery_score = team_object[+toss].bat_rating[strike[+strike_index]] - team_object[+!toss].bowl_rating[current_bowler];
-                bowler_performance_index = (team_object[+!toss].bowl_rating[current_bowler]) / ((rand(team_object[+!toss].bowl_average[strike[+strike_index]] * team_object[+!toss].bowl_rating[current_bowler] / bowl[0] + 1) + team_object[+!toss].bowl_average[current_bowler] * team_object[+!toss].bowl_rating[current_bowler] / 1000) * (rand(team_object[+!toss].bowl_strike_rate[current_bowler] * team_object[+!toss].bowl_rating[current_bowler] / bowl[1] + 1) + team_object[+!toss].bowl_strike_rate[current_bowler] * team_object[+!toss].bowl_rating[current_bowler] / 1000) * (rand(team_object[+!toss].economy[current_bowler] * team_object[+!toss].bowl_rating[current_bowler] / bowl[2] + 1) + team_object[+!toss].economy[current_bowler] * team_object[+!toss].bowl_rating[current_bowler] / 1000));
+                bowler_performance_index = (team_object[+!toss].bowl_rating[current_bowler]) / ((rand(team_object[+!toss].bowl_avg[strike[+strike_index]] * team_object[+!toss].bowl_rating[current_bowler] / bowl[0] + 1) + team_object[+!toss].bowl_avg[current_bowler] * team_object[+!toss].bowl_rating[current_bowler] / 1000) * (rand(team_object[+!toss].bowl_strike_rate[current_bowler] * team_object[+!toss].bowl_rating[current_bowler] / bowl[1] + 1) + team_object[+!toss].bowl_strike_rate[current_bowler] * team_object[+!toss].bowl_rating[current_bowler] / 1000) * (rand(team_object[+!toss].economy[current_bowler] * team_object[+!toss].bowl_rating[current_bowler] / bowl[2] + 1) + team_object[+!toss].economy[current_bowler] * team_object[+!toss].bowl_rating[current_bowler] / 1000));
                 batsman_performance_index = (rand(team_object[+toss].bat_avg[strike[+strike_index]] * team_object[+toss].bat_rating[strike[+strike_index]] / bat[0] + 1) + team_object[+toss].bat_avg[strike[+strike_index]] * (1000 - team_object[+toss].bat_rating[strike[+strike_index]]) / 1000) * (rand(team_object[+toss].bat_strike_rate[strike[+strike_index]] * team_object[+toss].bat_rating[strike[+strike_index]] / bat[1] + 1) + team_object[+toss].bat_strike_rate[strike[+strike_index]] * (1000 - team_object[+toss].bat_rating[strike[+strike_index]]) / 1000) / team_object[+!toss].bowl_rating[current_bowler] + Math.pow(-1, (rand(2))) * ((frustration[strike_index] >= 3) ? frustration[strike_index] : 0);
                 if (!delivery_score)
                 {

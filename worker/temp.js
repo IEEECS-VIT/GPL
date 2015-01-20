@@ -107,14 +107,15 @@ exports.simulate = function (data, callback)
             mean_rating[arg] = ( this.avg_bat_rating + this.avg_bowl_rating ) / (this.bat_name.length + this.bowl_name.length);
             this.avg_bat_rating /= 11;
             this.avg_bowl_rating /= 6;
-            for (i = 0; i < 11; ++i)
+            for(i in this.bowl_rating)
             {
-                if (i < 6)
-                {
-                    this.bowl_rating[i] += parseFloat(this.bowl_rating[i] ) / (this.bowl_name.length - 1) - parseFloat(this.avg_bowl_rating) / (this.bowl_name.length * (this.bowl_name.length - 1)) + parseInt(this.coach_rating);
-                }
-                this.bat_rating[i] += parseFloat(this.bat_rating[i]) / (this.bat_name.length - 1) - parseFloat(this.avg_bat_rating) / (this.bat_name.length * (this.bat_name.length - 1)) + parseInt(this.coach_rating);
-                this.bat_rating[i] = (this.bat_rating < 0)? ((this.coach_rating < 0) ? (0) : (this.coach_rating)):(this.bat_rating);
+                this.bowl_rating[i] += parseFloat(this.bowl_rating[i] ) / (this.bowl_name.length - 1) - parseFloat(this.avg_bowl_rating) / (this.bowl_name.length * (this.bowl_name.length - 1)) + parseInt(this.coach_rating);
+                this.bowl_rating[i] = (this.bowl_rating < 0) ? ((this.coach_rating < 0) ? (0) : (this.coach_rating)) : (this.bowl_rating);
+            }
+            for(i in this.bat_rating)
+            {
+                this.bat_rating[i] += parseFloat(this.bat_rating[i] ) / (this.bat_name.length - 1) - parseFloat(this.avg_bat_rating) / (this.bat_name.length * (this.bat_name.length - 1)) + parseInt(this.coach_rating);
+                this.bat_rating[i] = (this.bat_rating < 0) ? ((this.coach_rating < 0) ? (0) : (this.coach_rating)) : (this.bat_rating);
             }
         };
         var path = require('path');
