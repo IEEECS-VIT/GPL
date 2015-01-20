@@ -139,7 +139,7 @@ exports.getSquad = function (doc, callback)
 
                         for (var i = 0; i < 16; i++)
                         {
-                            if (parseInt(document.team[i]) >= parseInt(304))
+                            if (document.team[i] >= 'd1')
                             {
                                 coach = parseInt(document.team[i]);
                             }

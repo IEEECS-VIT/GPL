@@ -83,7 +83,7 @@ exports.initSimulation = function (day, masterCallback)
                 {
                     var addCoach = function (elt, i, arr)
                     {
-                        if (elt >= 304)
+                        if (elt > 'd')
                         {
                             userDoc.squad.push(elt);
                         }

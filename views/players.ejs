@@ -334,7 +334,7 @@ function ch(r)
                 <% k = 4; var z = 1;i = 0;for(i = 0;i < Players.length;i++) { %>
                 <% if(k < 3){ %>
 
-                <% if(Players[i]._id <= 113){ %>
+                <% if(Players[i]._id < 'b'){ %>
                 <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
                     id="box<%= Players[i]._id %>" onclick="">
 
@@ -383,7 +383,7 @@ function ch(r)
                 <% k = 4;i = 0; var z = 1;for(i = 0;i < Players.length;i++) { %>
                 <% if(k < 3){ %>
 
-                <% if(Players[i]._id <= 242 && Players[i]._id > 113){ %>
+                <% if(Players[i]._id < 'c' && Players[i]._id > 'b'){ %>
                 <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
                     id="box<%= Players[i]._id %>" onclick="">
 
@@ -430,7 +430,7 @@ function ch(r)
                 <% k = 4;i = 0; var z = 1;for(i = 0;i < Players.length;i++) { %>
                 <% if(k < 3){ %>
 
-                <% if(Players[i]._id <= 303 && Players[i]._id >= 243){ %>
+                <% if(Players[i]._id < 'd' && Players[i]._id > 'c'){ %>
                 <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
                     id="box<%= Players[i]._id %>" onclick="">
 
@@ -477,7 +477,7 @@ function ch(r)
                 <% k = 4;i = 0; var z = 1;for(i = 0;i < Players.length;i++) { %>
                 <% if(k < 3){ %>
 
-                <% if(Players[i]._id <= 323 && Players[i]._id > 303){ %>
+                <% if(Players[i]._id > 'd'){ %>
                 <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
                     id="box<%= Players[i]._id %>" onclick="">
 

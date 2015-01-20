@@ -370,7 +370,7 @@ router.post('/getTeam', function (req, res)
     var stats = {};
     for(i in players)
     {
-        if(players[i] > 303)
+        if(players[i] > 'd')
         {
             continue;
         }
@@ -379,7 +379,7 @@ router.post('/getTeam', function (req, res)
         stats[players[i]].matches = 0;
         stats[players[i]].catches = 0;
         stats[players[i]].MoM = 0;
-        if((players[i] > 0 && players[i] < 114) || (players[i] > 242 && players[i] < 304))
+        if((players[i] > 'a' && players[i] < 'b') || (players[i] > 'c' && players[i] < 'd'))
         {
             stats[players[i]].runs_scored = 0;
             stats[players[i]].balls = 0;
@@ -393,7 +393,7 @@ router.post('/getTeam', function (req, res)
             stats[players[i]].sixes = 0;
             stats[players[i]].recent = [];
         }
-        if(players[i] > 113 && players[i] < 304)
+        if(players[i] > 'b' && players[i] < 'c')
         {
             stats[players[i]].runs_given = 0;
             stats[players[i]].wickets_taken = 0;

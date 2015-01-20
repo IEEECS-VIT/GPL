@@ -296,7 +296,7 @@
                 <table cellspacing="10px"
                        style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
                     <% for(i = 0;i < Squad.length;i++) { %>
-                    <% if(Squad[i]._id > 303) { %>
+                    <% if(Squad[i]._id > 'd') { %>
                     <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;"
                         colspan="3">
                         <img src="/images/coaches/<%= Squad[i]._id %>.jpg" style="width: 40%; margin: 0"/>
@@ -311,23 +311,23 @@
                     <% k = 4;i = 0; var z = 1;for(i = 0;i < Squad.length;i++) { %>
                     <% if(k < 3){ %>
 
-                    <% if(Squad[i]._id <= 303){ %>
+                    <% if(Squad[i]._id < 'd'){ %>
                     <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
                         id="box<%= Squad[i]._id %>">
 
-                        <% if (Squad[i]._id <= 113){ %>
+                        <% if (Squad[i]._id < 'b'){ %>
                         <img src="/images/bat/<%= Squad[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                         <p style="text-align: center;"><%= Squad[i].Name %></p>
 
                         <p style="text-align: center;">Batsman</p>
-                        <% } else if(Squad[i]._id >= 114 && Squad[i]._id <= 242) { %>
+                        <% } else if(Squad[i]._id < 'c') { %>
                         <img src="/images/bowl/<%= Squad[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                         <p style="text-align: center;"><%= Squad[i].Name %></p>
 
                         <p style="text-align: center;">Bowler</p>
-                        <% } else if(Squad[i]._id >= 243 && Squad[i]._id <= 303) { %>
+                        <% } else if(Squad[i]._id < 'd') { %>
                         <img src="/images/all/<%= Squad[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                         <p style="text-align: center;"><%= Squad[i].Name %></p>

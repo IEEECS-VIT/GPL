@@ -71,7 +71,7 @@
             <table cellspacing="10px"
                    style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
                 <% var f=false; for(var i = 0;i < results.team.length;i++) { %>
-                <% if(results.team[i]._id > 303) { %>
+                <% if(results.team[i]._id > 'd') { %>
                 <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;"
                     colspan="3">
                     <img src="/images/coaches/<%= results.team[i]._id %>.jpg" style="width: 40%; margin: 0"/>
@@ -85,7 +85,7 @@
                 <% f=true; } } if(!f) { %>
                 <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;"
                     colspan="3">
-                    <img src="/images/coaches/323.jpg"
+                    <img src="/images/coaches/d21.jpg"
                          style="width: 40%; margin: 0"/>
 
                     <p style="text-align: center;">
@@ -98,23 +98,23 @@
                 <% k = 4;i = 0; var z = 1;for(i = 0;i < results.team.length;i++) { %>
                 <% if(k < 3){ %>
 
-                <% if(results.team[i]._id <= 303){ %>
+                <% if(results.team[i]._id < 'd'){ %>
                 <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
                     id="box<%= results.team[i]._id %>">
 
-                    <% if (results.team[i]._id <= 113){ %>
+                    <% if (results.team[i]._id < 'b'){ %>
                     <img src="/images/bat/<%= results.team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                     <p style="text-align: center;"><%= results.team[i].Name %></p>
 
                     <p style="text-align: center;">Batsman</p>
-                    <% } else if(results.team[i]._id >= 114 && results.team[i]._id <= 242) { %>
+                    <% } else if(results.team[i]._id < 'c') { %>
                     <img src="/images/bowl/<%= results.team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                     <p style="text-align: center;"><%= results.team[i].Name %></p>
 
                     <p style="text-align: center;">Bowler</p>
-                    <% } else if(results.team[i]._id >= 243 && results.team[i]._id <= 303) { %>
+                    <% } else if(results.team[i]._id < 'd') { %>
                     <img src="/images/all/<%= results.team[i]._id %>.jpg" style="width: 40%;margin: 0;float: left;"/>
 
                     <p style="text-align: center;"><%= results.team[i].Name %></p>
