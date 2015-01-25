@@ -63,7 +63,7 @@ exports.simulate = function (data, callback)
             this.bowl_strike_rate = [];
             this.avg_bat_rating = 0;
             this.avg_bowl_rating = 0;
-            this.coach_rating = parseInt(team[11]['Rating (15)']) ? parseInt(team[11]['Rating (15)']) : -50;
+            this.coach_rating = team[11]['Rating (15)'] ? team[11]['Rating (15)'] : -50;
             for (i = 0; i < 11; ++i)
             {
                 switch (team[i].Type)
@@ -104,7 +104,7 @@ exports.simulate = function (data, callback)
                         break;
                 }
             }
-            mean_rating[arg] = ( this.avg_bat_rating + this.avg_bowl_rating ) / (this.bat_name.length + this.bowl_name.length);
+            mean_rating[arg] = ( this.avg_bat_rating * this.bowl_name.length + this.avg_bowl_rating * this.bat_name.length) / (this.bat_name.length + this.bowl_name.length);
             this.avg_bat_rating /= this.bat_name.length;
             this.avg_bowl_rating /= this.bowl_name.length;
             for(i in this.bowl_rating)
@@ -219,7 +219,7 @@ exports.simulate = function (data, callback)
         data.match.commentary.push(' Form: ');
         if(data.team[0].played && data.team[1].played)
         {
-            data.match.commentary.push(data.team[0]._id + ': ' + form[data.team[0].form * 100 / mean_rating[0]] + ' ' + data.team[1]._id + ': ' + form[data.team[1].form * 100 / mean_rating[1]]);
+            data.match.commentary.push(data.team[0]._id + ': ' + form[parseInt(data.team[0].form * 100 / mean_rating[0])] + ' ' + data.team[1]._id + ': ' + form[parseInt(data.team[1].form * 100 / mean_rating[1])]);
         }
         data.match.commentary.push(start[rand(start.length)]);
         data.match.commentary.push(' Toss:' + data.team[toss]._id + ' wins the toss and chooses to ');
@@ -351,6 +351,7 @@ exports.simulate = function (data, callback)
                             if (Total[1] > Total[0])
                             {
                                 data.match.commentary.push(' What an emphatic victory ! ');
+                                Overs[1] = i * 6 + j;
                                 break;
                             }
                             else if ((Total[1] == Total[0]) && loop)
@@ -422,8 +423,8 @@ exports.simulate = function (data, callback)
                             points = Math.round(temp);
                             MoM.id = strike[+strike_index];
                         }
-                        data.match.commentary.push(' ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ' balls' + ' ' + fours[strike[+strike_index]] + 'X4\'s ' + maximums[strike[+strike_index]] + 'X6\'s) SR: ' + (score[strike[+strike_index]] * 100 / balls[strike[+strike_index]]).toFixed(2) + 'Control: ' + control[strike[+strike_index]] * 100  + '%');
-                        data.match.commentary.push(' Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + ')' + ', Runrate: ' + (partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index])).toFixed(2);
+                        data.match.commentary.push(' ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ' balls' + ' ' + fours[strike[+strike_index]] + 'X4\'s ' + maximums[strike[+strike_index]] + 'X6\'s) SR: ' + (score[strike[+strike_index]] * 100 / balls[strike[+strike_index]]).toFixed(2) + 'Control: ' + (control[strike[+strike_index]] * 100).toFixed(2)  + '%');
+                        data.match.commentary.push(' Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + ')' + ', Runrate: ' + (partnership_runs[current_partnership_index] * 6 / (partnership_balls[current_partnership_index] ? partnership_balls[current_partnership_index] : 1))).toFixed(2);
                         ++current_partnership_index;
                         strike[+strike_index] = (strike[+strike_index] > strike[+!strike_index] ? strike[+strike_index] : strike[+!strike_index]) + 1;
                         desperation[+strike_index] = +(data.team[+toss_index].streak < 0) * (1 - team_object[+toss_index].bat_rating[strike[+strike_index]] / 1000) * data.team[+toss_index].streak * ((Total[0] - Total[1] + 1) / 5000) * mean_rating[+!toss_index] / team_object[+toss_index].bat_strike_rate[strike[+strike_index]];
@@ -492,6 +493,7 @@ exports.simulate = function (data, callback)
                                     frustration[strike_index] += 1 - team_object[+toss_index].bat_rating[strike[strike_index]] / 1000;
                                     control[strike[+strike_index]] *= ((balls[strike[+strike_index]] - 1) / (balls[strike[+strike_index]])).toFixed(2);
                                     ++dot_deliveries[current_bowler];
+                                    ++dot_balls[strike[+strike_index]];
                                     ++dot;
                                     break;
                                 case 5:
@@ -535,7 +537,7 @@ exports.simulate = function (data, callback)
                         {
                             data.match.commentary.push(' Scores are level now... ');
                         }
-                        else if ((Total[1] > Total[0]) && loop)
+                        else if (Total[1] > Total[0])
                         {
                             data.match.commentary.push(' And they have done it! What an emphatic victory ! ');
                             Overs[1] = 6 * i + j;
@@ -579,6 +581,7 @@ exports.simulate = function (data, callback)
                 data.match.commentary.push('  Current score: ' + Total[loop] + ' / ' + wickets[+toss_index] + '  Runrate: ' + (Total[loop] / (i + 1)).toFixed(2));
                 if (Total[1] > Total[0])
                 {
+                    Overs[1] = i * 6 + j;
                     break;
                 }
                 if(loop)
@@ -592,11 +595,11 @@ exports.simulate = function (data, callback)
                 if (strike[+!strike_index] < 11)
                 {
                     data.match.commentary.push(' ' + team_object[+toss_index].bat_name[strike[+!strike_index]] + ' : ' + score[strike[+!strike_index]] + ' (' + balls[strike[+!strike_index]] + '), Control: ' + control[strike[+!strike_index]] * 100 +  ' %');
-                    data.match.commentary.push(' Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + '), runrate: ' + (partnership_runs[current_partnership_index] * 6 / partnership_balls[current_partnership_index])).toFixed(2);
+                    data.match.commentary.push(' Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + '), runrate: ' + (partnership_runs[current_partnership_index] * 6 / (partnership_balls[current_partnership_index] ? partnership_balls[current_partnership_index] : 1))).toFixed(2);
                 }
                 if (previous_batsman > -1)
                 {
-                    data.match.commentary.push(' Previous Wicket: ' + team_object[+toss_index].bat_name[previous_batsman] + ': ' + score[previous_batsman] + '(' + balls[previous_batsman] + ')' + 'Control: ' + control[previous_batsman] * 100);
+                    data.match.commentary.push(' Previous Wicket: ' + team_object[+toss_index].bat_name[previous_batsman] + ': ' + score[previous_batsman] + '(' + balls[previous_batsman] + ') Control: ' + (control[previous_batsman] * 100).toFixed(2));
                     if (previous_dismissal > -1)
                     {
                         data.match.commentary.push(', Dismissed by: ' + team_object[+!toss_index].bowl_name[previous_dismissal]);
@@ -605,7 +608,7 @@ exports.simulate = function (data, callback)
                     {
                         data.match.commentary[data.match.commentary.length - 1] += '(runout)';
                     }
-                    data.match.commentary.push(' Partnership: ' + partnership_runs[previous_partnership_index] + '(' + partnership_balls[previous_partnership_index] + '), runrate: ' + (partnership_runs[previous_partnership_index] * 6 / partnership_balls[previous_partnership_index]).toFixed(2) + ' Fall of wicket: ' + fall_of_wicket);
+                    data.match.commentary.push(' Partnership: ' + partnership_runs[previous_partnership_index] + '(' + partnership_balls[previous_partnership_index] + '), runrate: ' + (partnership_runs[previous_partnership_index] * 6 / (partnership_balls[previous_partnership_index] ? partnership_balls[previous_partnership_index]: 1)).toFixed(2) + ' Fall of wicket: ' + fall_of_wicket);
                 }
                 data.match.commentary.push('  ' + team_object[+!toss_index].bowl_name[current_bowler] + ': ' + parseInt(deliveries[current_bowler] / 6) + '.' + deliveries[current_bowler] % 6 + '-' + maidens[current_bowler] + '-' + wickets_taken[current_bowler] + '-' + runs_conceded[current_bowler] + '-' + (runs_conceded[current_bowler] * 6 / deliveries[current_bowler]).toFixed(2) + '  ');
                 if ((i < 19) && ((Total[0] + 1 - Total[1]) / (19 - i) > 36) && hope)
@@ -666,13 +669,13 @@ exports.simulate = function (data, callback)
                     {
                         ++data.team[+toss_index].stats[data.team[+toss_index].squad[i]].notouts;
                     }
-                    data.team[+toss_index].stats[data.team[+toss_index].squad[i]].strike_rate = data.team[+toss_index].stats[data.team[+toss_index].squad[i]].runs_scored * 100 / data.team[+toss_index].stats[data.team[+toss_index].squad[i]].balls;
-                    data.team[+toss_index].stats[data.team[+toss_index].squad[i]].average = data.team[+toss_index].stats[data.team[+toss_index].squad[i]].runs_scored / data.team[+toss_index].stats[data.team[+toss_index].squad[i]].outs;
+                    data.team[+toss_index].stats[data.team[+toss_index].squad[i]].strike_rate = data.team[+toss_index].stats[data.team[+toss_index].squad[i]].runs_scored * 100 / (data.team[+toss_index].stats[data.team[+toss_index].squad[i]].balls ? data.team[+toss_index].stats[data.team[+toss_index].squad[i]].balls : 1);
+                    data.team[+toss_index].stats[data.team[+toss_index].squad[i]].average = data.team[+toss_index].stats[data.team[+toss_index].squad[i]].runs_scored / (data.team[+toss_index].stats[data.team[+toss_index].squad[i]].outs ? data.team[+toss_index].stats[data.team[+toss_index].squad[i]].outs : 1);
                     if(data.team[+toss_index].stats[data.team[+toss_index].squad[i]].high < score[j])
                     {
                         data.team[+toss_index].stats[data.team[+toss_index].squad[i]].high = score[j];
                     }
-                    else if(data.team[+toss_index].stats[data.team[+toss_index].squad[i]].low > score[j])
+                    if(data.team[+toss_index].stats[data.team[+toss_index].squad[i]].low > score[j])
                     {
                         data.team[+toss_index].stats[data.team[+toss_index].squad[i]].low = score[j];
                     }
@@ -688,9 +691,9 @@ exports.simulate = function (data, callback)
                     data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].runs_given += runs_conceded[j];
                     data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].wickets_taken += wickets_taken[j];
                     data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].overs += deliveries[j++];
-                    data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].economy = data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].runs_given * 6 / data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].overs;
-                    data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].avg = data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].runs_given / data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].wickets_taken;
-                    data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].sr = data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].overs / data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].wickets_taken;
+                    data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].economy = data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].runs_given * 6 / (data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].overs ? data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].overs : 1);
+                    data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].avg = data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].runs_given / (data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].wickets_taken ? data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].wickets_taken : 1);
+                    data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].sr = data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].overs / (data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].wickets_taken ? data.team[+!toss_index].stats[data.team[+!toss_index].squad[i]].wickets_taken : 1);
                 }
             }
             temp = 0;
@@ -707,6 +710,7 @@ exports.simulate = function (data, callback)
                 points = Math.round(temp);
                 MoM.id = strike[+strike_index];
             }
+            console.log(deliveries_bowled, balls_faced, dot_balls);
             data.match.scorecard.push(' Scorecard:');
             data.match.scorecard.push(['Runs', 'Balls', 'Strike Rate', 'Fours', 'Sixes', 'Dot balls', 'Control']);
             k = 0;
@@ -718,7 +722,7 @@ exports.simulate = function (data, callback)
                 }
                 else
                 {
-                    data.match.scorecard.push([team_object[+toss_index].bat_name[i], score[i], balls[i], (score[i] * 100 / balls[i]).toFixed(2), fours[i], maximums[i], dot_balls[i], control[i] * 100]);
+                    data.match.scorecard.push([team_object[+toss_index].bat_name[i], score[i], balls[i], (score[i] * 100 / balls[i]).toFixed(2), fours[i], maximums[i], dot_balls[i], (control[i] * 100).toFixed(2)]);
                     if (!dismissed[i])
                     {
                         data.match.scorecard[data.match.scorecard.length - 1].push('  (not out)');
@@ -731,7 +735,7 @@ exports.simulate = function (data, callback)
                 k += fours[i] * 4 + maximums[i] * 6;
                 balls[i] = fours[i] = maximums[i] = dismissed[i] = milestone[i] = score[i] = balls[i] = fours[i] = maximums[i] = control[i] = catches[i] = dot_balls[i] = 0;
             }
-            data.match.scorecard.push('Total: ' + Total[loop] + ' / ' + wickets[+toss_index] + ' (' + parseInt(Overs[loop] / 6) + '.' + Overs[loop] % 6 + ' overs)  Runrate: ' + (Total[loop] * 6 / Overs[loop]).toFixed(2) + ' Extras: ' + extras);
+            data.match.scorecard.push('Total: ' + Total[loop] + ' / ' + wickets[+toss_index] + ' (' + parseInt(Overs[loop] / 6) + '.' + Overs[loop] % 6 + ' overs)  Runrate: ' + (Total[loop] * 6 / (Overs[loop] ? Overs[loop] : 1)).toFixed(2) + ' Extras: ' + extras);
             data.match.scorecard.push(' Runs scored in boundaries: ' + k + ' of ' + Total[loop] + ' (' + (k * 100 / Total[loop]).toFixed(2) + ' %) ');
             data.match.scorecard.push(' Bowling Statistics:  ');
             data.match.scorecard.push(['Bowler', 'Overs', 'Maidens', 'Wickets', 'Runs conceded', 'Economy  ']);
@@ -751,7 +755,7 @@ exports.simulate = function (data, callback)
                     points = Math.round(temp);
                     MoM.id = team_object[+!toss_index].bowl_index[i];
                 }
-                data.match.scorecard.push([team_object[+!toss_index].bowl_name[i], parseInt(deliveries[i] / 6) + '.' + deliveries[i] % 6, maidens[i], wickets_taken[i], runs_conceded[i], (runs_conceded[i] * 6 / deliveries[i]).toFixed(2)]);
+                data.match.scorecard.push([team_object[+!toss_index].bowl_name[i], parseInt(deliveries[i] / 6).toString() + '.' + (deliveries[i] % 6).toString(), maidens[i], wickets_taken[i], runs_conceded[i], (runs_conceded[i] * 6 / (deliveries[i] ? deliveries[i] : 1)).toFixed(2)]);
                 five_wicket_haul[i] = continuous_wickets[i] = deliveries[i] = maidens[i] = runs_conceded[i] = wickets_taken[i] = dot_deliveries[i] = 0;
                 deliveries_bowled[i] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
             }
@@ -760,7 +764,7 @@ exports.simulate = function (data, callback)
             balls_faced = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
             extras = strike_index = free_hit = current_partnership_index = dot = previous_bowler = 0;
             data.match.scorecard.push('Fall of wickets: ');
-            data.match.scorecard.push(wicket_sequence); // use (typeof(a[])=='object') for commentary display section
+            data.match.scorecard.push(wicket_sequence);
             data.match.scorecard.push('Dot ball percentage: ' + (dot * 100 / Overs[loop]).toFixed(2) + ' %');
             data.match.scorecard.push('   ');
             wicket_sequence = [];
@@ -794,14 +798,14 @@ exports.simulate = function (data, callback)
                     ++data.team[1].tied;
                     ++data.team[0].points;
                     ++data.team[1].points;
-                    data.team[0].balls_for += Overs[0];
-                    data.team[1].balls_for += Overs[1];
                     data.team[0].runs_for += Total[0];
                     data.team[1].runs_for += Total[1];
-                    data.team[0].balls_against += Overs[1];
-                    data.team[1].balls_against += Overs[0];
+                    data.team[0].balls_for += Overs[0];
+                    data.team[1].balls_for += Overs[1];
                     data.team[0].runs_against += Total[1];
                     data.team[1].runs_against += Total[0];
+                    data.team[0].balls_against += Overs[1];
+                    data.team[1].balls_against += Overs[0];
                     data.team[0].wickets_taken += wickets[0];
                     data.team[1].wickets_taken += wickets[1];
                     data.team[0].wickets_fallen += wickets[0];
@@ -895,14 +899,14 @@ exports.simulate = function (data, callback)
     data.team[1].squad.pop();
     delete data.team[0].ratings;
     delete data.team[1].ratings;
-    data.team[0].avg_runs_for = data.team[0].runs_for / data.team[0].played;
-    data.team[1].avg_runs_for = data.team[1].runs_for / data.team[1].played;
-    data.team[0].avg_runs_against = data.team[0].runs_against / data.team[0].played;
-    data.team[1].avg_runs_against = data.team[1].runs_against / data.team[1].played;
-    data.team[0].avg_wickets_taken = data.team[0].wickets_taken / data.team[0].played;
-    data.team[1].avg_wickets_taken = data.team[1].wickets_taken / data.team[1].played;
-    data.team[0].avg_wickets_lost = data.team[0].wickets_fallen / data.team[0].played;
-    data.team[1].avg_wickets_lost = data.team[1].wickets_fallen / data.team[1].played;
+    data.team[0].avg_runs_for = Math.round(data.team[0].runs_for / data.team[0].played);
+    data.team[1].avg_runs_for = Math.round(data.team[1].runs_for / data.team[1].played);
+    data.team[0].avg_runs_against = Math.round(data.team[0].runs_against / data.team[0].played);
+    data.team[1].avg_runs_against = Math.round(data.team[1].runs_against / data.team[1].played);
+    data.team[0].avg_wickets_taken = Math.round(data.team[0].wickets_taken / data.team[0].played);
+    data.team[1].avg_wickets_taken = Math.round(data.team[1].wickets_taken / data.team[1].played);
+    data.team[0].avg_wickets_lost = Math.round(data.team[0].wickets_fallen / data.team[0].played);
+    data.team[1].avg_wickets_lost = Math.round(data.team[1].wickets_fallen / data.team[1].played);
     data.team[0].avg_overs_for = Math.ceil(data.team[0].balls_for / data.team[0].played / 6) + (Math.floor(data.team[0].balls_for / data.team[0].played) % 6) / 10;
     data.team[1].avg_overs_for = Math.ceil(data.team[1].balls_for / data.team[1].played / 6) + (Math.floor(data.team[1].balls_for / data.team[1].played) % 6) / 10;
     data.team[0].avg_overs_against = Math.ceil(data.team[0].balls_against / data.team[0].played / 6) + (Math.floor(data.team[0].balls_against / data.team[0].played) % 6) / 10;
