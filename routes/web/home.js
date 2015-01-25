@@ -96,7 +96,6 @@ router.get('/', function (req, res)
                     var document = doc.team;
                     async.map(document, getDetails, onFinish);
                 }
-
             }
             else
             {
@@ -375,7 +374,6 @@ router.post('/getTeam', function (req, res)
             continue;
         }
         stats[players[i]] = {};
-        stats[players[i]]._id = players[i];
         stats[players[i]].matches = 0;
         stats[players[i]].catches = 0;
         stats[players[i]].MoM = 0;
