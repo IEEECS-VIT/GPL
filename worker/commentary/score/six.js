@@ -124,6 +124,21 @@ module.exports =
         "terrible line from the bowler. On the pads and he's been swept miles into the boundary behind square leg. A batsman  of such class against this kind of bowling is no contest at all.",
         "what a strike! It was short and afforded him enough room to upper cut it and he's put enough muscle into it to clear  the ropes",
         "into orbit! Races down the track to pick it up off a length and deposit well into the crowd behind long-on. The  batsman has done away with defensive strokes",
-        "did that go all the way? This was bowled short and sat up nicely for the batsman to biff it over midwicket, the  question was whether the ball hit the boundary cushion on the full or on the half volley, the on-field umpire asks the third umpire and after studying a few replays he calls it a six"
-
+        "did that go all the way? This was bowled short and sat up nicely for the batsman to biff it over midwicket, the  question was whether the ball hit the boundary cushion on the full or on the half volley, the on-field umpire asks the third umpire and after studying a few replays he calls it a six",
+        "he's getting it off the middle now. This was tossed up amply on middle, he steps out a touch and stays leg side of the ball to ease this over the ropes at extra cover. Pure class",
+        "slower ball and this time the batsman has mauled it miles into the crowd! Planted his front leg down and didn't bother with the niceties. Full-blooded swing of the bat and that brings us to the time out",
+        "races down the track and smashes this over long-on. That's a pretty big blow in the context of the game",
+        "oh my! He shuffled across and slog swept the flighted delivery into the stands behind midwicket. That was a majestic hit",
+        "he walks down and smashes the low full toss over long-off!",
+        "he won't be smiling after this. It was full on off stump but the batsman had moved across and flicked it to the long leg boundary. Looked completely at ease playing that",
+        "that's over the ropes! It was length and sliding down leg, he was on his front foot and swiveled to help it on it's way.",
+        "whoa! That's emphatic! Chips down the track and drops this into the second tier behind long-on. Reached the pitch and punished it",
+        "I've seen him do that a couple of times. The bowler saw him making room outside leg and fired it wide outside off. But he reaches out, the bottom hand comes off the bat and yet he blasts it over extra cover",
+        " slower ball, picked up and hoisted over long-on. Bent his knees and slogged it away cleanly",
+        "this time he misses his length and the batsman has swept him mightily into the stands behind square leg. Sunk down into his knees and swung the arms quite freely. That was massive",
+        "low full toss outside off, the batsman does what he has been doing so often. Backs away and hammers it over the boundary. This time the crowd over extra cover scurries to return the ball",
+        "switch hit warning! This was a low full toss on off stump, he changed his grip and swept it right-handed over short fine leg, which was short third man until a second ago",
+        "oops! The yorker ends up a full toss and Finch has mauled it over cow corner. Pulls off his helmet and has the look of a man satisfied with his work. The bowler looks heartbroken with the mistake.",
+        "",
+        ""
     ];
