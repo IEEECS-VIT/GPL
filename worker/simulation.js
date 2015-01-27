@@ -415,7 +415,8 @@ exports.simulate = function (data, callback)
                         }
                         temp /= balls[strike[+strike_index]];
                         temp -= team_object[+toss_index].bat_rating[strike[+strike_index]];
-                        temp = score[strike[+strike_index]] * (1 - Math.exp(-(Math.pow(fours[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]])) + Math.pow(maximums[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]]))) / (balls[strike[+strike_index]] + team_object[+toss_index].bat_rating[strike[+strike_index]] + temp)));
+                        temp /= 10;
+                        temp = (score[strike[+strike_index]] + 1) * (1 - Math.exp((temp - (Math.pow(fours[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]])) + Math.pow(maximums[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]])))) / (balls[strike[+strike_index]] + team_object[+toss_index].bat_rating[strike[+strike_index]])));
                         if(points < temp)
                         {
                             MoM.team = +toss_index;
@@ -539,7 +540,7 @@ exports.simulate = function (data, callback)
                         else if (Total[+toss] > Total[+!toss])
                         {
                             data.match.commentary.push(' And they have done it! What an emphatic victory ! ');
-                            Overs[1] = 6 * i + j;
+                            Overs[+toss] = 6 * i + j;
                             break;
                         }
                         if (!milestone[strike[+strike_index]] && score[strike[+strike_index]] >= 50)
@@ -702,7 +703,8 @@ exports.simulate = function (data, callback)
             }
             temp /= balls[strike[+strike_index]];
             temp -= team_object[+toss_index].bat_rating[strike[+strike_index]];
-            temp = score[strike[+strike_index]] * (1 - Math.exp(-(Math.pow(fours[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]])) + Math.pow(maximums[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]]))) / (balls[strike[+strike_index]] + team_object[+toss_index].bat_rating[strike[+strike_index]] + temp)));
+            temp /= 10;
+            temp = (score[strike[+strike_index]] + 1) * (1 - Math.exp((temp - (Math.pow(fours[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]])) + Math.pow(maximums[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]])))) / (balls[strike[+strike_index]] + team_object[+toss_index].bat_rating[strike[+strike_index]])));
             if(points < temp)
             {
                 MoM.team = +toss_index;
@@ -746,7 +748,8 @@ exports.simulate = function (data, callback)
                 }
                 temp /= deliveries[i];
                 temp -= team_object[+!toss_index].bowl_rating[i];
-                temp = (wickets_taken[i] * 20) * (1 - Math.exp(-Math.pow((dot_deliveries[i] + 1) * 6 , wickets_taken[i]) / (team_object[+!toss_index].bowl_rating[i] + deliveries[i] + runs_conceded[i] + temp)));
+                temp /= 10;
+                temp = ((wickets_taken[i] + 1) * 25) * (1 - Math.exp((temp - Math.pow((dot_deliveries[i] + 1) * 100 , wickets_taken[i])) / (team_object[+!toss_index].bowl_rating[i] + deliveries[i] + runs_conceded[i])));
                 if(points < temp)
                 {
                     MoM.team = +!toss_index;
@@ -881,7 +884,6 @@ exports.simulate = function (data, callback)
             data.team[+winner].net_run_rate = (((data.team[+winner].runs_for) / (data.team[+winner].balls_for) - (data.team[+winner].runs_against) / (data.team[+winner].balls_against)) * 6).toFixed(2);
             data.team[+!winner].net_run_rate = (((data.team[+!winner].runs_for) / (data.team[+!winner].balls_for) - (data.team[+!winner].runs_against) / (data.team[+!winner].balls_against)) * 6).toFixed(2);
         }
-        console.log(MoM, points);
         ++data.team[MoM.team].stats[data.team[MoM.team].ratings[MoM.id]._id].MoM;
         data.match.commentary.push('Man of the Match: ' + data.team[MoM.team].ratings[MoM.id].Name + '( ' + data.team[MoM.team]._id + ')');
         temp = (data.team[MoM.team].ratings[MoM.id].Type == 'bat') ? (mom.bat) : ((data.team[MoM.team].ratings[MoM.id].Type == 'bowl') ? (mom.bowl) : (mom.all));
