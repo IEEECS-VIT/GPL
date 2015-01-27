@@ -350,7 +350,7 @@ exports.simulate = function (data, callback)
                             if (Total[+toss] > Total[+!toss])
                             {
                                 data.match.commentary.push(' What an emphatic victory ! ');
-                                Overs[1] = i * 6 + j;
+                                Overs[+toss] = i * 6 + j;
                                 break;
                             }
                             else if ((Total[1] == Total[0]) && loop)
@@ -800,17 +800,17 @@ exports.simulate = function (data, callback)
                     ++data.team[0].points;
                     ++data.team[1].points;
                     data.team[0].runs_for += Total[0];
-                    data.team[1].runs_for += Total[1];
+                    data.team[1].runs_for += Total[0];
                     data.team[0].balls_for += Overs[0];
-                    data.team[1].balls_for += Overs[1];
-                    data.team[0].runs_against += Total[1];
+                    data.team[1].balls_for += Overs[0];
+                    data.team[0].runs_against += Total[0];
                     data.team[1].runs_against += Total[0];
-                    data.team[0].balls_against += Overs[1];
+                    data.team[0].balls_against += Overs[0];
                     data.team[1].balls_against += Overs[0];
                     data.team[0].wickets_taken += wickets[0];
-                    data.team[1].wickets_taken += wickets[1];
+                    data.team[1].wickets_taken += wickets[0];
                     data.team[0].wickets_fallen += wickets[0];
-                    data.team[1].wickets_fallen += wickets[1];
+                    data.team[1].wickets_fallen += wickets[0];
                     data.team[0].form += Overs[0] * (mean_rating[1] - mean_rating[0]) / Total[0] / 600;
                     data.team[1].form += Overs[0] * (mean_rating[0] - mean_rating[1]) / Total[0] / 600;
                     data.team[0].net_run_rate = (((data.team[0].runs_for) / (data.team[0].balls_for) - (data.team[0].runs_against) / (data.team[0].balls_against)) * 6).toFixed(2);
