@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var bcrypt = require('bcryptjs');
+var bcrypt = require('bcrypt');
 var express = require('express');
 var path = require('path');
 var router = express.Router();
