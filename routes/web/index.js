@@ -16,11 +16,19 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var express = require('express');
 var path = require('path');
 var router = express.Router();
-
+var crypto = require('crypto');
+var email = require('nodemailer').createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'email@email.com',
+        pass: process.env.PASSWORD
+    }
+});
+var uri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 var log;
 if (process.env.LOGENTRIES_TOKEN)
 {
@@ -98,36 +106,96 @@ router.post('/login', function (req, res)
 
 router.post('/forgot', function (req, res)
 {
-    var name = req.body.team_name;
-    var email = req.body.email;
-
-    var credentials = {
-        '_id': name,
-        '_email': email
-    };
-    var onFetch = function (err, doc)
-    {
-        if (err)
+    mongo.connect(uri, function(err, db){
+        if(err)
         {
-            res.redirect('/');
-        }
-        else if (doc)
-        {
-            if (doc['email'] === credentials['email'] && doc['_id'] === credentials['_id'])
-            {
-                // email dispatcher
-            }
-            else
-            {
-                // wrong
-            }
+            console.log(err.message);
         }
         else
         {
-            res.render('forgot', {Message: "No record"});
+            crypto.randomBytes(20, function(err, buf) {
+                var token = buf.toString('hex');
+                var options = {
+                    from: 'email@gmail.com',
+                    to : req.body.email,
+                    subject: 'Time to get back in the game',
+                    text: 'Please click on http://' + req.headers.host + '/reset/' + token + ' in order to reset your password.\n '
+                    + 'In the event that this password reset was not requested by you,'
+                    + ' please ignore this message and your password shall remain intact.\n\nRegards, \nTeam G.P.L.'
+                };
+                db.collection('users').findAndModify({email : req.body.email_id, _id : req.body.team_name}, [], {$set:{token : token, expire : Date.now() + 3600000}}, {new : false}, function(err, doc){
+                    db.close();
+                    if(err)
+                    {
+                        console.log(err.message);
+                    }
+                    else if(!doc)
+                    {
+                        console.log('Oh No !');
+                    }
+                    else
+                    {
+                        email.sendMail(options, function(err) {
+                            if(err)
+                            {
+                                console.log(err.message);
+                            }
+                            else
+                            {
+                                res.redirect('/login');
+                            }
+                        });
+                    }
+                });
+            });
         }
-    };
-    mongoUsers.forgotPassword(credentials, onFetch);
+    });
+});
+
+router.post('/reset/:token', function(req, res) {
+    mongo.connect(uri, function(err, db){
+        if(err)
+        {
+            console.log(err.message);
+        }
+        else
+        {
+            var query = {token : req.params.token, expire : {$gt: Date.now()}},
+                op = {$set : {hash : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))}, $unset : {token : '', expire : ''}};
+            db.collection(match).findAndModify(query, [], op, {new : true}, function(err, doc) {
+                db.close();
+                if(err)
+                {
+                    console.log(err.message);
+                }
+                else if(!doc)
+                {
+                    console.log('No matches!');
+                    res.redirect('/forgot');
+                }
+                else
+                {
+                    var options = {
+                        to : doc.email,
+                        subject : 'Password chage successful !',
+                        text : 'Hey there, ' + doc.email.split('@')[0] + ' we\'re just writing in to let you know that the recent password change was successful.' +
+                        '\nRegards,\nTeam G.P.L'
+                    };
+                    email.sendMail(options, function(err, doc) {
+                        if(err)
+                        {
+                            console.log(err.message);
+                        }
+                        else
+                        {
+                            console.log('Updated successfully!');
+                            res.redirect('/login');
+                        }
+                    });
+                }
+            });
+        }
+    });
 });
 
 router.get('/register', function (req, res)

@@ -31,7 +31,7 @@ if (process.env.LOGENTRIES_TOKEN)
 
 var simulator = require(path.join(__dirname, 'simulation'));
 
-var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
+var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://127.0.0.1:27017/GPL';
 var databaseOptions = {
     server: {
         socketOptions: {

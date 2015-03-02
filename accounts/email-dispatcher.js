@@ -47,10 +47,11 @@ email_manager.composeEmail = function (object)
     var link = 'http://gravitaspremierleague.com/reset?e=' + object.email + '&p=' + object.pass;
     var html = "<html><body>";
     html += "Hi " + object.name + ",<br><br>";
-    html += "Your username is :: <b>" + object.user + "</b><br><br>";
-    html += "<a href='" + link + "'>Please click here to reset your password</a><br><br>";
-    html += "Cheers,<br>";
-    html += "</body></html>";
+    html += "You are seeing this message because somebody (most probably you) has chosen to reset the password for the Gravitas Premier League account associated with this email address.<br />";
+    html += "Your username is : <b>" + object.user + "</b><br><br>";
+    html += "Please click <a href='" + link + "'>here</a> to reset your password<br><br>";
+    html += "Regards,<br>";
+    html += "Team Gravitas Premier League</body></html>";
     return [
         {data: html, alternative: true}
     ];

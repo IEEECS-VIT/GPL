@@ -20,7 +20,7 @@ var express = require('express');
 var path = require('path');
 var async = require('async');
 var router = express.Router();
-
+var match = require(path.join(__dirname, '..', '..', 'matchCollection'));
 var log;
 if (process.env.LOGENTRIES_TOKEN)
 {
@@ -404,6 +404,36 @@ router.post('/getTeam', function (req, res)
         mongoUsers.updateUserTeam(credentials, players, stats, onUpdate);
 });
 
+router.get('/forgot', function(req, res){
+   res.render('forgot');
+});
+
+router.get('/reset/:token', function(req, res){
+    mongo.connect(uri, function(err, db) {
+        if(err)
+        {
+            console.log(err.message);
+        }
+        else
+        {
+            db.collection(match).findOne({ token: req.params.token, expire: { $gt: Date.now() } }, function(err, doc) {
+                db.close();
+                if(err)
+                {
+                    console.log(err.message);
+                }
+                else if (!doc)
+                {
+                    res.redirect('/forgot');
+                }
+                else
+                {
+                    res.render('reset');
+                }
+            });
+        }
+    });
+});
 
 router.get('/rules', function (req, res)
 {

@@ -22,8 +22,8 @@
 module.exports = {
 
     host: 'smtp.gmail.com',
-    user: process.env.EMAIL,
-    password: process.env.EMAIL_PASS,
-    sender: 'Kashish Singhal <singhal2.kashish@gmail.com>'
+    user: 'ieeecs@vit.ac.in',
+    password: process.env.PASSWORD,
+    sender: 'ieeecs@vit.ac.in'
 
-}
+};
