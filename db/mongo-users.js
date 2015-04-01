@@ -56,7 +56,6 @@ exports.getCount = function (callback)
         }
     };
     MongoClient.connect(mongoUri, onConnect);
-
 };
 
 exports.insert = function (doc, callback)
@@ -108,7 +107,6 @@ exports.fetch = function (doc, callback)
                 }
                 else if (document)
                 {
-                    db.close();
                     if (doc['_id'] === document['_id'])
                     {
                         callback(null, document);
@@ -117,7 +115,6 @@ exports.fetch = function (doc, callback)
                     {
                         callback(false, null);
                     }
-
                 }
                 else
                 {
@@ -164,8 +161,6 @@ exports.getleader = function (doc, callback)
                             documents.push(document);
                             callback(null, documents);
                         }
-                        //console.log("get Leader Function5");
-
                     };
                     collection.findOne(doc, onFetchOne);
                 }
@@ -178,13 +173,10 @@ exports.getleader = function (doc, callback)
                         ['net_run_rate', 'desc']
                     ]
                 };
-
             collection.find({}, options).toArray(onFetch);
-            //collection.find({},onFetch);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
-
 };
 
 exports.forgotPassword = function (doc, callback)
@@ -205,24 +197,83 @@ exports.forgotPassword = function (doc, callback)
                 {
                     callback(err, null);
                 }
+                else if (document)
+                {
+                    callback(null, document);
+                }
                 else
                 {
-                    if (document)
-                    {
-                        db.close();
-                        callback(null, document);
-                    }
-                    else
-                    {
-                        db.close();
-                        callback(false, null);
-                    }
-
+                    callback(false, null);
                 }
             };
             collection.findOne(doc, onFetch);
         }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};
 
+exports.getReset = function(doc, callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
+            callback(err, null);
+        }
+        else
+        {
+            var collection = db.collection(match);
+            var onFetch = function (err, document)
+            {
+                db.close();
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (document)
+                {
+                    callback(null, document);
+                }
+                else
+                {
+                    callback(false, null);
+                }
+            };
+            collection.findOne(doc, onFetch);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};
+
+exports.resetPassword = function (doc, op, callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
+            callback(err, null);
+        }
+        else
+        {
+            var collection = db.collection(match);
+            var onFetch = function (err, document)
+            {
+                db.close();
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (document)
+                {
+                    callback(null, document);
+                }
+                else
+                {
+                    callback(false, null);
+                }
+            };
+            collection.findAndModify(doc, [], op, {}, onFetch);
+        }
     };
     MongoClient.connect(mongoUri, onConnect);
 };
@@ -341,9 +392,7 @@ exports.update = function (query, update, callback)
                 }
             };
             collection.findAndModify(query, {}, update, {"upsert": true}, onUpdate);
-
         }
     };
     MongoClient.connect(mongoUri, options, onConnect);
 };
-

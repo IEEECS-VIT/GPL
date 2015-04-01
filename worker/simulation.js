@@ -617,7 +617,7 @@ exports.simulate = function (data, callback)
                 }
                 if (deliveries[current_bowler] == 24)
                 {
-                    data.match.commentary.push('And that brings an end to Bowler ' + team_object[+!toss_index].bowl_name[current_bowler] + '\'s spell.  ');
+                    data.match.commentary.push('And that brings an end to ' + team_object[+!toss_index].bowl_name[current_bowler] + '\'s spell.  ');
                 }
                 last_five_overs.unshift(previous_over);
                 if(i > 3)

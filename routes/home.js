@@ -30,10 +30,10 @@ if (process.env.LOGENTRIES_TOKEN)
                             });
 }
 
-var mongoPlayers = require(path.join(__dirname, '..', '..', 'db', 'mongo-players.js'));
-var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users.js'));
-var mongoTeam = require(path.join(__dirname, '..', '..', 'db', 'mongo-team.js'));
-var mongoMatches = require(path.join(__dirname, '..', '..', 'db', 'mongo-matches.js'));
+var mongoPlayers = require(path.join(__dirname, '..', 'db', 'mongo-players.js'));
+var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users.js'));
+var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team.js'));
+var mongoMatches = require(path.join(__dirname, '..', 'db', 'mongo-matches.js'));
 
 
 router.get('/', function (req, res)
@@ -78,7 +78,7 @@ router.get('/', function (req, res)
                 {
                     if (err)
                     {
-                        //do something with the error
+                        console.log(err.message);
                     }
                     else
                     {
@@ -102,7 +102,6 @@ router.get('/', function (req, res)
                 res.clearCookie('name', { });
                 res.redirect('/');
             }
-
         };
         mongoUsers.fetch(credentials, onFetch);
     }
@@ -116,17 +115,15 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
 {
     if (req.signedCookies.name)                           // if cookies exists then access the database
     {
-        var teamname = req.signedCookies.name;
         var doc =
         {
-            "_id": teamname
+            "_id": req.signedCookies.name
         };
         var onFetch = function (err, documents)
         {
             if (err)
             {
                 console.log(err.message);
-
             }
             else
             {
@@ -136,14 +133,11 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
         };
         console.log("get Leader Function");
         mongoUsers.getleader(doc, onFetch);
-
     }
     else
     {
         res.redirect("/");
     }
-
-
 });
 
 router.get('/matches', function (req, res)
@@ -190,11 +184,9 @@ router.get('/matches', function (req, res)
                         {
                             response.test = "True";
                         }
-                        //console.log(response.previousMatch);
                         console.log(response.nextMatch);
                         res.render('matches', {response: response});
                     }
-
                 };
 
                 parallel_tasks.previousMatch = function (asyncCallback)
@@ -207,8 +199,6 @@ router.get('/matches', function (req, res)
 
                 };
                 async.parallel(parallel_tasks, onFinish);
-                //res.render('matches', response);
-
             }
         };
         mongoUsers.fetch(credentials,onFetch);
@@ -219,7 +209,6 @@ router.get('/matches', function (req, res)
     }
 });
 
-
 router.post('/getsquad', function (req, res)
 {
     if (req.signedCookies.name)
@@ -229,36 +218,21 @@ router.post('/getsquad', function (req, res)
             '_id': teamname
         };
         var squad = [];
-        var squad1 = parseInt(req.body.p1);
-        var squad2 = parseInt(req.body.p2);
-        var squad3 = parseInt(req.body.p3);
-        var squad4 = parseInt(req.body.p4);
-        var squad5 = parseInt(req.body.p5);
-        var squad6 = parseInt(req.body.p6);
-        var squad7 = parseInt(req.body.p7);
-        var squad8 = parseInt(req.body.p8);
-        var squad9 = parseInt(req.body.p9);
-        var squad10 = parseInt(req.body.p10);
-        var squad11 = parseInt(req.body.p11);
-        console.log(squad11);
-        squad.push(squad1);
-        squad.push(squad2);
-        squad.push(squad3);
-        squad.push(squad4);
-        squad.push(squad5);
-        squad.push(squad6);
-        squad.push(squad7);
-        squad.push(squad8);
-        squad.push(squad9);
-        squad.push(squad10);
-        squad.push(squad11);
-        console.log(squad);
+        squad.push(parseInt(req.body.p1));
+        squad.push(parseInt(req.body.p2));
+        squad.push(parseInt(req.body.p3));
+        squad.push(parseInt(req.body.p4));
+        squad.push(parseInt(req.body.p5));
+        squad.push(parseInt(req.body.p6));
+        squad.push(parseInt(req.body.p7));
+        squad.push(parseInt(req.body.p8));
+        squad.push(parseInt(req.body.p9));
+        squad.push(parseInt(req.body.p10));
+        squad.push(parseInt(req.body.p11));
         var onFetch = function (err, document)
         {
             if (err)
             {
-                console.log(err.message);
-                //do something with the error
                 console.log(err.message);
             }
             else
@@ -273,56 +247,39 @@ router.post('/getsquad', function (req, res)
     {
         res.redirect('/');
     }
-
 });
+
 router.post('/getTeam', function (req, res)
 {
     var players = [], cost = 0;
-    var player1 = parseInt(req.body.p1);
-    var player2 = parseInt(req.body.p2);
-    var player3 = parseInt(req.body.p3);
-    var player4 = parseInt(req.body.p4);
-    var player5 = parseInt(req.body.p5);
-    var player6 = parseInt(req.body.p6);
-    var player7 = parseInt(req.body.p7);
-    var player8 = parseInt(req.body.p8);
-    var player9 = parseInt(req.body.p9);
-    var player10 = parseInt(req.body.p10);
-    var player11 = parseInt(req.body.p11);
-    var player12 = parseInt(req.body.p12);
-    var player13 = parseInt(req.body.p13);
-    var player14 = parseInt(req.body.p14);
-    var player15 = parseInt(req.body.p15);
-    var player16 = parseInt(req.body.p16);
-    players.push(player1);
-    players.push(player2);
-    players.push(player3);
-    players.push(player4);
-    players.push(player5);
-    players.push(player6);
-    players.push(player7);
-    players.push(player8);
-    players.push(player9);
-    players.push(player10);
-    players.push(player11);
-    players.push(player12);
-    players.push(player13);
-    players.push(player14);
-    players.push(player15);
-    players.push(player16);
+    players.push(parseInt(req.body.p1));
+    players.push(parseInt(req.body.p2));
+    players.push(parseInt(req.body.p3));
+    players.push(parseInt(req.body.p4));
+    players.push(parseInt(req.body.p5));
+    players.push(parseInt(req.body.p6));
+    players.push(parseInt(req.body.p7));
+    players.push(parseInt(req.body.p8));
+    players.push(parseInt(req.body.p9));
+    players.push(parseInt(req.body.p10));
+    players.push(parseInt(req.body.p11));
+    players.push(parseInt(req.body.p12));
+    players.push(parseInt(req.body.p13));
+    players.push(parseInt(req.body.p14));
+    players.push(parseInt(req.body.p15));
+    players.push(parseInt(req.body.p16));
 
     var onUpdate = function (err, documents)
     {
         if (err)
         {
-            // do something with the error
+            console.log(err.message);
         }
         else
         {
             console.log(documents);
             res.redirect('/home');
         }
-
     };
 
     var getCost = function (id, callback)
@@ -339,11 +296,12 @@ router.post('/getTeam', function (req, res)
         };
         mongoPlayers.getPlayer(player, fields, callback)
     };
+
     var onFinish = function (err, documents)
     {
         if (err)
         {
-            // do something with the error
+            console.log(err.message);
         }
         else
         {
@@ -359,6 +317,7 @@ router.post('/getTeam', function (req, res)
             res.redirect('/home/team');
         }
     };
+
     async.map(players, getCost, onFinish);
 
     var teamName = req.signedCookies.name;
@@ -377,7 +336,7 @@ router.post('/getTeam', function (req, res)
         stats[players[i]].matches = 0;
         stats[players[i]].catches = 0;
         stats[players[i]].MoM = 0;
-        if((players[i] > 'a' && players[i] < 'b') || (players[i] > 'c' && players[i] < 'd'))
+        if(!(players[i] > 'b' && players[i] < 'c'))
         {
             stats[players[i]].runs_scored = 0;
             stats[players[i]].balls = 0;
@@ -391,7 +350,7 @@ router.post('/getTeam', function (req, res)
             stats[players[i]].sixes = 0;
             stats[players[i]].recent = [];
         }
-        if(players[i] > 'b' && players[i] < 'c')
+        if(players[i] > 'b' && players[i] < 'd')
         {
             stats[players[i]].runs_given = 0;
             stats[players[i]].wickets_taken = 0;
@@ -409,51 +368,47 @@ router.get('/forgot', function(req, res){
 });
 
 router.get('/reset/:token', function(req, res){
-    mongo.connect(uri, function(err, db) {
+    var onGetReset = function(err, doc)
+    {
         if(err)
         {
             console.log(err.message);
         }
+        else if(!doc)
+        {
+            res.redirect('/forgot');
+        }
         else
         {
-            db.collection(match).findOne({ token: req.params.token, expire: { $gt: Date.now() } }, function(err, doc) {
-                db.close();
-                if(err)
-                {
-                    console.log(err.message);
-                }
-                else if (!doc)
-                {
-                    res.redirect('/forgot');
-                }
-                else
-                {
-                    res.render('reset');
-                }
-            });
+            res.render('reset');
         }
-    });
+    };
+    mongoUsers.getReset({token: req.params.token, expire: {$gt: Date.now()}}, onGetReset);
 });
 
 router.get('/rules', function (req, res)
 {
-    res.render('rules', { });
+    res.render('rules');
 });
+
 router.get('/rules', function (req, res)
 {
-    res.render('rules', { });
+    res.render('rules');
 });
+
 router.get('/sponsors', function (req, res) // sponsors page
 {
-    res.render('sponsors', { });
+    res.render('sponsors');
 });
+
 router.get('/prize', function (req, res) // page to view prizes
 {
-    res.render('prize', { });
+    res.render('prize');
 });
+
 router.get('/trailer', function (req, res) // trailer page
 {
-    res.render('trailer', { });
+    res.render('trailer');
 });
 
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
@@ -467,9 +422,7 @@ router.get('/players', function (req, res) // page for all players, only availab
         {
             if (err)
             {
-                //do something with the error
                 console.log(err.message);
-
             }
             else
             {
@@ -498,30 +451,27 @@ router.get('/players', function (req, res) // page for all players, only availab
             }
         };
         mongoUsers.fetch(doc, onFetchUser);
-
     }
     else
     {
         res.redirect("/");
     }
-
 });
-
 
 router.get('/team', function (req, res) // view the assigned playing 11 with options to change the playing 11
 {
-    if (req.signedCookies.name)                           // if cookies exists then access the database
+    if (req.signedCookies.name)                           // if cookies exist, then access the database
     {
-        var teamName = req.signedCookies.name;
         var credentials =
         {
-            '_id': teamName
+            '_id': req.signedCookies.name
         };
 
         var getTeam = function (err, documents)
         {
             if (err)
             {
+                console.log(err.message);
                 res.redirect('/home');
             }
             else
@@ -532,14 +482,15 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
         };
         mongoTeam.getTeam(credentials, getTeam);
     }
-    else                                                        // if cookies does not exists , go to login page
+    else                                                        // if cookies does not exist, go to login page
     {
         res.redirect('/');
     }
 });
+
 router.get('/developers', function (req, res) // developers page
 {
-
-    res.render('developers', {});
+    res.render('developers');
 });
+
 module.exports = router;

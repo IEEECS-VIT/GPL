@@ -16,7 +16,13 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var bcrypt = require('bcrypt');
+var bcrypt;
+try{
+    bcrypt = require('bcrypt');
+}
+catch(err){
+    bcrypt = require('bcryptjs');
+}
 var express = require('express');
 var path = require('path');
 var router = express.Router();
@@ -24,7 +30,7 @@ var crypto = require('crypto');
 var email = require('nodemailer').createTransport({
     service: 'Gmail',
     auth: {
-        user: 'email@email.com',
+        user: 'gravitaspremierleague@gmail.com',
         pass: process.env.PASSWORD
     }
 });
@@ -38,8 +44,8 @@ if (process.env.LOGENTRIES_TOKEN)
                             });
 }
 
-var mongoInterest = require(path.join(__dirname, '..', '..', 'db', 'mongo-interest'));
-var mongoUsers = require(path.join(__dirname, '..', '..', 'db', 'mongo-users'));
+var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
+var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
 
 
 router.get('/', function (req, res)
@@ -76,7 +82,6 @@ router.post('/login', function (req, res)
         if (err)
         {
             console.log(err.message);
-            // Make it more user friendly, output the error to the view
             res.render('index', {response: "Incorrect Username"});
         }
         else if (doc)
@@ -96,7 +101,6 @@ router.post('/login', function (req, res)
         else
         {
             console.log('No user exists');
-            // Make it more user friendly, output the error to the view
             res.render('index', {response: "Incorrect Username"});
         }
     };
@@ -106,96 +110,81 @@ router.post('/login', function (req, res)
 
 router.post('/forgot', function (req, res)
 {
-    mongo.connect(uri, function(err, db){
+    var onFetch = function(err, doc){
         if(err)
         {
             console.log(err.message);
         }
-        else
+        else if(doc)
         {
-            crypto.randomBytes(20, function(err, buf) {
+            crypto.randomBytes(20, function (err, buf) {
                 var token = buf.toString('hex');
                 var options = {
-                    from: 'email@gmail.com',
-                    to : req.body.email,
+                    from: 'gravitaspremierleague@gmail.com',
+                    to: req.body.email,
                     subject: 'Time to get back in the game',
                     text: 'Please click on http://' + req.headers.host + '/reset/' + token + ' in order to reset your password.\n '
                     + 'In the event that this password reset was not requested by you,'
                     + ' please ignore this message and your password shall remain intact.\n\nRegards, \nTeam G.P.L.'
                 };
-                db.collection('users').findAndModify({email : req.body.email_id, _id : req.body.team_name}, [], {$set:{token : token, expire : Date.now() + 3600000}}, {new : false}, function(err, doc){
-                    db.close();
+
+                email.sendMail(options, function(err) {
                     if(err)
                     {
                         console.log(err.message);
                     }
-                    else if(!doc)
-                    {
-                        console.log('Oh No !');
-                    }
                     else
                     {
-                        email.sendMail(options, function(err) {
-                            if(err)
-                            {
-                                console.log(err.message);
-                            }
-                            else
-                            {
-                                res.redirect('/login');
-                            }
-                        });
+                        res.redirect('/login');
                     }
                 });
             });
         }
-    });
+        else
+        {
+            console.log('Invalid credentials!');
+            res.redirect('/forgot');
+        }
+    };
+    mongoUsers.forgotPassword(doc, onFetch);
 });
 
 router.post('/reset/:token', function(req, res) {
-    mongo.connect(uri, function(err, db){
+    var query = {token : req.params.token, expire : {$gt: Date.now()}};
+    var op = {$set : {hash : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))}, $unset : {token : '', expire : ''}};
+    var onReset = function(err, doc)
+    {
         if(err)
         {
             console.log(err.message);
         }
+        else if(!doc)
+        {
+            console.log('No matches found!');
+            res.redirect('/forgot');
+        }
         else
         {
-            var query = {token : req.params.token, expire : {$gt: Date.now()}},
-                op = {$set : {hash : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))}, $unset : {token : '', expire : ''}};
-            db.collection(match).findAndModify(query, [], op, {new : true}, function(err, doc) {
-                db.close();
+            var options = {
+                to : doc.email,
+                subject : 'Password chage successful !',
+                text : 'Hey there, ' + doc.email.split('@')[0] + ' we\'re just writing in to let you know that the recent password change was successful.' +
+                '\nRegards,\nTeam G.P.L'
+            };
+            email.sendMail(options, function(err, doc) {
                 if(err)
                 {
                     console.log(err.message);
                 }
-                else if(!doc)
-                {
-                    console.log('No matches!');
-                    res.redirect('/forgot');
-                }
                 else
                 {
-                    var options = {
-                        to : doc.email,
-                        subject : 'Password chage successful !',
-                        text : 'Hey there, ' + doc.email.split('@')[0] + ' we\'re just writing in to let you know that the recent password change was successful.' +
-                        '\nRegards,\nTeam G.P.L'
-                    };
-                    email.sendMail(options, function(err, doc) {
-                        if(err)
-                        {
-                            console.log(err.message);
-                        }
-                        else
-                        {
-                            console.log('Updated successfully!');
-                            res.redirect('/login');
-                        }
-                    });
+                    console.log('Updated successfully!');
+                    res.redirect('/login');
                 }
             });
         }
-    });
+    };
+    mongoUsers.resetPassword(query, op, onReset);
 });
 
 router.get('/register', function (req, res)
@@ -216,7 +205,7 @@ router.post('/register', function (req, res)
     {
         if (err)
         {
-            // do something with the error
+            console.log(err.message);
         }
         else
         {
@@ -277,7 +266,6 @@ router.post('/register', function (req, res)
                     if (err)
                     {
                         console.log(err.message);
-                        // Make it more user friendly, output the error to the view
                         res.render('register', {response: "Team Name Already Exists"});
                     }
                     else
@@ -297,15 +285,14 @@ router.post('/register', function (req, res)
         }
     };
     mongoUsers.getCount(onGetCount);
-
 });
 
 router.get('/logout', function (req, res)
 {
     if (req.signedCookies.name)
     {
-        res.clearCookie('name', { });
-        res.redirect('/');
+        res.clearCookie('name');
+        res.redirect('/login');
     }
     else
     {
@@ -332,7 +319,7 @@ router.post('/interest', function (req, res) // interest form
     {
         if (err)
         {
-            // do something
+            console.log(err.message);
         }
         else
         {

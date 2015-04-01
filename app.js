@@ -22,14 +22,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var newrelic;
+var log;
+var index = require(path.join(__dirname, 'routes', 'index'));
+var home = require(path.join(__dirname, 'routes', 'home'));
+var app = express();
+var loggerLevel = process.env.LOGGER_LEVEL || 'dev';
+
 if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 {
     newrelic = require('newrelic');
 }
 
-var log;
 if (process.env.LOGENTRIES_TOKEN)
 {
     var logentries = require('node-logentries');
@@ -38,35 +42,22 @@ if (process.env.LOGENTRIES_TOKEN)
                             });
 }
 
-var index = require(path.join(__dirname, 'routes', 'web', 'index'));
-var home = require(path.join(__dirname, 'routes', 'web', 'home'));
-
-var app = express();
-
 if (newrelic)
 {
     app.locals.newrelic = newrelic;
 }
 
-var loggerLevel = process.env.LOGGER_LEVEL || 'dev';
 app.use(logger(loggerLevel));
-
 app.set('title', 'GPL');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')));
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 app.enable('trust proxy');
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
-var cookieSecret = process.env.COOKIE_SECRET || 'randomsecretstring';
-app.use(cookieParser(cookieSecret, {signed: true}));
-
+app.use(cookieParser(process.env.COOKIE_SECRET || 'randomsecretstring', {signed: true}));
 app.use('/', index);
 app.use('/home', home);
 

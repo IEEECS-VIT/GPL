@@ -48,7 +48,6 @@ var getPlayer = function (id, callback)
         }
     };
     MongoClient.connect(mongoUri, onConnect);
-
 };
 
 exports.getTeam = function (doc, callback)
@@ -63,7 +62,6 @@ exports.getTeam = function (doc, callback)
         else
         {
             var collection = db.collection(match);   // match collection
-
             var onFetch = function (err, document)
             {
                 console.log("Length " + document.team.length);
@@ -122,7 +120,6 @@ exports.getSquad = function (doc, callback)
                 {
                     getPlayer(coach, onGetCoach);
                 }
-
             };
 
             var onFetch = function (err, document)
@@ -150,13 +147,11 @@ exports.getSquad = function (doc, callback)
                     {
                         callback(null,[]);
                     }
-
                 }
                 else
                 {
                     callback(null,[]);
                 }
-
             };
             console.log("Team "+ doc.team_no);
             collection.findOne(doc, onFetch);
