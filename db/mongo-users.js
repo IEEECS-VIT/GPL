@@ -81,7 +81,7 @@ exports.insert = function (doc, callback)
                     callback(null, docs);
                 }
             };
-            collection.insert(doc, {w: 1}, onInsert);
+            collection.insertOne(doc, {w: 1}, onInsert);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
@@ -272,7 +272,7 @@ exports.resetPassword = function (doc, op, callback)
                     callback(false, null);
                 }
             };
-            collection.findAndModify(doc, [], op, {}, onFetch);
+            collection.findOneAndUpdate(doc, op, {}, onFetch);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
@@ -301,7 +301,7 @@ exports.updateUserTeam = function (doc, arr, stats, callback)
                     callback(true, document);
                 }
             };
-            collection.findAndModify(doc, [], {$set: {'team': arr, 'stats' : stats}}, {}, onUpdate)
+            collection.findOneAndUpdate(doc, {$set: {'team': arr, 'stats' : stats}}, {}, onUpdate)
         }
     };
     MongoClient.connect(mongoUri, onConnect);
@@ -331,7 +331,7 @@ exports.updateMatchSquad = function (doc, arr, callback)
                     callback(null, document);
                 }
             };
-            collection.findAndModify(doc, [], {$set: {'squad': arr}}, {}, onUpdate);
+            collection.findOneAndUpdate(doc, {$set: {'squad': arr}}, {}, onUpdate);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
@@ -391,7 +391,7 @@ exports.update = function (query, update, callback)
                     callback(null, doc);
                 }
             };
-            collection.findAndModify(query, {}, update, {"upsert": true}, onUpdate);
+            collection.findOneAndUpdate(query, update, {"upsert": true}, onUpdate);
         }
     };
     MongoClient.connect(mongoUri, options, onConnect);

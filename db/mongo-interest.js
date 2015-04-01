@@ -43,7 +43,7 @@ exports.insert = function (doc, callback)
                     callback(null, docs);
                 }
             };
-            collection.insert(doc, {w: 1}, onInsert);
+            collection.insertOne(doc, {w: 1}, onInsert);
         }
     };
     MongoClient.connect(mongoUri, onConnect);

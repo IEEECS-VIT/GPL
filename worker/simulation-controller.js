@@ -99,12 +99,12 @@ exports.initSimulation = function (day, masterCallback)
         {
             var updateUser = function (newUserDoc, asyncCallback)
             {
-                database.collection(match).update({_id: newUserDoc._id}, newUserDoc, asyncCallback);
+                database.collection(match).updateOne({_id: newUserDoc._id}, newUserDoc, asyncCallback);
             };
 
             var updateMatch = function (newMatchDoc, asyncCallback)
             {
-                database.collection('matchday' + day).update({_id: newMatchDoc._id}, newMatchDoc, asyncCallback);
+                database.collection('matchday' + day).updateOne({_id: newMatchDoc._id}, newMatchDoc, asyncCallback);
             };
 
             var parallelTasks2 = [

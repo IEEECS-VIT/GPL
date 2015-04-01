@@ -20,7 +20,7 @@ var express = require('express');
 var path = require('path');
 var async = require('async');
 var router = express.Router();
-var match = require(path.join(__dirname, '..', '..', 'matchCollection'));
+var match = require(path.join(__dirname, '..', 'matchCollection'));
 var log;
 if (process.env.LOGENTRIES_TOKEN)
 {

@@ -34,7 +34,6 @@ var email = require('nodemailer').createTransport({
         pass: process.env.PASSWORD
     }
 });
-var uri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 var log;
 if (process.env.LOGENTRIES_TOKEN)
 {
@@ -151,7 +150,7 @@ router.post('/forgot', function (req, res)
 
 router.post('/reset/:token', function(req, res) {
     var query = {token : req.params.token, expire : {$gt: Date.now()}};
-    var op = {$set : {hash : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))}, $unset : {token : '', expire : ''}};
+    var op = {$set : {password_hash : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))}, $unset : {token : '', expire : ''}};
     var onReset = function(err, doc)
     {
         if(err)
@@ -167,7 +166,7 @@ router.post('/reset/:token', function(req, res) {
         {
             var options = {
                 to : doc.email,
-                subject : 'Password chage successful !',
+                subject : 'Password change successful !',
                 text : 'Hey there, ' + doc.email.split('@')[0] + ' we\'re just writing in to let you know that the recent password change was successful.' +
                 '\nRegards,\nTeam G.P.L'
             };

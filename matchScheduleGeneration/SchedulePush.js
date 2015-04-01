@@ -47,7 +47,7 @@ exports.insert = function (doc, collection_recieved, callback)
                     callback(null, docs);
                 }
             };
-            collection.insert(doc, {w: 1}, onInsert);
+            collection.insertOne(doc, {w: 1}, onInsert);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
