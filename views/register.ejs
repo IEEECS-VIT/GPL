@@ -52,6 +52,7 @@
                     <a href="#" style="border-radius: 5px">Sign In</a>
                     <ul class="dropdown" style="width:300%;">
                         <form method="post" action="/login">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
                             <li class="title back js-generated">
                                 <h5>
                                     <a href="javascript:void(0)">
@@ -120,6 +121,7 @@
             <br/><br/>
 
             <form name="reset" action="" method="">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
                 <div class="row">
                     <div class="small-3 medium-3 large-3 columns">
                         <label for="team" class="right inline" style="color: white;">New Password: </label>

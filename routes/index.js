@@ -194,7 +194,7 @@ router.get('/register', function (req, res)
     }
     else
     {
-        res.render('register', { response: "" });
+        res.render('register', { response: "", csrfToken : req.csrfToken() });
     }
 });
 
@@ -301,7 +301,7 @@ router.get('/logout', function (req, res)
 
 router.get('/interest', function (req, res)
 {
-    res.redirect('/');
+    res.redirect('/', {csrfToken : req.csrfToken()});
 });
 
 router.post('/interest', function (req, res) // interest form
@@ -332,86 +332,34 @@ router.post('/interest', function (req, res) // interest form
 
 router.get('/developer', function (req, res) // developers page
 {
-    var session;
-    if (req.signedCookies.name)
-    {
-        session = 1;
-    }
-    else
-    {
-        session = 0;
-    }
-    res.render('developer', {results: session });
+    res.render('developer', {results: (req.signedCookies.name ? 1 : 0)});
 });
+
 router.get('/countdown', function (req, res) // page for countdown
 {
-    var session;
-    if (req.signedCookies.name)
-    {
-        session = true;
-    }
-    else
-    {
-        session = false;
-    }
-    res.render('countdown', {Session: session});
+    res.render('countdown', {Session: (req.signedCookies.name ? 1 : 0)});
 });
 
 router.get('/prizes', function (req, res) // page to view prizes
 {
-    var session;
-    if (req.signedCookies.name)
-    {
-        session = true;
-    }
-    else
-    {
-        session = false;
-    }
-    res.render('prizes', {Session: session });
+    res.render('prizes', {Session: (req.signedCookies.name ? 1 : 0)});
 });
 
 router.get('/rule', function (req, res)
 {
-    var session;
-    if (req.signedCookies.name)
-    {
-        session = 1;
-    }
-    else
-    {
-        session = 0;
-    }
-    res.render('rule', {results: session });
+    res.render('rule', {results: (req.signedCookies.name ? 1 : 0)});
 });
 
 router.get('/sponsor', function (req, res) // sponsors page
 {
-    var session;
-    if (req.signedCookies.name)
-    {
-        session = 1;
-    }
-    else
-    {
-        session = 0;
-    }
-    res.render('sponsor', {results: session });
+    res.render('sponsor', {results: (req.signedCookies.name ? 1 : 0)});
 });
 
 router.get('/trail', function (req, res) // trailer page
 {
-    var session;
-    if (req.signedCookies.name)
-    {
-        session = 1;
-    }
-    else
-    {
-        session = 0;
-    }
-    res.render('trail', {results: session });
+    res.render('trail', {results: (req.signedCookies.name ? 1 : 0)});
 });
+
 router.get('/schedule', function (req, res) // schedule page
 {
     var session;

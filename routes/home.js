@@ -364,7 +364,7 @@ router.post('/getTeam', function (req, res)
 });
 
 router.get('/forgot', function(req, res){
-   res.render('forgot');
+   res.render('forgot', {csrfToken : req.csrfToken()});
 });
 
 router.get('/reset/:token', function(req, res){
@@ -380,15 +380,10 @@ router.get('/reset/:token', function(req, res){
         }
         else
         {
-            res.render('reset');
+            res.render('reset', {csrfToken : req.csrfToken()});
         }
     };
     mongoUsers.getReset({token: req.params.token, expire: {$gt: Date.now()}}, onGetReset);
-});
-
-router.get('/rules', function (req, res)
-{
-    res.render('rules');
 });
 
 router.get('/rules', function (req, res)
