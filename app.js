@@ -22,6 +22,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 var newrelic;
 var log;
 var index = require(path.join(__dirname, 'routes', 'index'));
@@ -58,6 +59,7 @@ app.enable('trust proxy');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser(process.env.COOKIE_SECRET || 'randomsecretstring', {signed: true}));
+app.use(session({ secret : 'session secret key', resave : '', saveUninitialized : ''}));
 app.use(csurf());
 app.use('/', index);
 app.use('/home', home);
@@ -74,7 +76,7 @@ app.use(function (req, res, next)
 // development error handler, will print stacktrace
 if (app.get('env') === 'development')
 {
-    app.use(function (err, req, res, next)
+    app.use(function (err, req, res)
             {
                 if (log)
                 {
@@ -90,7 +92,7 @@ if (app.get('env') === 'development')
 }
 
 // production error handler, no stacktraces leaked to user
-app.use(function (err, req, res, next)
+app.use(function (err, req, res)
         {
             if (log)
             {
