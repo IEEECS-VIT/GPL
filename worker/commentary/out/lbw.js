@@ -32,5 +32,8 @@ module.exports =
     "that's gone, the bowler tries a reverse paddle, misses this big time and is caught in front",
     "This bowler needs only balls to strike, he has the batsman lbw, it was a delayed appeal for lbw, that was a back of  length ball around off stump, the batsman tries to whip that away, pad first,   a bit of doubt over whether that would have hit off, the umpire is convinced though",
     "trapped in the crease and he has to trudge back. No doubt about this one. This came on and struck him on the back  pad as he was looking to clip to midwicket.   The ball skids on and he's a goner",
-    "it's given! That's a pretty tight call from the umpire and the batsman walks back looking a little bemused. It pitched  in line and went on with the arm as he went for a sweep.   Struck low on the front pad and it might just have grazed off stump."
+    "it's given! That's a pretty tight call from the umpire and the batsman walks back looking a little bemused. It pitched  in line and went on with the arm as he went for a sweep.   Struck low on the front pad and it might just have grazed off stump.",
+    "skiddy ball and he's out lbw. pretty straight, and just short of a length, and it skids through to beat him and trap him in front. Height is the only issue, but the umpire has raised his finger",
+    "and this is a lovely bouncer. He has been mis-hit in the past, but this is aimed right at the melon. The batsman backs away, and is in no position to pull. Manages a massive edge that settles with mid-off",
+    ""
 ];

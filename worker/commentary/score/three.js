@@ -35,7 +35,7 @@ module.exports =
         "We could have had a run out here. The batsman continues to live on an edge, jumps out of the crease, gets a thick  edge. it flies over cover, chased it down well, keeps it in, relays it to a fielder, who slips and relays it to another, who spears the throw in, and the keeper messes the run-out up by flicking the bails without collecting the ball",
         "the batsman is late into the pull again, and this time the top edge evades fine leg.",
         "shortish and angled into him, Finch moved outside leg and cuts it behind point. the sweeper pulls it back right on the boundary",
-        "",
+        "short of a length, at the pads, tucked away nicely into the vacant spaces on the leg side, takes three runs",
         "",
         "",
         "",

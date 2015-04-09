@@ -28,5 +28,6 @@ module.exports =
         "fired this full on the stumps and the batsman drilled it down the pitch, the batsman had set off and had to quickly  turn around, the fielder back flicked it to the stumps and he was short, there was barely an appeal and nor did the umpire raise the finger, the batsman didn't wait and walk off, for a second we didn't know what was going on!",
         "That looked really tight from a certain distance, so the umpire has called for the big screen's help.   The frame  shows the batsman marginally out of this line, full credit to the fielder backing up at the right time to exact a dismissal.",
         "trouble here, there is a direct hit, superb work from the man at backward point,   the batsman had walked too far  down the pitch after getting hit on the thigh pad with an incoming ball, the fielder swooped on the ball and found him well short",
-        "fuller, quicker, wants the leg-bye to point, but there is no run here. The runner has given up, and this time the  throw doesn't miss"
+        "fuller, quicker, wants the leg-bye to point, but there is no run here. The runner has given up, and this time the  throw doesn't miss",
+        "poor from the batsman. The bowler bowls a wayward bouncer, but he is not looking at his partner who has rushed up for the bye that gives him the strike. Low alertness and slow running have cost them here. Good presence of mind from the keeper, lobbing the throw to the bowler"
 ];
