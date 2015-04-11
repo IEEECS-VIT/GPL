@@ -35,5 +35,16 @@ module.exports =
     "it's given! That's a pretty tight call from the umpire and the batsman walks back looking a little bemused. It pitched  in line and went on with the arm as he went for a sweep.   Struck low on the front pad and it might just have grazed off stump.",
     "skiddy ball and he's out lbw. pretty straight, and just short of a length, and it skids through to beat him and trap him in front. Height is the only issue, but the umpire has raised his finger",
     "and this is a lovely bouncer. He has been mis-hit in the past, but this is aimed right at the melon. The batsman backs away, and is in no position to pull. Manages a massive edge that settles with mid-off",
+    "belts out an lbw appeal and forefinger goes up. The striker departs! This one lifts from a length on off, He plays down the wrong line and does not meet with the flick as he is rapped on the knee-roll. It may have just bounced over the stumps. Not too sure",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
     ""
 ];

@@ -24,5 +24,9 @@ module.exports =
     "The ball moved away from the batsman, beating his booming hoick in to the covers. The keeper does well to collect  the ball behind the stumps,   before ending this partnership. Smart keeping",
     "That is some effort by the opposition ! The keeper was standing up to the stumps, the batsman took the bait and  charged out to an otherwise harmless delivery,   and has lost his wicket in the process. Strange cricket this...",
     "well that was the plan with him to hit the bowler, except that this delivery has gone in nowhere as expected. The batsman hasn't been watching them out of the hand, which turns his advance down the wicket into a highly low-percentage shot. Beaten comprehensively by the googly, and is stumped by a mile",
+    "he wanted another one but is beaten by the change in pace and is stumped so fast by the keeper before the striker can even look back. Came down the track for the ball that was outside off, it was much flatter and went under the horizontal bat as he missed it. Our keeper does the best",
+    "another stumping chance, this one goes to the third umpire no idea why! He came well out of his crease, got beaten in the air and the keeper whipped the bails off in no time to stump him",
+    "",
+    "",
     ""
 ];

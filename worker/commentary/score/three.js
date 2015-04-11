@@ -36,9 +36,9 @@ module.exports =
         "the batsman is late into the pull again, and this time the top edge evades fine leg.",
         "shortish and angled into him, Finch moved outside leg and cuts it behind point. the sweeper pulls it back right on the boundary",
         "short of a length, at the pads, tucked away nicely into the vacant spaces on the leg side, takes three runs",
-        "",
-        "",
-        "",
-        "",
+        "shortens his length, mis-timed pull over midwicket. That is good enough for three runs",
+        "fullish and angling away, the batsman covers for the movement and drives it past mid-off and gets three",
+        "fuller and on middle and leg, he twirls his wrists and flicks it in the gap between midwicket and mid-on",
+        "comes down again and lofts it in the gap from off stump over the mid off fielder, who cuts it back with a slide and saves one",
         ""
     ];
