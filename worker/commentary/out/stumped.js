@@ -26,7 +26,7 @@ module.exports =
     "well that was the plan with him to hit the bowler, except that this delivery has gone in nowhere as expected. The batsman hasn't been watching them out of the hand, which turns his advance down the wicket into a highly low-percentage shot. Beaten comprehensively by the googly, and is stumped by a mile",
     "he wanted another one but is beaten by the change in pace and is stumped so fast by the keeper before the striker can even look back. Came down the track for the ball that was outside off, it was much flatter and went under the horizontal bat as he missed it. Our keeper does the best",
     "another stumping chance, this one goes to the third umpire no idea why! He came well out of his crease, got beaten in the air and the keeper whipped the bails off in no time to stump him",
-    "",
+    "The batsman is down the track, the bowler pulls his length back a bit and fires it outside off. He can't connect with, the keeper can't connect with it properly either. The ball brushes his gloves, pops out and disturbs the woodwork. The batsman is short, he is stumped.",
     "",
     ""
 ];

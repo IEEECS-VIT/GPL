@@ -46,7 +46,10 @@ exports.simulate = function (data, callback)
             {
                 return Math.random();
             }
-            else return parseInt(Math.random() * 1000000000000000) % arg;
+            else
+            {
+                return typeof(arg) == 'object' ? arg[rand(arg.length)] : parseInt(Math.random() * 1000000000000000) % arg;
+            }
         };
         var Make = function(team, arg)
         {
