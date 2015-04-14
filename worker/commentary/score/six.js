@@ -390,5 +390,30 @@ module.exports =
         "strike",
         "low full toss, he steps out, shuffles across off and launches it over the long leg boundary",
         "he misses the yorker, half-volley slower ball outside off, the batsman picks it up and launches it over long-off",
+        "launches it big over deep midwicket, leaves the crease immediately, takes it off middle and carts it high",
+        "six more, this stayed in the air longer, the batsman advancing out, getting under the ball and going over " +
+        "long off now",
+        "gets another six with his ridiculously well-timed checked pick-up shots over midwicket, that is some way into" +
+        " the crowd, moves across early, stands on off, and takes it from around middle and leg",
+        "he is back with a flicked six over deep midwicket, was a good length ball on middle, and he sent it " +
+        "soaring over the man in the deep with a wristy flourish",
+        "goes for six more, the batsman gets under a length ball and firmly drives it over the wide long off boundary",
+        "length ball, right in the swinging zone, disappears into the crowd beyond long on",
+        "over deep extra cover now and into the stands, stays in the crease to a fuller one, and powers it over the " +
+        "boundary",
+        "that kept long on interested all the way, and cleared him safely, the batsman reaching for a flighted ball " +
+        "and connecting",
+        "shot, he picks this full ball and flicks it in the air, that falls right on to the deep midwicket rope",
+        "this bowling attack is looking to leak runs all around the ground, this is a violent swing that deposits the" +
+        " shortish ball over deep square leg",
+        "full toss, helpful full toss, sent flying over the long on boundary",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
         ""
     ];

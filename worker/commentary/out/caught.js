@@ -330,6 +330,16 @@ module.exports =
     "moves to his left and collects it",
     "Banged in short and rises awkwardly on the batsman, who goes for the pull. He can only splice it in the air. The" +
     " man at cow corner rushes in and completes a smart catch at midwicket. He tumbles onto the ground after taking it",
+    "has had one leading edge too many, wanted to work a length ball off the pad, ended up hitting it high and limply " +
+    "to mid off",
+    "he has picked out long off, skipped out and went with the spin, but was not too close to the pitch and did not get" +
+    " the distance",
+    "strikes with a slower one, the batsman tried to make some room and loft it over extra cover, but badly mishit it, and" +
+    " it is an easy catch at mid off",
+    "and now he strikes, he kept moving the line across the batsman, this one was floated up outside off, moved away a" +
+    " tad, he pushed at it away from the body, and the lone slip was in business",
+    "could have been a flicked six but he could not get enough distance on this full one and deep midwicket tumbles " +
+    "forward to take it",
     "",
     "",
     "",

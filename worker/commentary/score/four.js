@@ -839,6 +839,48 @@ module.exports =
         "shortish and leg-stumpish, he swivels on the back foot and eases it to the long leg boundary",
         "length on leg, the batsman, having backed away, has enough leverage to slap it straight down the ground, beats" +
         " mid-off comfortably",
+        "angles it in from wide of the crease, gets it to curl away late, but the batsman has hit the gap between cover " +
+        "and point with the drive, was in the air for a while, but out of reach",
+        "the bowler starts on the pads and the striker is not missing out, he whips it fine past the man in the ring",
+        "overdoes the angle now and he tucks him behind square, well away from the man at deep square leg",
+        "lucky boundary for the batsman, flashes a cut without much room, and a bottom edge runs past the stumps, and " +
+        "the keeper",
+        "that was quick and bouncing, came in a bit too, but the batsman has cut this very hard and fine, giving no " +
+        "chance to third man",
+        "overpitched, slanted across, the striker reaches the line with a forward stride and dispatches it through " +
+        "extra cover",
+        "full and down the leg side, the bowler is cross with himself as the striker puts it away with a gentle sweep",
+        "walks down the track now, and lifts an angled length ball over wide mid on",
+        "clean and straight, he pitches it full and slow, the batsman sets himself up and clobbers it in the air",
+        "that'll go, short again, and he opens up, goes to the leg side and clobbers it past deep midwicket",
+        "slower ball, he swings again, this is not off the middle, but powerful enough to beat long on to his right",
+        "a low full toss, he turns it through midwicket, and this has gone right in the gap, beating deep midwicket " +
+        "and long on",
+        "short and not much lift from the bowler, the batsman blasts it to the deep midwicket boundary with a flat hit",
+        "full toss, he makes some room, and slams it one bounce over long off boundary, that fell just inside",
+        "backs away to a shortish ball and underedges the pull, there is no one at fine leg, and this is four more",
+        "mid off is up, this is a full toss outside off, and he reaches it to mow it down the ground",
+        "the batsman has sliced this full delivery high over backward point and it runs into the boundary",
+        "width outside off on this shortish ball, and he firmly guides it into the gap between cover and point",
+        "full outside off, the batsman slices it hard over the covers and the chase from the fielder is in vain",
+        "pulls, and hits the gap between midwicket and mid on, just past the latter in the end",
+        "lifts this short of a length ball on the up, has not got hold of it too well, but has cleared mid on",
+        "moves across, takes this length ball off middle and leg and works it quite fine",
+        "sets himself up for a not so short delivery, cranks up and pulls hard through midwicket",
+        "he's gone over extra cover, this sat up from back of a length, and he intentionally went over the ring",
+        "short again, and this time the batsman is not missing out, the pull races into the gap between deep midwicket" +
+        " and long on",
+        "gets the boundary, leaves the crease, gets close to the pitch and drives it hard past the bowler",
+        "that'll help his team, he gets a thick edge as he drives from the crease, the ball flies to the fine third " +
+        "man rope",
+        "gets going with a quality checked pick-up over midwicket, it was quite full but he leaned back a bit to get " +
+        "under it, deep midwicket is vacant",
+        "exquisite from this batsman, feet wide apart, bending to a yorker outside off and guiding it past backward point",
+        "four more, comes off a thick outside edge to the third man boundary as Smith throws the bat at a full one",
+        "outstanding shot, down the track, moving inside the line, and dismissing a length ball between extra cover and" +
+        " mid off with total authority",
+        "another one, makes slight room, bends the legs a bit, arches back a bit, and crashes another drive between " +
+        "extra cover and mid off",
         "",
         ""
     ];

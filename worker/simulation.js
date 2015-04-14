@@ -222,7 +222,7 @@ exports.simulate = function (data, callback)
         {
             data.match.commentary.push(data.team[0]._id + ': ' + form[parseInt(data.team[0].form * 100 / mean_rating[0])] + ' ' + data.team[1]._id + ': ' + form[parseInt(data.team[1].form * 100 / mean_rating[1])]);
         }
-        data.match.commentary.push(start[rand(start.length)]);
+        data.match.commentary.push(rand(start));
         data.match.commentary.push(' Toss:' + data.team[toss]._id + ' wins the toss and chooses to ');
         if (rand(2))
         {
@@ -314,20 +314,20 @@ exports.simulate = function (data, callback)
                         temp = -1;
                         if (bat_perf_index <= 0 && bat_perf_index > -0.5)
                         {
-                            data.match.commentary.push(caught[rand(caught.length)]);
+                            data.match.commentary.push(rand(caught));
                             temp = parseInt(Math.abs(bat_perf_index * 22));
                         }
                         else if (bat_perf_index <= -0.5 && bat_perf_index > -1)
                         {
-                            data.match.commentary.push(bowled[rand(bowled.length)]);
+                            data.match.commentary.push(rand(bowled));
                         }
                         else if (bat_perf_index <= -1 && bat_perf_index > -1.5)
                         {
-                            data.match.commentary.push(lbw[rand(lbw.length)]);
+                            data.match.commentary.push(rand(lbw));
                         }
                         else if (bat_perf_index <= -1.5 && bat_perf_index > -2)
                         {
-                            data.match.commentary.push(stumped[rand(stumped.length)]);
+                            data.match.commentary.push(rand(stumped.length));
                         }
                         else
                         {
@@ -345,7 +345,7 @@ exports.simulate = function (data, callback)
                             {
                                 strike_index = !strike_index;
                             }
-                            data.match.commentary.push(runout[rand(runout.length)]);
+                            data.match.commentary.push(rand(runout));
                             previous_dismissal = -1;
                             continuous_wickets[current_bowler] = 0;
                             --wickets_taken[current_bowler];
@@ -465,11 +465,11 @@ exports.simulate = function (data, callback)
                         {
                             if (rand(2))
                             {
-                                data.match.commentary.push(' wide, ' + wide[rand(wide.length)]);
+                                data.match.commentary.push(' wide, ' + rand(wide));
                             }
                             else
                             {
-                                data.match.commentary.push(freehit[rand(freehit.length)]);
+                                data.match.commentary.push(rand(freehit));
                                 free_hit = 1;
                             }
                             --j;
@@ -491,7 +491,7 @@ exports.simulate = function (data, callback)
                             switch (delivery_score)
                             {
                                 case 0:
-                                    data.match.commentary.push('No run, ' + zero[rand(zero.length)]);
+                                    data.match.commentary.push('No run, ' + rand(zero));
                                     frustration[strike_index] += 1 - team_object[+toss_index].bat_rating[strike[strike_index]] / 1000;
                                     control[strike[+strike_index]] *= ((balls[strike[+strike_index]] - 1) / (balls[strike[+strike_index]])).toFixed(2);
                                     ++dot_deliveries[current_bowler];
@@ -501,22 +501,22 @@ exports.simulate = function (data, callback)
                                 case 5:
                                     delivery_score -= 1;
                                 case 4:
-                                    data.match.commentary.push('FOUR, ' + four[rand(four.length)]);
+                                    data.match.commentary.push('FOUR, ' + (four.length));
                                     ++fours[strike[+strike_index]];
                                     break;
                                 case 6:
-                                    data.match.commentary.push('SIX, ' + six[rand(six.length)]);
+                                    data.match.commentary.push('SIX, ' + rand(six));
                                     ++maximums[strike[+strike_index]];
                                     ++continuous_maximums;
                                     break;
                                 case 1:
-                                    data.match.commentary.push('1 run, ' + one[rand(one.length)]);
+                                    data.match.commentary.push('1 run, ' + rand(one));
                                     break;
                                 case 2:
-                                    data.match.commentary.push('2 runs, ' + two[rand(two.length)]);
+                                    data.match.commentary.push('2 runs, ' + rand(two));
                                     break;
                                 case 3:
-                                    data.match.commentary.push('3 runs, ' + three[rand(three.length)]);
+                                    data.match.commentary.push('3 runs, ' + rand(three));
                                     break;
                                 default:
                                     break;
@@ -648,7 +648,7 @@ exports.simulate = function (data, callback)
                 previous_bowler = current_bowler;
             }
             temp = loop ? end : mid;
-            data.match.commentary.push(temp[rand(temp.length)]);
+            data.match.commentary.push(rand(temp));
             j = 0;
             for(i in data.team[+toss_index].squad)
             {
@@ -889,8 +889,8 @@ exports.simulate = function (data, callback)
         ++data.team[MoM.team].stats[data.team[MoM.team].ratings[MoM.id]._id].MoM;
         data.match.commentary.push('Man of the Match: ' + data.team[MoM.team].ratings[MoM.id].Name + '( ' + data.team[MoM.team]._id + ')');
         temp = (data.team[MoM.team].ratings[MoM.id].Type == 'bat') ? (mom.bat) : ((data.team[MoM.team].ratings[MoM.id].Type == 'bowl') ? (mom.bowl) : (mom.all));
-        data.match.commentary.push(temp[rand(temp.length)]);
-        data.match.commentary.push(end[rand(end.length)]);
+        data.match.commentary.push(rand(temp));
+        data.match.commentary.push(rand(end));
     }
     ++data.team[0].played;
     ++data.team[1].played;

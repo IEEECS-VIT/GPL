@@ -470,5 +470,35 @@ module.exports =
         "cut that off",
         "very full and on middle and leg, drilled down to long-on",
         "back of a length and outside off, slashed away to deep third man",
+        "eases this pitched up ball straight down the ground, but not much power or timing on this one",
+        "tries to play a controlled pull but ends up top edging over square leg, safely",
+        "down the track, takes it on the full and whips it behind square for two",
+        "wide again, this time he connects well enough to take two wide of the sweeper",
+        "shortish, the batsman is quick to rock back but the pull is not hit well enough to beat long on running across",
+        "walks across and tries to pull, but this is angled in, cramping him for room, and also not short, but he " +
+        "picks up two still to deep midwicket",
+        "was done by this ball, appeared to come out, stopped and got a thick edge fine, pulled back at third man " +
+        "boundary by the fielder there",
+        "skips out and goes over extra cover now, sweeper does well to run to his right and stop it",
+        "almost yorked himself as he jumped out, but was able to squeeze it square in the end, there is a misfield " +
+        "at deep point",
+        "dropped, was pulled in the air, mid on dived forward, but it burst out of his hands, difficult chance",
+        "short and headed down the pads, helped behind square, and a dive is needed at fine leg from the fielder",
+        "starts with a yorker just outside off, he guides it behind point for two",
+        "stays back to a fuller one and squeezes it calmly through the covers",
+        "checks his lofted shot as he gets it really full again, long on reaches it on the bounce",
+        "imperious drive past extra cover to a length ball, sweeper cannot prevent the second",
+        "fullish on middle, worked through midwicket, they press for the second, make it",
+        "connects with this full toss but not well enough to deny the fielder running to his right from long on",
+        "works a slower short of a length ball behind square leg",
+        "stays in the crease as this length ball comes in to him, and succeeds in turning it past short fine leg",
+        "tossed up on leg stump, turned square for a couple",
+        "fullish, middle and leg line, nudged in front of square, there is again space to take two",
+        "cannot get the timing right as he looks to go over long on, and it rolls to the man after bouncing a few " +
+        "times, he makes it just in time for the second",
+        "slams a full toss straight over the bowler",
+        "down the track and cracks it hard, a fielder saves the boundary with sharp work to his left at deep midwicket," +
+        " a better throw would have had him runout though",
+        "low full toss squeezed straight down the ground and they push for the second",
         ""
     ];

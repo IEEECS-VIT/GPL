@@ -95,10 +95,13 @@ module.exports =
     "But only meets with a whole lot of thin air. The off-stump is rattled.",
     "nails the yorker, the middle stump is pegged back. Right in the blockhole, te batsman having backed away, can't " +
     "squeeze it out. The striker misses, the bowler hits now",
-    "Right in the blockhole on middle. He can't dig it ou",
-    "",
-    "",
-    "",
+    "Right in the blockhole on middle. He can't dig it out",
+    "and the bowler strikes, uproots leg and middle stumps, the striker walked across his stumps sensing that the bowler" +
+    " would bowl full and into the pads, he did, and the batsman missed, the replays are tight for the front-foot no-ball" +
+    " check, but it seems to be just fine",
+    "got him, good stuff from th bowler, the batsman has yorked himself, it was tossed up again, the batsman stepped " +
+    "out without much conviction, and the ball dipped and slid quickly under his bat to take out middle stump",
+    "middle stump is pegged back as he misses a swipe, the fullish ball brushes the thigh pad and crashes into the stump",
     "",
     "",
     "",

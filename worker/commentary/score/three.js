@@ -54,5 +54,5 @@ module.exports =
         "fuller and on middle and leg, he twirls his wrists and flicks it in the gap between midwicket and mid-on",
         "comes down again and lofts it in the gap from off stump over the mid off fielder, who cuts it back with a " +
         "slide and saves one",
-        ""
+        "gets across to a shortish ball and whips it behind square, fielder saves the boundary with a dive"
     ];
