@@ -19,7 +19,9 @@
 module.exports =
 [
     "",
-    "And we have a no-ball ! The dew has made the area around the popping crease quite slippery,   and the bowler's  front foot has snuck out just enough for a no-ball to be called. ",
-    "Brilliant bowling, except for the fact that the bowler's front foot was miles out of the crease. No ball signalled  by the umpire...",
+    "And we have a no-ball ! The dew has made the area around the popping crease quite slippery,   and the bowler's  " +
+    "front foot has snuck out just enough for a no-ball to be called. ",
+    "Brilliant bowling, except for the fact that the bowler's front foot was miles out of the crease. No ball signalled" +
+    "  by the umpire...",
     "Oh no! he has overstepped ! The batsman is all smiles, and why wouldn't he be ? It's free hit time..."
 ];

@@ -20,13 +20,27 @@ module.exports =
 [
     "",
     "is gone this time, he lunges out and misses a flighted ball, keeper does not, the bowler is pumped up",
-    "keeps coming out, the bowler pushes this straight and on a length outside off, the batsman misses it and is stumped  by miles",
-    "The ball moved away from the batsman, beating his booming hoick in to the covers. The keeper does well to collect  the ball behind the stumps,   before ending this partnership. Smart keeping",
-    "That is some effort by the opposition ! The keeper was standing up to the stumps, the batsman took the bait and  charged out to an otherwise harmless delivery,   and has lost his wicket in the process. Strange cricket this...",
-    "well that was the plan with him to hit the bowler, except that this delivery has gone in nowhere as expected. The batsman hasn't been watching them out of the hand, which turns his advance down the wicket into a highly low-percentage shot. Beaten comprehensively by the googly, and is stumped by a mile",
-    "he wanted another one but is beaten by the change in pace and is stumped so fast by the keeper before the striker can even look back. Came down the track for the ball that was outside off, it was much flatter and went under the horizontal bat as he missed it. Our keeper does the best",
-    "another stumping chance, this one goes to the third umpire no idea why! He came well out of his crease, got beaten in the air and the keeper whipped the bails off in no time to stump him",
-    "The batsman is down the track, the bowler pulls his length back a bit and fires it outside off. He can't connect with, the keeper can't connect with it properly either. The ball brushes his gloves, pops out and disturbs the woodwork. The batsman is short, he is stumped.",
-    "",
+    "keeps coming out, the bowler pushes this straight and on a length outside off, the batsman misses it and is stumped" +
+    "  by miles",
+    "The ball moved away from the batsman, beating his booming hoick in to the covers. The keeper does well to collect " +
+    " the ball behind the stumps,   before ending this partnership. Smart keeping",
+    "That is some effort by the opposition ! The keeper was standing up to the stumps, the batsman took the bait and " +
+    " charged out to an otherwise harmless delivery,   and has lost his wicket in the process. Strange cricket this...",
+    "well that was the plan with him to hit the bowler, except that this delivery has gone in nowhere as expected. The " +
+    "batsman hasn't been watching them out of the hand, which turns his advance down the wicket into a highly low-percentage" +
+    " shot. Beaten comprehensively by the googly, and is stumped by a mile",
+    "he wanted another one but is beaten by the change in pace and is stumped so fast by the keeper before the striker " +
+    "can even look back. Came down the track for the ball that was outside off, it was much flatter and went under the " +
+    "horizontal bat as he missed it. Our keeper does the best",
+    "another stumping chance, this one goes to the third umpire no idea why! He came well out of his crease, got beaten " +
+    "in the air and the keeper whipped the bails off in no time to stump him",
+    "The batsman is down the track, the bowler pulls his length back a bit and fires it outside off. He can't connect " +
+    "with, the keeper can't connect with it properly either. The ball brushes his gloves, pops out and disturbs the " +
+    "woodwork. The batsman is short, he is stumped.",
+    "The bowler and keeper pose a question. Is the batsman out stumped? He is in trouble and has to go. Sharp work from " +
+    "the keeper. The umpires check for a possible no-ball, its a legal ball. He started walking even before OUT flashed " +
+    "on the big screen. Dragged himself forward and does not meet with the sweep. This quicker ball beats him, sneaks " +
+    "through and DK whips the bails off in super quick time to catch the striker short. His backfoot was not grounded " +
+    "when it mattered",
     ""
 ];

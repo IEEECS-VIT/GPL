@@ -19,45 +19,83 @@
 module.exports =
 [
     "",
-    "He tries to punch this short of length delivery through cover, there is no room, and he ends up chopping this on to the stumps..",
-    "What's happening! You don't expect such loose shots from the batsman. Another tame delivery just outside off and he has a lazy waft at that one, ends up chopping it on to his stumps",
+    "He tries to punch this short of length delivery through cover, there is no room, and he ends up chopping this on to" +
+    " the stumps..",
+    "What's happening! You don't expect such loose shots from the batsman. Another tame delivery just outside off and he" +
+    " has a lazy waft at that one, ends up chopping it on to his stumps",
     "he's tried to force a length ball over mid-on, but mishit it, and the fielder has plenty of time to take the dolly",
-    "superb delivery hits top of off, good length, pitches around middle, the batsman looks to defend from the crease, the ball seams away past the outside edge to hit the stumps",
+    "superb delivery hits top of off, good length, pitches around middle, the batsman looks to defend from the crease, " +
+    "the ball seams away past the outside edge to hit the stumps",
     "this one beats the inside edge of the bat, flicks the front pad and then takes the off bail ..",
-    "off stump is pegged back and the bowler is on a roll! It was flat, it skidded off the deck and it sneaked below the intended cut",
+    "off stump is pegged back and the bowler is on a roll! It was flat, it skidded off the deck and it sneaked below the" +
+    " intended cut",
     "angled in, the batsman swings and misses, and we hear the sound of leather on timber.",
     "gone on the slog sweep, swift delivery, full around leg, he gets down for the slog sweep, misses and is bowled",
-    "gone through him, angled in, pitched up, not really the length to be playing back to, but the batsman prefers that, this time he is caught in an awkward position as this rushes in and goes through to hit the stumps",
+    "gone through him, angled in, pitched up, not really the length to be playing back to, but the batsman prefers that," +
+    " this time he is caught in an awkward position as this rushes in and goes through to hit the stumps",
     "angles this full into the stumps, the batsman has a swing and miss, and the ball hits middle",
-    "was bowling round the wicket, the batsman made a lot of room early on looking to push it to the off side, he may have expected turn but it went straight through and knocked the middle stump",
+    "was bowling round the wicket, the batsman made a lot of room early on looking to push it to the off side, he may " +
+    "have expected turn but it went straight through and knocked the middle stump",
     "skidded through and hit the stumps, the batsman was rooted to the crease, left a big gap",
-    "right through him. The bowler nips this in a mile from just outside off, on a good length, he has moved across and set himself up for a forcing stroke, and there is no way he can account for so much movement, through the gate and into the stumps",
-    "got him this time, slows it down a bit, gives it some air, the line is around off, the batsman is confused immediately, pushes weakly for some movement, there isn't any, and the stumps are rattled",
-    "what a yorker! The batsman was so late on it and he throws a little look back at the stumps. That slingy action brought the ball back in at him and his jittery stay in the middle ends in the most emphatic fashion",
-    "that stumps are in disarray again! Another fuller ball finds its mark. He was making room to try and open up the off side which made it all the more complicated for him to intervene with the ball's trajectory and off stump is knocked back",
-    "castled! Skids on after pitching and sneaks through his bat and pad. The batsman's feet fail him once again as this one is pitched on a good length and deviates in at him. He looked all at sea trying to keep that out and by the time he played his shot the middle stump was knocked back",
+    "right through him. The bowler nips this in a mile from just outside off, on a good length, he has moved across and " +
+    "set himself up for a forcing stroke, and there is no way he can account for so much movement, through the gate and " +
+    "into the stumps",
+    "got him this time, slows it down a bit, gives it some air, the line is around off, the batsman is confused " +
+    "immediately, pushes weakly for some movement, there isn't any, and the stumps are rattled",
+    "what a yorker! The batsman was so late on it and he throws a little look back at the stumps. That slingy action " +
+    "brought the ball back in at him and his jittery stay in the middle ends in the most emphatic fashion",
+    "that stumps are in disarray again! Another fuller ball finds its mark. He was making room to try and open up the " +
+    "off side which made it all the more complicated for him to intervene with the ball's trajectory and off stump is " +
+    "knocked back",
+    "castled! Skids on after pitching and sneaks through his bat and pad. The batsman's feet fail him once again as this" +
+    " one is pitched on a good length and deviates in at him. He looked all at sea trying to keep that out and by the " +
+    "time he played his shot the middle stump was knocked back",
     "off stump is knocked back !. The slog over midwicket fails again and this time it signals the end of his innings",
-    "leg stump cartwheels! It was length and he was looking to slog it across the line seeking the stands at midwicket. Missed it by several inches as the ball sneaks between the bat and pad. The bowler exults!",
-    "what a yorker! Leg stump has been uprooted. There was no room to manoeuvre it, which was what he was trying to do with a bit of an open face but the ball just kept coming in at him and cramping him up. He also seemed a little surprised by the extra pace on that and walks off the field",
-    "he telegraphs the slower ball with a change of action. The batsman slogs across the line of this delivery, and has his leg stump pegged back.",
-    "and he has been bowled. The batsman was pegged back first, then made to play defensive shots. And that's it. That is enough in T20 to create pressure that can make you play a low-percentage shot. And he just slogs already. The head falls away, is beaten, and the leg stump is pegged back",
-    "He has been running balls down to third man well, but his partner has kept getting closer and closer to off. This time, he gets the inside edge onto the stumps. Huge wicket",
-    "The batsman makes up his mind to slog-sweep, the bowler fires one in full and fast, and it squeezes under the bat to knock the stumps back. The batsman has again done the job for his captain.",
-    "Good riposte from the bowler and he lets out a roar. This was the arm-ball, quicker and flatter. The batsman aims to swipe over midwicket again. He misses it this time. But he nails the middle stump. It is knocked back",
-    "strikes back, just as he was threatening to soar, his wings have been clipped. He shuffles across off now, the bowler delivers a near-yorker, not pin-point, but it rattles the leg stump. Teh bowler throws a Johnson-like stare at the vanquished striker",
+    "leg stump cartwheels! It was length and he was looking to slog it across the line seeking the stands at midwicket. " +
+    "Missed it by several inches as the ball sneaks between the bat and pad. The bowler exults!",
+    "what a yorker! Leg stump has been uprooted. There was no room to manoeuvre it, which was what he was trying to do " +
+    "with a bit of an open face but the ball just kept coming in at him and cramping him up. He also seemed a little " +
+    "surprised by the extra pace on that and walks off the field",
+    "he telegraphs the slower ball with a change of action. The batsman slogs across the line of this delivery, and has" +
+    " his leg stump pegged back.",
+    "and he has been bowled. The batsman was pegged back first, then made to play defensive shots. And that's it. That " +
+    "is enough in T20 to create pressure that can make you play a low-percentage shot. And he just slogs already. The " +
+    "head falls away, is beaten, and the leg stump is pegged back",
+    "He has been running balls down to third man well, but his partner has kept getting closer and closer to off. This " +
+    "time, he gets the inside edge onto the stumps. Huge wicket",
+    "The batsman makes up his mind to slog-sweep, the bowler fires one in full and fast, and it squeezes under the bat " +
+    "to knock the stumps back. The batsman has again done the job for his captain.",
+    "Good riposte from the bowler and he lets out a roar. This was the arm-ball, quicker and flatter. The batsman aims " +
+    "to swipe over midwicket again. He misses it this time. But he nails the middle stump. It is knocked back",
+    "strikes back, just as he was threatening to soar, his wings have been clipped. He shuffles across off now, the " +
+    "bowler delivers a near-yorker, not pin-point, but it rattles the leg stump. The bowler throws a Johnson-like stare " +
+    "at the vanquished striker",
     "mighty full and just outside leg as Mitch swings and misses",
-    "knocks the stumps, and he misses it completely! It pitched well outside off and the batsman went back in the crease to cut it late but he got too far away from it",
-    "why, why would he do that?Tries to reverse sweep the ball that pitches on middle stump. The ball is angling in and he's playing the off-stump line, loses his leg stump",
-    "He is pretty handy with these slippery back-of-the-hand slower ones. This consumes the batsman. He aims to swipe it away to the leg side. He does not lay bat onto it, the ball hits the stumps. Deflected off the pads and onto the stumps",
-    "the yorker from hell, defeats him. He breaks into a jig - nice moves, man. Fired in, the batsman can't dig it out, it slides under his bat to cannon into middle. It gets knocked back.",
-    "Completes a brilliant catch and the captain applauds, Slower length ball on middle, the striker steps away a touch and slices it in the air. The fielder runs to his right from long-off dives, tumbles and plucks it. The bowler has his hands aloft in joy",
-    "he has his man! He leaps off his feet and celebrates. This was on a length and on off, hint of inward movement. THe unsuspecting batsman goes for a low-percentage slog across the line and misses. The impact pegs the off stump back",
-    "it's a wicket! Charged down, the length ball coming in sharply from outside off as he looked to slog and missed it completely. Ball clips the leg stump",
-    "He's running all the way to Antarctica while celebrating! Didn't pick that one as it pitched on length, came in and struck the leg stump as the batsman swept",
-    "",
-    "",
-    "",
-    "",
+    "knocks the stumps, and he misses it completely! It pitched well outside off and the batsman went back in the " +
+    "crease to cut it late but he got too far away from it",
+    "why, why would he do that?Tries to reverse sweep the ball that pitches on middle stump. The ball is angling in and " +
+    "he's playing the off-stump line, loses his leg stump",
+    "He is pretty handy with these slippery back-of-the-hand slower ones. This consumes the batsman. He aims to swipe it" +
+    " away to the leg side. He does not lay bat onto it, the ball hits the stumps. Deflected off the pads and onto the " +
+    "stumps",
+    "the yorker from hell, defeats him. He breaks into a jig - nice moves, man. Fired in, the batsman can't dig it out, " +
+    "it slides under his bat to cannon into middle. It gets knocked back.",
+    "Completes a brilliant catch and the captain applauds, Slower length ball on middle, the striker steps away a touch " +
+    "and slices it in the air. The fielder runs to his right from long-off dives, tumbles and plucks it. The bowler has " +
+    "his hands aloft in joy",
+    "he has his man! He leaps off his feet and celebrates. This was on a length and on off, hint of inward movement. The" +
+    " unsuspecting batsman goes for a low-percentage slog across the line and misses. The impact pegs the off stump back",
+    "it's a wicket! Charged down, the length ball coming in sharply from outside off as he looked to slog and missed it " +
+    "completely. Ball clips the leg stump",
+    "He's running all the way to Antarctica while celebrating! Didn't pick that one as it pitched on length, came in and" +
+    " struck the leg stump as the batsman swept",
+    "This was on a back of a length, the batsman backs away, has some leverage to thrash through the off side, but makes" +
+    " no contact. The ball hits the top of the off-stump",
+    "and the yorker consumes him! Right in the blockhole at the base of off, he wants to swing it away from GDN to SJT. " +
+    "But only meets with a whole lot of thin air. The off-stump is rattled.",
+    "nails the yorker, the middle stump is pegged back. Right in the blockhole, te batsman having backed away, can't " +
+    "squeeze it out. The striker misses, the bowler hits now",
+    "Right in the blockhole on middle. He can't dig it ou",
     "",
     "",
     "",
