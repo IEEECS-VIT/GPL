@@ -102,9 +102,13 @@ module.exports =
     "got him, good stuff from th bowler, the batsman has yorked himself, it was tossed up again, the batsman stepped " +
     "out without much conviction, and the ball dipped and slid quickly under his bat to take out middle stump",
     "middle stump is pegged back as he misses a swipe, the fullish ball brushes the thigh pad and crashes into the stump",
-    "",
-    "",
-    "",
+    "and he knocks over the timber and roars, the partnership has been broken. This was hurled in flat, hurries onto the batsman. He" +
+    " goes low for a slog-sweep and is beaten on the bottom edge, it hits the off stump. Replays actually reveal that " +
+    "it was a seam-up delivery",
+    "This was darted quick on middle, not too short. The batsman aims for a meaty pull and only meets with thin air. " +
+    "This offering thuds into the middle stump",
+    "This is a soft, soft dismissal. Full toss outside leg as the batsman steps away. Instead of mowing it away, " +
+    "he misses. The ball brushes the front pad and disturbs the stumps. The off-bail is tipped off",
     "",
     "",
     "",

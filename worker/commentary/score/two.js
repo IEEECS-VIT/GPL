@@ -500,5 +500,31 @@ module.exports =
         "down the track and cracks it hard, a fielder saves the boundary with sharp work to his left at deep midwicket," +
         " a better throw would have had him runout though",
         "low full toss squeezed straight down the ground and they push for the second",
+        "very full and on off, he gets under it and lofts it over the bowler's head. Not all that well-timed, the " +
+        "fielder keeps it to a couple",
+        "back of a length outside off, no swing, steered away to the right of third man",
+        "shortish and on the stumps, he pivots on the back foot. Mis-times a pull in the air, to the right of midwicket",
+        "overpitched and outside off, he lays into a crackin' drive. The man at covers dives and takes some pace off " +
+        "the ball, deflecting it past mid-off. The fielder runs back, chases and limits it to a couple",
+        "darted just outside off, dabbed down to third man, skiddy pace on that delivery",
+        "pitched up and outside off, the striker unwraps another drive from the past, sends it whistling through the " +
+        "covers. The man at cover runs across to his left from sweeper, slides and takes all the sheen off the shot, " +
+        "restricting it to two",
+        "low full toss on the leg stump, whipped away towards long-on. The fielder releases it quickly, but the fielding" +
+        " team needed a direct hit there",
+        "length ball on middle, he backs away and lifts it over the covers. Not middled, though",
+        "uses his feet and converts a full ball into a full toss. Flicked to cow-corner. A fielder hits the stumps at" +
+        " the non-striker's and concedes an overthrow. The bowler isn't pleased",
+        "low full toss on off, he paddles it fine on the leg side",
+        "pushed through outside off, the batsman draws the outside edge, that skitters away through the vacant slip " +
+        "cordon. The fielder runs back from short third and cuts it off to a couple",
+        "back of a length, the batsman makes some room and cuts it away towards sweeper cover",
+        "tossed up outside off, he shuffles across off and scoops it fine to the left of the keeper.",
+        "flatter and on off, tucked through midwicket for a couple",
+        "tossed up delivery from the bowler, the batsman chips it to the right of the bowler for a couple of runs",
+        "pushed through, lofted over the bowler's head. Long-on, long-off converge, kept down to a couple",
+        "",
+        "",
+        "",
         ""
     ];

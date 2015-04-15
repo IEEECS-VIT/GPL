@@ -340,8 +340,24 @@ module.exports =
     " tad, he pushed at it away from the body, and the lone slip was in business",
     "could have been a flicked six but he could not get enough distance on this full one and deep midwicket tumbles " +
     "forward to take it",
-    "",
-    "",
+    "Cross-seamer from the bowler. Shortish and rushes on outside off to ruin the attempted pull. He lobs it up in the " +
+    "air, a fielder runs across to his right from mid-off, dives and snags a smart catch",
+    "and he has holed out, no more hitting for him! This was pushed across him, he aims to loft it straight down the " +
+    "ground. But does not connect properly, slices it high into the air. The man makes good ground from deep cover, " +
+    "runs across and snaffles the take",
+    "outside off and he strikes! The batsman runs down the track, seeks to smash another mighty blow. But has to " +
+    "settle with a slice, which is swallowed up by the fielder at the covers",
+    "and the bowler is delighted. The batsman chips down the track, does not middle the lofted strike. The fielder " +
+    "just about hangs onto it at long-on",
+    "and he takes a sharp catch. The batsman wants to whack it over the leg side, skews it off the bottom of the bat " +
+    "and holes out to long-off, where the fielder takes it at the edge of the boundary",
+    "banged in short and rushes onto tuck him up for room. He was caught between pulling and pulling out of the stroke," +
+    " gets into an awkward tangle and guides it to the fielder at deep third man off the bottom part of the bat",
+    "goes deep in the crease, but holes out. This was very full from the bowler on off, the batsman shuffles across " +
+    "a bit, goes deep in the crease and swings it. He runs in from midwicket, keeps his eyes on the ball, dives " +
+    "forward and pulls off a superb catch. The umpires check for a no-ball and the delivery is okay, the batsman has to go",
+    "This was pushed through, the striker aims to swipe it away. Does not get it off the meat of the bat. Skies it " +
+    "off a top-edge, which is held by the man at cover",
     "",
     ""
 ];

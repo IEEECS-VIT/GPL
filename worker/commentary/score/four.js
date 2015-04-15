@@ -881,6 +881,51 @@ module.exports =
         " mid off with total authority",
         "another one, makes slight room, bends the legs a bit, arches back a bit, and crashes another drive between " +
         "extra cover and mid off",
-        "",
+        "back of a length and on the leg stump, he steps away, creates room and slogs it over a leaping mid-off off " +
+        "the inside half of the bat",
+        "and the batsman finds his bearings right now. On a length and well outside off, he arches back, carves a cut " +
+        "in the air, up and over backward point.",
+        "width on offer outside off. He frees his arms and rifles it over backward point. Don't bother about the feet" +
+        " movement",
+        "fractionally back of a length and on off, the batsman having stepped away, has ample leverage to lash it " +
+        "behind point. Third man can't cut that off",
+        "dragged short and wide outside off, encourages the cut. The batsman hits it past a diving backward point",
+        "and he is taking the fight to the bowler! Slid through outside off, he cuts it, fillets the gap between " +
+        "short third and backward point",
+        "floated on the fourth-stump line, he slithers across off, fetches it from there and lap-scoops it to the left " +
+        "of the keeper, fine on the leg side with a healthy helping of cheek",
+        "take that. Another indipper, but the line is far enough outside off for the batsman to be able to plonk his " +
+        "front foot across and swing freely to launch it, with the swing, over wide mid-on",
+        "length ball angling into middle stump. The batsman looks for the flick over the on side, had to bring his bat" +
+        " around a halfway planted front leg, and just about cleared mid-on in the end",
+        "length ball on a fourth-stump line, and the fielder makes a hash of this at third man. The striker opens his " +
+        "bat face to steer it, and the fielder slid to stop it and ended up sliding past the ball, which runs away to " +
+        "the boundary. Outfield may have been slippery with dew",
+        "very full and drifts in on off, the batsman clips it away between midwicket and mid-on. Good connection and " +
+        "the ball skips away to the boundary",
+        "shortish and outside off, sits up to be hit. This is a belated and early birthday gift, he rocks back and " +
+        "pulls it over midwicket",
+        "full again, floated wide outside off. He reaches out for the drive, gets a thick outside edge past the lone " +
+        "slip fielder",
+        "beautifully placed, the batsman brings his wrists into play. Fuller and straighter, flicked in the gap between " +
+        "midwicket and mid-on. The vintage timing carries it to the boundary",
+        "short on the hips, he hops up and tucks it fine on the leg side. The fielder slides in the deep, but his " +
+        "effort ends in vain",
+        "short and outside off, he takes it from there and pulls it away to the left of mid-on. The bowler did not " +
+        "have pace to pose a threat there",
+        "pitched further up and outside off, the batsman leans forward and caresses it to the long-off fence after " +
+        "beating mid-off's dive. Caresses it, I stress that again",
+        "the bowler errs in line and length. This was too full and on the leg stump, th striker eases it away to the " +
+        "fine leg boundary. Easy pickings, that",
+        "classy from the batsman. This was on a fuller length and outside off, he he gets under it and lofts it " +
+        "beautifully over mid-off, who was inside the circle",
+        "full and outside off, he opens his bat face and drives it, bisecting backward point and deep third man",
+        "full and wide outside off, the batsman throws his bat at it and slices it away to deep third man off a thick " +
+        "outside edge",
+        "slower short ball on the leg stump, he waits for his to arrive and pulls it in front of square. The fielder " +
+        "runs across to his right from deep midwicket, but can't prevent the boundary",
+        "back of a length and outside off, the batsman slaps it in the air. The fielder runs across to his left from " +
+        "deep cover, dives, but does not get to the ball. Can't even fingertip it away, that's a four",
+        "He nips down the track and drills it, beating mid-on to his left.",
         ""
     ];

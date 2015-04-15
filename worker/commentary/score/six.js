@@ -407,13 +407,30 @@ module.exports =
         "this bowling attack is looking to leak runs all around the ground, this is a violent swing that deposits the" +
         " shortish ball over deep square leg",
         "full toss, helpful full toss, sent flying over the long on boundary",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
+        "length ball outside off, the batsman goes down one one knee and swipes over long-on. Superb connection. If " +
+        "only our WiFi connections were this good.",
+        "whoa! Top strike with a pulled six. Near rib-cage rattler, he takes the bull by its horns and slap-pulls it " +
+        "away over deep backward square",
+        "goes bang! Very full and outside off, not full enough. The batsman gets under it, smokes the pants off it " +
+        "and launches it over long-on",
+        "quick and on middle and leg, he picks it up and deposits it over deep square. Flat and powerful",
+        "whacked over midwicket, fuller and on the pads, whipped with the wrists over midwicket. Replays show that's a no-ball as " +
+        "well, but the umpire has missed it",
+        "the batsman reaps reward for positive intent. He advances down the track, manufactures a length ball and " +
+        "annihilates a six over deep midwicket. Deposited into the stands!",
+        "fuller and on middle and leg, the batsman skips out, picks it up from there and deposits over the backward " +
+        "square leg boundary. Wristy stuff",
+        "fuller and on off, he gets under and lofts it high and over long-off for a six",
+        "the batsman skips out, the bowler bangs it short. Yet, he carries on with the pull, manages a top-edge and " +
+        "top-edges get sixes in T20s. Just about goes over deep midwicket",
+        "impressive strike from this talent. Creamed that one. Very full and on off, he gets under it and lofts it " +
+        "over the covers, skims over the boundary",
+        "Blisterin' barnacles! Round-armish and on a length, on off. He winds up and mows it over deep midwicket",
+        "And he has got his eye in. This was the rapid one, but he clubs over deep midwicket with some authority",
+        "dug in short and on the leg sump, he backs away a smidge and marmalises a six over the man at deep midwicket",
+        "away she sails over the boundary.. Fuller and on middle, he goes down on one knee and slog-sweeps it over " +
+        "cow corner",
+        "into the act. He nips down the track, meets the pitch of this floated ball on off and gives it marching " +
+        "orders over long-on",
         ""
     ];

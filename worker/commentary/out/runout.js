@@ -81,5 +81,11 @@ module.exports =
     "the ball back in just before that. The batsmen settled for one initially and realised a little late there was time" +
     " for a second. The batsman  is not completely fit and is slow to come back for the second. Accurate throw and he's " +
     "well short, what a faux pas",
+    "has he been run-out? This was slid through on the stumps, punched down the track. the fielder follows the ball, " +
+    "dives and deflects it back onto the non-striker's end all in one motion. During the process, he had also collided " +
+    "with the striker, who was thrown off balance and lost his bat and landed on his glove. Looks like the bails came " +
+    "off the groove before he landed on his right glove and made his ground. The TV umpire examines it from various " +
+    "angles and gives it OUT! Unfortunate state of affairs here. Full marks to the fielder, though, for the presence of " +
+    "mind",
     ""
 ];
