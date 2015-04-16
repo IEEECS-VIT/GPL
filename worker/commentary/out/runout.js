@@ -87,5 +87,9 @@ module.exports =
     "off the groove before he landed on his right glove and made his ground. The TV umpire examines it from various " +
     "angles and gives it OUT! Unfortunate state of affairs here. Full marks to the fielder, though, for the presence of " +
     "mind",
+    "Sharp work from the man at backward point. He nails the stumps at the striker's. The bowler nips this one back " +
+    "into the batsman after going wide of the crease, who does not meet with the flick, the ball wanders away behind " +
+    "point. The pair want to sneak in a leg bye. He moves quickly to his left, collects the ball and flings an " +
+    "accurate throw at the bull's eye. The victim is well short",
     ""
 ];

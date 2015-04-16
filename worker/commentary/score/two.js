@@ -523,8 +523,36 @@ module.exports =
         "flatter and on off, tucked through midwicket for a couple",
         "tossed up delivery from the bowler, the batsman chips it to the right of the bowler for a couple of runs",
         "pushed through, lofted over the bowler's head. Long-on, long-off converge, kept down to a couple",
-        "",
-        "",
+        "slipper short ball from the bowler, the batsman shifts his balance to the back foot and controls a pull to " +
+        "deep midwicket",
+        "fuller and on the stumps, driven down the track",
+        "tossed up from the bowler, the batsman goes over the covers after stepping out. The fielder from the deep " +
+        "rushes in, dives forward, but lets the sliced ball through his hands. Tough chance, that. He dived full-length" +
+        " to his right, but only parried it away with his fingertips",
+        "fuller and angled in on middle, slapped to the left of vacant mid-on. There is protection in the deep though",
+        "Morgan goes for a reverse-sweep against a googly, gets a bottom-edge just wide of slip. The batsman " +
+        "anticipated, moved away to his left, aims to belatedly intercept with his right boot in vain",
+        "tossed up outside off, top-edges the reverse sweep over the left of the keeper",
+        "the batsman is in trouble, the bat got twisted up in the air. He may have just grounded the bat before the " +
+        "bails came off the groove. Fraction short and outside off, cut away past cover. The man at long-off moves to " +
+        "his left and lasers a throw to the bowler's end. The striker scampers across, slides, the bat popped up " +
+        "momentarily, but he is in. The TV umpire confirms it",
+        "very full and on middle, he backs away and hacks it between deep midwicket and long-on. The fielder there runs " +
+        "across from deep midwicket and hunts the ball down",
+        "fuller and outside off, he leans forward and drives it in the gap between point and the covers",
+
+        "drifting onto the pads, he twirls his wrists and eases it behind square on the leg side. Long leg runs to his " +
+        "left and mops it up",
+        "fuller and outside off, he presses forward and drives it between mid-off and cover",
+        "fuller and outside off, driven to the left of short cover for one",
+        "Midwicket drops a tough chance! Back of a length again, outside off. The batsman short-arm pulls it in the air." +
+        "The fielder rushes in from deep midwicket, dives forward and lets it slip through his hands",
+        "dug in shortish and outside off, the batsman controls a pull and directs it backward of square leg",
+        "shuffles across and flicks it uppishly over backward square",
+        "tossed up and very full outside off, drilled through the cover region. Sweeper moves to his right and stops the ball",
+        "fuller on off, turned through vacant midwicket. The pair take two by the time the fielder runs across and gets " +
+        "to the ball",
+        "back of a length and on the hips, picked away behind square on the leg side",
         "",
         ""
     ];

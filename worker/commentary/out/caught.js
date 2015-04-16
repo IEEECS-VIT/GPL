@@ -358,6 +358,12 @@ module.exports =
     "forward and pulls off a superb catch. The umpires check for a no-ball and the delivery is okay, the batsman has to go",
     "This was pushed through, the striker aims to swipe it away. Does not get it off the meat of the bat. Skies it " +
     "off a top-edge, which is held by the man at cover",
-    "",
+    "And the bowler strikes, good retort. This one rears up from a back of a length and slides across the batsman with " +
+    "the angle. He has a loose waft at it and edges it through to the keeper, who moves to his left to pouch that.",
+    "delivers the breakthrough, the batsman has given it away. Fuller and outside off, he opens his bat-face and looks " +
+    "to steer through vacant slip, who dives to his right and plucks a smart one-handed catch. The umpire check for a " +
+    "no-ball, which is okay, the catch is also clean.",
+    "he picks out short cover perfectly! The bowler floats this outside off, he goes hard on the drive but cracks it " +
+    "straight to the man at short cover",
     ""
 ];

@@ -432,5 +432,15 @@ module.exports =
         "cow corner",
         "into the act. He nips down the track, meets the pitch of this floated ball on off and gives it marching " +
         "orders over long-on",
+        "dug in short and on middle, the batsman backs away and cuts it over point. Upper cut and he deposits it " +
+        "into the stands",
+        "he has banished that over deep midwicket, into the stands. Short and sits up outside off, he fetches it " +
+        "from there and swat-pulls it over the boundary",
+        "this was fuller and on off, he gets under it, frees his arms and launches it over long-on. That's a monster " +
+        "blow, sends it flying into the stands",
+        "slower fullish ball on off, he waits for it, picks it up and lofts it high into the air. Faulkner runs across " +
+        "to his from right long-off, goes as far as he can on the long-off boundary, leaps, takes the catch and goes " +
+        "over the rope. The result is a six",
+        "",
         ""
     ];

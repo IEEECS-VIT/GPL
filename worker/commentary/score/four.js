@@ -927,5 +927,49 @@ module.exports =
         "back of a length and outside off, the batsman slaps it in the air. The fielder runs across to his left from " +
         "deep cover, dives, but does not get to the ball. Can't even fingertip it away, that's a four",
         "He nips down the track and drills it, beating mid-on to his left.",
+        "short and angling away outside off, he has a crack at it and pulls it over a leaping mid-on. Not middled, " +
+        "he just about cleared the fielder. Replays reveal that the fielder finger-tipped it over",
+        "half-track outside off, he cuts it fiercely through cover-point. It blazes away to the boundary",
+        "half-volley outside off, he opens the face of his bat and drives it past backward point",
+        "the batsman latches onto this! He comes down the track, manufactures a full toss and whips it in the gap " +
+        "between midwicket and mid-on",
+        "nips down the track, this is on a length and outside off. Plenty of width on offer and the batsman thrashes" +
+        " it up and over the covers",
+        "whoa! Pitched up with some away movement outside off, he offers a mere extension of a push. Whistles away to" +
+        " the left of short cover. This was by no means a half-volley, the timing was right out of the top draw",
+        "The bowler errs too full and straight, that is in the glancing radar. Helped away fine, beats the fielder's " +
+        "slide in the deep",
+        "too leg-stumpish from the bowler, stray ball and duly eased away fine on the leg side",
+        "he delivers a half-tracker outside off, he does not have enough pace to threaten this batsman. He pulls it " +
+        "firmly over backward square",
+        "change of pace, short ball outside off. He waits for it to arrive and rifles a cut behind point, raced away to " +
+        "the fence",
+        "very full and on the stumps, he drives it down the track and beats mid-off",
+        "shortish and outside off, the batsman camps on the back foot and cuts it strongly to the left of backward point",
+        "swerving on the pads again, the batsman helps it away fine on the leg side to the left of the keeper",
+        "fuller and on middle and leg, clipped away fine on the leg side. Long leg runs to his right now, but ends up beaten",
+        "the batsman just clears mid-on. Length ball outside off, the batsman looks to flick it away, instead chips " +
+        "it in the air. The man at mid-off runs to his left, leaps but the ball loops over him.",
+        "back of a length and outside off, this time he makes a decent connection. The keeper shuffles across and " +
+        "clubs it in the air, to the right of mid-on",
+        "fuller and swings away outside off, squares 'em up, gets an outside edge through the vacant slip cordon",
+        "back of a length and angled outside off, the batsman moves deep in the crease and cuts it up and over point " +
+        "for a marvellous boundary",
+        "crude slog, but its effective. Length on off, the batsman cleans his front leg and mauls it away to the long-on" +
+        " boundary",
+        "tossed up on middle, he uses his feet, hits it with the turn and lofts it inside-out over mid-off",
+        "the batsman nails the gap now. Overpitched outside off, the batsman bends his knee and creams a drive to the " +
+        "left of the fielder, who was diving to his left at short cover. She whistles away to the boundary",
+        "back of a length and outside off, the batsman stands tall and cuts it away to the right of deep third man. " +
+        "Peachy timing",
+        "very, very wristy! the batsman nips down the track, manufactures a length ball and flicks it over wide mid-on",
+        "impressive strike from the batsman. Back of a length and on middle, he takes the aerial route and wristily " +
+        "pulls it with the angle over midwicket",
+        "banged in short and outside off, it gets big on the striker. He initially loaded up for the pull but managed " +
+        "to slice it up and over backward point",
+        "the bowler aims for the yorker, ventures too full, so much so that it ends up as a full toss. Carved away " +
+        "between covers and backward point, skips away to the cover-point boundary. The bowler is visibly cross with himself",
+        "",
+        "",
         ""
     ];

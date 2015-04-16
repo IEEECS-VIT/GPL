@@ -58,8 +58,11 @@ module.exports =
     "finger. The batsman was looking to play it to the leg side but did not account for the movement.",
     "This stand has been broken, courtesy some sharp bowling. The captain is pumped. This was floated on middle, the " +
     "batsman goes low for a sweep but misses and is struck on the back pad. The umpire raises his forefinger",
-    "",
-    "",
+    "This was fuller jags in and on middle, he seeks to flick it across the line but misses his stroke, he is struck " +
+    "on the pad, well below the knee roll. The batsman was crease-bound there and pays the penalty That would have " +
+    "smacked into middle and leg and given!",
+    "and he gets his man now! He is elated and his hands aloft in joy. This one skids off the deck on middle, might " +
+    "have been the slippery one. The striker misses the reverse sweep and the umpire raises his forefinger",
     "",
     "",
     "",

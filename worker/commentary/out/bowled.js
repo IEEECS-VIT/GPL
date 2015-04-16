@@ -109,8 +109,11 @@ module.exports =
     "This offering thuds into the middle stump",
     "This is a soft, soft dismissal. Full toss outside leg as the batsman steps away. Instead of mowing it away, " +
     "he misses. The ball brushes the front pad and disturbs the stumps. The off-bail is tipped off",
-    "",
-    "",
+    "that's a top ball from the bowler, he lets out a big roar. This tossed up ball pitches outside leg and wafts past " +
+    "the bat and hits the middle stump. The batsman is crease-bound as he looks to flick and misses.",
+    "and he takes out the danger man, the latter throws his head back in disappointment. This was on a back of a length" +
+    " and on off, the batsman backs away and wants to slog it over the leg side. He can only drag it back onto the off " +
+    "stump off a bottom edge",
     "",
     "",
     "",
