@@ -365,5 +365,22 @@ module.exports =
     "no-ball, which is okay, the catch is also clean.",
     "he picks out short cover perfectly! The bowler floats this outside off, he goes hard on the drive but cracks it " +
     "straight to the man at short cover",
+    "how does he always take such catches?! This ball he did not middle, pulled the back of length ball down the ground, " +
+    "got a leading edge right over the bowler's head and he ran from mid off to his left to dive backwards and catch it " +
+    "as if that's what he does every morning after waking up",
+    "and he is gone too, another catch down the ground! Made some room, maybe the bowler anticipated it and pitched " +
+    "outside off, the batsman swung his arms wildly, didn't middle it and found the fielder for a simple catch at the " +
+    "edge of the circle",
+    "the ball finds a fielder! Short of length ball towards the stumps, the batsman cleared his front foot and threw " +
+    "his bat at it, got a leading edge and the fielder ran a few steps to his right from fly slip for an easy catch",
+    "and out! Slower through the air and angled in, he slams it down the ground and finds long on for an easy catch",
+    "slower ball brings the fall! He picked the ball from around off, it was fullish, to the leg side and the fielder " +
+    "took a simple catch around his left shoulder at deep midwicket",
+    "full toss gets a wicket now! Attempted yorker is a full toss on the pads, he flicks it in the air and deep backward " +
+    "square leg takes a straightforward catch.",
+    "straight down long-off's throat! He came down the track to take it on the full, did not succeed, and mistimed " +
+    "that one down to the fielder's throat for an easy one",
+    "another mistimed shot, another wicket! This was flat and well outside off, but still slog-swept to the leg side, " +
+    "got a top edge very high and took the catch going back a few steps from midwicket",
     ""
 ];

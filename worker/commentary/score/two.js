@@ -540,7 +540,6 @@ module.exports =
         "very full and on middle, he backs away and hacks it between deep midwicket and long-on. The fielder there runs " +
         "across from deep midwicket and hunts the ball down",
         "fuller and outside off, he leans forward and drives it in the gap between point and the covers",
-
         "drifting onto the pads, he twirls his wrists and eases it behind square on the leg side. Long leg runs to his " +
         "left and mops it up",
         "fuller and outside off, he presses forward and drives it between mid-off and cover",
@@ -553,6 +552,28 @@ module.exports =
         "fuller on off, turned through vacant midwicket. The pair take two by the time the fielder runs across and gets " +
         "to the ball",
         "back of a length and on the hips, picked away behind square on the leg side",
+        "angling across the batsman outside off, he simply guides it to third man by opening the face of the bat",
+        "on the pads from over the wicket, tucked away to deep square leg for one",
+        "high in the air, but he gets some distance too and just clears mid off! Heaved on the off side, got a leading " +
+        "edge and the fielder there ran back a long way. If he could not get to it, nobody would have",
+        "he throws his bat at it again and escapes again! Slogs the back of length ball from outside off, this time " +
+        "the ball goes square on the off side and clears cover point",
+        "This time he pulls the short ball to the leg side, gets a top edge and the ball falls right in between deep " +
+        "square leg and midwicket",
+        "shorter and wider outside off, he goes back to let it turn and cuts it past point in the gap for two as the " +
+        "fielder kicks the ball inside",
+        "back of length outside off, square-driven off the back foot to deep point for two",
+        "shortish towards the batsman, pulled to deep midwicket for two",
+        "too full outside off and another exquisite drive from the batsman through the covers",
+        "nearly in the block hole now, flicked towards wide long on in the gap for two",
+        "has enough time for it and whips the short of length ball off the back foot to leg for two",
+        "this guy can do anything on the field! The striker flicked the low full toss from outside leg, by making room, " +
+        "to the cow corner, he ran to his right from long on and nearly flew to flick the back inside",
+        "full toss and it's nudged straight of midwicket",
+        "turning in from length just outside off, reverse swept fine on off for two in the gap",
+        "angled into the batsman, he tucks the ball wide of fine leg in the gap for two",
+        "lands safe after being in the air for very long! It was on length from the bowler, he whipped on the leg side " +
+        "and a leading edge went to the off side to fall between cover and deep cover. Run out chance also missed",
         "",
         ""
     ];

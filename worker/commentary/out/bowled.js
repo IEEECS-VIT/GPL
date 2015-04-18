@@ -114,8 +114,8 @@ module.exports =
     "and he takes out the danger man, the latter throws his head back in disappointment. This was on a back of a length" +
     " and on off, the batsman backs away and wants to slog it over the leg side. He can only drag it back onto the off " +
     "stump off a bottom edge",
-    "",
-    "",
+    "how do you bowl that, and how do you play that? Yorked on middle stump! pretty straightforward that one - straight " +
+    "on middle stump, as accurate as it could be on middle stump, and the bat came down late to block it",
     "",
     "",
     "",

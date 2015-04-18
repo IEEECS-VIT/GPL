@@ -441,6 +441,40 @@ module.exports =
         "slower fullish ball on off, he waits for it, picks it up and lofts it high into the air. Faulkner runs across " +
         "to his from right long-off, goes as far as he can on the long-off boundary, leaps, takes the catch and goes " +
         "over the rope. The result is a six",
-        "",
-        ""
+        "top-edge, sails into the stands! His pace does a lot of work again as the batsman swivels on a pull, is not " +
+        "quite quick enough on it and yet benefits",
+        "tossed up outside off, the striker reaches out and lifts the ball clean into the stands behind long-on. Appeared" +
+        " like he hadn't timed it, but the ball sailed away",
+        "and then there's the power! A tossed up delivery to make up for lost time, he plants his front leg down and " +
+        "hammers it over long-on",
+        "tossed up, and that is enough for the batsman to lean forward and lift it over extra cover. Pure power. Flat six",
+        "how does he do that?! Shuffles across and ramps the short ball from just outside off fine on the leg side for " +
+        "six. That's gone all the way!",
+        "slog-swept with the angle for six! Doesn't matter what the situation is, he nearly goes down on a knee and " +
+        "hits it just over deep backward's head for six!",
+        "dances down the track, takes it on the full, lofts it down the ground, long-on only watches and that goes all " +
+        "the way!",
+        "crackalicious! He sends in a bouncer, and as if the batsman was expecting it, he pulled it with such disdain " +
+        "from the middle of his bat to the cow corner",
+        "Pitched up and he launched it to the wide long-on boundary for maximum!",
+        "that's gone all the way! Teh bowler pitched it up a little, the striker nearly went down on a knee and " +
+        "slog-swept it over long on for six",
+        " that's gone out of this planet! The bowler pitched it up on the stumps, and the batsman lofted it straight " +
+        "down the ground, very very high and it went a long way into the stands over the press box",
+        "welcomes him with a six! The batsman dances down the ground for the ball outside off to take it on the full " +
+        "and lofts it over the long off boundary for a six",
+        "too short, too big and that's six! The striker went back quickly for the short ball around off and pulled it " +
+        "just in time to midwicket boundary for six!",
+        "flat and wide outside off, the batter throws his arms at it and tonks it straight down over long off for a " +
+        "clean six",
+        "just a bit too short, he rocks back and slams the ball from well outside off between long and deep midwicket " +
+        "for six more!",
+        "and another one, the belligerent striker is clearing the boundary at will. On length outside off and he " +
+        "hammers it over the long on boundary with some power",
+        "middles this time - six! Charged down the ground for the short ball and tonked it to the cow corner boundary " +
+        "for maximum",
+        "slower ball on middle, it's too short and the batsman makes room to hammer it over the deep midwicket fielder " +
+        "for six",
+        "that's a full toss around waist height and that's six! You would imagine such a ball around off stump to be " +
+        "pulled to the leg side but he pulled it straight down the ground to wards the sight screen"
     ];

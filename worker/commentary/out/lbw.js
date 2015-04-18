@@ -63,7 +63,9 @@ module.exports =
     "smacked into middle and leg and given!",
     "and he gets his man now! He is elated and his hands aloft in joy. This one skids off the deck on middle, might " +
     "have been the slippery one. The striker misses the reverse sweep and the umpire raises his forefinger",
-    "",
+    "the bowler has struck when it mattered! This one was angling in from leg stump, the batsman looked to glance it " +
+    "off the pads but could not connect and was struck in front of leg. Finger went up in no time even though it wasn't " +
+    "really plumb",
     "",
     "",
     "",

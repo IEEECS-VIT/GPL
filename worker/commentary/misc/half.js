@@ -18,5 +18,6 @@
  */
 module.exports =
 [
-    ""
+    "",
+    "And that brings up his half century - a well timed innings indeed."
 ];

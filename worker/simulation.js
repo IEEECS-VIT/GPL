@@ -40,15 +40,15 @@ exports.simulate = function (data, callback)
     }
     else
     {
-        var rand = function(arg)
+        var rand = function(base, limit)
         {
-            if(!arg)
+            if(!base)
             {
                 return Math.random();
             }
             else
             {
-                return typeof(arg) == 'object' ? arg[rand(arg.length)] : parseInt(Math.random() * 1000000000000000) % arg;
+                return ((typeof(base) == 'object') ? base[rand(base.length)] : parseInt(Math.random() * 1000000000000000) % base);
             }
         };
         var Make = function(team, arg)
@@ -109,12 +109,12 @@ exports.simulate = function (data, callback)
             mean_rating[arg] = ( this.avg_bat_rating + this.avg_bowl_rating) / (this.bat_name.length + this.bowl_name.length);
             this.avg_bat_rating /= this.bat_name.length;
             this.avg_bowl_rating /= this.bowl_name.length;
-            for(i in this.bowl_rating)
+            for(i = 0; i < this.bowl_rating.length; ++i)
             {
                 this.bowl_rating[i] += parseFloat(this.bowl_rating[i] ) / (this.bowl_name.length - 1) - parseFloat(this.avg_bowl_rating) / (this.bowl_name.length * (this.bowl_name.length - 1)) + parseInt(this.coach_rating);
                 this.bowl_rating[i] = (this.bowl_rating[i] < 0) ? ((this.coach_rating < 0) ? (0) : (this.coach_rating)) : (this.bowl_rating[i]);
             }
-            for(i in this.bat_rating)
+            for(i = 0; i < this.bat_rating.length; ++i)
             {
                 this.bat_rating[i] += parseFloat(this.bat_rating[i] ) / (this.bat_name.length - 1) - parseFloat(this.avg_bat_rating) / (this.bat_name.length * (this.bat_name.length - 1)) + parseInt(this.coach_rating);
                 this.bat_rating[i] = (this.bat_rating[i] < 0) ? ((this.coach_rating < 0) ? (0) : (this.coach_rating)) : (this.bat_rating[i]);
@@ -499,17 +499,6 @@ exports.simulate = function (data, callback)
                                     ++dot_balls[strike[+strike_index]];
                                     ++dot;
                                     break;
-                                case 5:
-                                    delivery_score -= 1;
-                                case 4:
-                                    data.match.commentary.push('FOUR, ' + (four.length));
-                                    ++fours[strike[+strike_index]];
-                                    break;
-                                case 6:
-                                    data.match.commentary.push('SIX, ' + rand(six));
-                                    ++maximums[strike[+strike_index]];
-                                    ++continuous_maximums;
-                                    break;
                                 case 1:
                                     data.match.commentary.push('1 run, ' + rand(one));
                                     break;
@@ -518,6 +507,16 @@ exports.simulate = function (data, callback)
                                     break;
                                 case 3:
                                     data.match.commentary.push('3 runs, ' + rand(three));
+                                    break;
+                                case 4 || 5:
+                                    delivery_score = 4;
+                                    data.match.commentary.push('FOUR, ' + rand(four));
+                                    ++fours[strike[+strike_index]];
+                                    break;
+                                case 6:
+                                    data.match.commentary.push('SIX, ' + rand(six));
+                                    ++maximums[strike[+strike_index]];
+                                    ++continuous_maximums;
                                     break;
                                 default:
                                     break;
@@ -549,12 +548,12 @@ exports.simulate = function (data, callback)
                         if (!milestone[strike[+strike_index]] && score[strike[+strike_index]] >= 50)
                         {
                             ++milestone[strike[+strike_index]];
-                            data.match.commentary.push(' And that brings up his half century - a well timed innings indeed.');
+                            data.match.commentary.push(rand(half));
                         }
                         else if (milestone[strike[+strike_index]] == 1 && score[strike[+strike_index]] >= 100)
                         {
                             ++milestone[strike[+strike_index]];
-                            data.match.commentary.push(' what a wonderful way to bring up his century.');
+                            data.match.commentary.push(rand(full));
                         }
                         if (delivery_score % 2)
                         {
@@ -651,7 +650,7 @@ exports.simulate = function (data, callback)
             temp = loop ? end : mid;
             data.match.commentary.push(rand(temp));
             j = 0;
-            for(i in data.team[+toss_index].squad)
+            for(i = 0; i < data.team[+toss_index].squad.length; ++i)
             {
                 if(data.team[+toss_index].squad[i] > 'd')
                 {
@@ -687,7 +686,7 @@ exports.simulate = function (data, callback)
                 }
             }
             j = 0;
-            for(i in data.team[+!toss_index].squad)
+            for(i = 0; i < data.team[+!toss_index].squad.length; ++i)
             {
                 if(data.team[+!toss_index].squad[i] > 'b' && data.team[+!toss_index].squad[i] < 'd')
                 {
