@@ -382,5 +382,49 @@ module.exports =
     "that one down to the fielder's throat for an easy one",
     "another mistimed shot, another wicket! This was flat and well outside off, but still slog-swept to the leg side, " +
     "got a top edge very high and took the catch going back a few steps from midwicket",
+    "there we go! Lovely line just outside off and he was tempted by third man a bit too much. Flashed the angled blade " +
+    "and presents slip-catching practice to a diving widish first slip",
+    "done him in! He seemed to be tiring to be lazy in the shot here. Fooled by the slower ball that holds on the pitch." +
+    " Was into his slog way too early and the leading edge settles into the hands of cover. Canny bowling here",
+    "what a catch! This was a long hop that was sailing beyond the midwicket boundary, but he waits for it. He times " +
+    "his jump with insane precision and thrusts his hands over head and grabs a stunner with the boundary inches from " +
+    "his feet as he comes down! Boy, is he pumped!",
+    "how soft was that? This was back of a length and comes in on middle and leg, he aims to flick it away. Instead he " +
+    "chips it to short midwicket. This may have stuck in the pitch and stopped on him. He rehearses the flick as he " +
+    "walks back",
+    "He takes pride in calling keeping his primary skill and he shows it off. This looked like one that " +
+    "gripped in the pitch, did not come onto the batsman, bounced extra as well. He looks to guide it away through the " +
+    "slip cordon but makes a mess of it. Off the face of the bat and pouched by the keeper, diving across full-length " +
+    "to his right. End of a charming cameo from this player. Replays show that it was the back-of-the-hand slower one",
+    "flashes, connects and nicks off. This was on a length and angling away outside off again, he swishes and manages " +
+    "a bottom-edge, which is gobbled up easily by the keeper",
+    "he's taken a super catch diving forward! The bowler waits after shovelling the wide, tossed up through the off side." +
+    " But the fielder swooped in from point, threw himself forward and to his right and takes a lovely grab. Third " +
+    "umpire confirms and off he goes.",
+    "picks out long-off! Easily done by the bowler. It was overpitched, but was wide. Had to reach out for it and that " +
+    "ruins his timing. The striker went through with the stroke and pays for it",
+    "caught at long-off! He was clearing that front leg again and the bowler bowls it full and wide to try and evade " +
+    "his reach. Splices it off the bottom of the bat and  was easily under it",
+    "he perishes! Back of a length and on middle and leg, the batsman chips it feebly, a fielder runs forward from " +
+    "midwicket and completes a good catch. The extra lift from this delivery foiled the stroke",
+    "strikes! On the customary back-of-a-length side, the striker hunts for another pull. This was not all that short " +
+    "to warrant the stroke. He can't connect well this time, much like the first attempt. Gets a bottom-edge onto the " +
+    "thigh, rebounds to the man at a widish slip position",
+    "sharp work from the bowler! The batsman wants to whip this length ball on middle and leg away, does so. But the " +
+    "fielder dives to his right at square leg and pulls off a smart, low catch",
+    "and this time the batter has holed out, he pulls off a stunning catch, diving forward from sweeper. The batsman " +
+    "makes room and carves it in the air, the fielder runs forward, takes the flat hit and tumbles onto the ground. The " +
+    "batsman examines the bottom of the bat as he trudges back",
+    "Crucial strike. The bowler delivers another short bumpy ball, the batsman backs away and mishits the attempted " +
+    "cut, finds backward point. He hops up and takes it",
+    "This was fuller and on middle, whipped away straight down the gullet of long-on. Not middled, hit high on the bat " +
+    "and he holes out",
+    "He bends down for a massive slog-sweep over leg, but can only skew it to long-off off the base of the bat.",
+    "hey hustle for a couple, fine throw from long off, the keeper whips the bails off. This low full toss was drilled " +
+    "down the ground. He wants a couple, the fielder collects the ball quickly from long-off and fires a throw to the " +
+    "keeper. He moves to his left, gathers it on the second bounce and catches the batsman short",
+    "this is an outstanding catch! The striker misses the yorker outside off, ends up bowling a full toss. Below the " +
+    "waistline, though, the TV umpire confirms it as well. The batsman backs away and slices it. The bowler leaps " +
+    "across to his left from backward point and completes a memorable catch. He also intercepted a four there",
     ""
 ];

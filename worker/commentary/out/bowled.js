@@ -116,11 +116,17 @@ module.exports =
     "stump off a bottom edge",
     "how do you bowl that, and how do you play that? Yorked on middle stump! pretty straightforward that one - straight " +
     "on middle stump, as accurate as it could be on middle stump, and the bat came down late to block it",
-    "",
-    "",
-    "",
-    "",
-    "",
+    "leg and middle stumps are in disarray as he removes his nemesis! He was looking to be a little too cute with a lap" +
+    " sweep, all he did was direct the ball onto his stumps",
+    "Mitch pegs the middle stump back, bags the wicket. Fuller length and fired though by the bowler, the striker has " +
+    "a huge slog and misses. The bowler hits the stumps. Timber, but all too late.",
+    "off stump takes a hit! Was expecting movement, possibly trying to slide it down to third man for a single, but there" +
+    " is nothing on the ball. He simply slides it on with the arm and exploits the gap between bat and pad when the " +
+    "batsmen expect the ball to deviate away. Hands raised in a simple smile after the fact",
+    "knocked him over now! Moves too far across to make use of the gap at long leg, but he can't make contact with the " +
+    "length ball on leg stump. He misses, the bowler hits",
+    "away goes the off stump. The batsman was making room, and went overboard with it. He fires in the quicker one and " +
+    "roars in delight as he beats the batsman all ends up. A little check on the no-ball and all's fine",
     "",
     "",
     "",

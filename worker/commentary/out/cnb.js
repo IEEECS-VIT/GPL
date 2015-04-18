@@ -21,5 +21,9 @@ module.exports = [
     "how soft is that? Chipped back at the bowler. Good length ball outside off, stops on the batsman, who aims to flick " +
     "it away, instead he lobs it back to the bowler, who moves to his right and snags the catch",
     "Slower from outside off, he marched down the ground and slapped the ball back to the bowler, who took it around " +
-    "waist height with both hands"
+    "waist height with both hands",
+    "'Come on', yells the captain, after the fall (Irony, thanks for stopping by) This was a tossed up delivery from " +
+    "around the stumps. Tailing in on off, which might have been what tempted the batsman to seek midwicket with the " +
+    "closed face. Plays too early and takes the leading edge back to the bowler who takes a good, low catch diving to " +
+    "his right"
 ];

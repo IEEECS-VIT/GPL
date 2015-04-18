@@ -476,5 +476,60 @@ module.exports =
         "slower ball on middle, it's too short and the batsman makes room to hammer it over the deep midwicket fielder " +
         "for six",
         "that's a full toss around waist height and that's six! You would imagine such a ball around off stump to be " +
-        "pulled to the leg side but he pulled it straight down the ground to wards the sight screen"
+        "pulled to the leg side but he pulled it straight down the ground to wards the sight screen",
+
+        "down the track and wallops the fielder beyond the long-off boundary. Claps from the captain and the crowd are " +
+        "in full force. Good footwork to get to the pitch and gain leverage",
+        "this time he has dealt with the short ball and how! Moves back and across, excellent use of the crease to " +
+        "pummel the pull over the wide long-on boundary",
+        "his misjudged this at long-on! Rushed in thinking the belt from the striker wouldn't reach him, but then " +
+        "realises it does have enough power. Has to backpeddle, and ends up parrying it over the ropes",
+        "gets under the tossed up delivery outside off and lofts it over long-off. Just about. The bat face wobbled " +
+        "big time on impact, but it still had enough",
+        "tonked over long-off! Possibly the biggest one of the match as he sizes up the width on this overpitched " +
+        "delivery and launches it high and handsome",
+        "heaved over the wide long-on boundary, that's the advantage right there, he can take the length ball and " +
+        "convert it. Seemed the googly too",
+        "another one! It's the sweep again and he has revived the zombie crowd! Lays into a full toss like a starving " +
+        "man at a banquet paid for by someone else",
+        "length ball, smashed! Slower ball, picked up and he gets reward for staying put, keeping his balance and " +
+        "drawing his leverage from it. Amazing strike, definitely pleased the dugout",
+        "he does not middle the pull. But collects a six. Top-edge and top-edges give way to sixes in T20s. Climbs " +
+        "disconcertingly, he manages a top-edge that balloons over backward square leg. The bowler's pace assisted him " +
+        "there",
+        "length delivery outside off, having backed away, has enough leverage to smash it to the long-on boundary. Flat " +
+        "and powerful, six",
+        "on a fuller length and on middle and leg, the bowler goes back and across as he whips his wrists and lifts it " +
+        "over backward square for a flat six. Smokin'",
+        "banged in short and on middle, he sits on the back foot and pummels a six over deep backward square leg",
+        "clean, crisp and effective. The batsmen punch gloves. Tossed up on off, he marmalises a six over long-on. " +
+        "Beautifully lofted, the coach applauds from the dug-out",
+        "and he connects now and connects well. Tossed up outside off, his eyes lit up as a kid's does while listening " +
+        "to fairy-tales, smeared over long-off, deposited into the sightscreen",
+        "the fielder finger-tips it over at the long-off boundary. He does not get hold of the yorker, low full toss, " +
+        "dispatched over vacant mid-off. Long-off was in picture, but can only tip it over",
+        "length ball, picked up and muscled over long-on! Nothing comical about that as he leans on his front foot and " +
+        "hammers it away",
+        "runs at the bowler, reaches the pitch and wallops him into the sightscreen. Brilliant footwork form the batsman there",
+        "gets under a pretty full delivery on off middle stump and shovels it from there to the long-on boundary. Got " +
+        "on one knee and scythes the ball away",
+        "The fielder is interested at long-on again, but this is a flat and brutal strike from the batsman. It was " +
+        "rather full again, but those strong wrists provide enough power",
+        "pummeled! Overpitched deliveries at that pace aren't any problem whatsoever. Launches the ball beyond the " +
+        "long-off boundary",
+        "fuller ball on leg this time is sent into orbit over long-on! Looks like the batsman has taken a look at his " +
+        "strike rate and does not like it at all",
+        "doesn't matter at which pace it comes down at for him! He races at the back of a length ball and tonks it over " +
+        "long-on. Skimmer of a six.",
+        "that's the slower ball and he has picked it, runs down the track to turn it into a half-volley and launches " +
+        "it straight down the ground. Legcutter gone wrong",
+        "phew! That hit the bat with a resounding crunch! Full toss from the bowler, yorker gone horribly wrong and the" +
+        " striker has nailed it over the deep midwicket boundary",
+        "Whoa! Back of a length and on middle, he jumps across off, picks it up from there and flicks it over long leg. ",
+        "He shuffles across and launches it over backward square.",
+        "that's out of earth, fetch that in Mars. Flatter and angled outside off, he sinks to one knee and slog-sweeps " +
+        "it into the stands over deep midwicket",
+        "He has smoked that! Low full toss on middle as the yorker goes wrong. He goes low on one knee, gets under it " +
+        "and launches it high and over long-on",
+        ""
     ];

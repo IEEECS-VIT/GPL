@@ -1378,5 +1378,188 @@ module.exports =
         "slower ball on length outside off, the batsman defends it with soft hands close to himself with an edge",
         "slow again, and on length outside off, the striker defends it",
         "bouncer angled down leg, he pulls and misses",
-        "classical defence from the batsman as he goes back in the crease for the short ball around off"
+        "classical defence from the batsman as he goes back in the crease for the short ball around off",
+        "back of a length and pushed across the batsman, but it hugs the pitch! Did not bounce at all and he flashes " +
+        "and misses",
+        "that's out of the top draw! Hits an excellent length on off stump, had him uncertain about moving forward or " +
+        "back. Tries to push at the ball, but it nips away past the outside edge. Terrific bowling",
+        "shortish and cramping him up on leg stump, he has to jump up to try and flick and wears it on the thigh",
+        "struck on the ribs and the batsman is winded! short and he was trying to leave it outside leg, perhaps " +
+        "misjudged the line, then tried to defend, but was in no position. Physio comes out, but it appears he's okay",
+        "comes on with the arm despite the slower pace, he moves outside leg to cut. Finds cover",
+        "cleanly struck along the ground to cover. Fuller delivery, this one keeping the slips in play since the " +
+        "batsman can be susceptible to edge behind. Good captaincy",
+        "width outside off, but he is unable to make the most of it. Lead feet doesn't allow him to time the cut shot. " +
+        "Bottom edge to the keeper",
+        "fuller delivery on off stump, presses forward to defend",
+        "skips down the track to a fuller ball outside off and crunches it to cover.",
+        "fuller delivery on off stump, slapped to long-on. Looked to hit it with a little too much power there",
+        "back of a length on off stump, pushed into the covers",
+        "back of a length on middle and leg, tucked to short midwicket",
+        "fuller delivery on off stump, defended with soft hands. The striker wanted the single, but his partner says no",
+        "only one stump left standing.... at the bowler's end! Just a shade shortish on middle and the batsman unleashes" +
+        " a vicious forehand. Stopped a boundary, or if you look at it the other way, the non-striker could have been " +
+        "run out had the bowler got his fingers on it",
+        "good length ball on off stump, defended",
+        "flighted on middle, defended",
+        "through him! Good length ball, dips and turns a shade away. He plays down the wrong line as he searches for " +
+        "the ball. Hands leading into the shot, beaten and only just misses the stumps",
+        "skids on does the googly and the batsman who had jumped back to make his room is almost bowled. Just about " +
+        "manages to get his bat down in time",
+        "flighted on middle and off, kept out",
+        "flighted on off stump, defended",
+        "Fuller delivery on off stump, holds its line and it's defended",
+        "pulls the ball back on off stump, steps forward to block",
+        "the bowler has to dive across to his right to keep a clip from the striker from passing through",
+        "slower through the air and lured him into playing away from the body. The slice almost carries to short third man",
+        "back of a length on off stump, tucked to short midwicket",
+        "length ball outside off, with a hint of curve away from the bat. Waft and miss",
+        " fuller delivery outside off, pushed into the covers",
+        "tries it again, but this one doesn't rise as much as he hopes. That's what the batsman has to contend with on " +
+        "a slow, two-paced pitch. Not easy to trust your big shots, and that's what's needed for a defendable score",
+        "fuller delivery on middle and leg, he steps out and makes room while doing so, drilled into the covers",
+        "ducks.... under an absolute bumper! That's a little too much respect as the short ball goes over off stump",
+        "slower ball - the offcutter - beats the rank slog. Clears the front leg looking for the midwicket boundary. " +
+        "No luck",
+        "and cue the slower ball. Offcutter gets him charging, but his slog mags him lose his shape. Beaten all ends " +
+        "up and it was about a whisker away from off stump too",
+        "back of a length and swerves in on off, the batsman accounts for the movement and blocks it back to the bowler",
+        "pitched up, this one goes the other way, pushed defensively to short cover",
+        "back of a length and on middle, defended to the left of the bowler",
+        "on a length and outside off, flashed to point, straight to the fielder. They look for a single but decide " +
+        "against it, the fielder at covers has a shy at the non-striker's. Ricochets off the pad onto the stumps, but he is in",
+        "back of a length and sliding across off, he skips out, slashes and only connects with thin air",
+        "stump-to-stump line, patted back to the bowler after pressing forward",
+        "fuller and outside off, square-driven to point via an open face",
+        "back of a length and darted across off, flashes and another miss",
+        "the bowler returns with a bouncer, flies to the keeper after beating the pull. One bouncer for the over",
+        "swish and a miss to a back-of-a-length delivery outside off",
+        "length ball, defensively pushed down the track",
+        "fuller and around off, defended to off with an angled bat",
+        "fuller and hurled in on off, pushed to the off side",
+        "Mitch slips in a slower one, waits on it and nudges it to leg",
+        "greeted by a bumper, he sinks under it",
+        "fuller and outside off, driven to point with an open face",
+        "full and wide outside off again, bends his knee and thrashes a drive to short cover. Could have placed that better",
+        "back of a length and darted across off, he is crease-bound as he slashes and misses",
+        "fuller and on middle, he shuffles across, works to short midwicket and averts a travesty",
+        "round-armed on off, toe-ends the drive back to the bowler",
+        "quicker on off, dabbed in front of point",
+        "arm-ball snakes in with the angle, takes it on the pad",
+        "darted on the stumps, blocked back to the bowler",
+        "back of a length and outside off, slapped to point",
+        "back of a length and outside off, swings and misses. He throws his head back for not connecting that",
+        "bumpy short ball outside off, another crude slog and a miss",
+        "back of a length and outside off, he hops up but can't slice it away. Beaten",
+        "pitched up and around off, slices the drive in front of point",
+        " mighty full and outside off, much better from Mitch. The batsman has an almighty swing at that but does not " +
+        "connect",
+        "yorker seeking the base of off. It seemed destined to nail off but the batsman's jab intervenes. Kept out",
+        "bouncer from the bowler, ducked under, one for the over",
+        "yorker outside off, just inside the tram-line. He backs away and fails to dig it out",
+        "he does not get the yorker right, mighty full and outside of, swing and a miss from Russell",
+        "angled in fuller and on off, pushed into the covers. The non-striker wants a single, but retreats after his " +
+        "partner says no, the fielder misses the direct-hit",
+        "low full toss as he does not meet with the yorker, pushed to the man at the covers. The striker drifts off for " +
+        "a single, the fielder has a shy at the stumps at the non-strikers' and misses, again. A direct hit would have " +
+        "caught him miles short",
+        "fuller and on middle, driven back at the bowler",
+        "back of a length and zipping away just outside off with some extra lift, the striker has a nervy waft at it, " +
+        "watches the ball beat the outside edge",
+        "pitched further up and just a shade outside off, driven to mid-off",
+        "back of a length and angles in on off, he inches forward and blocks it back to the bowler",
+        "near yorker at the base of off, jabs his bat down and keeps it out",
+        "banged in short and hurries onto hi,, he hops up and seeks it to turn it to the leg side. Lobs it to where a " +
+        "forward short leg may have been",
+        "shortish again, defended to the helmeted backward short leg",
+        "back of a length and skids on to the striker, who manages a bottom edge on the attempted pull, the ball rolls " +
+        "to leg",
+        "fuller and curling away outside off, pushed defensively to point",
+        "pushed into the covers",
+        "short and rises over the stumps, he jumps across off, pulls and meets with thin air",
+        "back of a length and jags back in on middle as the bowler pounds in and hammers the deck. The batsman is up on " +
+        "his toe tips as he defends it back to the bowler",
+        "greets him with a bumper, flies through to the keeper. The batsman jerks out of the way",
+        "back of a length, extra lift outside off, he lets it be",
+        "back of a length and outside off, he gets on top of the bounce and cuts it to the left of point, diving save",
+        "slid through outside off, left alone",
+        "shortish and outside off, he wants to lash it away, chops it to the covers",
+        "fuller on middle and leg, blocked back to the bowler",
+        "floated up and on off, pushed to the covers",
+        "angled in fuller on middle and leg, tucked to midwicket, finds the fielder",
+        "back of a length and skids through outside off, flat-batted back to the bowler. Not much power behind that",
+        "low full toss and Russell seeks the base of off, sliced to the covers",
+        "slid through quicker, catches him on the pad as he can't flick it away, but this was heading down leg",
+        "back of a length, this enjoys some extra bounce outside off, wobbles away as well to mess with the attempted " +
+        "dink to third man. Beaten",
+        "uses his feet and drills it back at the bowler",
+        "pacy bouncer from the bowler, the striker ducks under and lets it go",
+        "gives this more air on off, the batter strides forward and blocks it back to the bowler",
+        "short and outside off, the batsman should kick himself for not putting that away. Cut tamely to point",
+        "might have been a cross seam short ball, the batsman backs away, but can't ramp it over. Beaten",
+        "fuller and outside off, he strides forward and pushes it to the covers",
+        "fuller on middle, patted back to the bowler",
+        "skids off the deck with some extra bounce and catches him on the front pad. This did not threaten the stumps",
+        "darted flat and quick, the striker is stuck on the back pad, this was sliding down",
+        "skiddy ball outside off, scuttles low. Did not bounce at all. The batsman swings and misses",
+        "tossed up nicely, misses the slog-sweep and wears it on the pad. Outside the line of off and the bowler's " +
+        "animated lbw appeal amounts to nothing",
+        "slid through far too wide outside off, he can't reach out and connect, the keeper can't collect it cleanly " +
+        "as well",
+        "He shuffles across and aims to lap-scoop it away but is struck on the pad and falls over as his balance is " +
+        "shot. He is down on the floor, the non-striker wants a single, they can't get it",
+        "walks at the medium-pacer, gives up his strategy too early and is met with a shorter delivery that moves away " +
+        "off the deck. Wafts at it with the open face and is beaten. Appeal from the keeper, followed suit by the bowler." +
+        " No response from the umpire",
+        "a shade short and wide again, he slaps to point",
+        "back of a length on off stump, the batsman waits on it and defends with the open face to try and beat the lone " +
+        "slip fielder now. But he doesn't offer much pace and the batsman has an easy stop diving to his right",
+        "The batsman pokes at a fuller delivery, he's on the walk as it swings away and the outside edge falls short of " +
+        "the second slip fielder.",
+        "shortish and curling away again, but this time the striker has watched it far better and leaves",
+        "pushes him back with a pacy, shortish delivery on off stump. He softens his hands and blocks towards point",
+        "huge appeal! He had jumped right across to try and sneak a single behind square leg. Kept seriously low and " +
+        "hit him adjacent with middle, that's why the bowler was instant with his appeal. But it pitched outside leg",
+        "no bounce again! This was pitching closer on the stumps and he shuffles in line and brings down his bat just in" +
+        " time",
+        "good length ball on off stump, blocked solidly",
+        "good length ball seeking the middle of middle, the batsman does not oblige",
+        "good length ball outside off, he is forward with a defensive bat",
+        "fuller delivery, angled across the batsman to keep the lone slip in play, he wants to push down the ground but " +
+        "doesn't time it.",
+        "back of a length on off stump, blocked back at the bowler",
+        "tries to manufacture something a bit too much against a back of a length delivery on middle and leg. Looks to " +
+        "pick it up and deposit it into the deep square leg boundary. Wears it high on the pads, and the cross-seamer " +
+        "pitched outside leg as well",
+        "banged in short and he veers away from the line of the ball. That was pretty quick for the bowler",
+        "shortish and outside off, slid towards point",
+        "beautiful slower ball form teh bowler! Beats the advancing batsman all ends up and makes him look like a " +
+        "spinning top as he tries to slog",
+        "back of a length on middlle, he was making room to open up the off side, but he doesn't have enough. Tapped " +
+        "back to the bowler",
+        "shortish with enough width for that cut shot, but it bounces over the bat and causes a groan from the batsman " +
+        "as well.",
+        "fullish on off stump, he pushes it back at the bowler",
+        "flat, quick and pushed wider outside off. The striker isn't quick enough to cut it away",
+        "flighted outside off, driven down the ground",
+        "shortish and outside off, guides it to point",
+        "leaps way outside leg, telegraphed his intentions and the bowler nods and bowls a slow, fuller ball just " +
+        "inside the wide tram lines. Way out of reach",
+        "pulls all the pace off it and he can't succeed in nurdling it into the gap at fine leg",
+        "fuller delivery on off stump, pushed into the off side for the fielder to cut across from short cover",
+        "well directed slower ball a shade outside off, looks to slide it towards point for a single but there isn't one" +
+        " there",
+        "good length ball a shade outside off, he is in line with it",
+        "he is luring life out of this pitch! That was taken by the keeper well over his head! Loads of pace, loads of " +
+        "carry, cuts across the batter off back of a length and leaves him a little bemused",
+        "Shortish delivery cramping Duminy for room as well and as he was looking to flick, he gets the inside edge and " +
+        "lobs off his body. Nearly carried to the on-rushing bowler",
+        "keeper up now and the shortish delivery wanders down leg. He was looking to pull and the ball lodges in the " +
+        "keeper's gloves. Appeal, but there was no bat. Only thigh pad",
+        "offcutter on a fuller length on off stump, defended",
+        "shortish and outside off, sliced to point",
+        "finds the yorker on off stump, slid to point. The batsman was sent back by his non-striker and he barely makes " +
+        "his ground. Good work in the field again, but a direct hit could have had him!",
+        "",
+        ""
 ];

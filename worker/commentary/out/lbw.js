@@ -66,8 +66,11 @@ module.exports =
     "the bowler has struck when it mattered! This one was angling in from leg stump, the batsman looked to glance it " +
     "off the pads but could not connect and was struck in front of leg. Finger went up in no time even though it wasn't " +
     "really plumb",
-    "",
-    "",
+    "this ball pins him lbw. This was fullish and on off, The batsman shuffles across off and does not meet with the " +
+    "flick, rapped on the front pad. Struck in front of off and he has to depart. He exults",
+    "in-ducker does the trick again. This was on a good length and comes in on off, the batsman aims for an across-the-line" +
+    " flick and misses, plumb in front. Oh wait, replays reveal that he had gotten an inside-snick on to front pad. " +
+    "Unfortunate..",
     "",
     "",
     ""

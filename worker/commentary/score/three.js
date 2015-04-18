@@ -55,5 +55,7 @@ module.exports =
         "comes down again and lofts it in the gap from off stump over the mid off fielder, who cuts it back with a " +
         "slide and saves one",
         "gets across to a shortish ball and whips it behind square, fielder saves the boundary with a dive",
+        "he pushes and gets an inside edge that sneaks away fine after passing the stumps. The fielder slides in the " +
+        "deep, but was he in contact with the ad boards while doing that. No, that's a clean stop, says the TV umpire",
         ""
     ];

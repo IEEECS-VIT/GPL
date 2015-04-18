@@ -91,5 +91,7 @@ module.exports =
     "into the batsman after going wide of the crease, who does not meet with the flick, the ball wanders away behind " +
     "point. The pair want to sneak in a leg bye. He moves quickly to his left, collects the ball and flings an " +
     "accurate throw at the bull's eye. The victim is well short",
-    ""
+    "wide yorker, with the batsman making room. Great option from the bowler and the batsmen wanting to sneak a bye " +
+    "hurts them. The non-striker is late to respond and is beaten by the throw from the keeper back to the bowler, and " +
+    "then the bowler racing back to knock the stumps over"
 ];

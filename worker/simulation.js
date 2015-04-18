@@ -42,13 +42,17 @@ exports.simulate = function (data, callback)
     {
         var rand = function(base, limit)
         {
-            if(!base)
+            if(limit)
             {
-                return Math.random();
+                return base + ((limit > base) ? rand(limit - base) : 0);
+            }
+            else if(base)
+            {
+                return ((typeof(base) == 'object') ? base[rand(base.length)] : parseInt(Math.random() * 1000000000000000) % base);
             }
             else
             {
-                return ((typeof(base) == 'object') ? base[rand(base.length)] : parseInt(Math.random() * 1000000000000000) % base);
+                return Math.random();
             }
         };
         var Make = function(team, arg)
@@ -192,7 +196,7 @@ exports.simulate = function (data, callback)
         var dot = 0;
         var extras = 0;
         var toss_index;
-        var hope = true;
+        var hope;
         var points = 0;
         var free_hit = 0;
         var strike_index;
@@ -263,7 +267,7 @@ exports.simulate = function (data, callback)
                 {
                     data.match.commentary.push(' So the captain has chosen to bowl ' + team_object[+!toss_index].bowl_name[current_bowler] + ' out. ');
                 }
-                if ((score[strike[+strike_index]] >= 44 && score[strike[+strike_index]] < 50))
+                if ((score[strike[+strike_index]] >= 44 && score[strike[+strike_index]] < 50) || (loop && hope))
                 {
                     data.match.commentary.push('  ' + team_object[+toss_index].bat_name[strike[+strike_index]] + ' one hit away from a well deserving fifty. Will he make it ?  ');
                 }
@@ -377,9 +381,9 @@ exports.simulate = function (data, callback)
                         }
                         if (score[strike[+strike_index]] >= 45 && score[strike[+strike_index]] < 50)
                         {
-                            data.match.commentary.push(' looks like there won\'t be any fifty for ' + team_object[+toss_index].bat_name[strike[+strike_index]] + ', he came so close, and was yet so far. ');
+                            data.match.commentary.push(rand(miss.half).replace('/b', team_object[+toss_index].bat_name[strike[+strike_index]]));
                         }
-                        else if (score[strike[+strike_index]] >= 90 && score[strike[+strike_index]] < 100) data.match.commentary.push(' He\'ll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team. ');
+                        else if (score[strike[+strike_index]] >= 90 && score[strike[+strike_index]] < 100) data.match.commentary.push(rand(miss.full));
                         if (continuous_wickets[current_bowler] == 3)
                         {
                             data.match.commentary.push(' And that is also a hattrick for ' + team_object[+!toss_index].bowl_name[current_bowler] + '! Fantastic bowling in the time of need.');
@@ -613,7 +617,7 @@ exports.simulate = function (data, callback)
                     data.match.commentary.push(' Partnership: ' + partnership_runs[previous_partnership_index] + '(' + partnership_balls[previous_partnership_index] + '), runrate: ' + (partnership_runs[previous_partnership_index] * 6 / (partnership_balls[previous_partnership_index] ? partnership_balls[previous_partnership_index]: 1)).toFixed(2) + ' Fall of wicket: ' + fall_of_wicket);
                 }
                 data.match.commentary.push('  ' + team_object[+!toss_index].bowl_name[current_bowler] + ': ' + parseInt(deliveries[current_bowler] / 6) + '.' + deliveries[current_bowler] % 6 + '-' + maidens[current_bowler] + '-' + wickets_taken[current_bowler] + '-' + runs_conceded[current_bowler] + '-' + (runs_conceded[current_bowler] * 6 / deliveries[current_bowler]).toFixed(2) + '  ');
-                if ((i < 19) && ((Total[+!toss] + 1 - Total[+toss]) / (19 - i) > 36) && hope)
+                if ((i < 19) && ((Total[+!toss] + 1 - Total[+toss]) / (19 - i) > 36) && hope && loop)
                 {
                     data.match.commentary.push(data.team[+toss_index]._id + ' might as well hop onto the team bus now.... ');
                     hope = false;
@@ -647,6 +651,7 @@ exports.simulate = function (data, callback)
                 }
                 previous_bowler = current_bowler;
             }
+            hope = true;
             temp = loop ? end : mid;
             data.match.commentary.push(rand(temp));
             j = 0;
