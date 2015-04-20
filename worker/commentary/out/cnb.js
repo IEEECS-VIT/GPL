@@ -25,5 +25,10 @@ module.exports = [
     "'Come on', yells the captain, after the fall (Irony, thanks for stopping by) This was a tossed up delivery from " +
     "around the stumps. Tailing in on off, which might have been what tempted the batsman to seek midwicket with the " +
     "closed face. Plays too early and takes the leading edge back to the bowler who takes a good, low catch diving to " +
-    "his right"
+    "his right",
+    "This is a slower ball and what does he do? he chips it straight back at the bowler",
+    "the most bizarre things are happening here! It was a slower bouncer outside off, the batsman got into position " +
+    "early to pull it to leg, but it stopped on him and he played a slow slap back to the bowler, who took the catch " +
+    "with his right hand",
+    ""
 ];

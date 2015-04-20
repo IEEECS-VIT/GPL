@@ -426,5 +426,29 @@ module.exports =
     "this is an outstanding catch! The striker misses the yorker outside off, ends up bowling a full toss. Below the " +
     "waistline, though, the TV umpire confirms it as well. The batsman backs away and slices it. The bowler leaps " +
     "across to his left from backward point and completes a memorable catch. He also intercepted a four there",
+    "the danger man is gone off the top edge, the crowd is happy, flags are waving! He shuffled across a long way to " +
+    "off, swept the length delivery against the turn and got a top edge high in the air behind the keeper fine on leg. " +
+    "The fielder went to his right from short fine leg to take it nicely",
+    "can't clear the fielder this time and finds long off! Swept the fullish ball straight down the ground, not quite " +
+    "from the middle, and holed out!",
+    "The fielder has taken a very good catch at deep midwicket, the batsman is gone. He saw the short of length " +
+    "delivery and played a half-flick-half-pull to the leg side, and the man had to jump in the deep to catch it over " +
+    "his head",
+    "slightly similar, slightly different, same result in similar fashion! Back of length ball coming in, lofted to the" +
+    " leg side and he runs in this time to catch it easily",
+    "holes out straight to sweeper cover! Short and wide, there's an opportunity to swing his arms, he does, and finds " +
+    "the man in the deep",
+    "chipped in the air and he takes a very good catch running in from mid off, the bowler gets a breakthrough! It was " +
+    "fullish on off, he looked to play it down the ground but played it early and the ball lobbed towards mid-off, who " +
+    "ran in and dived forward to get his fingers under it",
+    "he holes out, is that the beginning of the end? Full delivery on the stumps, He put his back foot in the crease " +
+    "and tonked it straight down to long-on",
+    "he has missed him previously, but he has his man now! The batsman looks to pull this flatter delivery over " +
+    "midwicket but gets hurried by the ball, doesn't get it off the middle and lobs an easy chance to mid-on",
+    "that's the end of him, the extra bounce does it. The bowler slants it across the batsman at good pace and the " +
+    "batsman looks to steer it to third man. But this is too close and he feathers an edge to the keeper",
+    "another one goes down! Superb catch by the man at long-off. The striker looked to attack the flighted delivery " +
+    "and almost beats the fielder, who is a bit inside the boundary and has to leap up to grab that one. He falls " +
+    "backwards, but safely inside the boundary",
     ""
 ];

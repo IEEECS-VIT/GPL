@@ -622,6 +622,52 @@ module.exports =
         "Slid through on middle and leg, pushed in front of wide long-on off the back foot. He wants a couple and " +
         "hustles across",
         "back of a length and outside off, flashed to long-off, another couple",
+        "leans forward and drives the fullish delivery from outside off behind square in the gap for two",
+        "that's high in the air on off and falls safe! He went down on a knee to loft the ball with a drive, it landed " +
+        "right in between sweeper cover and long off safely",
+        "back of length outside off, he guides it to point, from where the fielder tries a direct hit at keeper's end " +
+        "and concedes overthrows",
+        "dropped at long on! A mistimed pulled went high in the air down the ground, the fielder was at least a couple " +
+        "of feet inside the rope but jumped for the catch and put it down",
+        "somehow gets it on the leg stump, he tucks it towards midwicket where the fielder doesn't bend enough and " +
+        "concedes a second",
+        "takes the pace off the ball and pitches it shorter, the striker whips it towards deep midwicket for one",
+        "that's how you spell chaos.comedy! It was fullish this time with some room, he drove to sweeper cover for two. " +
+        "Both batsmen were running down the same side of the pitch, on the leg side, and then kept running diagonally to " +
+        "collide. Sure shot run-out chance but the man backing up doesn't collect the quick throw",
+        "pretty full outside off, he plays a lofted cover drive in the air and sweeper cover cuts it to two",
+        "yorker right on the leg stump, the batsman steers it to leg and hares back for the second",
+        "full around off, lofted down the ground and he cuts it off while going to his left",
+        "this is not short enough, but the batsman feasts on such back of length deliveries.. He swivels on his back " +
+        "leg and pulls it down to long leg. Binny slides and makes the save, just in time to keep the batsman to two",
+        "bowls a fuller one this time, the batsman punches it past the non-striker, past the diving mid-off",
+        "length delivery on the stumps, Raina goes for an ugly cross-batted swipe and drags it through square leg. " +
+        "There is not much timing there, but the batsman get a boundary",
+        "full and on the pads, the batsman digs it out towards wide long-on and comes back for a second",
+        "flatter but on the middle stump line, the batsman nudges it through midwicket and calls back for a second",
+        "fuller on the stumps, Smith whips it over square leg for a couple of runs to the deep",
+        "excellent work at the wide long-off boundary. This was driven firmly by the batsman and the fielder saved a " +
+        "couple of runs there",
+        "he looks to pick that area at extra cover again, but doesn't get the timing this time. The ball lands safely " +
+        "and the batsman picks two",
+        "swings across the line this time and finds another couple at deep square leg",
+        "throws his bat at this back of the length delivery but still no timing, just a single to deep midwicket",
+        "this time he plays the shot he wanted to off the previous ball and gets it on the middle, punches this length " +
+        "ball through cover for a couple",
+        "pushed through on the stumps, he comes forward and tickles it to fine leg",
+        "more aggression against the bowler as the batsman again looks to hit him over the top on off side, gets " +
+        "another thick outside edge through point",
+        "this is short again, he goes deep in the crease and punches it to deep extra cover for another couple",
+        "length delivery on the pads, easily flicked to deep backward square leg for a couple. Excellent from this batsman",
+        "makes room and swings across the line of this length delivery but gets an inside edge that rolls towards deep " +
+        "backward square leg",
+        "fires it in the blockhole but he picks up an easy couple to wide long on",
+        "fires a good, fast yorker that the striker digs out to cover.. Raina picks it up and aims at the non-striker's" +
+        "but misses and gives away an overthrow",
+        "slower bouncer this time, he has seen that coming and he ramps it from the right of the keeper for a couple to" +
+        " third man",
+        "fuller on the off, eases it down to long-off. The throw comes in from the deep, hits the stumps and ricochets " +
+        "away, allowing an extra run",
         "",
         ""
     ];

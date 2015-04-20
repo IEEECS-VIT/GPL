@@ -29,12 +29,12 @@ module.exports =
         "he gives this full delivery everything, but it just rolls across the outfield to long on",
         "goes straight and aerial now, on the bounce to long on who has run across",
         "moves across and whips this full one wide of fine leg, but is getting only one",
-        " low full toss, he drives with an open face to the sweeper",
+        "low full toss, he drives with an open face to the sweeper",
         "length ball worked to deep midwicket",
         "full just outside off now, the batsman looks to drill it over extra cover, but only hits it along the ground " +
-        " to long off,   he is visibly angry with himself",
+        "to long off,   he is visibly angry with himself",
         "almost bowled him, full delivery pushed through, the batsman plays it rather uncertainly, and only an inside " +
-        " edge saves him",
+        "edge saves him",
         "charges out, but only manages a thick inside edge to square leg",
         "cut away for a single",
         "comes out again and swings hard, mishits to long on",
@@ -59,7 +59,7 @@ module.exports =
         "tailing in, worked off the pad to fine leg",
         "moving in and rising from back of a length now, the batsman tucks it to fine leg",
         "dropped, he jumps out and slams it into the bowler, and it rolls away into the off side, shout of 'catch it', " +
-        " that was struck very hard, and slipped through the bowler's fingers",
+        "that was struck very hard, and slipped through the bowler's fingers",
         "follows him as he makes room outside leg, the batsman lofts the length ball, couple of bounces to long off",
         "slow, short and very wide, he wants to attack it but is done in by the lack of pace",
         "very full and angled in from wide of the crease, driven to long on",
@@ -76,7 +76,7 @@ module.exports =
         "waits on this length ball now, it holds its line outside off, and he guides it to third man",
         "he thrusts the slog sweep and gets to the other end",
         "he makes plenty of room outside leg, the bowler follows him every inch of the way, and hits him with a short " +
-        " of a length ball, it pops up towards point, there is a chance for a run out, but the throw misses",
+        "of a length ball, it pops up towards point, there is a chance for a run out, but the throw misses",
         "short and wide slower one, he mistimes a cut to the sweeper",
         "tries the reverse sweep, not much on it, but enough for a single wide of short third man",
         "squeezed into the off side for a single, could have been tight",
@@ -85,7 +85,7 @@ module.exports =
         "taken from well outside off and worked to deep square leg",
         "that looked dead straight, but the umpire spots the inside edge and remains unmoved",
         "takes this from outside off and manages a top edge on the slog sweep, it weakly loops and falls in front of " +
-        " deep midwicket",
+        "deep midwicket",
         "shortish outside off stump, he cuts it in the air, in the gap at cover and down to the sweeper",
         "a top edge loops towards short third man as he tries a reverse paddle",
         "punches this one sliding across him to extra cover, he had backed up too much and would have been gone in  " +
@@ -95,12 +95,12 @@ module.exports =
         "hits it along the ground and straight to long off",
         "turned off the pad to deep midwicket",
         "taps a length ball to wide mid on and is taking it easy on the single before he realises he has to hurry,  " +
-        " makes it, throw misses anyway",
+        "makes it, throw misses anyway",
         "short of a length into the pad and with one leg in the air, he tucks it to fine leg",
         "very tight single, short ball dropped in front of cover, the non-striker was gone in case of a direct hit",
-        "and one more in the blockhole, terrific execution from the bowler, the batsman can only squeeze it to the  off side",
-        "in the blockhole, dug out into the pitch and over the bowler, he is running back for the second,   but he  is" +
-        " sent back, no way the non-striker was making it back in time",
+        "and one more in the blockhole, terrific execution from the bowler, the batsman can only squeeze it to the off side",
+        "in the blockhole, dug out into the pitch and over the bowler, he is running back for the second, but he is " +
+        "sent back, no way the non-striker was making it back in time",
         "cracks a full ball straight down the ground, long on slides and saves it, but they have taken only one",
         "has a heave at a pitched up ball, which travels high and falls at vacant mid on",
         "cannot get under this full delivery and squeezes it out to the off side instead",
@@ -109,12 +109,12 @@ module.exports =
         "full toss on middle, the batsman turns it straight to square leg, there is a direct hit here,   but the  " +
         "batsman has made it back in time, he was a tad slow in turning around",
         "he's charged out but mishit this lofted stroke, a fielder comes forward at long on, he dives in front, but " +
-        " it bounces ahead of him, nice effort",
+        "it bounces ahead of him, nice effort",
         "that did quite a bit, it was angled sharply into the pad initially and seemed to straighten on the batsman,  " +
-        " who defended and accepted the single as it rolled square on the off side",
+        "who defended and accepted the single as it rolled square on the off side",
         "pulled with intent, straight to deep midwicket though",
         "dropped, the batsman checks a pull and hits it high to short midwicket, he gets both hands to the ball as it " +
-        " comes over his head, parries it over, but falls to the ground and even as he stretches, the ball falls well " +
+        "comes over his head, parries it over, but falls to the ground and even as he stretches, the ball falls well " +
         "out of his reach",
         "comes forward and opens the face to pick up an easy single to cover-point region",
         "comes down the crease, the bowler slows it down, and batsman stops and adjusts to knock it to the off side",
@@ -128,7 +128,7 @@ module.exports =
         "moves across to this length ball outside off and square drives towards third man",
         "pushed away on the off side",
         "this back of a length ball is angled in, tucking him up, he squeezes it to the on side and setts off, direct " +
-        " hit was needed",
+        "hit was needed",
         "yorker, dug out to point, they jog through for one. The fielder at long-off, but they don't chance the second",
         "slogs at a length ball, gets an inside edge for one",
         "nearly bowled him. Another variation form the bowler, the batsman gets a bottom edge on the slog sweep, but  " +
@@ -139,14 +139,14 @@ module.exports =
         "on the pads, gets a single to long-on",
         "long hop, pulled away to deep midwicket for one",
         "drilled to long-on as he pitches this up",
-        " into the ribs, tucked away for one",
+        "into the ribs, tucked away for one",
         "slow through the air again, clipped away for a single to leg",
         "pushed into the leg side for one",
         "short of a length, pretty straight, bunted to leg for one. A collision in the middle as he dashes across to " +
-        " field.   No unpleasantness between the two, and we seem to have some action off the pitch as well.",
+        "field.   No unpleasantness between the two, and we seem to have some action off the pitch as well.",
         "goes after it without feet, and edges it over point for one",
         "down the wicket to drill this down straight of long-off, and the flying fielder saves three runs there with " +
-        " the dive and a quick throw",
+        "the dive and a quick throw",
         "down the wicket, more in hope than conviction, gets a thick outside edge for one",
         "on a length, outside off, driven to deep cover",
         "steered to third man for one",
@@ -169,24 +169,24 @@ module.exports =
         "full, driven to long-off",
         "slower ball and he punches it to the off side",
         "Dropped ! The bowler gives it more air and tempts the batsman to go for the slog, it was hit flat and dipped " +
-        " towards the man at long-on,   dived forward and couldn't catch it, not the easiest take either",
+        "towards the man at long-on,   dived forward and couldn't catch it, not the easiest take either",
         "he tucks it away behind square leg",
         "shuffles across early and he mistimes the flick to the leg side",
         "fetches that from the off stump and clips it to the leg side, good use of wrists",
         "good running, he merely pushed it with soft hands towards cover and sets off quickly, the non-striker is " +
-        " quick to respond",
-        " he goes back at the crease and clips it to the on side",
+        "quick to respond",
+        "he goes back at the crease and clips it to the on side",
         "just a short arm flick towards midwicket and they complete a single",
-        " punched towards mid-off and there's a misfield and that allows a single",
-        " fullish on the pads and clipped just wide of mid-on",
+        "punched towards mid-off and there's a misfield and that allows a single",
+        "fullish on the pads and clipped just wide of mid-on",
         "he bowls it full on the stumps, pushes it just in front of mid-on and sets off",
-        " this time he strays on the pads and he clips it away to the leg side",
-        " fires this one full outside off and he digs it out to cover",
+        "this time he strays on the pads and he clips it away to the leg side",
+        "fires this one full outside off and he digs it out to cover",
         "that's a good yorker and he really had to dig that out to the leg side, nearly lost his balance",
         "minimum footwork but those hands are good enough to cut the shortish delivery down to deep third man",
         "tossed up on off stump, defended with soft hands into the covers",
         "dropped and it is the most comical of the lot. The batsman goes for the reverse sweep but this time he gets " +
-        " it off the shoulder of the bat and it goes straight up.   The short third man lunges at the ball with both " +
+        "it off the shoulder of the bat and it goes straight up.   The short third man lunges at the ball with both " +
         "hands outstretched, but to no avail.",
         "fired in on middle and off, the batsman closed the face too early and gets a leading edge to long-off",
         "nearly a yorker on middle and leg, dug out to long-on",
@@ -213,7 +213,7 @@ module.exports =
         "ample opportunity to swing those shoulders and he lashes to the sweeper again",
         "another full toss on middle and leg, the batsman flicks wide of long-on",
         "skips down the track and looks to beat short cover but has to settle for the single after the misfield",
-        " round the wicket and fires it on the stumps and he drills it down to long-on",
+        "round the wicket and fires it on the stumps and he drills it down to long-on",
         "full toss outside off, pushed down the ground to long-off",
         "fullish and outside off, he goes for a hoick to midwicket and gets an inside edge",
         "dances down the track while making room for himself and laces a drive to long-off",
@@ -231,26 +231,26 @@ module.exports =
         "full and angled into the pads, he isn't able to whip it away and has to settle for a single",
         "waits on this nicely, stays beside the shortish ball and taps to deep cover",
         "back of a length on middle and leg, he goes back and blocks and manages an inside edge that squirts out into " +
-        " the on side",
+        "the on side",
         "the lack of pace surprised him !. Think this held in the pitch a little more, as the batsman who was looking " +
-        " to drive on the up had to check his shot. Went uppishly but it evaded the cover field",
+        "to drive on the up had to check his shot. Went uppishly but it evaded the cover field",
         "fullish and on the stumps, he pushes it down to mid-on",
         "hustles for a quick single and had the bowler's throw broken the stumps things might have been interesting.  " +
-        " The batsman nudged to the right of the bowler and took off just that smallest bit late",
+        "The batsman nudged to the right of the bowler and took off just that smallest bit late",
         "drifting on the pads and the batsman eases it to deep midwicket",
         "shortish and angled in at him, whipped away calmly to deep midwicket",
         "good length ball on middle, the batsman looks to whip it away but there isn't enough pace on it this time",
         "quick, length ball on the pads. Whipped to deep midwicket",
         "his trip down the track ends up being detrimental as he yorks himself. Dug out to cover",
         "The batsman was making room but the bowler follows him. Again hits the bat hard as he runs it down to third " +
-        " man",
+        "man",
         "good length ball on middle and off, clipped into midwicket",
         "his use of feet turns a shortish ball into a length one which is belted to long-off",
         "neatly clipped into the vacant midwicket region",
         "Drags a short ball from well outside off to deep square leg",
         "Very thick bottom edge and it would have tested a regular keeper as well.",
         "thick outside edge that evades the slips. The batsman was bringing a closed defensive face down on the ball " +
-        " and is deceived",
+        "and is deceived",
         "back of a length and outside off, steered to deep third man",
         "taps and runs to point as he rides the bounce on this shortish ball outside off",
         "widish yorker, nudged into the covers and raced off for the single",
@@ -264,9 +264,9 @@ module.exports =
         "opens the face to slice this full delivery outside off to deep cover",
         "slower short ball and the batsman was just a little too exuberant. Mistimes the pull and finds deep square  leg",
         "the batsman looks to steer it down to third man but bottom edges it. The non-striker sees the ball going  into a" +
-        " gap behind the wickets and rushes up for a single",
-        "nicely done by the batsman. Realised the ball was defended with soft hands, into the off side, just about  enough" +
-        " to sneak a quick single",
+        "gap behind the wickets and rushes up for a single",
+        "nicely done by the batsman. Realised the ball was defended with soft hands, into the off side, just about enough " +
+        "to sneak a quick single",
         "slower delivery kept right up there on off stump, the batsman is wise to it as he adjusts his stroke and  pushes" +
         " to mid-off",
         "nudged to mid-on",
@@ -1183,7 +1183,7 @@ module.exports =
         "the bowler starts shortish on the pad, but he cannot time the pull and deep square is able to cut it off",
         "back of a length, some away shape, the striker pats it in front of mid off and goes for the single, underarm throw " +
         "misses, he has pulled up after completing that run",
-        " keeps producing these bottom edges, this almost took leg stump as the batsman tried to force one off the " +
+        "keeps producing these bottom edges, this almost took leg stump as the batsman tried to force one off the " +
         "back foot, did not have the room",
         "falls over as he bends to sweep one angled in fuller, hit the thigh pad, could have been some glove before " +
         "that, else that was close",
@@ -1234,7 +1234,7 @@ module.exports =
         "down the track and heaves, but along the ground to long on, came off the inner part of the bat",
         "on the back foot to a pitched up ball, whips it to long on",
         "straightens and skids on towards middle, is pulled to deep square",
-        " did him in the flight as he darted down the track, had to stop and push it on the off side",
+        "did him in the flight as he darted down the track, had to stop and push it on the off side",
         "hits a tossed up ball along the ground to long on",
         "slogged down to deep midwicket, did not get hold of it",
         "he is down the track, but is not to the pitch and swats it to long on for one",
@@ -1666,7 +1666,7 @@ module.exports =
         "shortish and hurled on the leg stump, he leaps off his feet and paddles it to the left of the keeper off the " +
         "inner part of the bat",
         "pitched up and outside off, he reaches out and drives it to third man",
-        " back of a length and on middle and leg, tucks him up for room. Nudged in front of midwicket",
+        "back of a length and on middle and leg, tucks him up for room. Nudged in front of midwicket",
         "dug in on a back of a length, tap-and-run single in front of the covers",
         "dug in shortish and cramps him for room, mistimed paddle in front of short fine",
         "back of a length with some away shape outside off, the batsman reads it and pokes it to deep third man",
@@ -1703,7 +1703,7 @@ module.exports =
         "slid through on off, drifts in, milked down to long-on. the batsman looks for the second, he can't get it",
         "quicker and outside off, it was the magic ball, the batsman employs the latest of late cuts and finds short third",
         "short and wide, cut to sweeper off the back foot",
-        " shortish and dragged outside off, he clunks a cut to sweeper. The non-striker wants two but is sent back as a " +
+        "shortish and dragged outside off, he clunks a cut to sweeper. The non-striker wants two but is sent back as a " +
         "fielder swoops in on the ball",
         "dabbed in front of point with an angled bat",
         "Bailey sinks to one knee and slog-sweeps it in front of square on the leg side. This was tossed up on middle and leg",
@@ -1749,7 +1749,187 @@ module.exports =
         "not in the blockhole now, fuller on the leg stump, clipped to long leg",
         "angled outside off from round the stumps, he employs finesse and dabs it to deep third man",
         "very full and outside off, driven to sweeper cover",
-        "The bowler does not nail the yorker. Mighty full and outside off, drilled to long-off. The coach applauds from the dug-ou",
+        "The bowler does not nail the yorker. Mighty full and outside off, drilled to long-off. The coach applauds from" +
+        " the dug-out",
+        "outside off, he pushes it down to mid off off the front foot for one",
+        "fullish on the pads, tucked behind square on the leg side for another",
+        "quick by his standards, swings it in towards the waist, he takes it on the body and takes a quick single",
+        "fullish outside off, pushed to cover point off the front foot for a quick single",
+        "accurate delivery on off stump with some movement, inside edge goes towards short fine leg, they scamper for " +
+        "one and make it",
+        "bit too much on the leg side and it's deflected off the pads for a single",
+        "touch wider outside off, Simmons drives it a bit late to third man for one",
+        "goes to the third umpire first up! He clipped the fullish delivery on the pads towards mid on, the alert " +
+        "fielder got a direct hit at non-striker's end as the non-striker didn't quite drag his bat in, but he was well " +
+        "inside.",
+        "tossed up on middle and leg, clipped to midwicket for one",
+        "on off and wide, driven with a forward lean to sweeper cover for one",
+        "slower again, and a touch shorter, he waits and guides it to third man for one",
+        "third slower ball in a row, but this one on the pads and it's driven to leg for one",
+        "makes some room, pitches that on the pads and it's flicked to deep midwicket for one",
+        "tossed up outside off, driven down to long off for one",
+        "too much on the leg side and he easily sweeps it to deep fine leg for one",
+        "slower through the air just outside off, guides it late to third man",
+        "pretty full on middle and leg, pushed down to long on",
+        "shorter and flatter on off, he rocks back pulls along the ground to midwicket",
+        "takes a step down and and tucks the length delivery to long on for one more",
+        "full toss is tonked down the ground, it falls just before long on",
+        "full on the pads and it's driven down to long on for one",
+        "fullish outside off and it's driven firmly to long off with a straight bat",
+        "fullish outside off, smashed down to long off for one",
+        "relatively slower ball, it's fullish outside off and pushed down to long on for one",
+        "full on off, driven down to long on for one",
+        "full and straight on middle, punched down to long off for one",
+        "turning away again, guides it late to short third man for one",
+        "slightly short outside off, punched down to long off",
+        "flat delivery towards middle stump, turned to the leg side for one",
+        "angled in towards middle and leg, flicked to the midwicket region for one",
+        "low full toss now outside off, pushed down to long off for one",
+        "shuffles across and tucks the back of length delivery through midwicket for a single",
+        "tries the yorker again, the batsman swings his bat and gets an inside edge to fine leg",
+        "another slower ball, on the middle stump now, and he tucks it to short fine leg for one",
+        "yet another slower ball, well outside off, he looked to drive, maybe looked to leave it later, and got the toe" +
+        " of the bat towards third man for one",
+        "on off and middle, turned towards the midwicket region for one",
+        "slow again outside leg, steered to short fine leg and the throw hits the batsman on the way",
+        "slightly short of length outside off, swatted off the back foot on the leg side",
+        "goes back in the crease again and steers this one to square leg",
+        "much shorter, which gives the striker time and he pulls it to deep backward square for one",
+        "shuffles back and across towards off, defends the ball towards midwicket for one",
+        "angled in from outside off, he guides it late to third man by opening the face of the bat",
+        "slow and full on leg, flicked off the back foot to deep midwicket",
+        "back of length outside off, guides it to third man by opening the face of the bat",
+        "he's been dropped this time! He heaved the slower ball on the leg side behind square, the fielder went to his " +
+        "right to catch but put it down. It was not a touch chance at all",
+        "length delivery on leg, tucks it towards midwicket for one",
+        "takes a step down and drives it through the covers",
+        "towards the stumps now, pushed down to the left of midwicket for a quick single",
+        "back of length outside off, pulled to the leg side for one",
+        "outside off with the angle, driven to sweeper cover for one",
+        "some room outside off, driven firmly to sweeper cover for one",
+        "almost in the block hole, he steers it to point for one",
+        "waits for the ball that pitches outside off and cuts it to deep point for one",
+        "angled in sharply from back of length outside off, inside edge hits the pad and they sneak in a single",
+        "length delivery outside off, punched down to long on for one",
+        "pretty full now outside off, drives it down firmly to long off",
+        "full again on the pads, tucked to fine leg for one more",
+        "attempted yorker on middle stump, pushed down to long on for one",
+        "ull toss on the pads, that's nearly a four but deep backward square leg takes it on the bounce and saves three",
+        "fullish on the pads now, flicked away to deep midwicket for one",
+        "yorker on the off stump, digs it out towards point for one",
+        "full on off, driven down to long on. There's a confusion as they think of two. The non-striker turns around for" +
+        " the second but is sent back, has to dive. The fielder doesn't collect the ball which makes the striker think " +
+        "of an extra run but his partner is flat on the ground",
+        "dropped at long-on! He waited for the slower ball and lofted it down the ground, the fielder there had enough " +
+        "time to take a few steps in but he spills it. At least he throws it quickly and he can't come back on time",
+        "another slower short ball, pulls this time and finds deep backward square leg",
+        "takes the pace off again and targets the stumps, slogged to the leg side for one",
+        "pushed through on the middle stumps, he gets off the mark with a neat push to long on",
+        "uses his feet and takes the flighted delivery on the full, flicks it to deep midwicket to get off the mark",
+        "waits on the back foot and punches the flatter delivery to long on for a single",
+        "tossed up on the pads, the batsman nudges it to deep midwicket for a single",
+        "full and flighted on the stumps, he comes forward and pushes it to long off",
+        "keeps bowling down the leg side, the batsman looks to paddle it fine but doesn't get hold of it, takes a " +
+        "single to " +
+        "backward square leg",
+        "he gets off strike with a punch through midwicket. He shuffles across to the off side and just pushes it in " +
+        "the gap",
+        "he throws his bat at this wider delivery and it's not too far from the cover fielder, just out of the reach",
+        "this was close too! Flighted delivery on the stumps, looks to chip it over mid-on but toe-ends it to the " +
+        "fielder, just drops short of the fielder at mid-on",
+        "swipes against the turn and picks up a single to deep midwicket",
+        "he comes forward and punches the length delivery down to long off",
+        "fuller delivery on the stumps, the batsman drives it down to long-off",
+        "another quicker delivery on the pads, this time he clips it to short fine leg for a single",
+        "gets off the mark with a nudge to the right of cover",
+        "here comes the slower bouncer. It climbs on him but he manages to roll his wrists on it, plays it towards " +
+        "midwicket",
+        "uses his feet before clipping the length delivery to fine leg",
+        "he comes forward and pushes it through cover for a single",
+        "uses his feet but clips the length delivery calmly to deep square leg for a single",
+        "comes down the pitch again before nudging the length delivery to short fine leg",
+        "he charges down the pitch again, but gets an inside edge down to short fine leg",
+        "goes deep in the crease and punches the flighted delivery to deep cover",
+        "tossed up on the stumps, this time he calmly punches it to long off",
+        "flighted delivery on the stumps, the batsman arches back and drives it to wide long on for a single",
+        "pushed through on the stumps, goes back and works it away to deep midwicket",
+        "this was in the zone! A full toss that should have been smoked over the boundary, but the striker gets hurried " +
+        "and punches it back to the bowler, who makes a half-stop",
+        "he comes down the pitch and was looking to send it out of the stadium, but yet another inside edge to the leg " +
+        "side",
+        "length delivery outside off, he pushes it to deep cover to turn the strike over",
+        "picks up the back of length slower delivery but can't get much timing, chips it towards long off",
+        "he looks to punch that on the up, though the off side, but mistimes it down to long on for a single",
+        "gets a half-volley this time and looks to hammer it down the ground, but doesn't get the timing. Just a single" +
+        " to long on",
+        "full and pacy towards the middle stump, the batsman digs it out to long off",
+        "dabs the length delivery to backward point for a single",
+        "comes down the pitch and punches the fuller delivery to deep midwicket",
+        "now he steps out but his struggle with timing continues, can only hit it along the ground to long on",
+        "a neat clip to deep midwicket",
+        "slower delivery on the stumps, he looks for the big hit but doesn't get his timing right, just a single to " +
+        "deep midwicket",
+        "another quick delivery! This is back of length and he looks to pull it to the leg side, but inside edges it on " +
+        "to his thigh pad.. picks up a single though",
+        "towards off and middle now from back of length, he gets off the mark by tucking it to leg with another bottom " +
+        "edge",
+        "touch back of length around off, turned to leg side for a quick single",
+        "goes down on a knee to drive the full ball outside off, inside edge just misses the stumps and goes to leg " +
+        "behind square",
+        "back of length around off, swivelled towards midwicket again for one",
+        "on the pads, he waits and clips it to deep square leg for a single",
+        "back of length on off, the batsman cuts it down to third man",
+        "on the stumps, he waits in the crease and clips it to fine leg",
+        "he stays in the crease and pushes the length delivery to mid-off with soft hands to pick up a quick single",
+        "pushes this to mid-off with soft hands and calls for a quick single",
+        "another one that was too close! He gets a leading edge and it just lobs over the fielder who jumps but cannot " +
+        "grab at that.. it was within his reach",
+        "stands tall and punches the length ball to mid-off for a quick single",
+        "uses his reach to come forward and slash the fuller delivery to deep cover",
+        "gets some away turn on this, but it's short enough for the batsman to adjust and work it away to long on",
+        "it jags back from wide of off, he waits on the back foot and chops it to backward point for a single",
+        "quicker delivery on off, he waits on the back foot and punches it to deep cover",
+        "he waits on the crease and whips the length delivery to deep midwicket for a single",
+        "Watson was going for the big heave.. he hits is straight to deep midwicket for a single",
+        "goes deep in the crease and punches the length delivery down to long on",
+        "punches it back down the pitch and he is not able to stop it cleanly, parries it to mid-off",
+        "looks to power the length ball down the ground but gets a thick outside edge, it lands behind point and they " +
+        "run for a single",
+        "this time, he takes the calm approach, punches it with soft hands towards long on",
+        "straighter this time, he tucks it behind square on the leg side for a single",
+        "moves to the leg side to create room and punches it to deep cover",
+        "gets the same delivery, but this time he punches it through cover point for a single to the deep",
+        "he keeps the strike rotating with a push to midwicket",
+        "gives Watson the space to free his arms and the batsman slaps it firmly to deep cover",
+        "waits on the back foot and dabs it towards short third man for a quick single",
+        "length delivery on the stumps, the batsman flat-bats it down the ground to long-on.",
+        "waits in the crease and eases this to deep cover for a single",
+        "looks to hit firmly down the ground but doesn't get the power behind it, picks up a single to long on through",
+        "he makes room and chops the length delivery through point for a single to the deep",
+        "length delivery, he comes forward and whips it through midwicket for a single",
+        "back of length on the leg-stump line, he pulls it down to fine leg for a single",
+        "and another outside edge! This time the third-man is back at the boundary and it lands well short of him",
+        "length delivery on the stumps, the batsman pushes it to cover for a quick single",
+        "fuller delivery on the stumps, the batsman punches it down the ground to long on",
+        "misses out on a low full toss as he gets an inside edge on to his pads",
+        "he picks up the slower one early and pushes it towards midwicket for an easy single",
+        "length delivery on the stumps, the batsman punches it down to long on for a single",
+        "creates room and thrashes the length delivery to deep cover, just for a single this time",
+        "he tucks the length delivery through midwicket ",
+        "starts off with a slower ball but that is calmly pushed towards long on for a single",
+        "oh what luck! The batsman gets a big leading edge as he looks to blast this slower delivery down the ground. " +
+        "He gives it up as soon as he hits it.. but there is no one at square leg. A fielder runs towards it from short " +
+        "fine leg but never gets there. A closer fielder from the deep never runs in. It lands safely",
+        "short and slower, the batsman has to adjust for the lack of pace as he pulls it through square leg",
+        "another slower ball, waits for it before steering it through backward point for a single",
+        "he waits on the back foot and punches the length delivery through cover",
+        "he comes forward to play a defensive shot towards backward point but he wants a single and completes it easily",
+        "steps out of the crease and punches the length ball down to long off",
+        "length delivery outside off and Smith hammers it to the leg side, a diving save at midwicket from the fielder " +
+        "prevents a certain boundary",
+        "length delivery outside off, the batsman gets hurried as this is the quicker one, dragged down to long on",
+        "short delivery this time and he slaps it straight to short fine leg for a single.",
+        "another slower delivery and the striker whips it to square leg",
         "",
         "",
         ""

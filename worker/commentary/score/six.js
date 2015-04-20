@@ -531,5 +531,49 @@ module.exports =
         "it into the stands over deep midwicket",
         "He has smoked that! Low full toss on middle as the yorker goes wrong. He goes low on one knee, gets under it " +
         "and launches it high and over long-on",
-        ""
+        "charges down and launches it for six! He took it on the full from middle and leg and cleared the long on " +
+        "boundary",
+        "was that too short, didn't look like. The batsman just went back and pounced on it to pull it over the " +
+        "midwicket boundary for a massive six",
+        "crackalicious, that's hit the roof! Short ball, he picked it up and absolutely tonked it to the midwicket " +
+        "boundary roof for six!",
+        "on fire now! Gets a full delivery on middle and leg, and slog-sweeps it to the cow corner for a massive six. " +
+        "The ball lands in the middle of a big crowd",
+        "bit too full outside off, he swings his arms for a lofted and elegant drive to the cover boundary, and that " +
+        "just clears the boundary for a six",
+        "hammered out of the park! Full toss around waist height, pulled clear of the midwicket boundary for a massive " +
+        "six",
+        "what was that? That's gone all the way - that's timing for you. It was fullish outside off, he went down on a " +
+        "knee and just flicked his wrists to clear deep midwicket. Effortless",
+        "hooked and the top edge goes for another six! Short ball banged in, he didn't get the middle but got enough " +
+        "to clear fine leg on this short ground",
+        "he tonks the ball over midwicket for a massive six. Right in the zone and smashed",
+        "no, no, don't bowl to him there. It was a full toss on the pads, what else can happen to that? Hammered to the" +
+        " leg side for six",
+        "mid on is in, he charges down and lofts the ball down the ground and over long on boundary for six",
+        "pitches it up, he gets under it and tonks it to the wide long on boundary for a massive six right from the " +
+        "middle of the bat",
+        "pitched it up, he launched it down the ground with a lofted straight drive and that went all the way",
+        "short ball now, maybe he was expecting that so he went back in the crease and pulled it with power over square " +
+        "leg for six. Goes in the crowd on its feet",
+        "it's full, so it's in his zone and he launches it high in the air on the off side. Not sure if he middled that " +
+        "but it crossed the cover boundary for six",
+        "the sweet sound of his bat tonking the ball! Short of length outside off, he stayed back and heaved it to the " +
+        "midwicket boundary roof. Nobody had to move, how he hits these so cleanly",
+        "full toss again, on off, and it's hammered down the ground with to the sight screen for six",
+        "angled into the batsman, he makes use of it by flicking it high in the air over fine leg for six",
+        "he has got hold of this one, short ball and this has been smeared over fine leg. He swivels and gives it good " +
+        "thwack",
+        "now he gets the ideal length! It's a half-volley on off stump and he swings it down the ground for a huge hit",
+        "poor delivery now! He gets a long hop and he hammers it over midwicket for a huge huge hit",
+        "more timing! This is back of length outside off, waist high and he swings it across the line to pick up a six " +
+        "over midwicket. That was superbly timed. No flourish in that shot",
+        "he takes a small step forward and launches into the bowler, smacks him straight down the ground for a six, " +
+        "just clears the rope",
+        "his is bigger, badder and better.. He comes closer to the pitch of the delivery and hammers it over long-off",
+        "this is flat, this is long! He was going for the slog sweep no matter what the delivery.. he had to reach out " +
+        "a little as it was delivered slower but he manages to drag it over the boundary at midwicket",
+        "take that! He gets his front leg out of the way and hammers this length delivery flat and long over wide long-on.",
+        "uff! That is a whole lot of timing and a bit of power too.. The striker looks to launch this length delivery " +
+        "and gets it off the middle.. whacks it over the cow corner"
     ];

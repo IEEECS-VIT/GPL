@@ -93,5 +93,14 @@ module.exports =
     "accurate throw at the bull's eye. The victim is well short",
     "wide yorker, with the batsman making room. Great option from the bowler and the batsmen wanting to sneak a bye " +
     "hurts them. The non-striker is late to respond and is beaten by the throw from the keeper back to the bowler, and " +
-    "then the bowler racing back to knock the stumps over"
+    "then the bowler racing back to knock the stumps over",
+    "run out on the last ball as he drives the last ball straight to cover, the fielder throws the ball to the bowler " +
+    "and there's no way the batsman can get there",
+    "dropped at long-on! Th batsman waited for the slower ball and lofted it down the ground, where the fielder had " +
+    "enough time to take a few steps in but he spills it. At least he throws it quickly and the batsman can't come back" +
+    " in time",
+    "",
+    "",
+    "",
+    ""
 ];

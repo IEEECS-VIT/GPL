@@ -127,12 +127,18 @@ module.exports =
     "length ball on leg stump. He misses, the bowler hits",
     "away goes the off stump. The batsman was making room, and went overboard with it. He fires in the quicker one and " +
     "roars in delight as he beats the batsman all ends up. A little check on the no-ball and all's fine",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
+    "the slower ball does it, he is gone, the stadium erupts! THe bowler bowled a slower one by his standards, on middle" +
+    " and off, the batsman defended on the off side but played the wrong line and got an inside edge onto the stumps",
+    "bowled him! Makes room for the shortish delivery to cut off the back foot, misses it completely and loses middle " +
+    "stump. THe bowler waves him goodbye",
+    "he's bowled this time! He charged down the track, the bowler delivered this one in towards off and middle from " +
+    "outside off. THe striker missed as he slogged and the ball did the rest",
+    "Came round the wicket and angled this one in, looked like he played for the straighter one but it came in and " +
+    "disturbed the stumps",
+    "he has knocked him over with a length delivery! He was looking to hoick it over to the cow-corner boundary but " +
+    "drags it on to his stumps. Have they got the danger man out? The opposition is in a spot of bother",
+    "here's a wicket against the run of play! The bowler fires in a yorker that squeezes under the bat and knocks the " +
+    "stumps down. Well done lad!",
     "",
     "",
     "",
