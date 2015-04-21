@@ -450,5 +450,19 @@ module.exports =
     "another one goes down! Superb catch by the man at long-off. The striker looked to attack the flighted delivery " +
     "and almost beats the fielder, who is a bit inside the boundary and has to leap up to grab that one. He falls " +
     "backwards, but safely inside the boundary",
+    "shortish ball, too quick for the batsman to pull, hurries through, and he top-edges it high in the air for the " +
+    "fielder to take a sprawling catch at long leg",
+    "full outside off, and he picks out backward point. Makes room to slice it away, hits it fairly well, but straight " +
+    "to the fielder, who catches it just above head height",
+    "taken! That was full and wide and he had a big slog at it, got a thick outside edge that was going a long way to " +
+    "the right of the keeper, but he dived across, at full stretch, and came away with the ball in his right glove",
+    "fullish outside off, and he simply doesn't time that. Looked to hit it over mid-off, and I think that hit the " +
+    "outside half of his bat, and he ended up chipping it straight to mid-off",
+    "short outside off, and he has simply helped that into third man's hands. Leaned back to ramp it, and picked out " +
+    "the fielder",
+    "shortish outside off and he's gone! Looked for that late dab again, ended up sending a thin edge into the keeper's " +
+    "gloves",
+    "",
+    "",
     ""
 ];

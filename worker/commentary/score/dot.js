@@ -1728,6 +1728,109 @@ module.exports =
         "nearly in the block hole again on off stump, punched back to the bowler",
         "makes room again, the bowler chases him with a very low full toss which is pushed to cover",
         "slower short ball, he heaves and misses that one",
-        "",
-        ""
+        "length ball outside off, comes forward to defend and it keeps low, bounces to the keeper off the toe-end of the" +
+        " bat",
+        "shortish outside off, slanting away. He slashes and misses",
+        "length ball outside off, comes forward and steers it to backward point",
+        "back of a length on middle stump. He stays leg-side of the ball and jumps to poke it towards point",
+        "sharp bouncer outside off, too quick for the batsman to hook",
+        "length ball heading towards leg stump, misses the flick and it hits him on the pad. Pitched well outside leg " +
+        "stump",
+        "length ball on middle stump, defended into the off side",
+        "length ball outside off, jabbed towards backward point",
+        "length ball, a bit of width outside off, and he will be a little cross with himself that he hit it well but " +
+        "couldn't beat backward point",
+        "length ball outside off, punched to short cover",
+        "slog and miss. It was a length ball outside off and he cleared his front leg and was looking to smash that " +
+        "over mid-on",
+        "length ball on off stump, straightened into him a touch. Wanted to push it into the covers, inside edged it " +
+        "into his back leg",
+        "back of a length on off stump, makes room and jabs it to backward point",
+        "back of a length on off stump, he skips away from the line and pokes it to backward point",
+        "fullish outside off, drifted away and continued to go away from the batsman after pitching. Looked to work it " +
+        "leg side and got a leading edge towards backward point",
+        "back of a length, quickish ball angling in towards off and middle, punched off the back foot back to the bowler",
+        "slower ball outside off, keeps low, goes under his bat as he looks to play a crouched slash",
+        "tossed up slow outside off, left alone",
+        "back of a length outside off, chopped away to backward point",
+        "length ball outside off, beats him as he makes room to shovel it over cover",
+        "back of a length close to off stump, dabbed to short third man",
+        "back of a length, angling in towards off stump, chopped to short third man",
+        "length ball, hurries through into the batsman, who brings his bat down in a hurry to tuck it into the leg side",
+        "a bit of turn for him, very slow turn. Pitches outside off, turns further away, and he has time to adjust and " +
+        "poke it towards point",
+        "big shout for lbw, not given. That looked close. Came out of the front of the hand, I think, and went with the " +
+        "angle. He pressed forward to defend, playing for turn, and it seemed to strike his pad in line of off stump. " +
+        "Lucky boy.",
+        "length ball outside off, keeps a bit low as he aims a slap through point. Ends up chopping it towards short " +
+        "third man",
+        "sort-of bouncer now, he semi-ducks under it",
+        "and again. This time the umpire signals one bouncer for the over.",
+        "back of a length on off stump, punched hard into the ground, bounces up to the point fielder",
+        "back of a length on off stump, chopped to backward point",
+        "tossed up slow outside off. Goes for the sweep, doesn't connect",
+        "length ball on off stump, dabbed towards wide slip",
+        "back of a length, angling into the body. He looks to clip it through the leg side, can't connect, is hit on " +
+        "the upper thigh",
+        "back of a length, fifth-stump line, a bit of bounce and away movement to beat his swishing bat. Was looking to" +
+        " slash through the off side, but no footwork",
+        "length ball, angling in towards off stump. Stays leg side of the ball and slaps it to point",
+        "back of a length in the corridor. Clears his front leg and tries to hoick over the leg side, doesn't make contact",
+        "full-toss, swinging away from outside off to beat the bat. Was looking for an angled-bat drive",
+        "back of a length, fourth-stump line, blocked towards point",
+        "shortish, outside off. Goes for a slash away from his body and doesn't make contact",
+        "back of a length on off stump. He shuffles across, looks to work it into the leg side, inside-edges into his " +
+        "pads",
+        "fuller now, fourth-stump line. He is too early into his attempted extra-cover drive, ends up dragging it " +
+        "towards mid-on",
+        "full outside off. He clears his front leg and has a merry old swipe at it, hits it along the ground, straight " +
+        "to mid-off",
+        "a little fuller and wider this time and he comes forward, looking to drive on the up, slices it to backward " +
+        "point",
+        "length ball on off stump. He comes half-forward and pushes it into the covers",
+        "length ball on off stump. He stays inside the line and jabs his bat down a touch late, bounces down towards " +
+        "slip",
+        "length ball on middle stump, jumps across to poke it towards mid-on",
+        "tossed up on off stump, driven into the covers",
+        "back of a length on off and middle. He shuffles across and tucks it into the leg side",
+        "back of a length on a fourth-stump line. Again, shuffles across to work it to square leg",
+        "back of a length outside off, beats him, who walks across and has a poke at it",
+        "back of a length, goes with the angle towards off stump as he rocks back to cut. Ends up dragging it back to " +
+        "the bowler off the inside half of his bat",
+        "sees him come down the track and bowls a loopy googly. Hits him on the pad as he sticks it across to try and " +
+        "work it into the leg side",
+        "stays back to a length ball angling in towards leg stump, keeps a bit low and he has to jam his bat down " +
+        "quickly to defend into the on side",
+        "shortish outside off, carved away to point",
+        "bouncer over off stump. He thinks of hooking, ends up checking his shot and leaving the ball",
+        "back of a length, angling down the leg side. Looks to walk across and tuck it fine, doesn't connect. Was very " +
+        "close to the top of leg stump, and not given wide",
+        "back of a length outside off, defended to short cover",
+        "ooh. That was banged in, angling into the body, and it bounced more than he expected. He had walked across, " +
+        "looking to tuck it towards the leg side, possibly from chest height, but it was nearer his head and he popped " +
+        "it off his glove, just wide of backward point",
+        "sharp turn there. Slanted across, and turns away further. Looks to defend initially, leaves it in the end, " +
+        "tucking his bat away inside the line",
+        "goes deep in his crease to a fullish ball on off and middle, defends into the leg side",
+        "tossed up on leg stump, presses forward to defend watchfully back to the bowler",
+        "tossed up on leg stump, and he nearly falls over as he sweeps this powerfully to deep square leg",
+        "length ball on off stump, slides away with the angle. Presses forward and blocks",
+        "sees him striding down the pitch and shortens his length, sliding it across the batsman, who stretches his " +
+        "front pad out to block into the off side",
+        "back of a length on leg stump, tucking him up. Looks to work it away into the leg side, ends up dropping down " +
+        "into the pitch, off the bottom edge",
+        "back of a length on off stump. Looks to poke it into the off side for a quick single, it's too close to him, " +
+        "and he ends up jabbing it down into the pitch",
+        "goes deep in his crease to pull, wasn't anywhere near short enough to do that, and he brings his bat down just " +
+        "in time to jab it back to the bowler",
+        "back of a length on off stump, squirted away wristily towards mid-off",
+        "full outside off, driven firmly to short extra cover",
+        "length ball outside off, slower ball. Looks to poke it away towards third man, chops it onto the ground and it " +
+        "rolls to the keeper",
+        "back of a length on off stump, another off-cutter, cramps him up for room. Shaping to punch through the off " +
+        "side, he ends up pushing it back to the bowler",
+        "outside off, back of a length. He looks to steer it towards third man, doesn't connect",
+        "big appeal for caught behind, not given. Shortish outside off, not enough room to cut, bounces over his bat",
+        "yorker on off stump, Mathews can't connect as he makes room and tries to jab it away through point",
+        "slower ball outside off, beats Mathews again as he looks to club it into the leg side"
     ];

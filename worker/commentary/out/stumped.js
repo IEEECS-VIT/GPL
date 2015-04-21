@@ -40,7 +40,10 @@ module.exports =
     "The bowler and keeper pose a question. Is the batsman out stumped? He is in trouble and has to go. Sharp work from " +
     "the keeper. The umpires check for a possible no-ball, its a legal ball. He started walking even before OUT flashed " +
     "on the big screen. Dragged himself forward and does not meet with the sweep. This quicker ball beats him, sneaks " +
-    "through and DK whips the bails off in super quick time to catch the striker short. His backfoot was not grounded " +
+    "through and DK whips the bails off in super quick time to catch the striker short. His back foot was not grounded " +
     "when it mattered",
+    "what was he doing? It was a length ball on leg stump, and the batsman didn't connect with the sweep. Wandered out " +
+    "of his crease as it rolled to the keeper, and before he could realise it the bails were off - he took so long " +
+    "realising it that the keeper missed the stumps once and took the bails off the second time",
     ""
 ];

@@ -668,6 +668,17 @@ module.exports =
         " third man",
         "fuller on the off, eases it down to long-off. The throw comes in from the deep, hits the stumps and ricochets " +
         "away, allowing an extra run",
-        "",
+        "tossed up on middle and leg, clears his front leg to slog it over the leg side, ends up dragging it off the " +
+        "inside half of his bat towards square leg",
+        "back of a length on off stump, pushed towards short cover for a single. The fielder throws to the bowler's " +
+        "end, misses, and gives up an overthrow",
+        "looks for the same shot again, the length was shorter, ends up tennis fore-handing it past the bowler, to the " +
+        "left of long-on",
+        "full on off stump, whipped away to the right of long-on",
+        "ooh! He went on the back foot there, looking to make room to cut, and it was the other one, cramped him as he " +
+        "jammed his bat down and inside-edged it between his legs towards fine leg",
+        "shortish on off stump, he makes room to cut it away to the right of sweeper cover",
+        "another googly as the batsman shuffles across his stumps, and he whips it away towards deep backward square " +
+        "leg and picks up two to give Knight Riders the easiest possible win they could have imagined",
         ""
     ];

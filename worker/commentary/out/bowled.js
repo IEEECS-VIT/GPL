@@ -102,9 +102,9 @@ module.exports =
     "got him, good stuff from th bowler, the batsman has yorked himself, it was tossed up again, the batsman stepped " +
     "out without much conviction, and the ball dipped and slid quickly under his bat to take out middle stump",
     "middle stump is pegged back as he misses a swipe, the fullish ball brushes the thigh pad and crashes into the stump",
-    "and he knocks over the timber and roars, the partnership has been broken. This was hurled in flat, hurries onto the batsman. He" +
-    " goes low for a slog-sweep and is beaten on the bottom edge, it hits the off stump. Replays actually reveal that " +
-    "it was a seam-up delivery",
+    "and he knocks over the timber and roars, the partnership has been broken. This was hurled in flat, hurries onto the " +
+    "batsman. He goes low for a slog-sweep and is beaten on the bottom edge, it hits the off stump. Replays actually " +
+    "reveal that it was a seam-up delivery",
     "This was darted quick on middle, not too short. The batsman aims for a meaty pull and only meets with thin air. " +
     "This offering thuds into the middle stump",
     "This is a soft, soft dismissal. Full toss outside leg as the batsman steps away. Instead of mowing it away, " +
@@ -139,10 +139,15 @@ module.exports =
     "drags it on to his stumps. Have they got the danger man out? The opposition is in a spot of bother",
     "here's a wicket against the run of play! The bowler fires in a yorker that squeezes under the bat and knocks the " +
     "stumps down. Well done lad!",
-    "",
-    "",
-    "",
-    "",
+    "bowled him! That was pitched outside leg stump. He went for the sweep, the ball may have bounced more than he " +
+    "expected, and it hit the top of his pad, and maybe his glove as well, and ricocheted onto leg stump. Looked like " +
+    "pad onto forearm.",
+    "bowled him. Was going for the slog-sweep, may have been playing for the angle. Went through straight and crashed " +
+    "into off stump",
+    "short ball outside off, and he's out after a hint of promise. Plays a shovel-pull, doesn't hit it as sweetly as " +
+    "he'd like, and pops a simple catch to short midwicket",
+    "chops it on. Gives himself room to cut, it does just enough and doesn't bounce as much as expected, and he ends up " +
+    "inside-edging into his off stump",
     "",
     "",
     ""

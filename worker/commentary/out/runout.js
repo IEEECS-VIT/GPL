@@ -99,7 +99,8 @@ module.exports =
     "dropped at long-on! Th batsman waited for the slower ball and lofted it down the ground, where the fielder had " +
     "enough time to take a few steps in but he spills it. At least he throws it quickly and the batsman can't come back" +
     " in time",
-    "",
+    "full and wide, flat-batted to long-off. The batsman ran back, his partner sent him back, and he " +
+    "had no chance of turning back and making his ground as the fielder, fired in a low, flat throw to the stumps",
     "",
     "",
     ""

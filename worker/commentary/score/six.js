@@ -575,5 +575,18 @@ module.exports =
         "a little as it was delivered slower but he manages to drag it over the boundary at midwicket",
         "take that! He gets his front leg out of the way and hammers this length delivery flat and long over wide long-on.",
         "uff! That is a whole lot of timing and a bit of power too.. The striker looks to launch this length delivery " +
-        "and gets it off the middle.. whacks it over the cow corner"
+        "and gets it off the middle.. whacks it over the cow corner",
+        "just a bit of air outside off, bowled with a round-arm action, and he uses the width to swing his arms through " +
+        "the line and launch the ball over the boundary to the right of long-off",
+        "tossed up outside off, and this one has hit the roof. Just swung his bat through a big arc and hit it way over " +
+        "long-on, hit one of the upper-tier roofs and bounced back into the ground",
+        "length ball on leg stump, and he clears his front leg and slogs it away cleanly over the wide long-on boundary",
+        "shot! That was back of a length, fourth-stump line, and the striker was waiting for it. Cleared his front leg " +
+        "a touch and pulled it away over the midwicket boundary",
+        "a bit slower now, closer to off stump, and he slog-sweeps again, in the air this time, and timed really well, " +
+        "clears deep midwicket with ease",
+        "tossed up on off stump and now it's the other batsman's turn to slog-sweep for six. Opened up his body as he " +
+        "did so to hit it square, over the deep square leg boundary",
+        "and again. This one's bowled wider outside off, and he hits this over wide long-on with a full, free swing of " +
+        "his arms"
     ];

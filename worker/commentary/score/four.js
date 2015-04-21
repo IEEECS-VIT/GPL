@@ -1262,16 +1262,59 @@ module.exports =
         "another poor delivery, this is short and he pulls it expertly in the gap at backward square leg",
         "bowls a low full toss and Watson takes full toll, powers it through mid-off for a boundary. There is no one in " +
         "the deep to cut it off",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
+        "length ball on a fourth-stump line, and that is super timing from this striker. Just stands there and opens " +
+        "his bat face to find the gap between backward point and cover point",
+        "short and wide, and his feet go off the ground as he slashes it away, off the middle of the bat, over backward " +
+        "point",
+        "back of a length on middle stump, and that's a super shot, just shuffled across and played a back-foot on-drive" +
+        " that raced away to the midwicket boundary",
+        " length ball, on an off-stump line, and he immediately plays the paddle, gets it fine enough to beat short " +
+        "fine leg and run away for four",
+        "shot! That was a length ball on off stump, and he seemed to be waiting for it. Simply moved his front leg out " +
+        "of the way and flat-batted it down the ground, in the air to the right of mid-off",
+        "on the pads and he says thank you and glances neatly to the fine leg boundary",
+        "starts with a length ball outside off, and he knows his field well. Third man is inside the circle, and he " +
+        "plays what could be described as a reverse-glance between the keeper and that fielder",
+        "length ball outside off stump, and he makes a lot of room to flat-bat it to the right of the man at short cover",
+        "short again and this time the batsman is in a much better position. Back and across and pulls it powerfully to " +
+        "the left of the square leg umpire",
+        "shot. Sees this tossed up outside off, in his hitting zone, and he swings his arms through and sends it " +
+        "whistling over the bowler's head. Clean, flat hit",
+        "this one is short enough, just about. He was waiting deep in his crease, and he pulled this from outside off, " +
+        "powerfully, to the straight midwicket boundary. Lovely transfer of weight, swivelling through the hips",
+        "super placement, that. It was tossed up wide outside off, and he had to get down really low, reach out a long " +
+        "way, and use his wrists to execute that slog-sweep well enough to split the gap between deep midwicket and long-on",
+        "flat and full on middle stump, and that is superb from the striker. Moved his front foot out of the way and " +
+        "whipped it with a lot of bottom wrist to power it away into the gap to the left of deep midwicket",
+        "length ball on middle stump and the batsman shuffles across and times the flick beautifully to send it racing " +
+        "away to the long leg boundary",
+        "full on leg stump, fine leg is in the circle, and the batsman flicks it away to his right. Deep square leg " +
+        "puts in the dive after running it over",
+        "slower ball on off stump, he swings through the line and hits it over mid-on. A fielder chases back and dives " +
+        "to try and pull it back at the rope, almost twisting his ankle in the process. Don't think he managed to save " +
+        "any runs there. Ball hit the boundary cushion before he could pull it back",
+        "overpitched on middle stump, and that's asking for trouble. He brings his bat down straight, and flicks his " +
+        "wrists at the last moment to send it racing away wide of mid-on",
+        "on the pads and he flicks it away for another boundary, finds the gap to the right of short fine leg",
+        "full and wide, and he puts it away with a crisp drive, brings his wrists into it and flays it away through " +
+        "square cover",
+        "length ball close to off stump, angling away. He looks for that dab to third man, gets an outside edge that " +
+        "races away to the left of the keeper",
+        "short outside off, turns away, gives him enough width to slice hard under the ball and hit it over the leaping " +
+        "backward point fielder",
+        "length ball outside off, and he simply clears his front leg and flat-bats it to the right of mid-off",
+        "short ball, and he is back in a flash to pull it away to the midwicket boundary",
+        "low full-toss outside off, and he clears his front leg and puts it away into the gap to the left of sweeper cover",
+        "shot. That was a length ball, just a bit of width outside off, and he leaned back and sliced it away into the " +
+        "gap between point and sweeper cover",
+        "short, wide, and he slaps it fiercely to the cover boundary. I think the bowler gripped it too tight and it " +
+        "simply didn't come out of his hand right",
+        "starts his spell with a long-hop on off stump and the batsman gets to his fifty by pulling it to the boundary " +
+        "in front of square leg",
+        "shortish ball angling down leg, and he simply has to help it to the long leg boundary",
+        "full on middle stump, clears his front leg and whips it away to the midwicket boundary",
+        "short, wide, sits up at a friendly pace, lashes it away to the square cover boundary",
+        "back of a length, close to off stump, and this is an excellent shot from the batter, stays leg side of the " +
+        "ball and slices down on it to send it racing away to the right of third man",
         ""
     ];

@@ -1930,6 +1930,123 @@ module.exports =
         "length delivery outside off, the batsman gets hurried as this is the quicker one, dragged down to long on",
         "short delivery this time and he slaps it straight to short fine leg for a single.",
         "another slower delivery and the striker whips it to square leg",
+        "shortish on a fourth-stump line, dabbed away towards backward point",
+        "length ball on off and middle, defended into the off side, picks up a single as short cover converges on the " +
+        "ball",
+        "back of a length outside off, dabbed to third man",
+        "length ball slanting away outside off, he has a flash at it away from his body and slices it over the leaping " +
+        "gully fielder",
+        "length ball outside off, steered to third man",
+        "length ball on off stump, plonks his front leg across and tucks it away towards mid-on",
+        "length ball on a fourth-stump line, pushed softly into the off side for a quick single",
+        "full on off stump, plays a checked drive to the right of mid-off",
+        "short, angling into the body, pulled away to deep backward square leg",
+        "back of a length on off stump, whipped into the gap",
+        "back of a length on a fourth-stump line, steered away to third man",
+        "length ball outside off, comes in off the pitch as he looks to poke it into the covers, gets an inside edge " +
+        "that ricochets off his back pad towards point",
+        "fullish on middle and off. He stays inside the line and pokes it softly towards point",
+        "starts with a shortish ball, drags his pull to deep square leg",
+        "back of a length outside off, pushed off the back foot to sweeper cover",
+        "length ball on off stump, was the one that went away from the batsman, who waited on it and steered it to " +
+        "short third man. They take on the fielder's arm and win, just about. Direct hit and the non-striker would have " +
+        "been out. The keeper didn't collect cleanly either, and ended up hitting the stumps with his gloves",
+        "fullish on middle and leg, whipped away to deep backward square leg",
+        "length ball on the stumps, worked away towards deep midwicket",
+        "tossed up outside off, driven to sweeper cover",
+        "short ball on leg stump, pulled to deep square leg",
+        "length ball on middle and leg, tucked away to the right of long-on",
+        "full on leg stump, clipped to short fine leg",
+        "full on off stump, whipped to long-on",
+        "fullish and flat on off stump, comes forward to work it through midwicket",
+        "shortish outside off, hops in the air to dab it down to third man",
+        "lets this back of a length ball come on to him, and plays a late dab to the right of the keeper. The fielder " +
+        "anticipates well at third man and sprints to his left to cut it off",
+        "back of a length outside off, steered down to third man",
+        "flat and quick, slides on towards middle and leg, tucked away towards midwicket",
+        "slower now, tossed up on off stump, and he plonked his foot forward to play the lap sweep towards fine leg",
+        "back of a length on off stump, he rocks back and plays a half-pull-half-punch to long-on",
+        "tossed up on off stump and he stretches out to sweep to deep backward square leg",
+        "very full on middle and off, whipped away to deep midwicket",
+        "back of a length on off stump, dabbed away to third man",
+        "shortish, angling into the hips, helped away to long leg",
+        "back of a length outside off, dabbed down to third man",
+        "short ball, gets big on he, climbs to head height, and he's cramped for room but manages to make decent " +
+        "contact with a checked hook and play it towards long leg",
+        "back of a length on a fourth-stump line, punched to sweeper cover",
+        "back of a length on off stump, whipped away to deep midwicket",
+        "shortish on off stump, pulled to long-on",
+        "length ball on middle and off. He stays on the back foot to work it away towards deep backward square leg",
+        "back of a length on off stump, waits for it and dabs it towards short third man",
+        "turns away sharply from off stump. He goes on the back foot and whips it wristily back towards the bowler, who " +
+        "gets down quickly but can't stop it cleanly and concedes a single",
+        "tossed up on off stump, sliced over the off side, bounces down to sweeper cover",
+        "fullish on off stump, pushed to long-off for one",
+        "full on middle stump, driven to long-on",
+        "googly turning towards off stump, and the striker who was on the front foot, adjusted and sliced it away " +
+        "towards short third man",
+        "length ball angling in towards middle stump. He stays inside the line and looks to poke it away through the " +
+        "off side, inside-edges it towards square leg",
+        "back of a length, tucking up the batsman on an off-and-middle line. Lets it come on and bunts it into the off " +
+        "side for a quick single",
+        "shortish, angling in towards off stump. He stands tall and chops it down towards third man",
+        "short ball on off stump, pulled in the air, but was in fairly good control of it, bounces down to the left of " +
+        "the fielder at deep square leg",
+        "shortish ball, angling into middle and leg and cramping him for room. Swivels around in an ungainly manner to " +
+        "half-pull, half-whip it to long leg",
+        "back of a length on off stump. Stands tall and punches into the covers",
+        "back of a length, angling in towards off and middle. Shuffles across to work it towards midwicket",
+        "short ball, angling into the body. Leans away and plays a controlled slap to third man",
+        "shortish ball on off stump. Gets behind the line to bunt it into the on side of the pitch and run a quick " +
+        "single. The bowler sprints through from his follow through, picks up, and hits the stumps direct at the " +
+        "keeper's end, but the non-striker was well home",
+        "shortish ball on off and middle. Makes room to slap it away towards sweeper cover",
+        "back of a length on middle stump, makes room to punch it to sweeper cover",
+        "length ball on off stump, swiped down the ground to long-on",
+        "back of a length on off stump, punched off the back foot to long-on",
+        "a bit of flight outside off, very full. He uses his wrists to force it away powerfully to the right of sweeper " +
+        "cover",
+        "length ball on leg stump, tossed up. He can't beat short fine leg with his sweep",
+        "length ball on middle stump, tucked away through midwicket",
+        "length ball, straightens towards middle stump. Shuffles across to work it to short fine leg",
+        "length ball on leg stump, tucked away to short fine leg",
+        "back of a length on off stump, goes on the back foot to punch to long-on",
+        "flat length ball fired into the pads, tucked away to deep backward square leg",
+        "length ball on off stump, skips a long way across to work it to deep square leg",
+        "length ball on leg stump, tucked away to short fine leg",
+        "back of a length outside off, helped away to the left of third man",
+        "back of a length on off stump, goes on the back foot to work it into the leg side",
+        "this one straightens into the batter, and it nearly hurries on and smacks him in the pad as he prods halfway " +
+        "forward. Moves his front leg out of the way in a hurry and jams his bat down to squirt it away through square " +
+        "leg",
+        "back of a length outside off, whipped with the turn to short fine leg",
+        "sees him come down the track, fires it into his feet. Pokes it away towards long-on",
+        "again he sees him coming, making room, and fires it full, on the stumps, pokes it into the covers for a quick " +
+        "single",
+        "back of a length, angling across, chopped away towards backward point",
+        "back of a length on middle stump, worked away to deep midwicket",
+        "tossed up wide outside off, he was initially looking to drive through the off side, ended up " +
+        "hitting it off the inside edge",
+        "sees him shaping to skip down the pitch, fires it in flat on his pads. Tucked away quietly to deep square leg",
+        "down the track, drags this slowish delivery from outside off to deep midwicket",
+        "full outside off, checked drive to the right of short cover, who makes a diving stop",
+        "he walks down the pitch and Russell bangs it in, back of a length, tucking him up for room. Pushes it away " +
+        "towards point",
+        "back of a length on middle stump, worked away through midwicket",
+        "full on off stump, clipped away to long-on",
+        "length ball wide outside off, chopped away off the front foot to the right of backward point",
+        "length ball on the pads, whipped away to deep midwicket",
+        "slower ball outside off, waits for it and steers it towards deep point",
+        "down the track now and the bowler bowls it wide outside off. Swings through the line and drives to long-off",
+        "now it's his turn to slog-sweep from outside off, a more controlled version, all along the ground to deep " +
+        "midwicket",
+        "full-toss on off stump, clears his front leg and swipes it over the bowler, bounces down to long-on",
+        "shortish on off stump, steered to third man",
+        "back of a length, angling in. Misses the flick and the ball hits his pad and ricochets towards third man",
+        "short on off stump, flat-batted powerfully to long-on",
+        "",
+        "",
+        "",
         "",
         "",
         ""
