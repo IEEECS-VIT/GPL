@@ -621,33 +621,56 @@ module.exports =
         "shot over deep midwicket",
         "down the track, and again he follows him with the full ball at his feet, and again he simply flicks him for " +
         "six. Easy. ",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
+        "flicks so well off his pads that it clears deep square leg",
+        "a big six over midwicket, Creates momentum with a step down the track, lifts back leg and sends the slanted " +
+        "length ball soaring",
+        "has properly clobbered this over deep midwicket, short and sitting up, and he gives it what it deserves, and " +
+        "the one his team needs right now.",
+        "can get under this, and slams it into the giant screen, was fullish on off, and he was instantly down on one " +
+        "knee to power it away",
+        "much flatter hit this time but same result, clears the deep midwicket boundary, showing why he was promoted",
+        "too full on the stumps, has no problems in getting under it after making some room and lofts it cleanly over " +
+        "the bowler",
+        "this will go, and also take Warner to his fifty, short outside off from him, he jumps and cuts hard in the " +
+        "air, that flies several metres beyond square third man boundary",
+        "clears wide long on in the end, he goes shortish again and the batsman heaves it over midwicket, hasn't middled" +
+        " it but it has gone just over the man in the deep",
+        " gets a connection now, fullish around leg stump, he bends and picks up the slog sweep cleanly, way into the " +
+        "stands",
+        "so he goes conventional slog-sweeping, easily gets underneath a flat and quick one and blasts it over wide " +
+        "long on",
+        "shows off his timing again, this is skiddy, fast and short on the pad, he is on one leg as he swats it over the" +
+        " long leg boundary",
+        "manages maximum, a length ball on middle and leg, clears front leg and clobbers it over wide long on",
+        "pulled for six! It was too short now, was slow too, he went back to the back foot and slammed it for a clean " +
+        "six",
+        "elegant drive straight down the ground for six! Pitched up on the stumps, he plomps his right foot forward and " +
+        "tonks it into the sight screen",
+        "too full this time, it's in his zone and he hammers it down the ground from outside off for a massive six!",
+        "full delivery followed by short ball, the batsman rocks back and smashes it to the midwicket boundary for a six" +
+        " with a pull",
+        "charges down and absolutely bludgeons that with a swing to the leg side, sends it very deep in the stands over" +
+        " the wide long on boundary. Massive six",
+        "can't hold him back for too long when he's coming down! Gets to the pitch of the ball just outside leg and s" +
+        "lams it to the wide long-on boundary again with lofted drive with a flamingo aerial flick",
+        "has he middled that? Doesn't matter...it's six! Comes down, takes it as half volley and tonks it straight over " +
+        "long on for one more six",
+        "this isn't too full, isn't too short but he has stayed back in the crease and has lofted it off the back foot " +
+        "over deep midwicket. Very well executed for six",
+        "that's not full either, but he unleashes the slog-sweep, doesn't middle it and clears the short boundary at " +
+        "deep midwicket. Top edge for six",
+        "too full on the stumps, Faf picks it up and slams it high and straight down the ground over long on for six",
+        "that is awesome! This is very very long. If there were no stands, this might have gone all the way to the " +
+        "Chennai campus. He charges down the pitch and makes a clean connection to send it flying over long on",
+        "flat and short on middle, picks it early and hammers it with some elegance to the midwicket boundary for a clean six",
+        "cracking shot! Reached out for the length delivery outside off, swept it a long way against the turn and as " +
+        "soon as he hit it, the ball had no choice but to go for six over deep midwicket",
+        "that's too full, there's enough room too and AB swings his bat with a big follow through straight over long off" +
+        " for a massive six",
+        "makes room towards leg and executes a good-looking inside out drive over the covers for a big six. That's why " +
+        "he is in the team. Beautifully struck",
+        "angled in towards the stumps, tonks it straight down the ground into the sight screen. That went quick and " +
+        "flat over the umpire's head",
+        "outside off, slams this one high and far in the air over the wide long on boundary for a big six.",
         ""
     ];

@@ -33,5 +33,6 @@ module.exports =
     "  the leg side. He goes for the flick and has no success connecting",
     "terrible delivery as he bowls it well down the leg side. The batsman looks to help it away, but doesn't succeed",
     "short delivery that is just a shade down the leg side. That's rather harsh as the ball sailed over his hips as he " +
-    "was a little cramped up while attempting a shot"
+    "was a little cramped up while attempting a shot",
+    "slanted in too much this time and it slips down the leg side"
 ];

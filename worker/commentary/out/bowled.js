@@ -153,5 +153,14 @@ module.exports =
     "bowled him! That was full and straight, and he was trying to be too cute there. Walked across his stumps, looked " +
     "for the scoop over short fine leg, and it was far too full for that shot",
     "bowled, off stump goes for a wander, made room to carve through the off side, and the bowler simply slipped a " +
-    "fast yorker under his bat"
+    "fast yorker under his bat",
+    "and he responds with a yorker that uproots off stump, the batsman was making room again but could not get the bat " +
+    "down in time, they check for the no-ball, it is a really tight one, probably had a few millimetres behind the line",
+    "This one slides under the bat and hits the stumps. To be fair to the batsman, this was the work of the pitch. It " +
+    "stayed very low after bouncing on a length. But hr will take it. His wickets tally keeps going up",
+    "continues to deal in full tosses, but he sends him back with this one, it straightens late on the line, he wants to" +
+    " hoick it, only inside-edges into the stumps",
+    "rams into the off stump at furious pace! Angled it in from outside off, he made room and swung his arms but the " +
+    "ball rammed into the off stump",
+    ""
 ];

@@ -475,5 +475,45 @@ module.exports =
     "loopy delivery, and that's produced the breakthrough. Nice line from the bowler, challenged to hit him against the " +
     "angle, and he top-edged the attempted slog-sweep high in the air, drops into the waiting hands of long-on",
     "full and wide outside off, and the striker gets under it and slices it straight into sweeper cover's hands.",
+    "gone this time, his preferred back of a length doing it, the striker did not seem to be sure about the pull as he " +
+    "took it from outside off, awkwardly top-edged it behind square on leg, the keeper got under it safely",
+    "catching practice for extra cover and the batsman has squeezed a full one straight to the man",
+    "quite full now, and he has drilled it straight to the man at long on, how much has he hurt their chances?",
+    "you beauty!!! He keeps ta king this shoulder-breaking catches in almost every game. This is a top-edge as the " +
+    "batsman looks to hit down the ground and it looks like well clear of mid-off, but the fielder back pedals and " +
+    "somehow gets under it just in time.. Falls backwards hard on that right shoulder. Just saw on the replay.. this is " +
+    "a one-hander.. doubly impressive then",
+    "that's a spectacular catch, and what a celebration! Back of length slower ball towards off stump, the batter " +
+    "lofted it down the ground, it didn't go that high but he ran in from long on and threw himself forward to get his " +
+    "fingers under it. Then he gets up, raises his right hand and leg simultaneously, then the left ones for a little " +
+    "jig. All in slow motion",
+    "right from the middle of the bat, but he finds deep midwicket. Went down on a knee for the ball outside off, swept " +
+    "it against the angle and holed out, who was a good few yards inside the rope",
+    "gets a wicket immediately, the big one! Landed a full delivery on the pads, he launched it high on the leg side " +
+    "with a flick, he was there right at the midwicket boundary at the edge and caught it over his head on the right " +
+    "side. Very well judged",
+    "another one falls, another nail hammered by the bowler! The striker pulls this ball, it was a short one, but " +
+    "manages only a top edge down the ground. It's gone high enough for the fielder to run behind the umpire form mid " +
+    "off, he catches it and does a little Calypso jig",
+    "threw his bat at this one outside off, get a leading edge and he ran in from deep cover to take the catch",
+    "cuts it to point, gone! Delivered this one slower outside off, it went the other way and the batsman went back in " +
+    "the crease to cut it off the middle. He takes a good, low catch towards his left there",
+    "edged and gone! This was touch back of length outside off, Smith poked trying to steer it to third man but found a " +
+    "thick outside edge and the keeper pouches it with both hands to his right",
+    "can't clear the fielder this time, holes out to long off! He charged down, as usual, chipped the ball down the " +
+    "ground with power, but it didn't have enough to clear long off",
+    "mistimes, and gone! He came outside the crease, couldn't take it on the full and lofted it outside off, didn't " +
+    "middle it at all and found sweeper cover",
+    "in the arc, but not out of the park even though it looked like he middled it. Fulish around off, lofted between " +
+    "long on and deep midwicket, but it's gone high enough for long on to get under it",
+    "you can give them to this guy and he'll gobble them. Pitched up around off, it was slow again, and he looked to " +
+    "loft it over the covers but mistimed it straight down the ground, high in the air. Th fielder comes from long on " +
+    "and catches it safely",
+    "makes room for the slower ball on the stumps, it's absolutely full and he slices it straight to short third man",
+    "they finally take a catch, the batsman did well to move across, lean forward and flick this full delivery from " +
+    "around off, but straight into the hands of short fine leg",
+    "failed to clear long on, seemed as if he had got more than enough on this full one as he sent it climbing into the " +
+    "sky, but it came down in safe hands, and he is not dropping it",
+    "wide full toss, the batsman cracks it straight to extra cover, the captain roars",
     ""
 ];

@@ -112,5 +112,10 @@ module.exports =
     "keeper, who runs to the stumps and runs him out. On replay, that lbw shout looked plumb in front of middle stump.",
     "slower ball outside off, and he's gone for a needless wander, and the fielder has run him out. The batsman went " +
     "for the big slog, missed, and took a few steps down the pitch, looking for the bye. His partner wasn't interested. " +
-    "The fielder spotted it quickly and threw at the stumps and hit them direct, and his run has come to an end."
+    "The fielder spotted it quickly and threw at the stumps and hit them direct, and his run has come to an end.",
+    "run out chance, it's the keeper's smart work again despite a wide throw, the decision goes upstairs! Replays show " +
+    "out despite the dive, out by a couple of inches. The batsman punched at the ball towards sweeper cover, initially " +
+    "they might have thought of two and he turned around quickly, so did his partner but said no after a couple of " +
+    "steps. The throw at keeper's end was wide, the keeper came out of the crease and parried the ball to the stumps",
+    ""
 ];

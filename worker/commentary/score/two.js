@@ -718,28 +718,38 @@ module.exports =
         "of the stumps, and they get the second easily",
         "down the track, making room, and he slices the low full-toss to the right of sweeper cover, and they take two " +
         "this time. The keeper doesn't collect cleanly, makes it easier for the batsman, who slides home.",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        "slowish and just outside leg stump, he stabs it through midwicket, enough time to come back for the second",
+        "shortish and pulled hard through midwicket off the front foot, the fielder puts in a good sprint in the deep " +
+        "and dives to his left to prevent the boundary",
+        "starts off stump and moves away wide, he reaches it and slams it past extra cover's dive, sweeper reaches it",
+        "flat-batted through extra cover, a fielder fumbles running across from long off and they take two",
+        "bouncing but providing width, cuts it through point for two more",
+        "and again, he has the space to cut square for an easy couple of runs",
+        "tries the reverse paddle now, the edge has hit the keeper's leg and gone really fine, long chase that, a chance" +
+        " technically",
+        "a flighted yorker almost, on the pad, gets them out of the way and flicks it square",
+        "down the track, has to stop as the bowler slows and shortens it outside leg, the batsman still picks up two " +
+        "with a tuck through square",
+        "low full toss on the pad, he stabs it in front of square for a couple",
+        "leading edge flies past point as the striker looks to clip a rising length ball from middle, stopped just " +
+        "inside the rope",
+        "full delivery clipped through midwicket, non-striker has to hurry back for the second as the throw comes in",
+        "slogged along the ground to wide long on, it slips through his hands, but he is around right behind the fast " +
+        "bowler to save the boundary",
+        "very full on the pads, swung away to deep square leg, they push for the second, make it",
+        "low full toss on the stumps, carted to deep midwicket, he loses the ball as he tries to throw it back quickly",
+        "towards the pads from length, tucked towards short fine leg for two",
+        "too full on the pads and it's driven slightly wide of long on, the non-striker runs like his usual fast self " +
+        "and is safe for the second",
+        "length delivery towards the pads, he tucks it to the leg side in the gap and they take two by the time deep " +
+        "square leg gets there",
+        "waits in the crease and pulls this back of length delivery over midwicket with ease. The bounce is ideal for " +
+        "such shots here",
+        "swinging in a bit from middle stump, flicked away to deep square leg for one",
+        "bit too short, DK rocks back and pulls it between deep midwicket and long on in the gap for two",
+        "clips the ball from off stump to the leg side in the gap and calls for two early, he responds and they get two",
+        "too full on the stumps, he rams it straight down the ground and Baz runs to his left and throws the ball up " +
+        "for long off. Can the ball ever escape him?",
+        "fullish on middle and leg now, steers it through the midwicket region off the front foot with soft hands to get" +
+        " two"
     ];

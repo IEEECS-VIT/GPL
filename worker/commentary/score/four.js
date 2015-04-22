@@ -1379,18 +1379,95 @@ module.exports =
         "short fine leg",
         "he's hit it for four with complete authority! It's full and wide, and he slices under it and sends it to the " +
         "deep point boundary, one bounce!",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
+        "he is quick to pounce on this short one! Easily hammers it over midwicket",
+        "looked like he was giving some catching practice to the man at cover, but fortunately for him, this one is in " +
+        "the gap. And they say in Vellore that once it's past the inner circle, it's also past the outer circle",
+        "that's a smart little pull shot again! A copy of the one he played in the first over. It's not really short but" +
+        " he gets in great position, then whacks it over midwicket",
+        "smart adjustment there! He is already doing better till now. Comes down the pitch, gets a slower bouncer, has " +
+        "to adjust a bit but then hammers it over mid-on",
+        "shorter and turning down leg, moves to off and goes down on a knee to sweep it wide of short fine leg for four " +
+        "behind square",
+        "another boundary, gets room outside off and drives it handsomely and powerfully past cover and long off for " +
+        "four",
+        "just outside off, makes room and cuts it to short third man where a fielder bends but lets it through his legs " +
+        "for four. Blunder!",
+        "gets room and slaps it through the covers with the wrists, completing a swiveling motion and that beats sweeper" +
+        " cover",
+        "gets width again and he beats sweeper cover again! It was outside off, e freed his arms with a swish and it " +
+        "went right off the middle of the bat. Beat everyone for four!",
+        "finally connects as he slaps this short of length delivery down the ground towards long off for four",
+        "bangs it in short and angles it in, gets under that and hooks it over and wide of short fine leg for four",
+        "pitched up, there's room too and he lofts it effortlessly over the point boundary for a one-bounce four",
+        "charges down first ball, it's a top edge, won't go for a six, but he's safe. It didn't go off the middle as he " +
+        "tried to take it on the full, went for a big drive down the ground and the ball fell just inside the rope even " +
+        "as he came from somewhere to cut it off, but could not",
+        "thick outside edge, lands right in between short third man and point and it goes for four! The ball was angling" +
+        " away, drove, but not for the turn, and the ball was in the air before landing safe",
+        "driven for four now! Pitched up, he saw room and drove it square slightly late to beat point for a four along " +
+        "the ground",
+        "full again, it's a slower delivery and he pounces on it with a lofted drive over the covers for another four",
+        "slow, full, well outside off and he drives it through the covers. Four more even though it was not from the " +
+        "middle of the bat, but was in the gap",
+        "fullish on the pads, glances it fine enough and beats a diving fine-leg fielder to get four more. The time out " +
+        "hasn't affected him",
+        "bit too full outside off, and...wait for it, he has driven it with a flick of the wrists to manoeuvre it past " +
+        "point for a four. Such an unusual shot in general, but nothing unusual",
+        "another slower one, it's short of length outside off, he dances down and slashes at it with some power to beat " +
+        "sweeper cover, who hardly has time to react",
+        "too wide outside off, Raina swings his arms for the shortish delivery and sends that one past point for a " +
+        "powerful four",
+        "short, pulled, four! That was too short on the leg side, he got enough time to get on top of that and pull it " +
+        "wide of deep midwicket for four",
+        "too short on off, he gets the time to go back and pull it between long on and deep midwicket for four",
+        "short of length from outside off, he's hardly bowled those, nudges it fine on the leg side off the ribs and" +
+        " collects four by beating fine leg",
+        "knee-high full toss and some room, Faf puts his back foot towards off stump, opens up and slices it over point " +
+        "for four",
+        "angles in another low full toss, Bravo flicks it off the pads right in the gap that's between deep square leg " +
+        "and fine leg",
+        "takes it on the full and hammers it down the ground, between his legs to beat long on with that powerful shot",
+        "too slow and short outside off, it's wide too and he has all the time in the world to cut it between short " +
+        "third man and point for four",
+        "that's gone like a rocket between point and short third man for four. He got room outside off, stayed back and " +
+        "hammered it behind square for four",
+        "another back of a length ball, but he uses the line on the pad, hops in the crease and swats it behind square, " +
+        "too quick for the man at fine leg",
+        "down the track, moving quite some way inside the line of one on off and lifts it cleanly with the angle over " +
+        "extra cover",
+        " he's timed this alright, back of a length, quick and angled across and close to off, and he punches it in a " +
+        "flash past backward point",
+        "he creates some space for himself outside leg stump, and blasts this short of a length ball flat over extra " +
+        "cover, he's struck it so hard that it almost carries all the way",
+        "short again, even though there is some turn, he has all the time to open up and put it away with a pull to " +
+        "deep midwicket",
+        "when conventional does not work, he changes his stance and grip to a shortish one and pulls it flat over square" +
+        " leg, or the former point position",
+        " poor again from the bowler, short and wide outside off, he cranks up and forces it past extra cover, could " +
+        "have stopped it with a better effort",
+        "he finally gets one away, gets this pitched up ball on the pad, and flicks it over the man at square leg, fine " +
+        "leg was up too and there is no stopping this one",
+        "he changes stance second time and sweeps a slanted delivery violently over short fine leg, has picked up " +
+        "boundaries both times he's switched grips",
+        "sees him making room outside leg, the delivery follows his man, angles in a full toss, the striker cracks it " +
+        "down the ground, the bowler has misjudged the chance at long on, he's come in initially, then realised the " +
+        "ball is clearing him to his right, but it is too late by then, it has bounced just inside the rope in the end",
+        "it almost appeared as if he was withdrawing from this delivery as he walked way outside leg even before it had " +
+        "been delivered, he bowled it full, the bat reached it with a stretch and sliced it over point, almost goes for " +
+        "a six",
+        "short third man's dive is futile, picks up a four with a delicate reverse paddle from around the line of middle",
+        "shot! this man has some timing, driven on the up, calmly tackling the extra bounce this pitch gets, past extra " +
+        "cover and easily beating the sweeper",
+        "with the scoop over short fine leg, walks outside off, gets a full delivery he can get under and twirls it out " +
+        "of the reach of the man in the circle",
+        "thick outside edge flies past a diving keeper for four as he heaves at a pitched up ball outside off",
+        "good length delivery slanted in and he takes a step across to clip it superbly through midwicket",
+        "this swung in full and quite late, but he got the bat down in time and flicked it behind square, four more",
+        "gets this away, heaves another short of a length ball on off to the deep midwicket boundary",
+        "nicely done, with a low full toss outside off, the batsman calmly glides it to the square third man rope",
+        "short of a length ball, and he latches on, clears front leg and crashes it between deep midwicket and deep " +
+        "square leg",
+        "wide full toss, he jumps down the track and slices it past a diving backward point",
         "",
         "",
         "",

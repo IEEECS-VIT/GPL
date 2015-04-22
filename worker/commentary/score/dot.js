@@ -1912,6 +1912,166 @@ module.exports =
         "very full and wide. He stretches out to slice it towards point",
         "good slower ball, angled across. He looked to make room to crash it through the covers, and came nowhere near " +
         "connecting as it kept low and dribbled through to the keeper",
-        "",
-        ""
+        "starts with a good length, confidently forward but the push finds point",
+        "slants a darted length ball past, who is beaten on another massive attempted drive, ball curls away as it nears" +
+        " the keeper, who appeals for the catch, the bowler joins in quite late, just in case",
+        "had taken a start as he drove in the air, mid on took it on the bounce but his throw missed, he would have " +
+        "probably been back anyway",
+        "bangs it in short, leg sidish, but over his back as he ducks",
+        "wants to mow this back of a length ball through midwicket but cannot connect",
+        "moving in to the blockhole, he digs it out",
+        "big inswinger arrives near the boots, and he has to jam bat down to keep it out again",
+        "The batsman has sent short extra cover sprawling on the ground as he smacks a full delivery right on to the " +
+        "left pad flap",
+        "wanted to go after this pitched up ball and had made some room but could not get under it, squeezed it to extra" +
+        " cover",
+        "beaten, he floats it up outside off, lures him into a loose drive and gets it to move away",
+        "tries to cut even as he is backing away but this short of a length ball bounces over his attempt",
+        "tossed up slowly and turning away, guided to backward point, they wont get the single",
+        "was winding up, but this was flat and slanted in to middle and leg, and he adjusted to defend",
+        "ets the yorker in on off stump, digs it out",
+        "very low full toss outside off, cannot connect as he brings the bat down late",
+        "sees him moving to leg, follows him with a yorker, he decides to save his feet, gets right leg out of the way, " +
+        "that is all he manages",
+        "slower length ball outside off now after those yorkers, he slogs and misses",
+        "angled in to the pad from round the wicket, some bounce there for the bowler, the striker fails to tuck it away",
+        "nicely bowled, some flight on this fullish ball on off, Warner well forward to smother it",
+        "this is flat and quicker, the batsman makes some room and slaps it hard, but he dives to stop it at extra cover," +
+        " saved a few runs there",
+        "slower this time, bit of air again, around off stump line, he defends",
+        "the ball goes fuller now, the batter is not really forward, and his drive is straight to mid on",
+        "similar line just outside off, but a fuller length, and he cannot guide it past backward point",
+        "pushes this length ball on the up, without timing, to extra cover",
+        "plenty of turn right away, from around the line of off, tosses it up, looks to defend, finds himself nowhere " +
+        "near the line, beaten by miles",
+        "fuller, Warner goes back, tries to work it in front of square, bowler runs forward and denies him",
+        "bounce from leg stump, can only tap it on to the pitch",
+        "pushed through quicker and slides in from wide of the crease, is done in by the change of pace, is hit on the " +
+        "pad",
+        "comes out and has a go, but cannot get under it and mishits to mid on",
+        "stays in the crease and square-drives a length ball, cannot beat point",
+        "slows it up and gets it to hold and turn a bit, he adjusts to run it to backward point",
+        "tries to go through the off side off this short of a length ball but extra cover runs to his left to stop it",
+        "Warner skips to the leg side and charges out first ball of the over, keeps it full and outside off, the batsman" +
+        " misses",
+        "ack of a length and tucking him up on middle and leg, manages an inside edge on to pad",
+        "fuller ball hit hard and straight back to the bowler",
+        "down the track but ends up pushing straight to extra cover",
+        "hit on the pad with a delivery slanted in from a length",
+        "does not succeed on the switch hit attempt number three, tries a big slog sweep but it almost trickles on to " +
+        "his stumps",
+        "reaches for a widish length ball and softly pushes it to point",
+        "straighter one, he did not seem to pick it as he opened up in the crease, is cramped and forces it back to the " +
+        "bowler",
+        "now he defends solidly off the front foot",
+        "gives him a slowish bouncer as he backs away to leg, and is in the air as he tries to upper cut, but cannot " +
+        "reach it, that was a wide for height, not given",
+        "slow again, from short of a length, he is completely done in on the attempted pull",
+        "appeal for catch down the leg side but the umpire says no, replays show he is right, the length ball has gone " +
+        "off the pad as the striker missed the flick",
+        "that cuts in sharply from just back of a length, and he is cramped and beaten on the inside edge",
+        "beaten on the pull now, acceleration just hasn't come for him today, this was quite pacy off the pitch",
+        "beaten with a short of a length ball that comes in a bit, he tried to force it square on the leg side but it " +
+        "was through him in a flash",
+        "and now a sharp bouncer, what a ball, there is an appeal for caught behind, but he was in no position to " +
+        "connect on a weak hook, this is off the shoulder",
+        "just short of extra cover as he smears a pitched up ball, there is confusion between the batsmen, and the " +
+        "result is they return to their ends after meeting in the middle",
+        "neatly done by the bowler, the batsman is backing away to leg, he bowls it back of a length wide outside off, " +
+        "comfortably inside the marker, no way he is reaching that",
+        "right on target on middle stump, almost a yorker as it's a low full toss and he blocks it back",
+        "wider and slightly higher full toss, pushes at it tentatively and edges to second slip after a bounce",
+        " that's a yorker on off, he drives with an outside edge to point",
+        "bit of turn outside off from length, he pushes at it without footwork and misses",
+        "defends the length delivery back to the bowler, didn't time it properly",
+        "outside off with the angle and it's left alone",
+        "low full toss outside off, he pushes it to point. He hasn't been going for the big drives",
+        "swing and a miss! Length delivery going away from him, he chases with a drive and misses",
+        "slightly closer to the off stump, angling away again, and he leaves at the last minute now",
+        "beautiful delivery, extra bounce! Pitched it up outside off, there was pace, his bat for the drive came down a " +
+        "bit late, the ball then swung away and bounced almost till his chest with the bounce",
+        "slightly slow and full around off, pushed to mid off from the front foot",
+        "errs towards leg stump now and he sweeps it to short fine leg",
+        "tries to drive the first ball from outside off and misses",
+        "stifled appeal as him traps him with a back of length ball from outside off, but it looked high. Was struck in " +
+        "front of off stump, though",
+        "length delivery towards middle stump, he pushes it into the covers",
+        "outside off with the angle and some room, he cuts it straight to cover point",
+        "slower one on the leg stump, pushed down to mid on",
+        "slow again, he waits for this one outside off and finds point",
+        "coming in towards the middle stump, Smith defends on the leg side",
+        "down the leg side, but it comes in and goes over leg stump as he shuffles across to glance but misses",
+        "loud appeal for lbw from the bowler with a delivery that came in, but the ball took an inside edge before " +
+        "hitting the pads",
+        "another inside edge onto the pads as he tries to push the incoming delivery to the leg side",
+        "bouncer for Raina - he pulls and misses and the keeper dives for the ball to stop it with one hand",
+        "beautiful slower one from the bowler, it comes in, beats the attempted cut and goes just over the stumps",
+        "short and slow delivery now, he ducks under it to leave it for the keeper",
+        "bouncer this time towards leg, he ducks under it",
+        "stays back and pushes the ball from outside off to cover",
+        "turning away from outside off, he waits and guides it to point",
+        "presses forward now and drives the length delivery to cover with the turn",
+        "tries to paddle the ball from middle and off, misses and there's no time for leg bye",
+        "charges down and Iqbal yorks him, he blocks it back",
+        "turning away from length outside off, he pushes it off the back foot to point",
+        "tries to tuck the ball off the legs, but takes it on the pads as he can't time it well",
+        "quick bouncer over the stumps, he decides to leave this one",
+        "length delivery around off, he goes back and pushes it down to the bowler",
+        "goes on the back foot for the shortish ball outside off, whips it towards mid on but he runs across to deny " +
+        "the single",
+        "inside edge for the ball that turned towards off from middle, he tried to whip against the angle but could not " +
+        "middle",
+        "just outside off, pushed to point off the back foot",
+        "comes down now and drives the length delivery into the covers",
+        "slower through the air around off, he waits and defends it back",
+        "full and across outside off, he charges, swings and misses",
+        "quick and pitched up just outside off, drives and misses again",
+        "lands it short outside off and takes the pace off, surprises him who tries to scoop it to off but misses",
+        "nice little delivery, he plays it calmly towards point",
+        "he walks down the pitch but this one swings away from back of length and beats the outside edge",
+        "stays on the back foot and punches the back of length delivery to mid-off",
+        "full and swinging in towards the stumps, he doesn't commit to the front foot and pushes it with soft hands " +
+        "towards mid-on",
+        "stands upright and punches the back of length delivery towards cover, but can't find the gap",
+        "bowls a slower delivery wide outside off, he lets it go through",
+        "he continues to impress with his lines. This is tight on off stump and he can only defend it to point",
+        "this time he doesn't swing it! This one keeps going away with the angle and beats the outside edge",
+        "length delivery on the stumps, the batsman defends it to the leg side",
+        "back of length delivery outside off, the batsman looks to pierce the off side with his cut, but finds man at " +
+        "point",
+        "beats the inside edge! This was length delivery just outside off and he looks to punch it firmly, but just " +
+        "passes under the bat. Good take by the keeper",
+        "superb outward delivery! Pitches on a length and jags away with beautiful shape. The bat is nowhere near it",
+        "solid defence from him this time, but they need less of that and more of his big hitting",
+        "fullish around off, pushed down to mid-off off the front foot",
+        "just back of length now outside off, he defends it to point",
+        "similar length and closer to off, he defends to leg this time",
+        "back of length and cutting in towards off, crams him for room and he defends it back",
+        "helps it with the turn to midwicket",
+        "slightly full outside off, he drives it straight to cover",
+        "lands it short and outside off now, AB slaps it down to cover again",
+        "stifled appeal for lbw as it's going down leg. He took a step down and took the ball full on the pads in front " +
+        "of leg as he missed the flick",
+        "darts this one in, defends it back but the inside edge hits the pads and just misses the off stump",
+        "outside the off stump, guides the ball to point",
+        "in the block hole on the stumps, he digs it out towards mid on",
+        "pretty wide outside off and short of length, he swings and misses",
+        " flattish outside off, he cuts off the back foot to point, who dives and stops it",
+        "tries the backfoot cut again and misses this time",
+        "tries to paddle the ball from outside off to leg but misses",
+        "beaten by turn, the keeper asks for stumping but umpire says no! He pitched it up outside off, the striker " +
+        "drove and missed the ball as it turned away, he whipped the bails off too, but the batsman was in",
+        "he drives with some power but the ball gets the inside edge and nearly hits the stumps",
+        "straight on middle stump, driven towards midwicket as he dives to his left and saves one",
+        "another bottom edge as he drives the length ball outside off, but can't clear the bowler",
+        "fullish outside off, driven straight to point",
+        "inside edge again as he heaves the length delivery from around off but hits his own pads",
+        "angled across from length outside off, he pokes and misses",
+        "slower one now outside off, he angled it across again, looked to cut and missed it",
+        "pitches it wider outside off, drives by swinging his arms but only gets an inside edge onto his pads",
+        "no pace on that one, not much bounce either outside off, he cuts and finds an inside edge",
+        "heaves the straighter delivery on the leg side but misses",
+        "cuts it in with slower ball, he went back to whip it to off, but was beaten and took it on his groin",
+        "swing and a miss for the widish delivery outside off, goes to the keeper"
+
     ];
