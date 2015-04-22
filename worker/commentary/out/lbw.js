@@ -71,7 +71,8 @@ module.exports =
     "in-ducker does the trick again. This was on a good length and comes in on off, the batsman aims for an across-the-line" +
     " flick and misses, plumb in front. Oh wait, replays reveal that he had gotten an inside-snick on to front pad. " +
     "Unfortunate..",
-    "",
+    "full-toss on middle and leg, and he's lbw. Swivelled to pull and it smacked him flush on the thigh pad. Was on its " +
+    "way down when it struck him.",
     "",
     ""
 ];

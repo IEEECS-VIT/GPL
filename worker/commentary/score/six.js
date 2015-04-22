@@ -588,5 +588,66 @@ module.exports =
         "tossed up on off stump and now it's the other batsman's turn to slog-sweep for six. Opened up his body as he " +
         "did so to hit it square, over the deep square leg boundary",
         "and again. This one's bowled wider outside off, and he hits this over wide long-on with a full, free swing of " +
-        "his arms"
+        "his arms",
+        "tossed up again, on a perfect hitting length outside off, and he mows it away over the wide long-on boundary, " +
+        "hitting cleanly, with the angle",
+        "a bit slower now and he loves that. Makes room for himself, gets down low, and lofts it high over long-off",
+        "wow. Saw a bit of air outside off, and got down on one knee and sent it soaring over wide long-on with a huge, " +
+        "free swing of his arms",
+        "sees the batsman make room and fires it full and wide, but to no avail. He gets down low, and launches it high " +
+        "and clean over long-on",
+        "length ball outside off, and that's a clean six, a pick-up shot whipped to the right of deep midwicket, not " +
+        "too far out of his reach. The fielder there leaped diagonally but couldn't get his hand to it",
+        "down the track now. The bowler sees him coming and bowls it flat and wide outside off, and he simply swishes " +
+        "his bat through the line to launch it over the cover boundary",
+        "full-toss and the batsman clears his front leg and Javed Miandads it over the square leg boundary. Poor ball, " +
+        "that.",
+        "slower ball down the leg side and he opens up and swings it away over the backward square leg boundary",
+        "shot! Beautifully done by the batsman, who comes down the track, doesn't reach the pitch, but simply extends " +
+        "his arms through the stroke and lifts it over the bowler's head and over the boundary",
+        "slower ball on off stump, clears his front leg and swipes it over the straight midwicket boundary. Lovely " +
+        "clean swing of the bat for a shot that can be described as a slog",
+        "tossed up on off stump, clears his front leg and swings through the line, with the turn and clears the " +
+        "boundary between deep midwicket and long-on",
+        "down the track he comes, and that's deposited into the stands. It's very full, near his feet, and he's only " +
+        "allowed a short bat-swing at it, but he hits it so cleanly it easily clears the straight boundary, to long-on's " +
+        "right",
+        "bang. It's a length ball on middle stump and he clears his front leg and launches it over wide long-on",
+        "tossed up outside off, and that's in the perfect slot for him to launch over the cover boundary.",
+        "this time he waited for it. It was on an off stump line and he picked the slower ball, got his front leg out " +
+        "of the way, and swivelled through his hips to swat that over the straight midwicket boundary",
+        "short ball, not the slower ball, and he dumps this higher and squarer, over forward square leg this time",
+        "down the track, The bowler follows the batsman, fires it into his feet, but he puts it away easily, pick-up " +
+        "shot over deep midwicket",
+        "down the track, and again he follows him with the full ball at his feet, and again he simply flicks him for " +
+        "six. Easy. ",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
     ];

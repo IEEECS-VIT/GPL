@@ -462,7 +462,18 @@ module.exports =
     "the fielder",
     "shortish outside off and he's gone! Looked for that late dab again, ended up sending a thin edge into the keeper's " +
     "gloves",
-    "",
-    "",
+    "It was a long-hop, or a longish-hop at any rate, and he pulls it straight down the throat of deep midwicket",
+    "slower ball slanting away from off stump, and the keeper takes a good low catch to his right, after the batsman " +
+    "looked to slog it over the leg side and only managed a top-edge",
+    "got him! That was cleanly struck, clearing his front leg and hitting the full middle-stump ball down the ground, " +
+    "but didn't get enough elevation to clear long-on, who timed his jump perfectly to catch it two-handed, over his " +
+    "head",
+    "and he strikes. Very full on middle and leg. The striker looks to hoick it away over the leg side, doesn't really " +
+    "get hold of it, picks out deep square leg",
+    "goes for the slog-sweep now and he's holed out to deep midwicket. Just a bit of extra bounce from middle and leg " +
+    "and it produces the top edge",
+    "loopy delivery, and that's produced the breakthrough. Nice line from the bowler, challenged to hit him against the " +
+    "angle, and he top-edged the attempted slog-sweep high in the air, drops into the waiting hands of long-on",
+    "full and wide outside off, and the striker gets under it and slices it straight into sweeper cover's hands.",
     ""
 ];

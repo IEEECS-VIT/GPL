@@ -1831,6 +1831,87 @@ module.exports =
         "side, he ends up pushing it back to the bowler",
         "outside off, back of a length. He looks to steer it towards third man, doesn't connect",
         "big appeal for caught behind, not given. Shortish outside off, not enough room to cut, bounces over his bat",
-        "yorker on off stump, Mathews can't connect as he makes room and tries to jab it away through point",
-        "slower ball outside off, beats Mathews again as he looks to club it into the leg side"
+        "yorker on off stump, can't connect as he makes room and tries to jab it away through point",
+        "slower ball outside off, beats him again as he looks to club it into the leg side",
+        "goes around the wicket now, bowls a slower ball wide outside off. The batsman reaches out to carve it through " +
+        "the off side, doesn't connect",
+        "on the pads, the languid flick can't beat square leg",
+        "full on off stump, driven to cover",
+        "full, angling down the leg side. he gets his front pad in the way as he tries to whip it over the leg side",
+        "quick short ball, is through the striker and over his left shoulder before he can get in position to hook",
+        "slower ball on a good length outside off, defended into the off side",
+        "back of a length on off stump, blocked back to the bowler",
+        "shortish outside off, carved away in typically Sehwag-esque fashion, but straight to backward point",
+        "back of a length on a fourth-stump line, didn't quite come on as well as he would have liked, and he punches " +
+        "it to short extra cover",
+        "length ball outside off, straightens past the outside edge as he pokes at it. Feet move very late, and he " +
+        "almost stumbles into the shot",
+        "full on middle and leg, clipped towards midwicket",
+        "back of a length on a fourth-stump line. he goes back and across to defend into the on side",
+        "length ball on a fourth-stump line, pushed towards mid-off, lot of bottom hand in that shot",
+        "length ball on off stump, punched to mid-on off the back foot",
+        "length ball on a fourth-stump line, punched towards mid-off",
+        "length ball outside off, enough width for him to crack it away resoundingly, but straight to cover point",
+        "back of a length outside off, dabbed to short third man",
+        "back of a length, angling across, a bit of extra bounce to beat the attempted cut",
+        "slowish ball, angled across towards off stump. The batsman defends it back to the bowler",
+        "tossed up outside off, and he presses forward to defend towards the bowler",
+        "tossed up outside off, left alone",
+        "a bit of turn here from leg and middle. It was flat, and he was looking to turn it into the leg side, but held " +
+        "himself and played it with a relatively full face towards mid-off",
+        "looks for the reverse sweep from leg stump, hits it straight to cover point. Didn't quite middle it either",
+        "length ball, skids on towards off stump as he makes room to cut. Punches it towards short cover, who dives to " +
+        "his right to make a brilliant save, and flicks it quickly to the keeper to make Miller decide against the single",
+        "short and wide, cracked away past point, and this time he manages to cut it off with the dive after sprinting " +
+        "from sweeper cover",
+        "shortish slower ball on off stump. Through his pull too quickly, bottom-edges towards short midwicket",
+        "slower ball outside off, slips under the bat as he shuffles down the track and goes for the big hit through the" +
+        " covers",
+        "this time it's a short slower ball along that tight line just outside off. Very hard to hit, and he can't " +
+        "connect with the pull",
+        "down the track, and the bowler fires it into his pads. Too quick for him to connect with the flick",
+        "another slower ball, another missed pull, and it rolls down to the keeper. Didn't miss off stump by much",
+        "length ball outside off, defended towards point",
+        "back of a length, a bit of swing in towards off stump. Leans back and punches to short cover",
+        "once again it's short and wide but this time he cuts it straight to the bowler",
+        "length ball, brings his line much closer to off stump, and Watson pushes it defensively into the covers",
+        "big appeal for lbw as he plays around his front pad to try and flick this one. Nice length, and it hit him in " +
+        "line, but there was an inside-edge on it",
+        "length ball outside off, swings away to beat the angled-bat drive away from the body",
+        "full outside off, the batsman is too early into the drive, sends it running off the inside half of his bat " +
+        "towards square leg",
+        "starts with a length ball, angled across. Once again the ball doesn't quite come on for the cover drive, and he" +
+        " drags it into the leg side",
+        "excellent delivery, a bit of movement to rap him on the front pad as he plays across it. Not given. Maybe it " +
+        "pitched outside leg stump a touch, maybe it was a bit high.",
+        "and again some movement, and again it hits the thrust-across front pad. He plays all around it again and gets " +
+        "a thick inside edge into his pad",
+        "back of a length on off stump, a bit of movement. he looks to punch it through cover, inside-edges it to the " +
+        "right of short midwicket",
+        "another one just short of a good length, tucking Watson up for room. Ends up punching it back to the bowler",
+        "full this time, swings in again. He wants to drive through cover initially, and ends up hitting it back " +
+        "towards the bowler, didn't hit anywhere near the sweet spot",
+        "length ball, swinging into the pads, flicked straight to short fine leg",
+        "length ball on middle and leg. Watson defends to short midwicket",
+        "shortish ball climbing towards Watson's ribcage. Opens up, jumps to get on top of the bounce, and defends into " +
+        "the on side",
+        "full ball on off stump, too full to drive with power, gives mid-off enough time to move to his right and cut " +
+        "it off easily",
+        "back of a length on a fourth-stump line. Makes room to cut, can't beat point",
+        "fullish ball on off stump. Stays on the back foot and defends into the covers",
+        "full, speared into leg stump. Can't get the flick away, rolls off the pad to the right of short midwicket",
+        "another slower ball, slanted full and wide outside off. Reaches out to try and drive, can't connect",
+        "slower ball, full and angling into off stump. Defends towards point",
+        "full on leg stump, cramping Watson who's backing away to make room. Defends into the covers",
+        "fired in full and flat on middle and off, he jams down on it, stabs it back to the bowler",
+        "low full-toss on off stump, punched back firmly to the bowler",
+        "back of a length outside off, tried to flat-bat it through the off side, didn't come on, hit it straight back " +
+        "towards the bowler",
+        "full-toss on middle stump, whipped to midwicket",
+        "down the track, checked drive towards cover",
+        "very full and wide. He stretches out to slice it towards point",
+        "good slower ball, angled across. He looked to make room to crash it through the covers, and came nowhere near " +
+        "connecting as it kept low and dribbled through to the keeper",
+        "",
+        ""
     ];

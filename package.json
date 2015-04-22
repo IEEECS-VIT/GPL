@@ -1,11 +1,11 @@
 {
   "name": "GPL",
   "version": "0.1.0",
-  "description": "GraVITas Premier League",
+  "description": "graVITas Premier League",
   "homepage": "http://www.gravitaspremierleague.com/",
   "bugs": {
     "url": "https://github.com/IEEECS-VIT/GPL/issues",
-    "email": "ieeecs@vit.ac.in"
+    "email": "gravitaspremierleague@gmail.com"
   },
   "private": true,
   "main": "./bin/www",
@@ -45,7 +45,6 @@
   ],
   "dependencies": {
     "async": "~0.9.0",
-    "bcrypt": "~0.8.2",
     "body-parser": "^1.12.3",
     "bower": "^1.4.1",
     "cookie-parser": "^1.3.4",
@@ -61,6 +60,9 @@
     "nodemailer": "^1.3.4",
     "serve-favicon": "^2.2.0",
     "universal-analytics": "^0.3.6"
+  },
+  "optionalDependencies" : {
+    "bcrypt": "~0.8.2"
   },
   "repository": {
     "type": "git",

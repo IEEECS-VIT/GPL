@@ -61,7 +61,8 @@ module.exports =
         "was hit that high but not long, and the long-on fielder got under it, but pushed it back towards long off, but " +
         "it was not well-directed, goes over the other fielder. Don't think there was a need for that, as long off could" +
         " have completed the catch himself.. he had enough space",
-        "",
+        "overpitched outside off and he comes forward to drive it between cover point and short extra cover. The fielder " +
+        "runs back from cover point to pull it back short of the rope",
         "",
         "",
         "",

@@ -101,7 +101,16 @@ module.exports =
     " in time",
     "full and wide, flat-batted to long-off. The batsman ran back, his partner sent him back, and he " +
     "had no chance of turning back and making his ground as the fielder, fired in a low, flat throw to the stumps",
-    "",
-    "",
-    ""
+    "fullish outside off, checked drive to mid-off. They go for the single, and the thrower goes for the keeper's end " +
+    "and hits the stumps direct. The fielding team is already celebrating, but it's gone to the third umpire. You can " +
+    "see why. The batsman is stretching but he's well short of the crease. Sharp thinking, and a brilliant flat throw. " +
+    "The victim started running a touch too late, and was watching the fielder as he ran.",
+    "short outside off, and that's a convoluted way for a bad ball to get a wicket. It stopped on the pitch a bit, and " +
+    "the striker, shaping to cut, ended up flat-batting it back to the bowler, who fielded it and turned around in a " +
+    "flash to flick the ball at the stumps, too quick for him, who struggled to return to his crease.",
+    "yorker now, on middle and leg. LBW appeal from the bowler, but it isn't given. It's leg byes, ricochets to the " +
+    "keeper, who runs to the stumps and runs him out. On replay, that lbw shout looked plumb in front of middle stump.",
+    "slower ball outside off, and he's gone for a needless wander, and the fielder has run him out. The batsman went " +
+    "for the big slog, missed, and took a few steps down the pitch, looking for the bye. His partner wasn't interested. " +
+    "The fielder spotted it quickly and threw at the stumps and hit them direct, and his run has come to an end."
 ];

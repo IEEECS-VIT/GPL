@@ -45,5 +45,9 @@ module.exports =
     "what was he doing? It was a length ball on leg stump, and the batsman didn't connect with the sweep. Wandered out " +
     "of his crease as it rolled to the keeper, and before he could realise it the bails were off - he took so long " +
     "realising it that the keeper missed the stumps once and took the bails off the second time",
+    "gone! The bowler saw the striker stepping down the pitch and fired in an arm ball that slid between bat and pad, " +
+    "and the keeper did brilliantly there, in such an understated way, to collect calmly outside leg stump and whip off " +
+    "the bails",
+    "",
     ""
 ];

@@ -148,7 +148,10 @@ module.exports =
     "he'd like, and pops a simple catch to short midwicket",
     "chops it on. Gives himself room to cut, it does just enough and doesn't bounce as much as expected, and he ends up " +
     "inside-edging into his off stump",
-    "",
-    "",
-    ""
+    "bowled him, or is that bowled himself? Stretched across the stumps a long way to play the lap sweep to the full " +
+    "ball on leg stump, didn't make any contact",
+    "bowled him! That was full and straight, and he was trying to be too cute there. Walked across his stumps, looked " +
+    "for the scoop over short fine leg, and it was far too full for that shot",
+    "bowled, off stump goes for a wander, made room to carve through the off side, and the bowler simply slipped a " +
+    "fast yorker under his bat"
 ];

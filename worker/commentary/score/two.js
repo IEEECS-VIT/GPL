@@ -680,5 +680,66 @@ module.exports =
         "shortish on off stump, he makes room to cut it away to the right of sweeper cover",
         "another googly as the batsman shuffles across his stumps, and he whips it away towards deep backward square " +
         "leg and picks up two to give Knight Riders the easiest possible win they could have imagined",
+        "another one on a good length, and this one was headed towards the stumps. He gets his bat down just in time to " +
+        "clip it away towards deep backward square leg",
+        "this one holds its line. He is playing for movement, looking to flick from outside off, and gets a leading " +
+        "edge that loops over the cover fielder and falls in no man's land",
+        "length ball, angled into the pads, tucked away between deep square leg and deep midwicket",
+        "back of a length outside off, skips back and opens his bat face to punch it to the left of sweeper cover",
+        "tossed up outside off, driven to the right of sweeper cover",
+        "fullish on middle stump, clears his front leg and swipes it away to the left of deep square leg",
+        "full-toss on leg stump, and he calmly reverse-paddles it to the left of short fine leg",
+        "the conventional square sweep now. This was tossed up a bit more and he hits it to the right of deep " +
+        "midwicket, picks up two",
+        "down the track now, whips away the leg-stump ball towards deep backward square leg",
+        "low full-toss outside off, shovelled firmly towards long-on, lots of bottom hand",
+        "length ball outside off, and he waves his bat at it to hit it uppishly to the left of the diving short extra " +
+        "cover fielder",
+        "length ball angled across, who looks to flick it and plays too early. Leading edge loops over the covers",
+        "length ball on off stump, angling in. He stays on the back foot and whips it away forward of square leg",
+        "length ball, angling in towards off stump, tucked off the pads towards deep backward square leg",
+        "back of a length outside off, dabbed away to the right of backward point, where it's his turn to misfield",
+        "back of a length outside off, slides with the angle, punched to deep extra cover",
+        "fired down the leg side, paddled towards long leg",
+        "down the track, whipped to deep midwicket",
+        "not short enough to pull cleanly and he doesn't time it well, but he hits it in the gap, to the left of long-on",
+        "back of a length angled across, flayed away to third man",
+        "flat and quick again, a touch shorter now, and he rocks back to pull between deep square leg and deep midwicket",
+        "length ball on off stump, and he makes room to carve it into the gap between long-off and deep cover",
+        "slower ball angled across, and he makes a great attempt but puts him down. Went for the big swipe down the " +
+        "ground, top-edged it very high, and he had to run in a long way from long-on. Caught it with both hands but it " +
+        "popped out as he fell forward onto the ground",
+        "full-toss outside off, swiped down to long-on, and the batsman, attacking the ball and swooping down to pick-up" +
+        " and throw, fumbles and lets them get two",
+        "full outside off, swiped to the left of long-on. They take on the fielder's arm, because they want to rotate " +
+        "strike, and he goes for the bowler's end, and the keeper is quick to get the bails off but the batsman is just " +
+        "about home, at full stretch. Excellent running.",
+        "full outside off, gets his front foot across and swipes it to long-on. The throw to the keeper's end is wide " +
+        "of the stumps, and they get the second easily",
+        "down the track, making room, and he slices the low full-toss to the right of sweeper cover, and they take two " +
+        "this time. The keeper doesn't collect cleanly, makes it easier for the batsman, who slides home.",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
         ""
     ];

@@ -3,7 +3,7 @@ graVITas Premier League
 
 The graVITas Premier League code repository
 
-This website is hosted [here](http://www.gravitaspremierleague.com/)
+This website is hosted [here](http://www.gravitaspremierleague.com)
 
 Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues) 
 
@@ -13,12 +13,10 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
 
     $ npm install
     
-###### Install frontend dependencies manually (Microsoft Windows only)
-The npm postinstall script to run bower may not work properly on Windows, see [this issue](https://github.com/IEEECS-VIT/GPL/issues/13)
+###### Install security dependency manually (Microsoft Windows only)
 
-    # npm -g install bower
-    $ bower install
-    
+    # npm install bcryptjs
+        
 ###### Run the server locally at port 3000 or "PORT" in process.env
 
     $ npm start

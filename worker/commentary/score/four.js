@@ -1316,5 +1316,88 @@ module.exports =
         "short, wide, sits up at a friendly pace, lashes it away to the square cover boundary",
         "back of a length, close to off stump, and this is an excellent shot from the batter, stays leg side of the " +
         "ball and slices down on it to send it racing away to the right of third man",
+        "full-toss outside off, may have been over waist height, and he stands tall and carves it away to the square " +
+        "cover boundary",
+        "short ball, sits up on middle stump, and the batsman clears his front leg and wallops the pull to the square " +
+        "leg boundary",
+        "low full-toss on off stump, and he smacks it and just stands there, no need to run. Clears his front leg and " +
+        "powers through the line to send it scudding away to the straight boundary, leaving long-off no chance even " +
+        "though it was only a few yards to his left",
+        "sees him making room, goes for the yorker again, gets it horribly wrong. High full-toss on off stump, he " +
+        "flashes hard, and edges it to the right of the keeper and it rockets away to the boundary",
+        "width now, back of a length at a gentle pace, and he is on the front foot, bends at the knee and crashes it " +
+        "away to the point boundary, screams away to the left of the diving fielder",
+        "this time it's full and wide and he comes forward and flat-bats it to the square cover boundary",
+        "here's the bouncer, and he isn't in a great position to pull. Top-edges it and it goes high in the air and " +
+        "bounces into the long leg boundary, to the right of the fielder there, who is stationed quite square, almost " +
+        "at deep backward square leg",
+        "length ball on a fourth-stump line, and the captain applauds heartily, because the batsman played a super shot " +
+        "there. Stayed next to the line and crashed it away, almost a front-foot cut, to the point boundary. Shades of " +
+        "Dravid in that shot",
+        "shot! That was a length ball on leg stump, and he cleared his front leg and whipped it away over square leg",
+        "wow. That wasn't the greatest ball, lots of width, but such a crisp sound when he cracked that to the square " +
+        "cover boundary. Bent at the knees to get down low and simply flat-batted it away",
+        "full, a bit of movement outside off, and he gets a move on with a thick edge to the third man boundary. He was " +
+        "making room, looking to launch it over cover",
+        "tossed up full on middle stump, and he drives that so powerfully and so straight that neither long-on nor " +
+        "long-off, converging on the ball, can stop it",
+        "full-toss on off stump, and the fielder misfields a fairly simple stop at midwicket, low to his right, and " +
+        "concedes another boundary. #ButterFingers",
+        "full on middle stump, and again he gives long-on no chance, hitting hard and ramrod-straight",
+        "shot! This is superb, was he clears his front leg to this full ball on the stumps and drives with a free swing " +
+        "of his bat to pierce the gap between long-on and deep midwicket",
+        "shot! Sees a bit of air outside off and gets down nice and low to get the elevation to launch it over cover",
+        "another reverse-sweep, and this time he played it almost on the half-volley. So close to his foot that the " +
+        "bowler appealed for lbw, but he middled it and sent it screaming to the boundary to the left of short fine leg",
+        "slower ball, full on middle stump. He shuffled across, waited for it to come on, and clipped it elegantly over " +
+        "the square leg umpire. Top shot.",
+        "full-toss on middle stump, and that's a super shot for the shutterbugs, clears his front leg and bisects long " +
+        "on and deep midwicket",
+        "shot. It's very full on middle stump, not quite a yorker, and that's enough of an error in length as he makes " +
+        "room and carves it through square cover",
+        "fullish, angling in towards off stump, and he flicks it away past short midwicket, to the left of the fielder",
+        "slower short ball, sits up nicely for Marsh to swivel and pull - it was only a flick of his wrists, really - to" +
+        " the right of the short fine leg fielder",
+        "short and wide, cut away crisply. A fielder , sliding across to his right after running round from sweeper " +
+        "cover, could only push it into the boundary rope",
+        "tossed up on off stump, and that is brutal, a full, free swing of the bat and hi partner has to duck his head " +
+        "in a hurry at the non-striker's end. Long-off was on the rope but he had no chance of stopping it, running to " +
+        "his left",
+        "short ball and he jumps deep in his crease and pulls it witheringly to the straight midwicket boundary",
+        "full on middle stump, and that is power. Gets his front leg out of the way and flat-bats it over the ducking " +
+        "non-striker. Long-on had no chance",
+        "another slower short ball, but the batter stayed nice and still, with a stable base, and pulled it firmly to " +
+        "the right of deep square leg. He ran to his right and got a hand to it, so I guess that's a drop, but a great " +
+        "effort, and it bounces down and rolls into the rope. Saved two runs, I suppose.",
+        "super shot, this, from him. It's very full and straight, not too much swinging room, but he stayed fairly deep" +
+        " in his crease and whipped it away with a lot of bottom hand between long on and deep midwicket",
+        "and another! This one's short and he's very quick to swivel into the pull and beat long leg running " +
+        "desperately to his left",
+        "full-toss on off stump, and that's another stunner from this magician. Got under it and shovelled it to the " +
+        "wide long-on boundary",
+        "another slower ball, on leg stump, and he steps across again and simply helps it into the gap to the left of " +
+        "short fine leg",
+        "he's hit it for four with complete authority! It's full and wide, and he slices under it and sends it to the " +
+        "deep point boundary, one bounce!",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
         ""
     ];
