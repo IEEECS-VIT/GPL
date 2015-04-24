@@ -672,5 +672,31 @@ module.exports =
         "angled in towards the stumps, tonks it straight down the ground into the sight screen. That went quick and " +
         "flat over the umpire's head",
         "outside off, slams this one high and far in the air over the wide long on boundary for a big six.",
-        ""
+        "he has middled this. Length and just outside off, he clobbers it straight down the ground. Picked the slower " +
+        "one and dispatched it",
+        "whack! Looked like the other one. He flexes his muscles and wallops it over deep midwicket",
+        "lobbed up outside off, sees ample air, gets under it and smears it over to the long-off boundary",
+        "steps out, manufactures a length ball and lofts it straight over the bowler's head",
+        "excellent connection, gets into the act. He nips down the track, gets close to the pitch of this length-ball " +
+        "and swings it over deep midwicket",
+        "he has smoked the pants off it. Banged in short on middle, sits back, waits on it and swings it over deep " +
+        "midwicket",
+        "bangs it short and wide outside off, he uses the pace on it and carves it over backward point for a flat, " +
+        "powerful six",
+        "Banged in shortish and down leg with a 'hit me' label on it. He picked it up and flicked it over the backward " +
+        "square leg boundary",
+        "dug in short at a gentle pace, he rocks back and swivel-pulls it, clears backward square leg again",
+        "clean strike. Length-ball, he comes forward a bit and sends it sailing over the bowler. Deposited into the " +
+        "sightscreen",
+        "length on the leg stump, that's easy pickings. he picks it up and lifts it high and over backward square leg",
+        "another bad ball. The bowler has lost the plot. Full toss outside off, the batsman annihilates a six over deep " +
+        "midwicket. The batting team shifting gears?",
+        "keeps it short and homing in on the ribs, he does not flinch. He attempts a hook, gets a top-edge that flies " +
+        "over Malinga at long leg",
+        "length on middle, right in the hitting zone and he has tonked it. Dispatched over the long-on boundary. Even " +
+        "the umpire seemed to have enjoyed that hit",
+        "and again! Slower and outside off, sinks to one knee, pasting a slog-sweep into the stands over deep midwicket",
+        "half-tracker outside off, he fetches it from there and pummels a pull over deep midwicket. It was the slower " +
+        "ball but the striker had manufactured his own pace",
+        "low full toss on off, he misses the yorker, he gets under it and launches it down the ground"
     ];

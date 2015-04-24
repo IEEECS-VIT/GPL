@@ -751,5 +751,23 @@ module.exports =
         "too full on the stumps, he rams it straight down the ground and Baz runs to his left and throws the ball up " +
         "for long off. Can the ball ever escape him?",
         "fullish on middle and leg now, steers it through the midwicket region off the front foot with soft hands to get" +
-        " two"
+        " two",
+        "drifting onto the pads, nudged in front of midwicket. The fielder overruns and fumbles, gifting an easy extra single",
+        "dropped shortish and widish outside off, slapped away to deep point",
+        "this was looped up by the bowler, the striker loads up for a slog sweep. Skies it via a top edge. Long-on runs " +
+        "forward, but the ball lands in front of him.",
+        "slower ball outside off, he waits on it and slices it to the right of the man at sweeper cover",
+        "hurled very full and around off, he squeezes a drive towards mid-off and sets off. The bowler fails to effect " +
+        "a direct hit, and concedes an extra run via overthrow",
+        "steps away outside leg, the bowler follows him, he dinks it in front of long-on for a couple",
+        "drifting onto the pads, glanced away fine on the leg side. The fielder who is rather squarer sprints across, " +
+        "dives across to his right and stops the ball",
+        "shortish and on middle, pulled to deep backward square with one feet lifted in the air",
+        "tucked away off the pads towards deep midwicket. Deep square runs to his left to mop it up",
+        "down the track and whipped away over a leaping midwicket",
+        "length on off, slogged away to cow corner",
+        "darted flatter and on middle and leg, clipped to long on. The fielder rushes in, aims to attack the ball and " +
+        "does not collect it cleanly in the end. The pair get two",
+        "good length ball on the leg stump, steps away lofts it high in the air. A fielder back-pedals, but the shot just about" +
+        " clears him at long-off"
     ];

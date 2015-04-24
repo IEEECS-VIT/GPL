@@ -1468,13 +1468,37 @@ module.exports =
         "short of a length ball, and he latches on, clears front leg and crashes it between deep midwicket and deep " +
         "square leg",
         "wide full toss, he jumps down the track and slices it past a diving backward point",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        "overpitched on off, he takes it from there, whips his wrists and sends it between midwicket and mid-on",
+        "slower length-ball on middle, picks the off-cutter. He waits for it, clears his front leg and launches it over " +
+        "wide mid-on",
+        "fuller and quicker outside off, aims to drive, manages an outside edge that runs away through vacant slip",
+        "shortish, width on offer here, latches onto it as he cuts it firmly to the left of backward point, beats third " +
+        "man as well",
+        "backs away, the bowler delivers a full-toss, which is slapped away past the covers",
+        "oh boy! he has squeezed out a yorker for a four. Right in the blockhole on off, he angles his bat and squeezes " +
+        "it through vacant slip for a four",
+        " poor ball and put away. Full toss outside off, he takes it from there and slaps it over the bowler's head. " +
+        "Long on can't run across in time and cut it off",
+        "dragged short and outside off, he has a crack at it, gets a thick outside edge, this one flies over vacant " +
+        "slip cordon. Well, well, edges get you boundaries in T20s",
+        "on a fuller-length and on the leg stump, whipped away to the cow corner boundary, bisecting the gap between " +
+        "deep midwicket and long-on with surgical precision. He was running across to his left from long-on",
+        "b-e-a-u-t-i-f-u-l!. Lowish full toss on off, he drives it handsomely over extra-cover, skims away to the fence",
+        "length on middle, backs away and drives it nicely between the covers and mid-off. Full marks for placement",
+        "back of a length and outside off, steps away and late-cuts it between short third and backward point",
+        "he can make ample room outside off, he gets a back of a length ball outside off, which is punched past the " +
+        "covers",
+        "on a length and outside off, he punchily drives it, beats the man diving to his left at mid-on. Not much feet movement but enough power on that",
+        "the ball thudded away! Fractionally back of a length, Simmons backs away and unleashes a strong cut past backward point",
+        "dragged shortish and on middle, he clears his front leg and clubs it away to the deep-midwicket boundary",
+        "pushed through outside off, Parthiv steps away and scythes it over the covers. Once he cleared the infield that was a four",
+        "slid through short and wide outside off, he switches his balance onto the back foot and cuts it fiercely in the gap at the covers",
+        "fuller and outside off, Simmons bends his knee and drives it past the covers",
+        "good length ball on middle, drilled over a leaping Mathews, beats mid-on diving to his right. Parthiv backed away and did not middle it. Yet he collected a four",
+        "down leg, Chand loses his balance and falls over the sweep. No tickle on that.",
+        "in on off, he waits on it and dabs it through the vacant slip cordon. Neatly done, Yuvi runs back, slides but the ball winds the race",
+        "back of a length and outside off, he steps away and has enough leverage to thrash it through point. Sweeper can't cut that off",
+        "dug in on a back of a length and on middle, Rayudu executes a pull over a leaping midwicket for back-to-back fours",
+        "fuller and spinning away outside off, he throws his bat at it and slices it over point",
+        "shortish and on middle, Malinga was tucked up for room. He took his eyes off the ball. Yet he manages to pull it over a leaping midwicket"
     ];

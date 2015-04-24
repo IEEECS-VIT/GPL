@@ -162,5 +162,12 @@ module.exports =
     " hoick it, only inside-edges into the stumps",
     "rams into the off stump at furious pace! Angled it in from outside off, he made room and swung his arms but the " +
     "ball rammed into the off stump",
+    "bowled'em or bowled himself? The leg stump goes for a wander. Yorker speared in, the batsman had premeditated a " +
+    "lap-scoop after shuffling miles across off. He failed to AB de Villiers it away, the ball batters the leg stump. " +
+    "The captain shakes his head in the dug-out",
+    "",
+    "",
+    "",
+    "",
     ""
 ];

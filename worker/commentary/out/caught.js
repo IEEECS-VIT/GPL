@@ -515,5 +515,30 @@ module.exports =
     "failed to clear long on, seemed as if he had got more than enough on this full one as he sent it climbing into the " +
     "sky, but it came down in safe hands, and he is not dropping it",
     "wide full toss, the batsman cracks it straight to extra cover, the captain roars",
-    ""
+    "strikes with his magic ball! The umpire's check for a possible no-ball, he is okay. This was shortish, tucking him " +
+    "up for room. He aims to pull, does so half-heartedly, spoons a simple catch to short midwicket, who nearly made a " +
+    "mess of it but recovered and pouched it on the second attempt.",
+    "gone, caught behind. He walks off. This was banged in short and on the stumps, he targets deep square with a pull " +
+    "after backing away, but messes it up. Has to settle with a toe-end to end his innings",
+    "Strong swing of the bat but he holes out to long-on. Length outside off, he shovel-whips it with plenty of " +
+    "bottom-hand........ caught at head height",
+    "Cramp or no cramps, he pulls off a brilliant catch! Length on middle, he backs away a touch and mishits it high in " +
+    "the air. He pedals back from mid-on, then moves to his right, turns back, traces the ball. Dives across to his " +
+    "right, catches and tumbles onto the ground. It's never easy taking these skiers. He initially misjudged it but " +
+    "recovered well",
+    "pulls off a sharp catch and sets off on a victory lap. He is mobbed by his team-mates. This was a slower one dug " +
+    "in short and on middle, the striker got a good chunk of wood on the pull. Hits it in the air over midwicket. The " +
+    "fielder covers some ground from deep square leg, dives across to his right and comes out with the ball in his hands",
+    "have their man now.. This was dug in short and on the body, he wants to pull it away. But loses all his balance as " +
+    "his bottom hand comes off the bat handle. He has to settle with a top-edge. The man from deep square leg and deep " +
+    "midwicket nearly collided. The fielder somehow plucks it out",
+    "a fielder takes it at long-off. He gives this air on off, the man looks for the lofted hit. Does not get enough " +
+    "power behind it. The fielder rushes forward and completes a fine, tumbling catch",
+    "Another one! He walks back. This was flighted and full outside off, aims to loft it, ends up slicing it into the " +
+    "hands of long-off",
+    "And he is out! He is off on a celebratory run, you can't stop him! This was fuller and flatter on middle, he " +
+    "attempts a reverse sweep first up, gets an under-edge, loops off the pad, rebounds off the back of the bat to the " +
+    "left",
+    "Add another super catch to the list! The bowler digs it in very short. The batsman aims for a pull. Hit high up on " +
+    "the sticker of the bat. A man rushes in from deep midwicke"
 ];

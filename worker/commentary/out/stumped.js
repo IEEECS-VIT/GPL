@@ -48,6 +48,10 @@ module.exports =
     "gone! The bowler saw the striker stepping down the pitch and fired in an arm ball that slid between bat and pad, " +
     "and the keeper did brilliantly there, in such an understated way, to collect calmly outside leg stump and whip off " +
     "the bails",
-    "",
+    "strikes, and he roars! Much slower through the air, looped up outside off, lures the batsman out of the crease. The" +
+    " batsman misses his attempted big hit over the leg side. The ball kept low as well but the keeper breaks the bails " +
+    "in a flash",
+    "he perishes and this is a crucial strike for the bowling side.. This was flatter and moving away outside off, so he" +
+    " rocks back and slices it high in the air. The fielder juggles and pouches it at deep cover",
     ""
 ];
