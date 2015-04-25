@@ -1488,17 +1488,60 @@ module.exports =
         "back of a length and outside off, steps away and late-cuts it between short third and backward point",
         "he can make ample room outside off, he gets a back of a length ball outside off, which is punched past the " +
         "covers",
-        "on a length and outside off, he punchily drives it, beats the man diving to his left at mid-on. Not much feet movement but enough power on that",
-        "the ball thudded away! Fractionally back of a length, Simmons backs away and unleashes a strong cut past backward point",
+        "on a length and outside off, he punchily drives it, beats the man diving to his left at mid-on. Not much feet " +
+        "movement but enough power on that",
+        "the ball thudded away! Fractionally back of a length, Simmons backs away and unleashes a strong cut past " +
+        "backward point",
         "dragged shortish and on middle, he clears his front leg and clubs it away to the deep-midwicket boundary",
-        "pushed through outside off, Parthiv steps away and scythes it over the covers. Once he cleared the infield that was a four",
-        "slid through short and wide outside off, he switches his balance onto the back foot and cuts it fiercely in the gap at the covers",
-        "fuller and outside off, Simmons bends his knee and drives it past the covers",
-        "good length ball on middle, drilled over a leaping Mathews, beats mid-on diving to his right. Parthiv backed away and did not middle it. Yet he collected a four",
-        "down leg, Chand loses his balance and falls over the sweep. No tickle on that.",
-        "in on off, he waits on it and dabs it through the vacant slip cordon. Neatly done, Yuvi runs back, slides but the ball winds the race",
-        "back of a length and outside off, he steps away and has enough leverage to thrash it through point. Sweeper can't cut that off",
-        "dug in on a back of a length and on middle, Rayudu executes a pull over a leaping midwicket for back-to-back fours",
+        "pushed through outside off, steps away and scythes it over the covers. Once he cleared the infield that was a " +
+        "four",
+        "slid through short and wide outside off, he switches his balance onto the back foot and cuts it fiercely in the" +
+        " gap at the covers",
+        "fuller and outside off, bends his knee and drives it past the covers",
+        "good length ball on middle, drilled over a leaping fielder, beats mid-on diving to his right. backed away and " +
+        "did not middle it. Yet he collected a four",
+        "down leg, loses his balance and falls over the sweep. No tickle on that.",
+        "in on off, he waits on it and dabs it through the vacant slip cordon. Neatly done, runs back, slides but the " +
+        "ball winds the race",
+        "back of a length and outside off, he steps away and has enough leverage to thrash it through point. Sweeper " +
+        "can't cut that off",
+        "dug in on a back of a length and on middle, executes a pull over a leaping midwicket for back-to-back fours",
         "fuller and spinning away outside off, he throws his bat at it and slices it over point",
-        "shortish and on middle, Malinga was tucked up for room. He took his eyes off the ball. Yet he manages to pull it over a leaping midwicket"
+        "shortish and on middle, he was tucked up for room. He took his eyes off the ball. Yet he manages to pull it " +
+        "over a leaping midwicket",
+        "too full outside off and he leans forward towards the ball to drive it handsomely through the covers for four",
+        "short ball on leg stump now, the striker pulls it a bit awkwardly and manages to land it wide of midwicket and " +
+        "mid on for four",
+        "it's short again, but there's room on offer and he unleashes the upper cut to send it in the air over point for" +
+        " four",
+        "bit of flight on middle stump and he goes down to sweep it over square leg in the gap for four. He's playing " +
+        "the field now",
+        "oh, that's a misfield at mid-off, goes for four! Rolled his wrists a bit to drive the ball down, the fielder " +
+        "slid to his right but couldn't stop the ball",
+        "takes two quick steps down the ground to take the ball on the full and lofts it just over mid on to clear him " +
+        "and collect four",
+        "he takes these risks and they all pay off! Shuffled across to expose all his stumps for the ball just outside " +
+        "off, and he whipped just past the leg stump to the boundary for four",
+        "clever shot for four! Back of length ball on off stump, he waited for it and helped it very late through the " +
+        "slip cordon for a cheeky four",
+        "that was way outside off, doesn't matter. He shuffles across completely and whips it with a pull over short " +
+        "fine leg for four",
+        "on the stumps, unleashes the reverse sweep and easily clears point and short third man for four on the off side",
+        "mid off is not at the edge of the circle, he gets a short of length ball outside off and he lofts it well over " +
+        "mid off for a well-executed four",
+        "crashed through the covers! Back of length, room, he stayed back and packed a crunching punch to send that " +
+        "crashing through the covers for four",
+        "short ball with width again, he sees that's enough and slaps the ball over the covers in the air for another " +
+        "powerful four",
+        "too short this time, outside off, and he spots it early to pull it over midwicket by getting under it. Four runs",
+        "doesn't take too long when he's on strike! Got width outside off and crashed it with a square drive just wide " +
+        "of backward point for four",
+        "gets room again, it's back of length this time and he goes to the back foot to punch it through the covers " +
+        "with some power. Four more",
+        "bit too short and the batter digs deep in the crease to pull it over midwicket and wide of deep midwicket for " +
+        "four in the gap",
+        "errs down the leg side, stays back and clips it fine down the leg side for four easy runs",
+        "slammed down the ground, four this time! He strolled down and took it nearly on the full, the bat also closed " +
+        "in his hands when he played the shot and he got enough to collect four down the ground",
+        "full toss on the pads, flicked to the midwicket boundary for four!"
     ];

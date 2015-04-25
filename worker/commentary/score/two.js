@@ -769,5 +769,27 @@ module.exports =
         "darted flatter and on middle and leg, clipped to long on. The fielder rushes in, aims to attack the ball and " +
         "does not collect it cleanly in the end. The pair get two",
         "good length ball on the leg stump, steps away lofts it high in the air. A fielder back-pedals, but the shot just about" +
-        " clears him at long-off"
+        " clears him at long-off",
+        "short ball, pulls it in the gap on leg just behind square but the man runs from deep midwicket to his right " +
+        "with a slide to save two",
+        "back of length outside off, it's cut wide of point who gets a hand to it",
+        "slightly short of length and wider, it's punched off the back foot towards sweeper cover for two",
+        "dropped at long on! Came down and lofted that length delivery high in the air, would have been easy for the " +
+        "fielder but he put it down",
+        "high in the air but it lands safe! Charged and lofted it high over cover with a leading edge, but neither " +
+        "cover nor deep cover could get there",
+        "closer to the off stump from just back of length, guides it fine to third man who slides to his left and saves " +
+        "two",
+        "slightly slow from the leg side, clips it off the pads on the leg side and races back for the second",
+        "flighted and full on the pads, he clips it square on the leg side and these two run two by the time anyone " +
+        "realises it",
+        "bangs in the short ball, goes back and across to tuck the ball behind square. He fumbles at deep fine leg and " +
+        "they come back immediately for the second",
+        "gets some room outside off, he swishes at it to find the gap in the covers with some power for two",
+        "charges down the pitch to take it on the full and slams it straight down the ground, long on cuts it off for two",
+        "on middle and leg stump, clipped to the leg side around square for two",
+        "length delivery and he whips it away to the leg side in the gap for two",
+        "top edge from he as he pulls the short ball to the leg side, doesn't get the middle and it falls short and " +
+        "wide of long on in the gap",
+        "bangs it in short, he comes down and slaps the ball along the ground wide of deep midwicket for two"
     ];

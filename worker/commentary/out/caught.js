@@ -540,5 +540,19 @@ module.exports =
     "attempts a reverse sweep first up, gets an under-edge, loops off the pad, rebounds off the back of the bat to the " +
     "left",
     "Add another super catch to the list! The bowler digs it in very short. The batsman aims for a pull. Hit high up on " +
-    "the sticker of the bat. A man rushes in from deep midwicke"
+    "the sticker of the bat. A man rushes in from deep midwicket",
+    "another shortish ball, another shot in the air and he's holed out to wide long-on! It was not a good delivery, but " +
+    "it looked like a trap as he went back to pull, but was caught in the deep. The fielder didn't have to move at all",
+    "he has made a blow first up! Serves up one that is full and fast, he wants to smash it over long on but that's too " +
+    "quick. All he can manage is a thick top edge that swirls in the air towards gully. The keeper has plenty of time " +
+    "to move to his right and settle under this. This is going to hurt the lineup even more",
+    "makes some good connection on this but clearly it's not enough! he hits the fuller delivery inside out but can " +
+    "only sky it towards deep extra cover.",
+    "this is a superb catch! What a wonderful piece of anticipation.. the keeper starts moving towards his left as soon " +
+    "as he sees the batsman shaping for the scoop shot and once the he doesn't make a good connection, he is always in " +
+    "business. It still takes some doing as he has to dive full length to his left to complete this one-handed. Superb " +
+    "effort from him!",
+    "such a slow delivery, such a big wicket! This was a slow-slow bouncer, he kept waiting and finally decided to pull," +
+    " got a top edge as he just checked his shot, and the keeper jumped to his right to take it with both hands over his" +
+    " head"
 ];

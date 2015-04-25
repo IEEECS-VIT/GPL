@@ -165,9 +165,10 @@ module.exports =
     "bowled'em or bowled himself? The leg stump goes for a wander. Yorker speared in, the batsman had premeditated a " +
     "lap-scoop after shuffling miles across off. He failed to AB de Villiers it away, the ball batters the leg stump. " +
     "The captain shakes his head in the dug-out",
-    "",
-    "",
-    "",
-    "",
-    ""
+    "wild slog for the straight delivery and that's gone through! The length delivery pitched on middle stump and " +
+    "turned away a bit as he looked to slog it to the leg side and missed it by miles",
+    "another slog against the away-going delivery, another wicket! Looked like a pre-meditated shot as he went down on " +
+    "a knee and slog-swept the ball against the turn and missed the line completely. Off and middle stumps are rattled",
+    "sheer pace and accuracy, he smiles as the off stump goes for a walk! the striker made some room and the ball landed" +
+    " on length and rocketed onto the stumps to send it flying"
 ];

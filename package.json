@@ -53,7 +53,7 @@
     "ejs": "^2.3.1",
     "express": "^4.12.3",
     "express-session": "^1.11.1",
-    "mongodb": "^2.0.27",
+    "mongodb": "^2.0.28",
     "morgan": "^1.5.2",
     "newrelic": "^1.18.4",
     "node-logentries": "~0.1.4",

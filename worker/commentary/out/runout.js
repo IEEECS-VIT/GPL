@@ -117,5 +117,7 @@ module.exports =
     "out despite the dive, out by a couple of inches. The batsman punched at the ball towards sweeper cover, initially " +
     "they might have thought of two and he turned around quickly, so did his partner but said no after a couple of " +
     "steps. The throw at keeper's end was wide, the keeper came out of the crease and parried the ball to the stumps",
-    ""
+    "full toss gets a wicket, it's a run out, so what? he slashed at the high full toss that was well outside off, " +
+    "sweeper cover came around as the batsmen looked for the second. It was a pretty flat throw, the man backing up went" +
+    " to his right a bit, collected and threw the ball to the stumps, like Dhoni, to send the batsman back"
 ];

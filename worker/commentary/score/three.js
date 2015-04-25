@@ -69,22 +69,5 @@ module.exports =
         "it in the air behind square. Third man cuts it off and throws it quickly but it's an overthrow, and his partner " +
         "forces him to come back for the third as he ways way back in the crease after the second",
         "gets the sweep nicely past short fine leg, but deep square puts in a run and a slide to save a run, good " +
-        "running too to get the third",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        "running too, to get the third"
     ];

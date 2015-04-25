@@ -698,5 +698,18 @@ module.exports =
         "and again! Slower and outside off, sinks to one knee, pasting a slog-sweep into the stands over deep midwicket",
         "half-tracker outside off, he fetches it from there and pummels a pull over deep midwicket. It was the slower " +
         "ball but the striker had manufactured his own pace",
-        "low full toss on off, he misses the yorker, he gets under it and launches it down the ground"
+        "low full toss on off, he misses the yorker, he gets under it and launches it down the ground",
+        "a bit too short and he rocks back in the crease as if he knew it was coming, and lofts it over the long on " +
+        "fielder for a big six!",
+        "welcomed with a six! Went back for the short of length delivery around off and smacked it over the long on " +
+        "boundary for a clean six",
+        "too full on middle and leg, and Nair take a big stride forward to sweep the ball well into the midwicket-boundary" +
+        " crowd for a six",
+        "too short earlier, too full this time! It's in his zone as he lofts it straight down and over the mid-on " +
+        "boundary for six",
+        "flatter and shorter, rocks back and hammers it over the midwicket boundary with a pull for a massive six!",
+        "that's a straight drive while he was on the move for six! He came down, the bowler banged it in short outside " +
+        "off and the striker replied with a lofted straight drive for a six into the sight screen",
+        "make that another six! He dances down the track, takes it on the full and slams it straight and over long on " +
+        "for six"
     ];

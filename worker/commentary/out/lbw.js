@@ -73,6 +73,6 @@ module.exports =
     "Unfortunate..",
     "full-toss on middle and leg, and he's lbw. Swivelled to pull and it smacked him flush on the thigh pad. Was on its " +
     "way down when it struck him.",
-    "",
-    ""
+    "the slower delivery works, he is gone! It was an offcutter coming in from outside off, he moved across to help it " +
+    "to leg but could not connect and was trapped in front of middle stump"
 ];
