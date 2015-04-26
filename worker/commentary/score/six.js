@@ -733,5 +733,13 @@ module.exports =
         "fuller and on middle and leg, clears his front leg and launches it over midwicket. Off the toe-end off the bat " +
         "and goes over the batsman who was running to his left from deep midwicket",
         "banged in shortish and on middle, rocks back, gets into a balanced position and pulls it over backward square leg",
-        "clears long-off. Floated outside off, he hits through the line and lofts it over long-off"
+        "clears long-off. Floated outside off, he hits through the line and lofts it over long-off",
+        "tests him with a bouncer. Disconcerting bounce, directed just above the ribs. The striker goes on the back foot" +
+        " and top-edges a pull over long leg. A bit too quick for his liking...",
+        "on a length and outside off, right in his zone. He launches it over long-off for a six",
+        "pitched up and outside off, width on offer now. Slices it over extra-cover for a flat six. Looks like he is in " +
+        "the mood",
+        "he gets another in style. This was fuller and outside off, he smashes a slog-sweep and sends it over midwicket",
+        "Boom! Launched into the second tier. Tossed up and full on middle, clears his front leg and annihilates a six " +
+        "over the bowler's head"
     ];

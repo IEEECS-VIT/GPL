@@ -123,5 +123,8 @@ module.exports =
     "A run-out chance and they go upstairs. He dives across to his right and deflects the ball onto the non-striker's end." +
     " His bat is in the air. He has to depart after drifting out of his crease and backing up. This was darted flatter " +
     "and on middle, the batter drills it ram-rod straight. The bowler manages to tip it onto the stumps. Raina's bat was" +
-    " in the air when the bails came off the groove"
+    " in the air when the bails came off the groove",
+    "caught miles short! Everything coming together now. This was another slower ball outside off, pushed to backward " +
+    "point, he collects the ball but fails to effect a direct hit. The back-up fielder fails to gather the ball, but " +
+    "long-on runs in and fires a direct hit at the bowler's end"
 ];

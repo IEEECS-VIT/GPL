@@ -76,5 +76,10 @@ module.exports =
     "the slower delivery works, he is gone! It was an offcutter coming in from outside off, he moved across to help it " +
     "to leg but could not connect and was trapped in front of middle stump",
     "he has been given out lbw! Fractionally back of a length and swerves in on middle, he seeks to flick it away, but " +
-    "is rapped on the front pad on the knee roll. The umpire raises his forefinger"
+    "is rapped on the front pad on the knee roll. The umpire raises his forefinger",
+    "Inward yorker. Boom. This was hurled in on the blockhole, swings in. The batsman is late to bring his bat down in a" +
+    " bid to squirt it away. Trapped on the front pad in front of the leg stump. It would have grazed leg. The forefinger" +
+    " goes up",
+    "Fullish and angled in to beat the batsman's push and strike him on the back pad. This would have crashed into middle" +
+    " and leg. It was the slower one and he was hoodwinked. The captain lets out a roar"
 ];

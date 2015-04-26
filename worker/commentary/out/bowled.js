@@ -180,5 +180,9 @@ module.exports =
     "and he gets another one! Charges down the pitch, gets a slower delivery that beats the bat and grazes the top of " +
     "middle stump. This bowler is looking to run through the lineup now",
     "He bangs it short, the batsman is tucked up for room and does not get hold of the attempted pull. The ball grazes " +
-    "the front thigh, elbow and then disturbs the leg stump"
+    "the front thigh, elbow and then disturbs the leg stump",
+    "nails the yorker and rattles the off stump! This was just too good. Yorker comes in with the angle and tails away " +
+    "late from round the stumps, brings his bat down late and fails to keep it out",
+    "and this one makes light work of the batsman. He fires in one of those pin-point yorkers that move away, the batsman" +
+    " can't squeeze it out after backing away. Crashes into the off stump and the bowler exults"
 ];

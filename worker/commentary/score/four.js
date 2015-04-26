@@ -1643,5 +1643,39 @@ module.exports =
         "four. Half-volley and dispatched",
         "back of a length and too straight in line, he whips it beautifully to the left of Bravo at mid-on",
         "floats it up outside off, the batsman is down on one knee to sweep it over backward square leg. Top-edges it " +
-        "and gets four"
+        "and gets four",
+        "fuller and shapes in, he seeks to flick it away, manages a thick inside edge to the right of square leg",
+        "pitched further up and width on offer as well. The striker leans forward and drives it between the covers and " +
+        "mid-off. Sweetly-timed",
+        "shortish and down leg, he tickles it past the keeper off a bottom edge. The keeper moves across to his right " +
+        "and dives in vain. Poor line from the bowler",
+        "leg-stumpish ball, the batsman sinks down to one knee and paddles it fine on the leg side. No protection there",
+        "short and wide outside off, sits up with a 'hit me' label on it. The batter switches his balance onto the back " +
+        "foot and cuts it uppishly over backward point",
+        "back of a length and width on offer as well, he stands tall and crunches it past the covers. Beats mid-off as " +
+        "well",
+        "fuller and wide outside off, thrashed past the covers. Width on offer and cashed in",
+        "low full toss outside off, squeezed away to the right of third man, beats the fielder in the deep and gets a " +
+        "four",
+        "dragged short and outside off, sizes it up, pulls it stylishly over midwicket with one feet lifted in the air",
+        "this was far too full on the stumps, drills it to the left of the bowler. It just sped away to the long-on " +
+        "boundary",
+        "back of a length and outside off, offcutter, hangs back and punches it past the covers. Beats mid-off as well, " +
+        "who chases the ball in vain",
+        "fuller and on middle and leg, another wobbly one, he is down on one knee as he looks to slog sweep, off the inner" +
+        " part of the bat towards the backward square leg boundary",
+        "the bowler bowls a bouncer, cramps him up for room. He gets into a tangle, takes his eyes off the ball and " +
+        "mis-controls a pull over short fine",
+        "quicker outside off, pitched up. Hammers it to the left of mid-off, sped away",
+        "special! Tossed up outside off, he runs down the track, makes some room and drives it imperiously past the " +
+        "covers",
+        "flattish and on middle and leg, whipped away as he hangs back, bisecting the gap between long-on and deep " +
+        "midwicket",
+        "quicker outside off, he rocks back and cracks a cut behind point and beats short third man too, the ball fizzes" +
+        " away",
+        "half-tracker on middle, he rocks back and pulls it to the deep midwicket boundary. The fielder dives across his" +
+        " right in the deep but can only parry it away to the boundary",
+        "full and wide outside off, he simply throws his bat at it after backing away. The thick outside edge runs away " +
+        "past slip to the third-man boundary",
+        "Length outside off, he shovel-drives it between the bowler and and the non-striker"
     ];

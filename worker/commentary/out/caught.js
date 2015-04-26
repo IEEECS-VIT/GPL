@@ -602,5 +602,14 @@ module.exports =
     "and he finds the fielder. Fractionally short and on middle, aims to help it away with a pull. Mishits it in the air" +
     " over backward square leg. The fielder runs across to his left from long leg and takes it",
     "a soft dismissal. He backs away outside leg, the bowler follows him with a back-of-the-hand slower ball with some " +
-    "extra bounce. Sliced straight down the throat of backward point. That was the definition of a dolly"
+    "extra bounce. Sliced straight down the throat of backward point. That was the definition of a dolly",
+    "nicked off! Back of a length away-going ball outside off. He is crease-bound as he has a slash at it and bottom-edges" +
+    " it to the keeper. The keeper and bowler go up for a caught-behind appeal. Affirmative, says the umpire",
+    "gone now! Good delivery, banged in short and seams away outside off with some extra bounce. The batter can't resist" +
+    " himself, he has a waft at it and feeds an edge to the man behind the stumps",
+    "This was also shortish, cramping him for room. He looks to work it away after shuffling across and hopping up, " +
+    "instead he loops it in the air. The fielder runs across to his left from short midwicket and takes it at a square-leg" +
+    " region",
+    "holes out, this was a length-ball outside off, the batsman clears his front leg, goes for an almighty swipe and hits" +
+    " it into the hands of deep midwicket."
 ];

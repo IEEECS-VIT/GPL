@@ -851,5 +851,13 @@ module.exports =
         "dug in on a shortish length on middle, he looks to pull and drags it to the leg side off the inner part of the " +
         "bat",
         "change of pace, short and outside off, punched to sweeper cover",
-        "pitched up on off, slower in pace. Tucked away wide of deep midwicket for a couple of runs"
+        "pitched up on off, slower in pace. Tucked away wide of deep midwicket for a couple of runs",
+        "drifting onto the pads, he flicks his wrists and directs it to the left of mid-on. He gamely chases the ball, " +
+        "slides in the deep and restricts it to two",
+        "dug in shortish and outside off, stops on the pitch. The batsman punches it between the covers and mid-off, who" +
+        " runs back, chases the ball. Slides and prevents the ball from reaching the boundary",
+        "pushed through on middle and leg, tucked away through square leg",
+        "on a length and outside off, hit uppishly over the covers",
+        "fuller and outside off, swats it to midwicket off the inside part of the bat. The fielder there goes low but " +
+        "fumbles, allowing two runs"
     ];
