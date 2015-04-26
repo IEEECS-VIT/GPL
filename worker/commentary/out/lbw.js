@@ -74,5 +74,7 @@ module.exports =
     "full-toss on middle and leg, and he's lbw. Swivelled to pull and it smacked him flush on the thigh pad. Was on its " +
     "way down when it struck him.",
     "the slower delivery works, he is gone! It was an offcutter coming in from outside off, he moved across to help it " +
-    "to leg but could not connect and was trapped in front of middle stump"
+    "to leg but could not connect and was trapped in front of middle stump",
+    "he has been given out lbw! Fractionally back of a length and swerves in on middle, he seeks to flick it away, but " +
+    "is rapped on the front pad on the knee roll. The umpire raises his forefinger"
 ];

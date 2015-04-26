@@ -170,5 +170,15 @@ module.exports =
     "another slog against the away-going delivery, another wicket! Looked like a pre-meditated shot as he went down on " +
     "a knee and slog-swept the ball against the turn and missed the line completely. Off and middle stumps are rattled",
     "sheer pace and accuracy, he smiles as the off stump goes for a walk! the striker made some room and the ball landed" +
-    " on length and rocketed onto the stumps to send it flying"
+    " on length and rocketed onto the stumps to send it flying",
+    "the middle-stump takes a beating! Poor shot selection as he goes for a cross-batted hoick off a length delivery and" +
+    " loses the stumps. A big shame as he was looking like he was ready for the final thrust. The bowler doesn't react " +
+    "much",
+    "superb bowling! The batsman ran out of options - he had to hit out, but this is a beautifully disguised slower " +
+    "delivery, lands on a length and keeps coming in. Swings his bat at that but misses and the ball flattens the leg " +
+    "stump",
+    "and he gets another one! Charges down the pitch, gets a slower delivery that beats the bat and grazes the top of " +
+    "middle stump. This bowler is looking to run through the lineup now",
+    "He bangs it short, the batsman is tucked up for room and does not get hold of the attempted pull. The ball grazes " +
+    "the front thigh, elbow and then disturbs the leg stump"
 ];

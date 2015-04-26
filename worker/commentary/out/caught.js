@@ -554,5 +554,53 @@ module.exports =
     "effort from him!",
     "such a slow delivery, such a big wicket! This was a slow-slow bouncer, he kept waiting and finally decided to pull," +
     " got a top edge as he just checked his shot, and the keeper jumped to his right to take it with both hands over his" +
-    " head"
+    " head",
+    "he repeats the shot but has overcooked this shot! This came a bit quicker and that probably messed up with the " +
+    "placement. Even though he made a good connection, he hit it straight to the man stationed at the boundary. A good " +
+    "catch there. A meter here of there and this could have been a six",
+    "what a soft dismissal! This was a short and slow delivery on off, he had all the time to whack it anywhere he wanted" +
+    " to, but in his eagerness, he smashes it straight to the man at midwicket. Excellent work.",
+    "he takes the big one out! He has perished in the deep. He came down the pitch and wanted to hammer it down the ground," +
+    " but wasn't to the pitch of it. Once it turned a bit, he was always going to struggle with his timing. It goes high," +
+    " but not long and is taken easily at long-off",
+    "a low full toss brings him a wicket! It was there in the hitting zone... and maybe he would have sent it in the " +
+    "stands.. but all the batsman could do is time it straight to long-on. The fielder is not going to let these go.",
+    "bowls another fantastic slower delivery. He was running out of options and he had to throw his bat at that. But ends" +
+    " up slicing it towards wide long-on and is gobbled up by the fielder there",
+    "gets a slower delivery, he throws his hands at that, gets a thick outside edge and the fielder flies to his right " +
+    "to pluck it inches off the ground, one-handed. Excellent stuff",
+    "he has upper cut this into the hands of the third man! The shot was on - this was a short delivery on off stump - " +
+    "but the lack of pace meant he could not get any distance. The danger man is gone. The bowler gives him a bit of " +
+    "send-off as well",
+    "The fielder takes a stunner! The pull shot was on, and he had timed it well too, but he couldn't keep it down. Midwicket" +
+    " is quick to react as he stays low and wraps his finger around the stinger. That shot flew to him in no time",
+    "this is a classic dismissal! he wanted to hit it out of the ground, he is not to the pitch of the delivery and so, " +
+    "ends up to-ending it towards long-off where the fielder takes an easy catch",
+    "end of a cumbersome innings from the bowler! He throws his bat at this length ball without really getting into a " +
+    "good position. The result: no distance, only height. he takes an easy catch at long off",
+    "length ball, he made a good connection but there was absolutely no distance on that... it is swallowed up by " +
+    "the man at deep midwicket easily. The fielder there, who is ecstatic after competing the catch.",
+    "and another one departs! He has a swing at a slower delivery and all he can do is edge it to the keeper. There was " +
+    "a faint edge on that one. The bowler turned back to appeal but the umpire had already raised the finger",
+    "Another slower one does the job. He swings too early, hits it too high but not long. A fielder runs in from long " +
+    "off and comfortably settles under the skier",
+    "he has holed out to long-off. No mistake from the fielder there. He tosses this up, the striker backs away and " +
+    "lofts it to long-off. The fielder runs forward, dives and pouches it",
+    "and gone! How soft was that? Good length and outside off, looks like it stuck in the pitch and stopped on. He checks" +
+    " his push, is crease-bound as he spoons it into the hands of mid-off",
+    "sets off on a celebratory run with his hands aloft in joy. He loops this up outside off and gets it to move away, " +
+    "the striker is glued to the crease as he aims to drive it over the covers. Only manages an outside edge that is held" +
+    " by the keeper",
+    "What's with these leg-slips? This is a sharp, low catch. This was pushed through on a leg-stump line, he glances it." +
+    " The fielder anticipates well, moves to his left, stoops low and takes it inches from the turf before tumbling onto" +
+    " the ground",
+    "A promising innings comes to an end. This was tossed up outside off, he skips out, picks it up from there and drops" +
+    " it to deep midwicket. The fielder comes forward, pouches it and breaks into a customary jig",
+    "Fuller and on middle and leg, he sinks to one knee for a slog-sweep. He does not connect well and top-edges it to " +
+    "deep backward square leg, who dives forward and comes out with the ball in his hands and a big smile on his face. " +
+    "In contrast, the non-striker throws his head back",
+    "and he finds the fielder. Fractionally short and on middle, aims to help it away with a pull. Mishits it in the air" +
+    " over backward square leg. The fielder runs across to his left from long leg and takes it",
+    "a soft dismissal. He backs away outside leg, the bowler follows him with a back-of-the-hand slower ball with some " +
+    "extra bounce. Sliced straight down the throat of backward point. That was the definition of a dolly"
 ];

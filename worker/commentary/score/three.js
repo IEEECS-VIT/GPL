@@ -69,5 +69,10 @@ module.exports =
         "it in the air behind square. Third man cuts it off and throws it quickly but it's an overthrow, and his partner " +
         "forces him to come back for the third as he ways way back in the crease after the second",
         "gets the sweep nicely past short fine leg, but deep square puts in a run and a slide to save a run, good " +
-        "running too, to get the third"
+        "running too, to get the third",
+        "wonderful work at the deep backward square leg boundary! He chased this sweep shot from fine leg, keeps this " +
+        "one in with his first lunge, rolls over the boundary himself, then has to dive in to push the ball in again. " +
+        "Smart work",
+        "does not nail the yorker again. Too full and on middle and leg, swung away to cow corner. A bit of tag-team " +
+        "work in the deep keeps it to three"
     ];

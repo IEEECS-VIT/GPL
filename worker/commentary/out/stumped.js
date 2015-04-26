@@ -53,5 +53,6 @@ module.exports =
     "in a flash",
     "he perishes and this is a crucial strike for the bowling side.. This was flatter and moving away outside off, so he" +
     " rocks back and slices it high in the air. The fielder juggles and pouches it at deep cover",
-    ""
+    "He gives this ample air outside off and gets it to move away. The batsman is lured out of the crease, swipes across" +
+    " the line and misses. The keeper whips the bails off in a flash"
 ];

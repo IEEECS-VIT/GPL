@@ -119,5 +119,9 @@ module.exports =
     "steps. The throw at keeper's end was wide, the keeper came out of the crease and parried the ball to the stumps",
     "full toss gets a wicket, it's a run out, so what? he slashed at the high full toss that was well outside off, " +
     "sweeper cover came around as the batsmen looked for the second. It was a pretty flat throw, the man backing up went" +
-    " to his right a bit, collected and threw the ball to the stumps, like Dhoni, to send the batsman back"
+    " to his right a bit, collected and threw the ball to the stumps, like Dhoni, to send the batsman back",
+    "A run-out chance and they go upstairs. He dives across to his right and deflects the ball onto the non-striker's end." +
+    " His bat is in the air. He has to depart after drifting out of his crease and backing up. This was darted flatter " +
+    "and on middle, the batter drills it ram-rod straight. The bowler manages to tip it onto the stumps. Raina's bat was" +
+    " in the air when the bails came off the groove"
 ];

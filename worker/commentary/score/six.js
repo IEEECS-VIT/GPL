@@ -692,7 +692,7 @@ module.exports =
         "another bad ball. The bowler has lost the plot. Full toss outside off, the batsman annihilates a six over deep " +
         "midwicket. The batting team shifting gears?",
         "keeps it short and homing in on the ribs, he does not flinch. He attempts a hook, gets a top-edge that flies " +
-        "over Malinga at long leg",
+        "over long leg",
         "length on middle, right in the hitting zone and he has tonked it. Dispatched over the long-on boundary. Even " +
         "the umpire seemed to have enjoyed that hit",
         "and again! Slower and outside off, sinks to one knee, pasting a slog-sweep into the stands over deep midwicket",
@@ -711,5 +711,27 @@ module.exports =
         "that's a straight drive while he was on the move for six! He came down, the bowler banged it in short outside " +
         "off and the striker replied with a lofted straight drive for a six into the sight screen",
         "make that another six! He dances down the track, takes it on the full and slams it straight and over long on " +
-        "for six"
+        "for six",
+        "now gets it off the middle! He cleared his front leg out and hammered it over midwicket for six",
+        "that's a typical shot! He leans forward to the length ball and continues with the swing, lifts it so easily " +
+        "over the umpire's head. It just lands over the boundary",
+        "this time he has read the pace very well! A low full toss on the pads again, he doesn't try to hit it too hard," +
+        " just times it over midwicket and it smashes the advertising hoardings on the full",
+        "add six to that! It seemed like the batter was beaten on length as he went down for a sweep, it was too full. " +
+        "But he went on with the shot and manages to scoop it over square leg. Gets the distance as well",
+        "this one is a teaser for the man at cow corner! The batsman cleared his front leg out and slogged it over to " +
+        "the leg side, but didn't get the best of connections, just clears the boundary rider",
+        "fuller and just a shade outside off, gets under it and pummels a six over long-off",
+        "and again! This is a flat, powerful hit. Fuller and on the stumps, whacks it over long-on",
+        "that's a bazooka blow! He bangs it short and outside off, the batsman rocks back and thumps a pull over midwicket." +
+        " That exploded into the stands off the meat of the bat",
+        "the strker inspects the bottom of the bat. Not middled, but no problem. He charges down the track and manufactures" +
+        " a length ball, slices it up and over long-off. The batting team looking to motor along",
+        "what a way to get six! Shortish and on the stumps, attempted offcutter from the bowler. He pulls it up and over" +
+        " backward square leg. Is the bowler distracted?",
+        "He steps out, the bowler tosses it up on the leg stump, whipped over midwicket. Clears the fielder in the deep",
+        "fuller and on middle and leg, clears his front leg and launches it over midwicket. Off the toe-end off the bat " +
+        "and goes over the batsman who was running to his left from deep midwicket",
+        "banged in shortish and on middle, rocks back, gets into a balanced position and pulls it over backward square leg",
+        "clears long-off. Floated outside off, he hits through the line and lofts it over long-off"
     ];
