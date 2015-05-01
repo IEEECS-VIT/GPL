@@ -59,7 +59,8 @@ router.get('/', function (req, res)
     }
     else
     {
-        res.render('index', {response: "" });
+        //res.render('index', {response: "" });
+        res.render('static', {response: "" });
     }
 });
 
