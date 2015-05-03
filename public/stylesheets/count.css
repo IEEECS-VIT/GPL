@@ -1,0 +1,68 @@
+#countdowndays {
+    box-shadow: 0px 5px 5px rgba(0, 1, 12, 0.38), inset 0 0 1px rgba(0, 0, 0, 0.41);
+    padding: 50px;
+    margin: 0;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    border-width: 2px;
+    font-size: x-large;
+    border-style: solid;
+    border-radius: 100px;
+    background-color: rgba(15, 37, 90, 0.97);
+    font-weight: bold;
+    color: #ffffff;
+}
+#countdownhours{
+    box-shadow: 0px 5px 5px rgba(0, 1, 12, 0.38), inset 0 0 1px rgba(0, 0, 0, 0.41);
+    padding: 50px;
+    margin: 0;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    border-width: 2px;
+    font-size: x-large;
+    border-style: solid;
+    border-radius: 100px;
+    background-color: rgba(15, 37, 90, 0.97);
+    font-weight: bold;
+    color: #ffffff;
+}
+#countdownminutes{
+    box-shadow: 0px 5px 5px rgba(0, 1, 12, 0.38), inset 0 0 1px rgba(0, 0, 0, 0.41);
+    padding: 50px;
+    margin: 0;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    border-width: 2px;
+    font-size: x-large;
+    border-style: solid;
+    border-radius: 100px;
+    background-color: rgba(15, 37, 90, 0.97);
+    font-weight: bold;
+    color: #ffffff;
+}
+#countdownseconds {
+    box-shadow: 0px 5px 5px rgba(0, 1, 12, 0.38), inset 0 0 1px rgba(0, 0, 0, 0.41);
+    padding: 50px;
+    margin: 0;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    border-width: 2px;
+    font-size: x-large;
+    border-style: solid;
+    border-radius: 100px;
+    background-color: rgba(15, 37, 90, 0.97);
+    font-weight: bold;
+    color: #ffffff;
+}
