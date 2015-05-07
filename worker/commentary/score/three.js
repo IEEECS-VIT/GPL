@@ -74,5 +74,30 @@ module.exports =
         "one in with his first lunge, rolls over the boundary himself, then has to dive in to push the ball in again. " +
         "Smart work",
         "does not nail the yorker again. Too full and on middle and leg, swung away to cow corner. A bit of tag-team " +
-        "work in the deep keeps it to three"
+        "work in the deep keeps it to three",
+        "that's a lovely cover drive off the front foot through the covers in the gap. He came down for the bounce and " +
+        "the fielder jumped near the boundary to cut it in",
+        "slightly slower outside off, he guides it very late to beat short third man who runs to the boundary to slide " +
+        "and save one",
+        "the fielder makes a diving stop at sweeper cover, saves a run for his side",
+        "similar length swinging towards the pads and the batsman steers the ball between short midwicket and square leg" +
+        " for three",
+        "turned away into the leg side. The bowlers will have to adjust their lines better",
+        "fuller delivery outside off, the batsman leans into a push down the ground. Didn't quite time it as the bat face" +
+        " turned on impact. Still good enough to demand the fielder to dive at the boundary",
+        "he backs away, the bowler follows him. Still manages a cut that evades the dive of short third man. Gets up though" +
+        " and chases after it to pull it back before the boundary",
+        "shortish ball is pulled, the fielder runs a long way to his right from deep square leg, slides and keeps the ball" +
+        " in. But the ball is rolling away to the rope, so he gets up and then cuts it in again! The crowd applauds...",
+        "full outside off, he drives that firmly through the covers and a fumble in the deep gives them three",
+        "short fine leg nearly pushed it away to the boundary, but a little gaffe has been saved by the bowler. Shortish" +
+        " delivery, came onto him a little quicker as he went for a pull. Inside edge skews away behind him",
+        "into the pads and he flicks that beautifully behind square on the leg side. The fielder runs from fine leg to " +
+        "his left, slides the ball in. Then regains his balance and slides it in again to save one",
+        "shimmies down the track and whips it over midwicket. The fielder covers plenty of ground in the deep, sprints " +
+        "across to his right, puts in a slide and saves a run for his team",
+        "tossed up and outside off, he aims to sweep it away. Skews it over the fielder at short fine leg off a top edge." +
+        " The man there chases and slides. But he had hurt himself in the process, jamming his knee onto the turf. No " +
+        "real damage done, though.",
+        "pulled towards deep backward square leg, the fielder gives chase"
     ];

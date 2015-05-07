@@ -184,5 +184,93 @@ module.exports =
     "nails the yorker and rattles the off stump! This was just too good. Yorker comes in with the angle and tails away " +
     "late from round the stumps, brings his bat down late and fails to keep it out",
     "and this one makes light work of the batsman. He fires in one of those pin-point yorkers that move away, the batsman" +
-    " can't squeeze it out after backing away. Crashes into the off stump and the bowler exults"
+    " can't squeeze it out after backing away. Crashes into the off stump and the bowler exults",
+    "deflects onto the stumps, he is gone! The bowler angled it into the pads, he looked to heave that to the leg side " +
+    "and it deflects off the pads to the off stump",
+    "gone now, the bowler shortened the length considerably this time, and he ended up chopping it into the stumps as he" +
+    " tried running it to third man",
+    "bowled with a straighter and slower delivery, the crowd is wide awake! The dibbly-dobbly kept a bit low as he looked" +
+    " to turn it to leg, missed it completely and lost his off and middle",
+    "even better yorker, that's unplayable! The batsman stayed back in the crease, tried to block it back, but it swung " +
+    "late and uprooted two stumps out of three. What a treat to watch, that ball!",
+    "he's bowled him! A quicker ball outside off stump, a bit on the shorter side but the attempt at cutting it ended up" +
+    " in a bottom edge on to his stumps. That was really quick from the bowler",
+    "and he's bowled! He went back in the crease an exposed his stumps, wanted to cut the ball from off stump but it " +
+    "hurried on to him and knocked the off stump over",
+    "It came in sharply from outside off, he went in the crease to steer the ball to the leg side and the ball stayed " +
+    "low to find the gap between bat and pad. The crowd is loving this!",
+    "the slower one finally does it, he misses it completely! It was the slower offcutter from just outside off, played " +
+    "early and let one hand go off the bat when he realised he didn't pick it, and the ball knocked over the off stump",
+    "that's the quicker one from him and he knocks the off stump! The flatter delivery came in from just outside off, he" +
+    " tried to cut it off the back foot but was beaten by the pace and his bat came down late",
+    "he deserves that! Slid in the quicker, flatter delivery as he saw him running at him. No room to work the ball. All" +
+    " he can do is try and stop it from passing him. But since he wanted to belt the ball, he's in two minds. Uncertain " +
+    "prod does him in",
+    "slower ball does the trick and the bowler is off on a jig. It's a bit short so the striker loaded up on the pull, " +
+    "but he is a bit overeager. Manages an inside edge that disturbs the stumps",
+    "full and straight, he misses, you hit. He's made up for a lot of undoing in the recent past",
+    "block hole it is on the stumps, he's fallen over and the stumps have been rattled! He shuffled across well outside " +
+    "off and tried to paddle the ball fine but got an inside edge and the ball got the base of middle stump",
+    "the movement has done it, inside edge onto the stumps! He went down on a knee for the fullish delivery outside off, " +
+    "drove away from the body but the ball swung in and hit the leg stump after the inside edge",
+    "another inside edge, another wicket! He angled the ball across Marsh outside off, he played the wrong line, trying " +
+    "to nudge the ball towards third man but got an inside edge and that uprooted the leg stump!",
+    "the sound of the ball crashing into the stumps, followed by silence in the ground! He makes room to smash the ball," +
+    " it's right in the block hole at good pace and it rattles the stumps",
+    "inside edge onto the stumps, first ball! The ball was well outside off, he pushed at it away from the body without " +
+    "any footwork and edged it on to off and middle stumps",
+    "what a riposte from the bowler, the stadium raises itself to a roar. This was fuller and jags away, the batsman seeks" +
+    " to clip it away to the leg side but does not read the movement. the ball rattles the top of off stump",
+    "the off stump goes for a toss. This was fuller and curls in from outside off, he is crease-bound as he attempts a " +
+    "feeble drive. Too quick for him. He does not get hold of it and the off stump takes a beating",
+    "does him in on the second try! Goes for the reverse swat again, but this time he's pulled his length back and slanted" +
+    " it outside leg stump. The edge goes against the batsman, for once",
+    "struck! What a ball, he beats the bat completely by targeting the stumps this time, it didn't really do much as it " +
+    "pitched on middle and off to go straight, but the batsman was never in control of this one as he looked to steer this" +
+    " to leg, Off stump uprooted!",
+    "inside edge onto the stumps, he's gone! It was a slower one outside off, he went back and across in the crease to " +
+    "swipe it on the leg side but only edged it onto his off stump",
+    "the yorker can't stay away from this bowler for too long! Full, swinging in on the middle stump, the striker makes " +
+    "room to target the off side but the ball rams into the stumps",
+    "his struggle is over, he's failed to connect for the final time this innings, charges out to a full toss, heaves and" +
+    " misses, the line is right on the stumps, and the off peg is uprooted",
+    "played on! Undone by the other one and the stadium has been hushed into silence. This one moves in from outside off" +
+    " with extra bounce, the batsman backs away and seeks to cut it through the covers, perhaps. But drags it back onto " +
+    "the stumps",
+    "The experiment fails! Back of a length, he wants to swipe it away, but can only drag it back on to the off stump " +
+    "via a thick inside edge",
+    "what a corker! This is full and swings away very late. He wanted to whip it through the leg side but this moves away" +
+    " from the blade and takes out the middle stump. That is a one helluva delivery",
+    "off stump knocked over! he has not looked like his usual self and he falls to an average slog! It was a good length" +
+    " ball angled across. The batsman went across the line with the scoreboard pressure bearing down on him. Misses and " +
+    "the bowler hits.",
+    "top of off knocked back again! He runs down and misses a length, slightly slower, ball as he plays outside the line." +
+    " Bat and pad gap exploited and the crowd continues to rumble",
+    "lazy drive on the up outside off, the bowler jags the ball back and hurtles through bat and pad to peg off stump. " +
+    "This has become a procession",
+    "buh-bye, and he just smiles after messing up the off stump. It was fast, it was straight, it got the slog from the " +
+    "batsman, it beat him and he makes a forlorn walk back to the pavilion",
+    "The stumps are in tatters! He walks back with a duck. Swung at a length ball which was just too quick for him",
+    "that's the seventh batsman out bowled! Full, fast, threatening off stump and these aren't idle threats either. Too " +
+    "good.",
+    "kisses the base of middle and off stump! A second straight yorker and this time he gets it through his defences. " +
+    "Top quality bowling from the bowler",
+    "clatters into the base of middle stump! The batsman was moving outside leg to smear it through the covers but it " +
+    "sneaks under his bat",
+    "moves too early, backing away towards leg to slog, he sees him going and fires the ball flat, fast and straight, " +
+    "cramping the batsman for room. Swings across the line and misses. Bowled.",
+    "reverse-swatting is not as easy as one might think! The length is too full and the line too straight for the shot. " +
+    "The batsman misses and the ball rattles off stump",
+    "He went deep into his crease to try and cut the ball, the length was a bit full and the line was too straight. He " +
+    "missed and the bowler hit.",
+    "bowled him! He adjusts his line outside off stump, and the length isn't a full toss, it is good. He tries to drag " +
+    "it from outside off towards leg and gets an inside edge on to the stumps.",
+    "slowed it up so nicely! He was into the flick way too early, and then the ball finally floats over to him, dribbles" +
+    " off the inside edge and onto the stumps. Lovely delivery against a man looking to constantly play leg side. Make " +
+    "your own pace, says the bowler, and comes off better for it",
+    "plays on! And he off on a run! It's a flat, quick delivery. He was moving back and making room to cut. But the angle" +
+    " foils his efforts. Ends up chopping onto off stump",
+    "that's the last time the pull shot will fail him tonight. It's his normal pace, and it's short without offering too" +
+    " much room. he swivels on the back foot for the stroke, but he's still a bit late on the shot. Inside edge crashes " +
+    "into timber"
 ];

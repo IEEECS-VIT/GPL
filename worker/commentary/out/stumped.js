@@ -56,5 +56,13 @@ module.exports =
     "He gives this ample air outside off and gets it to move away. The batsman is lured out of the crease, swipes across" +
     " the line and misses. The keeper whips the bails off in a flash",
     "stumping now! The batsman gives the charge, the bowler reacts in time and lobs this up outside off. THe batsman is " +
-    "beaten in flight, can't loft it over the covers. Keeper does the rest"
+    "beaten in flight, can't loft it over the covers. Keeper does the rest",
+    "stumped! He came down the track, the bowler made it flatter outside off, the batsman pushes and missed it. The " +
+    "wicketkeeper does the rest",
+    "done it! He walked down, tried to steer it with the angle to the leg side, but the ball went the other way from around" +
+    " off and beat him completely. The keeper does the rest",
+    "runs past a straight one! He was looking for extra cover having signalled his move way too early. The bowler drags " +
+    "his length back, refuses to give him the angle he wants and just smiles as he pulls off an easy stumping",
+    "and that befuddles the batsman! He chips down the track, the bowler pushes a slider outside off. He can't connect " +
+    "with the cut, the keeper whips the bails off"
 ];

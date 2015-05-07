@@ -30,5 +30,8 @@ module.exports = [
     "the most bizarre things are happening here! It was a slower bouncer outside off, the batsman got into position " +
     "early to pull it to leg, but it stopped on him and he played a slow slap back to the bowler, who took the catch " +
     "with his right hand",
-    ""
+    "The fielder pouches the leading edge at short third man! The slog goes all wrong, the fielder held this one back.",
+    "good riposte from the bowler, sharp return catch. His knock has been cut short. This was pushed through flatter, he" +
+    " looks to punch it away but ends up chipping it to the left of the bowler, who moves across, takes it and tumbles " +
+    "onto the ground"
 ];

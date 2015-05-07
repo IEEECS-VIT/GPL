@@ -126,5 +126,56 @@ module.exports =
     " in the air when the bails came off the groove",
     "caught miles short! Everything coming together now. This was another slower ball outside off, pushed to backward " +
     "point, he collects the ball but fails to effect a direct hit. The back-up fielder fails to gather the ball, but " +
-    "long-on runs in and fires a direct hit at the bowler's end"
+    "long-on runs in and fires a direct hit at the bowler's end",
+    "that's a bizarre run out, gone! He flicked the ball from middle to deep midwicket and for some reason they thought " +
+    "of taking the second run. Accurate throw and he's run out by a mile.",
+    "that's such a bizarre run out! The striker pushed the straight full toss back towards the bowler but hit his partner," +
+    " then the ball hit the umpire and went to the left of the bowler. Both thought there was a run there and took off, " +
+    "but by the time they turned around, the fielder had picked the ball up from wide of the crease and hit the stumps " +
+    "even though he would have seen only one from that angle!",
+    "what a strike by, he's run the batsman out! The striker pulled but was beaten by another slower ball, tried to get " +
+    "off strike by stealing a bye but the keeper was too sharp for him. He collected cleanly and threw quickly, the direct" +
+    " hit catching the sprinting batsman inches short.",
+    "THe fielder doesn't realise that the batsmen are confused and throws the ball late, which makes the non-striker come" +
+    " back for the second. But his throw is accurate and the bowler takes the bails off casually, catching the bat short" +
+    " despite the dive",
+    "this has been a great little mini-battle. The batsman looks to get a leg up by racing down the pitch, but the bowler" +
+    " pulled his length back and this pitch helps him out with some zip and bounce. The batsman follows it with his hands" +
+    " and gets an outside edge. Wants a single to escape the stranglehold and that's ended up a mistake as well. He is well" +
+    " short. The direct throw from short third man effects a run out",
+    "short ball on middle, he pulls to deep square leg. But his partner wants two! Oh dear, this could be bad! It is! The" +
+    " batsman says no from the non-strikers' end rightly perhaps, by which time he had been halfway down. Ran the first " +
+    "too slow, while his partner was motoring. Has to turn, does his best, stretches as much as he could, but the throw " +
+    "has beaten him.",
+    "what a waste of a wicket, it was worked in front of square, there was only one in it as deep midwicket came in, they" +
+    " wanted a second, he started and stopped, his partner had come a long way out before he turned back, the throw was " +
+    "accurate on the bounce to the keeper, and he is comfortably short",
+    "they've gone for a greedy bye off a wide and it seems to be quite close. And he's gone. It was a slower ball that " +
+    "skirted well past and he is completely fooled. Goes for a swipe and is hit on the body. They call through for the " +
+    "run, but a fielder rushes forward, grabs the ball, turns around and nails the throw at the other end. The victim is" +
+    " well short",
+    "yorker on the toes, flicked to deep square leg. The batsman scurries for a second run, but he can't beat the incoming" +
+    " throw",
+    "is he gone? Yep, he's walking off! It was slid well wide of him, and the ball kept low as well. Manages a cut towards" +
+    " point. Then the indecision hits. The striker calls, and then worries about point. By that time bth had charged down" +
+    ". Then comes the fumble from the fielder and he thinks he can make it, but the man at point recovers quickly and gets" +
+    " the throw to the right end and the fielder backing up breaks the stumps",
+    "he's gone! It certainly appears so. He has beaten the batsman in flight - who was rushing down the track, but he " +
+    "realises the ball has been held back. All he can do is bunt it into the off side and then he gets greedy. Wants a " +
+    "single, but his partner says no. Amid the indecision, th bowler has rushed across and slung a throw to the keeper, " +
+    "who does the rest",
+    "misses the full delivery outside off, he tries to sneak in a bye but the keeper, who had his right glove off, gets " +
+    "a direct hit",
+    "but there's a run out and he is going back! The batsman flicked the length ball to midwicket and called for a very " +
+    "risky single, he responded too but the flat throw was pretty accurate and the keeper whipped the bails off in no time",
+    "such excellent work from the bowler, the batsman is run out! He blocked the yorker back to the bowler and was well " +
+    "out of the crease. He didn't go back immediately even though the bowler stopped it with his right hand, he threw the" +
+    " ball back in no time, rattled the stumps and the slide back wasn't enough",
+    "goes back to a good length ball, it's another slider, helps it off the inside edge to deep midwicket. Two is on, but" +
+    " the batsman is quite slow to turn. That could well cost him. But wait. it appears like the keeper's gloves have kissed" +
+    " the bails loose before he brings the ball over to knock on the stumps. It's terrribly close. The third umpire's looking" +
+    " at a lot of replays, but the ball was in his gloves when his webbing tips one of the bails over. And the big red " +
+    "letters tell him to go home",
+    "nails the yorker on off stump, he squeezes it out to deep cover and comes back for a second run, hoping the throw " +
+    "will be bad. It isn't"
 ];

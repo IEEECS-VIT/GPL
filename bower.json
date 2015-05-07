@@ -1,6 +1,6 @@
 {
     "name": "GPL",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "homepage": "https://github.com/IEEECS-VIT/GPL",
     "authors": [
         "Aneesh Neelam <neelam.aneesh@gmail.com>",
@@ -9,9 +9,10 @@
         "Vikhyati Jain <vikhyati.jain2012@vit.ac.in>",
         "Karan Pittie <karan.pittie2013@vit.ac.in>",
         "Ayush Agarwal <agarwalayush161@gmail.com>",
-        "Shivam Mathur <burnualive@hotmail.com>"
+        "Shivam Mathur <burnualive@hotmail.com>",
+        "Sakshi Anand <sakku.anand3@gmail.com>"
     ],
-    "description": "GraVITas Premier League",
+    "description": "graVITas Premier League",
     "main": "bin/www",
     "moduleType": [
         "globals",

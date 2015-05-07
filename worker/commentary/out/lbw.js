@@ -81,5 +81,29 @@ module.exports =
     " bid to squirt it away. Trapped on the front pad in front of the leg stump. It would have grazed leg. The forefinger" +
     " goes up",
     "Fullish and angled in to beat the batsman's push and strike him on the back pad. This would have crashed into middle" +
-    " and leg. It was the slower one and he was hoodwinked. The captain lets out a roar"
+    " and leg. It was the slower one and he was hoodwinked. The captain lets out a roar",
+    "he appealed for it all alone, and got the umpire to raise his finger. The danger man is gone! This one was much slower" +
+    " around the off stump, he got into position early to paddle it fine and took it on the pad for a leg bye. The bowler" +
+    " appealed long and hard and the umpire took his time to raise the finger but did it eventually. Simmons took his eyes" +
+    " off the ball and got a big inside edge which the umpire didn't spot",
+    "given lbw! Fired the ball full and angling into the batsman from round the wicket, he was caught on his crease and " +
+    "struck in front as he played across the line. That looked pretty adjacent. The umpire took a while to raise his finger" +
+    " and before he did the fielder at slip had collected the ball and broken the stumps at the striker's end. So there " +
+    "was an appeal for a run out too, but he was then given lbw. Replays show that the ball might have been clipping leg" +
+    " stump, but Marsh would have been given run out had he not been given lbw",
+    "he's got him first ball, he started with a flat delivery on the stumps, short of length, the batsman pulled and " +
+    "missed it and was struck right in front. Maybe he thought it was too high and wasn't that happy. Looked plumb in " +
+    "replays",
+    "does him in! Drew him forward with the length and then the pitch offers just enough zip, at just enough pace to beat" +
+    " Baz. Defends down the wrong line, struck in front. Oh, but was there an inside edge? The reaction suggests as much...",
+    "swinging yorker towards the stumps now, appeal from the bowler for lbw and he's given! The batter tried to paddle " +
+    "the ball on the leg side, didn't connect and was hit low and in front of off stump",
+    "another wicket, the angle from round the wicket has done it as he gets his man! Stayed on the back foot and covered" +
+    " the stumps to steer the ball to leg with the angle, but missed it and was caught in front of middle stump",
+    "the bowler strikes, he has to depart. This was the magical one from the bowler, he controls it. The striker's balance is" +
+    " shot as he falls over the flick and is smacked on the front pad in front of middle. It would have grazed leg. The " +
+    "forefinger goes up",
+    "struck in front! This was pushed through on leg stump, pulling him into a sweep, but the ball gains a lot of zip " +
+    "from the pitch and hits him in front of middle stump. Seemed a fair decision. Lovely bowling, went wide of the " +
+    "crease to create a different angle"
 ];

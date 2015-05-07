@@ -859,5 +859,336 @@ module.exports =
         "pushed through on middle and leg, tucked away through square leg",
         "on a length and outside off, hit uppishly over the covers",
         "fuller and outside off, swats it to midwicket off the inside part of the bat. The fielder there goes low but " +
-        "fumbles, allowing two runs"
+        "fumbles, allowing two runs",
+        "slightly full outside off, drives it just past short cover towards sweeper cover and comes back in time for the" +
+        " second",
+        "not too short, not full at all, don't know what the batsman saw in that and slammed it high on the leg side " +
+        "towards the cow corner. It bounces a couple of times before the boundary where the fielder cuts it in",
+        "short ball now, Morgan doesn't time the pull that well but finds the gap between deep midwicket and long on for" +
+        " two",
+        "short ball just outside off, slapped back past the bowler towards long off for two",
+        "full and going towards leg stump, helped with the angle to fine leg for two",
+        "covers off stump and paddles the fullish ball fine on leg for two",
+        "full on the leg side again, comes down and flicks the low full toss on the pads wide of deep midwicket for two",
+        "fullish outside off, drives that into the covers and in the gap to call for two",
+        "the stumps are uprooted, this time at the non-striker's end with a direct hit. The batsman clipped the " +
+        "full delivery to deep midwicket, the fielder ran in, picked it up in no time and hit the stumps. The bat was in" +
+        " by an inch or two",
+        "in the block hole on off and middle, he pushes it down to long on for one. A direct hit means it's an overthrow" +
+        " too",
+        "full toss on the pads, it deflects off the pads and they come back for the second as it goes to square leg",
+        "drives on the front foot to mid-off where he dives over the ball and lets it go through for runs, mid-on gives " +
+        "chase",
+        "makes room and slaps the ball with a flat bat to long off for a single, he is sloppy in collecting his clean " +
+        "throw and concedes an overthrow",
+        "goes deep into his crease and dabs the ball through wicket, they race through for two because the fielders have" +
+        " some ground to cover to get to the ball",
+        "top edges a full toss and is cut short by the fielder running in from long on",
+        "hit flat and hard towards long on where he comes racing in from the line and dives forward desperately, top " +
+        "effort but the ball drops just short",
+        "in the blockhole, pinpoint accuracy from the bowler, but the batsman manages to dig it out and because there is" +
+        " no infielder at midwicket they manage to run two as the fielder has to run in from the deep",
+        "a full ball outside off and he drills the ball hard towards wide long off with a fluent drive, the fielder sprints" +
+        " to his left and dives to save the boundary. He gets on his feet quickly and releases the ball swiftly too, top" +
+        " fielding",
+        "short of a length and straight, the batsman charges and swings, hitting it through midwicket, they race back for" +
+        " the second",
+        "angled towards the pads, he stays back and tucks it behind square on the leg side for two",
+        "back of length outside off, defends off the back foot and takes a quick single towards cover. An overthrow makes" +
+        " it two",
+        "that's clever batting - he tucked the ball towards midwicket with soft hands because the fielder is in the deep" +
+        " and they came back for two",
+        "nipping in a bit towards middle stump, he drives the ball square past backward point and gets two before he cuts" +
+        " it off in the deep",
+        "fullish, to befit the slip in place, but this delivery is slanted on the pads. Nudged through midwicket",
+        "too full on the off stump, he opens up and drills it wide of long off with a handsome drive, th fielder goes to" +
+        " his left and cuts it to two",
+        "couple of short steps down the pitch and he drives it from outside off to sweeper cover for one",
+        "pitched up on off, he flicks it powerfully to the leg side between fine leg and deep square leg for two",
+        "full toss number four of the over, this one around the knee roll and the batsman steers it wide of deep fine leg" +
+        " but the fielder slides to his left to save two crucial runs",
+        "in the air again as he doesn't middle that pull, but the ball falls short and wide of Smith at long on and they" +
+        " come back for two",
+        "appeared the slower yorker, but he has seen it well and clips it to long leg. And the throw is way wild. He was" +
+        " running beside the pitch on the off side, and yet he had to duck",
+        "flighted on off, it's full too and Samson flicks it uppishly through the midwicket region. The fielder there runs" +
+        " across from long on and slides to save two",
+        "sweeps the ball with the angle wide of deep backward square leg, the fielder does good work in the deep as they" +
+        " come back for two",
+        "makes more room this time, think it was a straighter one and Samson cut it past point for two",
+        "slower ball just outside off, he goes across and whips the ball square on the leg side for two",
+        "goes on the back foot and steers the ball through midwicket in the gap for two quick runs",
+        "shuffles across the off stump, he lands it short and slow outside off, and the striker flicks it gently to the " +
+        "leg side so that they can come back for two",
+        "again in the block hole, he flicks and it goes wide of short fine leg as the fielder chases it",
+        "punched off the back foot through midwicket for two more",
+        "reaches for another wide one and tries to cut, he gets a bottom edge past his stumps towards fine leg, the ball" +
+        " is travelling slow enough for the fielder to collect this time.",
+        "opens the face late to steer the ball and give third man a chase to his right",
+        "a length ball on the pads, glanced to fine leg",
+
+        "slower one again, cutting in and Baz tucks it off the back foot towards deep square leg for two",
+        "that's gone high on the leg side, the fielder is running backwards and he puts it down! The striker pulled the " +
+        "short ball and got a top edge, he was running from midwicket but it never looked like he was going to get under" +
+        " it properly",
+        "fuller now outside off and he dabs it square on the off side to deep point for two",
+        "angled into the pads now, he helps it to fine leg and they come back for two",
+        "another outside edge as he pushes hart at the ball. Manages to evade the lone slip fielder, to deep third man",
+        "full on the pads now, flicks it with the angle to deep backward and a fumble there gives them an easy couple",
+        "another top-edge, this one lands safe! He flicked the back of length ball to leg, didn't time it and it just " +
+        "cleared the fielder at midwicket",
+        "takes a step down and chips the full delivery from middle and leg wide of long on for two more",
+        "angled in towards off stump, the steers it with the angle to the deep midwicket region. There was some hesitation" +
+        " for the second, especially from the non-striker, but they got there",
+        "fuller delivery on the stumps, flicked to the leg side for two in the gap",
+        "falls just short of deep square leg! He flicked the ball off the pads towards the fielder, who ran in hard, but" +
+        " the ball dipped on him and they take two",
+        "full again, he flicks it along the ground and finer on leg, he runs around and slides to keep it to two",
+        "great cricket all around! He took a step down and pushed the yorker down firmly towards long on. The fielder ran" +
+        " to his left from long on and slided to cut the ball and threw it to the man who came from long off",
+        "almost a yorker again, but he makes room and drives it straight down handsomely, he runs from long on and they " +
+        "take two",
+        "loopy delivery that's eased to deep midwicket, who races in, looks for a one-handed pick up and throw. But he's" +
+        " misfielded. Took his eyes off too early",
+        "that's timed quite well. Short ball at pace, but doesn't quite rise all that high. Pulled to deep midwicket",
+        "he's preferred to play off the back foot all day, and now he's getting the lengths to justify that premeditation." +
+        " Cut away to sweeper cover",
+        "they've stolen two! He's barely dabbed it into the leg side, Midwicket has spotted the urgency and raced in. Goes" +
+        " for an underarm throw. But can't beat the two batsmen",
+        "shortish and outside off, gets inside the line and clips it to deep square leg. Another two",
+        "top edge! But this time He's quick enough to manage the save. Goes for a last minute dive to keep the mistimed " +
+        "pull to only two",
+        "back of a length and angling across, jabbed off the front foot through covers",
+        "sweeps a tossed up delivery from outside off to long leg. Manages a couple",
+        "a shade short and wide, he slaps it into the covers. The man close in stumbles as he tries to take a low catch to " +
+        "his left. Only gets a finger tip to it, and it's bleeding. No persistent damage done, though",
+        "shortish and outside off, he has waited on it nicely and cracked a cut to the left of the sweeper",
+        "back of a length and outside off, nudged through square leg",
+        "length ball a shade outside off, he has slapped it past a diving extra cover and he's placed it wide of the " +
+        "sweeper as well. Perfect result",
+        "that's a full toss well outside off and he frees his arms to drive it to sweeper cover",
+        "turned wide of fine leg",
+        "stays back and swats a shortish one to deep midwicket",
+        "fuller on the stumps, turned to deep midwicket, they go for the second, non-striker puts in the dive",
+        "short of length outside off, guides it late to third man and they come back quickly for two",
+        "slower ball on length towards the covers, they sneak in a quick single but there's a direct hit at the bowler's" +
+        " end and they go to the third umpire. Not out, and there was an overthrow too because the ball deflected, so " +
+        "they get two",
+        "takes two small steps again, turns it towards deep square leg and they come back for the second",
+        "sitting up from back of a length, he swivels and forces a pull square, not able to beat the deep fielder",
+        "pitched up and moving in a bit, shout for leg before, but he has got some bat on it to force it behind square",
+        "full and angled in towards middle and leg, flicked behind square on the leg side and they come back for the second",
+        "comes down and drives the ball firmly into the covers, he slides to his left and saves two",
+        "back of length slower ball cutting in, dabbed towards deep midwicket and they sneak in two",
+        "hit hard, that's going flat to deep backward square and hea gets his hands to it while running in but drops it!" +
+        " The keeper pulled the short ball and found the fielders but escaped",
+        "that's gone very high, very very high and a mix-up between the bowler and the keeper means he tries in the end " +
+        "and it goes through his hands. He pulled, found a top edge and that went behind the stumps on the off side but " +
+        "not judged properly",
+        "shot ball is pulled to deep midwicket in the gap for two",
+        "angles in a yorker, the striker steers it wide of deep midwicket in the gap for two",
+        "pulls this one on the other side, it's in the air and in the gap for two before the fielder cuts it off at deep" +
+        " midwicket",
+        "that's a well-connected and firm cover drive right in the gap but a fielder races across from long off, slides " +
+        "in no time and picks the ball up with only his left hand and throws it back in no time. Excellent effort",
+        "takes it from off stump and clips the shortish ball to deep square leg",
+        "stopped with a dive at around square leg. Probe the pads of the batsman and you'll be hurt every time",
+        "works a tossed up delivery from outside off into the leg side. Deep midwicket runs around to his left, but can't" +
+        " stop the couple",
+        "tossed up on middle, he premeditated the sweep and manages to get it fine",
+        "flighted on middle, he puts all his strength into a sweep but it still isn't enough to beat the man at the long" +
+        " leg boundary",
+        "nearly hits the blockhole and he has sliced it to short third man and takes on the fielder's loopy throw. Good " +
+        "presence of mind, and the ricochet off the stumps at the bowler's end gives him an extra",
+        "shortish and outside off, he waits on it nicely and slaps it behind point for a couple.",
+        "chip over cover. Good length ball on middle and off, and this seems slower as well, lifted over the infield",
+        "lots of flight, and width as well, slashed to deep point for a couple",
+        "handsome shot over cover. And he'd nearly split the gap between the sweeper and long-off. Moves outside leg to " +
+        "give himself the room he needed. But the sweeper did not give up. And a good dive saves two runs",
+        "flatter and quicker outside leg as he saw Simmons making room. Clipped through deep midwicket for a couple. " +
+        "That'll be two",
+        "low full toss on off stump, drummed down the ground to long-off. He races across for the first run, and drags his" +
+        " partner back for another. There was a  quick throw, but it isn't quick enough. Direct hit would have had him " +
+        "though",
+        "in the slot and he has slammed it down to long-on, where the fielder stationed has some ground to cover to his " +
+        "left, by which time they steal another couple",
+        "dropped! It's the quicker one, a bouncer as well. The potential victim was on the front foot, but still goes for" +
+        " the hook. Top edge flies to long leg where the fielder comes up, sets himself up under it and misses it horribly",
+        "good length ball on off stump, swiped away to deep square leg",
+        "leg-stump low full toss which he clips to long leg and demands a couple. Could have been run out, had the " +
+        "keeper collected the throw cleanly. But the throw actually was a bit iffy from the fielder",
+        "short and wide, his cut goes manifests as an inside edge that skirts past the keeper. Got into the shot too early",
+        "down the track to a flighted ball on leg stump, clipped to deep square leg",
+        "goes back and clips a good length ball to deep square leg",
+        "fuller delivery, slower as well. Whipped to wide long-on",
+        "shortish, pulls to deep square leg.",
+        "full on off stump, Bailey skews it away to deep backward square with a slog",
+        "low full toss on middle, he has flicked it wide of long-on",
+        "fuller ball outside off, Bailey thumps it through extra cover. Two runs taken, despite the two batsmen doing their" +
+        " best to collide with each other. The non-striker has to run around his partner, but still makes it",
+        "low full toss on leg stump, whipped away to deep square leg and his partner hustles for a couple",
+        "goes short and hands room, he swipes it away wide of long-on, who gets across to it",
+        "angles it across he from off, he guides it to third man with the outside edge",
+        "more swing outside off, touch back of length and he guides it to third man in the gap",
+        "fuller outside the off stump, Watson drives it square towards point and a bit of misfield gives them two",
+        "touch shorter outside off, he waits and defends it past slip with a thick edge for two",
+        "outside off with some turn and Nair also finds deep cover with a drive",
+        "back of length on the middle stump, swatted off the back foot to long on for one",
+        "closer to the stumps further and he flicks it to leg with the angle",
+        "dropped at deep cover! The batsman lofted that without much power from the teo end of the bat, he fielder ran " +
+        "in a little late from the deep and couldn't get under it properly while diving forward",
+        "comes down the track and slashes that to the right of deep cover in the gap for two",
+        "some width outside off, driven off the front foot towards deep cover for two",
+        "short of length outside off and he slices that wide of deep third man for one",
+        "slightly straighter on the stumps, flicked against the turn towards deep midwicket and Nair manages to make it " +
+        "for the second",
+        "turning away, he reverse-sweeps it gently and finds short third man. An inaccurate throw to the bowler gives them" +
+        " an overthrow too",
+        "in the air again, two fielders coming under it and neither can take it! The batsman came down for the slower ball," +
+        " top-edged it high on the off side. One ran back from cover, the other from mid off and both dived but nobody " +
+        "got close to the ball and they landed on each other",
+        "more orthodox shot now as it's angled into the pads and he steers it to deep midwicket",
+        "slow and in the block hole on middle stump, pushed down to long on and even an apparently tired non-striker comes" +
+        " back quickly for the second",
+        "full on off, punched down to long off and he called for two immediately, who throws to the keeper's end while " +
+        "losing his balance and the ball goes towards the slips",
+        "towards middle and leg again, he swat-pulls that in the gap again, this time along the ground, and long on cuts" +
+        " it to two",
+        "shot ball into the ribs, swat-pulls it with an inner edge towards deep midwicket",
+        "short ball outside off and Mathews taps it to point for a quick single. He tries a direct hit at the keeper's " +
+        "end but misses and concedes an overthrow",
+        "short ball swinging into him, swat-pulls it behind square on leg in the gap for two",
+        "yorker on middle and leg, and he flicks that between fine leg and deep backward square leg for two",
+        "offcutter from leg to middle, he goes back and works it to deep square leg with gentle hands for two",
+        "late reaction from fine leg and he can't get under it! The short ball induced a pull a top edge which went high" +
+        " behind square on the leg side but the fielder ran in late from his position",
+        "angled into the batsman, steered to deep backward square for one",
+        "first he made room and then went back in the crease to tuck that fine on the leg side",
+        "low full toss is driven down wide of long off and they get two",
+        "tries the block hole outside off, JPD taps it just wide of point, who tumbles to his left but can't stop it",
+        "yorker to end the match too, outside off, and he steers it to third man where the fielder cuts it off for two",
+
+        "flighted on middle, he chips it to wide long-on. The keeper has gone up to the bowler to have a little word",
+        "a little too much width, although that's a good ploy against a batsman looking leg side. He drags it away to " +
+        "long-on on the bounce",
+        "backs away and slaps it through the covers",
+        "good length ball on of stump, steered towards point. The fielder dives to his right but can't reach it. By the " +
+        "time third man can mop it up, the batsmen have stolen a couple",
+        "fullish on leg stump, he flicks it away wide of mid-on",
+        "down the track first ball and hammers the flighted delivery to deep midwicket",
+        "flighted outside off, turned away through midwicket",
+        "a slap from the fielder keeps the ball inside the field! Good work on the long-on boundary after the batsman " +
+        "cleared his front leg and thumped a flighted delivery wide of the man.",
+        "the boundary riders almost pull off the hokey pokey! The batsman had jumped forward, to the pitch of the slow, " +
+        "loopy delivery and thumped it over long-on. It seemed headed for a six, until the fielder positioned himself on" +
+        " the edge of the boundary, leapt up, thrust his hands behind him, took the catch and then parried it to the fielder" +
+        " who was backing up. But the push back into the field didn't have enough power behind it",
+        "tossed up on middle and leg, clipped with soft hands through the midwicket region. This time the two is well on.",
+        "good length ball on leg stump, tucked away into the leg side for a single. He races after this one as well, and" +
+        " then flings an overthrow. Loopy throw wide of the man backing up at the bowler's end. The fielder uses only one" +
+        " hand for the job. Sloppy",
+        "Cuts back in and the bowler is excited. I think the impact was outside off. Good length ball brings him forward" +
+        " to block. Skids on at him too quickly and his bat is hidden behind the pad",
+        "fuller and outside off, flicked to deep square leg",
+        "lands the yorker on off stump, but yet it goes for a couple to deep midwicket",
+        "comes out of his crease and drives the ball inside out over the covers, taking it on the full. Couldn't smash " +
+        "it from the middle of the bat as the fielder ran from mid off to cut it off",
+        "offcutter outside the leg stump, Raina hops back and tucks to deep backward square leg for two",
+        "fuller and wider outside off, he drives it late and square to backward point. He dives to his right to get a " +
+        "hand to it and injures himself a bit as they come back for two",
+        "charges down to heave on the leg side now, it's much slower so it lands short and wide of deep midwicket",
+        "slow and in the block hole, he blocks on the leg side, the fielder runs a fair bit towards midwicket, dives and" +
+        " throws to the keeper. But there was enough time for a single and they get a second for overthrows",
+        "comes down and glides the low full toss a bit wide of third man, who runs to his left and slides to save two.",
+        "full toss around off, lofts it straight down to long off, he hasn't middled that at all. And a fumble at long off" +
+        " gives them a second. The bowler raises his arms, the batsman stares at the fielder",
+        "heaves that from the off stump to the leg side, it's wide of deep square leg and they get two",
+        "exposes all his stumps by going across all the way, and drives the low full toss from off stump to the midwicket" +
+        " region. They come back for two",
+        "straightening on a length on middle, and that line is picked away in front of square",
+        "clever batting, smart running - he eased the length delivery towards long off, not too hard, and called for two" +
+        " early",
+        "whipped through the leg side, he calls for two and has it despite the man losing his bat midway and running to " +
+        "the danger end",
+        "down the track and slaps the length ball to long-on! He had to reach out to it with the bowler adjusting his " +
+        "line. Hurt his timing a bit and the fielder hares after it from long-off, moving to his right like lightning and" +
+        " pulls in a big dive. The ball just bounces short of him",
+        "moves away from the stumps and dabs a flighted delivery from outside leg into the extra cover region. The man " +
+        "in the deep rushes in, but the batsmen are quicker",
+        "pretty wide outside off, he slams that to deep point",
+        "full and slightly wide, he drives that firmly past cover and in the gap between long off and deep cover for two",
+        "charges down again, the bowler delivers a slower ball and the batsman chips that uppishly to deep square leg to" +
+        " come back for the second",
+        "pushes the slower ball between point and short third man, who goes to his left and deflects the ball a bit wide" +
+        " of short third man, they come back for two",
+        "takes a step forward and flicks this one behind the square leg umpire",
+        "fuller and on middle and leg, he closes his bat face and clips it to the left of mid-on",
+        "slid through outside off, chopped to the right of short third. He dives and fumbles a bit. The pair get two",
+        "moves in, down the track but he does not meet the pitch of the ball. Squirt-edges it in front of long-on. He runs" +
+        " across and behind to hunt the ball down",
+        "length on the leg stump as he makes some room and swats it wide of deep square leg. They push for two and get it." +
+        " The bowler vents his frustration out and smashes the stumps at his end",
+        "Two fielders almost collide and drop the catch! The batsman attacks this ball and slices this one over cover-point" +
+        ". The two fielders run back, fail to make a call, and shell the chance. The first one got to the ball, juggled " +
+        "and put it down. He was perhaps distracted by an approaching fielder. The bowler is not pleased with the effort" +
+        " and sinks to his knees. The second fielder can't grab it on the rebound either",
+        "punched to mid-off and they take an extra run off an overthrow",
+        "back of a length outside off and turning away, punched behind point for a couple",
+        "full and outside off, he waits it and employs the latest of dabs. Nearly picks it off the keeper's gloves and " +
+        "runs it through vacant slip cordon",
+        "on a length and outside off, he bends his knees and swings it towards long-off, who runs in and attacks the ball," +
+        " he flings an accurate throw to the keeper's end but the batsman is in",
+        "there comes the fuller delivery! He was lucky that this came as a low full toss. He inside edges it through to " +
+        "deep backward square leg",
+        "good length on off stump, slid off the open face past point",
+        "flat on middle, swept to square leg on the boundary",
+        "dug in short, and it slips away towards the leg side as well. He goes for a pull, and seems to have gloved it. ",
+        "hits the yorker a shade outside off, he squeezes it into the covers and grabs a second off the overthrow. Seems" +
+        " to have been a ricochet at the bowler's end, but the batsman is well home",
+        "whips a fuller delivery off middle between deep square leg and deep midwicket",
+        "good length on middle stump, he stays back and plays a short-arm swat through square leg",
+        "now he does find the gap, leaning into a full ball and driving it smoothly through covers, he can come back for" +
+        " a second before the fielder at deep point gets to the ball",
+        "a length ball with width outside off, moves forward and drives on the up to long off",
+        "plays the reverse swat, chipping it over short third man. The ball begins to rush towards the third man boundary" +
+        " but the fielder sprints after it and dived superbly to save the four. That will put some of the aspiring younger" +
+        " players to shame",
+        "goes back and plays the ball off his pads through the leg side",
+        "driven on the front foot to long off, placed wide of the fielder so there is time for two",
+        "width outside off stump and he cuts late, placing the ball wide of the third man fielder so he has time to return" +
+        " for the second",
+        "full ball outside off, he is standing on middle and off, covering all three stumps, and he square drives to deep" +
+        " point",
+        "Morgan jumps out of his crease but has to lunge for the ball because it is wide outside off stump, he manges to" +
+        " hit it towards deep cover, who fields",
+        "Nair's away with a fluent front foot drive through cover, he pushes hard for the second run",
+        "reaches for the ball outside off to drive to cover but gets an inside edge towards the leg side",
+        "a full ball on middle and leg, nudges it gently towards mid-on, the fielder has to run a long way in from long-on" +
+        " and he isn't the quickest so can't prevent the second",
+        "skips out of his crease and towards the off side to whip the ball through midwicket",
+        "nudged into the covers, tries to get off strike but can't",
+        "they have got two here, dabbing a really slow delivery gently into the space at midwicket and running the second" +
+        " before the fielders from the deep can come rushing in",
+        "played off the pads through midwicket for one more",
+        "in the blockhole, and a slower ball too, plays it towards deep midwicket and they rush back for the second to " +
+        "keep strike",
+        "in the blockhole, he flicks but gets an inside edge towards short fine leg where the fielder dives to save " +
+        "the boundary",
+        "dropped. And this was a dolly too. He's let one spill through his hands at short midwicket after the batsman " +
+        "goes for a front-foot flick. Not quire full enough for that stroke and the ball just popped up. Should have been" +
+        " taken",
+        "looped up outside off, he gets down on one knee and lap-sweeps it fine.",
+        "tossed up on off stump, lifted over cover",
+        "doing what he is supposed to. Hit out or get out. Nearly carried as far as the deep cover fielder as he stayed " +
+        "leg side of the ball and scythed it over the top",
+        "lots off flight on off stump, and he sizes it up nicely to whip wide of long-on",
+        "shortish on off stump, pulled to deep midwicket",
+        "tossed up outside off, he goes for a full-blooded thump over cover. Has to settle for an inside edge through fine" +
+        " leg.",
+        "tossed up outside off, slashed away wide of long-off, who rushes around and parries the ball back inside the " +
+        "field of play",
+        "leans forward and lifts a good length ball from off stump over cover. Good shot, all he did was extend his hands" +
+        " from the old Test-match defence",
+        "comes in from back of a length, he punches off the back foot, to square third man",
+        "flighted on middle, turned away to long leg for a good, hard-run couple"
     ];
