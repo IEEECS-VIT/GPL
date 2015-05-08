@@ -1,6 +1,3 @@
-/**
- * Created by user on 5/1/2015.
- */
 var days=100;
 var seconds = days*24*60*60;
 function timePassed() {
@@ -32,6 +29,4 @@ function timePassed() {
     }
 }
 
-var countdownTimer = setInterval('timePassed()', 1000);/**
- * Created by pc on 03-05-2015.
- */
+var countdownTimer = setInterval('timePassed()', 1000);
