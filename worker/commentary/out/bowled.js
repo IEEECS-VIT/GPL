@@ -272,5 +272,14 @@ module.exports =
     " foils his efforts. Ends up chopping onto off stump",
     "that's the last time the pull shot will fail him tonight. It's his normal pace, and it's short without offering too" +
     " much room. he swivels on the back foot for the stroke, but he's still a bit late on the shot. Inside edge crashes " +
-    "into timber"
+    "into timber",
+    "The delivery takes everybody by surprise by hitting leg stump! The batsman moved a long way across his stumps and " +
+    "got down on one knee to sweep, he exposed his leg stump that was the end of his innings",
+    "He gets down on one knee to slog across the line but the length is quick and the pace is faster, it sneaks under his" +
+    " bat and bowls him",
+    "bowled him! He moved a long way across his stumps, exposing all three, to try and paddle the ball towards short fine" +
+    " leg, the length was too full and it beat the bat and hit the stumps",
+    "is that out? The bails are off..is he bowled or was it the keeper's gloves that took them off? There was no room as" +
+    " the ball came in from just outside off, he went back to cut it and was beaten past the outside edge. Replays clearly" +
+    " show the ball dislodged the bails, big wicket this one"
 ];

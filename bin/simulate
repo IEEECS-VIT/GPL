@@ -19,20 +19,27 @@
  */
 
 var path = require('path');
-
+var day;
 var simulationControl = require(path.join(__dirname, '..', 'worker', 'simulation-controller'));
 
-if (process.argv.length !== 3)
+if (process.argv.length < 3)
 {
-    console.log('Please Enter the Match Day as argument');
-    process.exit(1);
+    console.log('Using application environment variable');
+    if(process.env.DAY)
+    {
+        day = parseInt(process.env.DAY);
+    }
+    else
+    {
+        console.log('Please enter the match day number (1-7) as an argument');
+        process.exit(1);
+    }
 }
 else
 {
-    var day = parseInt(process.argv[2]);
-    simulationControl.initSimulation(day, function ()
-    {
-        console.log('Simulation of Matches for Day ' + day + ' is complete');
-        process.exit(0);
-    });
+    day = parseInt(process.argv[2]);
 }
+simulationControl.initSimulation(day, function (){
+    console.log('Simulation of Matches for Day ' + day + ' is complete');
+    process.exit(0);
+});

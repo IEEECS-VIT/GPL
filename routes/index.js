@@ -27,11 +27,12 @@ var express = require('express');
 var path = require('path');
 var router = express.Router();
 var crypto = require('crypto');
+var key = process.env.PASSWORD || require(path.join(__dirname, '..', 'key.js'));
 var email = require('nodemailer').createTransport({
     service: 'Gmail',
     auth: {
         user: 'gravitaspremierleague@gmail.com',
-        pass: process.env.PASSWORD
+        pass: key
     }
 });
 var log;
@@ -171,7 +172,7 @@ router.post('/reset/:token', function(req, res) {
                 text : 'Hey there, ' + doc.email.split('@')[0] + ' we\'re just writing in to let you know that the recent password change was successful.' +
                 '\nRegards,\nTeam G.P.L'
             };
-            email.sendMail(options, function(err, doc) {
+            email.sendMail(options, function(err) {
                 if(err)
                 {
                     console.log(err.message);
@@ -259,7 +260,8 @@ router.post('/register', function (req, res)
                     avg_overs_against : 0.0,
                     highest_total : -1,
                     lowest_total : Number.MAX_VALUE,
-                    stats : {}
+                    stats : {},
+                    surplus : 0
                 };
                 var onInsert = function (err, docs)
                 {

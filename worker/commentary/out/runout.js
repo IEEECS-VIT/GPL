@@ -177,5 +177,22 @@ module.exports =
     " at a lot of replays, but the ball was in his gloves when his webbing tips one of the bails over. And the big red " +
     "letters tell him to go home",
     "nails the yorker on off stump, he squeezes it out to deep cover and comes back for a second run, hoping the throw " +
-    "will be bad. It isn't"
+    "will be bad. It isn't",
+    "this innings ends with a run-out as he can't put a bat on this length ball, he takes off for a bye, but the keeper hits" +
+    " the stumps to end the partnership",
+    "looked to punch this through off but gets a thick outside edge, that one flew past slip. He might have got a hand " +
+    "to that, he actually did. The two take off for a single, but hello hello, he fires in a throw and catches him short" +
+    " at the striker's end. Initially there wasn't much interest, but the replays show he is well out. What a bonus!",
+    "run out by a direct hit! The match is swinging. He played the ball to extra cover and ran, the fielder swooped on " +
+    "the ball, picked up and nailed the throw, catching the victim at least a foot and a half short",
+    "it's all happening here! The bowler bowls it in the blockhole outside leg to counter the foot movement outside leg " +
+    "stump. He inside edges the ball on to the pad and the ball rolls towards the bowler. The non-striker charges for " +
+    "the single but his partner sends him back. The bowler rushes to the ball, picks up, and hits the stumps with the " +
+    "victim well short",
+    "banged in short and outside off, he jumps up, punches it to the covers and sets off. The fielder moves to his left " +
+    "swoops down on the ball and puts in an accurate throw to the man backing up, who whips the bails off. The bat got " +
+    "jammed into the ground and he was caught short! The skipper is pumped, super-pumped",
+    "he has been run out, a fielder nails the stumps down in haste. He fails to connect with the attempted reverse-ramp " +
+    "again, the bowler wants a single but is sent back. The ball rolls off the pad to the leg side, he runs forward, " +
+    "collects, turns back and fires a direct hit"
 ];

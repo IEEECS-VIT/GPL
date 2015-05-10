@@ -21,6 +21,7 @@ var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
 var match = require(path.join(__dirname,'..','matchCollection'));
 var log;
+var key = process.env.PASSWORD || require(path.join(__dirname, '..', 'key.js'));
 if (process.env.LOGENTRIES_TOKEN)
 {
     var logentries = require('node-logentries');
@@ -28,10 +29,29 @@ if (process.env.LOGENTRIES_TOKEN)
                                 token: process.env.LOGENTRIES_TOKEN
                             });
 }
-
+var ref = {
+    'users' : 1,
+    'round2' : 2,
+    'round3' : 3
+};
 var simulator = require(path.join(__dirname, 'simulation'));
+var email = require('nodemailer').createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'gravitaspremierleague@gmail.com',
+        pass: key
+    }
+});
 
-var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://127.0.0.1:27017/GPL';
+var options = {
+    from: 'gravitaspremierleague@gmail.com',
+    to: '',
+    subject: 'Round ' + ref[match] + ', match ' + (process.env.DAY || 1) + ' results are out!',
+    text: 'Please click on http://gravitaspremierleague.com/home/matches to see your scores!\n '
+    + '\n\nRegards, \nTeam G.P.L.'
+};
+
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 var databaseOptions = {
     server: {
         socketOptions: {
@@ -81,7 +101,7 @@ exports.initSimulation = function (day, masterCallback)
                 }
                 else
                 {
-                    var addCoach = function (elt, i, arr)
+                    var addCoach = function (elt)
                     {
                         if (elt > 'd')
                         {
@@ -99,7 +119,17 @@ exports.initSimulation = function (day, masterCallback)
         {
             var updateUser = function (newUserDoc, asyncCallback)
             {
-                database.collection(match).updateOne({_id: newUserDoc._id}, newUserDoc, asyncCallback);
+                //
+                database.collection(match).updateOne({_id: newUserDoc._id}, newUserDoc, function() {
+                    options.to = newUserDoc.email;
+                    email.sendMail(options, function(err) {
+                        if(err)
+                        {
+                            console.log(err.message);
+                        }
+                        asyncCallback();
+                    });
+                });
             };
 
             var updateMatch = function (newMatchDoc, asyncCallback)
@@ -121,7 +151,7 @@ exports.initSimulation = function (day, masterCallback)
                     updateMatch(newData.match, asyncCallback);
                 }
             ];
-            console.log('Teams ' + newData.team1._id + ' and ' + newData.team2._id + ', and Match ' + newData.match._id + ' are now being updated');
+            console.log(newData.team1._id + ' vs ' + newData.team2._id + ' (Match ' + newData.match._id + ') is now being updated');
             async.parallel(parallelTasks2, callback)
         };
 
@@ -162,26 +192,8 @@ exports.initSimulation = function (day, masterCallback)
         var collectionName;
         switch (day)
         {
-            case 1:
-                collectionName = 'matchday1';
-                break;
-            case 2:
-                collectionName = 'matchday2';
-                break;
-            case 3:
-                collectionName = 'matchday3';
-                break;
-            case 4:
-                collectionName = 'matchday4';
-                break;
-            case 5:
-                collectionName = 'matchday5';
-                break;
-            case 6:
-                collectionName = 'matchday6';
-                break;
-            case 7:
-                collectionName = 'matchday7';
+            case 1 || 2 || 3 || 4 || 5 || 6 || 7:
+                collectionName = 'matchday' + day;
                 break;
             default:
                 throw 'Invalid Day';

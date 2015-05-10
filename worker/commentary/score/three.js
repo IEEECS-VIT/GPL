@@ -99,5 +99,19 @@ module.exports =
         "tossed up and outside off, he aims to sweep it away. Skews it over the fielder at short fine leg off a top edge." +
         " The man there chases and slides. But he had hurt himself in the process, jamming his knee onto the turf. No " +
         "real damage done, though.",
-        "pulled towards deep backward square leg, the fielder gives chase"
+        "pulled towards deep backward square leg, the fielder gives chase",
+        "this one goes straight up, towards short third-man, but now the fielder drops it. This is a sitter. And what " +
+        "more, they have taken three from this",
+        "slower, but this is short too. He rocks back and pulls it over midwicket. Not much power behind that though, the" +
+        " fielder runs around from deep square leg and boots it in",
+        "another low full toss, he goes low and paddles it behind square leg. The fielder runs across and hauls it in " +
+        "before the boundary",
+        "movement away from the batsman outside off, he gets room and drives that off the back foot by going on his toes" +
+        " and sends it past point in the gap",
+        "in the air but wide of mid-off! Length delivery outside the off stump, he drove it on the up and it went just " +
+        "to the right of mid-off, hey chased it from there and saved one",
+        "tossed up on middle, he sets up for a ramp, does it connect well. The ball goes in the air in between the keeper" +
+        " and first slip",
+        "slower full ball on middle, sliced over the covers, who runs back from mid-off, puts in another outstanding slide" +
+        " near the boundary and swats the ball in"
     ];

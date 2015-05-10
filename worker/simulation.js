@@ -211,6 +211,7 @@ exports.simulate = function (data, callback)
         var free_hit = 0;
         var strike_index;
         var wicket_index;
+        var boundary_gap;
         var fall_of_wicket;
         var delivery_score;
         var current_bowler;
@@ -260,8 +261,9 @@ exports.simulate = function (data, callback)
         toss_index = !toss;
         for(loop = 0; loop < 2; ++loop)
         {
-            desperation[0] = +(data.team[+toss_index].streak < 0) * (1 - team_object[+toss_index].bat_rating[strike[0]] / 1000) * data.team[+toss_index].streak * ((Total[+!toss] + 1) / 5000) * mean_rating[+!toss_index] / team_object[+toss_index].bat_strike_rate[strike[0]];
-            desperation[1] = +(data.team[+toss_index].streak < 0) * (1 - team_object[+toss_index].bat_rating[strike[1]] / 1000) * data.team[+toss_index].streak * ((Total[+!toss] + 1) / 5000) * mean_rating[+!toss_index] / team_object[+toss_index].bat_strike_rate[strike[1]];
+            boundary_gap = 0;
+            desperation[0] = Math.pow(-1, +(data.team[+toss_index].streak < 0)) * (1 - team_object[+toss_index].bat_rating[strike[0]] / 1000) * data.team[+toss_index].streak * ((Total[+!toss] + 1) / 5000) * mean_rating[+!toss_index] / team_object[+toss_index].bat_strike_rate[strike[0]];
+            desperation[1] = Math.pow(-1, +(data.team[+toss_index].streak < 0)) * (1 - team_object[+toss_index].bat_rating[strike[1]] / 1000) * data.team[+toss_index].streak * ((Total[+!toss] + 1) / 5000) * mean_rating[+!toss_index] / team_object[+toss_index].bat_strike_rate[strike[1]];
             for (i = 1; i < 6; i++)
             {
                 if (team_object[+!toss_index].bowl_rating[i] > team_object[+!toss_index].bowl_rating[previous_bowler])
@@ -319,6 +321,7 @@ exports.simulate = function (data, callback)
                     }
                     if (bat_perf_index <= 0 && !free_hit)
                     {
+                        ++boundary_gap;
                         previous_batsman = strike[+strike_index];
                         dismissed[strike[+strike_index]] = 1;
                         data.match.commentary[data.match.commentary.length - 1] += 'OUT ';
@@ -445,7 +448,7 @@ exports.simulate = function (data, callback)
                         data.match.commentary.push(' ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ' balls' + ' ' + fours[strike[+strike_index]] + 'X4\'s ' + maximums[strike[+strike_index]] + 'X6\'s) SR: ' + (score[strike[+strike_index]] * 100 / balls[strike[+strike_index]]).toFixed(2) + 'Control: ' + (control[strike[+strike_index]] * 100).toFixed(2)  + '%');
                         data.match.commentary.push(' Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + ')' + ', Runrate: ' + (partnership_runs[current_partnership_index] * 6 / (partnership_balls[current_partnership_index] ? partnership_balls[current_partnership_index] : 1))).toFixed(2);
                         ++current_partnership_index;
-                        strike[+strike_index] = (strike[+strike_index] > strike[+!strike_index] ? strike[+strike_index] : strike[+!strike_index]) + 1;
+                        strike[+strike_index] = Math.max(strike[+strike_index], strike[+!strike_index]) + 1;
                         desperation[+strike_index] = +(data.team[+toss_index].streak < 0) * (1 - team_object[+toss_index].bat_rating[strike[+strike_index]] / 1000) * data.team[+toss_index].streak * ((Total[+!toss] - Total[+toss] + 1) / 5000) * mean_rating[+!toss_index] / team_object[+toss_index].bat_strike_rate[strike[+strike_index]];
                         frustration[+strike_index] = 0;
                         control[strike[+strike_index]] = 0;
@@ -513,26 +516,32 @@ exports.simulate = function (data, callback)
                                     control[strike[+strike_index]] *= ((balls[strike[+strike_index]] - 1) / (balls[strike[+strike_index]])).toFixed(2);
                                     ++dot_deliveries[current_bowler];
                                     ++dot_balls[strike[+strike_index]];
+                                    ++boundary_gap;
                                     ++dot;
                                     break;
                                 case 1:
                                     data.match.commentary.push('1 run, ' + rand(one));
+                                    ++boundary_gap;
                                     break;
                                 case 2:
                                     data.match.commentary.push('2 runs, ' + rand(two));
+                                    ++boundary_gap;
                                     break;
                                 case 3:
                                     data.match.commentary.push('3 runs, ' + rand(three));
+                                    ++boundary_gap;
                                     break;
                                 case 4 || 5:
                                     delivery_score = 4;
                                     data.match.commentary.push('FOUR, ' + rand(four));
                                     ++fours[strike[+strike_index]];
+                                    boundary_gap = 0;
                                     break;
                                 case 6:
                                     data.match.commentary.push('SIX, ' + rand(six));
                                     ++maximums[strike[+strike_index]];
                                     ++continuous_maximums;
+                                    boundary_gap = 0;
                                     break;
                                 default:
                                     break;

@@ -870,5 +870,71 @@ module.exports =
     "so cleanly. Top catch",
     "did not look promising at all as he connected with the slog sweep. Finds the man in the deep. it was a good plan, " +
     "going with the spin and heaving it away towards the shorter part of the ground. But he hasn't timed it well at all." +
-    " Seemed to have got under it too much"
+    " Seemed to have got under it too much",
+    "he has picked the lone man at deep midwicket! It was only marginally short and he probably thought he could clear " +
+    "the ropes, but he doesn't get the timing. The fielder there walks in a few paces and takes an easy catch. A sigh of" +
+    " relief for the bowler",
+    "he has picked out the man quite cleanly! THe striker came down the pitch, this time going squarer towards his favourite" +
+    " cow corner area, but he didn't get the distance. The fielder had to sprint to his right to get under it, he takes " +
+    "it easily, then keeps running all the way.",
+    "another one at deep midwicket! What are these batsmen upto today! He goes for the slog sweep and times it well. But" +
+    " this one is hit straight to the man at the boundary, who is standing right at the edge, takes an overhead chance " +
+    "easily",
+    "superb leaping catch by short fine leg! The batsman had moved across and he was always looking to flick it over the" +
+    " fielder, but doesn't get the timing. It lobs at slow pace, but he still has to time his jump well. He falls " +
+    "backwards after taking the catch",
+    "This is a superbly-judged at the edge of the boundary at wide long-on. It was a flighted delivery, the batsman got " +
+    "a lot of bat on it and made good connection in his slog sweep. But the man gobbled it up.",
+    "make it two in the over! Now he goes for a slog sweep by moving slightly inside the line, but he doesn't get the " +
+    "distance. This one is easily swallowed at deep midwicket by the fielder. This is the wobble the home team were after",
+    "The batsman is beaten by yet another slower delivery and yet again he manages to get height but not the distance. The" +
+    " catcher settles under it at long on and takes it easily",
+    "He top edges a pull - the ball might have bounced a bit more than expected - and the fielder comes running in from " +
+    "the deep midwicket boundary to take a well-judged catch. Once he has it safely, he celebrates with a rugby-like kick",
+    "caught at short midwicket! Simply chips the length ball off his hips in the air, the fielder moves forward quickly " +
+    "and dives to take the catch",
+    "he was timing it so well against the faster bowlers but the batsman has mis-timed this straight to long-on, a soft " +
+    "dismissal really, hit it flat and limply towards the fielder. He dragged it from wide outside off",
+    "what a soft dismissal that is! The ball was short and he went on the back foot and simply lofted it so tamely towards" +
+    " long-on, the man came cruising in from the boundary and caught it easily",
+    "caught behind! The short ball does it for him. He tried to ramp this short ball over the keeper and got an edge through" +
+    " to the keeper, he almost walks off before the umpire raises the finger",
+    "caught behind! The striker goes back to cut and gets a thick edge so that's a sharp catch by the keeper to his right." +
+    " He followed the ball superbly. Has he done enough?",
+    "caught down the leg side! That would have been wide had the batsman let it go but he tries to glance the short of a" +
+    " length ball and the keeper does splendidly to move to his right to catch it. That was so wide outside leg, and he " +
+    "gloved it.",
+    "chipped to midwicket for such an easy catch! It was angling in from over the wicket, he looked to flick it in the " +
+    "air on the leg side but mistimed it and lobbed an easy catch for him. No celebration from the bowler",
+    "another catch for midwicket, two down! He gave the charge and heaved the fullish delivery, managed an inner edge to" +
+    " the leg side and the man at midwicket only had to jump and catch the ball over his head",
+    "holes out to long-off under pressure! He made a lot of room, the man pitched it up and he lofted it straight towards" +
+    " long off where NCN dived forward to get his hands under it nicely",
+    "he mistimes the short ball and the fielder takes a good catch running backwards. The batsman made room, pulled the " +
+    "incoming short ball and it went on the off side off the edge, high enough for the point fielder to get under it",
+    "and again, he's gone by holing out to long on! Bit of air on off stump, he came down the track and merely lofted the" +
+    " ball straight to the fielder. He hardly had to move",
+    "taken this time, stunner from the fielder in the deep! The striker looked to slap the slower one well outside off " +
+    "and got another thick edge, it was ready to sail over short third man, but he flies to his left and grabs that with" +
+    " both hands. The fielder is thrilled, the team celebrates but not much reaction from the supper staff in the dug out." +
+    " The coach is not animated at all",
+    "slower offcutter on length on the off side, he takes a step down and holes out to long on. He didn't pick the slower" +
+    " one, it seems, and lofted it straight down his throat in the deep",
+    "leading edge caught at deep cover nicely! Length delivery around the off stump, he tried another heave on the leg " +
+    "side and only got a thick and high leading edge. He had enough time to get under it in the deep",
+    "slams it down the ground in the air, it would have easily gone for four but the fielder runs to his left and goes " +
+    "low in front to get his hands under it in no time. Excellent catch and the striker departs",
+    "that's not from the top edge, he has simply lofted the length ball down the ground to long on for an easy peasy " +
+    "catch",
+    "goes down on a knee to slog it on the leg side, gets another edge as the ball zips, and this one doesn't go far. The" +
+    " fielder runs towards the short cover region and takes it easily",
+    "holes out to mid-on! The bowler had given this more air outside off, the batter attempts a swipe over the leg side," +
+    " he can only drag it to mid-on off the inner part of the bat. The fielder comes in, dives forward to snap it up",
+    "and he picks out mid-off! The bowler follows up a with a length-delivery outside off, he camps back, seeks to drive" +
+    " and ends up chipping it to mid-off. The fielder helps himself to a simple catch. He takes a high-five from his " +
+    "captain",
+    "the effort comes to an end, sharp catch from the fielder. This was banged in short, climbs on a middle-stump line. " +
+    "He attempts a pull and can only top-edge it. Long leg dives forward and takes a smart tumbling catch",
+    "Full in length on middle, he backs away and toe-ends the attempted slap to the covers, where the fielder reverse cups" +
+    " his hands around it. No mistake. This did not need a jump. The striker throws his head back."
 ];

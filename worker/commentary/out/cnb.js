@@ -33,5 +33,12 @@ module.exports = [
     "The fielder pouches the leading edge at short third man! The slog goes all wrong, the fielder held this one back.",
     "good riposte from the bowler, sharp return catch. His knock has been cut short. This was pushed through flatter, he" +
     " looks to punch it away but ends up chipping it to the left of the bowler, who moves across, takes it and tumbles " +
-    "onto the ground"
+    "onto the ground",
+    "Return catch, the bowler strikes! The batsman is hanging around, though. They go to the TV umpire. This was pushed " +
+    "through flatter and quicker just outside off, he seeks to pull it but does not control it, lobbing it back to the " +
+    "bowler, who bends low to complete a clean catch. The umpire raises his forefinger",
+    "caught and bowled! The shorter ball is too quick for the batsman, who swivels towards the off and tries to pull. He" +
+    " gets a top edge that lobs towards short leg, he runs across and catches it easily",
+    "superb bowling! This one skids into the batsman, moves in sharply and bounces extra as well. The striker plays a " +
+    "nothing pull and ends up top-edging it for the bowler to take the return chance."
 ];

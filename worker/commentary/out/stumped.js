@@ -64,5 +64,9 @@ module.exports =
     "runs past a straight one! He was looking for extra cover having signalled his move way too early. The bowler drags " +
     "his length back, refuses to give him the angle he wants and just smiles as he pulls off an easy stumping",
     "and that befuddles the batsman! He chips down the track, the bowler pushes a slider outside off. He can't connect " +
-    "with the cut, the keeper whips the bails off"
+    "with the cut, the keeper whips the bails off",
+    "gone now, misses the ball and he's stumped! He came down the track to loft the ball with the turn, the ball came in" +
+    " to beat his bat and the keeper whipped the bails off quickly",
+    "gone this time, beaten by the trajectory! He came down the track to slam it again, but the length delivery turned " +
+    "away from him as he swung his bat and  he did the rest before the batsman could look back"
 ];

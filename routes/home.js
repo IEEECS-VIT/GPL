@@ -326,7 +326,7 @@ router.post('/getTeam', function (req, res)
         _id: teamName
     };
     var stats = {};
-    for(i in players)
+    for(i = 0; i < players.length; ++i)
     {
         if(players[i] > 'd')
         {
