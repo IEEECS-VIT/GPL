@@ -143,12 +143,14 @@ exports.simulate = function (data, callback)
         var two = require(path.join(__dirname, 'commentary', 'score', 'two'));
         var six = require(path.join(__dirname, 'commentary', 'score', 'six'));
         var zero = require(path.join(__dirname, 'commentary', 'score', 'dot'));
+        zero = zero.concat(require(path.join(__dirname, 'commentary', 'score', 'dot2')));
         var four = require(path.join(__dirname, 'commentary', 'score', 'four'));
         var three = require(path.join(__dirname, 'commentary', 'score', 'three'));
+        one = one.concat(require(path.join(__dirname, 'commentary', 'score', 'one2')));
         var wide = require(path.join(__dirname, 'commentary', 'extra', 'wide'));
         var freehit = require(path.join(__dirname, 'commentary', 'extra', 'freehit'));
         var MoM = {};
-        var bat =    // decrease to strengthen batting
+        var bat =    // decrease to strengthen batting, TODO: has to be made dynamic
         [
             [1100, 1100],
             [1100, 1100]
@@ -160,7 +162,7 @@ exports.simulate = function (data, callback)
         var desperation = [];
         var team_object = [];
         var Overs = [120, 120];
-        var bowl =      // increase to strengthen bowling
+        var bowl =      // increase to strengthen bowling, TODO: has to be made dynamic
         [
             [1200, 1200, 1200],
             [1200, 1200, 1200]
@@ -595,7 +597,7 @@ exports.simulate = function (data, callback)
                 data.match.commentary.push(' Last over: ');
                 if (previous_over)
                 {
-                    data.match.commentary[data.match.commentary.length - 1] += previous_over + ' run(s)';
+                    data.match.commentary[data.match.commentary.length - 1] += previous_over + ' run' + ((previous_over > 1) ? 's' : '');
                 }
                 else
                 {

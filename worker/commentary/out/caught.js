@@ -936,5 +936,94 @@ module.exports =
     "the effort comes to an end, sharp catch from the fielder. This was banged in short, climbs on a middle-stump line. " +
     "He attempts a pull and can only top-edge it. Long leg dives forward and takes a smart tumbling catch",
     "Full in length on middle, he backs away and toe-ends the attempted slap to the covers, where the fielder reverse cups" +
-    " his hands around it. No mistake. This did not need a jump. The striker throws his head back."
+    " his hands around it. No mistake. This did not need a jump. The striker throws his head back.",
+    "he holes out! Smart, low catch. Nicely tossed up and outside off, this one also holds up in the pitch. The striker " +
+    "looks to drive but is timing is foiled as he feebly chips it to cover, where the fielder dives forward and snaffles" +
+    " it.",
+    "holed out to long-on! Full outside off, he miscues the lofted strike and finds the fielder, who helps himself to an " +
+    "overhead catch. His innings has been cut short",
+    "The home crowd loving this. This was on a back of a length and moving across off with some extra lift, he has a " +
+    "lazy waft and nicks it off to the keeper off an outer edge. The batman had yanked his bottom hand off the bat while" +
+    " playing at it. Crucial strike.",
+    "the fielder pulls off a sharp, low catch, one-hander! The striker has to depart. Fullish and outside off, he drives" +
+    " it in the air. A fielder runs in from mid-off, dives forward and plucks it out with his right hand. Thought it " +
+    "would have popped out, but he managed to hang on to it.. went with both hands, it got stuck in the right hand",
+    "the fielder reverse-cups his hands around it. This was a slower, short ball outside off. Offcutter with extra bounce." +
+    " He is undone by the change-up, wanted to go hard on it but ends up chipping it to cover",
+    "On a length and outside off, he wants to turn this over the leg side, gets a leading edge and spoons a simple catch" +
+    " to backward point.",
+    "pouched it! The bowler strikes with his favourite ball. He shuffles across off, the bowler follows him with a full " +
+    "ball, he seeks to paddle it away but does not get hold of it. Toe ends it, the fielder moves back and steadies under" +
+    " it",
+    "taken at the edge of the boundary! Flatter and on a shortish length on off as he advances down the track and swipes" +
+    " it. The fielder judges it well and completes a good overhead catch just before the deep midwicket boundary. He took" +
+    " a step or two back but held his balance, ensuring that the momentum did not take him beyond the ad boards.",
+    "Top, low catch from the fielder as he batsman holes out. He dives to his left at deep square leg and throws the ball" +
+    " into the air. Length on middle, Morgan invests in a pick-up spot and connects well but has to go",
+    "soft dismissal. Soft end to his knock. He has to drag himself off the field. This was a low full toss on a " +
+    "fourth-stump line, chipped into the hands of midwicket off the toe end for a dolly. The bowler has a smile on his " +
+    "face",
+    "End of a sketchy little knock. He flits around in the crease, shuffles across off. The bowler pushes it fuller and" +
+    " outside off, scooped into the hands of mid-off, takes it in front of his chin. Soft as wax.",
+    "and he picks out short cover! Pushed through on middle, he comes down the track and chips it straight down the " +
+    "throat of the fielder. The batsman shakes his head as he trudges back",
+    "The bowler is in th striker's ears! Banged in shortish and hurries on outside off, he wants to slog it away, only " +
+    "manages a thick top-edge. Good, overhead catch at mid-off",
+    "holes out! Fuller length and around off, stops on the pitch. Change-up. He steps away a bit and mishits it high in " +
+    "the air. He runs in from long-off and snaffles the take before tumbling onto the ground",
+    "and this time the ball finds the fielder at long leg. Fractionally short on middle, he picks it up from there and " +
+    "plays it straight to the fielder. He could have placed that better... There it is, the early wicket",
+    "makes no mistake now! Gone. Pushed through and spins in, he goes low for a slog sweep, does not get hold of it. " +
+    "Mishits it to deep midwicket",
+    "Fuller on a leg-stump line, he backs away, comes down and goes for a big hit. Only slices it off the bottom of the" +
+    " bat to long-off",
+    "starts with a full ball outside off, and his innings comes to an end with a massive swipe. Doesn't connect cleanly" +
+    " this time, and skies it high to mid-on",
+    "slower ball outside off, and he doesn't get hold of the attempted loft over long-off, ends up chipping it straight" +
+    " into the fielder's hands",
+    "and he's gone! That was another crisply hit pull, but it was in the air and he picked out the man at deep midwicket",
+    "another wide and full ball. He tries to make room and hit over cover, only manages a thick edge that the keeper" +
+    " takes well. Makes it look simple, but good footwork to move quickly to his right",
+    "bouncer and he's taken out! It was a well-directed ball, over the left shoulder. Not an easy place to pull from, " +
+    "and he only got a thin edge through to the keeper",
+    "gone! it's fired flat towards leg stump and he went for the sweep, looking to hit over short fine leg, but simply" +
+    " didn't middle it and popped a simple catch to the fielder, off the top-edge",
+    "very full on middle stump, and he tried to play a straight-bat, bottom-hand shovel to get under the ball and get" +
+    " elevation. He managed this, but not the distance, and the skier dropped gently into long-on's hands",
+    "again it's flat and quick, but it's shorter, and angled into the batsman's body to cramp him for room. Goes for " +
+    "the pull, gets it high on the bat, and holes out to long-on",
+    "another slower ball on off stump. He makes room to hit over cover, ends up slicing it high in the air, straight to" +
+    " third man",
+    "and that's a typical end to a typical T20 innings. Runs down the track again but fails to reach the pitch. May " +
+    "have wanted to hit straight down the ground, ends up flicking it uppishly, straight down the throat of deep midwicket",
+    "excellent riposte, this. The batter makes room this time and teh bowler bangs it in, gets a lot of bounce. He " +
+    "wasn't in a great position to uppercut that, and ended up scooping it feebly into short third man's hands",
+    "sees him skip down the track and bowls it slower and wider. He goes through with the shot but ends up slicing it " +
+    "high and not quite getting the distance, finds the man at wide long-off",
+    "juggle, juggle, gone. This must have been a plan, judging by how often the bowler has been angling these darts in " +
+    "towards leg stump. Too quick for the batsman to get down on his knee and sweep, and he ends up lapping uppishly " +
+    "from a semi-crouched position, and hits it straight to short fine leg, at chest height. He didn't catch it cleanly" +
+    " on first attempt, but managed to grab onto it",
+    "short ball, dug in sharply, and it's too close to him to pull with any authority, and it balloons in the air, " +
+    "straight into the hands of the man running in from deep midwicket",
+    "slower ball wide outside off and he's gone! It was just short of driving length, and the low arm caused it to angle" +
+    " away from the batsman a bit. Went for the big hit, on one knee, looking to go over long-on, and ended up edging " +
+    "it to the keeper",
+    "that's his favourite pick-up shot, that's effortlessly timed, and that's hit straight into deep midwicket's hands! " +
+    "It was full on the pads, and he flicked it with an almost casual air. Shot was on, I suppose. He may have been " +
+    "looking to hit it a lot squarer than he ended up doing.",
+    "and he strikes! It's a slower short ball on off stump. The striker goes for the pull, top-edges it, and the ball " +
+    "balloons into th fielder's throat (figuratively, of course).",
+    "nailed it to deep midwicket! Same ploy, whisking that front leg aside and smearing the short ball hard and flat. " +
+    "But he picks out the fielder, who takes a pressure catch",
+    "Lobs up a slower ball, which brings out the classic golf swing. But he mistimes it, carries only as far as long-on." +
+    " The catcher sets off on a celebration, pumped up as ever",
+    "leg-stump full toss has been whipped to deep square leg! Silly cricket galore, and what can you expect in a shoot " +
+    "out format?",
+    "this is normal pace, this is short, and he has picked out mid-on. Wanted to smash it far longer as he rocked back " +
+    "for the pull, but his intention to hit the ball a bit too hard has hurt his timing. Comes off the bottom of the " +
+    "bat. Wry grin as he walks back, knew he should have belted that",
+    "and there is proof that bats these days have an edge. He gets it as he bowls the ball wide, trying to evade his " +
+    "reach. The slash over the covers doesn't come out as well as he'd hope, but he has to go",
+    "that's the short ball, to trump the batsman rushing down the pitch. Gets a top edge that is pouched at long-off."
 ];

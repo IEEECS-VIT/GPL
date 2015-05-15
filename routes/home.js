@@ -113,7 +113,11 @@ router.get('/', function (req, res)
 
 router.get('/leaderboard', function (req, res) // Leaderboard/Standings
 {
-    if (req.signedCookies.name)                           // if cookies exists then access the database
+    if(req.signedCookies.lead)
+    {
+        res.render("leaderboard", { leaderboard: req.signedCookies.name});
+    }
+    else if (req.signedCookies.name)                           // if cookies exists then access the database
     {
         var doc =
         {
@@ -127,15 +131,14 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
             }
             else
             {
-                console.log(documents);
                 res.render("leaderboard", { leaderboard: documents});
             }
         };
-        console.log("get Leader Function");
         mongoUsers.getleader(doc, onFetch);
     }
     else
     {
+        req.session.route = 'lead';
         res.redirect("/");
     }
 });
@@ -205,6 +208,7 @@ router.get('/matches', function (req, res)
     }
     else
     {
+        req.session.route = 'match';
         res.redirect('/');
     }
 });
@@ -245,6 +249,7 @@ router.post('/getsquad', function (req, res)
     }
     else
     {
+        req.session.route = 'squad';
         res.redirect('/');
     }
 });
@@ -360,7 +365,7 @@ router.post('/getTeam', function (req, res)
             stats[players[i]].sr = 0.0;
         }
     }
-        mongoUsers.updateUserTeam(credentials, players, stats, onUpdate);
+        mongoUsers.updateUserTeam(credentials, players, stats, cost, onUpdate);
 });
 
 router.get('/forgot', function(req, res){
@@ -449,6 +454,7 @@ router.get('/players', function (req, res) // page for all players, only availab
     }
     else
     {
+        req.session.route = 'player';
         res.redirect("/");
     }
 });
@@ -479,6 +485,7 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
     }
     else                                                        // if cookies does not exist, go to login page
     {
+        req.session.route = 'team';
         res.redirect('/');
     }
 });

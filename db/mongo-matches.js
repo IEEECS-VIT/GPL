@@ -64,9 +64,8 @@ exports.fetchPreviousMatch = function (doc1, doc2, callback)
                 default :
                     collectionName = 'matchday1';
                     break;
-
             }
-            collectionName='matchday' + process.env.DAY || 1;   // Collection controller for match day information. To be changed before each match
+            collectionName='matchday' + (process.env.DAY || 1);   // Collection controller for match day information. To be changed before each match
             var collection = db.collection(collectionName);
             var onFetch = function (err, docs)
             {

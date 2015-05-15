@@ -105,5 +105,7 @@ module.exports =
     "forefinger goes up",
     "struck in front! This was pushed through on leg stump, pulling him into a sweep, but the ball gains a lot of zip " +
     "from the pitch and hits him in front of middle stump. Seemed a fair decision. Lovely bowling, went wide of the " +
-    "crease to create a different angle"
+    "crease to create a different angle",
+    "and he strikes pre-emptively! This was pitched up and swerves in, the striker hangs on the back foot, does not meet" +
+    " with the defensive push, rapped on the back pad in front of middle. The forefinger goes up1"
 ];

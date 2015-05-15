@@ -19,8 +19,10 @@
 var async = require('async');
 var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
-var match = require(path.join(__dirname,'..','matchCollection'));
+var match = require(path.join(__dirname, '..', 'matchCollection'));
 var log;
+var bat;
+var bowl;
 var key = process.env.PASSWORD || require(path.join(__dirname, '..', 'key.js'));
 if (process.env.LOGENTRIES_TOKEN)
 {
@@ -34,6 +36,10 @@ var ref = {
     'round2' : 2,
     'round3' : 3
 };
+var orange;
+var purple;
+var orangeFlag = false;
+var purpleFlag = false;
 var simulator = require(path.join(__dirname, 'simulation'));
 var email = require('nodemailer').createTransport({
     service: 'Gmail',
@@ -119,7 +125,27 @@ exports.initSimulation = function (day, masterCallback)
         {
             var updateUser = function (newUserDoc, asyncCallback)
             {
-                //
+                for(i = 0; i < newUserDoc.squad.length; ++i)
+                {
+                    if(!newUserDoc.squad[i].match(/^b/) && newUserDoc.stats[newUserDoc.squad[i]].runs_scored > orange.runs)
+                    {
+                        console.log('bat');
+                        orangeFlag = true;
+                        orange.team = newUserDoc._id;
+                        orange.player = newUserDoc.squad[i];
+                        orange.runs = newUserDoc.stats[newUserDoc.squad[i]].runs_scored;
+                        orange.strikeRate = newUserDoc.stats[newUserDoc.squad[i]].bat_strike_rate;
+                    }
+                    if(newUserDoc.squad[i].match(/^[^a]/) && newUserDoc.stats[newUserDoc.squad[i]].wickets_taken > purple.wickets)
+                    {
+                        console.log('bowl');
+                        purpleFlag = true;
+                        purple.team = newUserDoc._id;
+                        purple.player = newUserDoc.squad[i];
+                        purple.economy = newUserDoc.stats[newUserDoc.squad[i]].economy;
+                        purple.wickets = newUserDoc.stats[newUserDoc.squad[i]].wickets_taken;
+                    }
+                }
                 database.collection(match).updateOne({_id: newUserDoc._id}, newUserDoc, function() {
                     options.to = newUserDoc.email;
                     email.sendMail(options, function(err) {
@@ -152,7 +178,7 @@ exports.initSimulation = function (day, masterCallback)
                 }
             ];
             console.log(newData.team1._id + ' vs ' + newData.team2._id + ' (Match ' + newData.match._id + ') is now being updated');
-            async.parallel(parallelTasks2, callback)
+            async.parallel(parallelTasks2, callback);
         };
 
         var onTeamDetails = function (err, results)
@@ -165,7 +191,6 @@ exports.initSimulation = function (day, masterCallback)
                 ],
                 match: matchDoc
             };
-
             simulator.simulate(data, updateData);
         };
 
@@ -174,6 +199,14 @@ exports.initSimulation = function (day, masterCallback)
 
     var onFinish = function (err, results)
     {
+        if(orangeFlag)
+        {
+            database.collection('info').updateOne({_id : 'orange'}, orange, null);
+        }
+        if(purpleFlag)
+        {
+            database.collection('info').updateOne({_id : 'purple'}, purple, null);
+        }
         database.close();
         if (err)
         {
@@ -229,6 +262,18 @@ exports.initSimulation = function (day, masterCallback)
         else
         {
             database = db;
+            database.collection('info').find().toArray(function(err, docs) {
+                if(err)
+                {
+                    console.log(err.message);
+                }
+                else
+                {
+                    orange = docs[0];
+                    purple = docs[1];
+                    console.log(docs);
+                }
+            });
             getAllMatches(err, ForAllMatches);
         }
     };

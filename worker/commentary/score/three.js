@@ -113,5 +113,9 @@ module.exports =
         "tossed up on middle, he sets up for a ramp, does it connect well. The ball goes in the air in between the keeper" +
         " and first slip",
         "slower full ball on middle, sliced over the covers, who runs back from mid-off, puts in another outstanding slide" +
-        " near the boundary and swats the ball in"
+        " near the boundary and swats the ball in",
+        "back of a length and on middle, whipped away towards midwicket, where the fielder fumbles. Gives the chase from" +
+        " mid-on, slides and hauls the ball in before the boundary. The result is three",
+        "the wet patch comes into play. It's a length ball, fairly straight, and he makes room to chip it over the " +
+        "covers. Timed it very well, but it stopped well short of the rope"
     ];

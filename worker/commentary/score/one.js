@@ -3078,13 +3078,15 @@ module.exports =
         "turns the ball from outside off to the leg side for one",
         "comes down for the flat delivery and pushes to long on for one",
         "shuffles across this time and pulls the short of length ball to deep midwicket. Didn't middle that",
-        "back of length actually and into the batsman and he steers it to leg, brings up his fifty",
+        "back of length actually and into the batsman and he steers it to leg",
         "back of length delivery outside off, Samson taps it late and fine on the off side. The fielder dives full length" +
         " to his left and saves two",
         "cuts the ball late from outside off to third man for one",
         "outside the off stump now, runs it to third man for one",
         "slower outside off, tapped to third man for one",
-        "easy peasy run-out chance, but missed! Right in the block hole on the stumps, Samson digs it out to midwicket and Nair is halfway down the track. Pollard only had to collect and throw it easily to Malinga, but he misfields and runs over the ball",
+        "easy peasy run-out chance, but missed! Right in the block hole on the stumps, the striker digs it out to midwicket " +
+        "and the his partner is halfway down the track. The fielder only had to collect and throw it easily to the bowler," +
+        " but misfields and runs over the ball",
         "yorker-length again, driven down to long on for one",
         "full and wide outside off, driven to sweeper cover to rotate the strike",
         "full and wide outside off, driven away from the body to deep cover for one",
@@ -3854,11 +3856,11 @@ module.exports =
         "back of length outside off, punched off the back foot to deep cover",
         "fullish outside off, pushed into the covers for one",
         "slightly slow and back of length towards off, turned off the back foot to leg",
-        "fullish outside off and Raina drives that firmly to deep cover for one",
-        "block hole around off, Faf goes across and blocks it on the leg side for one",
+        "fullish outside off and he drives that firmly to deep cover for one",
+        "block hole around off, goes across and blocks it on the leg side for one",
         "on middle with a bit of turn, pushes it off the back foot into the covers",
         "comes down to take it on the full and drives it to long off for one",
-        "just outside off with no room, Faf goes back and defends it to leg for one",
+        "just outside off with no room, goes back and defends it to leg for one",
         "goes on the back foot and tucks the ball to midwicket",
         "fullish outside off, Raina drives it off the front foot to deep cover",
         "slower and fuller on off stump, turned down to long on for one more",
@@ -3935,7 +3937,7 @@ module.exports =
         " his hand in pain, the physio rushes out with some pain releaving spray",
         "back of a length on middle, worked through midwicket",
         "back of a length and outside off, carved over cover-point to sweeper",
-        "back of a length and on middle, hedu hangs back and knocks it in front of midwicket for one.",
+        "back of a length and on middle, he hangs back and knocks it in front of midwicket for one.",
         "short and wide outside off, cracked to the off-side sweeper",
         "full and outside off, driven to long-off",
         "pushed through on middle, dropped in front of short midwicket",
@@ -3949,10 +3951,10 @@ module.exports =
         "skiddy ball on middle, he makes a bit of room and slaps it to deep cover",
         "picked away off the pads behind square on the leg side",
         "back of a length and outside off, stays back and cuts it to third man",
-        "length on off, Rohit taps it down to long-on for a comfortable single",
+        "length on off, taps it down to long-on for a comfortable single",
         "on a length and outside off, goes for a booming on-the-rise drive, gets a thick outside edge that runs " +
         "away to third man",
-        "on a length and outside off, driven to point, where the fielderj flings to his left and makes a diving save",
+        "on a length and outside off, driven to point, where the fielder flings to his left and makes a diving save",
         "low full toss on leg, whipped to deep midwicket",
         "pushed to long-off",
         "pitched up and outside off, laced to deep cover",
@@ -4845,6 +4847,5 @@ module.exports =
         "face as well",
         "low full toss outside off, slapped past the covers",
         "length and outside off, he slogs and gets a top edge to short third man. The batsman completes a good over head catch",
-        "he sinks to one knee, slog-sweeps and gets a toe-end to the off side",
-        "Banged in short and outside off, pulled to long-on."
+        "he sinks to one knee, slog-sweeps and gets a toe-end to the off side"
     ];

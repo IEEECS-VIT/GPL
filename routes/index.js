@@ -46,7 +46,12 @@ if (process.env.LOGENTRIES_TOKEN)
 
 var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
-
+var routes = {
+  'lead' : '/home/leaderboard',
+  'match'  : '/home/matches',
+  'player' : '/home/players',
+  'team' : '/home/team'
+};
 
 router.get('/', function (req, res)
 {

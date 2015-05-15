@@ -1168,5 +1168,95 @@ module.exports =
         "pummeled! Fuller length on off, slower cutter. He goes down on one knee, manufactures own pace and slog-sweeps " +
         "it high and over deep midwicket",
         "length ball outside off, he steps down the track and hammers it over deep midwicket for a huge six",
-        "slips in a waist-high full toss down leg, helped away over short fine leg for a six"
+        "slips in a waist-high full toss down leg, helped away over short fine leg for a six",
+        "On a length and swings in on the leg stump, he picks it up and deposits it over long leg",
+        "comes in on the pads with the angle, twirls his wrists and picks it up over and wide of short fine leg for a " +
+        "flat six",
+        "crunched! Maxi connects this and connects well. Runs down the track and lofts this full ball outside off over " +
+        "long-off with authority",
+        "fuller length on middle and leg, he skips out and swings it over long-on.",
+        "It was in his arc and its out of the park. Fullish and on off, down on one knee and slog-swept powerfully over " +
+        "deep midwicket",
+        "the bowler misses the yorker, pushes it too full. The striker gets under it and launches it straight down the " +
+        "ground",
+        "slower short ball on middle, he steps away, makes room. Waits for it, adjusts and slams it over cover-point. " +
+        "Hits the ad cushions on the flush.",
+        "full toss on the leg stump, he sinks to one knee and pastes it over deep midwicket",
+        "too full and outside off, sizes it up, bends his knees and slices it over the long-off. Clears the fielder",
+        "feeds Miller with length on leg stump, he clears his front leg and slugs it over cow corner",
+        "he is on fire! This was bad ball, though. Full toss outside off, slapped dismissively over the covers for six",
+        "Low full toss outside off, goes down on one knee and swipes it over long-on",
+        "what.a.shot! The bowler errs short and outside off, the striker fetches it from there, muscles a pull over " +
+        "midwicket. This one goes all the way.",
+        "welcome to the zone! Short of a length and outside off, he launches it over deep midwicket for a pulled six",
+        "length ball on the stumps, he backs away and smashes it over the covers. It goes all the way.",
+        "flat and hard! A helmetless batsman loads it up to this full ball on middle. Blows it up and whacks it over deep" +
+        " midwicket",
+        "bang! Take that. Tripe full toss, he camps back and hammers it away over deep midwicket. Into the big screen",
+        "on a length on middle, races down the track and thumps it for a flat six, beats long-off to his left",
+        "encore! Tossed up on middle and leg, the striker extends his arms and hoists it straight down the ground. Clean" +
+        " strike",
+        "horrible full toss on the leg stump, mauled over deep midwicket",
+        "he errs in length, does not get hold of the yorker. Slips in a yorker on middle and leg, clubbed over long-on",
+        "tossed up and outside off, he flexes his muscles and clobbers it over long-on",
+        "and he connects one, cleanly. Full and slid through on middle, races down the track and smashes it over the" +
+        " bowler's head. Into the orbit...",
+        "just clears long-on. Full toss around off, the batsman head falls over. He loses his balance and hoists it" +
+        " over long off, into the dug out. They are loving this...",
+        "pitched further up and outside off, he now makes some room and launches it over the covers. Crackin' hit, " +
+        "inside out",
+        "Boom goes the ball! Fullish and on the stumps, he flits down the track and sends it clattering over long-on. " +
+        "Easily clears the fielder",
+        "and he has mauled that! Length and outside off, he dances down the track and launches it over long-on",
+        "fullish ball on middle stump, and he has dumped it back over the bowler's head, over the long-on boundary. He" +
+        " opened up his body entirely and swiped it with a diagonal swing of his bat",
+        "full on leg stump, and that's a super shot. Skips towards the leg side to make room, and brings his bat down" +
+        " nice and straight and lifts the ball over long-off",
+        "down the track, and that is a clean, clean strike, straight down the ground. The pavilion building is three " +
+        "storeys tall, and it went into the top tier",
+        "another. This one wasn't hit as straight or as cleanly. He was in the crease this time, and not quite to the " +
+        "pitch with his front-foot stride. Hit it to the right of deep midwicket, who positioned himself, dived to " +
+        "try and catch it, only managed to palm it over the boundary",
+        "tossed up, angled across, and he gets down on one knee to fetch it from outside off and clear the boundary wide" +
+        " of long-on, to the left of the chasing fielder",
+        "boom. It was a fullish ball outside off, and Gayle stepped down the pitch, away from the line, and swung " +
+        "through the line to lift it high over long-off",
+        "slower ball, on middle and leg, and he gets his front leg out of the way and hits through the line, clean as a" +
+        " whistle, and clears long-on easily",
+        "slower ball on off stump, and he sits deep in his crease to swat that high and dump it over the long-on boundary",
+        "down the track now and he provides him the perfect ball in his hitting zone. It's floated and it's outside off," +
+        " giving him swinging room to launch that over long-on",
+        "tossed up on leg stump, and he clears his front leg and launches it easily over the wide long-on boundary. Used" +
+        " his bottom-hand to scoop it up and over",
+        "short ball, but this sits up at waist height, and that is such a stylish way to bring up a boundary. Swivels " +
+        "into a pull and dumps it high over the midwicket boundary",
+        "and there's the shot that everyone wants to see! It's a length ball, angled in towards middle stump, and he " +
+        "uses the angle, gets down on one knee and slog-sweeps powerfully over the square leg boundary",
+        "tossed up wide outside off and that's a gift for the batsman, gets down on one knee and launches it high over " +
+        "long-off",
+        "fullish on off stump. He errs on the shorter side while going for the yorker, and it ends up as a full ball " +
+        "that he hoicks away, with the angle, over the midwicket boundary to bring up six more",
+        "short ball, dispatched! This one allowed some room, and he'd made some for himself as well. Sat up for the " +
+        "pull and he's monstered it! Leaves a few in the crowed gaping...",
+        "this time it's in the slot, yorker gone wrong and Gayle has muscled it into the crowd well beyond long-on. The" +
+        " skipper is stone-faced",
+        "hammered over wide long-off! He hasn't been able to get those yorkers going. This is overpitched and the striker" +
+        " has sliced it handsomely over the off side",
+        "it works! Down the track to a flatter ball and thumped over long-on",
+        "lobs up a length ball, a slower ball, and he sets up on the back foot and pummels it over cow corner. Hit " +
+        "harder than some of the biffs",
+        "The fielder has touched the rope while looking to tack a catch on the boundary! This ball though wasn't the best," +
+        " it was length and he got under it. Lifts it high into the air, the catcher tracks it well and takes the catch." +
+        " He's celebrating, but as he backpeddles doing so, he trods on the turf",
+        "crrrrrunch! This is an absolute KO. Races down the pitch and pummels a flatter delivery straight down the " +
+        "ground. Soars into the crowd quite handsomely",
+        "he is in some form today! The way the ball is leaping off the middle of his bat is scary. Sitting deep in his " +
+        "crease, predicting the bowler going for a yorker. Ends up overpitched and it's hammered over long-off. Flat six",
+        "width on offer, viciously dealt with! It's in the slot again, very little pace on it. He pulls out his fork and" +
+        " spoon and napkin and tucks in. The captain and bowler are in deep conversaion",
+        "walllooped! Was that the switch hit? Yep! Temporarily becomes right handed and slog-sweeps over deep deep point," +
+        " which becomes square leg",
+        "hammered down the ground. This is even looooonger! Length ball, muscled into the delirious crowd over long-on",
+        "down the track amd smokes a length ball over long-on! This ends up a length ball as Morgan races down the pitch" +
+        " and nails it"
     ];

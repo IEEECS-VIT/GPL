@@ -68,5 +68,10 @@ module.exports =
     "gone now, misses the ball and he's stumped! He came down the track to loft the ball with the turn, the ball came in" +
     " to beat his bat and the keeper whipped the bails off quickly",
     "gone this time, beaten by the trajectory! He came down the track to slam it again, but the length delivery turned " +
-    "away from him as he swung his bat and  he did the rest before the batsman could look back"
+    "away from him as he swung his bat and  he did the rest before the batsman could look back",
+    "squares him up! The stand has been broken. He loops this up outside off and lures the batsman out of the crease. " +
+    "This does away a touch as well. He is beaten in line, the keeper makes no mistake now. Whips the bails off in a " +
+    "flash",
+    "gone. Saw him coming down the track and slid it flat and wide outside off. Quick work from the keeper as well, " +
+    "collects and has the bails off before th striker can even try and turn and try to regain his crease"
 ];

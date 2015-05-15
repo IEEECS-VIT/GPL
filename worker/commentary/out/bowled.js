@@ -281,5 +281,18 @@ module.exports =
     " leg, the length was too full and it beat the bat and hit the stumps",
     "is that out? The bails are off..is he bowled or was it the keeper's gloves that took them off? There was no room as" +
     " the ball came in from just outside off, he went back to cut it and was beaten past the outside edge. Replays clearly" +
-    " show the ball dislodged the bails, big wicket this one"
+    " show the ball dislodged the bails, big wicket this one",
+    "dragged on! This was on a length and on off, keeps a bit low. The striker seeks to dab it down towards third man, " +
+    "does not get hold of it. Gets an inside edge onto middle and off. He has to drag himself off the field",
+    "played on! Fuller and on off, keeps alarmingly low. The batsman seeks to cut and chops it onto the ground." +
+    " The ball bounces over and rattles off. Too close to play the shot",
+    "bowled 'em! he moved a long way across to try and lap-sweep, and this bowler beats him with a quicker one and hits " +
+    "his leg stump",
+    "he's struck. It wasn't a great ball, a length ball wide outside off, but it didn't quite come on for the cover drive" +
+    " and the bottom hand took over, as he ended up chopping it onto his stumps",
+    "opened him up! That was a beauty from the bowler. Pitches middle, hits off, and he clearly didn't pick it. Was " +
+    "looking to go on the back foot and work it through the leg side, initially, and then tried to adjust and play with" +
+    " a straight bat, but it slipped quickly past his bat-face and clipped his off bail",
+    "and he's gone! Down the track again, and the bowler bowls it flat and quick and yorks him and takes out his leg " +
+    "stump"
 ];

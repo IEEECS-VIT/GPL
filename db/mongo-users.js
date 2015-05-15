@@ -278,7 +278,7 @@ exports.resetPassword = function (doc, op, callback)
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.updateUserTeam = function (doc, arr, stats, callback)
+exports.updateUserTeam = function (doc, arr, stats, cost, callback)
 {
     var onConnect = function (err, db)
     {
@@ -301,7 +301,7 @@ exports.updateUserTeam = function (doc, arr, stats, callback)
                     callback(true, document);
                 }
             };
-            collection.findOneAndUpdate(doc, {$set: {'team': arr, 'stats' : stats}}, {}, onUpdate)
+            collection.findOneAndUpdate(doc, {$set: {'team': arr, 'stats' : stats, 'surplus' : 10000000 - cost}}, {}, onUpdate)
         }
     };
     MongoClient.connect(mongoUri, onConnect);

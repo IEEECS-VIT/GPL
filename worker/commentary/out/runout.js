@@ -194,5 +194,14 @@ module.exports =
     "jammed into the ground and he was caught short! The skipper is pumped, super-pumped",
     "he has been run out, a fielder nails the stumps down in haste. He fails to connect with the attempted reverse-ramp " +
     "again, the bowler wants a single but is sent back. The ball rolls off the pad to the leg side, he runs forward, " +
-    "collects, turns back and fires a direct hit"
+    "collects, turns back and fires a direct hit",
+    "the under-arm flicks it onto the stumps. The batsman has to depart! Back of a length and on middle, pushed to short" +
+    " midwicket, the fielder swoops down on the ball and hits the stumps. THe victim turns back and dives in vain. Too " +
+    "late. The TV umpire rules it out.",
+    "risky single, direct hit, and I think he's gone here. It was fired in quick and full, and the striker used the " +
+    "angle to tickle it towards short fine leg. His partner made the call for the single, but they realised both would" +
+    " have to dive to make ground, and even so the direct hit from caught him a foot short of the crease",
+    "walks at the bowler, has a full toss, thumps it back towards long-on, but the non-striker's bat intervenes. The " +
+    "ball is deflected to the nearby fielder, who completes an easy run out. The skipper is livid as the striker, who " +
+    "had raced down the pitch looking for runs, but ends up going to the dressing room"
 ];
