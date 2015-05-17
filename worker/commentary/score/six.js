@@ -1247,7 +1247,7 @@ module.exports =
         "harder than some of the biffs",
         "The fielder has touched the rope while looking to tack a catch on the boundary! This ball though wasn't the best," +
         " it was length and he got under it. Lifts it high into the air, the catcher tracks it well and takes the catch." +
-        " He's celebrating, but as he backpeddles doing so, he trods on the turf",
+        " He's celebrating, but as he back peddles doing so, he trods on the turf",
         "crrrrrunch! This is an absolute KO. Races down the pitch and pummels a flatter delivery straight down the " +
         "ground. Soars into the crowd quite handsomely",
         "he is in some form today! The way the ball is leaping off the middle of his bat is scary. Sitting deep in his " +
@@ -1258,5 +1258,42 @@ module.exports =
         " which becomes square leg",
         "hammered down the ground. This is even looooonger! Length ball, muscled into the delirious crowd over long-on",
         "down the track amd smokes a length ball over long-on! This ends up a length ball as Morgan races down the pitch" +
-        " and nails it"
+        " and nails it",
+        "short this time and he rocks into position in a flash to pull it over the square leg boundary",
+        "slower ball, angled across, who swings at it and launches it high over wide long-on. Just about clears the " +
+        "rope, beating the fielder who moves to his left and leaps to try and complete a back-hand catch with his right " +
+        "hand stretched over his head",
+        "down the track and finds the the slower ball right in his slot. It's wide outside off, and it gives him plenty" +
+        " of swinging room to get down low and launch over wide long-on",
+        "full-toss outside off and he puts it away brilliantly, gets his back foot across and deep in his crease, clears" +
+        " his front leg, and goes down on one knee to slog-sweep it over the midwicket boundary",
+        "now he comes out of his crease, gets his front leg out of the way, and swings through the line to loft it back" +
+        " over the bowler's head, carries all the way for six. Just a lovely, smooth swing of the bat",
+        "whoa. That's the sort of shot we haven't seen him play too often recently. It's another slower short ball " +
+        "outside off, and he moves a long way across and swings his body around, feet in the air, to whip/pull/scoop it" +
+        " over the fine leg boundary",
+        "down the track now, converts this ball into a full-toss, and lifts it over long-off",
+        "that's a sizzler! He saw the width, he loves it and lashes the ball over point. And it carries all the way. " +
+        "Well, he did say a six is a six no matter if it just clears the ropes or soars through it",
+        "down the track, not quite at the pitch, but it's not turning either. Hit through the line and lifted over the" +
+        " bowler's head. Massive hit",
+        "and the home crowd gets what it wants! This is a poor delivery, lobbed up in the slot, allowed him to step " +
+        "forward and mow it over long-on. Huuuuuge hit.",
+        "picked up and smashed down the ground! Saw the air on it, loves the width on it, and unleashes. Massive " +
+        "backlift, massive follow through for the cameras, massive shot",
+        "in the slot and his power is unveiled. Gets forward to the pitch and lifts it impressively over the sightscreen",
+        "take that, slower ball! It's been a go-to to every bowler in the GPL, but this time a batsman has picked it " +
+        "early, waiting on the trigger position with his high backlift, and slammed it over the top.",
+        "this is length and he has pinged the second tier in the stands. Went forward, and unleashed a full swing of the" +
+        " arms. Massive hit!",
+        "banged in short, he goes for the pull. Looks quite awkward doing it and gets a top edge that flies towards the " +
+        "square leg boundary. One fielder is running to his left, the other was racing to his left from long leg. The " +
+        "former goes for a the catch, but it slips past his hands and his momentum takes him into a horribly collision " +
+        "into his counterpart. He's looking quite out of it. The physio's checking his reflexes, seeing if he isn't too" +
+        " dazed. Looks a bit of an issue here. Still sitting against the boundary, having some liquid. Breathing hard",
+        "on the roof! Clears that front leg and smears the fuller delivery into orbit. Has all the room to free his arms" +
+        " and his power is absolutely stunning. Length ball, duly dealt with",
+        "cleared the stadium! Soars well over the roof beyond midwicket! Humongous hit, and guess what the length is? " +
+        "Short and sat up as he pulls off the front foot. He's playing an absolute blinder",
+        "length ball on off stump, he clears the front leg and wallops it over long-on."
     ];

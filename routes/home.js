@@ -34,7 +34,8 @@ var mongoPlayers = require(path.join(__dirname, '..', 'db', 'mongo-players.js'))
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users.js'));
 var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team.js'));
 var mongoMatches = require(path.join(__dirname, '..', 'db', 'mongo-matches.js'));
-
+var orange;
+var purple;
 
 router.get('/', function (req, res)
 {
@@ -115,7 +116,7 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
 {
     if(req.signedCookies.lead)
     {
-        res.render("leaderboard", { leaderboard: req.signedCookies.name});
+        res.render("leaderboard", { leaderboard: req.signedCookies.lead});
     }
     else if (req.signedCookies.name)                           // if cookies exists then access the database
     {
@@ -131,6 +132,7 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
             }
             else
             {
+                res.cookie('lead', docs, {maxAge: 86400000, signed: true});
                 res.render("leaderboard", { leaderboard: documents});
             }
         };
@@ -486,6 +488,37 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
     else                                                        // if cookies does not exist, go to login page
     {
         req.session.route = 'team';
+        res.redirect('/');
+    }
+});
+
+router.get('/caps', function(req, res){
+    if(req.signedCookies.name)
+    {
+        if(req.signedCookies.purple)
+        {
+            res.render('caps', {orange: req.signedCookies.orange, purple : req.signedCookies.purple});
+        }
+        else
+        {
+            var onGetCaps = function(err, docs){
+                if(err)
+                {
+                    console.log(err.message);
+                    res.redirect('/');
+                }
+                else
+                {
+                    res.cookie('orange', docs[0], {maxAge : 86400000, signed : true});
+                    res.cookie('purple', docs[1], {maxAge : 86400000, signed : true});
+                    res.render('caps', {orange: docs[0], purple : docs[1]});
+                }
+            };
+            mongoMathces.getCaps(onGetCaps);
+        }
+    }
+    else
+    {
         res.redirect('/');
     }
 });

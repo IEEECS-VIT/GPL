@@ -203,5 +203,10 @@ module.exports =
     " have to dive to make ground, and even so the direct hit from caught him a foot short of the crease",
     "walks at the bowler, has a full toss, thumps it back towards long-on, but the non-striker's bat intervenes. The " +
     "ball is deflected to the nearby fielder, who completes an easy run out. The skipper is livid as the striker, who " +
-    "had raced down the pitch looking for runs, but ends up going to the dressing room"
+    "had raced down the pitch looking for runs, but ends up going to the dressing room",
+    "you can't look any prettier while getting out. Leans forward for a cover drive again, and it wasn't like it was an" +
+    " overpitched delivery. Lovely timing. But then he is eager to get back on strike, gets through for a couple of " +
+    "steps and then realises the danger. Sells his partner down the river.",
+    "shortish and outside off, looks to stand and slog towards leg. Only gets an inside edge towards deep square leg. " +
+    "They're racing back, this is a good, flat through and he hasn't made it back"
 ];

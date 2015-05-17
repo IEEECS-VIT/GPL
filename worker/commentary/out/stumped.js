@@ -73,5 +73,7 @@ module.exports =
     "This does away a touch as well. He is beaten in line, the keeper makes no mistake now. Whips the bails off in a " +
     "flash",
     "gone. Saw him coming down the track and slid it flat and wide outside off. Quick work from the keeper as well, " +
-    "collects and has the bails off before th striker can even try and turn and try to regain his crease"
+    "collects and has the bails off before the striker can even try and turn and try to regain his crease",
+    "gone! That's another lovely bit of skill from the bowler. Sees the batsman skip down the track and defeats him with" +
+    " his trajectory again. The ball dips and goes sharply down the leg side and the man behind the stump does the rest"
 ];

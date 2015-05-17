@@ -294,5 +294,11 @@ module.exports =
     "looking to go on the back foot and work it through the leg side, initially, and then tried to adjust and play with" +
     " a straight bat, but it slipped quickly past his bat-face and clipped his off bail",
     "and he's gone! Down the track again, and the bowler bowls it flat and quick and yorks him and takes out his leg " +
-    "stump"
+    "stump",
+    "squared him up! That was a flat ball angled in towards middle and off, and he was neither forward nor back. It " +
+    "moves sharply away from him and past his outside edge as he pushed at it feebly, and hit the top of off stump",
+    "bowled him! That was back of a length on off stump, not enough width for the back-foot punch, and he ends up " +
+    "pushing at it with an angled bat and inside-edging into his stumps",
+    "yorks himself. Comes down the track, making room, and the bowler bowls it right up in the blockhole to sneak under" +
+    " his bat and bowl him as he tries to stab it away into the off side"
 ];

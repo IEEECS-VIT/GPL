@@ -299,6 +299,7 @@ router.get('/logout', function (req, res)
     if (req.signedCookies.name)
     {
         res.clearCookie('name');
+        res.clearCookie('lead');
         res.redirect('/login');
     }
     else

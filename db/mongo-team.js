@@ -21,6 +21,7 @@ var MongoClient = require('mongodb').MongoClient;
 var path = require('path');
 var match = require(path.join(__dirname, '..','matchCollection.js'));
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
+var collection;
 
 var getPlayer = function (id, callback)
 {
@@ -32,7 +33,7 @@ var getPlayer = function (id, callback)
         }
         else
         {
-            var collection = db.collection('players');
+            collection = db.collection('players');
             var onFetch = function (err, document)
             {
                 if (err)
@@ -61,7 +62,7 @@ exports.getTeam = function (doc, callback)
         }
         else
         {
-            var collection = db.collection(match);   // match collection
+            collection = db.collection(match);   // match collection
             var onFetch = function (err, document)
             {
                 console.log("Length " + document.team.length);
@@ -96,7 +97,7 @@ exports.getSquad = function (doc, callback)
         }
         else
         {
-            var collection = db.collection(match); // match collection
+            collection = db.collection(match); // match collection
             var onFinish = function (err, documents)
             {
                 var onGetCoach = function (err, doc)
@@ -155,6 +156,22 @@ exports.getSquad = function (doc, callback)
             };
             console.log("Team "+ doc.team_no);
             collection.findOne(doc, onFetch);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};
+
+exports.getCaps = function(callback){
+    var onConnect = function(err, db)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            collection = db.collection('info');
+            collection.find().toArray(callback);
         }
     };
     MongoClient.connect(mongoUri, onConnect);

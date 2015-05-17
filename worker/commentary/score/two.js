@@ -1421,5 +1421,40 @@ module.exports =
         "switch cover drive! And there's a misfield. Better delivery from the bowler as he fires it in outside off, at " +
         "the right-handed Warner. He is a little ginger chasing the ball, because of the outfield being soggy perhaps",
         "he's played such a sweet-looking shot! Nudges to deep square leg and snags a couple",
-        "pin-point yorker on middle, pushed to long-on where a misfield gives two"
+        "pin-point yorker on middle, pushed to long-on where a misfield gives two",
+        "shortish, goes with the angle into the body, and he opens up at the hips to pull it towards deep square leg",
+        "down the track, clips this leg-stumpish ball to the left of short fine leg",
+        "down the track now, and he shortens his length a bit, on that fourth-stump line, forcing the batsman to slice" +
+        " uppishly to the right of third man",
+        "down the track and the bowler fires one into his pads. Gets his front leg out of the way and nudges it into " +
+        "the on side",
+        "shortish ball, turns sharply outside off. He moves away from the line and taps down on the top of the bounce " +
+        "to place it to the right of short third man",
+        "back of a length on leg stump, tucked away through midwicket",
+        "tossed up slow, angling down leg, sweeps and the man at backward square leg - the fielder there dives to his " +
+        "left to get a hand to it and prevent the boundary",
+        "slowish delivery angled into middle and leg, he plays the lap=sweep towards fine leg",
+        "down the track he comes and the bowler bowls it quick and flat on leg stump. The striker brings down a straight" +
+        " bat and chips it over the bowler, and they take two while long-on covers the distance to his right",
+        "full, angling down the leg side, tickled away to the left of deep backward square leg",
+        "length ball on off stump, and that's a nice shot, shuffling across to whip it between deep backward square leg" +
+        " and deep midwicket, and it's, running to his right from the latter position, who makes the diving stop",
+        "back of a length on off stump, whipped away to the left of deep midwicket",
+        "short ball outside off, pulled to the right of long leg",
+        "pace, ample bounce, makes him leap off his feet to get on top of the ball. Then taps it through third man with" +
+        " an open face. Neatly done for a couple",
+        "shortish on middle and leg, nudged behind square leg. There's cover in the deep",
+        "stays beside the shortish ball and dabs it behind point. It just scurries away, deep third man has a lot of " +
+        "work to do. Runs to his right, dives, and saves a boundary",
+        "stays back to open the face on top of the bounce and runs a shortish delivery to third man on the boundary",
+        "goes back and flicks a length ball through to deep midwicket, and they've hared across for a couple.",
+        "tossed up on leg stump, eased through to the man at deep midwicket again. He struck it softly and placed it " +
+        "well enough for a couple again",
+        "shortish and outside off, back cut to the right of deep third man",
+        "full on middle and leg, flicked to deep midwicket for a couple",
+        "full on off stump, heaved away to deep midwicket and that's two",
+        "shortish and outside off, slapped away to the sweeper. He slides around and keeps it to only two",
+        "shortish and outside off, cut away powerfully towards the third man boundary. The fielder who is down there, " +
+        "nearly overruns the ball. Manages to recover quickly enough to keep it in the field of play",
+        "full on off stump, heaved away wide of long-on for a couple. Appeal for a run-out, but the batsman is quite safe"
     ];

@@ -677,7 +677,6 @@ module.exports =
     "caught at deep midwicket! He  moves across his crease and chips a length ball off his pads, it lands in the hands of" +
     " the fielder, who came running in from the boundary to take a simple catch. That has come after considerable punishment." +
     " Seemed to play too early",
-
     "that's a blinder first ball, it was pretty wide outside the off stump, he chased the delivery with a swipe uppishly" +
     " and the fielder flew to his left from cover point to gab it with both hands. The crowd erupts even more",
     "he's handed it straight to mid-on, gone! The bowler pitched it up, looks like the striker wanted to clear the infield" +
@@ -1025,5 +1024,47 @@ module.exports =
     "bat. Wry grin as he walks back, knew he should have belted that",
     "and there is proof that bats these days have an edge. He gets it as he bowls the ball wide, trying to evade his " +
     "reach. The slash over the covers doesn't come out as well as he'd hope, but he has to go",
-    "that's the short ball, to trump the batsman rushing down the pitch. Gets a top edge that is pouched at long-off."
+    "that's the short ball, to trump the batsman rushing down the pitch. Gets a top edge that is pouched at long-off.",
+    "steps towards the leg side to make a bit of room and the bowler spots that and bowls it slow, loopy and wide " +
+    "outside off. The striker reaches out to try and hit it over the off side, doesn't hit it cleanly - it zipped away " +
+    "a fair amount too - and ended up spooning a simple, loopy catch to cover",
+    "and he strikes! It was a good length ball angling away, and he pokes at it hesitantly, with his feet moving after" +
+    " his hands went at the ball, and he dives low to his right to pouch the edge",
+    "gone! That was full and wide and he goes after it hard, throws his hands at the ball and ends up slicing it high " +
+    "in the air, straight to third man",
+    "flat, a touch short, and he rocks back to pull, gets a lot of power on it but hits it in the air, and the fielder " +
+    "runs to his left from deep midwicket to complete an excellent catch, diving low to his left and taking it with " +
+    "both hands",
+    "slower ball angled away, and it gets his wicket. Slashes away from his body and only manages a top edge that loops" +
+    " to the right of the keeper, who settles himself under it and completes a simple catch",
+    "gone! That's the perfect delivery, angling away into the corridor, the length leaves his feet rooted to the crease," +
+    " and he pokes at it with an angled bat and edges to the keeper. A hint of shape away as well",
+    "that's an absolute shocker! A dumbfounded striker is looking at the umpire for a no-ball. But this should be out. " +
+    "A full toss has been flicked straight at short fine leg. Doesn't look like he'll be saved. He will be kicking " +
+    "himself all the way back to the pavilion",
+    "saw the length ball, thought it was there to be heaved away over leg again. But he's into the shot too early. Gets" +
+    " a leading edge and the catch balloons to point. Cross-seamer works for the bowler, cross-bat doesn't for his nemesis.",
+    "full on middle, he stays deep in his crease and looks for a heave seeking to clear the boundary. But he hasn't got" +
+    " as much as he'd like. Long-on runs to his right and takes a clean catch",
+    "fuller delivery outside off, goes for a booming drive through the off side. All he gets is an outside edge through" +
+    " to the keeper.",
+    "short ball, came quickly onto the body, as the batter was forced into an awkward position, he still plays the pull," +
+    " top edges it and that loops to backward square leg, massive wicket this",
+    "holes out to mid-off, looking to clear the man in the ring but he doesn't get enough power on that as it hits high " +
+    "on the bat, the ball gently flies towards the catcher, he doesn't drop that",
+    "straight to cover! Seems the slower ball has worked out. It was a length ball, on leg stump. He had made room for " +
+    "the slash and picks out the fielder",
+    "that's an outside edge, and it's travelled as far as long-off. It was fuller on middle, he clears the front leg and" +
+    " looks to thump it towards long-on again only to mis-hit it. Big strike for Royals",
+    "that's an absolute corker! It's back of a length, it straightens away off the seam, he has to play. He does so with" +
+    " a nervy push. Shaves the outside edge and carries through to the keeper. Bounce, pace, movement. The good old " +
+    "triple threat",
+    "right down the throat of long-off. It was a length ball on and around off stump, the batsman makes room to hammer " +
+    "it over the fielder, but isn't able to.",
+    "that's a stunner at long-on! This had gone miles in the air, he had a lot of time to contemplate how the match " +
+    "would change depending on this catch. Runs to his right, judges it wonderuflly well. And eventually he pouches it " +
+    "very safely. Goes for a length ball outside off but the slog doesn't come off",
+    "fuller delivery outside off, sliced away but only as far as point. Simple catch, simply taken",
+    "good length ball, he goes for a swing and he gets it pretty high on the bat. He runs in from long-on and takes a " +
+    "simple catch."
 ];

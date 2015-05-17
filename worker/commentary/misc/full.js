@@ -19,5 +19,6 @@
 module.exports =
 [
     "",
-    "what a wonderful way to bring up his century."
+    "what a wonderful way to bring up his century.",
+    "there it is! Spreads his arms aloft towards the dressing room, who are standing up and so is this crowd."
 ];

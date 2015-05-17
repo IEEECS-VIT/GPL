@@ -117,5 +117,10 @@ module.exports =
         "back of a length and on middle, whipped away towards midwicket, where the fielder fumbles. Gives the chase from" +
         " mid-on, slides and hauls the ball in before the boundary. The result is three",
         "the wet patch comes into play. It's a length ball, fairly straight, and he makes room to chip it over the " +
-        "covers. Timed it very well, but it stopped well short of the rope"
+        "covers. Timed it very well, but it stopped well short of the rope",
+        "full on leg stump, whipped away between midwicket and mid-on",
+        "not really short enough to pull, but he sits back and uses his wrists to whip it from an off-stump line and " +
+        "just about clear short midwicket",
+        "deftly done! Good length ball outside off, he plays it very late and uses the open face. Gets it fine of the " +
+        "fielder, who is able to catch up with it"
     ];
