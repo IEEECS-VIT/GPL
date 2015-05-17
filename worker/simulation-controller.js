@@ -21,8 +21,7 @@ var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
 var match = require(path.join(__dirname, '..', 'matchCollection'));
 var log;
-var bat;
-var bowl;
+var days = [1, 2, 3, 4, 5, 6, 7];
 var key = process.env.PASSWORD || require(path.join(__dirname, '..', 'key.js'));
 if (process.env.LOGENTRIES_TOKEN)
 {
@@ -35,6 +34,12 @@ var ref = {
     'users' : 1,
     'round2' : 2,
     'round3' : 3
+};
+var info = {
+    four : 0,
+    six : 0,
+    runs : 0,
+    wickets: 0
 };
 var orange;
 var purple;
@@ -51,10 +56,9 @@ var email = require('nodemailer').createTransport({
 
 var options = {
     from: 'gravitaspremierleague@gmail.com',
-    to: '',
     subject: 'Round ' + ref[match] + ', match ' + (process.env.DAY || 1) + ' results are out!',
-    text: 'Please click on http://gravitaspremierleague.com/home/matches to see your scores!\n '
-    + '\n\nRegards, \nTeam G.P.L.'
+    html: "Please click <a href='http://gravitaspremierleague.com/home/matches'>here</a> to see your scores!"
+    + "<br><br>Regards,<br>Team G.P.L."
 };
 
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
@@ -125,11 +129,15 @@ exports.initSimulation = function (day, masterCallback)
         {
             var updateUser = function (newUserDoc, asyncCallback)
             {
+                info.runs += newUserDoc.runs_for;
+                info.overs += newUserDoc.balls_for;
+                info.wickets += newUserDoc.wickets_lost;
                 for(i = 0; i < newUserDoc.squad.length; ++i)
                 {
+                    info.six += newUserDoc.stats[newUserDoc.squad[i]].sixes || 0;
+                    info.four += newUserDoc.stats[newUserDoc.squad[i]].fours || 0;
                     if(!newUserDoc.squad[i].match(/^b/) && newUserDoc.stats[newUserDoc.squad[i]].runs_scored > orange.runs)
                     {
-                        console.log('bat');
                         orangeFlag = true;
                         orange.team = newUserDoc._id;
                         orange.player = newUserDoc.squad[i];
@@ -138,7 +146,6 @@ exports.initSimulation = function (day, masterCallback)
                     }
                     if(newUserDoc.squad[i].match(/^[^a]/) && newUserDoc.stats[newUserDoc.squad[i]].wickets_taken > purple.wickets)
                     {
-                        console.log('bowl');
                         purpleFlag = true;
                         purple.team = newUserDoc._id;
                         purple.player = newUserDoc.squad[i];
@@ -201,35 +208,43 @@ exports.initSimulation = function (day, masterCallback)
     {
         if(orangeFlag)
         {
-            database.collection('info').updateOne({_id : 'orange'}, orange, null);
+            info.orange = orange;
         }
         if(purpleFlag)
         {
-            database.collection('info').updateOne({_id : 'purple'}, purple, null);
+            info.purple = purple;
         }
-        database.close();
-        if (err)
-        {
-            console.log(err.message);
-            if (log) log.log('debug', {Error: err.message});
-            throw err;
-        }
-        else
-        {
-            masterCallback(err, results);
-        }
+        console.log(info);
+        var onUpdate = function(error){
+            database.close();
+            if(error)
+            {
+                console.log(error.message);
+            }
+            if (err)
+            {
+                console.log(err.message);
+                if (log) log.log('debug', {Error: err.message});
+                throw err;
+            }
+            else
+            {
+                masterCallback(err, results);
+            }
+        };
+        database.collection('info').updateOne({_id : 'info'}, {$set : info}, onUpdate);
     };
 
     var getAllMatches = function (err, callback)
     {
         var collectionName;
-        switch (day)
+        switch(days.indexOf(day))
         {
-            case 1 || 2 || 3 || 4 || 5 || 6 || 7:
-                collectionName = 'matchday' + day;
+            case -1:
+                throw 'Invalid Day';
                 break;
             default:
-                throw 'Invalid Day';
+                collectionName = 'matchday' + day;
                 break;
         }
 
@@ -262,19 +277,20 @@ exports.initSimulation = function (day, masterCallback)
         else
         {
             database = db;
-            database.collection('info').find().toArray(function(err, docs) {
+            var onGetInfo = function(err, doc) {
                 if(err)
                 {
                     console.log(err.message);
                 }
                 else
                 {
-                    orange = docs[0];
-                    purple = docs[1];
-                    console.log(docs);
+                    orange = doc.orange;
+                    purple = doc.purple;
+                    console.log(orange, purple);
+                    getAllMatches(err, ForAllMatches);
                 }
-            });
-            getAllMatches(err, ForAllMatches);
+            };
+            database.collection('info').findOne(onGetInfo);
         }
     };
 

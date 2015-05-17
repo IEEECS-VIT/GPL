@@ -1062,9 +1062,28 @@ module.exports =
     "right down the throat of long-off. It was a length ball on and around off stump, the batsman makes room to hammer " +
     "it over the fielder, but isn't able to.",
     "that's a stunner at long-on! This had gone miles in the air, he had a lot of time to contemplate how the match " +
-    "would change depending on this catch. Runs to his right, judges it wonderuflly well. And eventually he pouches it " +
+    "would change depending on this catch. Runs to his right, judges it wonderfully well. And eventually he pouches it " +
     "very safely. Goes for a length ball outside off but the slog doesn't come off",
     "fuller delivery outside off, sliced away but only as far as point. Simple catch, simply taken",
     "good length ball, he goes for a swing and he gets it pretty high on the bat. He runs in from long-on and takes a " +
-    "simple catch."
+    "simple catch.",
+    "short, wide, slapped, caught. It was a terrible delivery, deserved to be punished, smashed to smithereens, but he" +
+    " stood up, smacked it hard, and found backward point, hitting it to him at a comfortable height, and he took it " +
+    "just over his head",
+    "tossed up outside off, and that's an excellent catch. He looks to hit down the ground, maybe over mid-on, and ends" +
+    " up slicing it over cover. He pouches it while running away from the batsman, towards the boundary, and does very " +
+    "well to keep his eye on it and make it look simple. He celebrates (if we can call it that) by flinging the ball " +
+    "angrily into the turf",
+    "tossed up a bit more, outside off, and he goes for another big hit. Hits it okay enough but not right out of the " +
+    "screws, and ends up offering long-off the simplest of catches",
+    "short and wide, and for the umpteenth time that's become a wicket-taking delivery. He stands there and throws his " +
+    "bat at it, and only manages to top-edge to the keeper",
+    "two fielders converge at long-off, one takes it. Length and outside off, slower in pace. The striker is hoodwinked." +
+    " His bat twists in his hand as he chips it to the fielder",
+    "he pulls off the finger-on-the lips celebration. No tape-on-the-mouth act here. This was fuller and outside off, " +
+    "change-up. He reaches out and slices it in the air. He pedals back from backward point, loses his balance; manages " +
+    "to hang onto the catch even as short third man was converging. Oh wait, has the bowler overstepped? This is close.." +
+    " Does he have some particle of his heel behind the crease? Given Out, he may have got some part of it behind the line.",
+    "Pushed through outside off, he backs away and attempts a cut only to slice it straight down the throat of the man " +
+    "at point"
 ];

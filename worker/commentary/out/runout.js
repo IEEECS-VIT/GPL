@@ -208,5 +208,10 @@ module.exports =
     " overpitched delivery. Lovely timing. But then he is eager to get back on strike, gets through for a couple of " +
     "steps and then realises the danger. Sells his partner down the river.",
     "shortish and outside off, looks to stand and slog towards leg. Only gets an inside edge towards deep square leg. " +
-    "They're racing back, this is a good, flat through and he hasn't made it back"
+    "They're racing back, this is a good, flat through and he hasn't made it back",
+    "full outside off, flat-batted firmly, the fielder gets a fingertip on it and deflects it into the " +
+    "stumps. They've gone to the third umpire, and has the batsman grounded his bat in time? Looks like it's in the air..." +
+    " one bail seems to be completely out of its groove too, and the big screen says 'OUT'",
+    "he wants another run, but there has been run out. This was fuller on middle, he slogs it away to cow corner. The " +
+    "fielder there swoops down on the ball and fires a flattish throw to the man backing up, who does the rest."
 ];

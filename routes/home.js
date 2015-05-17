@@ -16,12 +16,11 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var express = require('express');
+var log;
 var path = require('path');
 var async = require('async');
-var router = express.Router();
+var router = require('express').Router();
 var match = require(path.join(__dirname, '..', 'matchCollection'));
-var log;
 if (process.env.LOGENTRIES_TOKEN)
 {
     var logentries = require('node-logentries');
@@ -30,12 +29,10 @@ if (process.env.LOGENTRIES_TOKEN)
                             });
 }
 
-var mongoPlayers = require(path.join(__dirname, '..', 'db', 'mongo-players.js'));
-var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users.js'));
 var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team.js'));
+var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users.js'));
+var mongoPlayers = require(path.join(__dirname, '..', 'db', 'mongo-players.js'));
 var mongoMatches = require(path.join(__dirname, '..', 'db', 'mongo-matches.js'));
-var orange;
-var purple;
 
 router.get('/', function (req, res)
 {
@@ -56,7 +53,7 @@ router.get('/', function (req, res)
                 results.user = doc;
                 if (doc.team.length == 0)
                 {
-                    res.redirect("/home/players")
+                    res.redirect("/home/players");
                 }
 
                 var getDetails = function (id, callback)
@@ -343,6 +340,9 @@ router.post('/getTeam', function (req, res)
         stats[players[i]].matches = 0;
         stats[players[i]].catches = 0;
         stats[players[i]].MoM = 0;
+        stats[players[i]].form = 0;
+        stats[players[i]].fatigue = 0;
+        stats[players[i]].morale = 0;
         if(!(players[i] > 'b' && players[i] < 'c'))
         {
             stats[players[i]].runs_scored = 0;
@@ -492,16 +492,16 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
     }
 });
 
-router.get('/caps', function(req, res){
+router.get('/info', function(req, res){
     if(req.signedCookies.name)
     {
-        if(req.signedCookies.purple)
+        if(req.signedCookies.info)
         {
-            res.render('caps', {orange: req.signedCookies.orange, purple : req.signedCookies.purple});
+            res.render('caps', {info: req.signedCookies.info});
         }
         else
         {
-            var onGetCaps = function(err, docs){
+            var onGetInfo = function(err, doc){
                 if(err)
                 {
                     console.log(err.message);
@@ -509,12 +509,11 @@ router.get('/caps', function(req, res){
                 }
                 else
                 {
-                    res.cookie('orange', docs[0], {maxAge : 86400000, signed : true});
-                    res.cookie('purple', docs[1], {maxAge : 86400000, signed : true});
-                    res.render('caps', {orange: docs[0], purple : docs[1]});
+                    res.cookie('info', doc, {maxAge : 86400000, signed : true});
+                    res.render('info', {info : doc});
                 }
             };
-            mongoMathces.getCaps(onGetCaps);
+            mongoMatches.getCaps(onGetInfo);
         }
     }
     else

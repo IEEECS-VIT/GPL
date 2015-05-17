@@ -1295,5 +1295,25 @@ module.exports =
         " and his power is absolutely stunning. Length ball, duly dealt with",
         "cleared the stadium! Soars well over the roof beyond midwicket! Humongous hit, and guess what the length is? " +
         "Short and sat up as he pulls off the front foot. He's playing an absolute blinder",
-        "length ball on off stump, he clears the front leg and wallops it over long-on."
+        "length ball on off stump, he clears the front leg and wallops it over long-on.",
+        "makes room now and I don't know how well he's connected with it. It's full outside off and he sliced under it, " +
+        "connected near the bottom of his bat, and still managed to clear the backward point boundary",
+        "short ball on off stump, and he clears his front leg and swats it away over wide long-on, just clears the " +
+        "fielder, who is at full stretch, leaning backwards, on the rope",
+        "boom. It was slow, it was a touch short, it just sat up for him to open up and launch over the straight boundary",
+        "slower ball outside off, nice and full, and he absolutely launches into that, clears his front leg and sends " +
+        "it soaring over wide long-on",
+        "and another. He feeds him another full ball, but not full enough or straight enough to deny him swinging room, " +
+        "and the ball flies over wide long-on once again",
+        "tossed up outside leg, and he gets down on one knee and swivels his body through a sweep that deposits the " +
+        "ball high over deep square leg",
+        "flat, full, angled across wide outside off, and he plays another slog-sweep. The line of the ball dictates where" +
+        " the ball goes, and this time it soars over wide long-on",
+        "down the track, he doesn't quite reach the pitch, but that doesn't matter. It's on leg stump, it turns into him," +
+        " and he simply whips it with the angle and smacks that over deep midwicket",
+        "length ball outside off, and he flat-bats it back over the bowler and clears the straight boundary",
+        "smashed! Half-tracker, he rocks back and muscles a pull over midwicket",
+        "another short one, dispatched again. He marmalises a flattish six over deep midwicket with a slog-sweep",
+        "full and on off, right in his hitting zone. He sinks to one knee and pastes a slog-sweep over long-on. Gets " +
+        "off the mark in style"
     ];

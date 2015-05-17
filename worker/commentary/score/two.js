@@ -1456,5 +1456,25 @@ module.exports =
         "shortish and outside off, slapped away to the sweeper. He slides around and keeps it to only two",
         "shortish and outside off, cut away powerfully towards the third man boundary. The fielder who is down there, " +
         "nearly overruns the ball. Manages to recover quickly enough to keep it in the field of play",
-        "full on off stump, heaved away wide of long-on for a couple. Appeal for a run-out, but the batsman is quite safe"
+        "full on off stump, heaved away wide of long-on for a couple. Appeal for a run-out, but the batsman is quite safe",
+        "back of a length on the pads, worked away to the left of deep square leg. Good placement and weight of shot, " +
+        "allows him to pick up two easily",
+        "slowish, shortish ball, he plays a short-arm pull off the hips towards deep square leg",
+        "fired in quicker, full and wide, stabbed away towards backward point",
+        "length ball outside off, and that's nicely played, gets down low and manoeuvres it to the right of sweeper " +
+        "cover, picks up two",
+        "low full-toss, follows the batsman as he looks to make room, and he whips it away towards wide long-on",
+        "full outside off, he makes room, gets under it and slices it to where sweeper cover might be. Good placement, " +
+        "because they had moved him to deep extra cover",
+        "yorker on the base of off stump and he clears his front leg and swings freely to hit hard down the ground. " +
+        "Would have gone for four if he hadn't been as quick as he was to sprint across, slide, and intercept right on " +
+        "the edge of the boundary",
+        "he makes room outside leg, the bowler follows him. Skewed up in the air. Short third man and backward point " +
+        "converge, but the ball lands in no-man's land",
+        "just clears cover. Full and outside off, he plays a weak little drive over the fielder",
+        "back of a length and on off, he looks to force it away. Only manages an inside edge between the keeper and " +
+        "short fine leg. Narrowly missed the leg stump",
+        "on the stumps now, worked off the pads to deep midwicket for two",
+        "flat and width on offer as well, cut to backward point. The fielder fumbles and gifts two runs",
+        "fired full on off, he steps away and crashes it past the covers. Sweeper cover hunts it down"
     ];
