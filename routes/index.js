@@ -27,14 +27,14 @@ var express = require('express');
 var path = require('path');
 var router = express.Router();
 var crypto = require('crypto');
-var key = process.env.PASSWORD || require(path.join(__dirname, '..', 'key.js'));
+/*var key = process.env.PASSWORD || require(path.join(__dirname, '..', 'key.js'));
 var email = require('nodemailer').createTransport({
     service: 'Gmail',
     auth: {
         user: 'gravitaspremierleague@gmail.com',
         pass: key
     }
-});
+});*/
 var log;
 if (process.env.LOGENTRIES_TOKEN)
 {
