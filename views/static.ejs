@@ -1,36 +1,63 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Gravitas Premier League</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="/stylesheets/count.css" />
-    <!--<script src="/javascript/javascript.js"></script>-->
-    <script src="/javascript/countdown_final.js"></script>
-    <script>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        window.onload = function(){
-            start();
-        };
+    <link type="text/css" rel="stylesheet" href="/stylesheets/countdownStyle.css">
 
-    </script>
+
 </head>
 <body>
+<div class="overlay">
+    <img class="tvstatic" src="/images/tvstaticsmall.gif"/>
 
-<canvas id="canvas"></canvas>
-<div id="message">
-    <h1>Gravitas Premier League</h1>
-    <h2>Coming Soon</h2>
-    <ul class="timer">
-        <li id="countdowndays"></li>
-        <li id="countdownhours"></li>
-        <li id="countdownminutes"></li>
-        <li id="countdownseconds"></li>
-    </ul>
-    <h3>Stay tuned to our <a href="https://www.facebook.com/gravitaspremierleague">Facebook Page</a> for more details.</h3>
-    <h4>Presented by</h4>
-    <a href="https://www.facebook.com/ieeecsvit"><img src="/images/logo_nbg.png" /></a>
 </div>
-<!--<div id="footer"></div>-->
-<script src="/javascript/static.js"></script>
+
+<header>
+    <div id="DateCountdown" data-date="2015-09-01 00:00:00" ></div>
+</header>
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link rel="stylesheet"  type="text/css"  href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<script type="text/javascript" src="/javascript/TimeCircles.js"></script>
+<link rel="stylesheet"  type="text/css"  href="/stylesheets/TimeCircles.css" />
+
+<script>
+    $("#DateCountdown").TimeCircles({
+        "animation": "smooth",
+        "bg_width": 1,
+        "fg_width": 0.04,
+        "circle_bg_color": "#EEEEEE",
+        "time": {
+            "Days": {
+                "text": "Days",
+                "color": "#CCCCCC",
+                "show": true
+            },
+            "Hours": {
+                "text": "Hours",
+                "color": "#CCCCCC",
+                "show": true
+            },
+            "Minutes": {
+                "text": "Minutes",
+                "color": "#CCCCCC",
+                "show": true
+            },
+            "Seconds": {
+                "text": "Seconds",
+                "color": "#CCCCCC",
+                "show": true
+            }
+        }
+    });
+</script>
 </body>
 </html>
