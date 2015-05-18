@@ -1,40 +1,25 @@
-/**
- * Basic structure: TC_Class is the public class that is returned upon being called
- * 
- * So, if you do
- *      var tc = $(".timer").TimeCircles();
- *      
- * tc will contain an instance of the public TimeCircles class. It is important to
- * note that TimeCircles is not chained in the conventional way, check the
- * documentation for more info on how TimeCircles can be chained.
- * 
- * After being called/created, the public TimerCircles class will then- for each element
- * within it's collection, either fetch or create an instance of the private class.
- * Each function called upon the public class will be forwarded to each instance
- * of the private classes within the relevant element collection
- **/
-(function($) {
+(function ($) {
 
     var useWindow = window;
-    
+
     // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
     if (!Object.keys) {
-        Object.keys = (function() {
+        Object.keys = (function () {
             'use strict';
             var hasOwnProperty = Object.prototype.hasOwnProperty,
-                    hasDontEnumBug = !({toString: null}).propertyIsEnumerable('toString'),
-                    dontEnums = [
-                        'toString',
-                        'toLocaleString',
-                        'valueOf',
-                        'hasOwnProperty',
-                        'isPrototypeOf',
-                        'propertyIsEnumerable',
-                        'constructor'
-                    ],
-                    dontEnumsLength = dontEnums.length;
+                hasDontEnumBug = !({toString: null}).propertyIsEnumerable('toString'),
+                dontEnums = [
+                    'toString',
+                    'toLocaleString',
+                    'valueOf',
+                    'hasOwnProperty',
+                    'isPrototypeOf',
+                    'propertyIsEnumerable',
+                    'constructor'
+                ],
+                dontEnumsLength = dontEnums.length;
 
-            return function(obj) {
+            return function (obj) {
                 if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) {
                     throw new TypeError('Object.keys called on non-object');
                 }
@@ -58,12 +43,13 @@
             };
         }());
     }
-    
+
     // Used to disable some features on IE8
     var limited_mode = false;
     var tick_duration = 200; // in ms
-    
+
     var debug = (location.hash === "#debug");
+
     function debug_log(msg) {
         if (debug) {
             console.log(msg);
@@ -95,7 +81,7 @@
     function hexToRgb(hex) {
         // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
         var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-        hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+        hex = hex.replace(shorthandRegex, function (m, r, g, b) {
             return r + r + g + g + b + b;
         });
 
@@ -106,7 +92,7 @@
             b: parseInt(result[3], 16)
         } : null;
     }
-    
+
     function isCanvasSupported() {
         var elem = document.createElement('canvas');
         return !!(elem.getContext && elem.getContext('2d'));
@@ -118,8 +104,8 @@
      */
     function s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
+            .toString(16)
+            .substring(1);
     }
 
     /**
@@ -128,7 +114,7 @@
      */
     function guid() {
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-                s4() + '-' + s4() + s4() + s4();
+            s4() + '-' + s4() + s4() + s4();
     }
 
     /**
@@ -137,21 +123,19 @@
      * @returns {Number}
      */
     if (!Array.prototype.indexOf) {
-        Array.prototype.indexOf = function(elt /*, from*/)
-        {
+        Array.prototype.indexOf = function (elt /*, from*/) {
             var len = this.length >>> 0;
 
             var from = Number(arguments[1]) || 0;
             from = (from < 0)
-                    ? Math.ceil(from)
-                    : Math.floor(from);
+                ? Math.ceil(from)
+                : Math.floor(from);
             if (from < 0)
                 from += len;
 
-            for (; from < len; from++)
-            {
+            for (; from < len; from++) {
                 if (from in this &&
-                        this[from] === elt)
+                    this[from] === elt)
                     return from;
             }
             return -1;
@@ -186,7 +170,7 @@
         var old_time = {};
 
         var greater_unit = null;
-        for(var i = 0; i < units.length; i++) {
+        for (var i = 0; i < units.length; i++) {
             var unit = units[i];
             var maxUnits;
 
@@ -199,14 +183,14 @@
 
             var curUnits = (diff / secondsIn[unit]);
             var oldUnits = (old_diff / secondsIn[unit]);
-            
-            if(floor) {
-                if(curUnits > 0) curUnits = Math.floor(curUnits);
+
+            if (floor) {
+                if (curUnits > 0) curUnits = Math.floor(curUnits);
                 else curUnits = Math.ceil(curUnits);
-                if(oldUnits > 0) oldUnits = Math.floor(oldUnits);
+                if (oldUnits > 0) oldUnits = Math.floor(oldUnits);
                 else oldUnits = Math.ceil(oldUnits);
             }
-            
+
             if (unit !== "Days") {
                 curUnits = curUnits % maxUnits;
                 oldUnits = oldUnits % maxUnits;
@@ -233,8 +217,9 @@
     }
 
     var TC_Instance_List = {};
+
     function updateUsedWindow() {
-        if(typeof useWindow.TC_Instance_List !== "undefined") {
+        if (typeof useWindow.TC_Instance_List !== "undefined") {
             TC_Instance_List = useWindow.TC_Instance_List;
         }
         else {
@@ -242,7 +227,7 @@
         }
         initializeAnimationFrameHandler(useWindow);
     };
-    
+
     function initializeAnimationFrameHandler(w) {
         var vendors = ['webkit', 'moz'];
         for (var x = 0; x < vendors.length && !w.requestAnimationFrame; ++x) {
@@ -251,25 +236,25 @@
         }
 
         if (!w.requestAnimationFrame || !w.cancelAnimationFrame) {
-            w.requestAnimationFrame = function(callback, element, instance) {
+            w.requestAnimationFrame = function (callback, element, instance) {
                 if (typeof instance === "undefined")
                     instance = {data: {last_frame: 0}};
                 var currTime = new Date().getTime();
                 var timeToCall = Math.max(0, 16 - (currTime - instance.data.last_frame));
-                var id = w.setTimeout(function() {
+                var id = w.setTimeout(function () {
                     callback(currTime + timeToCall);
                 }, timeToCall);
                 instance.data.last_frame = currTime + timeToCall;
                 return id;
             };
-            w.cancelAnimationFrame = function(id) {
+            w.cancelAnimationFrame = function (id) {
                 clearTimeout(id);
             };
         }
     };
-    
 
-    var TC_Instance = function(element, options) {
+
+    var TC_Instance = function (element, options) {
         this.element = element;
         this.container;
         this.listeners = null;
@@ -311,24 +296,24 @@
         this.initialize();
     };
 
-    TC_Instance.prototype.clearListeners = function() {
-        this.listeners = { all: [], visible: [] };
+    TC_Instance.prototype.clearListeners = function () {
+        this.listeners = {all: [], visible: []};
     };
-    
-    TC_Instance.prototype.addTime = function(seconds_to_add) {
-        if(this.data.attributes.ref_date instanceof Date) {
+
+    TC_Instance.prototype.addTime = function (seconds_to_add) {
+        if (this.data.attributes.ref_date instanceof Date) {
             var d = this.data.attributes.ref_date;
             d.setSeconds(d.getSeconds() + seconds_to_add);
         }
-        else if(!isNaN(this.data.attributes.ref_date)) {
+        else if (!isNaN(this.data.attributes.ref_date)) {
             this.data.attributes.ref_date += (seconds_to_add * 1000);
         }
     };
-    
-    TC_Instance.prototype.initialize = function(clear_listeners) {
+
+    TC_Instance.prototype.initialize = function (clear_listeners) {
         // Initialize drawn units
         this.data.drawn_units = [];
-        for(var i = 0; i < Object.keys(this.config.time).length; i++) {
+        for (var i = 0; i < Object.keys(this.config.time).length; i++) {
             var unit = Object.keys(this.config.time)[i];
             if (this.config.time[unit].show) {
                 this.data.drawn_units.push(unit);
@@ -346,7 +331,7 @@
         this.container = $("<div>");
         this.container.addClass('time_circles');
         this.container.appendTo(this.element);
-        
+
         // Determine the needed width and height of TimeCircles
         var height = this.element.offsetHeight;
         var width = this.element.offsetWidth;
@@ -359,26 +344,26 @@
             height = width / this.data.drawn_units.length;
         else if (width === 0 && height > 0)
             width = height * this.data.drawn_units.length;
-        
+
         // Create our canvas and set it to the appropriate size
         var canvasElement = document.createElement('canvas');
         canvasElement.width = width;
         canvasElement.height = height;
-        
+
         // Add canvas elements
         this.data.attributes.canvas = $(canvasElement);
         this.data.attributes.canvas.appendTo(this.container);
-        
+
         // Check if the browser has browser support
         var canvasSupported = isCanvasSupported();
         // If the browser doesn't have browser support, check if explorer canvas is loaded
         // (A javascript library that adds canvas support to browsers that don't have it)
-        if(!canvasSupported && typeof G_vmlCanvasManager !== "undefined") {
+        if (!canvasSupported && typeof G_vmlCanvasManager !== "undefined") {
             G_vmlCanvasManager.initElement(canvasElement);
             limited_mode = true;
             canvasSupported = true;
         }
-        if(canvasSupported) {
+        if (canvasSupported) {
             this.data.attributes.context = canvasElement.getContext('2d');
         }
 
@@ -418,23 +403,23 @@
         if (!this.config.start) {
             this.data.paused = true;
         }
-        
+
         // Set up interval fallback
         var _this = this;
-        this.data.interval_fallback = useWindow.setInterval(function(){
+        this.data.interval_fallback = useWindow.setInterval(function () {
             _this.update.call(_this, true);
         }, 100);
     };
 
-    TC_Instance.prototype.update = function(nodraw) {
-        if(typeof nodraw === "undefined") {
+    TC_Instance.prototype.update = function (nodraw) {
+        if (typeof nodraw === "undefined") {
             nodraw = false;
         }
-        else if(nodraw && this.data.paused) {
+        else if (nodraw && this.data.paused) {
             return;
         }
-        
-        if(limited_mode) {
+
+        if (limited_mode) {
             //Per unit clearing doesn't work in IE8 using explorer canvas, so do it in one time. The downside is that radial fade cant be used
             this.data.attributes.context.clearRect(0, 0, this.data.attributes.canvas[0].width, this.data.attributes.canvas[0].hright);
         }
@@ -450,7 +435,7 @@
         // If not counting past zero, and time < 0, then simply draw the zero point once, and call stop
         if (!this.config.count_past_zero) {
             if (curDate > this.data.attributes.ref_date) {
-                for(var i = 0; i < this.data.drawn_units.length; i++) {
+                for (var i = 0; i < this.data.drawn_units.length; i++) {
                     var key = this.data.drawn_units[i];
 
                     // Set the text value
@@ -494,8 +479,8 @@
             if (Math.floor(visible_times.raw_time[key]) !== Math.floor(visible_times.raw_old_time[key])) {
                 this.notifyListeners(key, Math.floor(visible_times.time[key]), Math.floor(diff), "visible");
             }
-            
-            if(!nodraw) {
+
+            if (!nodraw) {
                 // Set the text value
                 this.data.text_elements[key].text(Math.floor(Math.abs(visible_times.time[key])));
 
@@ -527,13 +512,13 @@
         }
 
         // Dont request another update if we should be paused
-        if(this.data.paused || nodraw) {
+        if (this.data.paused || nodraw) {
             return;
         }
-        
+
         // We need this for our next frame either way
         var _this = this;
-        var update = function() {
+        var update = function () {
             _this.update.call(_this);
         };
 
@@ -549,13 +534,13 @@
                 delay = 1000 + delay;
             delay += 50;
 
-            _this.data.animation_frame = useWindow.setTimeout(function() {
+            _this.data.animation_frame = useWindow.setTimeout(function () {
                 _this.data.animation_frame = useWindow.requestAnimationFrame(update, _this.element, _this);
             }, delay);
         }
     };
 
-    TC_Instance.prototype.animateArc = function(x, y, color, target_pct, cur_pct, animation_end) {
+    TC_Instance.prototype.animateArc = function (x, y, color, target_pct, cur_pct, animation_end) {
         if (this.data.attributes.context === null)
             return;
 
@@ -580,26 +565,26 @@
             if (progress >= 1)
                 return;
             var _this = this;
-            useWindow.requestAnimationFrame(function() {
+            useWindow.requestAnimationFrame(function () {
                 _this.animateArc(x, y, color, target_pct, cur_pct, animation_end);
             }, this.element);
         }
     };
 
-    TC_Instance.prototype.drawArc = function(x, y, color, pct) {
+    TC_Instance.prototype.drawArc = function (x, y, color, pct) {
         if (this.data.attributes.context === null)
             return;
 
         var clear_radius = Math.max(this.data.attributes.outer_radius, this.data.attributes.item_size / 2);
-        if(!limited_mode) {
+        if (!limited_mode) {
             this.data.attributes.context.clearRect(
-                    x - clear_radius,
-                    y - clear_radius,
-                    clear_radius * 2,
-                    clear_radius * 2
-                    );
+                x - clear_radius,
+                y - clear_radius,
+                clear_radius * 2,
+                clear_radius * 2
+            );
         }
-        
+
         if (this.config.use_background) {
             this.data.attributes.context.beginPath();
             this.data.attributes.context.arc(x, y, this.data.attributes.radius, 0, 2 * Math.PI, false);
@@ -642,7 +627,7 @@
         this.data.attributes.context.stroke();
     };
 
-    TC_Instance.prototype.radialFade = function(x, y, color, from, key) {
+    TC_Instance.prototype.radialFade = function (x, y, color, from, key) {
         // TODO: Make fade_time option
         var rgb = hexToRgb(color);
         var _this = this; // We have a few inner scopes here that will need access to our instance
@@ -651,23 +636,23 @@
         var i;
         for (i = 0; from <= 1 && from >= 0; i++) {
             // Create inner scope so our variables are not changed by the time the Timeout triggers
-            (function() {
+            (function () {
                 var delay = 50 * i;
                 var rgba = "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", " + (Math.round(from * 10) / 10) + ")";
-                useWindow.setTimeout(function() {
+                useWindow.setTimeout(function () {
                     _this.drawArc(x, y, rgba, 1);
                 }, delay);
             }());
             from += step;
         }
         if (typeof key !== undefined) {
-            useWindow.setTimeout(function() {
+            useWindow.setTimeout(function () {
                 _this.data.state.fading[key] = false;
             }, 50 * i);
         }
     };
 
-    TC_Instance.prototype.timeLeft = function() {
+    TC_Instance.prototype.timeLeft = function () {
         if (this.data.paused && typeof this.data.timer === "number") {
             return this.data.timer;
         }
@@ -675,7 +660,7 @@
         return ((this.data.attributes.ref_date - now) / 1000);
     };
 
-    TC_Instance.prototype.start = function() {
+    TC_Instance.prototype.start = function () {
         useWindow.cancelAnimationFrame(this.data.animation_frame);
         useWindow.clearTimeout(this.data.animation_frame)
 
@@ -718,12 +703,12 @@
         this.update.call(this);
     };
 
-    TC_Instance.prototype.restart = function() {
+    TC_Instance.prototype.restart = function () {
         this.data.timer = false;
         this.start();
     };
 
-    TC_Instance.prototype.stop = function() {
+    TC_Instance.prototype.stop = function () {
         if (typeof this.data.timer === "number") {
             this.data.timer = this.timeLeft(this);
         }
@@ -732,18 +717,18 @@
         useWindow.cancelAnimationFrame(this.data.animation_frame);
     };
 
-    TC_Instance.prototype.destroy = function() {
+    TC_Instance.prototype.destroy = function () {
         this.clearListeners();
         this.stop();
         useWindow.clearInterval(this.data.interval_fallback);
         this.data.interval_fallback = null;
-        
+
         this.container.remove();
         $(this.element).removeAttr('data-tc-id');
         $(this.element).removeData('tc-id');
     };
 
-    TC_Instance.prototype.setOptions = function(options) {
+    TC_Instance.prototype.setOptions = function (options) {
         if (this.config === null) {
             this.default_options.ref_date = new Date();
             this.config = $.extend(true, {}, this.default_options);
@@ -751,14 +736,14 @@
         $.extend(true, this.config, options);
 
         // Use window.top if use_top_frame is true
-        if(this.config.use_top_frame) {
+        if (this.config.use_top_frame) {
             useWindow = window.top;
         }
         else {
             useWindow = window;
         }
         updateUsedWindow();
-        
+
         this.data.total_duration = this.config.total_duration;
         if (typeof this.data.total_duration === "string") {
             if (typeof secondsIn[this.data.total_duration] !== "undefined") {
@@ -767,7 +752,7 @@
             }
             else if (this.data.total_duration === "Auto") {
                 // If set to auto, total_duration is the size of 1 unit, of the unit type bigger than the largest shown
-                for(var i = 0; i < Object.keys(this.config.time).length; i++) {
+                for (var i = 0; i < Object.keys(this.config.time).length; i++) {
                     var unit = Object.keys(this.config.time)[i];
                     if (this.config.time[unit].show) {
                         this.data.total_duration = secondsIn[nextUnits[unit]];
@@ -783,7 +768,7 @@
         }
     };
 
-    TC_Instance.prototype.addListener = function(f, context, type) {
+    TC_Instance.prototype.addListener = function (f, context, type) {
         if (typeof f !== "function")
             return;
         if (typeof type === "undefined")
@@ -791,7 +776,7 @@
         this.listeners[type].push({func: f, scope: context});
     };
 
-    TC_Instance.prototype.notifyListeners = function(unit, value, total, type) {
+    TC_Instance.prototype.notifyListeners = function (unit, value, total, type) {
         for (var i = 0; i < this.listeners[type].length; i++) {
             var listener = this.listeners[type][i];
             listener.func.apply(listener.scope, [unit, value, total]);
@@ -837,13 +822,13 @@
     };
 
     // Time circle class
-    var TC_Class = function(elements, options) {
+    var TC_Class = function (elements, options) {
         this.elements = elements;
         this.options = options;
         this.foreach();
     };
 
-    TC_Class.prototype.getInstance = function(element) {
+    TC_Class.prototype.getInstance = function (element) {
         var instance;
 
         var cur_id = $(element).data("tc-id");
@@ -872,15 +857,15 @@
         return instance;
     };
 
-    TC_Class.prototype.addTime = function(seconds_to_add) {
-        this.foreach(function(instance) {
+    TC_Class.prototype.addTime = function (seconds_to_add) {
+        this.foreach(function (instance) {
             instance.addTime(seconds_to_add);
         });
     };
-    
-    TC_Class.prototype.foreach = function(callback) {
+
+    TC_Class.prototype.foreach = function (callback) {
         var _this = this;
-        this.elements.each(function() {
+        this.elements.each(function () {
             var instance = _this.getInstance(this);
             if (typeof callback === "function") {
                 callback(instance);
@@ -889,60 +874,60 @@
         return this;
     };
 
-    TC_Class.prototype.start = function() {
-        this.foreach(function(instance) {
+    TC_Class.prototype.start = function () {
+        this.foreach(function (instance) {
             instance.start();
         });
         return this;
     };
 
-    TC_Class.prototype.stop = function() {
-        this.foreach(function(instance) {
+    TC_Class.prototype.stop = function () {
+        this.foreach(function (instance) {
             instance.stop();
         });
         return this;
     };
 
-    TC_Class.prototype.restart = function() {
-        this.foreach(function(instance) {
+    TC_Class.prototype.restart = function () {
+        this.foreach(function (instance) {
             instance.restart();
         });
         return this;
     };
 
-    TC_Class.prototype.rebuild = function() {
-        this.foreach(function(instance) {
+    TC_Class.prototype.rebuild = function () {
+        this.foreach(function (instance) {
             instance.initialize(false);
         });
         return this;
     };
 
-    TC_Class.prototype.getTime = function() {
+    TC_Class.prototype.getTime = function () {
         return this.getInstance(this.elements[0]).timeLeft();
     };
 
-    TC_Class.prototype.addListener = function(f, type) {
+    TC_Class.prototype.addListener = function (f, type) {
         if (typeof type === "undefined")
             type = "visible";
         var _this = this;
-        this.foreach(function(instance) {
+        this.foreach(function (instance) {
             instance.addListener(f, _this.elements, type);
         });
         return this;
     };
 
-    TC_Class.prototype.destroy = function() {
-        this.foreach(function(instance) {
+    TC_Class.prototype.destroy = function () {
+        this.foreach(function (instance) {
             instance.destroy();
         });
         return this;
     };
 
-    TC_Class.prototype.end = function() {
+    TC_Class.prototype.end = function () {
         return this.elements;
     };
 
-    $.fn.TimeCircles = function(options) {
+    $.fn.TimeCircles = function (options) {
         return new TC_Class(this, options);
     };
 }(jQuery));
