@@ -15,7 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+var i;
 var async = require('async');
 var path = require('path');
 var MongoClient = require('mongodb').MongoClient;

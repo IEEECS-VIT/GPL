@@ -1,6 +1,6 @@
 /**
  * Created by Kunal Nagpal <kunagpal@gmail.com> on 09-02-2015.
- *  GraVITas Premier League
+ *  GraVITas Premier League <gravitaspremierleague@gmail.com>
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -107,5 +107,10 @@ module.exports =
     "from the pitch and hits him in front of middle stump. Seemed a fair decision. Lovely bowling, went wide of the " +
     "crease to create a different angle",
     "and he strikes pre-emptively! This was pitched up and swerves in, the striker hangs on the back foot, does not meet" +
-    " with the defensive push, rapped on the back pad in front of middle. The forefinger goes up1"
+    " with the defensive push, rapped on the back pad in front of middle. The forefinger goes up!",
+    "he has been given leg before by the umpire, the batsman is confounded with this dipping full toss and misses as he" +
+    " flails desperately at it, but that seemed to be headed down the leg side, replays show that even struck him " +
+    "comfortably outside the leg stump, that is an atrocious, atrocious decision",
+    "and he has been sent back to the pavilion! He tried to sweep that one as it was pitched up on middle stump, he was" +
+    " struck right in front and the finger went up soon after the loud appeal."
 ];

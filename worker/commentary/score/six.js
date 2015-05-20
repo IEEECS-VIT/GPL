@@ -1,6 +1,6 @@
 /**
  * Created by Kunal Nagpal <kunagpal@gmail.com> on 09-02-2015.
- *  GraVITas Premier League
+ *  GraVITas Premier League <gravitaspremierleague@gmail.com>
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -1315,5 +1315,58 @@ module.exports =
         "smashed! Half-tracker, he rocks back and muscles a pull over midwicket",
         "another short one, dispatched again. He marmalises a flattish six over deep midwicket with a slog-sweep",
         "full and on off, right in his hitting zone. He sinks to one knee and pastes a slog-sweep over long-on. Gets " +
-        "off the mark in style"
+        "off the mark in style",
+        "lovely timing from the bowler, this was overpitched and he sends it soaring over the long on rope with a clean" +
+        " straight swing and followthrough",
+        "that wasn't short at all, but he merely pivoted on the back foot and launched that with a swing of his bat into" +
+        " the spectator's box over the midwicket boundary for six!",
+        "short ball, it's as if he knew it was coming and launched it for six! He opened up early for the short ball, it" +
+        " was an offcutter but he didn't care and smacked that with a pull for a meaty six!",
+        "he dances down, he takes it on the full, he smashes it, he gets six! Used his feet very well to tonk that high" +
+        " over long-on for a big six from the middle of the bat",
+        "comes down the track and lofts that very very high, straight down the ground, it goes all the way for six! He" +
+        " took it nearly on the full and cleared long off",
+        "pitches it up, he launches it very high and straight down the ground, he didn't get the middle of the bat. But" +
+        " he has enough because Pollard at long-on jumped very high too but the ball went over him",
+        "full and incoming towards off stump, he uses the angle and slams it over the long-on fielder for a clean six! " +
+        "Hit hard from the middle of the bat",
+        "makes room, gets a fullish delivery and tonks it straight down the ground and into the sight screen for the " +
+        "first six!",
+        "full on middle, he slogs on the leg side with the turn and clears the boundary again! Cleared his front foot " +
+        "out of the way and found the cow corner",
+        "full and straight and that's the way it goes back too! He cleared his front foot a bit and absolutely drilled " +
+        "that down the ground to crash the ball into the sight screen",
+        "too full and he cashes in by slogging it on the leg side, it was slightly quicker, over the cow corner boundary" +
+        " for six!",
+        "short and flat, he dances down and picks the pace nicely to slap it from the middle of the bat to the wide " +
+        "long on boundary for six!",
+        "full delivery outside off, he lofts it down the ground over the long-off boundary for six! He didn't middle " +
+        "that, but got enough to send it into the crowd",
+        "he takes it on the full by coming down the track and drives it straight and high down the ground for a six into" +
+        " the sight screen",
+        "uses his feet to come down, takes it almost on the full and lofts it effortlessly with a flick to the cow " +
+        "corner for a six! That's what he can do",
+        "full, he doesn't need to move and just whacks that with some power to the long-on boundary for six more! He " +
+        "hits them like every delivery can be put away",
+        "slower ball, it's slightly full and he gets under it to tonk it very very high on the leg side. The boundaries " +
+        "are small here so he manages to clear it on leg for six",
+        "he doesn't miss the slower balls. This one is outside off, he swings his arms to slog it on the leg side and " +
+        "clears wide long on for another six",
+        "too full, too flat, six more! That was an attempted yorker on leg stump, he struck it hard and flat just wide" +
+        " of the fielder there, who took off almost like Superman going to his right, for maximum!",
+        "looks like a slower length ball, he goes on the back foot, winds up and wallops a six over long-on. It actually" +
+        " went off the toe-end of the bat. But still went all the way. Classic GPL...",
+        "sublime timing here. No complaints. On a fuller length and outside off, he gets under it, bends his knees and " +
+        "sends it clattering over long-off. Clean strike.. That spoils his figures",
+        "clears midwicket. Pushed through full on middle and leg, he sinks to one knee and thumps a six over deep " +
+        "midwicket with a powerful slog-sweep",
+        "another slog-sweep and another six! Flatter and on middle and leg, slog-swept high into the air. A fielder " +
+        "runs across to his right from deep midwicket, leaps but the ball goes over him",
+        "top-edge, six more. Banged in short, well-directed by the bowler. He pulls manages a top-edge that soars over " +
+        "fine leg",
+        "smokin' hit! Juicy length ball outside off, he stays in the crease and annihilates a six over deep midwicket. " +
+        "Away she sails over the boundary",
+        "fuller and on middle and leg, he stays deep in the crease and slugs it over midwicket for a flat six",
+        "first ball six! This was a low full toss, he flips his wrists and puts it away over the backward square leg " +
+        "boundary for another of those flat sixes"
     ];

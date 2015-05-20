@@ -1,6 +1,6 @@
 /**
  * Created by Kunal Nagpal <kunagpal@gmail.com> on 09-02-2015.
- *  GraVITas Premier League
+ *  GraVITas Premier League <gravitaspremierleague@gmail.com>
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -40,5 +40,12 @@ module.exports = [
     "caught and bowled! The shorter ball is too quick for the batsman, who swivels towards the off and tries to pull. He" +
     " gets a top edge that lobs towards short leg, he runs across and catches it easily",
     "superb bowling! This one skids into the batsman, moves in sharply and bounces extra as well. The striker plays a " +
-    "nothing pull and ends up top-edging it for the bowler to take the return chance."
+    "nothing pull and ends up top-edging it for the bowler to take the return chance.",
+    "gets the wicket with a return catch! It was not so slow as the batsman expected, the length delivery looped towards" +
+    " middle stump, he got into the short early with a defence and merely chipped the ball back towards the non-striker." +
+    " Couple of steps to the left and he caught it easily",
+    "The attempted encore fails! This was on a length and just outside off, he aims to turn it to midwicket, closes his " +
+    "bat face and chips it back to the bowler off a leading edge, who moves to his left and snaffles it",
+    "dips in on off. The striker shuffles across, aims to flick, gets an inside edge onto the front boot and lobs it " +
+    "back to the bowler. Smart return catch. Is this the slide we have been talking about?"
 ];

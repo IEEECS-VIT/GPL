@@ -1,7 +1,5 @@
 /**
- * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 1/7/14.
- */
-/*
+ * Created by Kunal Nagpal <kunagpal@gmail.com> on 21-05-2015.
  *  GraVITas Premier League
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
@@ -18,12 +16,9 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-module.exports = {
-
-    host: 'smtp.gmail.com',
-    user: 'ieeecs@vit.ac.in',
-    password: process.env.PASSWORD,
-    sender: 'ieeecs@vit.ac.in'
-
-};
+module.exports =
+[
+    "\t might as well hop onto the team bus now.... ",
+    "And with that, the required run rate is almost as high as the recommended system specifications for Assassin's " +
+    "Creed Unity ;-P"
+];

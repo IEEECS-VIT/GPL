@@ -1,6 +1,6 @@
 /*
     Created by Kunal Nagpal <kunagpal@gmail.com>
-    GraVITas Premier League
+    GraVITas Premier League <gravitaspremierleague@gmail.com>
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -139,6 +139,7 @@ exports.simulate = function (data, callback)
         var full = require(path.join(__dirname, 'commentary', 'misc', 'full'));
         var miss = require(path.join(__dirname, 'commentary', 'misc', 'miss'));
         var start = require(path.join(__dirname, 'commentary', 'misc', 'start'));
+        var hopeless = require(path.join(__dirname, 'commentary', 'misc', 'hopeless'));
         var one = require(path.join(__dirname, 'commentary', 'score', 'one'));
         var two = require(path.join(__dirname, 'commentary', 'score', 'two'));
         var six = require(path.join(__dirname, 'commentary', 'score', 'six'));
@@ -152,8 +153,8 @@ exports.simulate = function (data, callback)
         var MoM = {};
         var bat =    // decrease to strengthen batting, TODO: has to be made dynamic
         [
-            [1100, 1100],
-            [1100, 1100]
+            [1000, 1000],
+            [1000, 1000]
         ];
         var Total = [0, 0];
         var strike = [0, 1];
@@ -164,8 +165,8 @@ exports.simulate = function (data, callback)
         var Overs = [120, 120];
         var bowl =      // increase to strengthen bowling, TODO: has to be made dynamic
         [
-            [1200, 1200, 1200],
-            [1200, 1200, 1200]
+            [1000, 1000, 1000],
+            [1000, 1000, 1000]
         ];
         var frustration = [0,0];
         var wicket_sequence = [];
@@ -589,12 +590,9 @@ exports.simulate = function (data, callback)
                 {
                     data.match.commentary[data.match.commentary.length - 1] += previous_over + ' run' + ((previous_over > 1) ? 's' : '');
                 }
-                else
+                else if (j == 7)
                 {
-                    if (j == 7)
-                    {
-                        data.match.commentary[data.match.commentary.length - 1] += 'maiden';
-                    }
+                    data.match.commentary[data.match.commentary.length - 1] += 'maiden';
                     maidens[current_bowler] += 1;
                 }
                 data.match.commentary.push('  Current score: ' + Total[+toss_index] + ' / ' + wickets[+toss_index] + '  Runrate: ' + (Total[+toss_index] / (i + 1)).toFixed(2));
@@ -632,7 +630,8 @@ exports.simulate = function (data, callback)
                 data.match.commentary.push('  ' + team_object[+!toss_index].bowl_name[current_bowler] + ': ' + parseInt(deliveries[current_bowler] / 6) + '.' + deliveries[current_bowler] % 6 + '-' + maidens[current_bowler] + '-' + wickets_taken[current_bowler] + '-' + runs_conceded[current_bowler] + '-' + (runs_conceded[current_bowler] * 6 / deliveries[current_bowler]).toFixed(2) + '  ');
                 if ((i < 19) && ((Total[+!toss] + 1 - Total[+toss]) / (19 - i) > 36) && hope && loop)
                 {
-                    data.match.commentary.push(data.team[+toss_index]._id + ' might as well hop onto the team bus now.... ');
+                    temp = rand(hopeless).replace('\t', data.team[+toss_index]._id);
+                    data.match.commentary.push(temp);
                     hope = false;
                 }
                 if (deliveries[current_bowler] == 24)
@@ -837,19 +836,19 @@ exports.simulate = function (data, callback)
                 }
                 else
                 {
-                    winner = (Overs[+!toss] > Overs[+toss]) ? (+toss) : (+!toss);
+                    winner = ((Overs[+!toss] > Overs[+toss]) ? (+toss) : (+!toss));
                     data.match.commentary[data.match.commentary.length - 1] += data.team[+winner]._id + ' wins! (higher run rate)  ';
                 }
             }
             else
             {
-                winner = (wickets[+!toss] > wickets[+toss]) ? (+toss) : (+!toss);
+                winner = ((wickets[+!toss] > wickets[+toss]) ? (+toss) : (+!toss));
                 data.match.commentary[data.match.commentary.length - 1] += data.team[+winner]._id + ' wins! (fewer wickets lost)  ';
             }
         }
         else
         {
-            winner = (Total[+toss] > Total[+!toss]) ? (+toss) : (+!toss);
+            winner = ((Total[+toss] > Total[+!toss]) ? (+toss) : (+!toss));
             data.match.commentary.push(data.team[winner]._id + ' wins by ');
             if (Total[+!toss] < Total[+toss])
             {
@@ -894,14 +893,14 @@ exports.simulate = function (data, callback)
             data.team[+winner].wickets_taken += wickets[+!winner];
             data.team[+!winner].wickets_taken += wickets[+winner];
             data.team[+!winner].wickets_lost += wickets[+!winner];
-            data.team[+winner].streak = (data.team[+winner].streak < 0) ? (1) : (data.team[+winner].streak + 1);
+            data.team[+winner].streak = ((data.team[+winner].streak < 0) ? 1 : (data.team[+winner].streak + 1));
             data.team[+!winner].streak = (data.team[+!winner].streak > 0) ? (0) : (data.team[+!winner].streak - 1);
-            data.team[+winner].ratio = data.team[+winner].win / (data.team[+winner].loss ? data.team[+winner].loss : 1 );
-            data.team[+!winner].ratio = data.team[+!winner].win / (data.team[+!winner].loss ? data.team[+!winner].loss : 1);
+            data.team[+winner].ratio = data.team[+winner].win / (data.team[+winner].loss || 1 );
+            data.team[+!winner].ratio = data.team[+!winner].win / (data.team[+!winner].loss || 1);
             data.team[+winner].form += ((Overs[+winner] * mean_rating[+!winner] / Total[+winner]) - (Overs[+!winner] * mean_rating[+winner] / Total[+!winner])) / 600;
             data.team[+!winner].form += ((Overs[+!winner] * mean_rating[+winner] / Total[+!winner]) - (Overs[+winner] * mean_rating[+!winner] / Total[+winner])) / 600;
-            data.team[+winner].net_run_rate = (((data.team[+winner].runs_for) / (data.team[+winner].balls_for) - (data.team[+winner].runs_against) / (data.team[+winner].balls_against)) * 6).toFixed(2);
-            data.team[+!winner].net_run_rate = (((data.team[+!winner].runs_for) / (data.team[+!winner].balls_for) - (data.team[+!winner].runs_against) / (data.team[+!winner].balls_against)) * 6).toFixed(2);
+            data.team[+winner].net_run_rate = (((data.team[+winner].runs_for) / (data.team[+winner].balls_for) - (data.team[+winner].runs_against) / (data.team[+winner].balls_against)) * 6).toFixed(4);
+            data.team[+!winner].net_run_rate = (((data.team[+!winner].runs_for) / (data.team[+!winner].balls_for) - (data.team[+!winner].runs_against) / (data.team[+!winner].balls_against)) * 6).toFixed(4);
         }
         ++data.team[MoM.team].stats[data.team[MoM.team].ratings[MoM.id]._id].MoM;
         data.match.commentary.push('Man of the Match: ' + data.team[MoM.team].ratings[MoM.id].Name + '( ' + data.team[MoM.team]._id + ')');

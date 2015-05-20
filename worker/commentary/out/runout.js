@@ -1,6 +1,6 @@
 /**
  * Created by Kunal Nagpal <kunagpal@gmail.com> on 09-02-2015.
- *  GraVITas Premier League
+ *  GraVITas Premier League <gravitaspremierleague@gmail.com>
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -173,7 +173,7 @@ module.exports =
     " ball back in no time, rattled the stumps and the slide back wasn't enough",
     "goes back to a good length ball, it's another slider, helps it off the inside edge to deep midwicket. Two is on, but" +
     " the batsman is quite slow to turn. That could well cost him. But wait. it appears like the keeper's gloves have kissed" +
-    " the bails loose before he brings the ball over to knock on the stumps. It's terrribly close. The third umpire's looking" +
+    " the bails loose before he brings the ball over to knock on the stumps. It's terribly close. The third umpire's looking" +
     " at a lot of replays, but the ball was in his gloves when his webbing tips one of the bails over. And the big red " +
     "letters tell him to go home",
     "nails the yorker on off stump, he squeezes it out to deep cover and comes back for a second run, hoping the throw " +
@@ -213,5 +213,12 @@ module.exports =
     "stumps. They've gone to the third umpire, and has the batsman grounded his bat in time? Looks like it's in the air..." +
     " one bail seems to be completely out of its groove too, and the big screen says 'OUT'",
     "he wants another run, but there has been run out. This was fuller on middle, he slogs it away to cow corner. The " +
-    "fielder there swoops down on the ball and fires a flattish throw to the man backing up, who does the rest."
+    "fielder there swoops down on the ball and fires a flattish throw to the man backing up, who does the rest.",
+    "run out now? Gone to the third umpire this time! THe batsman pulled the short ball towards deep square leg and ran" +
+    " the first one very hard again so he did make it back in time. But the man backing up collected the throw and got " +
+    "a direct hit at the stumps to catch the victim short. Superb work...",
+    "very full on middle, not quite a yorker, drilled down to long-on. The fielder swoops down on the ball and lets rip" +
+    " a flat throw to the man backing up. The pair hare across for the run, the batsman dives but is caught short, takes" +
+    " it on the half-volley and whipped the bails off. The batsman knew he was out, he started walking as soon as the " +
+    "stumps were disturbed."
 ];

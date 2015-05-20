@@ -9,6 +9,7 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
 
 #### Instructions for Installation:
 ###### Install Node.js 0.12.x
+###### Install the latest version of MongoDB
 ###### Install all dependencies
 
     $ npm install

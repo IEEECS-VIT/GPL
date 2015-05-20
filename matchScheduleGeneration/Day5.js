@@ -2,7 +2,7 @@
  * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 11/8/14.
  */
 /*
- *  GraVITas Premier League
+ *  GraVITas Premier League <gravitaspremierleague@gmail.com>
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
  *  This program is free software: you can redistribute it and/or modify
