@@ -1,6 +1,6 @@
 /**
  * Created by Kunal Nagpal <kunagpal@gmail.com> on 09-02-2015.
- GraVITas Premier League
+ GraVITas Premier League <gravitaspremierleague@gmail.com>
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -1085,5 +1085,53 @@ module.exports =
     "to hang onto the catch even as short third man was converging. Oh wait, has the bowler overstepped? This is close.." +
     " Does he have some particle of his heel behind the crease? Given Out, he may have got some part of it behind the line.",
     "Pushed through outside off, he backs away and attempts a cut only to slice it straight down the throat of the man " +
-    "at point"
+    "at point",
+    "the crowd is pumped because the bowler has struck! Short ball outside off, he looks to cut it on the off side, the" +
+    " ball has good bounce and gets an upper edge before it's taken safely by the fielder around his shoulders",
+    "holes out to long-on, falls under pressure! He also came down the track but the ball came even later to him, he " +
+    "lofted on the leg side and long on came in easily to catch it",
+    "struck hard but straight to mid-off! Pitched up outside off, he drilled it back uppishly and is taken for a " +
+    "straight and quick catch",
+    "in the air again, taken very well this time at deep point! The bowler gave room, the batter swung his arms and " +
+    "played it uppishly as the fielder ran in to get his hands under the ball with a forward dive. Excellent catch",
+    "tries another one and holes out to deep midwicket! Length delivery on the leg stump, he slogged on the leg side " +
+    "and didn't send it too far as the man ran in from the deep to take it safely",
+    "it's high, it's taken! The batsman swivels his bat for the slower delivery which goes in the air towards deep " +
+    "square leg. In an age where fielders can take the toughest catches, he takes these simple ones too",
+    "slower delivery on the stumps, he makes room and slogs it down the ground to hole out to long-on. That's the " +
+    "breakthrough",
+    "superb catch running in from deep cover! The striker got some room to free his arms outside off, swung his bat and" +
+    " the fielder ran in hard to bend low to his toes to catch that nicely",
+    "doesn't get the middle of the bat and finds deep midwicket! He came down the track, but there was hardly any pace " +
+    "on the ball and he slogged it down the fielder's throat",
+    "that's gone too high on the leg side but a fielder comes in from there and takes it safely! The batsman swung his " +
+    "bat for the back of length delivery that was going towards middle stump, he might have middled that but it went way" +
+    " too high",
+    "the slower ball works again. He slogged it high on the leg side and the batsman made sure he got his hands and body" +
+    " under it at long on to take it safely",
+    "top edge this time that goes very high and he comes in from long-off to take that safely! Finally the slower one " +
+    "works as the batter slogs from outside off, sends it high but is caught this time",
+    "holes out to long-off. Back of a length and outside off, skewed to short extra cover for a simple catch. The bottom" +
+    " hand came off the bat, foiling the timing timing",
+    "he has nicked off! The keeper and bowler go up straightaway.. The forefinger goes up slowly. This was on a good " +
+    "length and angling away outside off, the striker chases it and can only edge it to the keeper, who moves to his " +
+    "right and snaps it up. The skipper is pumped, super-pumped..",
+    "and the magic ball strikes! The short ball works. This was banged in and climbs alarmingly on the stumps, he " +
+    "perhaps was caught in two minds whether to play at it or sway his upper body out of the way. He can't get out of " +
+    "the tangle and ends up faint-edging it to the keeper",
+    "hw takes it at sweeper cover! The batsman has to depart. Pitched up, outside off and cuts away, he nips down the " +
+    "track, but does not connect well with the lofted strike. Slices it into the hands of the fielder there for a dolly." +
+    " He reverse-cups his hands around it",
+    "caught behind! Simple catch for the keeper. On a length and zipping through outside off with some extra pace. The " +
+    "bowler perhaps looked for the cut with his feet paralysed to the crease, only feeds an outside edge to the keeper," +
+    " who throws the ball up in the air and celebrates",
+    "gone now, he perishes to scoreboard pressure. They continue to fade away. Flat around off, he sinks to one knee, " +
+    "goes for a slog sweep and top-edges it to deep midwicket",
+    "he claims a catch, appeals. He is celebrating.. They go to the TV umpire. Legal ball. This was a low full toss, " +
+    "Binny gone for a golden duck. This was on a back of a length, he skips out and misses the flick, the ball dribbles" +
+    " towards backward point. He rushes off in pursuit of a quick single. But is sent back. Its all too late and he is " +
+    "caught short. Good work from the bowler",
+    "picks out mid-off. Full and on middle, he backs away and slices it straight down the throat of the fielder",
+    "another nail rammed in the coffin. He bangs it short and outside off, the batsman is in no position to pull, " +
+    "mis-times it, hit high on the bat for a simple catch at deep midwicket"
 ];

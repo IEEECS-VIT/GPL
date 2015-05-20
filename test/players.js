@@ -29,7 +29,6 @@ exports.playersTest = function (players, asyncCallback)
         {
             if (err)
             {
-                //do something with the error
                 callback(err, null);
             }
             else
@@ -46,7 +45,6 @@ exports.playersTest = function (players, asyncCallback)
     {
         if (err)
         {
-            // do something with the error
             asyncCallback(err, null);
         }
         else

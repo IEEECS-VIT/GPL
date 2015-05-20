@@ -1,6 +1,6 @@
 /**
  * Created by Kunal Nagpal <kunagpal@gmail.com> on 09-02-2015.
- *  GraVITas Premier League
+ *  GraVITas Premier League <gravitaspremierleague@gmail.com>
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -300,5 +300,9 @@ module.exports =
     "bowled him! That was back of a length on off stump, not enough width for the back-foot punch, and he ends up " +
     "pushing at it with an angled bat and inside-edging into his stumps",
     "yorks himself. Comes down the track, making room, and the bowler bowls it right up in the blockhole to sneak under" +
-    " his bat and bowl him as he tries to stab it away into the off side"
+    " his bat and bowl him as he tries to stab it away into the off side",
+    "this one rattles the top of middle. The batsman races down the track and hunts for a big swipe. The bowler " +
+    "marginally shortens his length. The striker misses, the bowler hits and exults.",
+    "bowled'im! The bowler slips in the quicker one, the batsman fails to pick it, he pushes feebly and misses. The off" +
+    " stump is taking a walk."
 ];
