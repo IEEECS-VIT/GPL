@@ -52,7 +52,6 @@
         "tests"
     ],
     "dependencies": {
-        "foundation": "~5.4.5",
-        "bootstrap": "~3.3.0"
+        "bootstrap": "~3.3.4"
     }
 }
