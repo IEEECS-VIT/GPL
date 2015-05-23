@@ -10,7 +10,7 @@
   "private": true,
   "main": "./bin/www",
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install",
+    "postinstall": "node ./node_modules/bower/bin/bower install",
     "start": "node ./bin/www"
   },
   "contributors": [
