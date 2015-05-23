@@ -304,5 +304,9 @@ module.exports =
     "this one rattles the top of middle. The batsman races down the track and hunts for a big swipe. The bowler " +
     "marginally shortens his length. The striker misses, the bowler hits and exults.",
     "bowled'im! The bowler slips in the quicker one, the batsman fails to pick it, he pushes feebly and misses. The off" +
-    " stump is taking a walk."
+    " stump is taking a walk.",
+    "bowled 'em! This was a straight roller from the bowler, the striker goes low for a dinky lap-sweep and misses it " +
+    "entirely. The ball rattles the leg stump.",
+    "and this one splinters the off stump, breaks it into two. The bowler goes ventures of the crease and spears a " +
+    "yorker, too hot for him, who can't dig it out."
 ];

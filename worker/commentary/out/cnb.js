@@ -47,5 +47,8 @@ module.exports = [
     "The attempted encore fails! This was on a length and just outside off, he aims to turn it to midwicket, closes his " +
     "bat face and chips it back to the bowler off a leading edge, who moves to his left and snaffles it",
     "dips in on off. The striker shuffles across, aims to flick, gets an inside edge onto the front boot and lobs it " +
-    "back to the bowler. Smart return catch. Is this the slide we have been talking about?"
+    "back to the bowler. Smart return catch. Is this the slide we have been talking about?",
+    "widish ball, and out! Good riposte from the bowler, he snares the big wicket. This looked like a seam-up ball on " +
+    "off, he sets up for a pull but can only top-edge it into the air. The bowler pedals back from his follow-through " +
+    "and settles under it near the mid-on region. Excellent judgement."
 ];

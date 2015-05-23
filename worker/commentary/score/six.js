@@ -1368,5 +1368,20 @@ module.exports =
         "Away she sails over the boundary",
         "fuller and on middle and leg, he stays deep in the crease and slugs it over midwicket for a flat six",
         "first ball six! This was a low full toss, he flips his wrists and puts it away over the backward square leg " +
-        "boundary for another of those flat sixes"
+        "boundary for another of those flat sixes",
+        "classy! He charges down the track, manufactures a full ball and launches it over long-off. Clean strike",
+        "He fetches this from outside off and slog-sweeps it over wide long-on into the second tier. That exploded from" +
+        " the meat of the bat",
+        "length and around off, he clears his front leg and has an almighty swipe at it. Walloped over deep midwicket",
+        "finds his bearings! Length and swings away outside off, down the track and Gayle aims to swing it over the leg" +
+        " side. Skewed off a thick leading edge over the covers for a flat six. Not middled, but no problem. The TV " +
+        "umpire has a look at it. Its a six alright..",
+        "this one's even better! He skips down the track, manufactures a length ball and launches it over his head for " +
+        "a flat six. The captain isn't pleased...",
+        "goes Boom! Fuller length on middle, right in the hitting zone. He flexes his muscles and slugs it over " +
+        "midwicket",
+        "that's a massive blow. Pushed through on middle, he extends his arms and sends it soaring over long-on into " +
+        "the second tier for a six",
+        "launches it over cow corner. Length ball on off, he takes a step forward and smites it between deep midwicket " +
+        "and long-on. The bat made a resounding crack as it met the ball"
     ];

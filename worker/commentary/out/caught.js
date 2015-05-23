@@ -1133,5 +1133,26 @@ module.exports =
     "caught short. Good work from the bowler",
     "picks out mid-off. Full and on middle, he backs away and slices it straight down the throat of the fielder",
     "another nail rammed in the coffin. He bangs it short and outside off, the batsman is in no position to pull, " +
-    "mis-times it, hit high on the bat for a simple catch at deep midwicket"
+    "mis-times it, hit high on the bat for a simple catch at deep midwicket",
+    "he strikes. He short-arm pulls and finds the fielder. This was dropped short on middle and leg, the batter brings " +
+    "out his pet shot but hits is straight down the throat of deep square leg. He was cramped for room there",
+    "Massive blow! Tossed up, outside off, he attempts a lofted strike after dancing down the track, does not connect " +
+    "properly, slicing it to long-off. The fielder reverse-cups his hands around it. The skipper is off on a celebratory" +
+    " sprint. The bowler is pumped too",
+    "Crucial wicket! Short ball directed on a leg-stump line, tucks him up for room and messes with the attempted pull. " +
+    "He loops it to short fine leg off a top edge, the fielder there takes a couple of steps back and snaps it up..",
+    "the crowd has been hushed into silence. The batsman nicks off to the keeper, who makes no mistake now. Good length " +
+    "and outside off, he hunts for a powerful drive over the covers and feeds an outer edge to the man behind the stumps",
+    "he strikes, he gets rid of his man! This was an innocuous ball on the hips, he picks it up and flicks it straight " +
+    "to short fine leg, who bends forward and pouches it",
+    "and the fielder pulls off a brilliant catch! Around off with some extra bounce, he sinks to one knee and goes for " +
+    "a sweep. He mis-hits it in the air, the batsman sprints in from deep backward square leg, dives forward and takes \a" +
+    " superb, low catch! ",
+    "holes out to long-on. Low full toss on middle, instead of launching it over long-on, he scoops it straight into the" +
+    " hands of mid-on, caught near chest height.. The bat twisted in his hand, foiling his timing. The coach winces in " +
+    "the dug out.",
+    "snaffled at long-on! Back of a length and on middle, skiddy ball. He goes for a lofted strike and mis-hits it to " +
+    "the man there, who comes in and completes a simple catch",
+    "he perishes off the penultimate ball of the innings. The man slips in another slower ball outside off, he backs " +
+    "away for a cut. Ends up slicing it into the hands of point"
 ];

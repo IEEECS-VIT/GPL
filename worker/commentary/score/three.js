@@ -122,5 +122,9 @@ module.exports =
         "not really short enough to pull, but he sits back and uses his wrists to whip it from an off-stump line and " +
         "just about clear short midwicket",
         "deftly done! Good length ball outside off, he plays it very late and uses the open face. Gets it fine of the " +
-        "fielder, who is able to catch up with it"
+        "fielder, who is able to catch up with it",
+        "fuller and on off, gets under it but mis-hits it over mid-on. He sprints back, slides and hauls the ball into " +
+        "the field of play. They take three",
+        "pitched up and outside off, smears it over the covers. the bowler runs across from deep cover, dives and pulls" +
+        " the ball back to the batsman, who was giving the chase from long-off"
     ];

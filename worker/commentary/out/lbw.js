@@ -112,5 +112,8 @@ module.exports =
     " flails desperately at it, but that seemed to be headed down the leg side, replays show that even struck him " +
     "comfortably outside the leg stump, that is an atrocious, atrocious decision",
     "and he has been sent back to the pavilion! He tried to sweep that one as it was pitched up on middle stump, he was" +
-    " struck right in front and the finger went up soon after the loud appeal."
+    " struck right in front and the finger went up soon after the loud appeal.",
+    "appeal for lbw, he has been given out now. This was another in-dipper from the bowler, his nemesis misses it and " +
+    "is rapped on the back pad. He did not account for the movement here. This may have pitched outside leg.... Might " +
+    "have been snaking down. Tight call. Yes, it pitched just outside leg"
 ];

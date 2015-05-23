@@ -3153,5 +3153,43 @@ module.exports =
         "gets a thick outer edge. The man behind the stumps could only glove it away",
         "shortish and on the leg stump, he swivels on the back foot and pulls it backward of square leg",
         "back of a length and outside off, he steps away and flashes it past the covers. The fielder gets across from" +
-        " sweeper cover, fumbles and gives away a four."
+        " sweeper cover, fumbles and gives away a four.",
+        "back of a length and on off, he checks his drive and plays a jabbing punch over the non-striker, beating " +
+        "mid-off to his right",
+        "too full and outside off, right in the zone for the batsman. He comes forward and scythes it over the covers. " +
+        "The ball dribbles away to the boundary",
+        "back of a length and angling away outside off. He loads up for a pull and gets an toe end that skitters in the " +
+        "gap between between the keeper and the man at first slip",
+        "banged in short and directed at the body, he swivels through the hips and controls a pull fine on the leg " +
+        "side, wide of the man at deep backward square leg for a one-bounce four",
+        "length and outside off, pre-meditates by shuffling across and laps it up to the fine leg boundary. Excellent " +
+        "improvisation",
+        "fuller and on the stumps, he presents a straight bat and drills it to the long-on boundary, beating the fielder" +
+        " to his left in the deep",
+        "That's a special!!! Pitched up and outside off, he leans into the drive and sends it scurrying in the gap at " +
+        "the covers",
+        "shortish and on the hips. He latches onto it, picking it up fine on the leg side. The fielder in the deep was " +
+        "square and the batter took advantage of it",
+        "length on off, races down the track and lifts it over mid-off. Tense faces in the opposition camp",
+        "veering down leg, he sweeps and helps it to the right of short fine leg. He puts in a belated dive and his " +
+        "effort proves futile",
+        "fractionally short on off, he whip-pulls off the front foot to the wide long-on boundary",
+        "too leg stumpish and that's glanced finer of short fine leg. Poor line and he just gave it direction. He did " +
+        "not larrup it",
+        "fuller and on middle, he gallops down the track and whips it over midwicket, beats the man in the deep to his " +
+        "left. Positive strike...",
+        "on a length and outside off, he advances down the track and smacks it over extra-cover. Th fielder flies to his" +
+        " left but the ball eludes him and rockets away to the boundary",
+        "the ball drifts down leg, he employs soft hands and tickles it to the left of he. Very fine on the leg side and" +
+        " gets a four",
+        "he makes room outside leg, the bowler bowls this flat on leg. He drives it inside-out over the covers even " +
+        "though he yanked his bottom hand off the handle. The fielder runs across to his left in the deep but is beaten",
+        "fuller and on the stumps, races down the track and slaps it over the bowler's head for a more authoritative " +
+        "four",
+        "Welcome back bowler, says the batsman as he steps away, sits back and thrashes this full ball on off over the " +
+        "umpire's head",
+        "very, very, wristy! One-bounce four. On a length and on middle, he picks it up from there and flicks it " +
+        "aerially between deep square leg and long-on",
+        "dug in on a shortish length and outside off, slower in pace. He waits on it before forcing it over the covers." +
+        " He sat back and waited for the slower ball"
 ];

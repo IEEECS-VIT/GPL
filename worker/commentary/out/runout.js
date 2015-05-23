@@ -220,5 +220,10 @@ module.exports =
     "very full on middle, not quite a yorker, drilled down to long-on. The fielder swoops down on the ball and lets rip" +
     " a flat throw to the man backing up. The pair hare across for the run, the batsman dives but is caught short, takes" +
     " it on the half-volley and whipped the bails off. The batsman knew he was out, he started walking as soon as the " +
-    "stumps were disturbed."
+    "stumps were disturbed.",
+    "direct hit at the strikers', the man walks off! Yorker at the base of off, jammed out to the covers. The striker " +
+    "rushes across for a quick single, his partner reciprocates. A fieldsman lasers a direct hit and ends the partnership",
+    "wide, he takes his time, aims at the stumps and hits it! This was a back of a length slower ball outside off, the " +
+    "batter throws his bat at it and is fooled by the change of pace. He seeks a quick single. The keeper collects the " +
+    "ball and effects an over-arm direct hit.."
 ];

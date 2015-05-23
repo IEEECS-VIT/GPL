@@ -1528,5 +1528,34 @@ module.exports =
         "sees the batsman come down the track, drags his length back. Punched down the ground past the bowler",
         "back of a length and outside off, he kitchen-sinks it over the covers",
         "he steps out, manufactures a low full toss and slices it in the air. The batsman sprints in from sweeper, but" +
-        " the ball lands in front of him"
+        " the ball lands in front of him",
+        "full and on off, he lashes it past the covers to long-off. He fumbles in the deep and gives away an extra run." +
+        " The dew is making its presence felt",
+        "flicked off the pads behind square on the leg side",
+        "shortish and outside off, he switches his balance onto the back foot and cuts it towards sweeper cover",
+        "back of a length and outside off, cracked to the right of deep third man",
+        "stump-to-stump line, the batsman, who had initially backed away, adjusts and drives it past the covers",
+        "mighty full and outside off, he flat-bats it forcefully past the covers. He runs across to his left from " +
+        "sweeper cover and hunts it down",
+        "angled in very full and on off, pushed back to the bowler, who stretches his right hand and deflects it towards" +
+        " mid-off. The non-striker hustles across for the second",
+        "mighty full on off, he forces it down to long-off, who fumbles and puts in a wayward throw. They pinch two " +
+        "after some hesitation between the wickets",
+        "low full toss on off, drills a drive to the left of long-off. The fielder there sprints across, swoops down the" +
+        " ball and lets a rip a throw to the keeper, who whips the bails off. But he is far too quick. The outcome is two",
+        "veering onto the pads, he does not meet with the glance, the ball brushes the pad and sneaks away between the" +
+        " keeper and leg-slip",
+        "pitched up and on the pads, clipped away through square leg",
+        "shortish and outside off, he goes on the back foot and cracks it to sweeper cover. He comes back for the second",
+        "half-volley on off, crunches a drive to long-off. He comes back for the second",
+        "nudged to deep square leg for a couple",
+        "pushed through on the pads, shuffles across and works it through midwicket for a couple of runs. A direct hit " +
+        " could have put him in trouble",
+        "nudged off the pads in front of square on the leg side",
+        "length on off, turned to the right of the bowler and he comes back for the second",
+        "on a length and outside off, directed to the right of deep third man with soft hands",
+        "Oh dear, he has misjudged this, putting this down. This was on a fuller length and outside off, the batsman " +
+        "goes low and seeks to lap-scoop it away. He has to settle with a top-edge that swirls in the air. A fielder " +
+        "pedals back from short fine and drops it. The ball pops in and pops out. He took his eyes off the ball " +
+        "momentarily, it actually looked like it hit his wrists and went down on the ground"
     ];
