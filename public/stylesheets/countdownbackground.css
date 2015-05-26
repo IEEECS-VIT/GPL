@@ -1,0 +1,137 @@
+/*
+ *  GraVITas Premier League <gravitaspremierleague@gmail.com>
+ *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+header {
+    background: url("\images\img0.jpg");
+    background-size: cover;
+    height: 100vh;
+    padding: 50px;
+    color: #5a5a5a;
+    text-align: center;
+    z-index: 0;
+    background-repeat: no-repeat;
+    -webkit-animation-name: bchange;
+    -webkit-animation-delay: 3s;
+    -webkit-animation-duration: 40s;
+    -webkit-animation-direction: reverse;
+    -webkit-animation-iteration-count: infinite;
+
+}
+@-webkit-keyframes bchange {
+    0%{
+        background: url("\images\img0.jpg");
+        background-size: cover;
+        height: 100vh;
+        padding: 50px;
+        color: #5a5a5a;
+        text-align: center;
+        z-index: 0;
+        background-repeat: no-repeat;
+    }
+    14.3%{
+        background: url("\images\img1.jpg");
+        background-size: cover;
+        height: 100vh;
+        padding: 50px;
+        color: #5a5a5a;
+        text-align: center;
+        z-index: 0;
+        background-repeat: no-repeat;
+    }
+    28.6%{
+        background: url("\images\img2.jpg");
+        background-size: cover;
+        height: 100vh;
+        padding: 50px;
+        color: #5a5a5a;
+        text-align: center;
+        z-index: 0;background-repeat: no-repeat;
+    }
+    42.9%{
+        background: url("\images\img3.jpg");
+        background-size: cover;
+        padding: 50px;
+        height: 100vh;
+        color: #5a5a5a;
+        text-align: center;
+        z-index: 0;
+        background-repeat: no-repeat;
+    }
+    57.2%{
+        background: url("\images\img4.jpg");
+        background-size: cover;
+        height: 100vh;
+        padding: 50px;
+        color: #5a5a5a;
+        text-align: center;
+        z-index: 0;
+        background-repeat: no-repeat;
+    }
+    71.5%{
+        background: url("\images\img5.jpg");
+        background-size: cover;
+        height: 100vh;
+        padding: 50px;
+        color: #5a5a5a;
+        text-align: center;
+        z-index: 0;
+        background-repeat: no-repeat;
+    }
+    85.8%{
+        background: url("\images\img6.jpg");
+        background-size: cover;
+        padding: 50px;
+        height: 100vh;
+        color: #5a5a5a;
+        text-align: center;
+        z-index: 0;
+        background-repeat: no-repeat;
+    }
+    100%{
+        background: url("\images\img7.jpg");
+        background-size: cover;
+        padding: 50px;
+        height: 100vh;
+        color: #5a5a5a;
+        text-align: center;
+        z-index: 0;
+        background-repeat: no-repeat;
+    }
+}
+#DateCountdown {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 auto;
+}
+@media (max-device-width : 500px)  {
+    header{
+        padding: 0;
+    }
+}
+.overlay{
+    position:absolute;
+
+    z-index: 3;
+}
+.tvstatic{
+    background-repeat: repeat;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.20;
+    filter: alpha(opacity=20);
+}
