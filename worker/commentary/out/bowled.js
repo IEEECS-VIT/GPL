@@ -308,5 +308,9 @@ module.exports =
     "bowled 'em! This was a straight roller from the bowler, the striker goes low for a dinky lap-sweep and misses it " +
     "entirely. The ball rattles the leg stump.",
     "and this one splinters the off stump, breaks it into two. The bowler goes ventures of the crease and spears a " +
-    "yorker, too hot for him, who can't dig it out."
+    "yorker, too hot for him, who can't dig it out.",
+    "A lovely yorker! The batsman gets a bit too cheeky with it. Looks to open the face to run this fine, the yorker " +
+    "squeezes past the bat, and kisses the outside of his off stump.",
+    "slower-ball yorker. Gets under his bat, lands on the crease, hits the bat pad as he is on his knees trying to get " +
+    "under it. The ball ricochets off the pad, and hits the stumps. He has taken out the big one"
 ];

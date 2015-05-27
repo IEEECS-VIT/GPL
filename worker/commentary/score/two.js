@@ -1557,5 +1557,32 @@ module.exports =
         "Oh dear, he has misjudged this, putting this down. This was on a fuller length and outside off, the batsman " +
         "goes low and seeks to lap-scoop it away. He has to settle with a top-edge that swirls in the air. A fielder " +
         "pedals back from short fine and drops it. The ball pops in and pops out. He took his eyes off the ball " +
-        "momentarily, it actually looked like it hit his wrists and went down on the ground"
+        "momentarily, it actually looked like it hit his wrists and went down on the ground",
+        "looks for the dab again but this short ball takes his inside edge through to fine leg. Could easily have " +
+        "chopped on",
+        "bunted into the leg side, he takes the deep square leg on, and takes a couple thanks to a wide throw. The skipper" +
+        " doesn't emote too much on the field, but he can't stand ordinary fielding. He lets his fielder know it.",
+        "dropped. Only technically can you call this a drop. He gets a thick leading edge and the ball lobs wide of " +
+        "backward point, who races towards it, flies towards for a desperate dive, but can only get his hands to it. As " +
+        "he makes impact with ground, the ball slips out.",
+        "short of a length, into the pads, placed between the two men deep on the on side. Comes back for two. Rushing " +
+        "towards the orange cap.",
+        "low full toss, driven wide of long-off for two",
+        "bouncer, the ball doesn't come on. it is over head high, he goes ahead with the hook. The ball flies down the " +
+        "ground, and luckily for it falls wide of long-on",
+        "short of a length, outside off, punched past cover for two",
+        "nice drive with an open face, wide of long-off, but he makes a flying save there to save two runs",
+        "the batsman is surprised by the bounce on this, and the top edge falls between square leg and deep square leg. " +
+        "The fielder is going back to try to catch it over his shoulder, but loses it in the end and doesn't even make" +
+        " an effort. This isn't a chance, though, really",
+        "short, rib high, pulled away wide of the man at deep square for a couple",
+        "he jumps out of the crease, is nowhere near the pitch of the ball, but it falls wide of long-on and speeds off " +
+        "after pitching from the a practice pitch. Gets two for it as the fielder makes an excellent save",
+        "this time he pitches up and he gets bat on ball. Gets two runs with a punch in front of point",
+        "slower ball, the batter slogs, gets a thick inside edge for two to deep midwicket",
+        "on the pads, worked away fine",
+        "low full toss, he has placed it square of deep midwicket for two",
+        "he gives him the charge, yorks himself, gets a single to mid-off, and then an overthrow.",
+        "slows away at a full ball, gets a thick edge over point, and the fielder there puts in an excellent save still." +
+        " He could have taken it easy but hasn't"
     ];

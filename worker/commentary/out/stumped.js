@@ -75,5 +75,9 @@ module.exports =
     "gone. Saw him coming down the track and slid it flat and wide outside off. Quick work from the keeper as well, " +
     "collects and has the bails off before the striker can even try and turn and try to regain his crease",
     "gone! That's another lovely bit of skill from the bowler. Sees the batsman skip down the track and defeats him with" +
-    " his trajectory again. The ball dips and goes sharply down the leg side and the man behind the stump does the rest"
+    " his trajectory again. The ball dips and goes sharply down the leg side and the man behind the stump does the rest",
+    "he has another wicket. Lovely stumping from the keeper. The bowler sees him coming from a mile away, slips in a " +
+    "quick wide ball that lands just short of the popping crease, but the keeper makes a superb collection and whips " +
+    "the bail off. The batsman is down on ground, and so are his team mates in the dugout"
+
 ];

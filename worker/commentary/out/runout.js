@@ -225,5 +225,8 @@ module.exports =
     "rushes across for a quick single, his partner reciprocates. A fieldsman lasers a direct hit and ends the partnership",
     "wide, he takes his time, aims at the stumps and hits it! This was a back of a length slower ball outside off, the " +
     "batter throws his bat at it and is fooled by the change of pace. He seeks a quick single. The keeper collects the " +
-    "ball and effects an over-arm direct hit.."
+    "ball and effects an over-arm direct hit..",
+    "he is out! Flicks this wristily towards mid-on. The ball is not hit well, which means they can think of a run. The" +
+    " fielder charges in, dives in to save time, is off balance, the ball hasn't sat properly in his right hand, but he" +
+    " flicks it underarm even as he comes down. The ball loops to the top of the stumps to catch the running batsman short"
 ];

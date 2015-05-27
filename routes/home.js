@@ -129,7 +129,7 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
             }
             else
             {
-                res.cookie('lead', docs, {maxAge: 86400000, signed: true});
+                res.cookie('lead', documents, {maxAge: 86400000, signed: true});
                 res.render("leaderboard", { leaderboard: documents});
             }
         };

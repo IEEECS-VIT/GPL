@@ -1154,5 +1154,20 @@ module.exports =
     "snaffled at long-on! Back of a length and on middle, skiddy ball. He goes for a lofted strike and mis-hits it to " +
     "the man there, who comes in and completes a simple catch",
     "he perishes off the penultimate ball of the innings. The man slips in another slower ball outside off, he backs " +
-    "away for a cut. Ends up slicing it into the hands of point"
+    "away for a cut. Ends up slicing it into the hands of point",
+    "slower ball. Looked like he picked it but didn't time the shot well. It was on a length, the slower one, and he set" +
+    " himself up for the big slog. In the end he got cramped a little, and ended up hitting this straight to long-on.",
+    "wide half-volley, the bowler gets away with it. He hits this off the toe end as he looks to go over cover. The " +
+    "mis-hit settles at deep cover. A dot and a big wicket",
+    "wide of the crease again, a full toss to cramp him up. He is cramped on the shot as he looks to go over midwicket." +
+    " The fielder charges in from the fence, and dives forward to take an excellent catch.",
+    "wide full ball, the batter sees some release, he drives it hard, goes uppishly to cover-point where he seems to " +
+    "have taken a low catch but immediately says he is not sure. The soft signal as they go upstairs is not out. It " +
+    "looks like it has bounced, but it has bounced in his fingers that have kept the ball from touching the ground. " +
+    "Finally given out officially",
+    "short of a length, angling away, he looks for a big hit, gets a thick edge and third man takes the catch",
+    "he is down the wicket to drive at this wide and full ball, and can't clear extra cover. Another wicket falls.",
+    "slower ball again. This is short of a length, on the pads, gets the leading edge, and lobs for an easy catch to " +
+    "point",
+    "another wicket goes down. Looks for a big hit, gets too under a length ball and is caught at wide long-on"
 ];

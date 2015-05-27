@@ -1,5 +1,5 @@
 /*
- *  GraVITas Premier League
+ *  GraVITas Premier League <gravitaspremierleague@gmail.com>
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,6 @@ var MongoClient = require('mongodb').MongoClient;
 var match = require(path.join(__dirname, '..', 'matchCollection'));
 var log;
 var days = [1, 2, 3, 4, 5, 6, 7];
-var key = process.env.PASSWORD || require(path.join(__dirname, '..', 'key.js'));
 if (process.env.LOGENTRIES_TOKEN)
 {
     var logentries = require('node-logentries');
@@ -46,13 +45,7 @@ var purple;
 var orangeFlag = false;
 var purpleFlag = false;
 var simulator = require(path.join(__dirname, 'simulation'));
-var email = require('nodemailer').createTransport({
-    service: 'Gmail',
-    auth: {
-        user: 'gravitaspremierleague@gmail.com',
-        pass: key
-    }
-});
+var email = require(path.join(__dirname, '..', 'email.js'));
 
 var options = {
     from: 'gravitaspremierleague@gmail.com',

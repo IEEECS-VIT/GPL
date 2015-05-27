@@ -27,14 +27,7 @@ var express = require('express');
 var path = require('path');
 var router = express.Router();
 var crypto = require('crypto');
-var key = process.env.PASSWORD || require(path.join(__dirname, '..', 'key.js'));
-var email = require('nodemailer').createTransport({
-    service: 'Gmail',
-    auth: {
-        user: 'gravitaspremierleague@gmail.com',
-        pass: key
-    }
-});
+var email = require(path.join(__dirname, '..', 'email.js'));
 var log;
 if (process.env.LOGENTRIES_TOKEN)
 {
@@ -53,7 +46,7 @@ var routes = {
   'team' : '/home/team'
 };
 
-router.get('/', function (req, res)
+router.get(/^.*$/, function (req, res) // change when ready to launch
 {
     if (req.signedCookies.name)
     {
@@ -128,9 +121,9 @@ router.post('/forgot', function (req, res)
                     from: 'gravitaspremierleague@gmail.com',
                     to: req.body.email,
                     subject: 'Time to get back in the game',
-                    text: 'Please click on http://' + req.headers.host + '/reset/' + token + ' in order to reset your password.\n '
-                    + 'In the event that this password reset was not requested by you,'
-                    + ' please ignore this message and your password shall remain intact.\n\nRegards, \nTeam G.P.L.'
+                    html: "Please click <a href=\"http://" + req.headers.host + "/reset/" + token + "\">here</a>" + " in order to reset your password.<br>"
+                    + "In the event that this password reset was not requested by you,"
+                    + " please ignore this message and your password shall remain intact.<br><br>Regards, <br>Team G.P.L."
                 };
 
                 email.sendMail(options, function(err) {
@@ -277,8 +270,15 @@ router.post('/register', function (req, res)
                     else
                     {
                         var name = docs[0]['_id'];
+                        var options = {
+                            from : 'gravitaspremierleague.com',
+                            to : docs[0]['email'],
+                            subject : 'Welcome to graVITas premier league 2.0!',
+                            html : ''
+                        };
                         res.cookie('name', name, {maxAge: 86400000, signed: true});
                         res.redirect('/home/players');
+                        email.sendMail(options, null);
                     }
                 };
                 mongoUsers.insert(newUser, onInsert);
@@ -370,16 +370,7 @@ router.get('/trail', function (req, res) // trailer page
 
 router.get('/schedule', function (req, res) // schedule page
 {
-    var session;
-    if (req.signedCookies.name)
-    {
-        session = 1;
-    }
-    else
-    {
-        session = 0;
-    }
-    res.render('schedule', {results: session });
+    res.render('schedule', {results: (req.signedCookies.name ? 1 : 0) });
 });
 
 module.exports = router;

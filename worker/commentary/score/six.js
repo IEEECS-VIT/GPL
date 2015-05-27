@@ -1383,5 +1383,42 @@ module.exports =
         "that's a massive blow. Pushed through on middle, he extends his arms and sends it soaring over long-on into " +
         "the second tier for a six",
         "launches it over cow corner. Length ball on off, he takes a step forward and smites it between deep midwicket " +
-        "and long-on. The bat made a resounding crack as it met the ball"
+        "and long-on. The bat made a resounding crack as it met the ball",
+        "digs this one in short, gets it chest high, and despite the lack of pace on it, he has upper-cut this over " +
+        "third man for a six. He knows the short boundaries. He knows this ground. He loves it. he knows it like the " +
+        "back of his hand",
+        "this is a low full toss, and the batsman has drilled this back over his head for a low flat six",
+        "takes him on again. As he charges down, the bowler looks to go wide, but he throws his arms at it, and sends " +
+        "this over mid-off. Gets a six off the bottom of the bat",
+        "massive. He is in dream touch tonight. Jumps out of the crease as the bowler flights this. He is close to the " +
+        "pitch of the ball, but not too close. It gives him room to swing his arms, and he drives this over midwicket " +
+        "for a huge six",
+        "lovely shot. As good as you will ever see. Charges down the wicket, reaches the pitch of the ball, and lofts " +
+        "him over long-on for another big one",
+        "premeditated but effective. Length ball outside off, and he moves across the line to slog-sweep this over " +
+        "midwicket. As if he were a spinner",
+        "... but for this shot they needed a man deep in the stand behind midwicket. He has surprisingly bowled a length" +
+        " ball. A nothing ball really. And he has smoked this over midwicket for a massive six",
+        "this time the yorker goes wrong the other way. A low full toss outside off, and he has hit a flat six over " +
+        "long-on",
+        "sliced away for a six. This is not fair, but this is GPL. He finally draws a mis-hit off a full ball outside " +
+        "off. He is not close to the ball, which means it flies off the face of the bat, but it has enough muscle " +
+        "behind it to just clear extra cover",
+        "too predictable. The batsman is sitting back, waiting for a slower ball. Sure enough it arrives. And he has " +
+        "has punched this in the air, over cover for a six",
+        "premeditation but this is almost de Villiers-esque. He has moved across to go over short fine leg, he sees it " +
+        "and bowls a slower short ball, he is on his knee and completely out of position when he makes contact but he " +
+        "has sent it flying over short fine leg. He sees this fly for six even as he is laid flat on the ground",
+        "lovely shot first ball, and you have to say this is poor bowling too. A length ball wide outside off, he sits " +
+        "back, clears the front leg, and smashes this over extra cover for an excellent six",
+        "he was feeling the pressure there, he goes for his favourite swipe towards midwicket, a thick top edge over " +
+        "the keeper's head for six, lucky but that should settle him a bit",
+        "he finally plays a convincing shot. Dances down the ground, is not close to the pitch of the ball but that " +
+        "only means he has room to swing his arms. Over long-on he goes for six",
+        "length ball, on the pads, angling away towards off, he lofts this down the ground. A mis-hit but straight of " +
+        "long-on",
+        "misses the yorker by inches. Goes back deep into the crease, takes this on the half-volley and lofts this over" +
+        " long-on. A semi helicopter",
+        "that's the flicker of the dying flame. He backs away to smoke this short ball over extra cover for a big six",
+        "full length ball on off, he makes room and smashes this over extra cover for six"
     ];

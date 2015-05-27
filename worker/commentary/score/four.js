@@ -3191,5 +3191,59 @@ module.exports =
         "very, very, wristy! One-bounce four. On a length and on middle, he picks it up from there and flicks it " +
         "aerially between deep square leg and long-on",
         "dug in on a shortish length and outside off, slower in pace. He waits on it before forcing it over the covers." +
-        " He sat back and waited for the slower ball"
+        " He sat back and waited for the slower ball",
+        "beats third man along the ground this time. The ball stays short, the batsman leans back, and opens the face " +
+        "to guide this wide of slip and fine of third man",
+        "this is poor bowling. Juicy short and wide delivery, on this pitch one can hit these for fours blindfolded. " +
+        "Through cover-point it goes",
+        "just short of a length, not the pulling length, but he takes him on. Pulls this off the front foot, beats the " +
+        "outstretched hands of midwicket by inches",
+        "beautiful. He plays a lovely flowing cover-drive. This is pitched up outside off. Not quite the driving length," +
+        " but he drives at it away from the body. Along the ground it goes, past the lazy fielder at cover, who is " +
+        "taken out of that fielding position immediately",
+        "and he starts outside leg, opening up the sweep for with no fine leg in place. The captain won't be happy with " +
+        "it. Simmons takes the four runs gleefully",
+        "nicely played this time. This time he reacts to the ball as opposed to making the play first. This is short, " +
+        "rib high, there is no fine leg in place, and and he has played a clip-pull past the man in the circe for four",
+        "the batsmen seem to have a strategy to not let this bowler settle into a rhythm. He slog-sweeps first ball, and" +
+        " clears midwicket easily",
+        "juicy full toss to end the over, and he sends it over mid-on",
+        "short ball, wider ball, he goers back to cut it. The ball deserves to go for four, and go for four it does",
+        "poor bowling this time. Short and wide, and cut away - as it deserves - for four",
+        "This is too a full toss, on the pads, and is swept away promptly for four",
+        "the poor line is hurting his economy here. This is fired in short and wide, and he gets enough on the late cut" +
+        " to place this between point and short third man",
+        "even Bravo makes a poor start. Short, wide, asking to be hit, and he has cut this past point for four more. " +
+        "Plays this right under his eye. Lovely timing",
+        "wide length ball. Ordinary bowling really. On a length, not off pace, and he drives this on the up for four " +
+        "all along the ground.",
+        "another poor delivery. Short and wide with the third man. All he has to do is open the face and place it " +
+        "between point and short third man. Four he gets",
+        "misses the yorker by inches. This is somewhere between a yorker and a half-volley. On middle and leg, and he " +
+        "stays back to convert this into a proper half-volley and flocks this for a powerful four that scorches the " +
+        "outfield a bit as it goes",
+        "length ball is slugged off the front foot past cover, this is a quick outfield and Smith has connected well, " +
+        "that's four",
+        "finally gets bat on the cover-drive, drilling it over extra cover, inches away from the leap of Simmons there",
+        "and again. The batsman is at sea against quality bowling here. Dug in, he has no idea, throws his arms " +
+        "up in self defence, and gets an edge wide of slip",
+        "Smith takes a risk, gets a big outside edge that flies over point. Is the break he is looking for?",
+        "short-arm pull as he bowls short into the ribs. That's Smith's favourite shot. Gets four past fine leg",
+        "reverse-sweeps the first ball as the ball is a bit flat. Beats short third man, gets four",
+        "slogged away as this ball is pitched up, he has managed to place this straight of deep midwicket and gets a " +
+        "desperately needed boundary",
+        "looks to slip in the full wide ball, he has backed away a touch but somehow gets bat on it and manages to " +
+        "place it between mid-off and extra cover",
+        "short ball, plays the short-arm pull, places it between deep square and deep midwicket",
+        "this bouncer doesn't get as high as the earlier ones. This is only chest high and he pulls this through square " +
+        "leg for four",
+        "lovely shot to bring up a four. Short of a length, just outside off, and somehow he makes some room. Meets " +
+        "this with an open face, placing it to the left of point and right of third man. Top shot",
+        "only slightly short of a length, he rocks back to turn this into a proper short ball and pulls this between " +
+        "long-on an deep midwicket for a scorching four. The cheerleaders there nearly cleaned up",
+        "Rain finally gets four for his chip over cover. They have a deep cover placed for this shot, but this time he " +
+        "places it straight of the man",
+        "this is proper short ball, and he has cleared the front leg to pull this to deep square for four",
+        "gets a freebie first up. A leg-stump half-volley that he glances away for four.",
+        "top edge over the keeper's head"
 ];
