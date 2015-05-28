@@ -35,14 +35,15 @@
     <img class="tvstatic" src="/images/tvstaticsmall.gif"/>
 </div>
 <header>
-    <div id="DateCountdown" data-date="2015-09-01 00:00:00"></div>
+    <div id="DateCountdown" data-date="2015/09/01, 00:00:00"></div>
 </header>
 <script>
    $("#DateCountdown").TimeCircles({
-        "animation": "smooth",
+       "animation": "smooth",
         "bg_width": 1,
         "fg_width": 0.04,
         "circle_bg_color": "#aaaaaa",
+        "interval" : time,
         "time": {
             "Days": {
                 "text": "Days",

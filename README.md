@@ -12,17 +12,28 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
 #### Instructions for Installation:
 ###### Install Node.js 0.12.x
 ###### Install the latest version of MongoDB
-###### Install all dependencies
+###### Install all dependencies (Ignore the errors that would come up on a Windows environment)
 
     $ npm install
     
 ###### Install security dependency manually (Microsoft Windows only)
 
     # npm install bcryptjs
+    
+###### Create a file called email.js within the main directory and type in the following lines:
+    module.exports = require('nodemailer').createTransport({
+        service: 'Gmail', // change as desired, Gmail will require authorization for less secure applications in the security settings
+        auth: {
+            user: 'gravitaspremierleague@gmail.com', //change to an email address of your choice
+            pass: process.env.PASSWORD || '' // Provide your password within ''
+        }
+    });
         
 ###### Run the server locally at port 3000 or "PORT" in process.env
 
     $ npm start
+    
+###### View the website at localhost:3000 within your browser    
     
 #### External Requirements:
 * A MongoDB instance running locally or valid "MONGOLAB_URI"/"MONGOHQ_URI" string in process.env 

@@ -1,7 +1,5 @@
-/**
- * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 11/8/14.
- */
 /*
+ * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 11/8/14.
  *  GraVITas Premier League <gravitaspremierleague@gmail.com>
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
@@ -19,57 +17,43 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var MongoClient = require('mongodb').MongoClient;
 var path = require('path');
+var SchedulePush = require("./push.js");
+var MongoClient = require('mongodb').MongoClient;
 var match = require(path.join(__dirname, '..','matchCollection.js'));
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
-var SchedulePush = require("./SchedulePush.js");
-
-
 exports.gen_schedule = function ()
 {
-
-
     var onConnect = function (err, db)
     {
         if (err)
         {
-            callback(err);
+            console.log(err.message);
         }
         else
         {
             var collection = db.collection(match);
-
             var onFetch = function (err, count)
             {
                 db.close();
                 if (err)
                 {
-                    console.log("Error");
-                    callback(err, null);
+                    console.log(err.message);
                 }
                 else
                 {
                     console.log(count);
-
                     var arr = [], match_count = 1, j = 0;
                     var onInsert = function (err, docs)
                     {
-                        if (err)
-                        {
-                            console.log("Error")
-                        }
-                        else
-                        {
-                            console.log(docs)
-                        }
+                        console.log((err ? ("Error:" + ' ' + err.message) : docs));
                     };
 
                     for (var i = 0; i < count / 8; i++)
                     {
                         var team1 = [1, 2, 3, 4];
-                        var team2 = [5, 6, 8, 7];
+                        var team2 = [8, 7, 5, 6];
 
                         for (j = 0; j < team1.length; j++)
                         {
@@ -80,22 +64,18 @@ exports.gen_schedule = function ()
                                 "_id": match_count,
                                 "Team_1": 8 * i + team1[j],
                                 "Team_2": 8 * i + team2[j],
-                                "TimeStamp": new Date("13 Sep 2014 00:00:00 +0530 (IST)"),
+                                "TimeStamp": new Date("15 Sep 2014 00:00:00 +0530 (IST)"),
                                 "commentary": [],
                                 "scorecard" : []
                             };
                             match_count++;
-                            SchedulePush.insert(match, "matchday5", onInsert)
-
+                            SchedulePush.insert(match, "matchday7", onInsert)
                         }
                     }
                 }
             };
             collection.count(onFetch);
         }
-
     };
     MongoClient.connect(mongoUri, onConnect);
-
-
 };

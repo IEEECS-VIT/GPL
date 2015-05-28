@@ -58,7 +58,9 @@ router.get(/^.*$/, function (req, res) // change when ready to launch
     }
     else
     {
-        res.render('static', {response: "" });
+        var time = new Date;
+        var offset = 19800000 + time.getTime();
+        res.render('static', {time: time.setTime(offset)});
     }
 });
 

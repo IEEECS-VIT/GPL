@@ -1,8 +1,5 @@
-/**
- * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 11/8/14.
- */
-
 /*
+ * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 11/8/14.
  *  GraVITas Premier League <gravitaspremierleague@gmail.com>
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
@@ -19,58 +16,43 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-var MongoClient = require('mongodb').MongoClient;
+
 var path = require('path');
+var SchedulePush = require("./push.js");
+var MongoClient = require('mongodb').MongoClient;
 var match = require(path.join(__dirname, '..','matchCollection.js'));
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
 
-var SchedulePush = require("./SchedulePush.js");
-
-
 exports.gen_schedule = function ()
 {
-
-
     var onConnect = function (err, db)
     {
         if (err)
         {
-            callback(err);
+            console.log(err.message);
         }
         else
         {
             var collection = db.collection(match);
-
             var onFetch = function (err, count)
             {
                 db.close();
                 if (err)
                 {
-                    console.log("Error");
-                    callback(err, null);
+                    console.log(err.message);
                 }
                 else
                 {
                     console.log(count);
-
                     var arr = [], match_count = 1, j = 0;
                     var onInsert = function (err, docs)
                     {
-                        if (err)
-                        {
-                            console.log("Error")
-                        }
-                        else
-                        {
-                            console.log(docs)
-                        }
+                        console.log((err ? ("Error:" + ' ' + err.message) : docs));
                     };
-
                     for (var i = 0; i < count / 8; i++)
                     {
                         var team1 = [1, 2, 5, 6];
                         var team2 = [4, 3, 8, 7];
-
                         for (j = 0; j < team1.length; j++)
                         {
                             arr[8 * i + team1[j]] = match_count;
@@ -86,14 +68,12 @@ exports.gen_schedule = function ()
                             };
                             match_count++;
                             SchedulePush.insert(match, "matchday4", onInsert)
-
                         }
                     }
                 }
             };
             collection.count(onFetch);
         }
-
     };
     MongoClient.connect(mongoUri, onConnect);
 };
