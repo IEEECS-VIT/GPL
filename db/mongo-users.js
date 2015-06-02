@@ -16,11 +16,13 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var MongoClient = require('mongodb').MongoClient;
+var log;
 var path = require('path');
+var MongoClient = require('mongodb').MongoClient;
 var match = require(path.join(__dirname, '..','matchCollection.js'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
-var log;
+var options = { server: { socketOptions: { connectTimeoutMS: 50000 }}};
+
 if (process.env.LOGENTRIES_TOKEN)
 {
     var logentries = require('node-logentries');
@@ -28,7 +30,6 @@ if (process.env.LOGENTRIES_TOKEN)
                                 token: process.env.LOGENTRIES_TOKEN
                             });
 }
-var options = { server: { socketOptions: { connectTimeoutMS: 50000 }}};
 exports.getCount = function (callback)
 {
     var onConnect = function (err, db)

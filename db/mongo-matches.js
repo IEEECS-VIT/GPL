@@ -16,14 +16,11 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var path = require('path');
 var async = require('async');
 var MongoClient = require('mongodb').MongoClient;
-var path = require('path');
-
 var mongoTeam = require(path.join(__dirname, 'mongo-team'));
-
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
-var today = new Date();
 
 exports.fetchPreviousMatch = function (doc1, doc2, callback)
 {
@@ -36,36 +33,7 @@ exports.fetchPreviousMatch = function (doc1, doc2, callback)
         }
         else
         {
-            var collectionName;
-            var day = today.getDate();
-            switch (day)
-            {
-                case 0:
-                    collectionName = 'matchday4';
-                    break;
-                case 1:
-                    collectionName = 'matchday5';
-                    break;
-                case 2:
-                    collectionName = 'matchday6';
-                    break;
-                case 3:
-                    collectionName = 'matchday7';
-                    break;
-                case 4:
-                    collectionName = 'matchday1';
-                    break;
-                case 5:
-                    collectionName = 'matchday2';
-                    break;
-                case 6:
-                    collectionName = 'matchday3';
-                    break;
-                default :
-                    collectionName = 'matchday1';
-                    break;
-            }
-            collectionName='matchday' + (process.env.DAY || 1);   // Collection controller for match day information. To be changed before each match
+            var collectionName = 'matchday' + (process.env.DAY || 1);   // Collection controller for match day information. To be changed before each match
             var collection = db.collection(collectionName);
             var onFetch = function (err, docs)
             {
@@ -109,38 +77,7 @@ exports.fetchNextMatch = function (doc1, doc2, callback)
         }
         else
         {
-            var collectionName;
-            var day = today.getDate();
-
-            switch (day)
-            {
-                case 0:
-                    collectionName = 'matchday5';
-                    break;
-                case 1:
-                    collectionName = 'matchday6';
-                    break;
-                case 2:
-                    collectionName = 'matchday7';
-                    break;
-                case 3:
-                    collectionName = 'matchday1';
-                    break;
-                case 4:
-                    collectionName = 'matchday2';
-                    break;
-                case 5:
-                    collectionName = 'matchday3';
-                    break;
-                case 6:
-                    collectionName = 'matchday4';
-                    break;
-                default :
-                    collectionName = 'matchday1';
-                    break;
-
-            }
-            collectionName='matchday' + (parseInt(process.env.DAY) + 1) || 2;
+            var collectionName = 'matchday' + (parseInt(process.env.DAY) + 1) || 2;
 
             var onFetch = function (err, doc)
             {

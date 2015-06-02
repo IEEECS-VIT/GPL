@@ -17,7 +17,6 @@
  */
 
 var MongoClient = require('mongodb').MongoClient;
-
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
 
 exports.insert = function (doc, callback)
