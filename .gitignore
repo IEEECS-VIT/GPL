@@ -9,7 +9,6 @@ logs
 pids
 *.pid
 *.seed
-email.js
 temp.js
 test.js
 
