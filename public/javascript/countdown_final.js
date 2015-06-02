@@ -78,5 +78,4 @@ function counter(d,h,m,s){
     h.innerHTML = Math.round(time.hour)+"<br>Hours";
     m.innerHTML = Math.round(time.mins)+"<br>Min";
     s.innerHTML = Math.round(time.sec)+"<br>Sec";
-
 }

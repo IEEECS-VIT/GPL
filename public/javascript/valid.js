@@ -31,7 +31,9 @@ function validator()
         i++;
         team_name.style.backgroundColor = 'Yellow';
         display += i.toString() + ". Enter Team Name.\n";
-    } else if (team_name.value.length > 25) {
+    }
+    else if (team_name.value.length > 25)
+    {
         i++;
         team_name.style.backgroundColor = 'Yellow';
         display += i.toString() + ". Team Name is too long. Maximum 25 Character.\n";
@@ -76,7 +78,7 @@ function validator()
         i++;
         pass.style.backgroundColor = 'Yellow';
         cpass.style.backgroundColor = 'Yellow';
-        display += i.toString() + ". Password and confirm password do not match.\n";
+        display += i.toString() + ". Passwords do not match.\n";
     }
     for (var z = 0; z < mob1.value.length; z++)
     {
@@ -89,12 +91,10 @@ function validator()
         }
     }
 
-
     if (display != "Error:\n")
     {
         confirm(display);
         return false;
-
     }
     else
     {

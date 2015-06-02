@@ -20,7 +20,7 @@ var async = require('async');
 var MongoClient = require('mongodb').MongoClient;
 var path = require('path');
 var match = require(path.join(__dirname, '..','matchCollection.js'));
-var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
 var collection;
 
 var getPlayer = function (id, callback)

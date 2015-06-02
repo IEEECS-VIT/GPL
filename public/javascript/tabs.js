@@ -45,13 +45,9 @@ function tab(a)
         document.getElementById('panel4').className = 'content';
     }
 
-
     b = a.toString();
     document.getElementById('noact' + b).id = 'act' + b;
     document.getElementById('act' + b).className = "tab-title active";
-
-
     document.getElementById('panel' + b).className = "content active";
     x = a;
-
 }

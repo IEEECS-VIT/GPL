@@ -26,7 +26,6 @@ a:active {
 }
 
 body {
-
     background-color: rgba(25, 25, 25, 1) /*url("waca.jpg")*/;
     overflow: visible;
     width: 960px /*80em*/;
@@ -80,18 +79,15 @@ body {
     top: 2em;
     padding: 0.3em 0;
     box-shadow: inset 0em 0.1em 0.1em rgba(255, 255, 255, 0.5), inset 0em -0.1em 0.1em rgba(255, 255, 255, 0.5), inset 0 0.2em 0.5em rgba(255, 255, 255, 0.2), inset 0 -0.2em 0.5em rgba(255, 255, 255, 0.2);
-
     border-radius: 5px;
 }
 
 #menu #box {
     margin: 0;
     margin-left: 2.2em;
-
     padding: 0;
     width: auto;
     position: relative;
-
     z-index: 2;
 }
 
@@ -99,7 +95,6 @@ body {
     float: left;
     display: block;
     position: relative;
-
     overflow: hidden;
     color: rgba(255, 255, 255, 1);
     height: auto;
@@ -184,7 +179,6 @@ body {
     inset 0 -0.2em 0.5em rgba(0, 0, 0, 0.2),
     inset 0 0.3em 1em rgba(0, 0, 0, 0.6),
     inset 0 -0.3em 1em rgba(0, 0, 0, 0.6);
-
     color: black;
     padding: 1em;
     cursor: pointer;
@@ -210,7 +204,6 @@ body {
     height: auto;
     background: rgba(255, 255, 255, 0.8);
     position: absolute;
-
 }
 
 #h {
@@ -219,10 +212,8 @@ body {
     width: 100% /*61.2em*/;
     color: white;
     padding: 0.3em 0;
-
     position: relative;
     margin: 0;
-
     font-size: 1.2em;
     box-shadow: inset 0 0 1em rgba(255, 255, 255, 0.5);
 }
@@ -231,13 +222,11 @@ body {
 }
 
 #temp li {
-
     background: rgba(25, 25, 25, 1);
     box-shadow: inset 0 0 2em rgba(255, 255, 255, 0.2);
     color: White;
     padding: 1em;
     cursor: pointer;
-
 }
 
 /*HEADER SECTION*/
@@ -262,7 +251,6 @@ body {
 #header #rightbox {
     margin: 0;
     color: rgba(255, 255, 255, 1);
-
 }
 
 #header #rightbox li {
@@ -336,7 +324,6 @@ body {
     left: 0;
     text-color: rgba(255, 255, 255, 1);
     box-shadow: inset 0.1em 0.1em 0.1em rgba(255, 255, 255, 0.5), inset -0.1em 0.1em 0.1em rgba(255, 255, 255, 0.5), inset 0 0.3em 0.5em rgba(255, 255, 255, 0.2);
-
 }
 
 #footer p {

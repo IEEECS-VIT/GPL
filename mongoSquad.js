@@ -31,7 +31,7 @@ exports.getSquad = function (doc, callback)
         }
         else
         {
-            var collection = db.collection('players');                        // i dont know the exact collection name, i have assumed it
+            var collection = db.collection('players');
             var onFetch = function (err, document)
             {
                 if (err)
@@ -56,7 +56,7 @@ exports.getSquad = function (doc, callback)
                     callback(true, null);
                 }
             };
-            collection.findOne(doc, onFetch);                       // i don't understand this line .. need help in this
+            collection.findOne(doc, onFetch);
         }
     };
     MongoClient.connect(mongoUri, onConnect);

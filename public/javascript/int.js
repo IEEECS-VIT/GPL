@@ -20,12 +20,10 @@ function valid()
 {
     var display = "Error:\n";
     var name = document.int.name;
-
     var email = document.int.email;
     var mob = document.int.mob;
-
-
     var i = 0;
+
     if (name.value.length == 0)
     {
         i++;
@@ -39,6 +37,7 @@ function valid()
         email.style.backgroundColor = 'Yellow';
         display += i.toString() + ". Enter Email.\n";
     }
+
     if (mob.value.length < 10)
     {
         i++;
@@ -57,12 +56,9 @@ function valid()
         }
     }
 
-
     if (display != "Error:\n")
     {
         confirm(display);
         return false;
-
     }
-
 }

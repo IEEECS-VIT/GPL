@@ -1,8 +1,5 @@
-/**
- * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 10/8/14.
- */
-
 /*
+ * Created by Kashish Singhal <singhal2.kashish@gmail.com> on 10/8/14.
  *  GraVITas Premier League <gravitaspremierleague@gmail.com>
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
@@ -20,10 +17,9 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 var MongoClient = require('mongodb').MongoClient;
-var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 
-
-exports.insert = function (doc, collection_recieved, callback)
+exports.insert = function (doc, collection_received, callback)
 {
     var onConnect = function (err, db)
     {
@@ -33,7 +29,7 @@ exports.insert = function (doc, collection_recieved, callback)
         }
         else
         {
-            var collection = db.collection(collection_recieved);
+            var collection = db.collection(collection_received);
             var onInsert = function (err, docs)
             {
                 db.close();
@@ -46,7 +42,7 @@ exports.insert = function (doc, collection_recieved, callback)
                     callback(null, docs);
                 }
             };
-            collection.insertOne(doc, {w: 1}, onInsert);
+            collection.insertMany(doc, {w: 1}, onInsert);
         }
     };
     MongoClient.connect(mongoUri, onConnect);

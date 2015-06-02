@@ -527,4 +527,15 @@ router.get('/developers', function (req, res) // developers page
     res.render('developers');
 });
 
+router.get('/dashboard', function(req, res){
+    if(req.signedCookies.name)
+    {
+        res.render('dashboard');
+    }
+    else
+    {
+        res.redirect('/login');
+    }
+});
+
 module.exports = router;

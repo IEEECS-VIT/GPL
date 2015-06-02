@@ -46,7 +46,7 @@ var routes = {
   'team' : '/home/team'
 };
 
-router.get(/^.*$/, function (req, res) // change when ready to launch
+router.get('/', function (req, res)
 {
     if (req.signedCookies.name)
     {
@@ -62,6 +62,11 @@ router.get(/^.*$/, function (req, res) // change when ready to launch
         var offset = 19800000 + time.getTime();
         res.render('static', {time: time.setTime(offset)});
     }
+});
+
+// TODO: delete this route when ready to launch
+router.get(/^.*$/, function(req, res){
+    res.redirect('/');
 });
 
 router.post('/login', function (req, res)

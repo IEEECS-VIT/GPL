@@ -18,14 +18,12 @@
 fieldset {
     border-radius: 5px;
     border: 1px dashed rgba(255, 255, 255, 0.6);
-
 }
 
 .drop {
     /* display:none;*/
     background: #555555;
     margin: 0;
-
 }
 
 #act1 a, #act2 a, #act3 a, #act4 a {

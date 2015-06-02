@@ -16,38 +16,18 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 header {
-    background-image: url("img1.jpg");
-    background-repeat: no-repeat;
+    background:
+    linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+    ),
+    url(/images/back_opt.jpg);
     background-size: cover;
     height: 100vh;
     padding: 50px;
     color: #ffffff;
     text-align: center;
     z-index: 0;
-    -webkit-animation-name: bchange;
-    -webkit-animation-delay: 2s;
-    -webkit-animation-duration: 10s;
-    -webkit-animation-direction: alternate;
-    -webkit-animation-iteration-count: infinite;
-
-}
-@-webkit-keyframes bchange {
-    0%{
-        background-image: url("img1.jpg");
-        background-repeat: no-repeat;
-        background-size: 1349px 700px;
-    }
-    50%{
-        background-image: url("img2.jpg");
-        background-size: 1349px 700px;
-        background-repeat: no-repeat;
-    }
-    100%{
-        background-image: url("img3.jpg");
-        background-size: 1349px 700px;
-        background-repeat: no-repeat;
-    }
-
 }
 #DateCountdown {
     position: relative;
@@ -62,7 +42,6 @@ header {
 }
 .overlay{
     position:absolute;
-
     z-index: 3;
 }
 .tvstatic{
