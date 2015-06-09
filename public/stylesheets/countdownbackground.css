@@ -16,11 +16,11 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 header {
-    background: url("/images/img0.jpg");
+    background: url("../images/img0.jpg");
     background-size: 100% 100%;
     height: 100vh;
     padding: 50px;
-    color: #5a5a5a;
+    color: #FFFFFF;
     text-align: center;
     z-index: 0;
     background-repeat: no-repeat;
@@ -42,80 +42,80 @@ header {
 }
 @-webkit-keyframes bchange {
     0%{
-        background: url("/images/img0.jpg");
+        background: url("../images/img0.jpg");
         background-size: 100% 100%;
         height: 100vh;
         padding: 50px;
-        color: #5a5a5a;
+        color: #FFFFFF;
         text-align: center;
         z-index: 0;
         background-repeat: no-repeat;
     }
     14.3%{
-        background: url("/images/img1.jpg");
+        background: url("../images/img1.jpg");
         background-size: 100% 100%;
         height: 100vh;
         padding: 50px;
-        color: #5a5a5a;
+        color: #FFFFFF;
         text-align: center;
         z-index: 0;
         background-repeat: no-repeat;
     }
     28.6%{
-        background: url("/images/img2.jpg");
+        background: url("../images/img2.jpg");
         background-size: 100% 100%;
         height: 100vh;
         padding: 50px;
-        color: #5a5a5a;
+        color: #FFFFFF;
         text-align: center;
         z-index: 0;background-repeat: no-repeat;
     }
     42.9%{
-        background: url("/images/img3.jpg");
+        background: url("../images/img3.jpg");
         background-size: 100% 100%;
         padding: 50px;
         height: 100vh;
-        color: #5a5a5a;
+        color: #FFFFFF;
         text-align: center;
         z-index: 0;
         background-repeat: no-repeat;
     }
     57.2%{
-        background: url("/images/img4.jpg");
+        background: url("../images/img4.jpg");
         background-size: 100% 100%;
         height: 100vh;
         padding: 50px;
-        color: #5a5a5a;
+        color: #FFFFFF;
         text-align: center;
         z-index: 0;
         background-repeat: no-repeat;
     }
     71.5%{
-        background: url("/images/img5.jpg");
+        background: url("../images/img5.jpg");
         background-size: 100% 100%;
         height: 100vh;
         padding: 50px;
-        color: #5a5a5a;
+        color: #FFFFFF;
         text-align: center;
         z-index: 0;
         background-repeat: no-repeat;
     }
     85.8%{
-        background: url("/images/img6.jpg");
+        background: url("../images/img6.jpg");
         background-size: 100% 100%;
         padding: 50px;
         height: 100vh;
-        color: #5a5a5a;
+        color: #FFFFFF;
         text-align: center;
         z-index: 0;
         background-repeat: no-repeat;
     }
     100%{
-        background: url("/images/img7.jpg");
+        background: url("../images/img7.jpg");
         background-size: 100% 100%;
         padding: 50px;
         height: 100vh;
-        color: #5a5a5a;
+        color: #FFFFFF;
         text-align: center;
         z-index: 0;
         background-repeat: no-repeat;

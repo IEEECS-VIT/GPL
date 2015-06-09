@@ -118,5 +118,4 @@ module.exports =
     "have been snaking down. Tight call. Yes, it pitched just outside leg",
     "the umpire has given him out lbw! This one is plumb. This is a top delivery, pitched just outside off, doesn't do " +
     "as much as an ordinary ball should, beats the sweep and hits him in front of middle. This is straightforward"
-
 ];

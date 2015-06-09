@@ -21,18 +21,18 @@ var path = require('path');
 var async = require('async');
 var router = require('express').Router();
 var match = require(path.join(__dirname, '..', 'matchCollection'));
-if (process.env.LOGENTRIES_TOKEN)
-{
-    var logentries = require('node-logentries');
-    log = logentries.logger({
-                                token: process.env.LOGENTRIES_TOKEN
-                            });
-}
-
 var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team.js'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users.js'));
 var mongoPlayers = require(path.join(__dirname, '..', 'db', 'mongo-players.js'));
 var mongoMatches = require(path.join(__dirname, '..', 'db', 'mongo-matches.js'));
+
+if (process.env.LOGENTRIES_TOKEN)
+{
+    var logentries = require('node-logentries');
+    log = logentries.logger({
+        token: process.env.LOGENTRIES_TOKEN
+    });
+}
 
 router.get('/', function (req, res)
 {

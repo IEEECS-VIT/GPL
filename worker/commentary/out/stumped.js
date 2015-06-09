@@ -79,5 +79,4 @@ module.exports =
     "he has another wicket. Lovely stumping from the keeper. The bowler sees him coming from a mile away, slips in a " +
     "quick wide ball that lands just short of the popping crease, but the keeper makes a superb collection and whips " +
     "the bail off. The batsman is down on ground, and so are his team mates in the dugout"
-
 ];

@@ -20,15 +20,6 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
 
     # npm install bcryptjs
     
-###### Create a file called email.js within the main directory and type in the following lines:
-    module.exports = require('nodemailer').createTransport({
-        service: 'Gmail', // change as desired, Gmail will require authorization for less secure applications in the security settings
-        auth: {
-            user: 'gravitaspremierleague@gmail.com', //change to an email address of your choice
-            pass: process.env.PASSWORD || '' // Provide your password within ''
-        }
-    });
-        
 ###### Run the server locally at port 3000 or "PORT" in process.env
 
     $ npm start

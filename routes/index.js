@@ -16,35 +16,42 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var log;
 var bcrypt;
+var path = require('path');
+var crypto = require('crypto');
+var routes = {
+    'lead' : '/home/leaderboard',
+    'match'  : '/home/matches',
+    'player' : '/home/players',
+    'team' : '/home/team'
+};
+var router = require('express').Router();
+var email = require(path.join(__dirname, '..', 'email.js'));
+var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
+var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
+
 try{
     bcrypt = require('bcrypt');
 }
 catch(err){
-    bcrypt = require('bcryptjs');
+    try
+    {
+        bcrypt = require('bcryptjs');
+    }
+    catch(err)
+    {
+        throw "Unexpected Bcrypt(js) error encountered...";
+    }
 }
-var express = require('express');
-var path = require('path');
-var router = express.Router();
-var crypto = require('crypto');
-var email = require(path.join(__dirname, '..', 'email.js'));
-var log;
+
 if (process.env.LOGENTRIES_TOKEN)
 {
     var logentries = require('node-logentries');
     log = logentries.logger({
-                                token: process.env.LOGENTRIES_TOKEN
-                            });
+        token: process.env.LOGENTRIES_TOKEN
+    });
 }
-
-var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
-var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
-var routes = {
-  'lead' : '/home/leaderboard',
-  'match'  : '/home/matches',
-  'player' : '/home/players',
-  'team' : '/home/team'
-};
 
 router.get('/', function (req, res)
 {
@@ -59,8 +66,17 @@ router.get('/', function (req, res)
     else
     {
         var time = new Date;
-        var offset = 19800000 + time.getTime();
-        res.render('static', {time: time.setTime(offset)});
+        time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
+        var date = {
+            seconds : time.getSeconds(),
+            minutes : time.getMinutes(),
+            hour : time.getHours(),
+            day : time.getDate(),
+            month : time.getMonth() + 1,
+            year : time.getFullYear()
+        };
+        console.log(date);
+        res.render('static', {date: date});
     }
 });
 
@@ -111,7 +127,6 @@ router.post('/login', function (req, res)
     };
     mongoUsers.fetch(credentials, onFetch);
 });
-
 
 router.post('/forgot', function (req, res)
 {
@@ -278,7 +293,7 @@ router.post('/register', function (req, res)
                     {
                         var name = docs[0]['_id'];
                         var options = {
-                            from : 'gravitaspremierleague.com',
+                            from : 'gravitaspremierleague@gmail.com',
                             to : docs[0]['email'],
                             subject : 'Welcome to graVITas premier league 2.0!',
                             html : ''
