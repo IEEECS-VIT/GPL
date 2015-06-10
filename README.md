@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/IEEECS-VIT/GPL.png?label=ready&title=Ready)](https://waffle.io/IEEECS-VIT/GPL)
 graVITas Premier League
 =======================
 
