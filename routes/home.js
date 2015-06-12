@@ -17,6 +17,8 @@
  */
 
 var log;
+var time;
+var temp;
 var path = require('path');
 var async = require('async');
 var router = require('express').Router();
@@ -117,10 +119,6 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
     }
     else if (req.signedCookies.name)                           // if cookies exists then access the database
     {
-        var doc =
-        {
-            "_id": req.signedCookies.name
-        };
         var onFetch = function (err, documents)
         {
             if (err)
@@ -129,15 +127,17 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
             }
             else
             {
-                res.cookie('lead', documents, {maxAge: 86400000, signed: true});
-                res.render("leaderboard", { leaderboard: documents});
+                time = new Date;
+                time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
+                temp = new Date(time.getFullYear(), time.getMonth(), time.getDate() + 1);
+                res.cookie('lead', documents, {maxAge: temp.getTime() - time.getTime(), signed: true});
+                res.render("leaderboard", { leaderboard: documents, name : req.signedCookies.name});
             }
         };
-        mongoUsers.getleader(doc, onFetch);
+        mongoUsers.getleader(req.signedCookies.name, onFetch);
     }
     else
     {
-        req.session.route = 'lead';
         res.redirect("/");
     }
 });

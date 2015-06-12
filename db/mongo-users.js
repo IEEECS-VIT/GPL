@@ -16,12 +16,28 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var i;
 var log;
+var flag;
+var slice = {
+    win : 1,
+    points : 1,
+    played : 1,
+    net_run_rate : 1
+};
+var options =
+{
+    "sort": [
+        ['points', -1],
+        ['net_run_rate', -1]
+    ]
+};
+var leaderboard;
 var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
 var match = require(path.join(__dirname, '..','matchCollection.js'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
-var options = { server: { socketOptions: { connectTimeoutMS: 50000 }}};
+var dbOptions = { server: { socketOptions: { connectTimeoutMS: 50000 }}};
 
 if (process.env.LOGENTRIES_TOKEN)
 {
@@ -128,18 +144,16 @@ exports.fetch = function (doc, callback)
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.getleader = function (doc, callback)
+exports.getleader = function (user, callback)
 {
     var onConnect = function (err, db)
     {
-        console.log("get Leader Function2");
         if (err)
         {
             callback(err);
         }
         else
         {
-            console.log("get Leader Function3");
             var collection = db.collection(match);
             var onFetch = function (err, documents)
             {
@@ -149,32 +163,29 @@ exports.getleader = function (doc, callback)
                 }
                 else
                 {
-                    console.log("get Leader Function4");
-                    var onFetchOne = function (err, document)
+                    flag = false;
+                    leaderboard = [];
+                    for(i = 0; i < documents.length; ++i)
                     {
-                        if (err)
+                        if(documents[i]._id == user)
                         {
-                            callback(err, null);
+                            flag = true;
+                            documents[i].rank = i + 1;
+                            leaderboard.push(documents[i]);
                         }
-                        else
+                        else if(lead.length < 10)
                         {
-                            db.close();
-                            documents.push(document);
-                            callback(null, documents);
+                            leaderboard.push(documents[i]);
                         }
-                    };
-                    collection.findOne(doc, onFetchOne);
+                        else if(flag)
+                        {
+                            break;
+                        }
+                    }
+                    callback(null, leaderboard);
                 }
             };
-            var options =
-                {
-                    "limit": 10,
-                    "sort": [
-                        ['points', 'desc'],
-                        ['net_run_rate', 'desc']
-                    ]
-                };
-            collection.find({}, options).toArray(onFetch);
+            collection.find({}, slice, options).toArray(onFetch);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
@@ -395,5 +406,5 @@ exports.update = function (query, update, callback)
             collection.findOneAndUpdate(query, update, {"upsert": true}, onUpdate);
         }
     };
-    MongoClient.connect(mongoUri, options, onConnect);
+    MongoClient.connect(mongoUri, dbOptions, onConnect);
 };
