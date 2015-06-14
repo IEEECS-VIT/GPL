@@ -18,8 +18,8 @@
  */
 var log;
 var path = require('path');
-var SchedulePush = require(path.join(__dirname, "push.js"));
 var MongoClient = require('mongodb').MongoClient;
+var SchedulePush = require(path.join(__dirname, "push.js"));
 var match = require(path.join(__dirname, '..','matchCollection.js'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 
@@ -49,7 +49,7 @@ var onConnect = function (err, db)
             }
             else
             {
-                var day, t, j, i, schedule;
+                var day, t, j, i, schedule, match;
                 var onInsert = function (err, doc)
                 {
                     console.log(err ? err.message : doc.ops);
@@ -63,7 +63,7 @@ var onConnect = function (err, db)
                             for(i = 1; i <= count / 2; ++i)
                             {
                                 t = (i + day - 1 + count / 2) % (count + 1);
-                                var match =
+                                match =
                                 {
                                     "_id": i,
                                     "Team_1": i,
@@ -85,7 +85,7 @@ var onConnect = function (err, db)
                                     {
                                         for(j = 1; j <= count * t / 4; j += t)
                                         {
-                                            var match =
+                                            match =
                                             {
                                                 "_id": ++num,
                                                 "Team_1": (count / 2) * i + j,
@@ -104,7 +104,7 @@ var onConnect = function (err, db)
                                         for(j = 1; j <= count / 4; ++j)
                                         {
                                             t = 2 * ((count / 4) * i + j) - 1;
-                                            var match =
+                                            match =
                                             {
                                                 "_id": (count / 4) * i + j,
                                                 "Team_1": t,

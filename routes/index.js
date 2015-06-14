@@ -28,8 +28,8 @@ var routes = {
 };
 var router = require('express').Router();
 var email = require(path.join(__dirname, '..', 'email.js'));
-var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
+var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
 
 try{
     bcrypt = require('bcrypt');
@@ -75,7 +75,6 @@ router.get('/', function (req, res)
             month : time.getMonth() + 1,
             year : time.getFullYear()
         };
-        console.log(date);
         res.render('static', {date: date});
     }
 });
@@ -188,8 +187,8 @@ router.post('/reset/:token', function(req, res) {
             var options = {
                 to : doc.email,
                 subject : 'Password change successful !',
-                text : 'Hey there, ' + doc.email.split('@')[0] + ' we\'re just writing in to let you know that the recent password change was successful.' +
-                '\nRegards,\nTeam G.P.L'
+                html : 'Hey there, ' + doc.manager + ' we\'re just writing in to let you know that the recent password change was successful.' +
+                '<br>Regards,<br>Team G.P.L'
             };
             email.sendMail(options, function(err) {
                 if(err)
@@ -296,7 +295,7 @@ router.post('/register', function (req, res)
                             from : 'gravitaspremierleague@gmail.com',
                             to : docs[0]['email'],
                             subject : 'Welcome to graVITas premier league 2.0!',
-                            html : ''
+                            html : 'Hey there,' + docs[0].manager_name + ', you have just embarked on a mind-blowing journey in the world of T20 cricket management.<br>Regards,<br>Team G.P.L'
                         };
                         res.cookie('name', name, {maxAge: 86400000, signed: true});
                         res.redirect('/home/players');

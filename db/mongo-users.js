@@ -173,7 +173,7 @@ exports.getleader = function (user, callback)
                             documents[i].rank = i + 1;
                             leaderboard.push(documents[i]);
                         }
-                        else if(lead.length < 10)
+                        else if(leaderboard.length < 10)
                         {
                             leaderboard.push(documents[i]);
                         }

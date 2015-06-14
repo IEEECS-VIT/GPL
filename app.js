@@ -28,8 +28,8 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var loggerLevel = process.env.LOGGER_LEVEL || 'dev';
-var index = require(path.join(__dirname, 'routes', 'index'));
 var home = require(path.join(__dirname, 'routes', 'home'));
+var index = require(path.join(__dirname, 'routes', 'index'));
 
 app = express();
 

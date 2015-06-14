@@ -442,11 +442,8 @@ router.get('/players', function (req, res) // page for all players, only availab
                         }
                         else
                         {
-                            res.render('players', {
-                                Players: documents
-                            });
+                            res.render('players', {Players: documents});
                         }
-
                     };
                     mongoPlayers.fetchPlayers(onFetch);
                 }
