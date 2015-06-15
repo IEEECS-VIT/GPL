@@ -337,40 +337,40 @@ router.post('/getTeam', function (req, res)
             continue;
         }
         stats[players[i]] = {};
-        stats[players[i]].matches = 0;
-        stats[players[i]].catches = 0;
         stats[players[i]].MoM = 0;
         stats[players[i]].form = 0;
-        stats[players[i]].fatigue = 0;
         stats[players[i]].morale = 0;
+        stats[players[i]].fatigue = 0;
+        stats[players[i]].matches = 0;
+        stats[players[i]].catches = 0;
         if(!(players[i] > 'b' && players[i] < 'c'))
         {
-            stats[players[i]].runs_scored = 0;
-            stats[players[i]].balls = 0;
             stats[players[i]].outs = 0;
-            stats[players[i]].notouts = 0;
-            stats[players[i]].strike_rate = 0.0;
-            stats[players[i]].average = 0.0;
+            stats[players[i]].balls = 0;
             stats[players[i]].high = -1;
-            stats[players[i]].low = Number.MAX_VALUE;
             stats[players[i]].fours = 0;
             stats[players[i]].sixes = 0;
             stats[players[i]].recent = [];
+            stats[players[i]].notouts = 0;
+            stats[players[i]].average = 0.0;
+            stats[players[i]].runs_scored = 0;
+            stats[players[i]].strike_rate = 0.0;
+            stats[players[i]].low = Number.MAX_VALUE;
         }
         if(players[i] > 'b' && players[i] < 'd')
         {
-            stats[players[i]].runs_given = 0;
-            stats[players[i]].wickets_taken = 0;
-            stats[players[i]].economy = 0.0;
+            stats[players[i]].sr = 0.0;
             stats[players[i]].overs = 0;
             stats[players[i]].avg = 0.0;
-            stats[players[i]].sr = 0.0;
+            stats[players[i]].economy = 0.0;
+            stats[players[i]].runs_given = 0;
+            stats[players[i]].wickets_taken = 0;
         }
     }
         mongoUsers.updateUserTeam(credentials, players, stats, cost, onUpdate);
 });
 
-router.get('/forgot', function(req, res){
+router.get('/forgot/password', function(req, res){
    res.render('forgot', {csrfToken : req.csrfToken()});
 });
 

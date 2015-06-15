@@ -224,6 +224,44 @@ exports.forgotPassword = function (doc, callback)
     MongoClient.connect(mongoUri, onConnect);
 };
 
+exports.forgotUser = function(doc, callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
+            callback(err, null);
+        }
+        else
+        {
+            var collection = db.collection(match);
+            var onFetch = function (err, docs)
+            {
+                db.close();
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (docs.length)
+                {
+                    var results = "";
+                    for(i = 0; i < docs.length; ++i)
+                    {
+                        results += '<li>' + docs[i]._id + '</li>';
+                    }
+                    callback(null, results);
+                }
+                else
+                {
+                    callback(false, null);
+                }
+            };
+            collection.find(doc, {_id : 1}).toArray(onFetch);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};
+
 exports.getReset = function(doc, callback)
 {
     var onConnect = function (err, db)

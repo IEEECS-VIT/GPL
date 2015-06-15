@@ -127,8 +127,12 @@ router.post('/login', function (req, res)
     mongoUsers.fetch(credentials, onFetch);
 });
 
-router.post('/forgot', function (req, res)
+router.post('/forgot/password', function (req, res)
 {
+    var doc = {
+        _id : req.body.team,
+        email : req.body.email
+    };
     var onFetch = function(err, doc){
         if(err)
         {
@@ -168,9 +172,57 @@ router.post('/forgot', function (req, res)
     mongoUsers.forgotPassword(doc, onFetch);
 });
 
+router.post('/forgot/user', function (req, res)
+{
+    var doc = {
+        phone : req.body.phone,
+        email : req.body.email
+    };
+    var onFetch = function(err, docs){
+        if(err)
+        {
+            console.log(err.message);
+        }
+        else if(docs)
+        {
+            var options = {
+                from: 'gravitaspremierleague@gmail.com',
+                to: req.body.email,
+                subject: 'Time to get back in the game',
+                html: "The following teams were found in association with your details:<br><br><ol>" + docs + "</ol><br><br><br>Regards, <br>Team G.P.L."
+            };
+
+            email.sendMail(options, function(err) {
+                if(err)
+                {
+                    console.log(err.message);
+                }
+                else
+                {
+                    res.redirect('/login');
+                }
+            });
+        }
+        else
+        {
+            console.log('Invalid credentials!');
+            res.redirect('/forgot/user');
+        }
+    };
+    mongoUsers.forgotPassword(doc, onFetch);
+});
+
 router.post('/reset/:token', function(req, res) {
     var query = {token : req.params.token, expire : {$gt: Date.now()}};
-    var op = {$set : {password_hash : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))}, $unset : {token : '', expire : ''}};
+    var op = {
+        $set : {
+            password_hash : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+        },
+        $unset : {
+            token : '',
+            expire : ''
+        }
+    };
     var onReset = function(err, doc)
     {
         if(err)
@@ -228,28 +280,19 @@ router.post('/register', function (req, res)
         }
         else
         {
-            var team_no = parseInt(number) + 1;
-            var teamName = req.body.team_name;
-            var password = req.body.password;
-            var confirmPassword = req.body.confirm_password;
-            var managerName = req.body.manager_name;
-            var email = req.body.email;
-            var phone = req.body.phone;
             console.log("Reached");
 
-            if (password === confirmPassword)
+            if (req.body.confirm_password === req.body.password)
             {
-                var salt = bcrypt.genSaltSync(10);
-                var hashedPassword = bcrypt.hashSync(password, salt);
                 var newUser =
                 {
-                    _id : teamName,
+                    _id : req.body.team_name,
                     dob : new Date(),
-                    team_no : team_no,
-                    password_hash : hashedPassword,
-                    manager_name : managerName,
-                    email : email,
-                    phone : phone,
+                    team_no : parseInt(number) + 1,
+                    password_hash : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
+                    manager_name : req.body.manager_name,
+                    email : req.body.email,
+                    phone : req.body.phone,
                     squad : [],
                     team : [],
                     win : 0,
