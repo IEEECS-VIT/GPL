@@ -24,19 +24,46 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link type="text/css" rel="stylesheet" href="/stylesheets/countdownbackground.css">
-    <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/javascript/TimeCircles.js"></script>
     <link rel="stylesheet" type="text/css" href="/stylesheets/TimeCircles.css"/>
 </head>
 <body>
-<div class="overlay">
-    <img class="tvstatic" src="/images/tvstaticsmall.gif"/>
-</div>
-<header>
-    <div id="DateCountdown" data-date="2015/09/01, 00:00:00"></div>
-</header>
+
+
+    <div class="overlay"></div>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="" >
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+
+            <div  id="DateCountdown" data-date="2015/09/01, 00:00:00"></div>
+
+            <div class="item active">
+                <div class="fill back-0"></div>
+            </div>
+            <div class="item">
+                <div class="fill back-1"></div>
+            </div>
+            <div class="item">
+                <div class="fill back-2"></div>
+            </div>
+            <div class="item">
+                <div class="fill back-3"></div>
+            </div>
+            <div class="item">
+                <div class="fill back-4"></div>
+            </div>
+            <div class="item">
+                <div class="fill back-5"></div>
+            </div>
+            <div class="item">
+                <div class="fill back-6"></div>
+            </div>
+
+        </div>
+    </div>
 <script>
    $("#DateCountdown").TimeCircles({
        "animation": "smooth",
