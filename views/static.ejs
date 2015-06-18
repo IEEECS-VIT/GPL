@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
     <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
     <script type="text/javascript" src="/javascript/TimeCircles.js"></script>
     <link rel="stylesheet" type="text/css" href="/stylesheets/TimeCircles.css"/>
 </head>
@@ -65,37 +66,66 @@
         </div>
     </div>
 <script>
+
+   var serverTime = moment({
+       year: <%=date.year%>,
+       month: <%=date.month%> -1,
+       day: <%=date.day%>,
+       hour: <%=date.hour%>,
+       minute: <%=date.minutes%>,
+       second: <%=date.seconds%>,
+       milliseconds: 0});
+   var now = moment()
+           .subtract({
+       year: <%=date.year%>,
+       month: <%=date.month%> ,
+       day: <%=date.day%>,
+       hour: <%=date.hour%>,
+       minute: <%=date.minutes%>,
+       second: <%=date.seconds%>,
+       milliseconds: 0})
+           .add({
+       year: 2015,
+       month: 9,
+       day: 1,
+       hour: 0,
+       minute: 0,
+       second: 0,
+       milliseconds: 0});
+   $("#DateCountdown").attr("data-date", now.format("YYYY/MM/DD HH:MM:SS"));
+    //alert( now.format("YYYY/MM/DD HH:MM:SS"));
+
    $("#DateCountdown").TimeCircles({
        "animation": "smooth",
-        "bg_width": 1,
-        "fg_width": 0.04,
-        "circle_bg_color": "#aaaaaa",
-        "time": {
-            "Days": {
-                "text": "Days",
-                "color": "#FF9900",
-                "show": true
-            },
-            "Hours": {
-                "text": "Hours",
-                "color": "#ECEFCB",
-                "show": true
-            },
-            "Minutes": {
-                "text": "Minutes",
-                "color": "#ACC742",
-                "show": true
-            },
-            "Seconds": {
-                "text": "Seconds",
-                "color": "#7995D5",
-                "show": true
-            }
-        }
-    });
-    $(window).resize(function(){
-        $("#DateCountdown").TimeCircles().rebuild();
-    });
+       "bg_width": 1,
+       "fg_width": 0.04,
+       "circle_bg_color": "#aaaaaa",
+       "time": {
+           "Days": {
+               "text": "Days",
+               "color": "#FF9900",
+               "show": true
+           },
+           "Hours": {
+               "text": "Hours",
+               "color": "#ECEFCB",
+               "show": true
+           },
+           "Minutes": {
+               "text": "Minutes",
+               "color": "#ACC742",
+               "show": true
+           },
+           "Seconds": {
+               "text": "Seconds",
+               "color": "#7995D5",
+               "show": true
+           }
+       }
+   });
+   $(window).resize(function(){
+       $("#DateCountdown").TimeCircles().rebuild();
+   });
 </script>
 </body>
 </html>
