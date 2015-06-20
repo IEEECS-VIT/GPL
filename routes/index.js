@@ -146,7 +146,7 @@ router.post('/forgot/password', function (req, res)
                     from: 'gravitaspremierleague@gmail.com',
                     to: req.body.email,
                     subject: 'Time to get back in the game',
-                    html: "<table background='GPL/public/images' align='center' cellpadding='0' cellspacing='0' width='600' style ='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+                    html: "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style ='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
                     "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
                     "</tr><tr><td align=\'center\' style=\'padding: 2px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:large;\'> Please click <a href=\"http://" + req.headers.host + "/reset/" + token + "\">here</a>" + " in order to reset your password.<br>" +
                     "In the event that this password reset was not requested by you," +
@@ -241,16 +241,11 @@ router.post('/reset/:token', function(req, res) {
         {
             var options = {
                 to : doc.email,
-                subject : 'Password change successful !',
-<<<<<<< HEAD
-                text : "<table background='GPL/public/images' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+                subject : 'Password change successful !
+                text : "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
             "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
             "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'>'Hey there, ' + doc.email.split('@')[0] + ' we\'re just writing in to let you know that the recent password change was successful.' + <br>" +
             "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
-=======
-                html : 'Hey there, ' + doc.manager + ' we\'re just writing in to let you know that the recent password change was successful.' +
-                '<br>Regards,<br>Team G.P.L'
->>>>>>> 70b829368e10366fb0fe7a636ba0a583eacae435
             };
             email.sendMail(options, function(err) {
                 if(err)
@@ -348,15 +343,14 @@ router.post('/register', function (req, res)
                             from : 'gravitaspremierleague@gmail.com',
                             to : docs[0]['email'],
                             subject : 'Welcome to graVITas premier league 2.0!',
-<<<<<<< HEAD
-                            html : "<table background='GPL/public/images' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+
+                            html : "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
                         "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
                         "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> This is to inform that that you have successfully registered for GPL 2.0 <br>" +
                         "Please click <a href='http://gravitaspremierleague.com' style='text-decoration: none;'> here </a> for more details<br> Good luck!  </td>" +
                         "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
-=======
+
                             html : 'Hey there,' + docs[0].manager_name + ', you have just embarked on a mind-blowing journey in the world of T20 cricket management.<br>Regards,<br>Team G.P.L'
->>>>>>> 70b829368e10366fb0fe7a636ba0a583eacae435
                         };
                         res.cookie('name', name, {maxAge: 86400000, signed: true});
                         res.redirect('/home/players');
