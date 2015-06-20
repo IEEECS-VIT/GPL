@@ -105,7 +105,7 @@
                                        style="border-radius: 5px;background: rgba(30,30,30,1);margin-left: 38%;margin-bottom: 3%;"/>
                             </li>
 
-                            <li class="divider"><a href="/forgot">Forgot Password?</a></li>
+                            <li class="divider"><a href="/forgot/password">Forgot Password?</a></li>
                         </form>
                     </ul>
                 </li>
@@ -120,7 +120,7 @@
             <h3 style="text-align: center; color: #ffffff;">Forgot Password</h3>
             <br/><br/>
 
-            <form name="forgot" action="/forgot" method="post">
+            <form name="forgot" action="/forgot/password" method="post">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
                 <div class="row">
                     <div class="small-3 medium-3 large-3 columns">
@@ -135,7 +135,7 @@
                         <label for="team" class="right inline" style="color: white;">Email ID: </label>
                     </div>
                     <div class="small-6 medium-6 large-6 columns left">
-                        <input type="email" id="email" placeholder="someone@example.com" name="email_id"/>
+                        <input type="email" id="email" placeholder="someone@example.com" name="email"/>
                     </div>
                 </div>
                 <br/>

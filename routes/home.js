@@ -17,22 +17,24 @@
  */
 
 var log;
+var time;
+var temp;
 var path = require('path');
 var async = require('async');
 var router = require('express').Router();
 var match = require(path.join(__dirname, '..', 'matchCollection'));
-if (process.env.LOGENTRIES_TOKEN)
-{
-    var logentries = require('node-logentries');
-    log = logentries.logger({
-                                token: process.env.LOGENTRIES_TOKEN
-                            });
-}
-
 var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team.js'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users.js'));
 var mongoPlayers = require(path.join(__dirname, '..', 'db', 'mongo-players.js'));
 var mongoMatches = require(path.join(__dirname, '..', 'db', 'mongo-matches.js'));
+
+if (process.env.LOGENTRIES_TOKEN)
+{
+    var logentries = require('node-logentries');
+    log = logentries.logger({
+        token: process.env.LOGENTRIES_TOKEN
+    });
+}
 
 router.get('/', function (req, res)
 {
@@ -117,10 +119,6 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
     }
     else if (req.signedCookies.name)                           // if cookies exists then access the database
     {
-        var doc =
-        {
-            "_id": req.signedCookies.name
-        };
         var onFetch = function (err, documents)
         {
             if (err)
@@ -129,15 +127,17 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
             }
             else
             {
-                res.cookie('lead', documents, {maxAge: 86400000, signed: true});
-                res.render("leaderboard", { leaderboard: documents});
+                time = new Date;
+                time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
+                temp = new Date(time.getFullYear(), time.getMonth(), time.getDate() + 1);
+                res.cookie('lead', documents, {maxAge: temp.getTime() - time.getTime(), signed: true});
+                res.render("leaderboard", { leaderboard: documents, name : req.signedCookies.name});
             }
         };
-        mongoUsers.getleader(doc, onFetch);
+        mongoUsers.getleader(req.signedCookies.name, onFetch);
     }
     else
     {
-        req.session.route = 'lead';
         res.redirect("/");
     }
 });
@@ -337,40 +337,40 @@ router.post('/getTeam', function (req, res)
             continue;
         }
         stats[players[i]] = {};
-        stats[players[i]].matches = 0;
-        stats[players[i]].catches = 0;
         stats[players[i]].MoM = 0;
         stats[players[i]].form = 0;
-        stats[players[i]].fatigue = 0;
         stats[players[i]].morale = 0;
+        stats[players[i]].fatigue = 0;
+        stats[players[i]].matches = 0;
+        stats[players[i]].catches = 0;
         if(!(players[i] > 'b' && players[i] < 'c'))
         {
-            stats[players[i]].runs_scored = 0;
-            stats[players[i]].balls = 0;
             stats[players[i]].outs = 0;
-            stats[players[i]].notouts = 0;
-            stats[players[i]].strike_rate = 0.0;
-            stats[players[i]].average = 0.0;
+            stats[players[i]].balls = 0;
             stats[players[i]].high = -1;
-            stats[players[i]].low = Number.MAX_VALUE;
             stats[players[i]].fours = 0;
             stats[players[i]].sixes = 0;
             stats[players[i]].recent = [];
+            stats[players[i]].notouts = 0;
+            stats[players[i]].average = 0.0;
+            stats[players[i]].runs_scored = 0;
+            stats[players[i]].strike_rate = 0.0;
+            stats[players[i]].low = Number.MAX_VALUE;
         }
         if(players[i] > 'b' && players[i] < 'd')
         {
-            stats[players[i]].runs_given = 0;
-            stats[players[i]].wickets_taken = 0;
-            stats[players[i]].economy = 0.0;
+            stats[players[i]].sr = 0.0;
             stats[players[i]].overs = 0;
             stats[players[i]].avg = 0.0;
-            stats[players[i]].sr = 0.0;
+            stats[players[i]].economy = 0.0;
+            stats[players[i]].runs_given = 0;
+            stats[players[i]].wickets_taken = 0;
         }
     }
         mongoUsers.updateUserTeam(credentials, players, stats, cost, onUpdate);
 });
 
-router.get('/forgot', function(req, res){
+router.get('/forgot/password', function(req, res){
    res.render('forgot', {csrfToken : req.csrfToken()});
 });
 
@@ -442,11 +442,8 @@ router.get('/players', function (req, res) // page for all players, only availab
                         }
                         else
                         {
-                            res.render('players', {
-                                Players: documents
-                            });
+                            res.render('players', {Players: documents});
                         }
-
                     };
                     mongoPlayers.fetchPlayers(onFetch);
                 }

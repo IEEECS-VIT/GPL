@@ -1,146 +1,62 @@
-/*
- *  GraVITas Premier League <gravitaspremierleague@gmail.com>
- *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-header {
+html,body{height:100%; }
+.carousel,.item,.active{height:100%;}
+.carousel-inner{height:100%;}
+.fill{width:100%;height:100%;}
+.back-0{
     background: url("/images/img0.jpg");
-    background-size: 100% 100%;
-    height: 100vh;
-    padding: 50px;
-    color: #5a5a5a;
-    text-align: center;
-    z-index: 0;
     background-repeat: no-repeat;
-    -webkit-animation-name: bchange;
-    -webkit-animation-delay: 2s;
-    -webkit-animation-duration: 40s;
-    -webkit-animation-direction: normal;
-    -webkit-animation-iteration-count: infinite;
-    -moz-animation-name: bchange;
-    -moz-animation-delay: 2s;
-    -moz-animation-duration: 40s;
-    -moz-animation-direction: normal;
-    -moz-animation-iteration-count: infinite;
-    animation-name: bchange;
-    animation-delay: 2s;
-    animation-duration: 40s;
-    animation-direction: normal;
-    animation-iteration-count: infinite;
+    background-size: cover;
+
 }
-@-webkit-keyframes bchange {
-    0%{
-        background: url("/images/img0.jpg");
-        background-size: 100% 100%;
-        height: 100vh;
-        padding: 50px;
-        color: #5a5a5a;
-        text-align: center;
-        z-index: 0;
-        background-repeat: no-repeat;
-    }
-    14.3%{
-        background: url("/images/img1.jpg");
-        background-size: 100% 100%;
-        height: 100vh;
-        padding: 50px;
-        color: #5a5a5a;
-        text-align: center;
-        z-index: 0;
-        background-repeat: no-repeat;
-    }
-    28.6%{
-        background: url("/images/img2.jpg");
-        background-size: 100% 100%;
-        height: 100vh;
-        padding: 50px;
-        color: #5a5a5a;
-        text-align: center;
-        z-index: 0;background-repeat: no-repeat;
-    }
-    42.9%{
-        background: url("/images/img3.jpg");
-        background-size: 100% 100%;
-        padding: 50px;
-        height: 100vh;
-        color: #5a5a5a;
-        text-align: center;
-        z-index: 0;
-        background-repeat: no-repeat;
-    }
-    57.2%{
-        background: url("/images/img4.jpg");
-        background-size: 100% 100%;
-        height: 100vh;
-        padding: 50px;
-        color: #5a5a5a;
-        text-align: center;
-        z-index: 0;
-        background-repeat: no-repeat;
-    }
-    71.5%{
-        background: url("/images/img5.jpg");
-        background-size: 100% 100%;
-        height: 100vh;
-        padding: 50px;
-        color: #5a5a5a;
-        text-align: center;
-        z-index: 0;
-        background-repeat: no-repeat;
-    }
-    85.8%{
-        background: url("/images/img6.jpg");
-        background-size: 100% 100%;
-        padding: 50px;
-        height: 100vh;
-        color: #5a5a5a;
-        text-align: center;
-        z-index: 0;
-        background-repeat: no-repeat;
-    }
-    100%{
-        background: url("/images/img7.jpg");
-        background-size: 100% 100%;
-        padding: 50px;
-        height: 100vh;
-        color: #5a5a5a;
-        text-align: center;
-        z-index: 0;
-        background-repeat: no-repeat;
-    }
+.back-1{
+    background: url("/images/img1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
 }
-#DateCountdown {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0 auto;
+.back-2{
+    background: url("/images/img2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-@media (max-device-width : 500px)  {
-    header{
-        padding: 0;
-    }
+.back-3{
+    background:url("/images/img3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.back-4{
+    background:  url("/images/img4.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.back-5{
+    background:url("/images/img5.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;	}
+.back-6{
+    background: url("/images/img6.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#DateCountdown{
+
+    color:#fff;
+    position:absolute;
+    z-index:10;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width:100%;
+    text-align:center;
+
 }
 .overlay{
-    position:absolute;
+    position: absolute;
+    z-index: 9;
+    background: url("/images/overlay01.png") repeat;
+    height: 100%;
+    width: 100%;
 
-    z-index: 3;
-}
-.tvstatic{
-    background-repeat: repeat;
-    width: 100vw;
-    height: 100vh;
-    opacity: 0.20;
-    filter: alpha(opacity=20);
 }

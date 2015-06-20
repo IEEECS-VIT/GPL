@@ -16,35 +16,42 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var log;
 var bcrypt;
+var path = require('path');
+var crypto = require('crypto');
+var routes = {
+    'lead' : '/home/leaderboard',
+    'match'  : '/home/matches',
+    'player' : '/home/players',
+    'team' : '/home/team'
+};
+var router = require('express').Router();
+var email = require(path.join(__dirname, '..', 'email.js'));
+var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
+var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
+
 try{
     bcrypt = require('bcrypt');
 }
 catch(err){
-    bcrypt = require('bcryptjs');
+    try
+    {
+        bcrypt = require('bcryptjs');
+    }
+    catch(err)
+    {
+        throw "Unexpected Bcrypt(js) error encountered...";
+    }
 }
-var express = require('express');
-var path = require('path');
-var router = express.Router();
-var crypto = require('crypto');
-var email = require(path.join(__dirname, '..', 'email.js'));
-var log;
+
 if (process.env.LOGENTRIES_TOKEN)
 {
     var logentries = require('node-logentries');
     log = logentries.logger({
-                                token: process.env.LOGENTRIES_TOKEN
-                            });
+        token: process.env.LOGENTRIES_TOKEN
+    });
 }
-
-var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
-var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
-var routes = {
-  'lead' : '/home/leaderboard',
-  'match'  : '/home/matches',
-  'player' : '/home/players',
-  'team' : '/home/team'
-};
 
 router.get('/', function (req, res)
 {
@@ -59,8 +66,16 @@ router.get('/', function (req, res)
     else
     {
         var time = new Date;
-        var offset = 19800000 + time.getTime();
-        res.render('static', {time: time.setTime(offset)});
+        time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
+        var date = {
+            seconds : time.getSeconds(),
+            minutes : time.getMinutes(),
+            hour : time.getHours(),
+            day : time.getDate(),
+            month : time.getMonth() + 1,
+            year : time.getFullYear()
+        };
+        res.render('static', {date: date});
     }
 });
 
@@ -112,9 +127,12 @@ router.post('/login', function (req, res)
     mongoUsers.fetch(credentials, onFetch);
 });
 
-
-router.post('/forgot', function (req, res)
+router.post('/forgot/password', function (req, res)
 {
+    var doc = {
+        _id : req.body.team,
+        email : req.body.email
+    };
     var onFetch = function(err, doc){
         if(err)
         {
@@ -157,9 +175,57 @@ router.post('/forgot', function (req, res)
     mongoUsers.forgotPassword(doc, onFetch);
 });
 
+router.post('/forgot/user', function (req, res)
+{
+    var doc = {
+        phone : req.body.phone,
+        email : req.body.email
+    };
+    var onFetch = function(err, docs){
+        if(err)
+        {
+            console.log(err.message);
+        }
+        else if(docs)
+        {
+            var options = {
+                from: 'gravitaspremierleague@gmail.com',
+                to: req.body.email,
+                subject: 'Time to get back in the game',
+                html: "The following teams were found in association with your details:<br><br><ol>" + docs + "</ol><br><br><br>Regards, <br>Team G.P.L."
+            };
+
+            email.sendMail(options, function(err) {
+                if(err)
+                {
+                    console.log(err.message);
+                }
+                else
+                {
+                    res.redirect('/login');
+                }
+            });
+        }
+        else
+        {
+            console.log('Invalid credentials!');
+            res.redirect('/forgot/user');
+        }
+    };
+    mongoUsers.forgotPassword(doc, onFetch);
+});
+
 router.post('/reset/:token', function(req, res) {
     var query = {token : req.params.token, expire : {$gt: Date.now()}};
-    var op = {$set : {password_hash : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))}, $unset : {token : '', expire : ''}};
+    var op = {
+        $set : {
+            password_hash : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+        },
+        $unset : {
+            token : '',
+            expire : ''
+        }
+    };
     var onReset = function(err, doc)
     {
         if(err)
@@ -176,10 +242,15 @@ router.post('/reset/:token', function(req, res) {
             var options = {
                 to : doc.email,
                 subject : 'Password change successful !',
+<<<<<<< HEAD
                 text : "<table background='GPL/public/images' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
             "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
             "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'>'Hey there, ' + doc.email.split('@')[0] + ' we\'re just writing in to let you know that the recent password change was successful.' + <br>" +
             "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
+=======
+                html : 'Hey there, ' + doc.manager + ' we\'re just writing in to let you know that the recent password change was successful.' +
+                '<br>Regards,<br>Team G.P.L'
+>>>>>>> 70b829368e10366fb0fe7a636ba0a583eacae435
             };
             email.sendMail(options, function(err) {
                 if(err)
@@ -219,28 +290,19 @@ router.post('/register', function (req, res)
         }
         else
         {
-            var team_no = parseInt(number) + 1;
-            var teamName = req.body.team_name;
-            var password = req.body.password;
-            var confirmPassword = req.body.confirm_password;
-            var managerName = req.body.manager_name;
-            var email = req.body.email;
-            var phone = req.body.phone;
             console.log("Reached");
 
-            if (password === confirmPassword)
+            if (req.body.confirm_password === req.body.password)
             {
-                var salt = bcrypt.genSaltSync(10);
-                var hashedPassword = bcrypt.hashSync(password, salt);
                 var newUser =
                 {
-                    _id : teamName,
+                    _id : req.body.team_name,
                     dob : new Date(),
-                    team_no : team_no,
-                    password_hash : hashedPassword,
-                    manager_name : managerName,
-                    email : email,
-                    phone : phone,
+                    team_no : parseInt(number) + 1,
+                    password_hash : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
+                    manager_name : req.body.manager_name,
+                    email : req.body.email,
+                    phone : req.body.phone,
                     squad : [],
                     team : [],
                     win : 0,
@@ -283,14 +345,18 @@ router.post('/register', function (req, res)
                     {
                         var name = docs[0]['_id'];
                         var options = {
-                            from : 'gravitaspremierleague.com',
+                            from : 'gravitaspremierleague@gmail.com',
                             to : docs[0]['email'],
                             subject : 'Welcome to graVITas premier league 2.0!',
+<<<<<<< HEAD
                             html : "<table background='GPL/public/images' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
                         "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
                         "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> This is to inform that that you have successfully registered for GPL 2.0 <br>" +
                         "Please click <a href='http://gravitaspremierleague.com' style='text-decoration: none;'> here </a> for more details<br> Good luck!  </td>" +
                         "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
+=======
+                            html : 'Hey there,' + docs[0].manager_name + ', you have just embarked on a mind-blowing journey in the world of T20 cricket management.<br>Regards,<br>Team G.P.L'
+>>>>>>> 70b829368e10366fb0fe7a636ba0a583eacae435
                         };
                         res.cookie('name', name, {maxAge: 86400000, signed: true});
                         res.redirect('/home/players');

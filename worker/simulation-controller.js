@@ -16,12 +16,21 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 var i;
-var async = require('async');
-var path = require('path');
-var MongoClient = require('mongodb').MongoClient;
-var match = require(path.join(__dirname, '..', 'matchCollection'));
 var log;
+var orange;
+var purple;
+var database;
+var orangeFlag = false;
+var purpleFlag = false;
+var path = require('path');
+var async = require('async');
 var days = [1, 2, 3, 4, 5, 6, 7];
+var MongoClient = require('mongodb').MongoClient;
+var simulator = require(path.join(__dirname, 'simulation'));
+var email = require(path.join(__dirname, '..', 'email.js'));
+var match = require(path.join(__dirname, '..', 'matchCollection'));
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
+
 if (process.env.LOGENTRIES_TOKEN)
 {
     var logentries = require('node-logentries');
@@ -40,12 +49,6 @@ var info = {
     runs : 0,
     wickets: 0
 };
-var orange;
-var purple;
-var orangeFlag = false;
-var purpleFlag = false;
-var simulator = require(path.join(__dirname, 'simulation'));
-var email = require(path.join(__dirname, '..', 'email.js'));
 
 var options = {
     from: 'gravitaspremierleague@gmail.com',
@@ -58,7 +61,6 @@ var options = {
     "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
 };
 
-var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 var databaseOptions = {
     server: {
         socketOptions: {
@@ -69,7 +71,6 @@ var databaseOptions = {
         poolSize: 100
     }
 };
-var database;
 
 exports.initSimulation = function (day, masterCallback)
 {
