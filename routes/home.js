@@ -203,7 +203,7 @@ router.get('/matches', function (req, res)
                 async.parallel(parallel_tasks, onFinish);
             }
         };
-        mongoUsers.fetch(credentials,onFetch);
+        mongoUsers.fetch(credentials, onFetch);
     }
     else
     {

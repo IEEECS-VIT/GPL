@@ -191,7 +191,7 @@ exports.getleader = function (user, callback)
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.forgotPassword = function (doc, callback)
+exports.forgotPassword = function (doc, op, callback)
 {
     var onConnect = function (err, db)
     {
@@ -218,7 +218,7 @@ exports.forgotPassword = function (doc, callback)
                     callback(false, null);
                 }
             };
-            collection.findOne(doc, onFetch);
+            collection.findOneAndUpdate(doc, op, onFetch);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
@@ -322,7 +322,7 @@ exports.resetPassword = function (doc, op, callback)
                     callback(false, null);
                 }
             };
-            collection.findOneAndUpdate(doc, op, {}, onFetch);
+            collection.findOneAndUpdate(doc, op, onFetch);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
@@ -445,4 +445,8 @@ exports.update = function (query, update, callback)
         }
     };
     MongoClient.connect(mongoUri, dbOptions, onConnect);
+};
+
+exports.facebook = function(user, callback){
+
 };

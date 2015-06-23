@@ -17,6 +17,7 @@
  */
 
 var log;
+var token;
 var bcrypt;
 var path = require('path');
 var crypto = require('crypto');
@@ -133,29 +134,37 @@ router.post('/forgot/password', function (req, res)
         _id : req.body.team,
         email : req.body.email
     };
-    var onFetch = function(err, doc){
-        if(err)
-        {
-            console.log(err.message);
-        }
-        else if(doc)
-        {
-            crypto.randomBytes(20, function (err, buf) {
-                var token = buf.toString('hex');
-                var options = {
-                    from: 'gravitaspremierleague@gmail.com',
-                    to: req.body.email,
-                    subject: 'Time to get back in the game',
-                    html: "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style ='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
-                    "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
-                    "</tr><tr><td align=\'center\' style=\'padding: 2px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:large;\'> Please click <a href=\"http://" + req.headers.host + "/reset/" + token + "\">here</a>" + " in order to reset your password.<br>" +
-                    "In the event that this password reset was not requested by you," +
-                    " please ignore this message and your password shall remain intact.<br>"
-                    "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
-                };
+    var options = {
+        from: 'gravitaspremierleague@gmail.com',
+        to: req.body.email,
+        subject: 'Time to get back in the game'
+    };
+    crypto.randomBytes(20, function (err, buf) {
+        token = buf.toString('hex');
+        options.html =
+             "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style ='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+            "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
+            "</tr><tr><td align=\'center\' style=\'padding: 2px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:large;\'> Please click <a href=\"http://" + req.headers.host + "/reset/" + token + "\">here</a>" + " in order to reset your password.<br>" +
+            "In the event that this password reset was not requested by you, please ignore this message and your password shall remain intact.<br>" +
+            "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
+        });
 
-                email.sendMail(options, function(err) {
-                    if(err)
+        var details = {
+            $set : {
+                token : token,
+                expire : Date.now() + 3600000
+            }
+        };
+
+        var onFetch = function(err, doc) {
+            if (err)
+            {
+                console.log(err.message);
+            }
+            else if (doc)
+            {
+                email.sendMail(options, function (err) {
+                    if (err)
                     {
                         console.log(err.message);
                     }
@@ -164,15 +173,14 @@ router.post('/forgot/password', function (req, res)
                         res.redirect('/login');
                     }
                 });
-            });
-        }
-        else
-        {
-            console.log('Invalid credentials!');
-            res.redirect('/forgot');
-        }
-    };
-    mongoUsers.forgotPassword(doc, onFetch);
+            }
+            else
+            {
+                console.log('Invalid credentials!');
+                res.redirect('/forgot');
+            }
+        };
+    mongoUsers.forgotPassword(doc, details, onFetch);
 });
 
 router.post('/forgot/user', function (req, res)
@@ -216,51 +224,63 @@ router.post('/forgot/user', function (req, res)
 });
 
 router.post('/reset/:token', function(req, res) {
-    var query = {token : req.params.token, expire : {$gt: Date.now()}};
-    var op = {
-        $set : {
-            password_hash : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
-        },
-        $unset : {
-            token : '',
-            expire : ''
-        }
-    };
-    var onReset = function(err, doc)
+    if(req.body.password === req.body.confirm)
     {
-        if(err)
+        var query = {
+            token : req.params.token,
+            expire : {
+                $gt: Date.now()
+            }
+        };
+        var op = {
+            $set : {
+                password_hash : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+            },
+            $unset : {
+                token : '',
+                expire : ''
+            }
+        };
+        var onReset = function(err, doc)
         {
-            console.log(err.message);
-        }
-        else if(!doc)
-        {
-            console.log('No matches found!');
-            res.redirect('/forgot');
-        }
-        else
-        {
-            var options = {
-                to : doc.email,
-                subject : 'Password change successful !
-                text : "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
-            "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
-            "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'>'Hey there, ' + doc.email.split('@')[0] + ' we\'re just writing in to let you know that the recent password change was successful.' + <br>" +
-            "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
-            };
-            email.sendMail(options, function(err) {
-                if(err)
-                {
-                    console.log(err.message);
-                }
-                else
-                {
-                    console.log('Updated successfully!');
-                    res.redirect('/login');
-                }
-            });
-        }
-    };
-    mongoUsers.resetPassword(query, op, onReset);
+            if(err)
+            {
+                console.log(err.message);
+            }
+            else if(!doc)
+            {
+                console.log('No matches found!');
+                res.redirect('/forgot');
+            }
+            else
+            {
+                var options = {
+                    to : doc.email,
+                    subject : 'Password change successful !',
+                    html : "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+                "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
+                "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'>'Hey there, ' + doc.email.split('@')[0] + ' we\'re just writing in to let you know that the recent password change was successful.' + <br>" +
+                "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
+                };
+                email.sendMail(options, function(err) {
+                    if(err)
+                    {
+                        console.log(err.message);
+                    }
+                    else
+                    {
+                        console.log('Updated successfully!');
+                        res.redirect('/login');
+                    }
+                });
+            }
+        };
+        mongoUsers.resetPassword(query, op, onReset);
+    }
+    else // passwords do not match
+    {
+            res.redirect('/reset/' + req.params.token);
+    }
 });
 
 router.get('/register', function (req, res)
@@ -343,7 +363,6 @@ router.post('/register', function (req, res)
                             from : 'gravitaspremierleague@gmail.com',
                             to : docs[0]['email'],
                             subject : 'Welcome to graVITas premier league 2.0!',
-
                             html : "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
                         "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
                         "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> This is to inform that that you have successfully registered for GPL 2.0 <br>" +

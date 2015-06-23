@@ -17,11 +17,11 @@
  */
 
 var log;
-var app;
 var newrelic;
 var path = require('path');
 var csurf = require('csurf');
 var logger = require('morgan');
+var app = require('express')();
 var express = require('express');
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
@@ -30,8 +30,6 @@ var cookieParser = require('cookie-parser');
 var loggerLevel = process.env.LOGGER_LEVEL || 'dev';
 var home = require(path.join(__dirname, 'routes', 'home'));
 var index = require(path.join(__dirname, 'routes', 'index'));
-
-app = express();
 
 if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 {
