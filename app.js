@@ -22,7 +22,7 @@ var path = require('path');
 var csurf = require('csurf');
 var logger = require('morgan');
 var app = require('express')();
-var express = require('express');
+var passport = require('passport');
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var session = require('express-session');
@@ -30,6 +30,7 @@ var cookieParser = require('cookie-parser');
 var loggerLevel = process.env.LOGGER_LEVEL || 'dev';
 var home = require(path.join(__dirname, 'routes', 'home'));
 var index = require(path.join(__dirname, 'routes', 'index'));
+var social = require(path.join(__dirname, 'routes', 'social'));
 
 if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 {
@@ -61,8 +62,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser(process.env.COOKIE_SECRET || 'randomsecretstring', {signed: true}));
 app.use(session({ secret : 'session secret key', resave : '', saveUninitialized : ''}));
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 app.use(csurf());
 app.use('/', index);
+app.use('/', social);
 app.use('/home', home);
 
 // catch 404 and forward to error handler
