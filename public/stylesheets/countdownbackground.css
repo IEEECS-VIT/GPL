@@ -29,40 +29,40 @@ html,body{
     height:100%;
 }
 .back-0{
-    background: url("/images/img0.jpg");
+    background: url("http://res.cloudinary.com/gpl/image/upload/general/img0.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 
 }
 .back-1{
-    background: url("/images/img1.jpg");
+    background: url("http://res.cloudinary.com/gpl/image/upload/general/img1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 
 }
 .back-2{
-    background: url("/images/img2.jpg");
+    background: url("http://res.cloudinary.com/gpl/image/upload/general/img2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 .back-3{
-    background:url("/images/img3.jpg");
+    background:url("http://res.cloudinary.com/gpl/image/upload/general/img3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 
 }
 .back-4{
-    background:  url("/images/img4.jpg");
+    background:  url("http://res.cloudinary.com/gpl/image/upload/general/img4.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 
 }
 .back-5{
-    background:url("/images/img5.jpg");
+    background:url("http://res.cloudinary.com/gpl/image/upload/general/img5.jpg");
     background-repeat: no-repeat;
     background-size: cover;	}
 .back-6{
-    background: url("/images/img6.jpg");
+    background: url("http://res.cloudinary.com/gpl/image/upload/general/img6.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -81,7 +81,7 @@ html,body{
 .overlay{
     position: absolute;
     z-index: 9;
-    background: url("/images/overlay01.png") repeat;
+    background: url("http://res.cloudinary.com/gpl/image/upload/general/overlay01.png") repeat;
     height: 100%;
     width: 100%;
 
