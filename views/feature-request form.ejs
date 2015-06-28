@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Feature-Request Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link href=/stylesheets/bootstrap.min.css" rel="stylesheet" TYPE="text/css"/>
+    <link href="/stylesheets/style1.css" rel="stylesheet" TYPE="text/css"/>
+</head>
+<body style="background: url('/images/img.jpg') no-repeat;background-size: cover;">
+
+<div id="header">
+    <h1> graVITas Premier League</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+
+        <form role="form" method="post" action="/home/feature-request%20form.ejs">
+            <div class="form-group">
+                <label for="name">Enter your Name :</label>
+                <input type="text" class="form-control" placeholder="Name" id="name">
+            </div>
+            <div class="form-group">
+                <label for="e-mail">Enter your E-mail address :</label>
+                <input type="email" class="form-control" placeholder="Email id" id="e-mail">
+            </div>
+            <div class="form-group">
+                <label for="features-requested">Features Requested : </label>
+                <textarea class="form-control" rows="5" id="features-requested"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" id="b">Submit</button>
+        </form>
+
+        </div>
+    </div>
+
+
+<script src="/javascript/jquery.js"></script>
+<script src="/javascript/bootstrap.min.js"></script>
+</body>
+</html>

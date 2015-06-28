@@ -22,9 +22,9 @@ var temp;
 var path = require('path');
 var async = require('async');
 var router = require('express').Router();
-var match = require(path.join(__dirname, '..', 'matchCollection'));
 var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team.js'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users.js'));
+var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection'));
 var mongoPlayers = require(path.join(__dirname, '..', 'db', 'mongo-players.js'));
 var mongoMatches = require(path.join(__dirname, '..', 'db', 'mongo-matches.js'));
 
@@ -39,7 +39,7 @@ if (process.env.LOGENTRIES_TOKEN)
 router.get('/', function (req, res)
 {
     var results = {};
-    if (req.signedCookies.name)
+    if (req.signedCookies.name || req.user)
     {
         var credentials = {
             '_id': req.signedCookies.name
@@ -117,7 +117,7 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
     {
         res.render("leaderboard", { leaderboard: req.signedCookies.lead});
     }
-    else if (req.signedCookies.name)                           // if cookies exists then access the database
+    else if (req.signedCookies.name || req.user)                           // if cookies exists then access the database
     {
         var onFetch = function (err, documents)
         {
@@ -131,7 +131,7 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
                 time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
                 temp = new Date(time.getFullYear(), time.getMonth(), time.getDate() + 1);
                 res.cookie('lead', documents, {maxAge: temp.getTime() - time.getTime(), signed: true});
-                res.render("leaderboard", { leaderboard: documents, name : req.signedCookies.name});
+                res.render("leaderboard", { leaderboard: documents, name : req.signedCookies.name || req.user._id});
             }
         };
         mongoUsers.getleader(req.signedCookies.name, onFetch);
@@ -144,7 +144,7 @@ router.get('/leaderboard', function (req, res) // Leaderboard/Standings
 
 router.get('/matches', function (req, res)
 {
-    if (req.signedCookies.name)
+    if (req.signedCookies.name || req.user)
     {
         var teamName = req.signedCookies.name;
 
@@ -214,7 +214,7 @@ router.get('/matches', function (req, res)
 
 router.post('/getsquad', function (req, res)
 {
-    if (req.signedCookies.name)
+    if (req.signedCookies.name || req.user)
     {
         var teamname = req.signedCookies.name;
         var credentials = {
@@ -415,7 +415,7 @@ router.get('/trailer', function (req, res) // trailer page
 
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
-    if (req.signedCookies.name)
+    if (req.signedCookies.name || req.user)
     {
         var doc = {
             "_id": req.signedCookies.name
@@ -460,7 +460,7 @@ router.get('/players', function (req, res) // page for all players, only availab
 
 router.get('/team', function (req, res) // view the assigned playing 11 with options to change the playing 11
 {
-    if (req.signedCookies.name)                           // if cookies exist, then access the database
+    if (req.signedCookies.name || req.user)                           // if cookies exist, then access the database
     {
         var credentials =
         {
@@ -490,7 +490,7 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
 });
 
 router.get('/info', function(req, res){
-    if(req.signedCookies.name)
+    if (req.signedCookies.name || req.user)
     {
         if(req.signedCookies.info)
         {
@@ -521,11 +521,11 @@ router.get('/info', function(req, res){
 
 router.get('/developers', function (req, res) // developers page
 {
-    res.render('developers');
+    res.render('developer');
 });
 
 router.get('/dashboard', function(req, res){
-    if(req.signedCookies.name)
+    if (req.signedCookies.name || req.user)
     {
         res.render('dashboard');
     }

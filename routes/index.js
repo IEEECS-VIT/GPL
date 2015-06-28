@@ -21,14 +21,9 @@ var token;
 var bcrypt;
 var path = require('path');
 var crypto = require('crypto');
-var routes = {
-    'lead' : '/home/leaderboard',
-    'match'  : '/home/matches',
-    'player' : '/home/players',
-    'team' : '/home/team'
-};
 var router = require('express').Router();
-var email = require(path.join(__dirname, '..', 'email.js'));
+var email = require(path.join(__dirname, '..', 'worker', 'email.js'));
+var record = require(path.join(__dirname, '..', 'db', 'mongo-record'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
 var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
 
@@ -56,7 +51,7 @@ if (process.env.LOGENTRIES_TOKEN)
 
 router.get('/', function (req, res)
 {
-    if (req.signedCookies.name)
+    if (req.signedCookies.name || req.user)
     {
         if (log)
         {
@@ -89,7 +84,11 @@ router.post('/login', function (req, res)
 {
     var teamName = req.body.team_name;
     var password = req.body.password;
-    if (req.signedCookies.name) res.clearCookie('name', { });
+    if (req.signedCookies.name || req.user)
+    {
+        delete req.user;
+        res.clearCookie('name', { });
+    }
     if (log)
     {
         log.log(teamName + " " + password + "recieved");
@@ -220,7 +219,7 @@ router.post('/forgot/user', function (req, res)
             res.redirect('/forgot/user');
         }
     };
-    mongoUsers.forgotPassword(doc, onFetch);
+    mongoUsers.forgotUser(doc, onFetch);
 });
 
 router.post('/reset/:token', function(req, res) {
@@ -285,7 +284,7 @@ router.post('/reset/:token', function(req, res) {
 
 router.get('/register', function (req, res)
 {
-    if (req.signedCookies.name)
+    if (req.signedCookies.name || req.user)
     {
         res.redirect('/home');
     }
@@ -297,6 +296,11 @@ router.get('/register', function (req, res)
 
 router.post('/register', function (req, res)
 {
+    if(req.signedCookies.name || req.user)
+    {
+        delete req.user;
+        res.clearCookie('name', {});
+    }
     var onGetCount = function (err, number)
     {
         if (err)
@@ -305,56 +309,24 @@ router.post('/register', function (req, res)
         }
         else
         {
-            console.log("Reached");
-
             if (req.body.confirm_password === req.body.password)
             {
-                var newUser =
-                {
-                    _id : req.body.team_name,
-                    dob : new Date(),
-                    team_no : parseInt(number) + 1,
-                    password_hash : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
-                    manager_name : req.body.manager_name,
-                    email : req.body.email,
-                    phone : req.body.phone,
-                    squad : [],
-                    team : [],
-                    win : 0,
-                    loss : 0,
-                    tied : 0,
-                    played : 0,
-                    points : 0,
-                    ratio : 0.0,
-                    runs_for: 0,
-                    runs_against : 0,
-                    balls_for : 0,
-                    balls_against: 0,
-                    net_run_rate: 0.0,
-                    wickets_taken : 0,
-                    wickets_lost : 0,
-                    toss : 0,
-                    form : 1,
-                    morale : 0.0,
-                    streak: 0,
-                    all_outs: 0,
-                    avg_runs_for : 0.0,
-                    avg_runs_against : 0.0,
-                    avg_wickets_lost : 0.0,
-                    avg_wickets_taken : 0.0,
-                    avg_overs_for : 0.0,
-                    avg_overs_against : 0.0,
-                    highest_total : -1,
-                    lowest_total : Number.MAX_VALUE,
-                    stats : {},
-                    surplus : 0
-                };
+                var newUser = record;
+                newUser._id = req.body.team_name;
+                newUser.dob = new Date();
+                newUser.team_no = parseInt(number) + 1;
+                newUser.password_hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+                newUser.manager_name = req.body.manager_name;
+                newUser.email = req.body.email;
+                newUser.phone = req.body.phone;
+                newUser.strategy = 'local';
+
                 var onInsert = function (err, docs)
                 {
                     if (err)
                     {
                         console.log(err.message);
-                        res.render('register', {response: "Team Name Already Exists"});
+                        res.render('register', {response: "Team Name Already Exists"});0
                     }
                     else
                     {
@@ -388,7 +360,7 @@ router.post('/register', function (req, res)
 
 router.get('/logout', function (req, res)
 {
-    if (req.signedCookies.name)
+    if (req.signedCookies.name || req.user)
     {
         res.clearCookie('name');
         res.clearCookie('lead');
@@ -431,39 +403,14 @@ router.post('/interest', function (req, res) // interest form
     mongoInterest.insert(newUser, onInsert);
 });
 
-router.get('/developer', function (req, res) // developers page
-{
-    res.render('developer', {results: (req.signedCookies.name ? 1 : 0)});
-});
-
 router.get('/countdown', function (req, res) // page for countdown
 {
-    res.render('countdown', {Session: (req.signedCookies.name ? 1 : 0)});
-});
-
-router.get('/prizes', function (req, res) // page to view prizes
-{
-    res.render('prizes', {Session: (req.signedCookies.name ? 1 : 0)});
-});
-
-router.get('/rule', function (req, res)
-{
-    res.render('rule', {results: (req.signedCookies.name ? 1 : 0)});
-});
-
-router.get('/sponsor', function (req, res) // sponsors page
-{
-    res.render('sponsor', {results: (req.signedCookies.name ? 1 : 0)});
-});
-
-router.get('/trail', function (req, res) // trailer page
-{
-    res.render('trail', {results: (req.signedCookies.name ? 1 : 0)});
+    res.render('countdown', {Session: (req.signedCookies.name || req.user ? 1 : 0)});
 });
 
 router.get('/schedule', function (req, res) // schedule page
 {
-    res.render('schedule', {results: (req.signedCookies.name ? 1 : 0) });
+    res.render('schedule', {results: (req.signedCookies.name || req.user ? 1 : 0) });
 });
 
 module.exports = router;

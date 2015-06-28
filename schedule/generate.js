@@ -20,7 +20,7 @@ var log;
 var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
 var SchedulePush = require(path.join(__dirname, "push.js"));
-var match = require(path.join(__dirname, '..','matchCollection.js'));
+var match = require(path.join(__dirname, 'matchCollection.js'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 
 if (process.env.LOGENTRIES_TOKEN)

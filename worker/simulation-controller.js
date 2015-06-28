@@ -27,7 +27,7 @@ var async = require('async');
 var days = [1, 2, 3, 4, 5, 6, 7];
 var MongoClient = require('mongodb').MongoClient;
 var simulator = require(path.join(__dirname, 'simulation'));
-var email = require(path.join(__dirname, '..', 'email.js'));
+var email = require(path.join(__dirname, 'email.js'));
 var match = require(path.join(__dirname, '..', 'matchCollection'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 

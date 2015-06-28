@@ -423,7 +423,10 @@ exports.update = function (query, update, callback)
     {
         if (err)
         {
-            if (log) log.log('debug', {Error: err, Message: err.message});
+            if (log)
+            {
+                log.log('debug', {Error: err, Message: err.message});
+            }
         }
         else
         {
@@ -433,7 +436,10 @@ exports.update = function (query, update, callback)
                 db.close();
                 if (err)
                 {
-                    if (log) log.log('debug', {Error: err, Message: err.message});
+                    if (log)
+                    {
+                        log.log('debug', {Error: err, Message: err.message});
+                    }
                     callback(true, null);
                 }
                 else
@@ -447,6 +453,59 @@ exports.update = function (query, update, callback)
     MongoClient.connect(mongoUri, dbOptions, onConnect);
 };
 
-exports.facebook = function(user, callback){
+exports.get = function(doc, callback){
+    var onConnect = function(err, db)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            var collection = db.collection(match);
+            var onFind = function(err, user)
+            {
+                db.close();
+                if(err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    callback(null, user);
+                }
+            };
+            collection.findOne({_id : require('mongodb').ObjectID(doc)}, onFind);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};
 
+exports.save = function(doc, callback)
+{
+    var onConnect = function(err, db)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            var collection = db.collection(match);
+            var onSave = function(err)
+            {
+                db.close();
+                if(err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    callback(null, doc);
+                }
+            };
+            collection.save(doc, onSave);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
 };
