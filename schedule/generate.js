@@ -23,45 +23,34 @@ var SchedulePush = require(path.join(__dirname, "push.js"));
 var match = require(path.join(__dirname, 'matchCollection.js'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 
-if (process.env.LOGENTRIES_TOKEN)
-{
+if (process.env.LOGENTRIES_TOKEN) {
     var logentries = require('node-logentries');
     log = logentries.logger({
-                                token: process.env.LOGENTRIES_TOKEN
-                            });
+        token: process.env.LOGENTRIES_TOKEN
+    });
 }
 
-var onConnect = function (err, db)
-{
-    if (err)
-    {
+var onConnect = function (err, db) {
+    if (err) {
         console.log('Error: ', err.message);
     }
-    else
-    {
+    else {
         var collection = db.collection(match);
-        var onFetch = function (err, count)
-        {
+        var onFetch = function (err, count) {
             db.close();
-            if(err)
-            {
+            if (err) {
                 console.log(err.message);
             }
-            else
-            {
+            else {
                 var day, t, j, i, schedule, match;
-                var onInsert = function (err, doc)
-                {
+                var onInsert = function (err, doc) {
                     console.log(err ? err.message : doc.ops);
                 };
-                for(day = 1; day < 8; ++day)
-                {
+                for (day = 1; day < 8; ++day) {
                     schedule = [];
-                    switch(day < 5)
-                    {
+                    switch (day < 5) {
                         case true:
-                            for(i = 1; i <= count / 2; ++i)
-                            {
+                            for (i = 1; i <= count / 2; ++i) {
                                 t = (i + day - 1 + count / 2) % (count + 1);
                                 match =
                                 {
@@ -69,29 +58,26 @@ var onConnect = function (err, db)
                                     "Team_1": i,
                                     "Team_2": (t > count / 2 ? t : (i + day - 1)),
                                     "commentary": [],
-                                    "scorecard" : []
+                                    "scorecard": []
                                 };
                                 schedule.push(match);
                             }
                             SchedulePush.insert(schedule, "matchday" + day, onInsert);
                             break;
                         default:
-                            switch(day % 2)
-                            {
+                            switch (day % 2) {
                                 case 1:
                                     var num = 0;
                                     t = Math.pow(2, +(day < 7));
-                                    for(i = 0; i < 2; ++i)
-                                    {
-                                        for(j = 1; j <= count * t / 4; j += t)
-                                        {
+                                    for (i = 0; i < 2; ++i) {
+                                        for (j = 1; j <= count * t / 4; j += t) {
                                             match =
                                             {
                                                 "_id": ++num,
                                                 "Team_1": (count / 2) * i + j,
                                                 "Team_2": (count / 2) * i + j + Math.pow((count / 4), +(day > 5)),
                                                 "commentary": [],
-                                                "scorecard" : []
+                                                "scorecard": []
                                             };
                                             schedule.push(match);
                                         }
@@ -99,10 +85,8 @@ var onConnect = function (err, db)
                                     SchedulePush.insert(schedule, "matchday" + day, onInsert);
                                     break;
                                 default:
-                                    for(i = 0; i < 2; ++i)
-                                    {
-                                        for(j = 1; j <= count / 4; ++j)
-                                        {
+                                    for (i = 0; i < 2; ++i) {
+                                        for (j = 1; j <= count / 4; ++j) {
                                             t = 2 * ((count / 4) * i + j) - 1;
                                             match =
                                             {
@@ -110,7 +94,7 @@ var onConnect = function (err, db)
                                                 "Team_1": t,
                                                 "Team_2": ((count * (2 * i + 1)) / 2 + 1 - t),
                                                 "commentary": [],
-                                                "scorecard" : []
+                                                "scorecard": []
                                             };
                                             schedule.push(match);
                                         }

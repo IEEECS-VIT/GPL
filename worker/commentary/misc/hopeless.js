@@ -17,8 +17,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 module.exports =
-[
-    "\t might as well hop onto the team bus now.... ",
-    "And with that, the required run rate is almost as high as the recommended system specifications for Assassin's " +
-    "Creed Unity ;-P"
-];
+    [
+        "\t might as well hop onto the team bus now.... ",
+        "And with that, the required run rate is almost as high as the recommended system specifications for Assassin's " +
+        "Creed Unity ;-P"
+    ];

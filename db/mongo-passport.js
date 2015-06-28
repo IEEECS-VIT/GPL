@@ -25,44 +25,38 @@ var record = require(path.join(__dirname, 'mongo-record.js'));
 var MongoUsers = require(path.join(__dirname, 'mongo-users.js'));
 var domain = 'http://' + ((process.env.NODE_ENV) ? 'gravitaspremierleague.com' : 'localhost:3000') + '/auth/';
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
     done(null, user._id);
 });
 
 // used to deserialize the user
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser(function (id, done) {
     MongoUsers.get(id, done);
 });
 
 passport.use(new facebook({
-        clientID        : process.env.FACEBOOK_ID,
-        clientSecret    : process.env.FAEBOOK_KEY,
-        callbackURL     : domain + 'facebook/callback',
-        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+        clientID: process.env.FACEBOOK_ID,
+        clientSecret: process.env.FAEBOOK_KEY,
+        callbackURL: domain + 'facebook/callback',
+        passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     },
-    function(req, token, refreshToken, profile, done) {
-        process.nextTick(function() {
-            if (!req.user)
-            {
-                MongoUsers.fetch({ 'profile' : profile.id }, function(err, user) {
-                    if (err)
-                    {
+    function (req, token, refreshToken, profile, done) {
+        process.nextTick(function () {
+            if (!req.user) {
+                MongoUsers.fetch({'profile': profile.id}, function (err, user) {
+                    if (err) {
                         return done(err);
                     }
-                    if (user)
-                    {
+                    if (user) {
                         return done(null, user); // user found, return that user
                     }
                     else // if there is no user, create them
                     {
-                        var onGetCount = function(err, number)
-                        {
-                            if(err)
-                            {
+                        var onGetCount = function (err, number) {
+                            if (err) {
                                 console.log(err.message);
                             }
-                            else
-                            {
+                            else {
                                 var newUser = record;
                                 newUser.token = token;
                                 newUser.profile = profile.id;
@@ -70,9 +64,8 @@ passport.use(new facebook({
                                 newUser.team_no = parseInt(number) + 1;
                                 newUser.email = (profile.emails[0].value || '').toLowerCase();
                                 newUser.name = profile.name.givenName + ' ' + profile.name.familyName;
-                                MongoUsers.save(newUser, function(err, newUser) {
-                                    if (err)
-                                    {
+                                MongoUsers.save(newUser, function (err, newUser) {
+                                    if (err) {
                                         return done(err);
                                     }
                                     return done(null, newUser);
@@ -83,16 +76,14 @@ passport.use(new facebook({
                     }
                 });
             }
-            else
-            {
+            else {
                 var user = req.user; // pull the user out of the session
                 user.token = token;
                 user.profile = profile.id;
                 user.email = (profile.emails[0].value || '').toLowerCase();
                 user.name = profile.name.givenName + ' ' + profile.name.familyName;
-                MongoUsers.save(user, function(err) {
-                    if (err)
-                    {
+                MongoUsers.save(user, function (err) {
+                    if (err) {
                         return done(err);
                     }
                     return done(null, user);
@@ -102,36 +93,31 @@ passport.use(new facebook({
     }));
 
 passport.use(new twitter({
-        consumerKey     : process.env.TWITTER_ID,
-        consumerSecret  : process.env.TWITTER_KEY,
-        callbackURL     : domain + 'twitter/callback',
-        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+        consumerKey: process.env.TWITTER_ID,
+        consumerSecret: process.env.TWITTER_KEY,
+        callbackURL: domain + 'twitter/callback',
+        passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     },
-    function(req, token, tokenSecret, profile, done) {
-        process.nextTick(function() {
-            if (!req.user)
-            {
-                MongoUsers.fetch({ 'profile' : profile.id }, function(err, user) {
-                    if (err)
-                    {
+    function (req, token, tokenSecret, profile, done) {
+        process.nextTick(function () {
+            if (!req.user) {
+                MongoUsers.fetch({'profile': profile.id}, function (err, user) {
+                    if (err) {
                         return done(err);
                     }
-                    if (user)
-                    {
+                    if (user) {
                         console.log(profile._json.entities);
                         return done(null, user); // user found, return that user
                     }
-                    else
-                    {
+                    else {
                         var newUser = record;
                         newUser.token = token;
                         newUser.strategy = 'twitter';
                         newUser.profile = profile.id;
                         newUser.team_no = parseInt(number) + 1;
                         newUser.manager_name = profile.displayName;
-                        MongoUsers.save(newUser, function(err) {
-                            if (err)
-                            {
+                        MongoUsers.save(newUser, function (err) {
+                            if (err) {
                                 return done(err);
                             }
                             return done(null, newUser);
@@ -139,15 +125,13 @@ passport.use(new twitter({
                     }
                 });
             }
-            else
-            {
+            else {
                 var user = req.user; // pull the user out of the session
                 user.token = token;
                 user.profile = profile.id;
                 user.name = profile.displayName;
-                MongoUsers.save(user, function(err) {
-                    if (err)
-                    {
+                MongoUsers.save(user, function (err) {
+                    if (err) {
                         return done(err);
                     }
                     return done(null, user);
@@ -157,35 +141,30 @@ passport.use(new twitter({
     }));
 
 passport.use(new google({
-        clientID        : process.env.GOOGLE_ID,
-        clientSecret    : process.env.GOOGLE_KEY,
-        callbackURL     : domain + 'google/callback',
-        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+        clientID: process.env.GOOGLE_ID,
+        clientSecret: process.env.GOOGLE_KEY,
+        callbackURL: domain + 'google/callback',
+        passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     },
-    function(req, token, refreshToken, profile, done) {
-        process.nextTick(function() {
-            if (!req.user)
-            {
-                MongoUsers.fetch({ 'profile' : profile.id }, function(err, user) {
-                    if (err)
-                    {
+    function (req, token, refreshToken, profile, done) {
+        process.nextTick(function () {
+            if (!req.user) {
+                MongoUsers.fetch({'profile': profile.id}, function (err, user) {
+                    if (err) {
                         return done(err);
                     }
-                    if (user)
-                    {
+                    if (user) {
                         return done(null, user);
                     }
-                    else
-                    {
+                    else {
                         var newUser = record;
                         newUser.token = token;
                         newUser.strategy = 'google';
                         newUser.profile = profile.id;
                         newUser.name = profile.displayName;
                         newUser.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email
-                        MongoUsers.save(newUser, function(err) {
-                            if (err)
-                            {
+                        MongoUsers.save(newUser, function (err) {
+                            if (err) {
                                 return done(err);
                             }
                             return done(null, newUser);
@@ -193,16 +172,14 @@ passport.use(new google({
                     }
                 });
             }
-            else
-            {
+            else {
                 var user = req.user; // pull the user out of the session
                 user.token = token;
                 user.profile = profile.id;
                 user.name = profile.displayName;
                 user.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email
-                MongoUsers.save(user, function(err) {
-                    if (err)
-                    {
+                MongoUsers.save(user, function (err) {
+                    if (err) {
                         return done(err);
                     }
                     return done(null, user);

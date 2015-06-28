@@ -27,99 +27,83 @@ var record = require(path.join(__dirname, '..', 'db', 'mongo-record'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
 var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
 
-try{
+try {
     bcrypt = require('bcrypt');
 }
-catch(err){
-    try
-    {
+catch (err) {
+    try {
         bcrypt = require('bcryptjs');
     }
-    catch(err)
-    {
+    catch (err) {
         throw "Unexpected Bcrypt(js) error encountered...";
     }
 }
 
-if (process.env.LOGENTRIES_TOKEN)
-{
+if (process.env.LOGENTRIES_TOKEN) {
     var logentries = require('node-logentries');
     log = logentries.logger({
         token: process.env.LOGENTRIES_TOKEN
     });
 }
 
-router.get('/', function (req, res)
-{
-    if (req.signedCookies.name || req.user)
-    {
-        if (log)
-        {
+router.get('/', function (req, res) {
+    if (req.signedCookies.name || req.user) {
+        if (log) {
             log.log(req.signedCookies.name + "logged in");
         }
         res.redirect('/home');
     }
-    else
-    {
+    else {
         var time = new Date;
         time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
         var date = {
-            seconds : time.getSeconds(),
-            minutes : time.getMinutes(),
-            hour : time.getHours(),
-            day : time.getDate(),
-            month : time.getMonth() + 1,
-            year : time.getFullYear()
+            seconds: time.getSeconds(),
+            minutes: time.getMinutes(),
+            hour: time.getHours(),
+            day: time.getDate(),
+            month: time.getMonth() + 1,
+            year: time.getFullYear()
         };
         res.render('static', {date: date});
     }
 });
 
 // TODO: delete this route when ready to launch
-router.get(/^.*$/, function(req, res){
+router.get(/^.*$/, function (req, res) {
     res.redirect('/');
 });
 
-router.post('/login', function (req, res)
-{
+router.post('/login', function (req, res) {
     var teamName = req.body.team_name;
     var password = req.body.password;
-    if (req.signedCookies.name || req.user)
-    {
+    if (req.signedCookies.name || req.user) {
         delete req.user;
-        res.clearCookie('name', { });
+        res.clearCookie('name', {});
     }
-    if (log)
-    {
+    if (log) {
         log.log(teamName + " " + password + "recieved");
     }
 
     var credentials = {
         '_id': teamName
     };
-    var onFetch = function (err, doc)
-    {
-        if (err)
-        {
+    var onFetch = function (err, doc) {
+        if (err) {
             console.log(err.message);
             res.render('index', {response: "Incorrect Username"});
         }
-        else if (doc)
-        {
-            if (bcrypt.compareSync(password, doc['password_hash']))
-            {
+        else if (doc) {
+            if (bcrypt.compareSync(password, doc['password_hash'])) {
                 console.log("Login Successful" + teamName);
                 res.cookie('name', doc['_id'], {maxAge: 86400000, signed: true});
                 res.redirect('/home');
             }
-            else
-            {
+            else {
                 console.log('Incorrect Credentials');
                 res.render('index', {response: "Incorrect Password"});
             }
         }
-        else
-        {
+        else {
             console.log('No user exists');
             res.render('index', {response: "Incorrect Username"});
         }
@@ -127,11 +111,10 @@ router.post('/login', function (req, res)
     mongoUsers.fetch(credentials, onFetch);
 });
 
-router.post('/forgot/password', function (req, res)
-{
+router.post('/forgot/password', function (req, res) {
     var doc = {
-        _id : req.body.team,
-        email : req.body.email
+        _id: req.body.team,
+        email: req.body.email
     };
     var options = {
         from: 'gravitaspremierleague@gmail.com',
@@ -141,60 +124,52 @@ router.post('/forgot/password', function (req, res)
     crypto.randomBytes(20, function (err, buf) {
         token = buf.toString('hex');
         options.html =
-             "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style ='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+            "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style ='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
             "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
             "</tr><tr><td align=\'center\' style=\'padding: 2px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:large;\'> Please click <a href=\"http://" + req.headers.host + "/reset/" + token + "\">here</a>" + " in order to reset your password.<br>" +
             "In the event that this password reset was not requested by you, please ignore this message and your password shall remain intact.<br>" +
             "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
-        });
+    });
 
-        var details = {
-            $set : {
-                token : token,
-                expire : Date.now() + 3600000
-            }
-        };
+    var details = {
+        $set: {
+            token: token,
+            expire: Date.now() + 3600000
+        }
+    };
 
-        var onFetch = function(err, doc) {
-            if (err)
-            {
-                console.log(err.message);
-            }
-            else if (doc)
-            {
-                email.sendMail(options, function (err) {
-                    if (err)
-                    {
-                        console.log(err.message);
-                    }
-                    else
-                    {
-                        res.redirect('/login');
-                    }
-                });
-            }
-            else
-            {
-                console.log('Invalid credentials!');
-                res.redirect('/forgot');
-            }
-        };
+    var onFetch = function (err, doc) {
+        if (err) {
+            console.log(err.message);
+        }
+        else if (doc) {
+            email.sendMail(options, function (err) {
+                if (err) {
+                    console.log(err.message);
+                }
+                else {
+                    res.redirect('/login');
+                }
+            });
+        }
+        else {
+            console.log('Invalid credentials!');
+            res.redirect('/forgot');
+        }
+    };
     mongoUsers.forgotPassword(doc, details, onFetch);
 });
 
-router.post('/forgot/user', function (req, res)
-{
+router.post('/forgot/user', function (req, res) {
     var doc = {
-        phone : req.body.phone,
-        email : req.body.email
+        phone: req.body.phone,
+        email: req.body.email
     };
-    var onFetch = function(err, docs){
-        if(err)
-        {
+    var onFetch = function (err, docs) {
+        if (err) {
             console.log(err.message);
         }
-        else if(docs)
-        {
+        else if (docs) {
             var options = {
                 from: 'gravitaspremierleague@gmail.com',
                 to: req.body.email,
@@ -202,19 +177,16 @@ router.post('/forgot/user', function (req, res)
                 html: "The following teams were found in association with your details:<br><br><ol>" + docs + "</ol><br><br><br>Regards, <br>Team G.P.L."
             };
 
-            email.sendMail(options, function(err) {
-                if(err)
-                {
+            email.sendMail(options, function (err) {
+                if (err) {
                     console.log(err.message);
                 }
-                else
-                {
+                else {
                     res.redirect('/login');
                 }
             });
         }
-        else
-        {
+        else {
             console.log('Invalid credentials!');
             res.redirect('/forgot/user');
         }
@@ -222,52 +194,45 @@ router.post('/forgot/user', function (req, res)
     mongoUsers.forgotUser(doc, onFetch);
 });
 
-router.post('/reset/:token', function(req, res) {
-    if(req.body.password === req.body.confirm)
-    {
+router.post('/reset/:token', function (req, res) {
+    if (req.body.password === req.body.confirm) {
         var query = {
-            token : req.params.token,
-            expire : {
+            token: req.params.token,
+            expire: {
                 $gt: Date.now()
             }
         };
         var op = {
-            $set : {
-                password_hash : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+            $set: {
+                password_hash: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
             },
-            $unset : {
-                token : '',
-                expire : ''
+            $unset: {
+                token: '',
+                expire: ''
             }
         };
-        var onReset = function(err, doc)
-        {
-            if(err)
-            {
+        var onReset = function (err, doc) {
+            if (err) {
                 console.log(err.message);
             }
-            else if(!doc)
-            {
+            else if (!doc) {
                 console.log('No matches found!');
                 res.redirect('/forgot');
             }
-            else
-            {
+            else {
                 var options = {
-                    to : doc.email,
-                    subject : 'Password change successful !',
-                    html : "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
-                "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
-                "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'>'Hey there, ' + doc.email.split('@')[0] + ' we\'re just writing in to let you know that the recent password change was successful.' + <br>" +
-                "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
+                    to: doc.email,
+                    subject: 'Password change successful !',
+                    html: "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+                    "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
+                    "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'>'Hey there, ' + doc.email.split('@')[0] + ' we\'re just writing in to let you know that the recent password change was successful.' + <br>" +
+                    "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
                 };
-                email.sendMail(options, function(err) {
-                    if(err)
-                    {
+                email.sendMail(options, function (err) {
+                    if (err) {
                         console.log(err.message);
                     }
-                    else
-                    {
+                    else {
                         console.log('Updated successfully!');
                         res.redirect('/login');
                     }
@@ -278,39 +243,30 @@ router.post('/reset/:token', function(req, res) {
     }
     else // passwords do not match
     {
-            res.redirect('/reset/' + req.params.token);
+        res.redirect('/reset/' + req.params.token);
     }
 });
 
-router.get('/register', function (req, res)
-{
-    if (req.signedCookies.name || req.user)
-    {
+router.get('/register', function (req, res) {
+    if (req.signedCookies.name || req.user) {
         res.redirect('/home');
     }
-    else
-    {
-        res.render('register', { response: "", csrfToken : req.csrfToken() });
+    else {
+        res.render('register', {response: "", csrfToken: req.csrfToken()});
     }
 });
 
-router.post('/register', function (req, res)
-{
-    if(req.signedCookies.name || req.user)
-    {
+router.post('/register', function (req, res) {
+    if (req.signedCookies.name || req.user) {
         delete req.user;
         res.clearCookie('name', {});
     }
-    var onGetCount = function (err, number)
-    {
-        if (err)
-        {
+    var onGetCount = function (err, number) {
+        if (err) {
             console.log(err.message);
         }
-        else
-        {
-            if (req.body.confirm_password === req.body.password)
-            {
+        else {
+            if (req.body.confirm_password === req.body.password) {
                 var newUser = record;
                 newUser._id = req.body.team_name;
                 newUser.dob = new Date();
@@ -321,25 +277,23 @@ router.post('/register', function (req, res)
                 newUser.phone = req.body.phone;
                 newUser.strategy = 'local';
 
-                var onInsert = function (err, docs)
-                {
-                    if (err)
-                    {
+                var onInsert = function (err, docs) {
+                    if (err) {
                         console.log(err.message);
-                        res.render('register', {response: "Team Name Already Exists"});0
+                        res.render('register', {response: "Team Name Already Exists"});
+                        0
                     }
-                    else
-                    {
+                    else {
                         var name = docs[0]['_id'];
                         var options = {
-                            from : 'gravitaspremierleague@gmail.com',
-                            to : docs[0]['email'],
-                            subject : 'Welcome to graVITas premier league 2.0!',
-                            html : "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
-                        "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
-                        "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> This is to inform that that you have successfully registered for GPL 2.0 <br>" +
-                        "Please click <a href='http://gravitaspremierleague.com' style='text-decoration: none;'> here </a> for more details<br> Good luck!  </td>" +
-                        "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
+                            from: 'gravitaspremierleague@gmail.com',
+                            to: docs[0]['email'],
+                            subject: 'Welcome to graVITas premier league 2.0!',
+                            html: "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+                            "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
+                            "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> This is to inform that that you have successfully registered for GPL 2.0 <br>" +
+                            "Please click <a href='http://gravitaspremierleague.com' style='text-decoration: none;'> here </a> for more details<br> Good luck!  </td>" +
+                            "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
                         };
                         res.cookie('name', name, {maxAge: 86400000, signed: true});
                         res.redirect('/home/players');
@@ -348,8 +302,7 @@ router.post('/register', function (req, res)
                 };
                 mongoUsers.insert(newUser, onInsert);
             }
-            else
-            {
+            else {
                 console.log("Incorrect Password");
                 res.render('register', {response: "Passwords do not match"});
             }
@@ -358,23 +311,19 @@ router.post('/register', function (req, res)
     mongoUsers.getCount(onGetCount);
 });
 
-router.get('/logout', function (req, res)
-{
-    if (req.signedCookies.name || req.user)
-    {
+router.get('/logout', function (req, res) {
+    if (req.signedCookies.name || req.user) {
         res.clearCookie('name');
         res.clearCookie('lead');
         res.redirect('/login');
     }
-    else
-    {
+    else {
         res.redirect('/');
     }
 });
 
-router.get('/interest', function (req, res)
-{
-    res.redirect('/', {csrfToken : req.csrfToken()});
+router.get('/interest', function (req, res) {
+    res.redirect('/', {csrfToken: req.csrfToken()});
 });
 
 router.post('/interest', function (req, res) // interest form
@@ -387,14 +336,11 @@ router.post('/interest', function (req, res) // interest form
         email: email,
         phone: phone
     };
-    var onInsert = function (err, docs)
-    {
-        if (err)
-        {
+    var onInsert = function (err, docs) {
+        if (err) {
             console.log(err.message);
         }
-        else
-        {
+        else {
             res.redirect('/interest');
             console.log(docs);
         }
@@ -410,7 +356,7 @@ router.get('/countdown', function (req, res) // page for countdown
 
 router.get('/schedule', function (req, res) // schedule page
 {
-    res.render('schedule', {results: (req.signedCookies.name || req.user ? 1 : 0) });
+    res.render('schedule', {results: (req.signedCookies.name || req.user ? 1 : 0)});
 });
 
 module.exports = router;

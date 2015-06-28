@@ -32,21 +32,18 @@ var home = require(path.join(__dirname, 'routes', 'home'));
 var index = require(path.join(__dirname, 'routes', 'index'));
 var social = require(path.join(__dirname, 'routes', 'social'));
 
-if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
-{
+if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE) {
     newrelic = require('newrelic');
 }
 
-if (process.env.LOGENTRIES_TOKEN)
-{
+if (process.env.LOGENTRIES_TOKEN) {
     var logentries = require('node-logentries');
     log = logentries.logger({
-                                token: process.env.LOGENTRIES_TOKEN
-                            });
+        token: process.env.LOGENTRIES_TOKEN
+    });
 }
 
-if (newrelic)
-{
+if (newrelic) {
     app.locals.newrelic = newrelic;
 }
 
@@ -61,7 +58,7 @@ app.enable('trust proxy');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser(process.env.COOKIE_SECRET || 'randomsecretstring', {signed: true}));
-app.use(session({ secret : 'session secret key', resave : '', saveUninitialized : ''}));
+app.use(session({secret: 'session secret key', resave: '', saveUninitialized: ''}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(csurf());
@@ -70,45 +67,39 @@ app.use('/', social);
 app.use('/home', home);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next)
-        {
-            var err = new Error('Not Found');
-            err.status = 404;
-            next(err);
-        });
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
 
 // error handlers
 // development error handler, will print stacktrace
-if (app.get('env') === 'development')
-{
-    app.use(function (err, req, res)
-            {
-                if (log)
-                {
-                    log.log('debug', {Error: err, Message: err.message});
-                }
-                res.status(err.status || 500);
-                res.render('error', {
-                    message: err.message,
-                    status: err.status,
-                    stack: err.stack
-                });
-            });
+if (app.get('env') === 'development') {
+    app.use(function (err, req, res) {
+        if (log) {
+            log.log('debug', {Error: err, Message: err.message});
+        }
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            status: err.status,
+            stack: err.stack
+        });
+    });
 }
 
 // production error handler, no stacktraces leaked to user
-app.use(function (err, req, res)
-        {
-            if (log)
-            {
-                log.log('debug', {Error: err, Message: err.message});
-            }
-            res.status(err.status || 500);
-            res.render('error', {
-                message: err.message,
-                status: err.status,
-                stack: ''
-            });
-        });
+app.use(function (err, req, res) {
+    if (log) {
+        log.log('debug', {Error: err, Message: err.message});
+    }
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        status: err.status,
+        stack: ''
+    });
+});
 
 module.exports = app;

@@ -1,41 +1,41 @@
 {
-    "name": "GPL",
-    "version": "0.2.0",
-    "homepage": "https://github.com/IEEECS-VIT/GPL",
-    "authors": [
-        "Aneesh Neelam <neelam.aneesh@gmail.com>",
-        "Kashish Singhal <singhal2.kashish@gmail.com>",
-        "Kunal Nagpal <kunagpal@gmail.com>",
-        "Karan Pittie <karan.pittie2013@vit.ac.in>",
-        "Ayush Agarwal <agarwalayush161@gmail.com>",
-        "Shivam Mathur <burnualive@hotmail.com>",
-        "Sakshi Anand <sakku.anand3@gmail.com>",
-        "Saurabh Mathur <saurabhmathur96@gmail.com>",
-        "Tanisha Chawla <chawlatanisha20@gmail.com>"
-    ],
-    "description": "graVITas Premier League",
-    "main": "bin/www",
-    "moduleType": [
-        "globals",
-        "node"
-    ],
-    "license": "GPL-3.0+",
-    "licenses": [
-        {
-            "type": "GPL-3.0+",
-            "url": "https://www.gnu.org/licenses/gpl-3.0-standalone.html"
-        }
-    ],
-    "private": true,
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "public/bower_components",
-        "test",
-        "tests"
-    ],
-    "dependencies": {
-        "bootstrap": "~3.3.4"
+  "name": "GPL",
+  "version": "0.2.0",
+  "homepage": "https://github.com/IEEECS-VIT/GPL",
+  "authors": [
+    "Aneesh Neelam <neelam.aneesh@gmail.com>",
+    "Kashish Singhal <singhal2.kashish@gmail.com>",
+    "Kunal Nagpal <kunagpal@gmail.com>",
+    "Karan Pittie <karan.pittie2013@vit.ac.in>",
+    "Ayush Agarwal <agarwalayush161@gmail.com>",
+    "Shivam Mathur <burnualive@hotmail.com>",
+    "Sakshi Anand <sakku.anand3@gmail.com>",
+    "Saurabh Mathur <saurabhmathur96@gmail.com>",
+    "Tanisha Chawla <chawlatanisha20@gmail.com>"
+  ],
+  "description": "graVITas Premier League",
+  "main": "bin/www",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "license": "GPL-3.0+",
+  "licenses": [
+    {
+      "type": "GPL-3.0+",
+      "url": "https://www.gnu.org/licenses/gpl-3.0-standalone.html"
     }
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4"
+  }
 }

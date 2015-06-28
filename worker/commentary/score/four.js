@@ -3246,4 +3246,4 @@ module.exports =
         "this is proper short ball, and he has cleared the front leg to pull this to deep square for four",
         "gets a freebie first up. A leg-stump half-volley that he glances away for four.",
         "top edge over the keeper's head"
-];
+    ];

@@ -17,8 +17,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 module.exports =
-[
-    "",
-    "what a wonderful way to bring up his century.",
-    "there it is! Spreads his arms aloft towards the dressing room, who are standing up and so is this crowd."
-];
+    [
+        "",
+        "what a wonderful way to bring up his century.",
+        "there it is! Spreads his arms aloft towards the dressing room, who are standing up and so is this crowd."
+    ];

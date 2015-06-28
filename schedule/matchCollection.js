@@ -22,5 +22,5 @@
  db: mongo-team(64, 100), mongo-users(41, 71, 100, 144, 199, 239, 268, 298, 328)
  schedule: (23, 42)
  worker: simulation-controller(95,102)
-*/
+ */
 module.exports = process.env.MATCH || 'round3';

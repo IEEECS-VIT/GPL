@@ -34,98 +34,101 @@
 <body>
 
 
-    <div class="overlay"></div>
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="" >
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
+<div class="overlay"></div>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
 
-            <div  id="DateCountdown" data-date="2015/09/01, 00:00:00"></div>
+        <div id="DateCountdown" data-date="2015/09/01, 00:00:00"></div>
 
-            <div class="item active">
-                <div class="fill back-0"></div>
-            </div>
-            <div class="item">
-                <div class="fill back-1"></div>
-            </div>
-            <div class="item">
-                <div class="fill back-2"></div>
-            </div>
-            <div class="item">
-                <div class="fill back-3"></div>
-            </div>
-            <div class="item">
-                <div class="fill back-4"></div>
-            </div>
-            <div class="item">
-                <div class="fill back-5"></div>
-            </div>
-            <div class="item">
-                <div class="fill back-6"></div>
-            </div>
-
+        <div class="item active">
+            <div class="fill back-0"></div>
         </div>
+        <div class="item">
+            <div class="fill back-1"></div>
+        </div>
+        <div class="item">
+            <div class="fill back-2"></div>
+        </div>
+        <div class="item">
+            <div class="fill back-3"></div>
+        </div>
+        <div class="item">
+            <div class="fill back-4"></div>
+        </div>
+        <div class="item">
+            <div class="fill back-5"></div>
+        </div>
+        <div class="item">
+            <div class="fill back-6"></div>
+        </div>
+
     </div>
+</div>
 <script>
 
-   var serverTime = moment({
-       year: <%=date.year%>,
-       month: <%=date.month%> -1,
-       day: <%=date.day%>,
-       hour: <%=date.hour%>,
-       minute: <%=date.minutes%>,
-       second: <%=date.seconds%>,
-       milliseconds: 0});
-   var now = moment()
-           .subtract({
-       year: <%=date.year%>,
-       month: <%=date.month%> ,
-       day: <%=date.day%>,
-       hour: <%=date.hour%>,
-       minute: <%=date.minutes%>,
-       second: <%=date.seconds%>,
-       milliseconds: 0})
-           .add({
-       year: 2015,
-       month: 9,
-       day: 1,
-       hour: 0,
-       minute: 0,
-       second: 0,
-       milliseconds: 0});
-   $("#DateCountdown").attr("data-date", now.format("YYYY/MM/DD HH:MM:SS"));
+    var serverTime = moment({
+        year: <%=date.year%>,
+        month: <%=date.month%> -1,
+        day: <%=date.day%>,
+        hour: <%=date.hour%>,
+        minute: <%=date.minutes%>,
+        second: <%=date.seconds%>,
+        milliseconds: 0
+    });
+    var now = moment()
+            .subtract({
+                year: <%=date.year%>,
+                month: <%=date.month%>,
+                day: <%=date.day%>,
+                hour: <%=date.hour%>,
+                minute: <%=date.minutes%>,
+                second: <%=date.seconds%>,
+                milliseconds: 0
+            })
+            .add({
+                year: 2015,
+                month: 9,
+                day: 1,
+                hour: 0,
+                minute: 0,
+                second: 0,
+                milliseconds: 0
+            });
+    $("#DateCountdown").attr("data-date", now.format("YYYY/MM/DD HH:MM:SS"));
     //alert( now.format("YYYY/MM/DD HH:MM:SS"));
 
-   $("#DateCountdown").TimeCircles({
-       "animation": "smooth",
-       "bg_width": 1,
-       "fg_width": 0.04,
-       "circle_bg_color": "#aaaaaa",
-       "time": {
-           "Days": {
-               "text": "Days",
-               "color": "#FF9900",
-               "show": true
-           },
-           "Hours": {
-               "text": "Hours",
-               "color": "#ECEFCB",
-               "show": true
-           },
-           "Minutes": {
-               "text": "Minutes",
-               "color": "#ACC742",
-               "show": true
-           },
-           "Seconds": {
-               "text": "Seconds",
-               "color": "#7995D5",
-               "show": true
-           }
-       }
-   });
-   $(window).resize(function(){
-       $("#DateCountdown").TimeCircles().rebuild();
-   });
+    $("#DateCountdown").TimeCircles({
+        "animation": "smooth",
+        "bg_width": 1,
+        "fg_width": 0.04,
+        "circle_bg_color": "#aaaaaa",
+        "time": {
+            "Days": {
+                "text": "Days",
+                "color": "#FF9900",
+                "show": true
+            },
+            "Hours": {
+                "text": "Hours",
+                "color": "#ECEFCB",
+                "show": true
+            },
+            "Minutes": {
+                "text": "Minutes",
+                "color": "#ACC742",
+                "show": true
+            },
+            "Seconds": {
+                "text": "Seconds",
+                "color": "#7995D5",
+                "show": true
+            }
+        }
+    });
+    $(window).resize(function () {
+        $("#DateCountdown").TimeCircles().rebuild();
+    });
 </script>
 </body>
 </html>

@@ -1,5 +1,4 @@
-/**
- * Created by Kunal Nagpal <kunagpal@gmail.com> on 09-02-2015.
+/*
  *  GraVITas Premier League <gravitaspremierleague@gmail.com>
  *  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
  *
@@ -16,7 +15,28 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-module.exports =
-    [
-        ""
-    ];
+
+var MongoClient = require('mongodb').MongoClient;
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
+
+exports.insert = function (doc, callback) {
+    var onConnect = function (err, db) {
+        if (err) {
+            callback(err);
+        }
+        else {
+            var collection = db.collection('features');
+            var onInsert = function (err, docs) {
+                db.close();
+                if (err) {
+                    callback(err, null);
+                }
+                else {
+                    callback(null, docs)
+                }
+            }
+            collection.insertOne(doc, {w: 1}, onInsert);
+        }
+    }
+    MongoClient.connect(mongoUri, onConnect);
+};

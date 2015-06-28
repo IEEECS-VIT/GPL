@@ -15,24 +15,24 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 module.exports =
-[
-    "",
-    "That is a strange way to prevent the batsman from hitting the ball, but it seems to be working. Wide signalled by " +
-    " the umpire.",
-    "That is just criminal, to bowl deliveries like that in this format of the game. The batting team on the other hand," +
-    "  has no complaints",
-    "he strays wide down the leg side",
-    "that was way down the leg side, no mercy for that.",
-    "that looked a little to close, but the line belongs to the umpire, wide called.",
-    "he lost control of that! This was far too wide down the leg side and the wicketkeeper could do nothing",
-    "wide, a little indiscipline fetches additional runs as this length ball goes down leg",
-    "fires it down the leg side. Good take from the keeper. Moved with the ball and stayed low too",
-    "That looked like it would have hit the thigh pad but the umpire reckons there was no contact. Back of a length down" +
-    "  the leg side. He goes for the flick and has no success connecting",
-    "terrible delivery as he bowls it well down the leg side. The batsman looks to help it away, but doesn't succeed",
-    "short delivery that is just a shade down the leg side. That's rather harsh as the ball sailed over his hips as he " +
-    "was a little cramped up while attempting a shot",
-    "slanted in too much this time and it slips down the leg side"
-];
+    [
+        "",
+        "That is a strange way to prevent the batsman from hitting the ball, but it seems to be working. Wide signalled by " +
+        " the umpire.",
+        "That is just criminal, to bowl deliveries like that in this format of the game. The batting team on the other hand," +
+        "  has no complaints",
+        "he strays wide down the leg side",
+        "that was way down the leg side, no mercy for that.",
+        "that looked a little to close, but the line belongs to the umpire, wide called.",
+        "he lost control of that! This was far too wide down the leg side and the wicketkeeper could do nothing",
+        "wide, a little indiscipline fetches additional runs as this length ball goes down leg",
+        "fires it down the leg side. Good take from the keeper. Moved with the ball and stayed low too",
+        "That looked like it would have hit the thigh pad but the umpire reckons there was no contact. Back of a length down" +
+        "  the leg side. He goes for the flick and has no success connecting",
+        "terrible delivery as he bowls it well down the leg side. The batsman looks to help it away, but doesn't succeed",
+        "short delivery that is just a shade down the leg side. That's rather harsh as the ball sailed over his hips as he " +
+        "was a little cramped up while attempting a shot",
+        "slanted in too much this time and it slips down the leg side"
+    ];

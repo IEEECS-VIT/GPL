@@ -16,8 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 header {
-    background:
-    linear-gradient(
+    background: linear-gradient(
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0.5)
     ),
@@ -29,22 +28,26 @@ header {
     text-align: center;
     z-index: 0;
 }
+
 #DateCountdown {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
     margin: 0 auto;
 }
-@media (max-device-width : 500px)  {
-    header{
+
+@media (max-device-width: 500px) {
+    header {
         padding: 0;
     }
 }
-.overlay{
-    position:absolute;
+
+.overlay {
+    position: absolute;
     z-index: 3;
 }
-.tvstatic{
+
+.tvstatic {
     background-repeat: repeat;
     width: 100vw;
     height: 100vh;

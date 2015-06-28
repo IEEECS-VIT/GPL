@@ -22,40 +22,30 @@ var MongoClient = require('mongodb').MongoClient;
 var mongoTeam = require(path.join(__dirname, 'mongo-team'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
 
-exports.fetchPreviousMatch = function (doc1, doc2, callback)
-{
+exports.fetchPreviousMatch = function (doc1, doc2, callback) {
     var parallelTasks = {};
-    var onConnect = function (err, db)
-    {
-        if (err)
-        {
+    var onConnect = function (err, db) {
+        if (err) {
             throw err;
         }
-        else
-        {
+        else {
             var collectionName = 'matchday' + (process.env.DAY || 1);   // Collection controller for match day information. To be changed before each match
             var collection = db.collection(collectionName);
-            var onFetch = function (err, docs)
-            {
-                if (err)
-                {
+            var onFetch = function (err, docs) {
+                if (err) {
                     throw err;
                 }
-                else if (docs.team1)
-                {
+                else if (docs.team1) {
                     callback(null, docs.team1);
                 }
-                else if (docs.team2)
-                {
+                else if (docs.team2) {
                     callback(null, docs.team2);
                 }
             };
-            parallelTasks.team1 = function (asyncCallback)
-            {
+            parallelTasks.team1 = function (asyncCallback) {
                 collection.findOne(doc1, asyncCallback);
             };
-            parallelTasks.team2 = function (asyncCallback)
-            {
+            parallelTasks.team2 = function (asyncCallback) {
                 collection.findOne(doc2, asyncCallback);
             };
             async.parallel(parallelTasks, onFetch);
@@ -64,36 +54,28 @@ exports.fetchPreviousMatch = function (doc1, doc2, callback)
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.fetchNextMatch = function (doc1, doc2, callback)
-{
+exports.fetchNextMatch = function (doc1, doc2, callback) {
     var parallelTasks = {};
     console.log("document 1" + doc1.Team_1);
     console.log("document 2" + doc2.Team_2);
-    var onConnect = function (err, db)
-    {
-        if (err)
-        {
+    var onConnect = function (err, db) {
+        if (err) {
             throw err;
         }
-        else
-        {
+        else {
             var collectionName = 'matchday' + (parseInt(process.env.DAY) + 1) || 2;
 
-            var onFetch = function (err, doc)
-            {
+            var onFetch = function (err, doc) {
                 var credentials = {};
-                if (err)
-                {
+                if (err) {
                     throw err;
                 }
-                else if (doc.team1)
-                {
+                else if (doc.team1) {
                     credentials = {
                         'team_no': doc.team1.Team_2
                     };
                 }
-                else if (doc.team2)
-                {
+                else if (doc.team2) {
                     credentials = {
                         'team_no': doc.team2.Team_1
                     };
@@ -103,12 +85,10 @@ exports.fetchNextMatch = function (doc1, doc2, callback)
             };
 
             var collection = db.collection(collectionName);
-            parallelTasks.team1 = function (asyncCallback)
-            {
+            parallelTasks.team1 = function (asyncCallback) {
                 collection.findOne(doc1, asyncCallback);
             };
-            parallelTasks.team2 = function (asyncCallback)
-            {
+            parallelTasks.team2 = function (asyncCallback) {
                 collection.findOne(doc2, asyncCallback);
             };
             async.parallel(parallelTasks, onFetch);

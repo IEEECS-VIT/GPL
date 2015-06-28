@@ -17,7 +17,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 module.exports =
-[
-    "",
-    "And that brings up his half century - a well timed innings indeed."
-];
+    [
+        "",
+        "And that brings up his half century - a well timed innings indeed."
+    ];
