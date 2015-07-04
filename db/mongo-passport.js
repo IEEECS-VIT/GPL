@@ -36,7 +36,7 @@ passport.deserializeUser(function (id, done) {
 
 passport.use(new facebook({
         clientID: process.env.FACEBOOK_ID,
-        clientSecret: process.env.FAEBOOK_KEY,
+        clientSecret: process.env.FACEBOOK_KEY,
         callbackURL: domain + 'facebook/callback',
         passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     },

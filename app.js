@@ -16,12 +16,13 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var app;
 var log;
 var newrelic;
 var path = require('path');
 var csurf = require('csurf');
 var logger = require('morgan');
-var app = require('express')();
+var express = require('express');
 var passport = require('passport');
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
@@ -32,6 +33,7 @@ var home = require(path.join(__dirname, 'routes', 'home'));
 var index = require(path.join(__dirname, 'routes', 'index'));
 var social = require(path.join(__dirname, 'routes', 'social'));
 
+app = express();
 if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE) {
     newrelic = require('newrelic');
 }

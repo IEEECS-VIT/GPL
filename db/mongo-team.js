@@ -20,7 +20,7 @@ var collection;
 var path = require('path');
 var async = require('async');
 var MongoClient = require('mongodb').MongoClient;
-var match = require(path.join(__dirname, '..', 'matchCollection.js'));
+var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection.js'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
 
 var getPlayer = function (id, callback) {
