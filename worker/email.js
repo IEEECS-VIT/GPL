@@ -17,7 +17,8 @@
  */
 module.exports = require('nodemailer').createTransport({
     service: 'Gmail',
-    auth: {
+    auth:
+    {
         user: 'gravitaspremierleague@gmail.com',
         pass: process.env.KEY
     }

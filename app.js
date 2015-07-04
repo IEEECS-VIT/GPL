@@ -34,18 +34,21 @@ var index = require(path.join(__dirname, 'routes', 'index'));
 var social = require(path.join(__dirname, 'routes', 'social'));
 
 app = express();
-if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE) {
+if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
+{
     newrelic = require('newrelic');
 }
 
-if (process.env.LOGENTRIES_TOKEN) {
+if (process.env.LOGENTRIES_TOKEN)
+{
     var logentries = require('node-logentries');
     log = logentries.logger({
         token: process.env.LOGENTRIES_TOKEN
     });
 }
 
-if (newrelic) {
+if (newrelic)
+{
     app.locals.newrelic = newrelic;
 }
 
@@ -77,9 +80,11 @@ app.use(function (req, res, next) {
 
 // error handlers
 // development error handler, will print stacktrace
-if (app.get('env') === 'development') {
+if (app.get('env') === 'development')
+{
     app.use(function (err, req, res) {
-        if (log) {
+        if (log)
+        {
             log.log('debug', {Error: err, Message: err.message});
         }
         res.status(err.status || 500);
@@ -93,7 +98,8 @@ if (app.get('env') === 'development') {
 
 // production error handler, no stacktraces leaked to user
 app.use(function (err, req, res) {
-    if (log) {
+    if (log)
+    {
         log.log('debug', {Error: err, Message: err.message});
     }
     res.status(err.status || 500);

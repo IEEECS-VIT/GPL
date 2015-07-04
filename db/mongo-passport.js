@@ -42,21 +42,27 @@ passport.use(new facebook({
     },
     function (req, token, refreshToken, profile, done) {
         process.nextTick(function () {
-            if (!req.user) {
+            if (!req.user)
+            {
                 MongoUsers.fetch({'profile': profile.id}, function (err, user) {
-                    if (err) {
+                    if (err)
+                    {
                         return done(err);
                     }
-                    if (user) {
+                    if (user)
+                    {
                         return done(null, user); // user found, return that user
                     }
                     else // if there is no user, create them
                     {
-                        var onGetCount = function (err, number) {
-                            if (err) {
+                        var onGetCount = function (err, number)
+                        {
+                            if (err)
+                            {
                                 console.log(err.message);
                             }
-                            else {
+                            else
+                            {
                                 var newUser = record;
                                 newUser.token = token;
                                 newUser.profile = profile.id;
@@ -65,7 +71,8 @@ passport.use(new facebook({
                                 newUser.email = (profile.emails[0].value || '').toLowerCase();
                                 newUser.name = profile.name.givenName + ' ' + profile.name.familyName;
                                 MongoUsers.save(newUser, function (err, newUser) {
-                                    if (err) {
+                                    if (err)
+                                    {
                                         return done(err);
                                     }
                                     return done(null, newUser);
@@ -76,14 +83,16 @@ passport.use(new facebook({
                     }
                 });
             }
-            else {
+            else
+            {
                 var user = req.user; // pull the user out of the session
                 user.token = token;
                 user.profile = profile.id;
                 user.email = (profile.emails[0].value || '').toLowerCase();
                 user.name = profile.name.givenName + ' ' + profile.name.familyName;
                 MongoUsers.save(user, function (err) {
-                    if (err) {
+                    if (err)
+                    {
                         return done(err);
                     }
                     return done(null, user);
@@ -100,16 +109,20 @@ passport.use(new twitter({
     },
     function (req, token, tokenSecret, profile, done) {
         process.nextTick(function () {
-            if (!req.user) {
+            if (!req.user)
+            {
                 MongoUsers.fetch({'profile': profile.id}, function (err, user) {
-                    if (err) {
+                    if (err)
+                    {
                         return done(err);
                     }
-                    if (user) {
+                    if (user)
+                    {
                         console.log(profile._json.entities);
                         return done(null, user); // user found, return that user
                     }
-                    else {
+                    else
+                    {
                         var newUser = record;
                         newUser.token = token;
                         newUser.strategy = 'twitter';
@@ -125,13 +138,15 @@ passport.use(new twitter({
                     }
                 });
             }
-            else {
+            else
+            {
                 var user = req.user; // pull the user out of the session
                 user.token = token;
                 user.profile = profile.id;
                 user.name = profile.displayName;
                 MongoUsers.save(user, function (err) {
-                    if (err) {
+                    if (err)
+                    {
                         return done(err);
                     }
                     return done(null, user);
@@ -148,15 +163,19 @@ passport.use(new google({
     },
     function (req, token, refreshToken, profile, done) {
         process.nextTick(function () {
-            if (!req.user) {
+            if (!req.user)
+            {
                 MongoUsers.fetch({'profile': profile.id}, function (err, user) {
-                    if (err) {
+                    if (err)
+                    {
                         return done(err);
                     }
-                    if (user) {
+                    if (user)
+                    {
                         return done(null, user);
                     }
-                    else {
+                    else
+                    {
                         var newUser = record;
                         newUser.token = token;
                         newUser.strategy = 'google';
@@ -164,7 +183,8 @@ passport.use(new google({
                         newUser.name = profile.displayName;
                         newUser.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email
                         MongoUsers.save(newUser, function (err) {
-                            if (err) {
+                            if (err)
+                            {
                                 return done(err);
                             }
                             return done(null, newUser);
@@ -172,14 +192,16 @@ passport.use(new google({
                     }
                 });
             }
-            else {
+            else
+            {
                 var user = req.user; // pull the user out of the session
                 user.token = token;
                 user.profile = profile.id;
                 user.name = profile.displayName;
                 user.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email
                 MongoUsers.save(user, function (err) {
-                    if (err) {
+                    if (err)
+                    {
                         return done(err);
                     }
                     return done(null, user);

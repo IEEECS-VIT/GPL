@@ -24,17 +24,23 @@ var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection.js')
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
 
 var getPlayer = function (id, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection('players');
-            var onFetch = function (err, document) {
-                if (err) {
+            var onFetch = function (err, document)
+            {
+                if (err)
+                {
                     callback(err, null);
                 }
-                else {
+                else
+                {
                     callback(false, document);
                 }
             };
@@ -46,22 +52,29 @@ var getPlayer = function (id, callback) {
 
 exports.getTeam = function (doc, callback) {
     console.log(doc);
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match);   // match collection
-            var onFetch = function (err, document) {
+            var onFetch = function (err, document)
+            {
                 console.log("Length " + document.team.length);
-                if (document.team.length == 0) {
+                if (document.team.length == 0)
+                {
                     console.log("Reached");
                     callback(null, []);
                 }
-                else if (err) {
+                else if (err)
+                {
                     callback(err, null);
                 }
-                else {
+                else
+                {
                     async.map(document.team, getPlayer, callback);
                 }
             };
@@ -73,51 +86,68 @@ exports.getTeam = function (doc, callback) {
 
 exports.getSquad = function (doc, callback) {
     var coach;
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match); // match collection
-            var onFinish = function (err, documents) {
-                var onGetCoach = function (err, doc) {
-                    if (err) {
+            var onFinish = function (err, documents)
+            {
+                var onGetCoach = function (err, doc)
+                {
+                    if (err)
+                    {
                         console.log(err.message);
                         callback(err, null)
                     }
-                    else {
+                    else
+                    {
                         documents.push(doc);
                         callback(null, documents);
                     }
                 };
-                if (err) {
+                if (err)
+                {
                     throw err;
                 }
-                else {
+                else
+                {
                     getPlayer(coach, onGetCoach);
                 }
             };
 
-            var onFetch = function (err, document) {
+            var onFetch = function (err, document)
+            {
                 console.log(document);
-                if (document) {
-                    if (err) {
+                if (document)
+                {
+                    if (err)
+                    {
                         callback(err, null);
                     }
-                    else if (document.team.length != 0) {
+                    else if (document.team.length != 0)
+                    {
 
-                        for (var i = 0; i < 16; i++) {
-                            if (document.team[i] >= 'd1') {
+                        for (var i = 0; i < 16; i++)
+                        {
+                            if (document.team[i] >= 'd1')
+                            {
                                 coach = parseInt(document.team[i]);
                             }
                         }
                         async.map(document.squad, getPlayer, onFinish);
                     }
-                    else {
+                    else
+                    {
                         callback(null, []);
                     }
                 }
-                else {
+                else
+                {
                     callback(null, []);
                 }
             };
@@ -129,11 +159,14 @@ exports.getSquad = function (doc, callback) {
 };
 
 exports.getCaps = function (callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection('info');
             collection.find().toArray(callback);
         }

@@ -20,18 +20,23 @@ var MongoClient = require('mongodb').MongoClient;
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
 
 exports.fetchPlayers = function (callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             var collection = db.collection('players');
             var onFetch = function (err, documents) {
                 db.close();
-                if (err) {
+                if (err)
+                {
                     callback(err, null);
                 }
-                else {
+                else
+                {
                     callback(null, documents);
                 }
             };
@@ -42,16 +47,21 @@ exports.fetchPlayers = function (callback) {
 };
 
 exports.getPlayer = function (queryDoc, fields, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             var collection = db.collection('players');
-            if (fields) {
+            if (fields)
+            {
                 collection.findOne(queryDoc, fields, callback);
             }
-            else {
+            else
+            {
                 collection.findOne(queryDoc, callback);
             }
         }

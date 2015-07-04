@@ -27,19 +27,24 @@ var record = require(path.join(__dirname, '..', 'db', 'mongo-record'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
 var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
 
-try {
+try
+{
     bcrypt = require('bcrypt');
 }
-catch (err) {
-    try {
+catch (err)
+{
+    try
+    {
         bcrypt = require('bcryptjs');
     }
-    catch (err) {
+    catch (err)
+    {
         throw "Unexpected Bcrypt(js) error encountered...";
     }
 }
 
-if (process.env.LOGENTRIES_TOKEN) {
+if (process.env.LOGENTRIES_TOKEN)
+{
     var logentries = require('node-logentries');
     log = logentries.logger({
         token: process.env.LOGENTRIES_TOKEN
@@ -47,16 +52,20 @@ if (process.env.LOGENTRIES_TOKEN) {
 }
 
 router.get('/', function (req, res) {
-    if (req.signedCookies.name || req.user) {
-        if (log) {
+    if (req.signedCookies.name || req.user)
+    {
+        if (log)
+        {
             log.log(req.signedCookies.name + "logged in");
         }
         res.redirect('/home');
     }
-    else {
+    else
+    {
         var time = new Date;
         time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
-        var date = {
+        var date =
+        {
             seconds: time.getSeconds(),
             minutes: time.getMinutes(),
             hour: time.getHours(),
@@ -76,34 +85,42 @@ router.get(/^.*$/, function (req, res) {
 router.post('/login', function (req, res) {
     var teamName = req.body.team_name;
     var password = req.body.password;
-    if (req.signedCookies.name || req.user) {
+    if (req.signedCookies.name || req.user)
+    {
         delete req.user;
         res.clearCookie('name', {});
     }
-    if (log) {
+    if (log)
+    {
         log.log(teamName + " " + password + "recieved");
     }
 
-    var credentials = {
+    var credentials =
+    {
         '_id': teamName
     };
     var onFetch = function (err, doc) {
-        if (err) {
+        if (err)
+        {
             console.log(err.message);
             res.render('index', {response: "Incorrect Username"});
         }
-        else if (doc) {
-            if (bcrypt.compareSync(password, doc['password_hash'])) {
+        else if (doc)
+        {
+            if (bcrypt.compareSync(password, doc['password_hash']))
+            {
                 console.log("Login Successful" + teamName);
                 res.cookie('name', doc['_id'], {maxAge: 86400000, signed: true});
                 res.redirect('/home');
             }
-            else {
+            else
+            {
                 console.log('Incorrect Credentials');
                 res.render('index', {response: "Incorrect Password"});
             }
         }
-        else {
+        else
+        {
             console.log('No user exists');
             res.render('index', {response: "Incorrect Username"});
         }
@@ -112,11 +129,13 @@ router.post('/login', function (req, res) {
 });
 
 router.post('/forgot/password', function (req, res) {
-    var doc = {
+    var doc =
+    {
         _id: req.body.team,
         email: req.body.email
     };
-    var options = {
+    var options =
+    {
         from: 'gravitaspremierleague@gmail.com',
         to: req.body.email,
         subject: 'Time to get back in the game'
@@ -131,28 +150,35 @@ router.post('/forgot/password', function (req, res) {
             "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
     });
 
-    var details = {
-        $set: {
+    var details =
+    {
+        $set:
+        {
             token: token,
             expire: Date.now() + 3600000
         }
     };
 
     var onFetch = function (err, doc) {
-        if (err) {
+        if (err)
+        {
             console.log(err.message);
         }
-        else if (doc) {
+        else if (doc)
+        {
             email.sendMail(options, function (err) {
-                if (err) {
+                if (err)
+                {
                     console.log(err.message);
                 }
-                else {
+                else
+                {
                     res.redirect('/login');
                 }
             });
         }
-        else {
+        else
+        {
             console.log('Invalid credentials!');
             res.redirect('/forgot');
         }
@@ -161,16 +187,20 @@ router.post('/forgot/password', function (req, res) {
 });
 
 router.post('/forgot/user', function (req, res) {
-    var doc = {
+    var doc =
+    {
         phone: req.body.phone,
         email: req.body.email
     };
     var onFetch = function (err, docs) {
-        if (err) {
+        if (err)
+        {
             console.log(err.message);
         }
-        else if (docs) {
-            var options = {
+        else if (docs)
+        {
+            var options =
+            {
                 from: 'gravitaspremierleague@gmail.com',
                 to: req.body.email,
                 subject: 'Time to get back in the game',
@@ -178,15 +208,18 @@ router.post('/forgot/user', function (req, res) {
             };
 
             email.sendMail(options, function (err) {
-                if (err) {
+                if (err)
+                {
                     console.log(err.message);
                 }
-                else {
+                else
+                {
                     res.redirect('/login');
                 }
             });
         }
-        else {
+        else
+        {
             console.log('Invalid credentials!');
             res.redirect('/forgot/user');
         }
@@ -195,32 +228,43 @@ router.post('/forgot/user', function (req, res) {
 });
 
 router.post('/reset/:token', function (req, res) {
-    if (req.body.password === req.body.confirm) {
-        var query = {
+    if (req.body.password === req.body.confirm)
+    {
+        var query =
+        {
             token: req.params.token,
-            expire: {
+            expire:
+            {
                 $gt: Date.now()
             }
         };
-        var op = {
-            $set: {
+        var op =
+        {
+            $set:
+            {
                 password_hash: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
             },
-            $unset: {
+            $unset:
+            {
                 token: '',
                 expire: ''
             }
         };
-        var onReset = function (err, doc) {
-            if (err) {
+        var onReset = function (err, doc)
+        {
+            if (err)
+            {
                 console.log(err.message);
             }
-            else if (!doc) {
+            else if (!doc)
+            {
                 console.log('No matches found!');
                 res.redirect('/forgot');
             }
-            else {
-                var options = {
+            else
+            {
+                var options =
+                {
                     to: doc.email,
                     subject: 'Password change successful !',
                     html: "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
@@ -229,7 +273,8 @@ router.post('/reset/:token', function (req, res) {
                     "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
                 };
                 email.sendMail(options, function (err) {
-                    if (err) {
+                    if (err)
+                    {
                         console.log(err.message);
                     }
                     else {
@@ -248,25 +293,32 @@ router.post('/reset/:token', function (req, res) {
 });
 
 router.get('/register', function (req, res) {
-    if (req.signedCookies.name || req.user) {
+    if (req.signedCookies.name || req.user)
+    {
         res.redirect('/home');
     }
-    else {
+    else
+    {
         res.render('register', {response: "", csrfToken: req.csrfToken()});
     }
 });
 
 router.post('/register', function (req, res) {
-    if (req.signedCookies.name || req.user) {
+    if (req.signedCookies.name || req.user)
+    {
         delete req.user;
         res.clearCookie('name', {});
     }
-    var onGetCount = function (err, number) {
-        if (err) {
+    var onGetCount = function (err, number)
+    {
+        if (err)
+        {
             console.log(err.message);
         }
-        else {
-            if (req.body.confirm_password === req.body.password) {
+        else
+        {
+            if (req.body.confirm_password === req.body.password)
+            {
                 var newUser = record;
                 newUser._id = req.body.team_name;
                 newUser.dob = new Date();
@@ -277,15 +329,18 @@ router.post('/register', function (req, res) {
                 newUser.phone = req.body.phone;
                 newUser.strategy = 'local';
 
-                var onInsert = function (err, docs) {
-                    if (err) {
+                var onInsert = function (err, docs)
+                {
+                    if (err)
+                    {
                         console.log(err.message);
                         res.render('register', {response: "Team Name Already Exists"});
-                        0
                     }
-                    else {
+                    else
+                    {
                         var name = docs[0]['_id'];
-                        var options = {
+                        var options =
+                        {
                             from: 'gravitaspremierleague@gmail.com',
                             to: docs[0]['email'],
                             subject: 'Welcome to graVITas premier league 2.0!',
@@ -302,7 +357,8 @@ router.post('/register', function (req, res) {
                 };
                 mongoUsers.insert(newUser, onInsert);
             }
-            else {
+            else
+            {
                 console.log("Incorrect Password");
                 res.render('register', {response: "Passwords do not match"});
             }
@@ -312,12 +368,14 @@ router.post('/register', function (req, res) {
 });
 
 router.get('/logout', function (req, res) {
-    if (req.signedCookies.name || req.user) {
+    if (req.signedCookies.name || req.user)
+    {
         res.clearCookie('name');
         res.clearCookie('lead');
         res.redirect('/login');
     }
-    else {
+    else
+    {
         res.redirect('/');
     }
 });
@@ -331,16 +389,20 @@ router.post('/interest', function (req, res) // interest form
     var name = req.body.name;
     var email = req.body.email;
     var phone = req.body.phone;
-    var newUser = {
+    var newUser =
+    {
         name: name,
         email: email,
         phone: phone
     };
-    var onInsert = function (err, docs) {
-        if (err) {
+    var onInsert = function (err, docs)
+    {
+        if (err)
+        {
             console.log(err.message);
         }
-        else {
+        else
+        {
             res.redirect('/interest');
             console.log(docs);
         }

@@ -19,7 +19,8 @@
 var path = require('path');
 var passport = require('passport');
 var router = require('express').Router();
-var setCookie = function (req, res, next) {
+var setCookie = function (req, res, next)
+{
     res.cookie('name', req.user, {maxAge: 86400000, signed: true});
     next();
 };
