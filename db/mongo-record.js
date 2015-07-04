@@ -51,6 +51,10 @@ module.exports = {
     avg_overs_for: 0.0,
     avg_overs_against: 0.0,
     highest_total: -1,
+    partnership_runs : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    partnership_balls : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    scored_per_over: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    conceded_per_over: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     lowest_total: Number.MAX_VALUE,
     stats: {},
     surplus: 0

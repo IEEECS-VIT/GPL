@@ -449,6 +449,8 @@ exports.simulate = function (data, callback) {
                             points = Math.round(temp);
                             MoM.id = strike[+strike_index];
                         }
+                        data.team[+toss_index].partnership_runs[current_partnership_index] = (partnership_runs[current_partnership_index] + data.team[+toss_index].partnership_runs[current_partnership_index] * data.team[+toss_index].played) / (data.team[+toss_index].played + 1);
+                        data.team[+toss_index].partnership_balls[current_partnership_index] = (partnership_balls[current_partnership_index] + data.team[+toss_index].partnership_balls[current_partnership_index] * data.team[+toss_index].played) / (data.team[+toss_index].played + 1);
                         data.match.commentary.push(' ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ' balls' + ' ' + fours[strike[+strike_index]] + 'X4\'s ' + maximums[strike[+strike_index]] + 'X6\'s) SR: ' + (score[strike[+strike_index]] * 100 / balls[strike[+strike_index]]).toFixed(2) + 'Control: ' + (control[strike[+strike_index]] * 100).toFixed(2) + '%');
                         data.match.commentary.push(' Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + ')' + ', Runrate: ' + (partnership_runs[current_partnership_index] * 6 / (partnership_balls[current_partnership_index] ? partnership_balls[current_partnership_index] : 1))).toFixed(2);
                         ++current_partnership_index;
@@ -596,6 +598,8 @@ exports.simulate = function (data, callback) {
                     data.match.commentary[data.match.commentary.length - 1] += 'maiden';
                     maidens[current_bowler] += 1;
                 }
+                data.team[+toss_index].scored_per_over[i] = (data.team[+toss_index].scored_per_over[i] * data.team[+toss_index].played + previous_over) / (data.team[+toss_index].played + 1);
+                data.team[+!toss_index].conceded_per_over[i] = (data.team[+!toss_index].conceded_per_over[i] * data.team[+!toss_index].played + previous_over) / (data.team[+!toss_index].played + 1);
                 data.match.commentary.push('  Current score: ' + Total[+toss_index] + ' / ' + wickets[+toss_index] + '  Runrate: ' + (Total[+toss_index] / (i + 1)).toFixed(2));
                 if (Total[+toss] > Total[+!toss])
                 {
