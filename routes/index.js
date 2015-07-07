@@ -39,7 +39,7 @@ catch (err)
     }
     catch (err)
     {
-        throw "Unexpected Bcrypt(js) error encountered...";
+        throw "Failure to compile run time requirement: bcrypt(js)";
     }
 }
 
@@ -83,7 +83,7 @@ router.get(/^.*$/, function (req, res) {
 });
 
 router.post('/login', function (req, res) {
-    var teamName = req.body.team_name;
+    var user = req.body.team_name;
     var password = req.body.password;
     if (req.signedCookies.name || req.user)
     {
@@ -92,12 +92,12 @@ router.post('/login', function (req, res) {
     }
     if (log)
     {
-        log.log(teamName + " " + password + "recieved");
+        log.log(user + " " + password + "recieved");
     }
 
     var credentials =
     {
-        '_id': teamName
+        '_id': user
     };
     var onFetch = function (err, doc) {
         if (err)
@@ -109,7 +109,7 @@ router.post('/login', function (req, res) {
         {
             if (bcrypt.compareSync(password, doc['password_hash']))
             {
-                console.log("Login Successful" + teamName);
+                console.log("Login Successful" + user);
                 res.cookie('name', doc['_id'], {maxAge: 86400000, signed: true});
                 res.redirect('/home');
             }
@@ -121,8 +121,34 @@ router.post('/login', function (req, res) {
         }
         else
         {
-            console.log('No user exists');
-            res.render('index', {response: "Incorrect Username"});
+            var onGetAdmin = function(err, doc)
+            {
+                if(err)
+                {
+                    console.log(err.message);
+                    res.render('index', {response: "Incorrect Username"});
+                }
+                else if (doc)
+                {
+                    if (bcrypt.compareSync(password, doc['password_hash']))
+                    {
+                        console.log("Admin login successful" + user);
+                        res.cookie('admin', doc['_id'], {signed: true});
+                        res.redirect('/admin');
+                    }
+                    else
+                    {
+                        console.log('Incorrect Credentials');
+                        res.render('index', {response: "Incorrect Password"});
+                    }
+                }
+                else
+                {
+                    console.log('No user exists');
+                    res.render('index', {response: "Incorrect Username"});
+                }
+            };
+            mongoUsers.admin(credentials, onGetAdmin);
         }
     };
     mongoUsers.fetch(credentials, onFetch);
@@ -143,11 +169,11 @@ router.post('/forgot/password', function (req, res) {
     crypto.randomBytes(20, function (err, buf) {
         token = buf.toString('hex');
         options.html =
-            "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style ='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+            "<table background='http://res.cloudinary.com/gpl/public/general/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style ='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
             "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
             "</tr><tr><td align=\'center\' style=\'padding: 2px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:large;\'> Please click <a href=\"http://" + req.headers.host + "/reset/" + token + "\">here</a>" + " in order to reset your password.<br>" +
             "In the event that this password reset was not requested by you, please ignore this message and your password shall remain intact.<br>" +
-            "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
+            "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE Computer Society</td></tr></table>"
     });
 
     var details =
@@ -204,7 +230,7 @@ router.post('/forgot/user', function (req, res) {
                 from: 'gravitaspremierleague@gmail.com',
                 to: req.body.email,
                 subject: 'Time to get back in the game',
-                html: "The following teams were found in association with your details:<br><br><ol>" + docs + "</ol><br><br><br>Regards, <br>Team G.P.L."
+                html: "The following teams were found in association with your details:<br><br><ol>" + docs + "</ol><br><br><br>Regards, <br>Team G.P.L<br>IEEE Computer Society"
             };
 
             email.sendMail(options, function (err) {
@@ -267,10 +293,10 @@ router.post('/reset/:token', function (req, res) {
                 {
                     to: doc.email,
                     subject: 'Password change successful !',
-                    html: "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+                    html: "<table background='http://res.cloudinary.com/gpl/image/upload/general/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
                     "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
                     "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'>'Hey there, ' + doc.email.split('@')[0] + ' we\'re just writing in to let you know that the recent password change was successful.' + <br>" +
-                    "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
+                    "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE Computer Society</td></tr></table>"
                 };
                 email.sendMail(options, function (err) {
                     if (err)
@@ -327,7 +353,7 @@ router.post('/register', function (req, res) {
                 newUser.manager_name = req.body.manager_name;
                 newUser.email = req.body.email;
                 newUser.phone = req.body.phone;
-                newUser.strategy = 'local';
+                newUser.authStrategy = 'local';
 
                 var onInsert = function (err, docs)
                 {
@@ -344,11 +370,11 @@ router.post('/register', function (req, res) {
                             from: 'gravitaspremierleague@gmail.com',
                             to: docs[0]['email'],
                             subject: 'Welcome to graVITas premier league 2.0!',
-                            html: "<table background='GPL/public/images/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+                            html: "<table background='http://res.cloudinary.com/gpl/image/upload/general/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
                             "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
                             "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> This is to inform that that you have successfully registered for GPL 2.0 <br>" +
                             "Please click <a href='http://gravitaspremierleague.com' style='text-decoration: none;'> here </a> for more details<br> Good luck!  </td>" +
-                            "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
+                            "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE Computer Society</td></tr></table>"
                         };
                         res.cookie('name', name, {maxAge: 86400000, signed: true});
                         res.redirect('/home/players');
@@ -403,6 +429,18 @@ router.post('/interest', function (req, res) // interest form
         }
         else
         {
+            var options =
+            {
+                from: 'gravitaspremierleague@gmail.com',
+                to: newUser.email,
+                subject: 'Welcome to graVITas premier league 2.0!',
+                html: "<table background='http://res.cloudinary.com/gpl/image/upload/general/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+                "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
+                "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> Thank you for your interest in graVITas Premier League <br>" +
+                "Please check out  our Facebook <a href='http://www.facebook.com/gravitaspremierleague' style='text-decoration: none;'>page</a> to stay close to all the action! </td>" +
+                "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE Computer Society</td></tr></table>"
+            };
+            email.sendMail(options, null);
             res.redirect('/interest');
             console.log(docs);
         }
@@ -411,14 +449,34 @@ router.post('/interest', function (req, res) // interest form
     mongoInterest.insert(newUser, onInsert);
 });
 
-router.get('/countdown', function (req, res) // page for countdown
-{
-    res.render('countdown', {Session: (req.signedCookies.name || req.user ? 1 : 0)});
+router.get('/admin', function(req, res){
+    if(req.signedCookies.admin)
+    {
+        var onGetInfo = function(err, doc)
+        {
+            if(err)
+            {
+                console.log(err.message);
+            }
+            else if(doc)
+            {
+                res.render('admin', {info : doc});
+            }
+            else
+            {
+                res.redirect('/');
+            }
+        };
+        mongoUsers.adminInfo(onGetInfo);
+    }
+    else
+    {
+        res.redirect('/');
+    }
 });
 
-router.get('/schedule', function (req, res) // schedule page
-{
-    res.render('schedule', {results: (req.signedCookies.name || req.user ? 1 : 0)});
+router.get('/social', function(req, res){
+
 });
 
 module.exports = router;

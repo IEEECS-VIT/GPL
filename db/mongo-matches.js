@@ -16,6 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var collection;
 var path = require('path');
 var async = require('async');
 var MongoClient = require('mongodb').MongoClient;
@@ -32,8 +33,8 @@ exports.fetchPreviousMatch = function (doc1, doc2, callback) {
         }
         else
         {
-            var collectionName = 'matchday' + (process.env.DAY || 1);   // Collection controller for match day information. To be changed before each match
-            var collection = db.collection(collectionName);
+            // Collection controller for match day information. To be changed before each match
+            collection = db.collection('matchday' + (process.env.DAY || 1));
             var onFetch = function (err, docs)
             {
                 if (err)
@@ -75,7 +76,7 @@ exports.fetchNextMatch = function (doc1, doc2, callback) {
         }
         else
         {
-            var collectionName = 'matchday' + (parseInt(process.env.DAY) + 1) || 2;
+            collection = 'matchday' + (parseInt(process.env.DAY) + 1) || 2;
             var onFetch = function (err, doc)
             {
                 var credentials = {};
@@ -101,7 +102,7 @@ exports.fetchNextMatch = function (doc1, doc2, callback) {
                 mongoTeam.getTeam(credentials, callback);
             };
 
-            var collection = db.collection(collectionName);
+            collection = db.collection(collectionName);
             parallelTasks.team1 = function (asyncCallback)
             {
                 collection.findOne(doc1, asyncCallback);
@@ -111,6 +112,40 @@ exports.fetchNextMatch = function (doc1, doc2, callback) {
                 collection.findOne(doc2, asyncCallback);
             };
             async.parallel(parallelTasks, onFetch);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};
+
+exports.match = function(day, filter, callback)
+{
+    var onConnect = function(err, db)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            collection = db.collection('matchday' + day);
+            var slice =
+            {
+                _id : 0,
+                commentary : 0,
+                scorecard : 0
+            };
+            var onFind = function(err, doc)
+            {
+                if(err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    callback(null, doc);
+                }
+            };
+            collection.find(filter, slice, onFind);
         }
     };
     MongoClient.connect(mongoUri, onConnect);

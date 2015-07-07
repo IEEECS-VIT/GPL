@@ -134,7 +134,7 @@ router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
                 res.render("leaderboard", {leaderboard: documents, name: req.signedCookies.name || req.user._id});
             }
         };
-        mongoUsers.getleader(req.signedCookies.name, onFetch);
+        mongoUsers.getLeader(req.signedCookies.name, onFetch);
     }
     else
     {
@@ -156,7 +156,10 @@ router.get('/matches', function (req, res) {
             {
                 if (log)
                 {
-                    if (log) log.log('debug', {Error: err, Message: err.message});
+                    if (log)
+                    {
+                        log.log('debug', {Error: err, Message: err.message});
+                    }
                 }
             }
             else
@@ -176,7 +179,10 @@ router.get('/matches', function (req, res) {
                 {
                     if (err)
                     {
-                        if (log) log.log('debug', {Error: err, Message: err.message});
+                        if (log)
+                        {
+                            log.log('debug', {Error: err, Message: err.message});
+                        }
                     }
                     else
                     {
@@ -494,7 +500,7 @@ router.get('/info', function (req, res) {
     {
         if (req.signedCookies.info)
         {
-            res.render('caps', {info: req.signedCookies.info});
+            res.render('info', {info: req.signedCookies.info});
         }
         else
         {
@@ -511,16 +517,24 @@ router.get('/info', function (req, res) {
                     res.render('info', {info: doc});
                 }
             };
-            mongoMatches.getCaps(onGetInfo);
+            mongoMatches.getInfo(onGetInfo);
         }
     }
-    else {
+    else
+    {
         res.redirect('/');
     }
 });
 
 router.get('/feature', function (req, res) {
-    res.render('feature');
+    if(req.signedCookies.name || req.user)
+    {
+        res.render('feature');
+    }
+    else
+    {
+        res.redirect('/');
+    }
 });
 
 router.post('/feature', function (req, res) {
@@ -561,12 +575,63 @@ router.get('/developers', function (req, res) // developers page
 router.get('/dashboard', function (req, res) {
     if (req.signedCookies.name || req.user)
     {
-        res.render('dashboard');
+        var user = {
+            _id : req.signedCookies.name || req.user._id
+        };
+        var onFind = function(err, doc)
+        {
+            if(err)
+            {
+                console.log(err.message);
+            }
+            else
+            {
+                res.render('dashboard', {result : doc});
+            }
+        };
+        MongoTeam.dashboard(user, onFind);
     }
     else
     {
-        res.redirect('/login');
+        res.redirect('/');
     }
+});
+
+router.get('/schedule', function (req, res) // schedule page
+{
+    if (req.signedCookies.name || req.user)
+    {
+        var team = req.signedCookies.name || req.user._id;
+        var user =
+        {
+           $or : [
+               {
+                   "Team_1" :  team
+               },
+               {
+                   "Team_2" :  team
+               }
+           ]
+        };
+
+        var onFind = function(err, doc)
+        {
+            if(err)
+            {
+                console.log(err.message);
+            }
+            else
+            {
+                res.render('schedule', {schedule : doc});
+            }
+        };
+        mongoMatches.schedule(user, onFind);
+    }
+    else
+    {
+        res.redirect('/');
+    }
+    res.render('schedule', {results: (req.signedCookies.name || req.user ? 1 : 0)});
 });
 
 module.exports = router;

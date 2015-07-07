@@ -16,6 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
 
@@ -41,6 +42,63 @@ exports.insert = function (doc, callback) {
                 }
             };
             collection.insertOne(doc, {w: 1}, onInsert);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};
+
+exports.getInfo = function(doc, callback)
+{
+    var onConnect = function(err, db)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            var collection = db.collection('info');
+            var onGetInfo = function(err, doc)
+            {
+                db.close();
+                if(err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    callback(null, doc);
+                }
+            };
+            collection.find(doc, onGetInfo);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};
+
+exports.notify = function(callback)
+{
+    var onConnect = function(err, db)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            collection = db.collection('features');
+            var onFind = function(err, docs)
+            {
+                if(err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    callback(null, docs);
+                }
+            };
+            collection.find().toArray(onFind);
         }
     };
     MongoClient.connect(mongoUri, onConnect);

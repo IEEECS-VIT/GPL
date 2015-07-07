@@ -32,28 +32,32 @@ var options =
         ['net_run_rate', -1]
     ]
 };
+var collection;
 var leaderboard;
 var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
-var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection.js'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
 var dbOptions = {server: {socketOptions: {connectTimeoutMS: 50000}}};
+var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection.js'));
 
-if (process.env.LOGENTRIES_TOKEN) {
+if (process.env.LOGENTRIES_TOKEN)
+{
     var logentries = require('node-logentries');
     log = logentries.logger({
         token: process.env.LOGENTRIES_TOKEN
     });
 }
-exports.getCount = function (callback) {
-    var onConnect = function (err, db) {
+
+exports.getCount = function (doc, callback) {
+    var onConnect = function (err, db)
+    {
         if (err)
         {
             throw err;
         }
         else
         {
-            var collection = db.collection(match);
+            collection = db.collection(match);
             var onFetch = function (err, count)
             {
                 db.close();
@@ -66,7 +70,7 @@ exports.getCount = function (callback) {
                     callback(null, count);
                 }
             };
-            collection.find().count(onFetch);
+            collection.count(doc, onFetch);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
@@ -81,7 +85,7 @@ exports.insert = function (doc, callback) {
         }
         else
         {
-            var collection = db.collection(match);
+            collection = db.collection(match);
             var onInsert = function (err, docs)
             {
                 db.close();
@@ -109,7 +113,7 @@ exports.fetch = function (doc, callback) {
         }
         else
         {
-            var collection = db.collection(match);
+            collection = db.collection(match);
             var onFetch = function (err, document)
             {
                 db.close();
@@ -139,7 +143,7 @@ exports.fetch = function (doc, callback) {
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.getleader = function (user, callback) {
+exports.getLeader = function (user, callback) {
     var onConnect = function (err, db)
     {
         if (err)
@@ -148,7 +152,7 @@ exports.getleader = function (user, callback) {
         }
         else
         {
-            var collection = db.collection(match);
+            collection = db.collection(match);
             var onFetch = function (err, documents)
             {
                 if (err)
@@ -194,7 +198,7 @@ exports.forgotPassword = function (doc, op, callback) {
         }
         else
         {
-            var collection = db.collection(match);
+            collection = db.collection(match);
             var onFetch = function (err, document)
             {
                 db.close();
@@ -226,7 +230,7 @@ exports.forgotUser = function (doc, callback) {
         }
         else
         {
-            var collection = db.collection(match);
+            collection = db.collection(match);
             var onFetch = function (err, docs)
             {
                 db.close();
@@ -263,7 +267,7 @@ exports.getReset = function (doc, callback) {
         }
         else
         {
-            var collection = db.collection(match);
+            collection = db.collection(match);
             var onFetch = function (err, document)
             {
                 db.close();
@@ -295,7 +299,7 @@ exports.resetPassword = function (doc, op, callback) {
         }
         else
         {
-            var collection = db.collection(match);
+            collection = db.collection(match);
             var onFetch = function (err, document)
             {
                 db.close();
@@ -327,7 +331,7 @@ exports.updateUserTeam = function (doc, arr, stats, cost, callback) {
         }
         else
         {
-            var collection = db.collection(match);
+            collection = db.collection(match);
             var onUpdate = function (err, document)
             {
                 if (err)
@@ -361,7 +365,7 @@ exports.updateMatchSquad = function (doc, arr, callback) {
         }
         else
         {
-            var collection = db.collection(match);
+            collection = db.collection(match);
             var onUpdate = function (err, document)
             {
                 if (err)
@@ -390,7 +394,7 @@ exports.fetchUser = function (doc, callback) {
         }
         else
         {
-            var collection = db.collection(match);
+            collection = db.collection(match);
             var onFetch = function (err, document)
             {
                 db.close();
@@ -422,7 +426,7 @@ exports.update = function (query, update, callback) {
         }
         else
         {
-            var collection = db.collection(match);
+            collection = db.collection(match);
             var onUpdate = function (err, doc)
             {
                 db.close();
@@ -454,7 +458,7 @@ exports.get = function (doc, callback) {
         }
         else
         {
-            var collection = db.collection(match);
+            collection = db.collection(match);
             var onFind = function (err, user)
             {
                 db.close();
@@ -482,7 +486,7 @@ exports.save = function (doc, callback) {
         }
         else
         {
-            var collection = db.collection(match);
+            collection = db.collection(match);
             var onSave = function (err)
             {
                 db.close();
@@ -496,6 +500,35 @@ exports.save = function (doc, callback) {
                 }
             };
             collection.save(doc, onSave);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};
+
+exports.admin = function(doc, callback)
+{
+    var onConnect = function(err, db)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            collection = db.collection('admin');
+            var onGetAdmin = function(err, doc)
+            {
+                db.close();
+                if(err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    callback(null, doc);
+                }
+            };
+            collection.find(onGetAdmin);
         }
     };
     MongoClient.connect(mongoUri, onConnect);

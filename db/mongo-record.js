@@ -38,7 +38,7 @@ module.exports = {
     net_run_rate: 0.0,
     wickets_taken: 0,
     wickets_lost: 0,
-    strategy: '',
+    authStrategy: '',
     toss: 0,
     form: 1,
     morale: 0.0,

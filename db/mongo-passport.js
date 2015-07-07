@@ -66,7 +66,7 @@ passport.use(new facebook({
                                 var newUser = record;
                                 newUser.token = token;
                                 newUser.profile = profile.id;
-                                newUser.strategy = 'facebook';
+                                newUser.authStrategy = 'facebook';
                                 newUser.team_no = parseInt(number) + 1;
                                 newUser.email = (profile.emails[0].value || '').toLowerCase();
                                 newUser.name = profile.name.givenName + ' ' + profile.name.familyName;
@@ -125,7 +125,7 @@ passport.use(new twitter({
                     {
                         var newUser = record;
                         newUser.token = token;
-                        newUser.strategy = 'twitter';
+                        newUser.authStrategy = 'twitter';
                         newUser.profile = profile.id;
                         newUser.team_no = parseInt(number) + 1;
                         newUser.manager_name = profile.displayName;
@@ -178,7 +178,7 @@ passport.use(new google({
                     {
                         var newUser = record;
                         newUser.token = token;
-                        newUser.strategy = 'google';
+                        newUser.authStrategy = 'google';
                         newUser.profile = profile.id;
                         newUser.name = profile.displayName;
                         newUser.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email

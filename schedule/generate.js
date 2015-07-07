@@ -30,7 +30,8 @@ if (process.env.LOGENTRIES_TOKEN) {
     });
 }
 
-var onConnect = function (err, db) {
+var onConnect = function (err, db)
+{
     if (err)
     {
         console.log('Error: ', err.message);
