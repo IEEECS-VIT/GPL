@@ -68,7 +68,8 @@ var onConnect = function (err, db)
                                     "Team_1": i,
                                     "Team_2": (t > count / 2 ? t : (i + day - 1)),
                                     "commentary": [],
-                                    "scorecard": []
+                                    "scorecard": [],
+                                    "MoM" : {}
                                 };
                                 schedule.push(match);
                             }
@@ -90,7 +91,8 @@ var onConnect = function (err, db)
                                                 "Team_1": (count / 2) * i + j,
                                                 "Team_2": (count / 2) * i + j + Math.pow((count / 4), +(day > 5)),
                                                 "commentary": [],
-                                                "scorecard": []
+                                                "scorecard": [],
+                                                "MoM" : {}
                                             };
                                             schedule.push(match);
                                         }
@@ -109,7 +111,8 @@ var onConnect = function (err, db)
                                                 "Team_1": t,
                                                 "Team_2": ((count * (2 * i + 1)) / 2 + 1 - t),
                                                 "commentary": [],
-                                                "scorecard": []
+                                                "scorecard": [],
+                                                "MoM" : {}
                                             };
                                             schedule.push(match);
                                         }

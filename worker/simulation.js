@@ -445,8 +445,9 @@ exports.simulate = function (data, callback) {
                         temp = (score[strike[+strike_index]] + 1) * (1 - Math.exp((temp - (Math.pow(fours[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]])) + Math.pow(maximums[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]])))) / (balls[strike[+strike_index]] + team_object[+toss_index].bat_rating[strike[+strike_index]])));
                         if (points < temp)
                         {
-                            MoM.team = +toss_index;
                             points = Math.round(temp);
+                            MoM.points = points;
+                            MoM.team = +toss_index;
                             MoM.id = strike[+strike_index];
                         }
                         data.team[+toss_index].partnership_runs[current_partnership_index] = (partnership_runs[current_partnership_index] + data.team[+toss_index].partnership_runs[current_partnership_index] * data.team[+toss_index].played) / (data.team[+toss_index].played + 1);
@@ -729,8 +730,9 @@ exports.simulate = function (data, callback) {
             temp = (score[strike[+strike_index]] + 1) * (1 - Math.exp((temp - (Math.pow(fours[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]])) + Math.pow(maximums[strike[+strike_index]], 1 / (1 - control[strike[+strike_index]])))) / (balls[strike[+strike_index]] + team_object[+toss_index].bat_rating[strike[+strike_index]])));
             if (points < temp)
             {
-                MoM.team = +toss_index;
                 points = Math.round(temp);
+                MoM.points = points;
+                MoM.team = +toss_index;
                 MoM.id = strike[+strike_index];
             }
             data.match.scorecard.push(' Scorecard:');
@@ -774,8 +776,9 @@ exports.simulate = function (data, callback) {
                 temp = ((wickets_taken[i] + 1) * 25) * (1 - Math.exp((temp - Math.pow((dot_deliveries[i] + 1) * 100, wickets_taken[i])) / (team_object[+!toss_index].bowl_rating[i] + deliveries[i] + runs_conceded[i])));
                 if (points < temp)
                 {
-                    MoM.team = +!toss_index;
                     points = Math.round(temp);
+                    MoM.points = points;
+                    MoM.team = +!toss_index;
                     MoM.id = team_object[+!toss_index].bowl_index[i];
                 }
                 data.match.scorecard.push([team_object[+!toss_index].bowl_name[i], parseInt(deliveries[i] / 6).toString() + '.' + (deliveries[i] % 6).toString(), maidens[i], wickets_taken[i], runs_conceded[i], (runs_conceded[i] * 6 / (deliveries[i] ? deliveries[i] : 1)).toFixed(2)]);
@@ -910,6 +913,7 @@ exports.simulate = function (data, callback) {
         data.match.commentary.push('Man of the Match: ' + data.team[MoM.team].ratings[MoM.id].Name + '( ' + data.team[MoM.team]._id + ')');
         data.match.commentary.push(rand(((data.team[MoM.team].ratings[MoM.id].Type == 'bat') ? (mom.bat) : ((data.team[MoM.team].ratings[MoM.id].Type == 'bowl') ? (mom.bowl) : (mom.all)))));
         data.match.commentary.push(rand(end));
+        data.match.MoM = MoM;
     }
     ++data.team[0].played;
     ++data.team[1].played;

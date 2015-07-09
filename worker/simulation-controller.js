@@ -17,17 +17,15 @@
  */
 var i;
 var log;
-var orange;
-var purple;
+var info;
 var database;
-var orangeFlag = false;
-var purpleFlag = false;
+var points = 0;
 var path = require('path');
 var async = require('async');
 var days = [1, 2, 3, 4, 5, 6, 7];
 var MongoClient = require('mongodb').MongoClient;
-var simulator = require(path.join(__dirname, 'simulation'));
 var email = require(path.join(__dirname, 'email.js'));
+var simulator = require(path.join(__dirname, 'simulation'));
 var match = require(path.join(__dirname, '..', 'matchCollection'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 
@@ -43,13 +41,6 @@ var ref =
     'users': 1,
     'round2': 2,
     'round3': 3
-};
-var info =
-{
-    four: 0,
-    six: 0,
-    runs: 0,
-    wickets: 0
 };
 
 var options =
@@ -140,21 +131,19 @@ exports.initSimulation = function (day, masterCallback)
                 {
                     info.six += newUserDoc.stats[newUserDoc.squad[i]].sixes || 0;
                     info.four += newUserDoc.stats[newUserDoc.squad[i]].fours || 0;
-                    if (!newUserDoc.squad[i].match(/^b/) && newUserDoc.stats[newUserDoc.squad[i]].runs_scored > orange.runs)
+                    if (!newUserDoc.squad[i].match(/^b/) && newUserDoc.stats[newUserDoc.squad[i]].runs_scored > info.orange.runs)
                     {
-                        orangeFlag = true;
-                        orange.team = newUserDoc._id;
-                        orange.player = newUserDoc.squad[i];
-                        orange.runs = newUserDoc.stats[newUserDoc.squad[i]].runs_scored;
-                        orange.strikeRate = newUserDoc.stats[newUserDoc.squad[i]].bat_strike_rate;
+                        info.orange.team = newUserDoc._id;
+                        info.orange.player = newUserDoc.squad[i];
+                        info.orange.runs = newUserDoc.stats[newUserDoc.squad[i]].runs_scored;
+                        info.orange.strikeRate = newUserDoc.stats[newUserDoc.squad[i]].bat_strike_rate;
                     }
-                    if (newUserDoc.squad[i].match(/^[^a]/) && newUserDoc.stats[newUserDoc.squad[i]].wickets_taken > purple.wickets)
+                    if (newUserDoc.squad[i].match(/^[^a]/) && newUserDoc.stats[newUserDoc.squad[i]].wickets_taken > info.purple.wickets)
                     {
-                        purpleFlag = true;
-                        purple.team = newUserDoc._id;
-                        purple.player = newUserDoc.squad[i];
-                        purple.economy = newUserDoc.stats[newUserDoc.squad[i]].economy;
-                        purple.wickets = newUserDoc.stats[newUserDoc.squad[i]].wickets_taken;
+                        info.purple.team = newUserDoc._id;
+                        info.purple.player = newUserDoc.squad[i];
+                        info.purple.economy = newUserDoc.stats[newUserDoc.squad[i]].economy;
+                        info.purple.wickets = newUserDoc.stats[newUserDoc.squad[i]].wickets_taken;
                     }
                 }
                 database.collection(match).updateOne({_id: newUserDoc._id}, newUserDoc, function () {
@@ -171,6 +160,11 @@ exports.initSimulation = function (day, masterCallback)
 
             var updateMatch = function (newMatchDoc, asyncCallback)
             {
+                if(newMatchDoc.MoM.points > points)
+                {
+                   info.MoM = newMatchDoc;
+                   points = newMatchDoc.MoM.points;
+                }
                 database.collection('matchday' + day).updateOne({_id: newMatchDoc._id}, newMatchDoc, asyncCallback);
             };
 
@@ -212,14 +206,6 @@ exports.initSimulation = function (day, masterCallback)
 
     var onFinish = function (err, results)
     {
-        if (orangeFlag)
-        {
-            info.orange = orange;
-        }
-        if (purpleFlag)
-        {
-            info.purple = purple;
-        }
         console.log(info);
         var onUpdate = function (error)
         {
@@ -231,7 +217,10 @@ exports.initSimulation = function (day, masterCallback)
             if (err)
             {
                 console.log(err.message);
-                if (log) log.log('debug', {Error: err.message});
+                if (log)
+                {
+                    log.log('debug', {Error: err.message});
+                }
                 throw err;
             }
             else
@@ -264,7 +253,10 @@ exports.initSimulation = function (day, masterCallback)
         if (err)
         {
             console.log(err.message);
-            if (log) log.log('debug', {Error: err.message});
+            if (log)
+            {
+                log.log('debug', {Error: err.message});
+            }
             throw err;
         }
         else
@@ -278,7 +270,10 @@ exports.initSimulation = function (day, masterCallback)
         if (err)
         {
             console.log(err.message);
-            if (log) log.log('debug', {Error: err.message});
+            if (log)
+            {
+                log.log('debug', {Error: err.message});
+            }
             throw err;
         }
         else
@@ -292,9 +287,9 @@ exports.initSimulation = function (day, masterCallback)
                 }
                 else
                 {
-                    orange = doc.orange;
-                    purple = doc.purple;
-                    console.log(orange, purple);
+                    info.orange = doc.orange;
+                    info.purple = doc.purple;
+                    console.log(info.orange, info.purple);
                     getAllMatches(err, ForAllMatches);
                 }
             };
