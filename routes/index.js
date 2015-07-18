@@ -60,7 +60,7 @@ router.get('/', function (req, res) {
         }
         res.redirect('/home');
     }
-    else
+    else if (process.env.NODE_ENV)
     {
         var time = new Date;
         time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
@@ -75,11 +75,18 @@ router.get('/', function (req, res) {
         };
         res.render('static', {date: date});
     }
+    else
+    {
+        res.render('index', {response : []});
+    }
 });
 
 // TODO: delete this route when ready to launch
 router.get(/^.*$/, function (req, res) {
-    res.redirect('/');
+    if(process.env.NODE_ENV)
+    {
+        res.redirect('/');
+    }
 });
 
 router.post('/login', function (req, res) {
@@ -477,6 +484,10 @@ router.get('/admin', function(req, res){
 
 router.get('/social', function(req, res){
 
+});
+
+router.get('/timeline', function(req, res){
+    res.render('timeline');
 });
 
 module.exports = router;

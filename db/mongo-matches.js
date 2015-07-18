@@ -33,6 +33,7 @@ exports.fetchPreviousMatch = function (doc1, doc2, callback) {
         }
         else
         {
+            db.close();
             // Collection controller for match day information. To be changed before each match
             collection = db.collection('matchday' + (process.env.DAY || 1));
             var onFetch = function (err, docs)
@@ -79,6 +80,7 @@ exports.fetchNextMatch = function (doc1, doc2, callback) {
             collection = 'matchday' + (parseInt(process.env.DAY) + 1) || 2;
             var onFetch = function (err, doc)
             {
+                db.close();
                 var credentials = {};
                 if (err)
                 {
@@ -117,7 +119,7 @@ exports.fetchNextMatch = function (doc1, doc2, callback) {
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.match = function(day, filter, callback)
+exports.match = function(day, filter, slice, callback)
 {
     var onConnect = function(err, db)
     {
@@ -128,14 +130,9 @@ exports.match = function(day, filter, callback)
         else
         {
             collection = db.collection('matchday' + day);
-            var slice =
-            {
-                _id : 0,
-                commentary : 0,
-                scorecard : 0
-            };
             var onFind = function(err, doc)
             {
+                db.close();
                 if(err)
                 {
                     callback(err);

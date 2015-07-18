@@ -247,77 +247,130 @@ exports.shortList = function(callback)
 
 exports.adminInfo = function(callback)
 {
-    var onConnect = function(err, db)
+    var onParallel = function(err, result)
     {
         if(err)
         {
-            callback(err);
+             callback(err);
         }
         else
         {
-            var onParallel = function(err, result){
-                if(err)
-                {
-                    callback(err);
-                }
-                else
-                {
-                    callback(null, result);
-                }
-            };
-            var onFetch = function(err, doc)
-            {
-                if(err)
-                {
-                    callback(err);
-                }
-                else
-                {
-                    console.log(doc);
-                }
-            };
-            var parallelTasks =
-            {
-                'total' : function ()
-                {
-                    mongoUsers.getCount(onFetch);
-                },
-                'facebook' : function ()
-                {
-                    mongoUsers.getCount({authStrategy : 'facebook'}, onFetch);
-                },
-                'google' : function ()
-                {
-                    mongoUsers.getCount({authStrategy : 'google'}, onFetch);
-                },
-                'twitter' : function ()
-                {
-                    mongoUsers.getCount({authStrategy : 'twitter'}, onFetch);
-                },
-                'local' : function ()
-                {
-                    mongoUsers.getCount({authStrategy : 'local'}, onFetch);
-                },
-                'emptySquad' : function ()
-                {
-                    mongoUsers.getCount({squad : []}, onFetch);
-                },
-                'emptyTeam' : function ()
-                {
-                    mongoUsers.getCount({team : []}, onFetch);
-                },
-                'features' : function()
-                {
-                    mongoFeatures.notify(onFetch);
-                }
-            };
-            async.parallel(parallelTasks, onParallel);
+             callback(null, result);
         }
     };
-    MongoClient.connect(onConnect);
+    var onFetch = function(err, doc)
+    {
+        if(err)
+        {
+             callback(err);
+        }
+        else
+        {
+             console.log(doc);
+        }
+    };
+    var parallelTasks =
+    {
+        'total' : function ()
+        {
+            mongoUsers.getCount(onFetch);
+        },
+        'facebook' : function ()
+        {
+            mongoUsers.getCount({authStrategy: 'facebook'}, onFetch);
+        },
+        'google' : function ()
+        {
+            mongoUsers.getCount({authStrategy: 'google'}, onFetch);
+        },
+        'twitter' : function ()
+        {
+            mongoUsers.getCount({authStrategy: 'twitter'}, onFetch);
+        },
+        'local' : function ()
+        {
+            mongoUsers.getCount({authStrategy: 'local'}, onFetch);
+        },
+        'emptySquad' : function ()
+        {
+            mongoUsers.getCount({squad: []}, onFetch);
+        },
+        'emptyTeam' : function ()
+        {
+            mongoUsers.getCount({team: []}, onFetch);
+        },
+        'features' : function ()
+        {
+            mongoFeatures.notify(onFetch);
+        }
+    };
+    async.parallel(parallelTasks, onParallel);
 };
 
 exports.schedule = function(doc, callback)
+{
+     var slice = {
+           _id : 0,
+           scorecard : 0,
+           commentary : 0
+     };
+     var onParallel = function(err, result)
+     {
+           if(err)
+           {
+               callback(err);
+           }
+           else
+           {
+               callback(null, result);
+           }
+     };
+     var onGet = function(err, doc)
+     {
+           if(err)
+           {
+               callback(err);
+           }
+           else
+           {
+               console.log(doc);
+           }
+     };
+     var parallelTasks =
+     [
+           function()
+           {
+               mongoMatches.match(1, doc, slice, onGet);
+           },
+           function()
+           {
+               mongoMatches.match(2, doc, slice, onGet);
+           },
+           function()
+           {
+               mongoMatches.match(3, doc, slice, onGet);
+           },
+           function()
+           {
+               mongoMatches.match(4, doc, slice, onGet);
+           },
+           function()
+           {
+               mongoMatches.match(5, doc, slice, onGet);
+           },
+           function()
+           {
+               mongoMatches.match(6, doc, slice, onGet);
+           },
+           function()
+           {
+               mongoMatches.match(7, doc, slice, onGet);
+           }
+     ];
+     async.parallel(parallelTasks, onParallel);
+};
+
+exports.fetchMatches = function(team, slice, callback)
 {
     var onConnect = function(err, db)
     {
@@ -328,18 +381,8 @@ exports.schedule = function(doc, callback)
         else
         {
             db.close();
-            var i;
-            var onParallel = function(err, result)
-            {
-                if(err)
-                {
-                    callback(err);
-                }
-                else
-                {
-                    callback(null, result);
-                }
-            };
+            var matches = [];
+            var day = process.env.DAY || 1;
             var onGet = function(err, doc)
             {
                 if(err)
@@ -348,41 +391,13 @@ exports.schedule = function(doc, callback)
                 }
                 else
                 {
-                    console.log(doc);
+                    matches.push(doc);
                 }
             };
-            var parallelTasks =
-                [
-                    function()
-                    {
-                        MongoMatches.match(1, doc, onGet);
-                    },
-                    function()
-                    {
-                        MongoMatches.match(2, doc, onGet);
-                    },
-                    function()
-                    {
-                        MongoMatches.match(3, doc, onGet);
-                    },
-                    function()
-                    {
-                        MongoMatches.match(4, doc, onGet);
-                    },
-                    function()
-                    {
-                        MongoMatches.match(5, doc, onGet);
-                    },
-                    function()
-                    {
-                        MongoMatches.match(6, doc, onGet);
-                    },
-                    function()
-                    {
-                        MongoMatches.match(7, doc, onGet);
-                    }
-                ];
-            async.parallel(parallelTasks, onParallel);
+            for(i = 1; i <= day; ++i)
+            {
+                mongoMatches.match(i, team, slice, onGet);
+            }
         }
     };
     MongoClient.connect(mongoUri, onConnect);
