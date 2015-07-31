@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GPL | Match Details</title>
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+      <link rel='stylesheet' href='/stylesheets/matchDetails.css' />
+      <script type="text/javascript">
+          function tog(){
+              $('.row-offcanvas').toggleClass('active');
+          };
+          $(document).ready(function() {
+              $('[data-toggle=offcanvas]').click(function() {
+                  $('.row-offcanvas').toggleClass('active');
+              });
+          });
+      </script>
+  </head>
+  <body>
+  <div class="container-fluid">
+      <div class="row row-offcanvas row-offcanvas-left">
+          <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+              <ul class="nav nav-sidebar">
+                  <li class="active"><a href="#">Matches</a></li>
+
+                  <%for(var i=0;i<matchName.length ; i++){%>
+                  <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=matchName[i]%> <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                          <li><a href="#" onclick="document.getElementById('text').innerHTML='Commentary:<br><br><%=commentary[i]%>';tog();">Commentary</a></li>
+                          <li role="separator" class="divider"></li>
+                          <li><a href="#" onclick="document.getElementById('text').innerHTML='ScoreCard:<br><br><%=scoreCard[i]%>';tog();">Scorecard</a></li>
+                      </ul>
+                  </li>
+                  <%}%>
+
+              </ul>
+          </div><!--/span-->
+          <div class="col-sm-9 col-md-10 main">
+              <!--toggle sidebar button-->
+              <p class="visible-xs">
+                  <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
+              </p>
+              <h1 class="page-header">Match Details</h1>
+              <div class="container-fluid text-center" id="text"><br><br>
+                  <span id="text"></span>
+              </div>
+          </div><!--/row-->
+      </div>
+  </div><!--/.container-->
+  </body>
+</html>
