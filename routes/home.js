@@ -567,9 +567,9 @@ router.post('/feature', function (req, res) {
     }
 });
 
-router.get('/developers', function (req, res) // developers page
+router.get('/developers', function (req, res)
 {
-    res.render('developer');
+    res.render('timeline');
 });
 
 router.get('/dashboard', function (req, res) {

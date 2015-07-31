@@ -28,7 +28,8 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
 ###### View the website at localhost:3000 within your browser    
     
 #### External Requirements:
-* A MongoDB instance running locally or valid "MONGOLAB_URI"/"MONGOHQ_URI" string in process.env 
+* A MongoDB instance running locally or valid "MONGOLAB_URI"/"MONGOHQ_URI" string in process.env
+* A valid collection of social authentication tokens in process.env (Facebook, Twitter, and Google)
 * A valid "COOKIE_SECRET" string in process.env for better security (Optional)
 * A valid "LOGENTRIES_TOKEN" in process.env for Logentries support (Optional)
 * A valid "NEWRELIC_APP_NAME" and "NEWRELIC_LICENSE" in process.env for New Relic support (Optional)

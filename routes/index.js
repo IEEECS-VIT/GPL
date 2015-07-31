@@ -82,12 +82,16 @@ router.get('/', function (req, res) {
 });
 
 // TODO: delete this route when ready to launch
-router.get(/^.*$/, function (req, res) {
-    if(process.env.NODE_ENV)
-    {
-        res.redirect('/');
-    }
-});
+    router.get(/\/^.*$/, function (req, res, next) {
+        if(process.env.NODE_ENV)
+        {
+            res.redirect('/');
+        }
+        else
+        {
+            next();
+        }
+    });
 
 router.post('/login', function (req, res) {
     var user = req.body.team_name;
@@ -483,11 +487,51 @@ router.get('/admin', function(req, res){
 });
 
 router.get('/social', function(req, res){
+    if(req.user || req.signedCookies.name)
+    {
+        res.render('home');
+    }
+    else
+    {
+        res.render('social');
+    }
+});
 
+router.post('/social', function(req, res){
+    var onAddTeam = function(err, doc)
+    {
+        if(err)
+        {
+            console.log(err.message);
+        }
+        else
+        {
+            res.redirect('/players');
+        }
+    };
+    mongoUsers.addSocialTeam(req, onAddTeam);
 });
 
 router.get('/timeline', function(req, res){
-    res.render('timeline');
+    if(req.user || req.signedCookies.name)
+    {
+        res.render('timeline');
+    }
+    else
+    {
+        res.redirect('/');
+    }
+});
+
+router.get('/privacy', function(req, res){
+    if(req.user || req.signedCookies.name)
+    {
+        res.render('privacyPrivacy');
+    }
+    else
+    {
+        res.redirect('/');
+    }
 });
 
 module.exports = router;

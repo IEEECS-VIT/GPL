@@ -533,3 +533,31 @@ exports.admin = function(doc, callback)
     };
     MongoClient.connect(mongoUri, onConnect);
 };
+
+exports.addSocialTeam = function(team, callback)
+{
+    var onConnect = function(err, db)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            collection = db.collection('users');
+            var onUpdate = function(err, doc)
+            {
+                if(err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    callback(null, doc);
+                }
+            };
+            collection.updateOne(team, onUpdate);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};
