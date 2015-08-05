@@ -22,7 +22,7 @@ var bcrypt;
 var path = require('path');
 var crypto = require('crypto');
 var router = require('express').Router();
-var email = require(path.join(__dirname, '..', 'worker', 'email.js'));
+var email = require(path.join(__dirname, '..', 'worker', 'email'));
 var record = require(path.join(__dirname, '..', 'db', 'mongo-record'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
 var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
@@ -77,7 +77,7 @@ router.get('/', function (req, res) {
     }
     else
     {
-        res.render('index', {response : []});
+        res.render('interest', {csrfToken: req.csrfToken()});
     }
 });
 
@@ -451,11 +451,20 @@ router.post('/interest', function (req, res) // interest form
                 "Please check out  our Facebook <a href='http://www.facebook.com/gravitaspremierleague' style='text-decoration: none;'>page</a> to stay close to all the action! </td>" +
                 "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE Computer Society</td></tr></table>"
             };
-            email.sendMail(options, null);
-            res.redirect('/interest');
-            console.log(docs);
+            var onSend = function(err)
+            {
+                    if(err)
+                    {
+                        console.log(err.message);
+                    }
+                    else
+                    {
+                        console.log(docs);
+                        res.redirect('/interest');
+                    }
+            };
+            email.sendMail(options, onSend);
         }
-
     };
     mongoInterest.insert(newUser, onInsert);
 });

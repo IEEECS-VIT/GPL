@@ -129,6 +129,7 @@
             <p style="color:white;text-align:center">For future updates please register below.</p>
 
             <form name="int" action="/interest" method="post">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
                 <fieldset>
                     <legend>Player Details</legend>
 
