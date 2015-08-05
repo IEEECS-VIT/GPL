@@ -1,0 +1,85 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+html{
+    min-height: 100%;
+
+
+}
+
+h1{
+    font-weight: 700;
+}
+
+*{
+    font-family: 'Roboto';
+    text-rendering: optimizelegibility;
+    font-feature-settings: "liga", "kern";
+}
+*{
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-font-smoothing: antialiased !important;
+    font-smoothing: antialiased !important;
+    font-feature-settings: "liga";
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+
+}
+
+
+h1{
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.827em;
+}
+
+.shadow-effect{
+    -webkit-box-shadow: 0px 5px 7px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 5px 7px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 5px 7px 0px rgba(0,0,0,0.25);
+    min-height: 100vh;
+}
+
+strong{
+    font-weight: 700;
+}
+
+.specs li p{
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+.specs{
+    list-style-type: disc;
+}
+
+.small-class{
+    font-size: 0.5em;
+}
+
+footer{
+
+    background-color: #333;
+    margin-bottom: 0;
+    height: 60px;
+
+    position: relative;
+}
+
+.footer-logo{
+    max-height: 40px;
+    min-height: 20px;
+    margin-top: 14px;
+
+}
+
+.centered{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.gpllogo{
+    max-height: 200px;
+}

@@ -23,6 +23,7 @@
     <title>Interest | GPL</title>
     <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="/stylesheets/gplmain.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/interest.css"/>
     <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
     <script src="/javascript/int.js"></script>
     <script>
@@ -44,173 +45,81 @@
     </script>
 </head>
 <body style="background-color:#646464;font-family: 'PT Sans', sans-serif;height:100%;">
-<div style="min-height: 100%">
-    <div class="large-12 top-bar" style="overflow: visible;">
-        <section class="top-bar-section small-only-text-center">
-            <ul class="left">
-                <li><a href="/"><img src="http://res.cloudinary.com/gpl/image/upload/general/small.png"
-                                     style="height:42px;padding-bottom:3px;"/></a></li>
-                <li><a href="https://www.facebook.com/ieeecsvit"><img
-                                src="http://res.cloudinary.com/gpl/image/upload/general/ieee.png" style="height:40px;"
-                                align="center"/></a></li>
 
-            </ul>
-            <!--<ul class="right">
-                <li class="has-dropdown not-click" style="border-radius: 5px">
-                    <a href="#" style="border-radius: 5px">Sign In</a>
-                    <ul class="dropdown" style="width:300%;">
-                        <form>
-                            <li class="title back js-generated">
-                                <h5>
-                                    <a href="javascript:void(0)">
-                                        Back
-                                    </a>
-                                </h5>
-                            </li>
+<div class="container">
 
-
-                            <li>
-
-                                <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
-                                    <div class="row">
-                                        <div class="small-3 columns" style="margin-left: -5%">
-                                            <label for="team" class="right inline" style="color: white;">Team
-                                                Name: </label>
-                                        </div>
-                                        <div class="small-9 columns">
-                                            <input type="text" id="team" name="name" placeholder="Team Name" value=""
-                                                   style="margin:-4% 0 0 1%;border-radius: 5px">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <!--Username/Team Name -->
-
-
-            <!--<div class="small-12 left" style="margin:1%;padding-bottom: 5%">
-                <div class="row" style="margin-top: 2%">
-                    <div class="small-3 columns" style="margin-left: -5%">
-                        <label for="pass" class="right inline"
-                               style="color: white;">Password: </label>
-                    </div>
-                    <div class="small-9 columns">
-                        <input type="password" id="p
-                              ass" placeholder="Password" name="password" value=""
-                               style="margin:-4% 0 0 1%;border-radius: 5px">
-                    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 shadow-effect">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="page-header rules-header">
+                    <h1><img src="images/gpllogo.png" class="img-responsive gpllogo centered">graVITas Premier League 2.0</h1>
                 </div>
-            </div>
 
-            <!-- password-->
+                <form name="int" action="/interest" method="post">
+                    <input type="hidden" name="_csrf" value="<%=csrfToken%>"/>
+                    <fieldset>
+                        <legend>Player Details</legend>
+                        <div class="form-group">
 
-
-            <!--</li>
-            <li>
-                <input type="button" align="center" class="button [tiny small large]" value="Login"
-                       id="button" name="login"
-                       style="border-radius: 5px;background: rgba(30,30,30,1);margin-left: 38%;margin-bottom: 3%;"/>
-            </li>
-
-            <li class="divider"><a href="#">Forgot Password?</a></li>
-        </form>
-    </ul>
-</li>
-</ul>-->
-        </section>
-    </div>
-    <!-- top bar -->
-    <div class="row" align="center">
-
-        <div class="small-12 medium-12 large-12 columns"
-             style="background:rgba(0,123,184,0.5); border-radius: 0 0 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);float: left;text-align: left ">
-            <h1 style="color:white;text-align:center">Coming Soon</h1>
-
-            <p style="color:white;text-align:center">For future updates please register below.</p>
-
-            <form name="int" action="/interest" method="post">
-                <input type="hidden" name="_csrf" value="<%=csrfToken%>"/>
-                <fieldset>
-                    <legend>Player Details</legend>
-
-                    <div class="row">
-                        <div class="large-9 small-12">
-                            <div class="row">
-                                <div class="small-3 columns">
-                                    <label for="team" class="right inline" style="color: white;">Name:<i
-                                                style="color:red;">*</i> </label>
-                                </div>
-                                <div class="small-9 columns">
-                                    <input type="text" id="team" placeholder="Name" name="name"/>
-                                </div>
-                            </div>
+                            <label for="team">Name:<i
+                                        style="color:red;">*</i> </label>
+                            <input type="text" id="team" class="form-control" placeholder="Name" name="name"/>
                         </div>
+
+
 
                         <!--Username/Team Name -->
 
 
-                        <div class="large-9 small-12">
-                            <div class="row">
-                                <div class="small-3 columns">
-                                    <label for="mob" class="right inline" style="color: white;">Mobile:<i
-                                                style="color:red;">*</i> </label>
-                                </div>
-                                <div class="small-9 columns">
-                                    <input type="tel" id="mob" placeholder="9876543210" name="phone"/>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label for="mob" >Mobile:<i style="color:red;">*</i> </label>
+                            <input type="tel" id="mob" class="form-control" placeholder="9876543210" name="phone"/>
                         </div>
                         <!-- password-->
-
-                        <div class="large-9 small-12">
-                            <div class="row">
-                                <div class="small-3 columns">
-                                    <label for="email" class="right inline" style="color: white;">Email:<i
-                                                style="color:red;">*</i> </label>
-                                </div>
-                                <div class="small-9 columns">
-                                    <input type="email" id="email" placeholder="example@domain.com" name="email"/>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label for="email" >Email:<i
+                                        style="color:red;">*</i> </label>
+                            <input type="email" id="email" class="form-control" placeholder="example@domain.com" name="email"/>
                         </div>
 
-                        <div class="large-12" align="center">
-                            <input type="submit" id="button" class="button"
-                                   style="margin:1%;background: rgba(50,50,50,1);border-radius: 5px" align="center"
-                                   name="button"
-                                   onclick="valid()"/>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
+                        <input type="submit" id="button" class="btn btn-primary"
+                               align="center"
+                               name="button"
+                               value="Submit"
+                               onclick="valid()"/>
+            </div>
         </div>
+        </fieldset>
 
+
+        </form>
 
     </div>
+
 </div>
-<footer class="large-12" style="bottom:0; position:relative;">
-    <div class="top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">
-        <section class="top-bar-section">
-            <ul class="left">
-                <li style="display:block;"><a href="http://vitgravitas.com/"><img
-                                src="http://res.cloudinary.com/gpl/image/upload/general/gravitas.png"
-                                style="height:45px;"/></a></li>
-                <li><a href="http://vit.ac.in/"><img
-                                src="http://res.cloudinary.com/gpl/image/upload/general/vit_logo_white.png"
-                                style="height:40px;padding-top: 5px" align="center"/></a></li>
-            </ul>
-            <ul class="right">
-                <li><a href="/developer"><img src="http://res.cloudinary.com/gpl/image/upload/general/symbol.png"
-                                              style="height:35px;" align="center"/><span
-                                style="color:white;text-shadow: 1px 1px rgba(68,59,50,1);">Developers</span></a></li>
 
-            </ul>
+</div>
 
-        </section>
-        <p style="margin-left: 46%; font-size:60%;color:white;bottom:0; margin-top:2%">&copy;IEEE-CS VIT Chapter</p>
+</div>
 
+<footer>
+    <div class="container-fluid">
+        <div class="col-xs-4">
+            <!--- Change gravitas logo to 2015 -->
+            <img src="images/logo_gravitas_15.jpg" height="50" class="img-responsive footer-logo pull-left">
+        </div>
+        <div class="col-xs-4">
+            <img src="images/ieeecs.png" height="50" class="img-responsive footer-logo centered">
+        </div>
+        <div class="col-xs-4">
+            <img src="images/vit_logo_white.png" height="50" class="img-responsive footer-logo pull-right">
+        </div>
     </div>
+
 </footer>
+
+
+
 <!-- footer -->
 </body>
 </html>
