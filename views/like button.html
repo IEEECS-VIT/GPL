@@ -67,42 +67,42 @@
 </div>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <script>
 
     var serverTime = moment({
-        year: <%=date.year%>,
-        month: <%=date.month%> -1,
-        day: <%=date.day%>,
-        hour: <%=date.hour%>,
-        minute: <%=date.minutes%>,
-        second: <%=date.seconds%>,
-        milliseconds: 0
+                year: <%=date.year%>,
+            month: <%=date.month%> -1,
+            day: <%=date.day%>,
+            hour: <%=date.hour%>,
+            minute: <%=date.minutes%>,
+            second: <%=date.seconds%>,
+            milliseconds: 0
     });
     var now = moment()
             .subtract({
                 year: <%=date.year%>,
-                month: <%=date.month%>,
-                day: <%=date.day%>,
-                hour: <%=date.hour%>,
-                minute: <%=date.minutes%>,
-                second: <%=date.seconds%>,
-                milliseconds: 0
-            })
-            .add({
-                year: 2015,
-                month: 9,
-                day: 1,
-                hour: 0,
-                minute: 0,
-                second: 0,
-                milliseconds: 0
-            });
+            month: <%=date.month%>,
+            day: <%=date.day%>,
+            hour: <%=date.hour%>,
+            minute: <%=date.minutes%>,
+            second: <%=date.seconds%>,
+            milliseconds: 0
+    })
+    .add({
+        year: 2015,
+        month: 9,
+        day: 1,
+        hour: 0,
+        minute: 0,
+        second: 0,
+        milliseconds: 0
+    });
     $("#DateCountdown").attr("data-date", now.format("YYYY/MM/DD HH:MM:SS"));
     //alert( now.format("YYYY/MM/DD HH:MM:SS"));
 
