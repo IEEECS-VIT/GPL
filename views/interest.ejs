@@ -44,19 +44,22 @@
 
     </script>
 </head>
-<body style="background-color:#646464;font-family: 'PT Sans', sans-serif;height:100%;">
+<body>
 
 <div class="container">
 
     <div class="row">
-        <div class="col-md-8 col-md-offset-2 shadow-effect">
+        <div class="col-md-8 col-md-offset-2 shadow-effect" id="form-container">
             <div class="col-md-10 col-md-offset-1">
                 <div class="page-header rules-header">
-                    <h1><img src="images/gpllogo.png" class="img-responsive gpllogo centered">graVITas Premier League 2.0</h1>
+                    <h1><img src="images/gpllogo.png" class="img-responsive gpllogo centered">graVITas Premier League
+                        2.0</h1>
+
+                    <p class="text-center lead">Coming Soon! <br> To keep yourself updated fill in the form!</p>
                 </div>
 
                 <form name="int" action="/interest" method="post">
-                    <input type="hidden" name="_csrf" value="<%=csrfToken%>"/>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
                     <fieldset>
                         <legend>Player Details</legend>
                         <div class="form-group">
@@ -67,26 +70,27 @@
                         </div>
 
 
-
                         <!--Username/Team Name -->
 
 
                         <div class="form-group">
-                            <label for="mob" >Mobile:<i style="color:red;">*</i> </label>
+                            <label for="mob">Mobile:<i style="color:red;">*</i> </label>
                             <input type="tel" id="mob" class="form-control" placeholder="9876543210" name="phone"/>
                         </div>
                         <!-- password-->
                         <div class="form-group">
-                            <label for="email" >Email:<i
+                            <label for="email">Email:<i
                                         style="color:red;">*</i> </label>
-                            <input type="email" id="email" class="form-control" placeholder="example@domain.com" name="email"/>
+                            <input type="email" id="email" class="form-control" placeholder="example@domain.com"
+                                   name="email"/>
                         </div>
 
-                        <input type="submit" id="button" class="btn btn-primary"
-                               align="center"
+                        <input type="submit" id="button" class="btn btn-primary btn-lg centered"
                                name="button"
                                value="Submit"
                                onclick="valid()"/>
+                    </fieldset>
+                </form>
             </div>
         </div>
         </fieldset>
@@ -106,18 +110,17 @@
     <div class="container-fluid">
         <div class="col-xs-4">
             <!--- Change gravitas logo to 2015 -->
-            <img src="images/logo_gravitas_15.jpg" height="50" class="img-responsive footer-logo pull-left">
+            <img src="images/logo_gravitas_15.jpg" class="img-responsive padding-2 img-60 pull-left">
         </div>
         <div class="col-xs-4">
-            <img src="images/ieeecs.png" height="50" class="img-responsive footer-logo centered">
+            <img src="images/ieeecs.png" class="img-responsive padding-2 img-50 centered">
         </div>
         <div class="col-xs-4">
-            <img src="images/vit_logo_white.png" height="50" class="img-responsive footer-logo pull-right">
+            <img src="images/vit_logo_white.png" class="img-responsive pull-right padding-2 img-60">
         </div>
     </div>
 
 </footer>
-
 
 
 <!-- footer -->
