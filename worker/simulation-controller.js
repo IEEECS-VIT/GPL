@@ -17,8 +17,8 @@
  */
 var i;
 var log;
-var info;
 var database;
+var info = {};
 var points = 0;
 var path = require('path');
 var async = require('async');
@@ -26,7 +26,7 @@ var days = [1, 2, 3, 4, 5, 6, 7];
 var MongoClient = require('mongodb').MongoClient;
 var email = require(path.join(__dirname, 'email.js'));
 var simulator = require(path.join(__dirname, 'simulation'));
-var match = require(path.join(__dirname, '..', 'matchCollection'));
+var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 
 if (process.env.LOGENTRIES_TOKEN)
@@ -289,11 +289,10 @@ exports.initSimulation = function (day, masterCallback)
                 {
                     info.orange = doc.orange;
                     info.purple = doc.purple;
-                    console.log(info.orange, info.purple);
                     getAllMatches(err, ForAllMatches);
                 }
             };
-            database.collection('info').findOne(onGetInfo);
+            database.collection('info').findOne({}, onGetInfo);
         }
     };
 

@@ -16,7 +16,8 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-exports.simulate = function (data, callback) {
+exports.simulate = function (data, callback)
+{
     console.log(data.team[0]._id + ' vs ' + data.team[1]._id);
     if (data.team[0].ratings.length < 12 && data.team[1].ratings.length < 12)
     {
@@ -450,6 +451,7 @@ exports.simulate = function (data, callback) {
                             MoM.team = +toss_index;
                             MoM.id = strike[+strike_index];
                         }
+                        console.log('------------', +toss_index);
                         data.team[+toss_index].partnership_runs[current_partnership_index] = (partnership_runs[current_partnership_index] + data.team[+toss_index].partnership_runs[current_partnership_index] * data.team[+toss_index].played) / (data.team[+toss_index].played + 1);
                         data.team[+toss_index].partnership_balls[current_partnership_index] = (partnership_balls[current_partnership_index] + data.team[+toss_index].partnership_balls[current_partnership_index] * data.team[+toss_index].played) / (data.team[+toss_index].played + 1);
                         data.match.commentary.push(' ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ' balls' + ' ' + fours[strike[+strike_index]] + 'X4\'s ' + maximums[strike[+strike_index]] + 'X6\'s) SR: ' + (score[strike[+strike_index]] * 100 / balls[strike[+strike_index]]).toFixed(2) + 'Control: ' + (control[strike[+strike_index]] * 100).toFixed(2) + '%');

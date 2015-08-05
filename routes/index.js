@@ -423,14 +423,11 @@ router.get('/interest', function (req, res) {
 
 router.post('/interest', function (req, res) // interest form
 {
-    var name = req.body.name;
-    var email = req.body.email;
-    var phone = req.body.phone;
     var newUser =
     {
-        name: name,
-        email: email,
-        phone: phone
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone
     };
     var onInsert = function (err, docs)
     {
@@ -459,8 +456,7 @@ router.post('/interest', function (req, res) // interest form
                     }
                     else
                     {
-                        console.log(docs);
-                        res.redirect('/interest');
+                        res.redirect('/');
                     }
             };
             email.sendMail(options, onSend);
