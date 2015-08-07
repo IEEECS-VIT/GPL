@@ -17,38 +17,24 @@
 
   </head>
   <body>
+ <div class="main-content">
+  	<div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
+   <header class="banner" role="banner">
+     
+     <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo" src="/images/gpllogo.png" height="50" class="pull-left"/><span class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg" height="60" class="pull-right"/></span>
+     
+     
+    </header>
+  </div>
 
-
-    <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">GPL Logo Here</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="main-navbar-collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li class="navbar-active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Rules</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-        
-      </ul>
-
-
-    </div><!-- /.navbar-collapse-->
-  </div><!-- /.container-fluid -->
-</nav>
-
+  <div id="navbar-wrapper">
+  	<nav id="navbar" ></nav>
+  </div>
     <!-- Carousel
     ================================================== -->
-    <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+
+    
+    <section id="myCarousel" class="carousel slide carousel-fade " data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -58,7 +44,7 @@
       <div class="carousel-inner" role="listbox">
         <div class="one item active ">
           
-          <div class="container">
+          <div class="container-fluid">
             <div class="carousel-caption">
               <h1>graVITas Premier League 2.0</h1>
               <p>Come and be a part of the biggest online event this Gravitas. </p>
@@ -68,7 +54,7 @@
         </div>
         <div class="two item">
           
-          <div class="container">
+          <div class="container-fluid">
             <div class="carousel-caption">
               <h1>Challenge yourself !</h1>
               <p>Build and manage your own T20 cricket team.</p>
@@ -78,7 +64,7 @@
         </div>
         <div class="three item">
           
-          <div class="container">
+          <div class="container-fluid">
             <div class="carousel-caption">
               <h1>Win Prizes !</h1>
               <p>Prize money upto 22 grand.</p>
@@ -95,31 +81,23 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
-    </div><!-- /.carousel -->
+  
 
+    </section><!-- /.carousel -->
+
+    <section>
+    </section>
 
    
 
 
+
+
+    </div><!-- /.container -->
+
       <!-- FOOTER -->
-      <footer>
-        <div class="container-fluid">
-          <div class="col-xs-4">
-          <!--- Change gravitas logo to 2015 -->
-             <img src="images/gravitas.png" height="50" class="img-responsive footer-logo pull-left">
-          </div>
-          <div class="col-xs-4">
-              <img src="images/ieeecs.png" height="50" class="img-responsive footer-logo centered">
-          </div>
-          <div class="col-xs-4">
-            <img src="images/vit_logo_white.png" height="50" class="img-responsive footer-logo pull-right">
-          </div>
-        </div>
+      <footer id="footer" class="footer">
       </footer>
-
-    <!-- /.container -->
-
-
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -144,6 +122,7 @@
         <!-- build:js(.) scripts/plugins.js -->
 
         <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/javascript/main.js"></script>
 
         <!-- endbuild -->
 

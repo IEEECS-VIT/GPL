@@ -1,8 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
 html{
   min-height: 100%;
-
   
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body{
+
+  min-height: 100%;
+
+
 }
 
 h1{
@@ -10,7 +20,7 @@ h1{
 }
 
 *{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto';
   text-rendering: optimizelegibility;
 font-feature-settings: "liga", "kern";
 }
@@ -25,7 +35,7 @@ font-feature-settings: "liga", "kern";
   background: linear-gradient(
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
-    ),url(../images/one.jpg) no-repeat center center fixed;
+    ),url(/images/one.jpg) no-repeat center center fixed;
   background-size: cover;
 
 }
@@ -35,7 +45,7 @@ font-feature-settings: "liga", "kern";
     background: linear-gradient(
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
-    ),url(../images/two.jpg) no-repeat center center fixed;
+    ),url(/images/two.jpg) no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -43,7 +53,7 @@ font-feature-settings: "liga", "kern";
     background: linear-gradient(
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
-    ),url(../images/three.jpg) no-repeat center center fixed;
+    ),url(/images/three.jpg) no-repeat center center fixed;
   background-size: cover;
 
 }
@@ -53,40 +63,54 @@ font-feature-settings: "liga", "kern";
 /* Carousel base class */
 .carousel {
   height: 500px;
-  margin-bottom: 60px;
-  height: 100vh;
-  top: 0;
+  min-height: 90vh;
+  
 }
+
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   z-index: 10;
-  padding-bottom: 10%;
+  
+  height: 250px;
+  max-width:70vw;
+
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+
 }
 
 /* Declare heights because of positioning of img element */
+
 .carousel .item {
   height: 500px;
-  height: 100vh;
-  background-color: #777;
+  min-height: 90vh;
+  /*background-color: #777;*/
 
 }
+
+
 
 
 .navbar{
 
-  background: rgba(255, 255, 255, 0.90);
-    -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.39);
-    -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.39);
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.39);
+  background: #0D5B67;
+    -webkit-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.39);
+    -moz-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.39);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.39);
+
+    border-bottom: none;
 
 
 }
 
-.navbar .container-fluid .navbar-header .navbar-toggle,
-.navbar .container-fluid .navbar-header .navbar-toggle:hover,
-.navbar .container-fluid .navbar-header .navbar-toggle:active,
-.navbar .container-fluid .navbar-header .navbar-toggle:visited,
-.navbar .container-fluid .navbar-header .navbar-toggle:link{
+
+
+.navbar .navbar-header .navbar-toggle,
+.navbar .navbar-header .navbar-toggle:hover,
+.navbar .navbar-header .navbar-toggle:active,
+.navbar .navbar-header .navbar-toggle:visited,
+.navbar .navbar-header .navbar-toggle:link{
   border: none;
   background: none;
 }
@@ -121,32 +145,69 @@ font-feature-settings: "liga", "kern";
 #myCarousel{
   padding-bottom: 0;
   margin-bottom: 0;
+
 }
 
 
-.navbar .container-fluid .navbar-collapse .nav .navbar-active > a{
-  color: #999;
+.navbar{
+  margin-bottom: 0;
+}
+.navbar  .navbar-collapse .nav .navbar-active > a{
+  color: #bbb;
   pointer-events: none;
-
+  
 }
-
-.navbar .container-fluid .navbar-collapse .nav li a{
-  color: #333;
+.navbar .navbar-header,
+.navbar  .navbar-collapse .nav li a{
+  color: #fff;
   font-size: 13px;
   line-height: 18px;
+  
 }
 
-.navbar .container-fluid .navbar-collapse .nav li a:hover{
+.navbar  .navbar-collapse .nav li a:hover{
   color: #08c;
+  
 }
+.navbar .banner{
+  background: white;
+}
+
+.page-title{
+  height: 60px;
+
+  padding-top: 0;
+  margin-top: 0;
+
+
+}
+.page-title h2{
+  margin-top: 0px;
+}
+
+body {
+  /* Margin bottom by footer height */
+  
+  /*margin-top: 50px;*/
+}
+.footer {
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+}
+
 
 footer{
   
-  background-color: #333;
+  background-color: #002834;
   margin-bottom: 0;
   height: 60px;
-  
-  position: relative;
+      -webkit-box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.39);
+    -moz-box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.39);
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.39);
+
+  width: 100%;
+
 }
 
 .footer-logo{
@@ -160,4 +221,58 @@ footer{
   display: block;
   margin-right: auto;
   margin-left: auto;
+}
+
+ .custom-carousel{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+.brand{
+  padding-top: 0;
+  margin-top: 0;
+  top: 5px;
+
+  position: absolute;
+}
+
+.gplheadertext{
+  position: absolute;
+  margin: 10px;
+  color: #0D5B67;
+}
+
+.logo{
+  margin-left: 63px;
+  margin-top: 6px;
+}
+
+
+#navbar *{
+
+    z-index: 10000;
+
+}
+
+#navbar.affix {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10000;
+}
+
+#navbar > .navbar-inner {
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -o-border-radius: 0;
+}
+
+@media (max-width: 768px) {
+  #gplheader{
+    height: 0;
+  }
 }
