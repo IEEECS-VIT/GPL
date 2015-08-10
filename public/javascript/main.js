@@ -7,7 +7,7 @@ $(document).ready(function () {
     $('#navbar-wrapper').height($("#navbar").height());
 
     var calculated_offset = 0; 
-    calculated_offset = $('#navbar').offset().top;
+    //calculated_offset = $('#navbar').offset().top;
 
 
     console.log(calculated_offset);
