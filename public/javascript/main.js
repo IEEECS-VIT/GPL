@@ -1,10 +1,10 @@
-$( "#navbar" ).load( "/html/navbar.html");
-$( "#footer" ).load( "/html/footer.html");
+$( "#navbar" ).load( "navbar.html");
+$( "#footer" ).load( "footer.html");
 
 $(document).ready(function () {
 
  	sticky_nav = function() {
-    $('#navbar-wrapper').height($("#navbar").height());
+        $('#navbar-wrapper').height($("#navbar").height());
 
     var calculated_offset = 0; 
     //calculated_offset = $('#navbar').offset().top;

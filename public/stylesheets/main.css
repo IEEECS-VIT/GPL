@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
 html{
   min-height: 100%;
+    background-color: white;
   
 }
 
@@ -10,7 +11,9 @@ html {
 }
 body{
 
+    overflow: scroll;
   min-height: 100%;
+    margin-bottom: 60px;
 
 
 }
@@ -35,7 +38,7 @@ font-feature-settings: "liga", "kern";
   background: linear-gradient(
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
-    ),url(/images/one.jpg) no-repeat center center fixed;
+    ),url(images/one.jpg) no-repeat center center fixed;
   background-size: cover;
 
 }
@@ -45,7 +48,7 @@ font-feature-settings: "liga", "kern";
     background: linear-gradient(
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
-    ),url(/images/two.jpg) no-repeat center center fixed;
+    ),url(images/two.jpg) no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -53,7 +56,7 @@ font-feature-settings: "liga", "kern";
     background: linear-gradient(
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
-    ),url(/images/three.jpg) no-repeat center center fixed;
+    ),url(images/three.jpg) no-repeat center center fixed;
   background-size: cover;
 
 }
@@ -114,7 +117,10 @@ font-feature-settings: "liga", "kern";
   border: none;
   background: none;
 }
-
+.carousel-indicators{
+    z-index: 10;
+    color: darkred;
+}
 
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
 .carousel-fade .carousel-inner .item {
@@ -172,7 +178,10 @@ font-feature-settings: "liga", "kern";
 .navbar .banner{
   background: white;
 }
-
+.banner
+{
+    text-align: center;
+}
 .page-title{
   height: 60px;
 
@@ -193,7 +202,12 @@ body {
 .footer {
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 60px;
+    height: 60px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 50;
+
 }
 
 
