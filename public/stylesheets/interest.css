@@ -76,10 +76,11 @@ footer{
     display: block;
     margin-right: auto;
     margin-left: auto;
+    text-align: center;
 }
 
 .gpllogo{
-    max-height: 200px;
+    max-height: 150px;
 }
 
 .img-60 {
