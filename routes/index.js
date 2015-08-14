@@ -426,6 +426,7 @@ router.post('/interest', function (req, res) // interest form
     var newUser =
     {
         name: req.body.name,
+        regno: req.body.regno,
         email: req.body.email,
         phone: req.body.phone
     };
