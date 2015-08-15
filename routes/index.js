@@ -121,10 +121,7 @@ router.post('/interest', function (req, res) // interest form
                 {
                     console.log(err.message);
                 }
-                else
-                {
-                    res.redirect('/');
-                }
+                res.redirect('/');
             };
             email.sendMail(options, onSend);
         }
