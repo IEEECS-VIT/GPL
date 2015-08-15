@@ -77,7 +77,7 @@ exports.fetchNextMatch = function (doc1, doc2, callback) {
         }
         else
         {
-            collection = 'matchday' + (parseInt(process.env.DAY) + 1) || 2;
+            collection = db.collection('matchday' + (parseInt(process.env.DAY) + 1) || 2);
             var onFetch = function (err, doc)
             {
                 db.close();
@@ -104,7 +104,6 @@ exports.fetchNextMatch = function (doc1, doc2, callback) {
                 mongoTeam.getTeam(credentials, callback);
             };
 
-            collection = db.collection(collectionName);
             parallelTasks.team1 = function (asyncCallback)
             {
                 collection.findOne(doc1, asyncCallback);
@@ -142,7 +141,7 @@ exports.match = function(day, filter, slice, callback)
                     callback(null, doc);
                 }
             };
-            collection.find(filter, slice, onFind);
+            collection.findOne(filter, slice, onFind);
         }
     };
     MongoClient.connect(mongoUri, onConnect);

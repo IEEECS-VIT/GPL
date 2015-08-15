@@ -16,6 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var collection;
 var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
@@ -28,7 +29,7 @@ exports.insert = function (doc, callback) {
             callback(err);
         }
         else {
-            var collection = db.collection('features');
+            collection = db.collection('features');
             var onInsert = function (err, docs)
             {
                 db.close();
@@ -47,7 +48,7 @@ exports.insert = function (doc, callback) {
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.getInfo = function(doc, callback)
+exports.getInfo = function(callback)
 {
     var onConnect = function(err, db)
     {
@@ -57,7 +58,7 @@ exports.getInfo = function(doc, callback)
         }
         else
         {
-            var collection = db.collection('info');
+            collection = db.collection('info');
             var onGetInfo = function(err, doc)
             {
                 db.close();
@@ -70,7 +71,7 @@ exports.getInfo = function(doc, callback)
                     callback(null, doc);
                 }
             };
-            collection.find(doc, onGetInfo);
+            collection.findOne(onGetInfo);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
@@ -102,4 +103,21 @@ exports.notify = function(callback)
         }
     };
     MongoClient.connect(mongoUri, onConnect);
+};
+
+exports.simulate = function(callback)
+{
+    var simulationControl = require(path.join(__dirname, '..', 'worker', 'simulation-controller'));
+    var onSimulate = function(err, docs)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            callback(null, docs);
+        }
+    };
+    simulationControl.initSimulation(process.env.DAY || 1, onSimulate);
 };

@@ -14,7 +14,7 @@ $(document).ready(function () {
     $('#navbar').affix({
         offset: { top: calculated_offset }
     });
-	}
+	};
 	sticky_nav();
 	$(window).on('resize', function(){
 

@@ -23,7 +23,7 @@ var MongoClient = require('mongodb').MongoClient;
 var mongoUsers = require(path.join(__dirname, 'mongo-users'));
 var mongoMatches = require(path.join(__dirname, 'mongo-matches'));
 var mongoFeatures = require(path.join(__dirname, 'mongo-features'));
-var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection.js'));
 
 var getPlayer = function (id, callback) {
@@ -172,6 +172,17 @@ exports.dashboard = function(doc, callback)
         else
         {
             collection = db.collection(match);
+            var slice =
+            {
+                dob : 0,
+                email : 0,
+                phone : 0,
+                squad : 0,
+                team : 0,
+                manager_name : 0,
+                authStrategy : 0,
+                surplus : 0
+            };
             var onFind = function(err, doc)
             {
                 if(err)
@@ -183,7 +194,7 @@ exports.dashboard = function(doc, callback)
                     callback(null, doc);
                 }
             };
-            collection.find(doc, onFind);
+            collection.findOne(doc, slice, onFind);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
@@ -255,53 +266,43 @@ exports.adminInfo = function(callback)
         }
         else
         {
-             callback(null, result);
+            callback(null, result);
         }
     };
-    var onFetch = function(err, doc)
-    {
-        if(err)
-        {
-             callback(err);
-        }
-        else
-        {
-             console.log(doc);
-        }
-    };
+
     var parallelTasks =
     {
-        'total' : function ()
+        total : function (asyncCallback)
         {
-            mongoUsers.getCount(onFetch);
+            mongoUsers.getCount({}, asyncCallback);
         },
-        'facebook' : function ()
+        facebook : function (asyncCallback)
         {
-            mongoUsers.getCount({authStrategy: 'facebook'}, onFetch);
+            mongoUsers.getCount({authStrategy: 'facebook'}, asyncCallback);
         },
-        'google' : function ()
+        google : function (asyncCallback)
         {
-            mongoUsers.getCount({authStrategy: 'google'}, onFetch);
+            mongoUsers.getCount({authStrategy: 'google'}, asyncCallback);
         },
-        'twitter' : function ()
+        twitter : function (asyncCallback)
         {
-            mongoUsers.getCount({authStrategy: 'twitter'}, onFetch);
+            mongoUsers.getCount({authStrategy: 'twitter'}, asyncCallback);
         },
-        'local' : function ()
+        local : function (asyncCallback)
         {
-            mongoUsers.getCount({authStrategy: 'local'}, onFetch);
+            mongoUsers.getCount({authStrategy: 'local'}, asyncCallback);
         },
-        'emptySquad' : function ()
+        emptySquad : function (asyncCallback)
         {
-            mongoUsers.getCount({squad: []}, onFetch);
+            mongoUsers.getCount({squad: []}, asyncCallback);
         },
-        'emptyTeam' : function ()
+        emptyTeam : function (asyncCallback)
         {
-            mongoUsers.getCount({team: []}, onFetch);
+            mongoUsers.getCount({team: []}, asyncCallback);
         },
-        'features' : function ()
+        features : function (asyncCallback)
         {
-            mongoFeatures.notify(onFetch);
+            mongoFeatures.notify(asyncCallback);
         }
     };
     async.parallel(parallelTasks, onParallel);
@@ -309,10 +310,13 @@ exports.adminInfo = function(callback)
 
 exports.schedule = function(doc, callback)
 {
-     var slice = {
+     var slice =
+     {
            _id : 0,
            scorecard : 0,
-           commentary : 0
+           commentary : 0,
+           TimeStamp : 0,
+           MoM : 0
      };
      var onParallel = function(err, result)
      {
@@ -325,52 +329,63 @@ exports.schedule = function(doc, callback)
                callback(null, result);
            }
      };
-     var onGet = function(err, doc)
-     {
-           if(err)
-           {
-               callback(err);
-           }
-           else
-           {
-               console.log(doc);
-           }
-     };
+
      var parallelTasks =
      [
-           function()
+           function(asyncCallback)
            {
-               mongoMatches.match(1, doc, slice, onGet);
+               mongoMatches.match(1, doc, slice, asyncCallback);
            },
-           function()
+           function(asyncCallback)
            {
-               mongoMatches.match(2, doc, slice, onGet);
+               mongoMatches.match(2, doc, slice, asyncCallback);
            },
-           function()
+           function(asyncCallback)
            {
-               mongoMatches.match(3, doc, slice, onGet);
+               mongoMatches.match(3, doc, slice, asyncCallback);
            },
-           function()
+           function(asyncCallback)
            {
-               mongoMatches.match(4, doc, slice, onGet);
+               mongoMatches.match(4, doc, slice, asyncCallback);
            },
-           function()
+           function(asyncCallback)
            {
-               mongoMatches.match(5, doc, slice, onGet);
+               mongoMatches.match(5, doc, slice, asyncCallback);
            },
-           function()
+           function(asyncCallback)
            {
-               mongoMatches.match(6, doc, slice, onGet);
+               mongoMatches.match(6, doc, slice, asyncCallback);
            },
-           function()
+           function(asyncCallback)
            {
-               mongoMatches.match(7, doc, slice, onGet);
+               mongoMatches.match(7, doc, slice, asyncCallback);
            }
      ];
      async.parallel(parallelTasks, onParallel);
 };
 
 exports.fetchMatches = function(team, slice, callback)
+{
+    var matches = [];
+    var day = process.env.DAY || 1;
+    var onGet = function(err, doc)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            matches.push(doc);
+        }
+    };
+    for(i = 1; i <= day; ++i)
+    {
+        mongoMatches.match(i, team, slice, onGet);
+    }
+};
+
+exports.check = function(team, callback)
 {
     var onConnect = function(err, db)
     {
@@ -380,10 +395,8 @@ exports.fetchMatches = function(team, slice, callback)
         }
         else
         {
-            db.close();
-            var matches = [];
-            var day = process.env.DAY || 1;
-            var onGet = function(err, doc)
+            collection = db.collection('users');
+            var onFind = function(err, result)
             {
                 if(err)
                 {
@@ -391,13 +404,10 @@ exports.fetchMatches = function(team, slice, callback)
                 }
                 else
                 {
-                    matches.push(doc);
+                    callback(null, result ? false : true);
                 }
             };
-            for(i = 1; i <= day; ++i)
-            {
-                mongoMatches.match(i, team, slice, onGet);
-            }
+            collection.findOne(team, onFind);
         }
     };
     MongoClient.connect(mongoUri, onConnect);

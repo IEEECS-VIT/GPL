@@ -53,7 +53,7 @@ exports.getCount = function (doc, callback) {
     {
         if (err)
         {
-            throw err;
+            callback(err);
         }
         else
         {
@@ -63,7 +63,7 @@ exports.getCount = function (doc, callback) {
                 db.close();
                 if (err)
                 {
-                    throw err;
+                    callback(err);
                 }
                 else
                 {
@@ -327,7 +327,7 @@ exports.updateUserTeam = function (doc, arr, stats, cost, callback) {
     {
         if (err)
         {
-            throw err;
+            callback(err);
         }
         else
         {
@@ -361,7 +361,7 @@ exports.updateMatchSquad = function (doc, arr, callback) {
     {
         if (err)
         {
-            throw err;
+            callback(err);
         }
         else
         {
