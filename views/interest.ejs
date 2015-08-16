@@ -46,97 +46,79 @@
     </script>
 </head>
 <body>
-<div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
-    <header class="banner" role="banner">
-
-        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo" src="/images/gpllogo.png" height="50" class="pull-left"/><span class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg" height="60" class="pull-right"/></span>
-
-
-    </header>
-</div>
-<div id="navbar-wrapper">
-    <nav id="navbar" ></nav>
-</div>
 <div class="container">
 
     <div class="row">
         <div class="col-md-8 col-md-offset-2 shadow-effect" id="form-container">
+            <div class="row">
+                <div class="col-xs-4">
+                    <a href="http://www.facebook.com/ieeecsvit" target="_blank">
+                        <img src="images/logo_nbg.png" class="img-responsive pull-left padding-2 centered margin-top-4">
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a href="http://www.facebook.com/gravitaspremierleague" target="_blank">
+                        <img src="images/gpllogo.png" class="img-responsive img-60 padding-2 centered">
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a href="http://www.vitgravitas.com" target="_blank">
+                        <img src="/images/gravitas'15.png" class="img-responsive padding-2 pull-right margin-top-4">
+                    </a>
+                </div>
+            </div>
             <div class="col-md-10 col-md-offset-1">
                 <div class="centered">
-                    <h1><img src="images/gpllogo.png" class="img-responsive gpllogo centered">graVITas Premier League
+                    <h1>graVITas Premier League
                         2.0</h1>
 
-                    <p class="text-center lead">Coming Soon! <br> To keep yourself updated fill in the form!</p>
+                    <p class="text-center"><span class="lead">Coming Soon!</span><br> To keep yourself updated fill in
+                        the form!</p>
                 </div>
 
                 <form name="int" action="/interest" method="post">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
-                    <fieldset>
-                        <legend>Player Details</legend>
-                        <div class="form-group">
 
-                            <label for="team">Name:<i
-                                        style="color:red;">*</i> </label>
-                            <input type="text" id="team" class="form-control" placeholder="Name" name="name"/>
-                        </div>
+                    <div class="form-group">
+
+                        <label for="team">Name:<i
+                                    style="color:red;">*</i> </label>
+                        <input type="text" id="team" class="form-control" placeholder="Name" name="name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="team">Registration Number: (VIT Students Only)</label>
+                        <input type="text" id="team" class="form-control"
+                               value="NA" name="regno"/>
+                    </div>
+                    <!--Username/Team Name -->
 
 
-                        <!--Username/Team Name -->
+                    <div class="form-group">
+                        <label for="mob">Mobile:<i style="color:red;">*</i> </label>
+                        <input type="tel" id="mob" class="form-control" placeholder="9876543210" name="phone"/>
+                    </div>
+                    <!-- password-->
+                    <div class="form-group">
+                        <label for="email">Email:<i
+                                    style="color:red;">*</i> </label>
+                        <input type="email" id="email" class="form-control" placeholder="example@domain.com"
+                               name="email"/>
+                    </div>
 
-
-                        <div class="form-group">
-                            <label for="mob">Mobile:<i style="color:red;">*</i> </label>
-                            <input type="tel" id="mob" class="form-control" placeholder="9876543210" name="phone"/>
-                        </div>
-                        <!-- password-->
-                        <div class="form-group">
-                            <label for="email">Email:<i
-                                        style="color:red;">*</i> </label>
-                            <input type="email" id="email" class="form-control" placeholder="example@domain.com"
-                                   name="email"/>
-                        </div>
-
-                        <input type="submit" id="button" class="btn btn-primary btn-lg centered"
-                               name="button"
-                               value="Submit"
-                               onclick="valid()"/>
-                    </fieldset>
+                    <input type="submit" id="button" class="btn btn-primary btn-lg centered"
+                           name="button"
+                           value="Submit"
+                           onclick="valid()"/>
                 </form>
             </div>
         </div>
     </div>
-    </div>
-
-
+</div>
+<!--
 <footer id="footer" class="footer">
-</footer>
-<!--[if lt IE 10]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
-
-
-<!-- build:js(.) scripts/vendor.js -->
-<!-- bower:js -->
+</footer>-->
 <script src="/bower_components/jquery/dist/jquery.js"></script>
-<!-- endbower -->
-<!-- endbuild -->
-
-<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-<script>
-    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-        e.src='//www.google-analytics.com/analytics.js';
-        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-    ga('create','UA-XXXXX-X');ga('send','pageview');
-</script>
-
-<!-- build:js(.) scripts/plugins.js -->
-
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/javascript/main.js"></script>
-
-
-<!-- footer -->
 </body>
 </html>

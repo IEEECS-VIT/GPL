@@ -162,7 +162,7 @@ exports.initSimulation = function (day, masterCallback)
             {
                 if(newMatchDoc.MoM.points > points)
                 {
-                   info.MoM = newMatchDoc;
+                   info.MoM = newMatchDoc.MoM;
                    points = newMatchDoc.MoM.points;
                 }
                 database.collection('matchday' + day).updateOne({_id: newMatchDoc._id}, newMatchDoc, asyncCallback);
@@ -170,18 +170,18 @@ exports.initSimulation = function (day, masterCallback)
 
             var parallelTasks2 =
                 [
-                function (asyncCallback)
-                {
-                    updateUser(newData.team1, asyncCallback);
-                },
-                function (asyncCallback)
-                {
-                    updateUser(newData.team2, asyncCallback);
-                },
-                function (asyncCallback)
-                {
-                    updateMatch(newData.match, asyncCallback);
-                }
+                    function (asyncCallback)
+                    {
+                        updateUser(newData.team1, asyncCallback);
+                    },
+                    function (asyncCallback)
+                    {
+                        updateUser(newData.team2, asyncCallback);
+                    },
+                    function (asyncCallback)
+                    {
+                        updateMatch(newData.match, asyncCallback);
+                    }
             ];
             console.log(newData.team1._id + ' vs ' + newData.team2._id + ' (Match ' + newData.match._id + ') is now being updated');
             async.parallel(parallelTasks2, callback);

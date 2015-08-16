@@ -55,3 +55,7 @@ function valid() {
         return false;
     }
 }
+
+addEventListener('DOMContentReady', function(){
+    document.getElementsByName('name')[0].focus();
+}, false);

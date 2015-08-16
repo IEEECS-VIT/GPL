@@ -41,7 +41,8 @@ router.get('/', function (req, res) {
     var results = {};
     if (req.signedCookies.name || req.user)
     {
-        var credentials = {
+        var credentials =
+        {
             '_id': req.signedCookies.name
         };
         var onFetch = function (err, doc)
@@ -400,16 +401,16 @@ router.get('/reset/:token', function (req, res) {
     mongoUsers.getReset({token: req.params.token, expire: {$gt: Date.now()}}, onGetReset);
 });
 
-router.get('/rules', function (req, res) {
+router.get(/\/rules?/, function (req, res) {
     res.render('rules');
 });
 
-router.get('/sponsors', function (req, res) // sponsors page
+/*router.get('/sponsors', function (req, res) // sponsors page
 {
     res.render('sponsors');
-});
+});*/
 
-router.get('/prize', function (req, res) // page to view prizes
+router.get(/\/prizes?/, function (req, res) // page to view prizes
 {
     res.render('prize');
 });
@@ -488,7 +489,7 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
         };
         mongoTeam.getTeam(credentials, getTeam);
     }
-    else                                                        // if cookies does not exist, go to login page
+    else                                                        // if cookies do not exist, go to login page
     {
         req.session.route = 'team';
         res.redirect('/');
@@ -517,7 +518,7 @@ router.get('/info', function (req, res) {
                     res.render('info', {info: doc});
                 }
             };
-            mongoMatches.getInfo(onGetInfo);
+            mongoFeatures.getInfo(onGetInfo);
         }
     }
     else
@@ -567,11 +568,6 @@ router.post('/feature', function (req, res) {
     }
 });
 
-router.get('/developers', function (req, res)
-{
-    res.render('timeline');
-});
-
 router.get('/dashboard', function (req, res) {
     if (req.signedCookies.name || req.user)
     {
@@ -602,19 +598,7 @@ router.get('/schedule', function (req, res) // schedule page
     if (req.signedCookies.name || req.user)
     {
         var team = req.signedCookies.name || req.user._id;
-        var user =
-        {
-           $or : [
-               {
-                   "Team_1" :  team
-               },
-               {
-                   "Team_2" :  team
-               }
-           ]
-        };
-
-        var onFind = function(err, doc)
+        var onMap = function(err, doc)
         {
             if(err)
             {
@@ -622,16 +606,40 @@ router.get('/schedule', function (req, res) // schedule page
             }
             else
             {
-                res.render('schedule', {schedule : doc});
+                var onFind = function(err, result)
+                {
+                    if(err)
+                    {
+                        console.log(err.message);
+                    }
+                    else
+                    {
+                        res.render('schedule', {schedule : result});
+                    }
+                };
+
+                var user =
+                {
+                    $or :
+                    [
+                        {
+                            "Team_1" :  doc
+                        },
+                        {
+                            "Team_2" :  doc
+                        }
+                    ]
+                };
+                mongoTeam.schedule(user, onFind);
             }
         };
-        mongoMatches.schedule(user, onFind);
+
+        mongoTeam.map({'_id' : team}, onMap);
     }
     else
     {
         res.redirect('/');
     }
-    res.render('schedule', {results: (req.signedCookies.name || req.user ? 1 : 0)});
 });
 
 module.exports = router;

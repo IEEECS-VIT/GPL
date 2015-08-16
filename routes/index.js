@@ -26,6 +26,7 @@ var email = require(path.join(__dirname, '..', 'worker', 'email'));
 var record = require(path.join(__dirname, '..', 'db', 'mongo-record'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
 var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
+var mongoFeatures = require(path.join(__dirname, '..', 'db', 'mongo-features'));
 
 try
 {
@@ -42,6 +43,7 @@ catch (err)
         throw "Failure to compile run time requirement: bcrypt(js)";
     }
 }
+
 
 if (process.env.LOGENTRIES_TOKEN)
 {
@@ -77,8 +79,54 @@ router.get('/', function (req, res) {
     }
     else
     {
-        res.render('interest', {csrfToken: req.csrfToken()});
+        res.render('index');
     }
+});
+
+router.get('/interest', function (req, res) {
+    res.render('interest', {csrfToken: req.csrfToken()});
+});
+
+router.post('/interest', function (req, res) // interest form
+{
+    var newUser =
+    {
+        name: req.body.name,
+        regno: req.body.regno,
+        email: req.body.email,
+        phone: req.body.phone
+    };
+    var onInsert = function (err, docs)
+    {
+        if (err)
+        {
+            console.log(err.message);
+        }
+        else
+        {
+            var options =
+            {
+                from: 'gravitaspremierleague@gmail.com',
+                to: newUser.email,
+                subject: 'Welcome to graVITas premier league 2.0!',
+                html: "<table background='http://res.cloudinary.com/gpl/image/upload/general/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+                "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
+                "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> Thank you for your interest in graVITas Premier League <br>" +
+                "Please check out  our Facebook <a href='http://www.facebook.com/gravitaspremierleague' style='text-decoration: none;'>page</a> to stay close to all the action! </td>" +
+                "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE Computer Society</td></tr></table>"
+            };
+            var onSend = function(err)
+            {
+                if(err)
+                {
+                    console.log(err.message);
+                }
+                res.redirect('/');
+            };
+            email.sendMail(options, onSend);
+        }
+    };
+    mongoInterest.insert(newUser, onInsert);
 });
 
 // TODO: delete this route when ready to launch
@@ -417,54 +465,6 @@ router.get('/logout', function (req, res) {
     }
 });
 
-router.get('/interest', function (req, res) {
-    res.redirect('/', {csrfToken: req.csrfToken()});
-});
-
-router.post('/interest', function (req, res) // interest form
-{
-    var newUser =
-    {
-        name: req.body.name,
-        email: req.body.email,
-        phone: req.body.phone
-    };
-    var onInsert = function (err, docs)
-    {
-        if (err)
-        {
-            console.log(err.message);
-        }
-        else
-        {
-            var options =
-            {
-                from: 'gravitaspremierleague@gmail.com',
-                to: newUser.email,
-                subject: 'Welcome to graVITas premier league 2.0!',
-                html: "<table background='http://res.cloudinary.com/gpl/image/upload/general/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
-                "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
-                "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> Thank you for your interest in graVITas Premier League <br>" +
-                "Please check out  our Facebook <a href='http://www.facebook.com/gravitaspremierleague' style='text-decoration: none;'>page</a> to stay close to all the action! </td>" +
-                "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE Computer Society</td></tr></table>"
-            };
-            var onSend = function(err)
-            {
-                    if(err)
-                    {
-                        console.log(err.message);
-                    }
-                    else
-                    {
-                        res.redirect('/');
-                    }
-            };
-            email.sendMail(options, onSend);
-        }
-    };
-    mongoInterest.insert(newUser, onInsert);
-});
-
 router.get('/admin', function(req, res){
     if(req.signedCookies.admin)
     {
@@ -517,10 +517,10 @@ router.post('/social', function(req, res){
     mongoUsers.addSocialTeam(req, onAddTeam);
 });
 
-router.get('/timeline', function(req, res){
+router.get(/\/developers?/, function(req, res){
     if(req.user || req.signedCookies.name)
     {
-        res.render('timeline');
+        res.render('developers');
     }
     else
     {
@@ -531,7 +531,29 @@ router.get('/timeline', function(req, res){
 router.get('/privacy', function(req, res){
     if(req.user || req.signedCookies.name)
     {
-        res.render('privacyPrivacy');
+        res.render('privacy');
+    }
+    else
+    {
+        res.redirect('/');
+    }
+});
+
+router.get('/simulate', function(req, res){
+    if(req.signedCookies.admin)
+    {
+        var onSimulate = function(err, docs)
+        {
+            if(err)
+            {
+                console.log(err);
+            }
+            else
+            {
+                res.render('results', {results : docs});
+            }
+        };
+        mongoFeatures.simulate(onSimulate);
     }
     else
     {

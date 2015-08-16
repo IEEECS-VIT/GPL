@@ -451,7 +451,6 @@ exports.simulate = function (data, callback)
                             MoM.team = +toss_index;
                             MoM.id = strike[+strike_index];
                         }
-                        console.log('------------', +toss_index);
                         data.team[+toss_index].partnership_runs[current_partnership_index] = (partnership_runs[current_partnership_index] + data.team[+toss_index].partnership_runs[current_partnership_index] * data.team[+toss_index].played) / (data.team[+toss_index].played + 1);
                         data.team[+toss_index].partnership_balls[current_partnership_index] = (partnership_balls[current_partnership_index] + data.team[+toss_index].partnership_balls[current_partnership_index] * data.team[+toss_index].played) / (data.team[+toss_index].played + 1);
                         data.match.commentary.push(' ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ' balls' + ' ' + fours[strike[+strike_index]] + 'X4\'s ' + maximums[strike[+strike_index]] + 'X6\'s) SR: ' + (score[strike[+strike_index]] * 100 / balls[strike[+strike_index]]).toFixed(2) + 'Control: ' + (control[strike[+strike_index]] * 100).toFixed(2) + '%');

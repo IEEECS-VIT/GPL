@@ -15,7 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-module.exports = require('nodemailer').createTransport({
+var email = require('nodemailer').createTransport({
     service: 'Gmail',
     auth:
     {
@@ -23,3 +23,4 @@ module.exports = require('nodemailer').createTransport({
         pass: process.env.KEY
     }
 });
+module.exports = email;
