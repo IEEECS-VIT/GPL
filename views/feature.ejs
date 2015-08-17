@@ -30,6 +30,7 @@
     <div class="row">
 
         <form role="form" method="post" action="/home/feature">
+            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
             <div class="form-group">
                 <label for="name">Enter your Name :</label>
                 <input type="text" class="form-control" placeholder="Name" id="name" name="f_name">

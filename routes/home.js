@@ -39,7 +39,7 @@ if (process.env.LOGENTRIES_TOKEN)
 
 router.get('/', function (req, res) {
     var results = {};
-    if (req.signedCookies.name || req.user)
+    if (req.signedCookies.name)
     {
         var credentials =
         {
@@ -118,7 +118,7 @@ router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
     {
         res.render("leaderboard", {leaderboard: req.signedCookies.lead});
     }
-    else if (req.signedCookies.name || req.user)                           // if cookies exists then access the database
+    else if (req.signedCookies.name)                           // if cookies exists then access the database
     {
         var onFetch = function (err, documents)
         {
@@ -132,7 +132,7 @@ router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
                 time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
                 temp = new Date(time.getFullYear(), time.getMonth(), time.getDate() + 1);
                 res.cookie('lead', documents, {maxAge: temp.getTime() - time.getTime(), signed: true});
-                res.render("leaderboard", {leaderboard: documents, name: req.signedCookies.name || req.user._id});
+                res.render("leaderboard", {leaderboard: documents, name: req.signedCookies.name._id});
             }
         };
         mongoUsers.getLeader(req.signedCookies.name, onFetch);
@@ -144,7 +144,7 @@ router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
 });
 
 router.get('/matches', function (req, res) {
-    if (req.signedCookies.name || req.user)
+    if (req.signedCookies.name)
     {
         var teamName = req.signedCookies.name;
         var credentials =
@@ -178,12 +178,9 @@ router.get('/matches', function (req, res) {
                 response.test = "False";
                 var onFinish = function (err, results)
                 {
-                    if (err)
+                    if (err && log)
                     {
-                        if (log)
-                        {
-                            log.log('debug', {Error: err, Message: err.message});
-                        }
+                        log.log('debug', {Error: err, Message: err.message});
                     }
                     else
                     {
@@ -205,7 +202,6 @@ router.get('/matches', function (req, res) {
                 parallel_tasks.nextMatch = function (asyncCallback)
                 {
                     mongoMatches.fetchNextMatch(credentials1, credentials2, asyncCallback);
-
                 };
                 async.parallel(parallel_tasks, onFinish);
             }
@@ -220,7 +216,7 @@ router.get('/matches', function (req, res) {
 });
 
 router.post('/getsquad', function (req, res) {
-    if (req.signedCookies.name || req.user)
+    if (req.signedCookies.name)
     {
         var teamname = req.signedCookies.name;
         var credentials =
@@ -378,29 +374,6 @@ router.post('/getTeam', function (req, res) {
     mongoUsers.updateUserTeam(credentials, players, stats, cost, onUpdate);
 });
 
-router.get('/forgot/password', function (req, res) {
-    res.render('forgot', {csrfToken: req.csrfToken()});
-});
-
-router.get('/reset/:token', function (req, res) {
-    var onGetReset = function (err, doc)
-    {
-        if (err)
-        {
-            console.log(err.message);
-        }
-        else if (!doc)
-        {
-            res.redirect('/forgot');
-        }
-        else
-        {
-            res.render('reset', {csrfToken: req.csrfToken()});
-        }
-    };
-    mongoUsers.getReset({token: req.params.token, expire: {$gt: Date.now()}}, onGetReset);
-});
-
 router.get(/\/rules?/, function (req, res) {
     res.render('rules');
 });
@@ -422,7 +395,7 @@ router.get('/trailer', function (req, res) // trailer page
 
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
-    if (req.signedCookies.name || req.user)
+    if (req.signedCookies.name)
     {
         var doc =
         {
@@ -468,7 +441,7 @@ router.get('/players', function (req, res) // page for all players, only availab
 
 router.get('/team', function (req, res) // view the assigned playing 11 with options to change the playing 11
 {
-    if (req.signedCookies.name || req.user)                           // if cookies exist, then access the database
+    if (req.signedCookies.name)                           // if cookies exist, then access the database
     {
         var credentials =
         {
@@ -497,7 +470,7 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
 });
 
 router.get('/info', function (req, res) {
-    if (req.signedCookies.name || req.user)
+    if (req.signedCookies.name)
     {
         if (req.signedCookies.info)
         {
@@ -528,9 +501,9 @@ router.get('/info', function (req, res) {
 });
 
 router.get('/feature', function (req, res) {
-    if(req.signedCookies.name || req.user)
+    if(req.signedCookies.name || 1)
     {
-        res.render('feature');
+        res.render('feature', {csrfToken : req.csrfToken()});
     }
     else
     {
@@ -539,7 +512,7 @@ router.get('/feature', function (req, res) {
 });
 
 router.post('/feature', function (req, res) {
-    if (req.signedCookies.name || req.user)
+    if (req.signedCookies.name)
     {
         var feature =
         {
@@ -569,10 +542,11 @@ router.post('/feature', function (req, res) {
 });
 
 router.get('/dashboard', function (req, res) {
-    if (req.signedCookies.name || req.user)
+    if (req.signedCookies.name)
     {
-        var user = {
-            _id : req.signedCookies.name || req.user._id
+        var user =
+        {
+            _id : req.signedCookies.name
         };
         var onFind = function(err, doc)
         {
@@ -595,9 +569,9 @@ router.get('/dashboard', function (req, res) {
 
 router.get('/schedule', function (req, res) // schedule page
 {
-    if (req.signedCookies.name || req.user)
+    if (req.signedCookies.name)
     {
-        var team = req.signedCookies.name || req.user._id;
+        var team = req.signedCookies.name._id;
         var onMap = function(err, doc)
         {
             if(err)

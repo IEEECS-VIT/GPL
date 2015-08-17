@@ -1,0 +1,193 @@
+
+html, body {
+    height: 100%;
+    font-family: 'Roboto', arial, sans-serif;
+
+}
+
+#sidenav > .container-fluid > .nav > li,
+#sidenav > .container-fluid > .nav > li:hover,
+#sidenav > .container-fluid > .nav > li > a {
+    border-radius: 0;
+}
+
+#main-content > .navbar {
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.06), 0px 2px 5px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    border: none;
+    z-index: 2;
+    background: #0D5B67;
+
+}
+
+#main-content > .navbar > * {
+    z-index: 5;
+}
+
+.container-fluid {
+    height: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.wrapper {
+    margin-top: 7.5px;
+    height: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.nav {
+    height: 100%;
+}
+
+.card {
+    width: auto;
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.06), 0px 2px 5px 0px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+    border-radius: 3px;
+
+}
+
+.chart-container {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#line-chart {
+    height: 50px;
+    width: 200px;
+
+}
+
+@media (max-width: 650px) {
+    #line-chart {
+
+        height: 300px;
+        width: 300px;
+
+    }
+}
+
+.card > canvas {
+    height: 100%;
+}
+
+.card-content {
+    width: auto;
+    padding: 20px;
+}
+
+.card-content > h3 {
+    width: 100%;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.card-yellow {
+    background: #fffde7;
+}
+
+.card-blue {
+    background: #e1f5fe;
+}
+
+.card-green {
+    background: #f1f8e9;
+}
+
+.full-width {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+#sidenav {
+    top: 0;
+    bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: #4F4E3A;
+    min-height: 100%;
+    z-index: 10;
+}
+
+#wrapper {
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.navbar-toggle {
+    margin-left: 15px;
+}
+
+#sidenav a {
+    color: #ffffff;
+    background: transparent;
+    padding-left: 5px;
+}
+
+#sidenav .nav a:hover {
+    background-color: #363521;
+}
+
+#sidenav .nav .active a:hover {
+    background-color: #1C1B07;
+}
+
+#sidenav .nav li.active, .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:link {
+    background-color: #1C1B07;
+}
+
+.nav-pills > li > a:visited, .nav-pills > li > a:active, .nav-pills > li > a {
+    background: transparent;
+}
+
+.navbar-collapse {
+    overflow: hidden;
+}
+
+#topbar-toggle {
+    height: 44px;
+    background: url(/images/ellipsis.png) no-repeat center;
+    background-size: 5px;
+    border: none;
+}
+
+#sidenav-toggle {
+    height: 44px;
+    border: none;
+}
+
+#sidenav-toggle:hover {
+    background: transparent;
+    border: none;
+}
+
+#sidenav-toggle {
+    background: transparent;
+    border: none;
+}
+
+#navbar {
+    padding-right: 10px;
+
+}
+
+#sidenav-toggle:active,
+#sidenav-toggle:visited {
+    background: transparent;
+    border: none;
+}
+
+#sidenav > ul > img {
+    max-height: 270px;
+
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #ddd;
+}

@@ -471,7 +471,7 @@ exports.get = function (doc, callback) {
                     callback(null, user);
                 }
             };
-            collection.findOne({_id: require('mongodb').ObjectID(doc)}, onFind);
+            collection.findOne({_id: doc}, onFind);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
