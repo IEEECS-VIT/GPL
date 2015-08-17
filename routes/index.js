@@ -54,7 +54,7 @@ if (process.env.LOGENTRIES_TOKEN)
 }
 
 router.get('/', function (req, res) {
-    if (req.signedCookies.name || req.user)
+    if (req.signedCookies.name)
     {
         if (log)
         {
@@ -144,10 +144,9 @@ router.post('/interest', function (req, res) // interest form
 router.post('/login', function (req, res) {
     var user = req.body.team_name;
     var password = req.body.password;
-    if (req.signedCookies.name || req.user)
+    if (req.signedCookies.name)
     {
-        delete req.user;
-        res.clearCookie('name', {});
+        res.clearCookie('name');
     }
     if (log)
     {
@@ -213,6 +212,10 @@ router.post('/login', function (req, res) {
     mongoUsers.fetch(credentials, onFetch);
 });
 
+router.get('/forgot/password', function(req, res){
+    res.render('forgot', {csrfToken : req.csrfToken()});
+});
+
 router.post('/forgot/password', function (req, res) {
     var doc =
     {
@@ -256,19 +259,35 @@ router.post('/forgot/password', function (req, res) {
                 {
                     console.log(err.message);
                 }
-                else
-                {
-                    res.redirect('/login');
-                }
+                res.redirect('/login');
             });
         }
         else
         {
             console.log('Invalid credentials!');
-            res.redirect('/forgot');
+            res.redirect('/forgot/password');
         }
     };
     mongoUsers.forgotPassword(doc, details, onFetch);
+});
+
+router.get('/reset/:token', function (req, res) {
+    var onGetReset = function (err, doc)
+    {
+        if (err)
+        {
+            console.log(err.message);
+        }
+        else if (!doc)
+        {
+            res.redirect('/forgot');
+        }
+        else
+        {
+            res.render('reset', {csrfToken: req.csrfToken()});
+        }
+    };
+    mongoUsers.getReset({token: req.params.token, expire: {$gt: Date.now()}}, onGetReset);
 });
 
 router.post('/forgot/user', function (req, res) {
@@ -297,10 +316,7 @@ router.post('/forgot/user', function (req, res) {
                 {
                     console.log(err.message);
                 }
-                else
-                {
-                    res.redirect('/login');
-                }
+                res.redirect('/login');
             });
         }
         else
@@ -362,10 +378,7 @@ router.post('/reset/:token', function (req, res) {
                     {
                         console.log(err.message);
                     }
-                    else {
-                        console.log('Updated successfully!');
-                        res.redirect('/login');
-                    }
+                    res.redirect('/login');
                 });
             }
         };
@@ -378,7 +391,7 @@ router.post('/reset/:token', function (req, res) {
 });
 
 router.get('/register', function (req, res) {
-    if (req.signedCookies.name || req.user)
+    if (req.signedCookies.name)
     {
         res.redirect('/home');
     }
@@ -389,10 +402,9 @@ router.get('/register', function (req, res) {
 });
 
 router.post('/register', function (req, res) {
-    if (req.signedCookies.name || req.user)
+    if (req.signedCookies.name)
     {
-        delete req.user;
-        res.clearCookie('name', {});
+        res.clearCookie('name');
     }
     var onGetCount = function (err, number)
     {
@@ -436,8 +448,13 @@ router.post('/register', function (req, res) {
                             "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE Computer Society</td></tr></table>"
                         };
                         res.cookie('name', name, {maxAge: 86400000, signed: true});
-                        res.redirect('/home/players');
-                        email.sendMail(options, null);
+                        email.sendMail(options, function(err){
+                            if(err)
+                            {
+                                console.log(err.message);
+                            }
+                            res.redirect('/home/players');
+                        });
                     }
                 };
                 mongoUsers.insert(newUser, onInsert);
@@ -453,7 +470,7 @@ router.post('/register', function (req, res) {
 });
 
 router.get('/logout', function (req, res) {
-    if (req.signedCookies.name || req.user)
+    if (req.signedCookies.name)
     {
         res.clearCookie('name');
         res.clearCookie('lead');
@@ -492,33 +509,37 @@ router.get('/admin', function(req, res){
 });
 
 router.get('/social', function(req, res){
-    if(req.user || req.signedCookies.name)
+    if(req.signedCookies.name)
     {
         res.render('home');
     }
     else
     {
-        res.render('social');
+        res.render('social', {mode : req.cookies.temp ? 0 : 1});
     }
 });
 
 router.post('/social', function(req, res){
-    var onAddTeam = function(err, doc)
+    res.cookie('temp', req.body.team);
+    res.redirect('/social');
+});
+
+router.get('/social/callback', function(req, res){
+    if(req.user)
     {
-        if(err)
-        {
-            console.log(err.message);
-        }
-        else
-        {
-            res.redirect('/players');
-        }
-    };
-    mongoUsers.addSocialTeam(req, onAddTeam);
+        res.cookie('name', req.user._id, {maxAge : 86400000, signed : true});
+        res.clearCookie('temp');
+        delete req.user;
+        res.redirect('/home');
+    }
+    else
+    {
+        res.redirect('/social');
+    }
 });
 
 router.get(/\/developers?/, function(req, res){
-    if(req.user || req.signedCookies.name)
+    if(req.signedCookies.name)
     {
         res.render('developers');
     }
@@ -529,7 +550,7 @@ router.get(/\/developers?/, function(req, res){
 });
 
 router.get('/privacy', function(req, res){
-    if(req.user || req.signedCookies.name)
+    if(req.signedCookies.name)
     {
         res.render('privacy');
     }
