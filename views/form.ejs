@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GPL | Match Details</title>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel='stylesheet' href='/stylesheets/teamNameForm.css' />
+    <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+<div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
+    <header class="banner" role="banner">
+
+        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/>
+            <img class="logo" src="/images/gpllogo.png" height="50" class="pull-left"/>
+            <span class="h2 gplheadertext">graVITas Premier League 2.0</span>
+            <img src="/images/header-right.jpg" height="60" class="pull-right"/>
+        </span>
+
+    </header>
+</div>
+
+<div id="navbar-wrapper">
+    <nav id="navbar" ></nav>
+</div>
+
+<div class="container col-sm-offset-2 col-sm-8 shadow">
+
+    <div class="row">
+        <p class="page-header text-center" id="header">
+            Team Name
+        </p>
+    </div>
+
+    <div class="row">
+        <p class="text-info col-sm-offset-2 col-sm-6 info">
+            Please submit your Team Name below:
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-2 col-sm-8">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="teamName" class="col-sm-3 control-label tlabel">Team Name</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="teamName" placeholder="Team Name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div><!--/.container-->
+
+<footer id="footer" class="footer">
+</footer>
+
+<!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<script>
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-XXXXX-X');ga('send','pageview');
+</script>
+
+<!-- build:js(.) scripts/plugins.js -->
+
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/javascripts/main.js"></script>
+
+<!-- endbuild -->
+
+<!-- build:js({app,.tmp}) scripts/main.js -->
+
+<!-- endbuild -->
+</body>
+</html>
