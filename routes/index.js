@@ -22,7 +22,7 @@ var bcrypt;
 var path = require('path');
 var crypto = require('crypto');
 var router = require('express').Router();
-var email = require(path.join(__dirname, '..', 'worker', 'email'));
+var email = require(path.join(__dirname, '..', 'email'));
 var record = require(path.join(__dirname, '..', 'db', 'mongo-record'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
 var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
