@@ -448,11 +448,11 @@ exports.simulate = function (data, callback)
                         {
                             points = Math.round(temp);
                             MoM.points = points;
-                            MoM.team = +toss_index;
+                            MoM.team = data.team[+toss_index]._id;
                             MoM.id = strike[+strike_index];
                         }
-                        data.team[+toss_index].partnership_runs[current_partnership_index] = (partnership_runs[current_partnership_index] + data.team[+toss_index].partnership_runs[current_partnership_index] * data.team[+toss_index].played) / (data.team[+toss_index].played + 1);
-                        data.team[+toss_index].partnership_balls[current_partnership_index] = (partnership_balls[current_partnership_index] + data.team[+toss_index].partnership_balls[current_partnership_index] * data.team[+toss_index].played) / (data.team[+toss_index].played + 1);
+                        data.team[+toss_index].avg_partnership_runs[current_partnership_index] = (partnership_runs[current_partnership_index] + data.team[+toss_index].avg_partnership_runs[current_partnership_index] * data.team[+toss_index].played) / (data.team[+toss_index].played + 1);
+                        data.team[+toss_index].avg_partnership_balls[current_partnership_index] = (partnership_balls[current_partnership_index] + data.team[+toss_index].avg_partnership_balls[current_partnership_index] * data.team[+toss_index].played) / (data.team[+toss_index].played + 1);
                         data.match.commentary.push(' ' + score[strike[+strike_index]] + ' (' + balls[strike[+strike_index]] + ' balls' + ' ' + fours[strike[+strike_index]] + 'X4\'s ' + maximums[strike[+strike_index]] + 'X6\'s) SR: ' + (score[strike[+strike_index]] * 100 / balls[strike[+strike_index]]).toFixed(2) + 'Control: ' + (control[strike[+strike_index]] * 100).toFixed(2) + '%');
                         data.match.commentary.push(' Partnership: ' + partnership_runs[current_partnership_index] + '(' + partnership_balls[current_partnership_index] + ')' + ', Runrate: ' + (partnership_runs[current_partnership_index] * 6 / (partnership_balls[current_partnership_index] ? partnership_balls[current_partnership_index] : 1))).toFixed(2);
                         ++current_partnership_index;
@@ -755,6 +755,16 @@ exports.simulate = function (data, callback)
                 }
                 if (i < 10)
                 {
+                    if(partnership_runs[i] > data.team[+toss_index].best_partnership_runs[i])
+                    {
+                        data.team[+toss_index].best_partnership_runs[i] = partnership_runs[i];
+                        data.team[+toss_index].best_partnership_balls[i] = partnership_balls[i];
+                    }
+                    if(partnership_runs[i] < data.team[+toss_index].worst_partnership_runs[i])
+                    {
+                        data.team[+toss_index].worst_partnership_runs[i] = partnership_runs[i];
+                        data.team[+toss_index].worst_partnership_balls[i] = partnership_balls[i];
+                    }
                     partnership_runs[i] = partnership_balls[i] = 0;
                 }
                 k += fours[i] * 4 + maximums[i] * 6;
@@ -891,6 +901,12 @@ exports.simulate = function (data, callback)
             data.team[+winner].points += 2;
             data.team[+winner].runs_for += Total[+winner];
             data.team[+winner].balls_for += Overs[+winner];
+            data.team[+winner].scores.push(Total[+winner]);
+            data.team[+!winner].scores.push(Total[+!winner]);
+            data.team[+winner].overs.push(Overs[+winner]);
+            data.team[+!winner].overs.push(Overs[+!winner]);
+            data.team[+winner].wickets.push(wickets[+winner]);
+            data.team[+!winner].wickets.push(wickets[+!winner]);
             data.team[+!winner].runs_for += Total[+!winner];
             data.team[+!winner].balls_for += Overs[+!winner];
             data.team[+winner].runs_against += Total[+!winner];
@@ -901,10 +917,10 @@ exports.simulate = function (data, callback)
             data.team[+winner].wickets_taken += wickets[+!winner];
             data.team[+!winner].wickets_taken += wickets[+winner];
             data.team[+!winner].wickets_lost += wickets[+!winner];
-            data.team[+winner].streak = ((data.team[+winner].streak < 0) ? 1 : (data.team[+winner].streak + 1));
-            data.team[+!winner].streak = (data.team[+!winner].streak > 0) ? (0) : (data.team[+!winner].streak - 1);
             data.team[+winner].ratio = data.team[+winner].win / (data.team[+winner].loss || 1 );
             data.team[+!winner].ratio = data.team[+!winner].win / (data.team[+!winner].loss || 1);
+            data.team[+winner].streak = ((data.team[+winner].streak < 0) ? 1 : (data.team[+winner].streak + 1));
+            data.team[+!winner].streak = (data.team[+!winner].streak > 0) ? (0) : (data.team[+!winner].streak - 1);
             data.team[+winner].form += ((Overs[+winner] * mean_rating[+!winner] / Total[+winner]) - (Overs[+!winner] * mean_rating[+winner] / Total[+!winner])) / 600;
             data.team[+!winner].form += ((Overs[+!winner] * mean_rating[+winner] / Total[+!winner]) - (Overs[+winner] * mean_rating[+!winner] / Total[+winner])) / 600;
             data.team[+winner].net_run_rate = (((data.team[+winner].runs_for) / (data.team[+winner].balls_for) - (data.team[+winner].runs_against) / (data.team[+winner].balls_against)) * 6).toFixed(4);
