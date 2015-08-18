@@ -43,16 +43,18 @@ var ref =
     'round3': 3
 };
 
-var options =
-{
+var message = email.wrap({
     from: 'gravitaspremierleague@gmail.com',
-    subject: 'Round ' + ref[match] + ', match ' + (process.env.DAY || 1) + ' results are out!',
-    html: "<table background='http://res.cloudinary.com/gpl/image/upload/general/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+    subject: 'Round ' + ref[match] + ', match ' + (process.env.DAY || 1) + ' results are out!'
+});
+
+message.attach_alternative("<table background='http://res.cloudinary.com/gpl/image/upload/general/img8.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
     "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
     "</tr><tr><td align='center' style='padding: 40px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> This is to inform that the match results are out<br>" +
     "Please click <a href='http://gravitaspremierleague.com/home/matches' style='text-decoration: none;'>here </a> to view your scores.  </td>" +
-    "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>"
-};
+    "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards:<br>Team GPL<br>IEEE-COMPUTER SOCIETY</td></tr></table>");
+
+message.header.bcc = [];
 
 var databaseOptions =
 {
@@ -147,14 +149,8 @@ exports.initSimulation = function (day, masterCallback)
                     }
                 }
                 database.collection(match).updateOne({_id: newUserDoc._id}, newUserDoc, function () {
-                    options.to = newUserDoc.email;
-                    email.sendMail(options, function (err) {
-                        if (err)
-                        {
-                            console.log(err.message);
-                        }
-                        asyncCallback();
-                    });
+                    message.header.bcc.push(newUserDoc.email);
+                    asyncCallback();
                 });
             };
 
@@ -225,7 +221,13 @@ exports.initSimulation = function (day, masterCallback)
             }
             else
             {
-                masterCallback(err, results);
+                email.send(message, function (err) {
+                    if (err)
+                    {
+                        console.log(err.message);
+                    }
+                    masterCallback(err, results);
+                });
             }
         };
         database.collection('info').updateOne({_id: 'info'}, {$set: info}, onUpdate);
