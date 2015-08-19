@@ -71,7 +71,7 @@
 
                         <div class="card card-green">
                             <div class="card-content wide">
-                                <h3>Run Rate (for and against) <br/>
+                                <h3>Run Rate <br/>
                                     <small>Matches v/s Run Rate</small>
                                 </h3>
                                 <div class="chart-container">
@@ -84,8 +84,8 @@
                     <div class="col-md-4 col-xs-12">
                         <div class="card card-green">
                             <div class="card-content wide">
-                                <h3>Runs scored and given <br/>
-                                    <small>Matches v/s Runs</small>
+                                <h3>Runs scored and conceded <br/>
+                                    <small>Overs v/s Runs</small>
                                 </h3>
                                 <div class="chart-container">
                                     <canvas id="bar-chart" class=""></canvas>
@@ -142,23 +142,6 @@
 <!-- endbower -->
 <!-- endbuild -->
 
-<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-<script>
-    (function (b, o, i, l, e, r) {
-        b.GoogleAnalyticsObject = l;
-        b[l] || (b[l] =
-                function () {
-                    (b[l].q = b[l].q || []).push(arguments)
-                });
-        b[l].l = +new Date;
-        e = o.createElement(i);
-        r = o.getElementsByTagName(i)[0];
-        e.src = '//www.google-analytics.com/analytics.js';
-        r.parentNode.insertBefore(e, r)
-    }(window, document, 'script', 'ga'));
-    ga('create', 'UA-XXXXX-X');
-    ga('send', 'pageview');
-</script>
 
 <!-- build:js(.) scripts/plugins.js -->
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -166,6 +149,119 @@
 
 <!-- build:js({app,.tmp}) scripts/main.js -->
 <script src="javascript/dashboard.js"></script>
+<script>
+    <% function string_range(start, stop){
+        var string_array = [];
+        for(i=start; i<=stop; i++){
+            string_array.push(i.toString());
+        }
+
+    }
+     %>
+
+    Chart.defaults.global.responsive = true;
+
+
+    <% var run_rate = [];
+    for (i=0; i<scores.length; i++){
+        run_rate.push(scores[i]/overs[i]);
+    }
+     %>
+
+    var line = $("#line-chart").get(0).getContext("2d");
+
+    var line_data = {
+        labels: <%= string_range(0, json_data.run_rate.length) %>,
+        datasets: [
+            {
+                label: "Run rate",
+                fillColor: "rgba(7, 51, 58,0.2)",
+                strokeColor: "transparent",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: <%= json_data.run_rate %>
+            }
+
+        ]
+    };
+
+
+    var myLineChart = new Chart(line).Line(line_data, {scaleShowGridLines: false});
+
+
+    var bar = $("#bar-chart").get(0).getContext("2d");
+
+    var bar_data = {
+        labels: <%= string_range(1, json_data.scored_per_over.length) %>,
+        datasets: [
+            {
+                label: "Runs scored",
+                fillColor: "rgba(7, 51, 58,0.2)",
+                strokeColor: "transparent",
+                highlightFill: "rgba(220,220,220,1)",
+                highlightStroke: "transparent",
+                data: <%= json_data.scored_per_over %>
+            },
+            {
+                label: "Runs given",
+                fillColor: "rgba(19,131,148,0.2)",
+                strokeColor: "transparent",
+                highlightFill: "rgba(151,187,205,1)",
+                highlightStroke: "transparent",
+                data: <%= json_data.conceded_per_over %>
+            }
+        ]
+    };
+
+    var myBarChart = new Chart(bar).Bar(bar_data, {scaleShowGridLines: false});
+
+
+    var winloss = $("#win-loss").get(0).getContext("2d");
+
+    var winloss_data = {
+        labels: <%= string_range(1, json_data.progression.length) %>,
+        datasets: [
+            {
+                label: "Points",
+                fillColor: "rgba(19,131,148,0.2)",
+                strokeColor: "transparent",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: <%= json_data.progression %>
+            }
+        ]
+    };
+
+
+    var myLineChart2 = new Chart(winloss).Line(winloss_data, {bezierCurveTension: 0, scaleShowGridLines: false});
+
+
+    var pie = $("#pie-chart").get(0).getContext("2d");
+
+
+    var pie_data = [
+        {
+            value: <%= data.fours %>,
+            color: "rgba(7, 51, 58,0.2)",
+            highlight: "rgba(7, 51, 58,0.5)",
+            label: "Fours"
+        },
+        {
+            value: <%= data.sixes %>,
+            color: "rgba(19,131,148,0.2)",
+            highlight: "rgba(19,131,148,0.5)",
+            label: "Sixes"
+        }
+    ];
+
+    var myPieChart = new Chart(pie).Pie(pie_data);
+
+
+</script>
 <!-- endbuild -->
 </body>
 </html>
