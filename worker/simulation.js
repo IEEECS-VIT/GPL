@@ -768,6 +768,8 @@ exports.simulate = function (data, callback)
                     partnership_runs[i] = partnership_balls[i] = 0;
                 }
                 k += fours[i] * 4 + maximums[i] * 6;
+                data.team[+toss_index].fours += fours[i];
+                data.team[+toss_index].sixes += maximums[i];
                 balls[i] = fours[i] = maximums[i] = dismissed[i] = milestone[i] = score[i] = balls[i] = fours[i] = maximums[i] = control[i] = catches[i] = dot_balls[i] = 0;
             }
             data.match.scorecard.push('Total: ' + Total[+toss_index] + ' / ' + wickets[+toss_index] + ' (' + parseInt(Overs[+toss_index] / 6) + '.' + Overs[+toss_index] % 6 + ' overs)  Runrate: ' + (Total[+toss_index] * 6 / (Overs[+toss_index] ? Overs[+toss_index] : 1)).toFixed(2) + ' Extras: ' + extras);
@@ -849,6 +851,8 @@ exports.simulate = function (data, callback)
                     data.team[1].wickets_taken += wickets[0];
                     data.team[0].form += Overs[0] * (mean_rating[1] - mean_rating[0]) / Total[0] / 600;
                     data.team[1].form += Overs[0] * (mean_rating[0] - mean_rating[1]) / Total[0] / 600;
+                    data.team[0].progression.push((data.team[0].progression[process.env.DAY - 2] || 0) + 1);
+                    data.team[1].progression.push((data.team[1].progression[process.env.DAY - 2] || 0) + 1);
                     data.team[0].net_run_rate = (((data.team[0].runs_for) / (data.team[0].balls_for) - (data.team[0].runs_against) / (data.team[0].balls_against)) * 6).toFixed(4);
                     data.team[1].net_run_rate = (((data.team[1].runs_for) / (data.team[1].balls_for) - (data.team[1].runs_against) / (data.team[1].balls_against)) * 6).toFixed(4);
                 }
@@ -919,6 +923,8 @@ exports.simulate = function (data, callback)
             data.team[+!winner].wickets_lost += wickets[+!winner];
             data.team[+winner].ratio = data.team[+winner].win / (data.team[+winner].loss || 1 );
             data.team[+!winner].ratio = data.team[+!winner].win / (data.team[+!winner].loss || 1);
+            data.team[+!winner].progression.push(data.team[+!winner].progression[process.env.DAY - 2] || 0);
+            data.team[+winner].progression.push((data.team[+winner].progression[process.env.DAY - 2] || 0) + 2);
             data.team[+winner].streak = ((data.team[+winner].streak < 0) ? 1 : (data.team[+winner].streak + 1));
             data.team[+!winner].streak = (data.team[+!winner].streak > 0) ? (0) : (data.team[+!winner].streak - 1);
             data.team[+winner].form += ((Overs[+winner] * mean_rating[+!winner] / Total[+winner]) - (Overs[+!winner] * mean_rating[+winner] / Total[+!winner])) / 600;
