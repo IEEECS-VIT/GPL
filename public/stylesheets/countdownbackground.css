@@ -133,7 +133,7 @@ html, body {
     text-align: center;
 }
 
-.overlay-text > h2 {
+.overlay-text > p {
     z-index: 99;
     position: relative;
 
@@ -164,5 +164,5 @@ html, body {
 
 .overlay-text a:hover {
     color: white;
-
+    text-decoration: underline;
 }

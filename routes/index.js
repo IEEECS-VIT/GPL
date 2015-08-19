@@ -79,7 +79,7 @@ router.get('/', function (req, res) {
     }
     else
     {
-        res.render('static', {date: date});
+        res.render('index');
     }
 });
 
