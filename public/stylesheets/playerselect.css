@@ -44,6 +44,9 @@ footer {
     color: #1e4669;
 }
 
+.players-form {
+    display: none;
+}
 /*
  * Off Canvas
  * --------------------------------------------------
