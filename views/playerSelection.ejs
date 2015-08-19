@@ -1,3 +1,4 @@
+<!-- TODO - Form Functionality -->
 <!--
   GraVITas Premier League <gravitaspremierleague@gmail.com>
   Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
@@ -115,15 +116,15 @@
                                 <% if (Players[i]._id[0] === 'a') { %>
                                 <div class="col-sm-3 thumbnail">
                                     <img class="img-thumbnail"
-                                         src="http://res.cloudinary.com/gpl/image/upload/players/bat/<% Players[i]._id %>"
-                                         alt="<% Players[i].Name %>"/>
+                                         src="http://res.cloudinary.com/gpl/image/upload/players/bat/<%= Players[i]._id %>"
+                                         alt="<%= Players[i].Name %>"/>
 
                                     <p id="name"><%= Players[i].Name %></p>
 
                                     <p id="name">Price: <%= Players[i].Price %></p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="s<% Players[i]._id %>"
-                                           value="Select">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r<% Players[i]._id %>"
+                                    <input type="button" class="add btn btn-info btn-sm" id="s<%= Players[i]._id %>"
+                                           value="Select" onclick="add(<%=Players[i]._id%>)">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r<%= Players[i]._id %>"
                                            value="Remove">
                                 </div>
                                 <% } %>
@@ -145,15 +146,15 @@
                                 <% if (Players[i]._id[0] === 'b') { %>
                                 <div class="col-sm-3 thumbnail">
                                     <img class="img-thumbnail"
-                                         src="http://res.cloudinary.com/gpl/image/upload/players/bowl/<% Players[i]._id %>"
-                                         alt="<% Players[i].Name %>"/>
+                                         src="http://res.cloudinary.com/gpl/image/upload/players/bowl/<%= Players[i]._id %>"
+                                         alt="<%= Players[i].Name %>"/>
 
                                     <p id="name"><%= Players[i].Name %></p>
 
                                     <p id="name">Price: <%= Players[i].Price %></p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="s<% Players[i]._id %>"
+                                    <input type="button" class="add btn btn-info btn-sm" id="s<%= Players[i]._id %>"
                                            value="Select">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r<% Players[i]._id %>"
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r<%= Players[i]._id %>"
                                            value="Remove">
                                 </div>
                                 <% } %>
@@ -175,15 +176,15 @@
                                 <% if (Players[i]._id[0] === 'c') { %>
                                 <div class="col-sm-3 thumbnail">
                                     <img class="img-thumbnail"
-                                         src="http://res.cloudinary.com/gpl/image/upload/players/all/<% Players[i]._id %>"
-                                         alt="<% Players[i].Name %>"/>
+                                         src="http://res.cloudinary.com/gpl/image/upload/players/all/<%= Players[i]._id %>"
+                                         alt="<%= Players[i].Name %>"/>
 
                                     <p id="name"><%= Players[i].Name %></p>
 
                                     <p id="name">Price: <%= Players[i].Price %></p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="s<% Players[i]._id %>"
+                                    <input type="button" class="add btn btn-info btn-sm" id="s<%= Players[i]._id %>"
                                            value="Select">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r<% Players[i]._id %>"
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r<%= Players[i]._id %>"
                                            value="Remove">
                                 </div>
                                 <% } %>
@@ -205,15 +206,15 @@
                                 <% if (Players[i]._id[0] === 'b') { %>
                                 <div class="col-sm-3 thumbnail">
                                     <img class="img-thumbnail"
-                                         src="http://res.cloudinary.com/gpl/image/upload/players/coaches/<% Players[i]._id %>"
-                                         alt="<% Players[i].Name %>"/>
+                                         src="http://res.cloudinary.com/gpl/image/upload/players/coaches/<%= Players[i]._id %>"
+                                         alt="<%= Players[i].Name %>"/>
 
                                     <p id="name"><%= Players[i].Name %></p>
 
                                     <p id="name">Price: <%= Players[i].Price %></p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="s<% Players[i]._id %>"
+                                    <input type="button" class="add btn btn-info btn-sm" id="s<%= Players[i]._id %>"
                                            value="Select">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r<% Players[i]._id %>"
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r<%= Players[i]._id %>"
                                            value="Remove">
                                 </div>
                                 <% } %>
