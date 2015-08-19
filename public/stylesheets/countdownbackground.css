@@ -17,6 +17,7 @@
  */
 html, body {
     height: 100%;
+    font-family: "Lato", Arial, sans-serif;
 }
 
 .carousel, .item, .active {
@@ -33,47 +34,68 @@ html, body {
 }
 
 .back-0 {
-    background: url("http://res.cloudinary.com/gpl/image/upload/general/img0.jpg");
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+    ), url("http://res.cloudinary.com/gpl/image/upload/general/img0.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 
 }
 
 .back-1 {
-    background: url("http://res.cloudinary.com/gpl/image/upload/general/img1.jpg");
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+    ), url("http://res.cloudinary.com/gpl/image/upload/general/img1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 
 }
 
 .back-2 {
-    background: url("http://res.cloudinary.com/gpl/image/upload/general/img2.jpg");
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+    ), url("http://res.cloudinary.com/gpl/image/upload/general/img2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .back-3 {
-    background: url("http://res.cloudinary.com/gpl/image/upload/general/img3.jpg");
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+    ), url("http://res.cloudinary.com/gpl/image/upload/general/img3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 
 }
 
 .back-4 {
-    background: url("http://res.cloudinary.com/gpl/image/upload/general/img4.jpg");
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+    ), url("http://res.cloudinary.com/gpl/image/upload/general/img4.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 
 }
 
 .back-5 {
-    background: url("http://res.cloudinary.com/gpl/image/upload/general/img5.jpg");
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+    ), url("http://res.cloudinary.com/gpl/image/upload/general/img5.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .back-6 {
-    background: url("http://res.cloudinary.com/gpl/image/upload/general/img6.jpg");
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+    ), url("http://res.cloudinary.com/gpl/image/upload/general/img6.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -97,5 +119,50 @@ html, body {
     background: url("http://res.cloudinary.com/gpl/image/upload/general/overlay01.png") repeat;
     height: 100%;
     width: 100%;
+
+}
+
+.overlay-text {
+    padding-top: 5%;
+    position: absolute;
+    z-index: 99;
+    height: 100%;
+    width: 100%;
+    color: white;
+
+    text-align: center;
+}
+
+.overlay-text > h2 {
+    z-index: 99;
+    position: relative;
+
+    /**/
+    font-variant: small-caps;
+    font-weight: 700;
+    color: #fff;
+
+}
+
+.overlay-text a, .overlay-text a:hover {
+
+    border-radius: 4px;
+    text-decoration: none;
+    padding-left: 4px;
+    padding-right: 4px;
+    font-variant: small-caps;
+    -webkit-transition: 1s ease;
+    -moz-transition: 1s ease;
+    -ms-transition: 1s ease;
+    -o-transition: 1s ease;
+    transition: 1s ease;
+}
+
+.overlay-text a {
+    color: yellow;
+}
+
+.overlay-text a:hover {
+    color: white;
 
 }

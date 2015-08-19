@@ -62,7 +62,7 @@
     "emailjs": "^0.3.16",
     "express": "^4.13.3",
     "express-session": "^1.11.3",
-    "mongodb": "^2.0.41",
+    "mongodb": "^2.0.42",
     "morgan": "^1.6.1",
     "newrelic": "^1.21.2",
     "node-logentries": "~0.1.4",
