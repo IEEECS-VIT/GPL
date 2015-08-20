@@ -125,7 +125,6 @@ exports.getSquad = function (doc, callback) {
 
             var onFetch = function (err, document)
             {
-                console.log(document);
                 if (document)
                 {
                     if (err)
@@ -308,16 +307,8 @@ exports.adminInfo = function(callback)
     async.parallel(parallelTasks, onParallel);
 };
 
-exports.schedule = function(doc, callback)
+exports.fetchMatches = function(team, callback)
 {
-     var slice =
-     {
-           _id : 0,
-           scorecard : 0,
-           commentary : 0,
-           TimeStamp : 0,
-           MoM : 0
-     };
      var onParallel = function(err, result)
      {
            if(err)
@@ -334,55 +325,34 @@ exports.schedule = function(doc, callback)
      [
            function(asyncCallback)
            {
-               mongoMatches.match(1, doc, slice, asyncCallback);
+               mongoMatches.match(1, team, asyncCallback);
            },
            function(asyncCallback)
            {
-               mongoMatches.match(2, doc, slice, asyncCallback);
+               mongoMatches.match(2, team, asyncCallback);
            },
            function(asyncCallback)
            {
-               mongoMatches.match(3, doc, slice, asyncCallback);
+               mongoMatches.match(3, team, asyncCallback);
            },
            function(asyncCallback)
            {
-               mongoMatches.match(4, doc, slice, asyncCallback);
+               mongoMatches.match(4, team, asyncCallback);
            },
            function(asyncCallback)
            {
-               mongoMatches.match(5, doc, slice, asyncCallback);
+               mongoMatches.match(5, team, asyncCallback);
            },
            function(asyncCallback)
            {
-               mongoMatches.match(6, doc, slice, asyncCallback);
+               mongoMatches.match(6, team, asyncCallback);
            },
            function(asyncCallback)
            {
-               mongoMatches.match(7, doc, slice, asyncCallback);
+               mongoMatches.match(7, team, asyncCallback);
            }
      ];
      async.parallel(parallelTasks, onParallel);
-};
-
-exports.fetchMatches = function(team, slice, callback)
-{
-    var matches = [];
-    var day = process.env.DAY || 1;
-    var onGet = function(err, doc)
-    {
-        if(err)
-        {
-            callback(err);
-        }
-        else
-        {
-            matches.push(doc);
-        }
-    };
-    for(i = 1; i <= day; ++i)
-    {
-        mongoMatches.match(i, team, slice, onGet);
-    }
 };
 
 exports.check = function(team, callback)
@@ -408,6 +378,107 @@ exports.check = function(team, callback)
                 }
             };
             collection.findOne(team, onFind);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};
+
+exports.opponent = function(day, team, callback)
+{
+    var onConnect = function(err, db)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            collection = db.collection('matchday' + day);
+            var filter =
+            {
+                $or :
+                    [
+                        {Team_1 : team},
+                        {Team_2 : team}
+                    ]
+            };
+            var onFind = function(err, doc)
+            {
+                db.close();
+                if(err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    callback(null, (team == doc.Team_1) ? doc.Team_2 : doc.Team_1);
+                }
+            };
+            collection.findOne(filter, onFind);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};
+
+var player = function(id, callback)
+{
+    var onConnect = function(err, db)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            collection = db.collection('players');
+            var onPlayer = function(err, player)
+            {
+                db.close();
+                if(err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    callback(null, player);
+                }
+            };
+            collection.findOne({_id : id}, {Name : 1, Country : 1, Type : 1}, onPlayer);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};
+
+exports.squad = function(doc, callback)
+{
+    var onConnect = function(err, db)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            collection = db.collection(match);
+            var onSquad = function(err, doc)
+            {
+                doc.team.sort();
+                db.close();
+                if(err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    var onGet = function(err, results)
+                    {
+                        doc.team = results;
+                        callback(null, doc);
+                    };
+                    async.map(doc.team, player, onGet);
+                }
+            };
+            collection.findOne(doc, {team : 1}, onSquad);
         }
     };
     MongoClient.connect(mongoUri, onConnect);

@@ -68,7 +68,7 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(csurf());
 app.use('/', index);
-app.use('/', social);
+app.use('/auth', social);
 app.use('/home', home);
 
 // catch 404 and forward to error handler

@@ -21,44 +21,28 @@ var passport = require('passport');
 var router = require('express').Router();
 require(path.join(__dirname, '..', 'db', 'mongo-passport.js')); // pass passport for configuration
 
-// normal routes ===============================================================
-// LOGOUT ==============================
+router.get('/facebook', passport.authenticate('facebook', {scope: 'email'}));
 
-// =============================================================================
-// AUTHENTICATE (FIRST LOGIN) ==================================================
-// =============================================================================
-
-// facebook -------------------------------
-// send to facebook to do the authentication
-router.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
-
-// handle the callback after facebook has authenticated the user
-router.get('/auth/facebook/callback', passport.authenticate('facebook', {
+router.get('/facebook/callback', passport.authenticate('facebook', {
     successRedirect: '/social/callback',
     failureRedirect: '/login'
 }));
 
-// twitter --------------------------------
-// send to twitter to do the authentication
-router.get('/auth/twitter', passport.authenticate('twitter', {scope: 'email'}));
+router.get('/twitter', passport.authenticate('twitter', {scope: 'email'}));
 
-// handle the callback after twitter has authenticated the user
-router.get('/auth/twitter/callback', passport.authenticate('twitter', {
+router.get('/twitter/callback', passport.authenticate('twitter', {
     successRedirect: '/social/callback',
     failureRedirect: '/login'
 }));
 
-// google ---------------------------------
-// send to google to do the authentication
-router.get('/auth/google', passport.authenticate('google', {
+router.get('/google', passport.authenticate('google', {
     scope: [
         'https://www.googleapis.com/auth/userinfo.profile',
         'https://www.googleapis.com/auth/userinfo.email'
     ]
 }));
 
-// the callback after google has authenticated the user
-router.get('/auth/google/callback', passport.authenticate('google', {
+router.get('/google/callback', passport.authenticate('google', {
     successRedirect: '/social/callback',
     failureRedirect: '/login'
 }));

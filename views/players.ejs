@@ -1,527 +1,473 @@
-<!--
-  GraVITas Premier League <gravitaspremierleague@gmail.com>
-  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Players | GPL</title>
-    <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
-    <link href="/stylesheets/gplmain.css" rel="stylesheet" type="text/css"/>
-    <script src="/javascript/tabs.js"></script>
-    <script src="/javascript/players.js"></script>
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    <title>Player Selection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 
-        ga('create', 'UA-57505316-2', 'auto');
-        ga('send', 'pageview');
-
-    </script>
-    <script type="text/javascript"> var team = [];
-        var k = 0;
-        var r;
-        var cost = 10000000;
-        var che;
-        var cb = 7, cbo = 6, ca = 2, cc = 1;
-        function subm() {
-
-            if (k < 15) {
-
-                alert("Team not full");
-
-
-            }
-            else {
-                var id;
-                for (var j = 1; j < 17; j++) {
-                    id = 't' + j;
-                    document.getElementById(id).value = team[j - 1];
-
-                }
-
-                document.getElementById('form').action = "/home/getTeam";
-                document.getElementById('form').method = "post";
-
-                document.getElementById('form').submit();
-
-            }
-
-        }
-        function sel(r) {
-            if (k == 16) {
-
-                alert("Team limit Reached");
-                return -1;
-            }
-
-            che = ch(r);
-
-            if (che != -1) {
-                if (k < 17) {
-
-
-                    var c = 'cc' + String(r);
-                    var y = document.getElementById(c);
-                    if (cost - y.value < 0) {
-                        alert("Low Budget");
-                        return -1;
-                    }
-                    cost -= y.value;
-
-                    team[k] = r;
-                    k++;
-                    document.getElementById("box" + r).style.visibility = 'hidden';
-                    ch(0);
-                    disp();
-
-
-                }
-
-
-                ch(0);
-            }
-        }
-        var count;
-        var di = [];
-        function disp() {
-
-
-            if (k == 0) {
-                document.getElementById("squad").innerHTML = "";
-                cost = 10000000;
-                document.getElementById('budget').innerHTML = "Selected Players <b style='font-size: 60%'>Budget:" + cost + "<br />" + "Batsmen : " + cb + "<br />" + "Bowlers : " + cbo + "<br />" + "All Rounders : " + ca + "<br />" + "Coach : " + cc + "<br />" + "</b>";
-            }
-            else {
-                for (count = 0; count < k; count++) {
-
-                    var cut = team[count];
-                    var n = 'cn' + String(cut);
-                    var p = 'cp' + String(cut);
-
-                    var t = 'ct' + String(cut);
-
-                    var w = document.getElementById(n);
-                    var x = document.getElementById(p);
-
-                    var z = document.getElementById(t);
-                    document.getElementById('budget').innerHTML = "Selected Players <b style='font-size: 60%'>Budget:" + cost + "<br />" + "Batsmen : " + cb + "<br />" + "Bowlers : " + cbo + "<br />" + "All Rounders : " + ca + "<br />" + "Coach : " + cc + "<br />" + "</b>";
-                    di[count] = "<div style='border-radius: 5px;background-color: rgba(0,0,0,0.2);margin-top: 1%;'>" + "<p align='center' style='color: white;padding: 1%;' >" + w.value + "<br />" + x.value + "<br />" + z.value + "</p>" + "<button class='button [tiny small large]' style='height: auto;width:auto;margin-left:75%;padding:1%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid red;background-color:rgba(255,255,255,0.1);color: red;border-radius: 5px;' onclick='rem(" + cut + ")'>" + " Remove</div></button>" + "</div>";
-
-                }
-
-                document.getElementById("squad").innerHTML = di.join(" ");
-            }
-        }
-        function rem(co) {
-            document.getElementById("box" + co).style.visibility = 'visible';
-
-            for (var b = 0; b < k; b++) {
-                if (team[b] == co) {
-                    var a = b;
-                    while (a < k) {
-
-                        team[a] = team[a + 1];
-
-                        a++;
-
-                    }
-
-                    k -= 1;
-                    di[k] = "";
-
-                    break;
-
-                }
-            }
-            cost = 10000000;
-            for (b = 0; b < k; b++) {
-                var c = 'cc' + String(team[b]);
-                var y = document.getElementById(c);
-
-                cost -= y.value;
-
-
-            }
-            ch(0);
-            disp();
-
-        }
-        function ch(r) {
-
-            var t, z;
-
-            var b = 0;
-            var bo = 0;
-            var al = 0;
-            var c = 0;
-
-
-            if (r != 0) {
-                var asd = 'ct' + String(r);
-                var y = document.getElementById(asd);
-                if (cb == 0 && y.value.localeCompare('bat') == 0) {
-                    alert("Maximum number of Batsmen reached");
-                    return -1;
-                }
-                if (cbo == 0 && y.value.localeCompare('bowl') == 0) {
-                    alert("Maximum number of Bowlers reached");
-                    return -1;
-                }
-                if (ca == 0 && y.value.localeCompare('all') == 0) {
-                    alert("Maximum number of All Rounders reached");
-                    return -1;
-
-                }
-                if (cc == 0 && y.value.localeCompare('coach') == 0) {
-                    alert("Maximum number of Coaches reached");
-                    return -1;
-
-                }
-            }
-            for (var a = 0; a < k; a++) {
-
-
-                t = 'ct' + String(team[a]);
-                z = document.getElementById(t);
-                if (z.value.localeCompare('bat') == 0) {
-                    b++;
-                }
-                else if (z.value.localeCompare('bowl') == 0) {
-                    bo++;
-                }
-                else if (z.value.localeCompare('all') == 0) {
-                    al++;
-                }
-                else if (z.value.localeCompare('coach') == 0) {
-                    c++;
-                }
-
-            }
-
-
-            cb = 7 - b;
-            cbo = 6 - bo;
-            ca = 2 - al;
-            cc = 1 - c;
-
-
-        }
-    </script>
-
+    <link rel="stylesheet" href="/stylesheets/playerselect.css" type="text/css">
+    <script src="/javascript/playerselect.js"></script>
+    <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
 </head>
-<body style="background-color: #646464;font-family: 'PT Sans', sans-serif;height:100%;">
+<body>
+<div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
+    <header class="banner" role="banner">
 
-<div style="min-height: 100%">
-    <div class="large-12 top-bar" style="overflow: visible;">
-        <section class="top-bar-section small-only-text-center">
-            <ul class="left">
-                <li><a href="/"><img src="http://res.cloudinary.com/gpl/image/upload/general/small.png"
-                                     style="height:42px;padding-bottom:3px;"/></a></li>
-                <li><a href="https://www.facebook.com/ieeecsvit"><img
-                                src="http://res.cloudinary.com/gpl/image/upload/general/ieee.png" style="height:40px;"
-                                align="center"/></a></li>
+        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo"
+                                                                                     src="/images/gpllogo.png"
+                                                                                     height="50"
+                                                                                     class="pull-left"/><span
+                    class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg"
+                                                                                    height="60"
+                                                                                    class="pull-right"/></span>
 
+
+    </header>
+</div>
+<div id="navbar-wrapper">
+    <nav id="navbar"></nav>
+</div>
+<div class="container-fluid">
+
+    <div class="row row-offcanvas row-offcanvas-left">
+
+        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+
+            <ul class="nav nav-sidebar">
+                <li id="home" class="active"><a href="#">Home</a></li>
+                <li id="bat"><a href="#">Batsman</a></li>
+                <li id="bowl"><a href="#">Bowler</a></li>
+                <li id="coach"><a href="#">Coach</a></li>
+                <li id="all-rounder"><a href="#">All Rounder</a></li>
             </ul>
-            <ul class="right">
-                <li><a href="/logout">Log Out</a></li>
-            </ul>
 
-        </section>
-    </div>
-    <!-- top bar -->
+        </div>
+        <!--/span-->
 
-    <% var team = []; var k = 0;var r;var j = 0; %>
-    <div class="small-12">
-        <ul class="radius tabs" data-tab="" style="margin-left: 31%;margin-top: 2%;">
-            <li class="tab-title active" id="act1" onclick="tab(1)"><a href="#">Batsmen</a></li>
-            <li class="tab-title" id="noact2" onclick="tab(2)"><a href="#">Bowlers</a></li>
-            <li class="tab-title" id="noact3" onclick="tab(3)"><a href="#">All Rounders</a></li>
-            <li class="tab-title" id="noact4" onclick="tab(4)"><a href="#">Coaches</a></li>
-        </ul>
-        <div class="tabs-content">
-            <div class="large-3 small-12 left"
-                 style="height:auto;background-color: rgba(10,10,10,0.5);margin-right: 1%;margin-left: 2%;border-radius: 5px;">
-                <h4 style="color: white;background-color: rgba(80,80,80,1);margin-top: 0;border-radius: 5px;padding: 2%;text-align: center;"
-                    id="budget">
-                    Selected Players <b style='font-size: 60%'>Budget:10000000
-                        <script type="text/javascript">document.write("<br />" + "Batsmen : " + cb + "<br />" + "Bowlers : " + cbo + "<br />" + "All Rounders : " + ca + "<br />" + "Coach : " + cc + "<br />")</script>
-                    </b>
-                </h4>
+        <div class="col-sm-9 col-md-10 main">
 
-                <div style="max-height:29em;overflow-y:scroll" id="squad">
+            <!--toggle sidebar button-->
+            <p class="visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i
+                            class="glyphicon glyphicon-chevron-left"></i></button>
+            </p>
 
-                </div>
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-8 text-center">
+                    <div class="home">
+                        <h1 id="head"><strong>Welcome to Player Selection!</strong></h1>
+                        <br>
 
+                        <h3 id="important">Important Information</h3>
 
-                <form style="text-align: center" id="form">
-                    <input style="display: none;" id="t1" name="p1" value=""/>
-                    <input style="display: none;" id="t2" name="p2" value=""/>
-                    <input style="display: none;" id="t3" name="p3" value=""/>
-                    <input style="display: none;" id="t4" name="p4" value=""/>
-                    <input style="display: none;" id="t5" name="p5" value=""/>
-                    <input style="display: none;" id="t6" name="p6" value=""/>
-                    <input style="display: none;" id="t7" name="p7" value=""/>
-                    <input style="display: none;" id="t8" name="p8" value=""/>
-                    <input style="display: none;" id="t9" name="p9" value=""/>
-                    <input style="display: none;" id="t10" name="p10" value=""/>
-                    <input style="display: none;" id="t11" name="p11" value=""/>
-                    <input style="display: none;" id="t12" name="p12" value=""/>
-                    <input style="display: none;" id="t13" name="p13" value=""/>
-                    <input style="display: none;" id="t14" name="p14" value=""/>
-                    <input style="display: none;" id="t15" name="p15" value=""/>
-                    <input style="display: none" id="t16" name="p16" value=""/>
-                    <input onclick="subm();" type="submit"
-                           style="background: rgba(60,60,60,1);border-radius: 5px;margin:1%" id="sub" class="button"/>
-
-                </form>
-            </div>
-            <div class="content active" id="panel1">
-                <div class="large-8 small-12 columns">
-
-                    <div style="height: 42em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
-                         class="large-12 small-12 right">
-                        <table cellspacing="10px"
-                               style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
-
-                            <% k = 4; var z = 1;i = 0;for(i = 0;i < Players.length;i++) { %>
-                            <% if(k < 3){ %>
-
-                            <% if(Players[i]._id < 'b'){ %>
-                            <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                                id="box<%= Players[i]._id %>" onclick="">
-
-
-                                <img src="http://res.cloudinary.com/gpl/image/upload/players/bat/a<%= Players[i]._id %>.jpg"
-                                     style="width: 40%;margin: 0;float: left;"/>
-
-
-                                <p style="text-align: center;"><%= Players[i].Name %><br/>
-                                    <%= Players[i].Price %></p>
-
-                                <form name="h" style="display: none">
-                                    <input value="<%= Players[i].Name %>" id="cn<%= Players[i]._id %>"/>
-                                    <input value="<%= Players[i].Price %>" id="cp<%= Players[i]._id %>"/>
-                                    <input value="<%= Players[i].Cost %>" id="cc<%= Players[i]._id %>"/>
-                                    <input value="<%= Players[i].Type %>" id="ct<%= Players[i]._id %>"/>
-                                </form>
-                                <button class='button [tiny small large]' onclick="<%- 'sel(' + Players[i]._id + ')' %>"
-                                        style="height: auto;width: auto;margin-left:75%;padding:1.5%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
-                                    Select
-
-                                </button>
-                            </td>
-                            <% k++; } else {
-                                continue;
-                            } %>
-                            <% } else { if(z == 1) { %>
-                            <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                                <% z = 0;k = 0;i--;} else { %>
-                            </tr>
-                            <% k = 0;i--; %>
-                            <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                                <% } } } %>
-                            </tr>
-                        </table>
+                        <p id="message">You need to select a minimum of <strong>7 batsmen</strong>, <strong>6
+                                bowlers</strong>, <strong>1 coach</strong> and <strong>2 all-rounders</strong>.<br>Enjoy
+                            playing <strong>graVITas Premiere League!</strong>.</p>
                     </div>
-                </div>
-            </div>
-            <div class="content" id="panel2">
-                <div class="large-8 small-12 columns">
+                    <div class="batsman">
+                        <div class="container-fluid">
+                            <div class="alert alert-info fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 
-                    <div style="height: 42em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
-                         class="large-12 small-12 right">
-                        <table cellspacing="10px"
-                               style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
+                                <p class="alert-message"><strong>Important!:</strong>Select at least 7 players.</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 thumbnail" id="player">
+                                    <img class="img-thumbnail" id="i1" src="/images/img1.jpg" alt="image1">
 
-                            <% k = 4;i = 0; var z = 1;for(i = 0;i < Players.length;i++) { %>
-                            <% if(k < 3){ %>
+                                    <p id="name">CH Gayle
+                                        <br><strong>PRICE : </strong>2.2 M
+                                    </p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b1" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r1" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p2">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
 
-                            <% if(Players[i]._id < 'c' && Players[i]._id > 'b'){ %>
-                            <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                                id="box<%= Players[i]._id %>" onclick="">
+                                    <p id="n2">AB de Villiers<br><strong>PRICE : </strong>1.9 M
+                                    </p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b2" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r2" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p3">
+                                    <img class="img-thumbnail" src="//images/img1.jpg" alt="image3">
 
-                                <img src="http://res.cloudinary.com/gpl/image/upload/players/bowl/b<%= Players[i]._id %>.jpg"
-                                     style="width: 40%;margin: 0;float: left;"/>
+                                    <p id="n3"> KP Pietersen
+                                        <br><strong>PRICE:</strong> 1.5 M
 
-                                <p style="text-align: center;"><%= Players[i].Name %><br/>
-                                    <%= Players[i].Price %></p>
+                                    </p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b3" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r3" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p4">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
 
-                                <form name="h" style="display: none">
-                                    <input value="<%= Players[i].Name %>" id="cn<%= Players[i]._id %>"/>
-                                    <input value="<%= Players[i].Price %>" id="cp<%= Players[i]._id %>"/>
-                                    <input value="<%= Players[i].Cost %>" id="cc<%= Players[i]._id %>"/>
-                                    <input value="<%= Players[i].Type %>" id="ct<%= Players[i]._id %>"/>
-                                </form>
-                                <button class='button [tiny small large]' onclick="<%- 'sel(' + Players[i]._id + ')' %>"
-                                        style="height: auto;width: auto;margin-left:75%;padding:1.5%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
-                                    Select
+                                    <p id="n4"> BB McCullum
+                                        <br><strong>PRICE:</strong> 1.9 M
+                                    </p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b4" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r4" value="Remove">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 thumbnail" id="p7">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
 
-                                </button>
-                            </td>
-                            <% k++; } else {
-                                continue;
-                            } %>
-                            <% } else { if(z == 1) { %>
-                            <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                                <% z = 0;k = 0;i--;} else { %>
-                            </tr>
-                            <% k = 0;i--; %>
-                            <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                                <% } } } %>
-                            </tr>
-                        </table>
+                                    <p id="n7"> M Vijay
+                                        <br><strong>PRICE:</strong> 1.5 M
+                                    </p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b7" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r7" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p8">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
+
+                                    <p id="n8"> DA Warner
+                                        <br><strong>PRICE:</strong> 1.5 M
+                                    </p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b8" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r8" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p9">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
+
+                                    <p id="n9"> MEK Hussey
+                                        <br><strong>PRICE:</strong> 1.3 M
+                                    </p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b9" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r9" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p10">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
+
+                                    <p id="n10"> V Sehwag
+                                        <br><strong>PRICE:</strong> 1.3 M
+                                    </p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b10" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r10" value="Remove">
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="content" id="panel3">
-                <div class="large-8 small-12 columns">
+                    <div class="bowler">
+                        <div class="container-fluid">
+                            <div class="alert alert-info fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 
-                    <div style="height: 42em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
-                         class="large-12 small-12 right">
-                        <table cellspacing="10px"
-                               style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
+                                <p class="alert-message"><strong>Important!:</strong>Select at least 6 bowlers.</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 thumbnail" id="p115">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
 
-                            <% k = 4;i = 0; var z = 1;for(i = 0;i < Players.length;i++) { %>
-                            <% if(k < 3){ %>
+                                    <p id="n115">SP Narine<br>
+                                        <strong>Price: </strong>2.2 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b115" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r115" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p116">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
 
-                            <% if(Players[i]._id < 'd' && Players[i]._id > 'c'){ %>
-                            <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                                id="box<%= Players[i]._id %>" onclick="">
+                                    <p id="n116">Saeed Ajmal<br><strong>Price: </strong>2.2 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b116" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r116" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p117">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
 
-                                <img src="http://res.cloudinary.com/gpl/image/upload/players/all/c<%= Players[i]._id %>.jpg"
-                                     style="width: 40%;margin: 0;float: left;"/>
+                                    <p id="n117">M Muralitharan<br><strong>Price: </strong>1.5 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b117" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r117" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p118">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
 
-                                <p style="text-align: center;"><%= Players[i].Name %><br/>
-                                    <%= Players[i].Price %></p>
+                                    <p id="n118">BW Hilfenhaus<br><strong>Price: </strong>1.5 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b118" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r118" value="Remove">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 thumbnail" id="p121">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
 
-                                <form name="h" style="display: none">
-                                    <input value="<%= Players[i].Name %>" id="cn<%= Players[i]._id %>"/>
-                                    <input value="<%= Players[i].Price %>" id="cp<%= Players[i]._id %>"/>
-                                    <input value="<%= Players[i].Cost %>" id="cc<%= Players[i]._id %>"/>
-                                    <input value="<%= Players[i].Type %>" id="ct<%= Players[i]._id %>"/>
-                                </form>
-                                <button class='button [tiny small large]' onclick="<%- 'sel(' + Players[i]._id + ')' %>"
-                                        style="height: auto;width: auto;margin-left:75%;padding:1.5%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
-                                    Select
+                                    <p id="n121">M Morkel<br><strong>Price: </strong>1.8 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b121" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r121" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p122">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
 
-                                </button>
-                            </td>
-                            <% k++; } else {
-                                continue;
-                            } %>
-                            <% } else { if(z == 1) { %>
-                            <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                                <% z = 0;k = 0;i--;} else { %>
-                            </tr>
-                            <% k = 0;i--; %>
-                            <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                                <% } } } %>
-                            </tr>
-                        </table>
+                                    <p id="n122">JL Pattinson<br><strong>Price: </strong>1.2 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b122" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r122" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p123">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
+
+                                    <p id="n123">R Rampaul<br><strong>Price: </strong>1.2 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b123" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r123" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p124">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
+
+                                    <p id="n124">Umar Gul<br><strong>Price: </strong>1.6 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b124" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r124" value="Remove">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 thumbnail" id="p127">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
+
+                                    <p id="n127">CS Martin<br><strong>Price: </strong>1.6 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b127" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r127" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p128">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
+
+                                    <p id="n128">R Ashwin<br><strong>Price: </strong>1.8 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b128" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r128" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p129">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
+
+                                    <p id="n129">Mohammad Irfan<br><strong>Price: </strong>1.6 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b129" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r129" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p130">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
+
+                                    <p id="n130">A Mishra<br><strong>Price: </strong>1.3 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b130" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r130" value="Remove">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="content" id="panel4">
-                <div class="large-8 small-12 columns">
+                    <div class="coach">
+                        <div class="container-fluid">
+                            <div class="alert alert-info fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 
-                    <div style="height: 42em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
-                         class="large-12 small-12 right">
-                        <table cellspacing="10px"
-                               style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
+                                <p class="alert-message"><strong>Important!:</strong>Select at least 1 coach.</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 thumbnail" id="p243">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
 
-                            <% k = 4;i = 0; var z = 1;for(i = 0;i < Players.length;i++) { %>
-                            <% if(k < 3){ %>
+                                    <p id="n243">Gary Kristen<br><strong>Price: </strong>1.6 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b243" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r243" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p244">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
 
-                            <% if(Players[i]._id > 'd'){ %>
-                            <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                                id="box<%= Players[i]._id %>" onclick="">
+                                    <p id="n244">Sachin Tendulkar<br><strong>Price: </strong>900 k</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b244" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r244" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p245">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
 
-                                <img src="http://res.cloudinary.com/gpl/image/upload/players/coaches/d<%= Players[i]._id %>.jpg"
-                                     style="width: 40%;margin: 0;float: left;"/>
+                                    <p id="n245">John Wright<br><strong>Price: </strong>1.5 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b245" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r245" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p246">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
 
-                                <p style="text-align: center;"><%= Players[i].Name %><br/>
-                                    <%= Players[i].Price %></p>
+                                    <p id="n246">Andy Flower<br><strong>Price: </strong>1.4 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b246" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r246" value="Remove">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 thumbnail" id="p249">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
 
-                                <form name="h" style="display: none">
-                                    <input value="<%= Players[i].Name %>" id="cn<%= Players[i]._id %>"/>
-                                    <input value="<%= Players[i].Price %>" id="cp<%= Players[i]._id %>"/>
-                                    <input value="<%= Players[i].Cost %>" id="cc<%= Players[i]._id %>"/>
-                                    <input value="<%= Players[i].Type %>" id="ct<%= Players[i]._id %>"/>
-                                </form>
-                                <button class='button [tiny small large]' onclick="<%- 'sel(' + Players[i]._id + ')' %>"
-                                        style="height: auto;width: auto;margin-left:75%;padding:1.5%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
-                                    Select
+                                    <p id="n249">Rahul Dravid<br><strong>Price: </strong>650 K</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b249" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r249" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p250">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
 
-                                </button>
-                            </td>
-                            <% k++; } else {
-                                continue;
-                            } %>
-                            <% } else { if(z == 1) { %>
-                            <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                                <% z = 0;k = 0;i--;} else { %>
-                            </tr>
-                            <% k = 0;i--; %>
-                            <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                                <% } } } %>
-                            </tr>
-                        </table>
+                                    <p id="n250">John Buchannan<br><strong>Price: </strong>1.3 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b250" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r250" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p251">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
+
+                                    <p id="n251">Dav Whatmore<br><strong>Price: </strong>900 K</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b251" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r251" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p252">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
+
+                                    <p id="n252">Duncan Fletcher<br><strong>Price: </strong>1.4 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b252" value="Add">
+                                    <input type="button" class="remove btn btn-danger btn-sm" id="r252" value="Remove">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="all-rounder">
+                        <div class="container-fluid">
+                            <div class="alert alert-info fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+
+                                <p class="alert-message"><strong>Important!:</strong>Select at least 2 players.</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 thumbnail" id="p243">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
+
+                                    <p id="n243">Gary Kirste<br><strong>Price: </strong>1.6 M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b243" value="Add"> <input
+                                            type="button" class="remove btn btn-danger btn-sm" id="r243" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p244">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
+
+                                    <p id="n244">Sachin Tendulkar<br><strong>Price: </strong>1.6M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b244" value="Add"> <input
+                                            type="button" class="remove btn btn-danger btn-sm" id="r244" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p245">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
+
+                                    <p id="n245">John Wright<br><strong>Price: </strong>1.6M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b245" value="Add"> <input
+                                            type="button" class="remove btn btn-danger btn-sm" id="r245" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p246">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
+
+                                    <p id="n246">Andy Flower<br><strong>Price: </strong>1.6M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b246" value="Add"> <input
+                                            type="button" class="remove btn btn-danger btn-sm" id="r246" value="Remove">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3 thumbnail" id="p255">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
+
+                                    <p id="n255">Tom Moody<br><strong>Price: </strong>1.6M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b255" value="Add"> <input
+                                            type="button" class="remove btn btn-danger btn-sm" id="r255" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p256">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
+
+                                    <p id="n256">Jhonty Rhodes<br><strong>Price: </strong>1.6M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b256" value="Add"> <input
+                                            type="button" class="remove btn btn-danger btn-sm" id="r256" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p257">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
+
+                                    <p id="n257">Robin Singh<br><strong>Price: </strong>1.6M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b257" value="Add"> <input
+                                            type="button" class="remove btn btn-danger btn-sm" id="r257" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p258">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
+
+                                    <p id="n258">Ricky Ponting<br><strong>Price: </strong>1.6M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b258" value="Add"> <input
+                                            type="button" class="remove btn btn-danger btn-sm" id="r258" value="Remove">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 thumbnail" id="p261">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
+
+                                    <p id="n261">Darren Lehmann<br><strong>Price: </strong>1.6M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b261" value="Add"> <input
+                                            type="button" class="remove btn btn-danger btn-sm" id="r261" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p262">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
+
+                                    <p id="n262">Ray Jennings<br><strong>Price: </strong>1.6M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b262" value="Add"> <input
+                                            type="button" class="remove btn btn-danger btn-sm" id="r262" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p263">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
+
+                                    <p id="n263"><br><strong>Price: </strong>1.6M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b263" value="Add"> <input
+                                            type="button" class="remove btn btn-danger btn-sm" id="r263" value="Remove">
+                                </div>
+                                <div class="col-sm-3 thumbnail" id="p264">
+                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
+
+                                    <p id="n264"><br><strong>Price: </strong>1.6M</p>
+                                    <input type="button" class="add btn btn-info btn-sm" id="b264" value="Add"> <input
+                                            type="button" class="remove btn btn-danger btn-sm" id="r264" value="Remove">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!--/row-->
     </div>
-    <!-- content -->
 </div>
-<footer class="large-12" style="bottom:0; position:relative;">
-    <div class="top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">
-        <section class="top-bar-section">
-            <ul class="left">
-                <li style="display:block;"><a href="http://vitgravitas.com/"><img
-                                src="http://res.cloudinary.com/gpl/image/upload/general/gravitas.png"
-                                style="height:45px;"/></a></li>
-                <li><a href="http://vit.ac.in/"><img
-                                src="http://res.cloudinary.com/gpl/image/upload/general/vit_logo_white.png"
-                                style="height:40px;padding-top: 5px" align="center"/></a></li>
-            </ul>
-            <ul class="right">
-                <li><a href="/home/developers"><img src="http://res.cloudinary.com/gpl/image/upload/general/symbol.png"
-                                                    style="height:35px;" align="center"/><span
-                                style="color:white;text-shadow: 1px 1px rgba(68,59,50,1);">Developers</span></a></li>
+<!--/.container-->
 
-            </ul>
+</div>
 
-        </section>
-        <p style="margin-left: 46%; font-size:60%;color:white;bottom:0; margin-top:2%">&copy;IEEE-CS VIT Chapter</p>
 
-    </div>
+<footer id="footer" class="footer">
 </footer>
-<!-- footer -->
+<!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<script>
+    (function (b, o, i, l, e, r) {
+        b.GoogleAnalyticsObject = l;
+        b[l] || (b[l] =
+                function () {
+                    (b[l].q = b[l].q || []).push(arguments)
+                });
+        b[l].l = +new Date;
+        e = o.createElement(i);
+        r = o.getElementsByTagName(i)[0];
+        e.src = '//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e, r)
+    }(window, document, 'script', 'ga'));
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+</script>
+
+<!-- build:js(.) scripts/plugins.js -->
+
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/javascript/main.js"></script>
+
 </body>
 </html>

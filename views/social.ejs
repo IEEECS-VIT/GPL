@@ -25,6 +25,7 @@
 
 <div class="container col-sm-offset-2 col-sm-8 shadow">
 
+    <%if(mode){%>
     <div class="row">
         <p class="page-header text-center" id="header">
             Team Name
@@ -54,6 +55,8 @@
             </form>
         </div>
     </div>
+    <%} else {%>
+    <% } %>
 </div><!--/.container-->
 
 <footer id="footer" class="footer">

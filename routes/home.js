@@ -146,67 +146,29 @@ router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
 router.get('/matches', function (req, res) {
     if (req.signedCookies.name)
     {
-        var teamName = req.signedCookies.name;
-        var credentials =
-        {
-            '_id': teamName
-        };
-        var onFetch = function (err, doc)
-        {
-            if (err)
-            {
-                if (log)
-                {
-                    if (log)
-                    {
-                        log.log('debug', {Error: err, Message: err.message});
-                    }
-                }
-            }
-            else
-            {
-                var credentials1 =
-                {
-                    'Team_1': doc.team_no
-                };
-                var credentials2 =
-                {
-                    'Team_2': doc.team_no
-                };
-                var parallel_tasks = {};
-                var response = {};
-                response.test = "False";
-                var onFinish = function (err, results)
-                {
-                    if (err && log)
-                    {
-                        log.log('debug', {Error: err, Message: err.message});
-                    }
-                    else
-                    {
-                        response["previousMatch"] = results.previousMatch;
-                        response["nextMatch"] = results.nextMatch;
-                        if (response["previousMatch"] != null || response["nextMatch"] != null)
-                        {
-                            response.test = "True";
-                        }
-                        console.log(response.nextMatch);
-                        res.render('matches', {response: response});
-                    }
-                };
-
-                parallel_tasks.previousMatch = function (asyncCallback)
-                {
-                    mongoMatches.fetchPreviousMatch(credentials1, credentials2, asyncCallback);
-                };
-                parallel_tasks.nextMatch = function (asyncCallback)
-                {
-                    mongoMatches.fetchNextMatch(credentials1, credentials2, asyncCallback);
-                };
-                async.parallel(parallel_tasks, onFinish);
-            }
-        };
-        mongoUsers.fetch(credentials, onFetch);
+       var onMap = function(err, num)
+       {
+           if(err)
+           {
+               console.log(err.message);
+           }
+           else
+           {
+               var onMatches = function(err, matches)
+               {
+                   if(err)
+                   {
+                       console.log(err.message);
+                   }
+                   else
+                   {
+                       res.render('matches', {match : matches});
+                   }
+               };
+               mongoTeam.fetchMatches(num, onMatches);
+           }
+       };
+       mongoTeam.map({_id : req.signedCookies.name}, onMap);
     }
     else
     {
@@ -501,7 +463,7 @@ router.get('/info', function (req, res) {
 });
 
 router.get('/feature', function (req, res) {
-    if(req.signedCookies.name || 1)
+    if(req.signedCookies.name)
     {
         res.render('feature', {csrfToken : req.csrfToken()});
     }
@@ -571,48 +533,7 @@ router.get('/schedule', function (req, res) // schedule page
 {
     if (req.signedCookies.name)
     {
-        var team = req.signedCookies.name._id;
-        var onMap = function(err, doc)
-        {
-            if(err)
-            {
-                console.log(err.message);
-            }
-            else
-            {
-                var onFind = function(err, result)
-                {
-                    if(err)
-                    {
-                        console.log(err.message);
-                    }
-                    else
-                    {
-                        res.render('schedule', {schedule : result});
-                    }
-                };
-
-                var user =
-                {
-                    $or :
-                    [
-                        {
-                            "Team_1" :  doc
-                        },
-                        {
-                            "Team_2" :  doc
-                        }
-                    ]
-                };
-                mongoTeam.schedule(user, onFind);
-            }
-        };
-
-        mongoTeam.map({'_id' : team}, onMap);
-    }
-    else
-    {
-        res.redirect('/');
+        res.render('schedule');
     }
 });
 
