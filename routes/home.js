@@ -26,7 +26,6 @@ var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team.js'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users.js'));
 var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection'));
 var mongoPlayers = require(path.join(__dirname, '..', 'db', 'mongo-players.js'));
-var mongoMatches = require(path.join(__dirname, '..', 'db', 'mongo-matches.js'));
 var mongoFeatures = require(path.join(__dirname, '..', 'db', 'mongo-features.js'));
 
 if (process.env.LOGENTRIES_TOKEN)
@@ -521,7 +520,7 @@ router.get('/dashboard', function (req, res) {
                 res.render('dashboard', {result : doc});
             }
         };
-        MongoTeam.dashboard(user, onFind);
+        mongoTeam.dashboard(user, onFind);
     }
     else
     {

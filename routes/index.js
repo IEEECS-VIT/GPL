@@ -548,25 +548,11 @@ router.get('/social/callback', function(req, res){
 });
 
 router.get(/\/developers?/, function(req, res){
-    if(req.signedCookies.name)
-    {
-        res.render('developers');
-    }
-    else
-    {
-        res.redirect('/');
-    }
+    res.render('developers');
 });
 
 router.get('/privacy', function(req, res){
-    if(req.signedCookies.name)
-    {
-        res.render('privacy');
-    }
-    else
-    {
-        res.redirect('/');
-    }
+    res.render('privacy');
 });
 
 router.get('/simulate', function(req, res){
