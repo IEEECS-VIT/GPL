@@ -24,43 +24,10 @@
 
 <div id="wrapper" class="container-fluid">
 
-    <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
-        <div class="container-fluid">
-            <ul class="nav nav-pills nav-stacked wrapper  ">
-                <img src="/images/gpllogo.png" class="img-responsive" style="margin: 5px;padding-right:10px;">
-                <li role="presentation" class="active"><a href="/home/dashboard">Dashboard</a></li>
-                <li role="presentation"><a href="/home/team">Team</a></li>
-                <li role="presentation"><a href="/home/matches">Matches</a></li>
-
-            </ul>
-        </div>
-    </div>
+    <div id="side-navigation"></div>
     <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
 
-
-        <div class="navbar navbar-inverse navbar-static-top">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-controls="navbar" id="topbar-toggle">
-                </button>
-                <button type="button" class="navbar-toggle pull-left" id="sidenav-toggle" onclick="toggleSidenav()">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-
-                </button>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/home/rules">Rules</a></li>
-                    <li><a href="/privacy">Privacy Policy</a></li>
-                    <li><a href="/logout">Log Out</a></li>
-
-                </ul>
-            </div>
-            <!--/.nav-collapse -->
-        </div>
+        <div id="top-navigation"></div>
 
         <div class="container-fluid wrapper stats-view">
 
@@ -148,7 +115,7 @@
 <!-- endbuild -->
 
 <!-- build:js({app,.tmp}) scripts/main.js -->
-<script src="javascript/dashboard.js"></script>
+<script src="javascript/playerCommon.js"></script>
 <script>
     <% function string_range(start, stop){
         var string_array = [];
@@ -171,7 +138,7 @@
     var line = $("#line-chart").get(0).getContext("2d");
 
     var line_data = {
-        labels: <%= string_range(0, json_data.run_rate.length) %>,
+        labels: <%= string_range(1, json_data.run_rate.length) %>,
         datasets: [
             {
                 label: "Run rate",
@@ -245,13 +212,13 @@
 
     var pie_data = [
         {
-            value: <%= data.fours %>,
+            value: <%= json_data.fours %>,
             color: "rgba(7, 51, 58,0.2)",
             highlight: "rgba(7, 51, 58,0.5)",
             label: "Fours"
         },
         {
-            value: <%= data.sixes %>,
+            value: <%= json_data.sixes %>,
             color: "rgba(19,131,148,0.2)",
             highlight: "rgba(19,131,148,0.5)",
             label: "Sixes"

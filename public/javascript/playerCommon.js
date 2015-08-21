@@ -17,6 +17,10 @@ function toggleSidenav() {
     $("#main-content").toggleClass("col-xs-offset-4");
 }
 
+(function () {
+    $("#top-navigation").load("/html/playerNavbar.html");
+    $("side-navigation").load("/html/playerSidenav.html");
+})();
 
 
 
