@@ -20,10 +20,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Reset Password | GPL</title>
+    <title>Register | GPL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/stylesheets/register.css"/>
     <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
-    <link href="/stylesheets/gplamain.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/main.css">
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -39,138 +42,69 @@
 
         ga('create', 'UA-57505316-2', 'auto');
         ga('send', 'pageview');
-
     </script>
 </head>
-<body style="background-color:#646464;font-family: 'PT Sans', sans-serif;height:100%;">
-<div style="min-height: 100%">
-    <div class="large-12 top-bar" style="overflow: visible;">
-        <section class="top-bar-section small-only-text-center">
-            <ul class="left">
-                <li><a href="/"><img src="http://res.cloudinary.com/gpl/general/small.png"
-                                     style="height:42px;padding-bottom:3px;"/></a></li>
-                <li><a href="https://www.facebook.com/ieeecsvit"><img
-                                src="http://res.cloudinary.com/gpl/general/ieee.png" style="height:40px;"
-                                align="center"/></a></li>
+<body>
+<div id="gplheader" class="page-title hidden-xs hidden-md hidden-sm">
+    <header class="banner" role="banner">
 
-            </ul>
-            <ul class="right">
-                <li class="has-dropdown not-click" style="border-radius: 5px">
-                    <a href="#" style="border-radius: 5px">Sign In</a>
-                    <ul class="dropdown" style="width:300%;">
-                        <form method="post" action="/login">
-                            <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
-                            <li class="title back js-generated">
-                                <h5>
-                                    <a href="javascript:void(0)">
-                                        Back
-                                    </a>
-                                </h5>
-                            </li>
+        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo pull-left"
+                                                                                     src="/images/gpllogo.png"
+                                                                                     height="50"/><span
+                    class="h2 gplheadertext pull-left">graVITas Premier League 2.0</span><img
+                    src="/images/header-right.jpg"
+                    height="60"
+                    class="pull-right"/></span>
 
 
-                            <li>
+    </header>
+</div>
 
-                                <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
-                                    <div class="row">
-                                        <div class="small-3 columns" style="margin-left: -5%">
-                                            <label for="team" class="right inline" style="color: white;">Team
-                                                Name: </label>
-                                        </div>
-                                        <div class="small-9 columns">
-                                            <input type="text" id="team" name="name" placeholder="Team Name" value=""
-                                                   style="margin:-4% 0 0 1%;border-radius: 5px">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <!--Username/Team Name -->
-
-
-                                <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
-                                    <div class="row" style="margin-top: 2%">
-                                        <div class="small-3 columns" style="margin-left: -5%">
-                                            <label for="pass" class="right inline"
-                                                   style="color: white;">Password: </label>
-                                        </div>
-                                        <div class="small-9 columns">
-                                            <input type="password" id="p
-                                                  ass" placeholder="Password" name="password" value=""
-                                                   style="margin:-4% 0 0 1%;border-radius: 5px">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- password-->
-
-
-                            </li>
-                            <li>
-                                <input type="submit" align="center" class="button [tiny small large]" value="Login"
-                                       id="button" name="login"
-                                       style="border-radius: 5px;background: rgba(30,30,30,1);margin-left: 38%;margin-bottom: 3%;"/>
-                            </li>
-
-                            <li class="divider"><a href="/forgot">Forgot Password?</a></li>
-                        </form>
-                    </ul>
-                </li>
-            </ul>
-
-        </section>
-    </div>
-    <!-- top bar -->
-    <div class="row" align="center">
-        <div class="small-12 medium-12 large-12 columns"
-             style="background:rgba(0,123,184,0.5); border-radius: 0 0 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0) ">
-            <h3 style="text-align: center; color: #ffffff;margin-top: 2%;">Reset Password</h3>
-            <br/><br/>
-
-            <form name="reset" action="" method="">
+<div id="navbar-wrapper">
+    <nav id="navbar"></nav>
+</div>
+<div class="container">
+    <div class="row" id="register-form">
+        <div class="col-xs-12 col-sm-offset-2 col-sm-8">
+            <form name="register" action="/register" method="post">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
 
-                <div class="row">
-                    <div class="small-3 medium-3 large-3 columns">
-                        <label for="team" class="right inline" style="color: white;">New Password: </label>
-                    </div>
-                    <div class="small-6 medium-6 large-6 columns">
-                        <input type="password" id="pass" placeholder="New Password" name="password"/>
-                    </div>
+                <div class="form-group">
+                    <label for="team">Team Name: </label>
+                    <input type="text" id="team" placeholder="Team Name" class="form-control" name="team_name"/>
                 </div>
-                <div class="row">
-                    <div class="small-3 medium-3 large-3 columns">
-                        <label for="team" class="right inline" style="color: white;">Confirm New Password: </label>
-                    </div>
-                    <div class="small-6 medium-6 large-6 columns">
-                        <input type="password" id="cpass" placeholder="Confirm New Password" name="c_password"/>
-                    </div>
+                <div class="form-group">
+                    <label for="pass">Password: </label>
+                    <input type="password" id="pass" class="form-control" placeholder="Password" name="password"/>
                 </div>
-                <br/>
-                <input type="submit" style="background: rgba(30,30,30,1);border-radius: 5px;" align="center"
-                       class="button [radius round]" onclick=""/>
+                <div class="form-group">
+                    <label for="cpass">Confirm Password: </label>
+                    <input type="password" id="cpass" class="form-control" placeholder="Confirm Password"
+                           name="confirm_password"/>
+                </div>
+                <div class="form-group">
+                    <label for="manager">Manager Name: </label>
+                    <input type="text" id="manager" placeholder="Manager Name" class="form-control"
+                           name="manager_name"/>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email: </label>
+                    <input type="email" id="email" placeholder="username@domain.com" class="form-control" name="email"/>
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile Number: </label>
+                    <input type="text" id="mobile" placeholder="Mobile Number" class="form-control" name="phone"/>
+                </div>
+                <input type="submit" id="button" class="btn btn-primary btn-lg centered" name="button" value="Submit"
+                       onclick="validator()"/>
             </form>
         </div>
-
     </div>
 </div>
-<!-- content -->
 
-<footer class="small-12 medium-12 large-12" style="bottom:0; position:absolute;">
-    <div class="top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">
-        <section class="top-bar-section">
-            <ul class="left">
-                <li style="display:block;"><a href="http://vitgravitas.com/">graVITas</a></li>
-            </ul>
-            <ul class="right">
-                <li><a href="/developer">Developers</a></li>
-            </ul>
 
-        </section>
-        <p style="margin-left: 46%; font-size:60%;color:white;bottom:0; margin-top:2%">&copy;IEEE-CS VIT Chapter</p>
-
-    </div>
+<footer id="footer" class="footer">
 </footer>
-<!-- footer -->
+<script src="/javascript/main.js"></script>
 </body>
 </html>
