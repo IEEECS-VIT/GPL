@@ -1,116 +1,75 @@
-<!--
-  GraVITas Premier League <gravitaspremierleague@gmail.com>
-  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
-
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js">
 <head>
-    <meta charset="UTF-8">
-    <title>Trailer | GPL</title>
-    <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>b2798ee5ce99e4f0587ae7442831096352fa9688
-    <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    <meta charset="utf-8">
+    <title>Trailer</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="/stylesheets/trailer.css" rel="stylesheet">
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="/stylesheets/main.css">
 
-        ga('create', 'UA-57505316-2', 'auto');
-        ga('send', 'pageview');
 
-    </script>
 </head>
-<body style="background-color:#646464;font-family: 'PT Sans', sans-serif;height:100%;">
-<div style="min-height: 100%">
-    <!--TOP BAR-->
-    <div class="large-12 top-bar" style="font-family: 'PT Sans', sans-serif;overflow: visible;">
-        <section class="top-bar-section small-only-text-center">
-            <ul class="left">
-                <li><a href="/"><img src="http://res.cloudinary.com/gpl/general/small.png"
-                                     style="height:42px;padding-bottom:3px;"/></a></li>
-                <li><a href="https://www.facebook.com/ieeecsvit"><img
-                                src="http://res.cloudinary.com/gpl/general/ieee.png" style="height:40px;"
-                                align="center"/></a></li>
+<body>
+<div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
+    <header class="banner" role="banner">
 
-            </ul>
-            <ul class="right">
-                <li><a href="/logout">Log Out</a></li>
-            </ul>
-        </section>
-    </div>
-    <!-- top bar -->
-    <div class="row" align="center">
-        <ul class="breadcrumbs"
-            style="background:rgba(30,30,30,0.9); border: none; box-shadow: inset 0 0 5px 3px rgba(255,255,255,0.2);margin-top: 5%;">
-            <li><a href="/home" style="color: #ffffff;">Home</a></li>
-            <li><a href="/home/matches" style="color:#ffffff;">Match</a></li>
-            <li><a href="/home/leaderboard" style="color:#ffffff;">Leaderboard</a></li>
-            <li><a href="/home/rules" style="color:#ffffff;">Rules</a></li>
-            <li><a href="/home/sponsors" style="color:#ffffff;">Sponsors</a></li>
-            <li><a href="/home/prize" style="color:#ffffff;">Prizes</a></li>
-            <li class="current"><a href="#" style="color: lightsteelblue;">Trailer</a></li>
-        </ul>
-    </div>
-    <div class="small-12 medium-12 large-12">
-        <div class="row" align="center"
-             style="background:rgba(80,80,120,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-top:3%; ">
-            <div style="background-color: rgba(0,0,0,0);border:none;padding: 2%; margin: 2%;">
-                <object width="853" height="480">
-                    <param name="movie" value="https://www.youtube.com/watch?v=Ui_zPTogeJY"/>
-                    <param name="allowFullScreen" value="true"/>
-                    <param name="allowscriptaccess" value="always"/>
-                    <embed src="https://www.youtube.com/watch?v=Ui_zPTogeJY"
-                           type="application/x-shockwave-flash" width="853" height="480" allowscriptaccess="always"
-                           allowfullscreen="true"></embed>
-                </object>
-            </div>
-        </div>
+        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo" src="/images/gpllogo.png" height="50" class="pull-left"/><span class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg" height="60" class="pull-right"/></span>
+
+
+    </header>
+</div>
+
+<div id="navbar-wrapper">
+    <nav id="navbar" ></nav>
+</div>
+
+<div class="container">
+    <div align="center" class="embed-responsive embed-responsive-16by9">
+        <iframe src="https://www.youtube.com/embed/Ui_zPTogeJY" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
 
-<footer class="large-12" style="bottom:0; position:relative;">
-    <div class="top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">
-        <section class="top-bar-section">
-            <ul class="left">
-                <li style="display:block;"><a href="http://vitgravitas.com/"><img
-                                src="http://res.cloudinary.com/gpl/general/gravitas.png"
-                                style="height:45px;"/></a></li>
-                <li><a href="http://vit.ac.in/"><img src="/images/vit_logo_white.png"
-                                                     style="height:40px;padding-top: 5px" align="center"/></a></li>
-            </ul>
-            <ul class="right">
-                <li><a href="/home/developers"><img src="http://res.cloudinary.com/gpl/general/symbol.png"
-                                                    style="height:35px;" align="center"/><span
-                                style="color:white;text-shadow: 1px 1px rgba(68,59,50,1);">Developers</span></a></li>
-
-            </ul>
-
-        </section>
-        <p style="margin-left: 46%; font-size:60%;color:white;bottom:0; margin-top:2%">&copy;IEEE-CS VIT Chapter</p>
-
-    </div>
+<!-- FOOTER -->
+<footer id="footer" class="footer">
 </footer>
-<!-- footer -->
+<!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<script>
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-XXXXX-X');ga('send','pageview');
+</script>
+
+<!-- build:js(.) scripts/plugins.js -->
+
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/javascript/main.js"></script>
+
+<!-- endbuild -->
+
+<!-- build:js({app,.tmp}) scripts/main.js -->
+
+<!-- endbuild -->
 </body>
 </html>
