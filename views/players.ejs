@@ -1,24 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js">
 <head>
-    <meta charset="UTF-8">
-    <title>Player Selection</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <!--<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>-->
+    <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/stylesheets/main.css"/>
+    <link rel="stylesheet" href="/stylesheets/playerselect.css"/>
 
-    <link rel="stylesheet" href="/stylesheets/playerselect.css" type="text/css">
-    <script src="/javascript/playerselect.js"></script>
-    <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
+    <!-- endbuild -->
 </head>
-<body>
+<body ng-app="formApp">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
 <div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
     <header class="banner" role="banner">
 
-        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo"
+        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo pull-left"
                                                                                      src="/images/gpllogo.png"
-                                                                                     height="50"
-                                                                                     class="pull-left"/><span
+                                                                                     height="50"/><span
                     class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg"
                                                                                     height="60"
                                                                                     class="pull-right"/></span>
@@ -26,430 +37,405 @@
 
     </header>
 </div>
+
 <div id="navbar-wrapper">
     <nav id="navbar"></nav>
 </div>
-<div class="container-fluid">
 
-    <div class="row row-offcanvas row-offcanvas-left">
+<!-- Add your site or application content here -->
 
-        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-
-            <ul class="nav nav-sidebar">
-                <li id="home" class="active"><a href="#">Home</a></li>
-                <li id="bat"><a href="#">Batsman</a></li>
-                <li id="bowl"><a href="#">Bowler</a></li>
-                <li id="coach"><a href="#">Coach</a></li>
-                <li id="all-rounder"><a href="#">All Rounder</a></li>
-            </ul>
-
+<div id="main" class="container-fluid" ng-controller="PlayerController">
+    <div class="col-md-8 col-md-offset-2 shadow-effect ">
+        <div class=" page-header row">
+            <h1>
+                <span class="col-xs-7">Players</span>
+          <span class="col-xs-5" id=" searchBoxContainer">
+            <input type="text" id="searchBox" class="form-control pull-right" placeholder="search"
+                   ng-model="searchText"/></span>
+            </h1>
         </div>
-        <!--/span-->
+        <div class="row">
 
-        <div class="col-sm-9 col-md-10 main">
+            <div class="col-sm-4">
 
-            <!--toggle sidebar button-->
-            <p class="visible-xs">
-                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i
-                            class="glyphicon glyphicon-chevron-left"></i></button>
-            </p>
+                <div class="container-fluid">
 
-            <div class="row">
-                <div class="col-sm-offset-2 col-sm-8 text-center">
-                    <div class="home">
-                        <h1 id="head"><strong>Welcome to Player Selection!</strong></h1>
-                        <br>
 
-                        <h3 id="important">Important Information</h3>
+                    <ul class="list-group ">
+                        <li class="list-group-item" ng-repeat="selectedPlayer in computeSelectedPlayers()"
+                            ng-class="{coachactive: isCoach(selectedPlayer)}">
+                            {{$index + 1}}.
+                            {{selectedPlayer.name}}<i class="glyphicon glyphicon-remove pull-right close-icon"
+                                                      ng-click="toggleActive(selectedPlayer)"></i>
 
-                        <p id="message">You need to select <strong>1 coach</strong> and <strong>15 players</strong>.<br>Enjoy
-                            playing <strong>graVITas Premiere League!</strong>.</p>
-                    </div>
-                    <div class="batsman">
-                        <div class="container-fluid">
-                            <div class="alert alert-info fade in">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        </li>
+                    </ul>
 
-                                <p class="alert-message"><strong>Important!:</strong>Select at least 7 players.</p>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 thumbnail" id="player">
-                                    <img class="img-thumbnail" id="i1" src="/images/img1.jpg" alt="image1">
+                    <p>{{alertMessage}}</p>
 
-                                    <p id="name">CH Gayle
-                                        <br><strong>PRICE : </strong>2.2 M
-                                    </p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b1" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r1" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p2">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
+                    <p><strong>Remaining Amount: </strong><span>{{remaining() | number}}</span></p>
 
-                                    <p id="n2">AB de Villiers<br><strong>PRICE : </strong>1.9 M
-                                    </p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b2" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r2" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p3">
-                                    <img class="img-thumbnail" src="//images/img1.jpg" alt="image3">
 
-                                    <p id="n3"> KP Pietersen
-                                        <br><strong>PRICE:</strong> 1.5 M
+                    <form name="playersForm" method="post"
+                          action="http://postcatcher.in/catchers/55d8413d8190a70300001668">
 
-                                    </p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b3" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r3" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p4">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
+                        <input type="hidden" ng-repeat="selectedPlayer in computeSelectedPlayers()"
+                               id="{{'t'+($index+1)}}" name="{{'p'+($index+1)}}" value="{{selectedPlayer._id}}"/>
 
-                                    <p id="n4"> BB McCullum
-                                        <br><strong>PRICE:</strong> 1.9 M
-                                    </p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b4" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r4" value="Remove">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 thumbnail" id="p7">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
 
-                                    <p id="n7"> M Vijay
-                                        <br><strong>PRICE:</strong> 1.5 M
-                                    </p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b7" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r7" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p8">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
+                        <input type="submit" class="btn btn-primary" ng-class="{disabled:isNotValid()}" value="Submit"
+                               ng-disabled="isNotValid()"/>
+                    </form>
 
-                                    <p id="n8"> DA Warner
-                                        <br><strong>PRICE:</strong> 1.5 M
-                                    </p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b8" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r8" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p9">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
-
-                                    <p id="n9"> MEK Hussey
-                                        <br><strong>PRICE:</strong> 1.3 M
-                                    </p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b9" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r9" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p10">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
-
-                                    <p id="n10"> V Sehwag
-                                        <br><strong>PRICE:</strong> 1.3 M
-                                    </p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b10" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r10" value="Remove">
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="bowler">
-                        <div class="container-fluid">
-                            <div class="alert alert-info fade in">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-
-                                <p class="alert-message"><strong>Important!:</strong>Select at least 6 bowlers.</p>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 thumbnail" id="p115">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
-
-                                    <p id="n115">SP Narine<br>
-                                        <strong>Price: </strong>2.2 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b115" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r115" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p116">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
-
-                                    <p id="n116">Saeed Ajmal<br><strong>Price: </strong>2.2 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b116" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r116" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p117">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
-
-                                    <p id="n117">M Muralitharan<br><strong>Price: </strong>1.5 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b117" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r117" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p118">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
-
-                                    <p id="n118">BW Hilfenhaus<br><strong>Price: </strong>1.5 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b118" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r118" value="Remove">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 thumbnail" id="p121">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
-
-                                    <p id="n121">M Morkel<br><strong>Price: </strong>1.8 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b121" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r121" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p122">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
-
-                                    <p id="n122">JL Pattinson<br><strong>Price: </strong>1.2 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b122" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r122" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p123">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
-
-                                    <p id="n123">R Rampaul<br><strong>Price: </strong>1.2 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b123" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r123" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p124">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
-
-                                    <p id="n124">Umar Gul<br><strong>Price: </strong>1.6 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b124" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r124" value="Remove">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 thumbnail" id="p127">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
-
-                                    <p id="n127">CS Martin<br><strong>Price: </strong>1.6 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b127" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r127" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p128">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
-
-                                    <p id="n128">R Ashwin<br><strong>Price: </strong>1.8 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b128" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r128" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p129">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
-
-                                    <p id="n129">Mohammad Irfan<br><strong>Price: </strong>1.6 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b129" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r129" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p130">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
-
-                                    <p id="n130">A Mishra<br><strong>Price: </strong>1.3 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b130" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r130" value="Remove">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="coach">
-                        <div class="container-fluid">
-                            <div class="alert alert-info fade in">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-
-                                <p class="alert-message"><strong>Important!:</strong>Select at least 1 coach.</p>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 thumbnail" id="p243">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
-
-                                    <p id="n243">Gary Kristen<br><strong>Price: </strong>1.6 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b243" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r243" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p244">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
-
-                                    <p id="n244">Sachin Tendulkar<br><strong>Price: </strong>900 k</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b244" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r244" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p245">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
-
-                                    <p id="n245">John Wright<br><strong>Price: </strong>1.5 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b245" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r245" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p246">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
-
-                                    <p id="n246">Andy Flower<br><strong>Price: </strong>1.4 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b246" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r246" value="Remove">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 thumbnail" id="p249">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
-
-                                    <p id="n249">Rahul Dravid<br><strong>Price: </strong>650 K</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b249" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r249" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p250">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
-
-                                    <p id="n250">John Buchannan<br><strong>Price: </strong>1.3 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b250" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r250" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p251">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
-
-                                    <p id="n251">Dav Whatmore<br><strong>Price: </strong>900 K</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b251" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r251" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p252">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
-
-                                    <p id="n252">Duncan Fletcher<br><strong>Price: </strong>1.4 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b252" value="Add">
-                                    <input type="button" class="remove btn btn-danger btn-sm" id="r252" value="Remove">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="all-rounder">
-                        <div class="container-fluid">
-                            <div class="alert alert-info fade in">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-
-                                <p class="alert-message"><strong>Important!:</strong>Select at least 2 players.</p>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 thumbnail" id="p243">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
-
-                                    <p id="n243">Gary Kirste<br><strong>Price: </strong>1.6 M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b243" value="Add"> <input
-                                            type="button" class="remove btn btn-danger btn-sm" id="r243" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p244">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
-
-                                    <p id="n244">Sachin Tendulkar<br><strong>Price: </strong>1.6M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b244" value="Add"> <input
-                                            type="button" class="remove btn btn-danger btn-sm" id="r244" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p245">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
-
-                                    <p id="n245">John Wright<br><strong>Price: </strong>1.6M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b245" value="Add"> <input
-                                            type="button" class="remove btn btn-danger btn-sm" id="r245" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p246">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
-
-                                    <p id="n246">Andy Flower<br><strong>Price: </strong>1.6M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b246" value="Add"> <input
-                                            type="button" class="remove btn btn-danger btn-sm" id="r246" value="Remove">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm-3 thumbnail" id="p255">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
-
-                                    <p id="n255">Tom Moody<br><strong>Price: </strong>1.6M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b255" value="Add"> <input
-                                            type="button" class="remove btn btn-danger btn-sm" id="r255" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p256">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
-
-                                    <p id="n256">Jhonty Rhodes<br><strong>Price: </strong>1.6M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b256" value="Add"> <input
-                                            type="button" class="remove btn btn-danger btn-sm" id="r256" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p257">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
-
-                                    <p id="n257">Robin Singh<br><strong>Price: </strong>1.6M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b257" value="Add"> <input
-                                            type="button" class="remove btn btn-danger btn-sm" id="r257" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p258">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
-
-                                    <p id="n258">Ricky Ponting<br><strong>Price: </strong>1.6M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b258" value="Add"> <input
-                                            type="button" class="remove btn btn-danger btn-sm" id="r258" value="Remove">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 thumbnail" id="p261">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image1">
-
-                                    <p id="n261">Darren Lehmann<br><strong>Price: </strong>1.6M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b261" value="Add"> <input
-                                            type="button" class="remove btn btn-danger btn-sm" id="r261" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p262">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image2">
-
-                                    <p id="n262">Ray Jennings<br><strong>Price: </strong>1.6M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b262" value="Add"> <input
-                                            type="button" class="remove btn btn-danger btn-sm" id="r262" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p263">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image3">
-
-                                    <p id="n263"><br><strong>Price: </strong>1.6M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b263" value="Add"> <input
-                                            type="button" class="remove btn btn-danger btn-sm" id="r263" value="Remove">
-                                </div>
-                                <div class="col-sm-3 thumbnail" id="p264">
-                                    <img class="img-thumbnail" src="/images/img1.jpg" alt="image4">
-
-                                    <p id="n264"><br><strong>Price: </strong>1.6M</p>
-                                    <input type="button" class="add btn btn-info btn-sm" id="b264" value="Add"> <input
-                                            type="button" class="remove btn btn-danger btn-sm" id="r264" value="Remove">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
+
+            <div class="col-sm-8">
+                <form>
+                    <ul class="list-group media-list">
+                        <h2>Batsmen</h2>
+                        <li ng-repeat="player in batsmen|filter:searchText" class="media list-group-item player"
+                            ng-click="toggleActive(player)"
+                            ng-class="{'batsmanactive':player.active, 'text-muted limit-exceeded': !canBeBought(player) && !player.active}"
+                            unselectable="on">
+
+                            <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
+
+                            {{player.name}}<span class="pull-right">{{player.price | number}}</span>
+                        </li>
+
+                        <h2>Bowlers</h2>
+                        <li ng-repeat="player in bowlers|filter:searchText" class="media list-group-item player"
+                            ng-click="toggleActive(player)"
+                            ng-class="{'bowleractive':player.active, 'text-muted limit-exceeded': !canBeBought(player) && !player.active}"
+                            unselectable="on">
+
+                            <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
+
+                            {{player.name}}<span class="pull-right">{{player.price | number}}</span>
+                        </li>
+
+                        <h2>All Rounders</h2>
+                        <li ng-repeat="player in allrounders|filter:searchText" class="media list-group-item player"
+                            ng-click="toggleActive(player)"
+                            ng-class="{'allrounderactive':player.active, 'text-muted limit-exceeded': !canBeBought(player) && !player.active}"
+                            unselectable="on">
+
+                            <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
+
+                            {{player.name}}<span class="pull-right">{{player.price | number}}</span>
+                        </li>
+
+
+                        <h2>Coaches</h2>
+                        <li ng-repeat="player in coaches|filter:searchText" class="media list-group-item player"
+                            ng-click="toggleActive(player)"
+                            ng-class="{'coachactive':player.active, 'text-muted limit-exceeded': !canBeBought(player) && !player.active}"
+                            unselectable="on">
+
+                            <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
+
+                            {{player.name}}<span class="pull-right">{{player.price | number}}</span>
+                        </li>
+                    </ul>
+
+
+                </form>
+
+
+            </div>
+
+
         </div>
-        <!--/row-->
+
     </div>
 </div>
-<!--/.container-->
-
-</div>
-
-
 <footer id="footer" class="footer">
 </footer>
-<!--[if lt IE 10]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
 
 
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
-<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/angularjs/angular.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
 <!-- endbower -->
 <!-- endbuild -->
 
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script type="text/javascript">
+    var myApp = angular.module('formApp', []);
+    function PlayerController($scope) {
 
-<!-- build:js(.) scripts/plugins.js -->
 
-<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        $scope.limitExceeded = false;
+
+        //TODO: change data to dynamic variables
+        $scope.batsmen = [
+            {
+                name: 'Adam Gilchrist',
+                price: 400,
+                image: '/images/god.jpeg',
+                _id: 'a1',
+                active: false
+            }, {
+                name: 'M S Dhoni',
+                price: 250,
+                image: '/images/god.jpeg',
+                _id: 'a2',
+                active: false
+            },
+            {
+                name: 'Rahul Dravid',
+                price: 300,
+                image: '/images/god.jpeg',
+                _id: 'a3',
+                active: false
+            }, {
+                name: 'Ricky Ponting',
+                price: 400,
+                image: '/images/god.jpeg',
+                _id: 'a4',
+                active: false
+            }
+
+        ];
+
+        $scope.bowlers = [
+            {
+                name: 'Brett Lee',
+                price: 220,
+                image: '/images/god.jpeg',
+                _id: 'b1',
+                active: false
+            }, {
+                name: 'Stuart Broad',
+                price: 230,
+                image: '/images/god.jpeg',
+                _id: 'b2',
+                active: false
+            },
+            {
+                name: 'Shane Warne',
+                price: 600,
+                image: '/images/god.jpeg',
+                _id: 'b3',
+                active: false
+            }];
+
+        $scope.allrounders = [
+            {
+                name: 'Saurav Ganguly',
+                price: 490,
+                image: '/images/god.jpeg',
+                _id: 'c1',
+                active: false
+            },
+            {
+                name: 'Shane Watson',
+                price: 600,
+                image: '/images/god.jpeg',
+                _id: 'c2',
+                active: false
+            }, {
+                name: 'Sachin Tendulkar',
+                price: 300,
+                image: '/images/god.jpeg',
+                _id: 'c3',
+                active: true
+            }
+        ];
+
+        $scope.coaches = [
+            {
+                name: 'Gary Kirsten',
+                price: 490,
+                image: '/images/god.jpeg',
+                _id: 'd1',
+                active: false
+            },
+            {
+                name: 'Kapil Dev',
+                price: 420,
+                image: '/images/god.jpeg',
+                _id: 'd2',
+                active: false
+            },
+            {
+                name: 'Greg Chappel',
+                price: 420,
+                image: '/images/god.jpeg',
+                _id: 'd3',
+                active: false
+            }
+        ]
+
+        $scope.nSelectedPlayers = {
+            batsmen: 0,
+            bowlers: 0,
+            allrounders: 0,
+            coaches: 0,
+            total: 0
+
+        }
+
+        $scope.computeSelectedPlayers = function () {
+            $scope.nSelectedPlayers = {
+                batsmen: 0,
+                bowlers: 0,
+                allrounders: 0,
+                coaches: 0,
+                total: 0
+
+            }
+
+            var a = [];
+            angular.forEach($scope.batsmen, function (s) {
+                if (s.active) {
+                    a.push(s);
+                    $scope.nSelectedPlayers.batsmen++;
+                }
+            });
+            angular.forEach($scope.bowlers, function (s) {
+                if (s.active) {
+                    a.push(s);
+                    $scope.nSelectedPlayers.bowlers++;
+                }
+            });
+
+            angular.forEach($scope.allrounders, function (s) {
+                if (s.active) {
+                    a.push(s);
+                    $scope.nSelectedPlayers.allrounders++;
+                }
+            });
+
+            angular.forEach($scope.coaches, function (s) {
+                if (s.active) {
+                    a.push(s);
+                    $scope.nSelectedPlayers.coaches++;
+                }
+            });
+            $scope.nSelectedPlayers.total = a.length;
+            return a;
+
+        }
+        $scope.searchText = "";
+        $scope.toggleActive = function (s) {
+
+            if (s.active || $scope.canBeBought(s)) {
+                s.active = !s.active;
+            }
+
+
+        };
+
+        // Helper method for calculating the total price
+
+        $scope.total = function () {
+
+            var total = 0;
+
+            // Use the angular forEach helper method to
+            // loop through the services array:
+
+            angular.forEach($scope.computeSelectedPlayers(), function (s) {
+                if (s.active) {
+                    total += s.price;
+                }
+            });
+
+            return total;
+        };
+
+        $scope.isCoach = function (player) {
+            return player._id[0] == 'd';
+        }
+
+        $scope.alertMessage = "";
+
+        $scope.isNotValid = function (players) {
+            $scope.alertMessage = "";
+
+            var valid = true;
+            var MAX_PLAYERS = 15;
+
+
+            if ($scope.nSelectedPlayers.total < MAX_PLAYERS + 1) {
+
+                var remainingPlayers = MAX_PLAYERS - ($scope.nSelectedPlayers.total - $scope.nSelectedPlayers.coaches);
+                if (remainingPlayers == 1) {
+                    $scope.alertMessage = "Please select 1 player";
+                }
+                else if (remainingPlayers > 0) {
+                    $scope.alertMessage = "Please select " + remainingPlayers + " players";
+                }
+
+                if ($scope.nSelectedPlayers.coaches < 1) {
+                    $scope.alertMessage += " and 1 coach.";
+                    if (remainingPlayers == 0) {
+                        $scope.alertMessage = "Please select a coach for your team";
+                    }
+
+                }
+
+
+            }
+
+            else {
+
+
+                if ($scope.nSelectedPlayers.coaches != 1) {
+                    $scope.alertMessage = "Please select exactly one coach.";
+                    if ($scope.nSelectedPlayers.coaches < 1) {
+                        $scope.alertMessage = "Please select a coach for your team";
+                    }
+                }
+
+
+                if ($scope.nSelectedPlayers.total > MAX_PLAYERS + 1) {
+                    $scope.alertMessage = "You need to select exactly 15 players and 1 coach.";
+                }
+
+            }
+
+
+            if ($scope.nSelectedPlayers.total == MAX_PLAYERS + 1 && $scope.nSelectedPlayers.coaches == 1) {
+                valid = true;
+            }
+            else {
+                valid = false;
+            }
+            if (valid) {
+                $scope.alertMessage = "Alright ! You are good to go.";
+            }
+            //if(!valid){
+            //  window.alert(alertMessage);
+            //}
+
+
+            return !valid;
+
+
+        };
+
+        $scope.remaining = function () {
+            var r = 10000 - $scope.total();
+
+
+            return r;
+        };
+
+        $scope.canBeBought = function (player) {
+            return ($scope.remaining() >= player.price);
+        }
+    }
+    ;
+    myApp.controller('PlayerController', ['$scope', PlayerController]);
+</script>
+
+<!-- endbuild -->
 <script src="/javascript/main.js"></script>
-
 </body>
 </html>
