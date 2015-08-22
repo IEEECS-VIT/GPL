@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard | GPL</title>
+    <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/leaderboard.css"/>
+
+</head>
+<body>
+
+<div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
+    <header class="banner" role="banner">
+        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo" src="/images/gpllogo.png" height="50" class="pull-left"/><span class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg" height="60" class="pull-right"/></span>
+    </header>
+</div>
+
+<div id="navbar-wrapper">
+    <nav id="navbar" ></nav>
+</div>
+
+<div class="container shadow-effect">
+    <div class="row">
+        <div  class="col-sm-offset-3 page-header text-left">
+            <h1>Leaderboard<br><small class="small-class">graVITas Premier League 2.0, graVITas 2015</small></h1>
+        </div>
+    </div>
+    <% if(leaderboard[0].points === 0) { %>
+    <div class="row">
+        <h3 class="col-sm-offset-3 text-info">
+            The Leader Board will be active as soon as the games begin!
+        </h3>
+    </div>
+    <% } else { %>
+    <div class="col-sm-offset-2 col-sm-8">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Team Name</th>
+                    <th>Points</th>
+                    <th>Matches Played</th>
+                    <th>Matches Won</th>
+                    <th>Net Run Rate</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for(var i = 0; i < leaderboard.length ; i++) { %>
+                <tr>
+                    <% if(i != 10){ %>
+
+                    <td> <%= i + 1 %>    </td>
+                    <td>  <%= leaderboard[i]._id %>    </td>
+                    <td> <%= leaderboard[i].points %>  </td>
+                    <td> <%= leaderboard[i].played %>  </td>
+                    <td> <%= leaderboard[i].win %>     </td>
+                    <td> <%= leaderboard[i].net_run_rate %> </td>
+
+                    <% } else if(i === 10){ %>
+                    <td>    <% var ra = "My Stats" %>
+                        <%= ra %>
+                    </td>
+                    <td>  <%= leaderboard[i]._id %>    </td>
+                    <td> <%= leaderboard[i].points %>  </td>
+                    <td> <%= leaderboard[i].played %>  </td>
+                    <td> <%= leaderboard[i].win %>     </td>
+                    <td> <%= leaderboard[i].net_run_rate %> </td>
+                    <% } %>
+                </tr>
+                <% } }%>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<footer id="footer" class="footer">
+</footer>
+<!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
