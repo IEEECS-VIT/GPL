@@ -1,15 +1,21 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
 
-html {
-    min-height: 100%;
+*{
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-font-smoothing: antialiased !important;
+    font-smoothing: antialiased !important;
+    font-feature-settings: "liga";
+}
+
+html{
+  min-height: 100%;
     background-color: white;
-
-}
-
-html {
     position: relative;
-    min-height: 100%;
+
 }
+
+
 
 body {
 
