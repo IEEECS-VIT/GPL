@@ -1,7 +1,7 @@
 body {
-    overflow: scroll!important;
+    overflow: scroll !important;
 }
 
-#register-form{
+#register-form {
     margin: 3%;
 }

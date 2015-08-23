@@ -1,19 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
-html{
-    min-height: 100%;
 
+html {
+    min-height: 100%;
 
 }
 
-h1{
+h1 {
     font-weight: 700;
 }
 
-*{
+* {
     font-family: 'Roboto';
     font-feature-settings: "liga", "kern";
 }
-*{
+
+* {
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
     -moz-font-smoothing: antialiased !important;
@@ -21,44 +22,44 @@ h1{
     font-feature-settings: "liga";
 }
 
-body{
+body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
-    background-color: #00796B!important;
+    background-color: #00796B !important;
     overflow: hidden;
 }
 
-
-h1{
+h1 {
     font-weight: 400;
     font-style: normal;
     font-size: 2.827em;
 }
 
-.shadow-effect{
-    -webkit-box-shadow: 0 5px 7px 0 rgba(0,0,0,0.25);
-    -moz-box-shadow: 0 5px 7px 0 rgba(0,0,0,0.25);
-    box-shadow: 0 5px 7px 0 rgba(0,0,0,0.25);
+.shadow-effect {
+    -webkit-box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.25);
     min-height: 100vh;
 }
 
-strong{
+strong {
     font-weight: 700;
 }
 
-.specs li p{
+.specs li p {
     padding-bottom: 3px;
     padding-top: 3px;
 }
-.specs{
+
+.specs {
     list-style-type: disc;
 }
 
-.small-class{
+.small-class {
     font-size: 0.5em;
 }
 
-.centered{
+.centered {
     text-align: center;
 }
 
@@ -73,6 +74,7 @@ strong{
 .img-30 {
     width: 30%;
 }
+
 .padding-2 {
     padding: 2%;
 }
@@ -87,7 +89,7 @@ strong{
 
 #form-container {
     background-color: white;
-    box-shadow: rgba(0,0,0,0.25);
+    box-shadow: rgba(0, 0, 0, 0.25);
     border-bottom-left-radius: 1%;
     border-bottom-right-radius: 1%;
 }

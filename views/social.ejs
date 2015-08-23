@@ -20,7 +20,7 @@
 <head>
     <title>Social | GPL</title>
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel='stylesheet' href='/stylesheets/teamNameForm.css' />
+    <link rel='stylesheet' href='/stylesheets/teamNameForm.css'/>
     <link rel="stylesheet" href="/stylesheets/main.css">
     <script>
         (function (i, s, o, g, r, a, m) {
@@ -54,12 +54,12 @@
 </div>
 
 <div id="navbar-wrapper">
-    <nav id="navbar" ></nav>
+    <nav id="navbar"></nav>
 </div>
 
 <div class="container col-sm-offset-2 col-sm-8 shadow">
 
-    <%if(mode){%>
+    <% if(mode){ %>
     <div class="row">
         <p class="page-header text-center" id="header">
             Team Name
@@ -76,6 +76,7 @@
             <form class="form-horizontal">
                 <div class="form-group">
                     <label for="teamName" class="col-sm-3 control-label tlabel">Team Name</label>
+
                     <div class="col-sm-5">
                         <input type="text" class="form-control" id="teamName" placeholder="Team Name">
                     </div>
@@ -89,15 +90,17 @@
             </form>
         </div>
     </div>
-    <%} else {%>
+    <% } else { %>
     <% } %>
-</div><!--/.container-->
+</div>
+<!--/.container-->
 
 <footer id="footer" class="footer">
 </footer>
 
 <!--[if lt IE 10]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 
 <!-- build:js(.) scripts/vendor.js -->

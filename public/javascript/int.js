@@ -56,6 +56,6 @@ function valid() {
     }
 }
 
-addEventListener('DOMContentReady', function(){
+addEventListener('DOMContentReady', function () {
     document.getElementsByName('name')[0].focus();
 }, false);

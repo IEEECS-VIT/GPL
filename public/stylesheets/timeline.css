@@ -1,6 +1,7 @@
 html {
     text-align: center;
 }
+
 .timeline {
 
     list-style: none;
@@ -24,10 +25,10 @@ html {
     margin-bottom: 20px;
     position: relative;
 }
-#head1, #head2:hover  {
+
+#head1, #head2:hover {
     cursor: pointer;
 }
-
 
 .timeline > li:before,
 .timeline > li:after {
@@ -124,6 +125,7 @@ html {
 .timeline-badge.blue {
     background-color: #3991d3 !important;
 }
+
 .image {
     float: right;
     width: 30%;
@@ -146,9 +148,11 @@ html {
 .timeline-badge.yellow {
     background-color: #ffff6f !important;
 }
+
 .timeline-badge.grey {
     background-color: #5d5f5d !important;
 }
+
 .timeline-badge.dark-blue {
     background-color: #2c9795 !important;
 }

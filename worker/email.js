@@ -1,15 +1,14 @@
-var email   = require("emailjs");
-var server  = email.server.connect({
-    user:       "gravitaspremierleague@gmail.com",
+var email = require("emailjs");
+var server = email.server.connect({
+    user: "gravitaspremierleague@gmail.com",
     password: process.env.KEY,
-    host:       "smtp.gmail.com",
-    ssl:        true
+    host: "smtp.gmail.com",
+    ssl: true
 });
 
-exports.send = function(message, callback) {
+exports.send = function (message, callback) {
     server.send(message, callback);
 };
-exports.wrap = function(content)
-{
+exports.wrap = function (content) {
     return email.message.create(content);
 };

@@ -47,14 +47,20 @@
 <div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
     <header class="banner" role="banner">
 
-        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo" src="/images/gpllogo.png" height="50" class="pull-left"/><span class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg" height="60" class="pull-right"/></span>
+        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo"
+                                                                                     src="/images/gpllogo.png"
+                                                                                     height="50"
+                                                                                     class="pull-left"/><span
+                    class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg"
+                                                                                    height="60"
+                                                                                    class="pull-right"/></span>
 
 
     </header>
 </div>
 
 <div id="navbar-wrapper">
-    <nav id="navbar" ></nav>
+    <nav id="navbar"></nav>
 </div>
 <div id="header">
     <h1> graVITas Premier League</h1>
@@ -64,7 +70,8 @@
     <div class="row">
 
         <form role="form" method="post" action="/home/feature">
-            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
             <div class="form-group">
                 <label for="name">Enter your Name :</label>
                 <input type="text" class="form-control" placeholder="Name" id="name" name="f_name">
@@ -85,7 +92,8 @@
 <footer id="footer" class="footer">
 </footer>
 <!--[if lt IE 10]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 
 
@@ -100,7 +108,6 @@
 
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/javascript/main.js"></script>
-
 
 
 </body>

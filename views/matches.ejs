@@ -17,108 +17,125 @@
 -->
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>GPL | Match Details</title>
-      <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-      <link rel='stylesheet' href='/stylesheets/matchDetails.css' />
-      <link rel="stylesheet" href="/stylesheets/main.css">
-      <script type="text/javascript">
-          function tog(){
-              $('.row-offcanvas').toggleClass('active');
-          };
-          $(document).ready(function() {
-              $('[data-toggle=offcanvas]').click(function() {
-                  $('.row-offcanvas').toggleClass('active');
-              });
-          });
-      </script>
-      <script>
-          (function (i, s, o, g, r, a, m) {
-              i['GoogleAnalyticsObject'] = r;
-              i[r] = i[r] || function () {
-                          (i[r].q = i[r].q || []).push(arguments)
-                      }, i[r].l = 1 * new Date();
-              a = s.createElement(o),
-                      m = s.getElementsByTagName(o)[0];
-              a.async = 1;
-              a.src = g;
-              m.parentNode.insertBefore(a, m)
-          })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/matchDetails.css'/>
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <script type="text/javascript">
+        function tog() {
+            $('.row-offcanvas').toggleClass('active');
+        }
+        ;
+        $(document).ready(function () {
+            $('[data-toggle=offcanvas]').click(function () {
+                $('.row-offcanvas').toggleClass('active');
+            });
+        });
+    </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-          ga('create', 'UA-57505316-2', 'auto');
-          ga('send', 'pageview');
+        ga('create', 'UA-57505316-2', 'auto');
+        ga('send', 'pageview');
 
-      </script>
-  </head>
-  <body>
-  <div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
-      <header class="banner" role="banner">
+    </script>
+</head>
+<body>
+<div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
+    <header class="banner" role="banner">
 
-          <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo" src="/images/gpllogo.png" height="50" class="pull-left"/><span class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg" height="60" class="pull-right"/></span>
-
-
-      </header>
-  </div>
-
-  <div id="navbar-wrapper">
-      <nav id="navbar" ></nav>
-  </div>
-  <div class="container-fluid">
-      <div class="row row-offcanvas row-offcanvas-left">
-          <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-              <ul class="nav nav-sidebar">
-                  <li class="active"><a href="#">Matches</a></li>
-
-                  <%for(var i=0;i<match.length ; i++){%>
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=match[i]%> <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                          <li><a href="#" onclick="document.getElementById('text').innerHTML='Commentary:<br><br><%=commentary[i]%>';tog();">Commentary</a></li>
-                          <li role="separator" class="divider"></li>
-                          <li><a href="#" onclick="document.getElementById('text').innerHTML='ScoreCard:<br><br><%=scorecard[i]%>';tog();">Scorecard</a></li>
-                      </ul>
-                  </li>
-                  <%}%>
-
-              </ul>
-          </div><!--/span-->
-          <div class="col-sm-9 col-md-10 main shadow ">
-              <!--toggle sidebar button-->
-              <p class="visible-xs">
-                  <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
-              </p>
-              <h1 class="page-header">Match Details</h1>
-              <div class="container-fluid text-center" id="text"><br><br>
-                  <span id="text"></span>
-              </div>
-          </div><!--/row-->
-      </div>
-  </div><!--/.container-->
-  <footer id="footer" class="footer">
-  </footer>
-  <!--[if lt IE 10]>
-  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
+        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo"
+                                                                                     src="/images/gpllogo.png"
+                                                                                     height="50"
+                                                                                     class="pull-left"/><span
+                    class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg"
+                                                                                    height="60"
+                                                                                    class="pull-right"/></span>
 
 
-  <!-- build:js(.) scripts/vendor.js -->
-  <!-- bower:js -->
-  <script src="/bower_components/jquery/dist/jquery.js"></script>
-  <!-- endbower -->
-  <!-- endbuild -->
+    </header>
+</div>
+
+<div id="navbar-wrapper">
+    <nav id="navbar"></nav>
+</div>
+<div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">Matches</a></li>
+
+                <% for(var i = 0;i < match.length ; i++){ %>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= match[i] %> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"
+                               onclick="document.getElementById('text').innerHTML='Commentary:<br><br><%= commentary[i] %>';tog();">Commentary</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#"
+                               onclick="document.getElementById('text').innerHTML='ScoreCard:<br><br><%= scorecard[i] %>';tog();">Scorecard</a>
+                        </li>
+                    </ul>
+                </li>
+                <% } %>
+
+            </ul>
+        </div>
+        <!--/span-->
+        <div class="col-sm-9 col-md-10 main shadow ">
+            <!--toggle sidebar button-->
+            <p class="visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i
+                            class="glyphicon glyphicon-chevron-left"></i></button>
+            </p>
+            <h1 class="page-header">Match Details</h1>
+
+            <div class="container-fluid text-center" id="text"><br><br>
+                <span id="text"></span>
+            </div>
+        </div>
+        <!--/row-->
+    </div>
+</div>
+<!--/.container-->
+<footer id="footer" class="footer">
+</footer>
+<!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
 
 
-  <!-- build:js(.) scripts/plugins.js -->
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
 
-  <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="/javascript/main.js"></script>
 
-  <!-- endbuild -->
+<!-- build:js(.) scripts/plugins.js -->
 
-  <!-- build:js({app,.tmp}) scripts/main.js -->
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/javascript/main.js"></script>
 
-  <!-- endbuild -->
-  </body>
+<!-- endbuild -->
+
+<!-- build:js({app,.tmp}) scripts/main.js -->
+
+<!-- endbuild -->
+</body>
 </html>

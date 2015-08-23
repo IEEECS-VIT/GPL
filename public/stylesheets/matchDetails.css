@@ -1,13 +1,15 @@
-#text{
+#text {
     border: solid 2px #ffffff;
     color: black;
     font-size: 20px;
     border-radius: 5px;
     width: 80%;
 }
+
 body {
     background-color: #f5f5f5;
 }
+
 /*
  * Off Canvas
  * --------------------------------------------------
@@ -36,6 +38,7 @@ body {
         margin-left: 10px;
     }
 }
+
 /* Sidebar navigation */
 .nav-sidebar {
     background-color: #f5f5f5;
@@ -43,19 +46,23 @@ body {
     margin-bottom: 20px;
     margin-left: -15px;
 }
+
 .nav-sidebar > li > a {
     padding-right: 20px;
     padding-left: 20px;
 }
+
 .nav-sidebar > .active > a {
     color: #fff;
     background-color: #428bca;
 }
-.shadow{
+
+.shadow {
     -webkit-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
+
 /*
  * Main content
  */
@@ -63,17 +70,20 @@ body {
     padding: 20px;
     background-color: #fff;
 }
+
 @media (min-width: 768px) {
     .main {
         padding-right: 40px;
         padding-left: 40px;
     }
 }
+
 .main .page-header {
     margin-top: 0;
     color: #000000;
 }
-.shadow{
+
+.shadow {
     -webkit-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);

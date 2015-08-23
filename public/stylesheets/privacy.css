@@ -1,19 +1,18 @@
-    *{
+* {
     text-rendering: optimizeLegibility !important;
-    -webkit-font-smoothing: antialiased !important; 
-    -moz-font-smoothing: antialiased !important; 
-    font-smoothing: antialiased !important; 
+    -webkit-font-smoothing: antialiased !important;
+    -moz-font-smoothing: antialiased !important;
+    font-smoothing: antialiased !important;
     font-feature-settings: "liga";
 }
 
-body{
+body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     overflow: hidden;
 }
 
-
-p{
+p {
     font-style: normal;
     color: #333333;
     padding-bottom: 12px;
@@ -22,47 +21,48 @@ p{
 
 }
 
-p{
+p {
     padding-bottom: 6px;
     padding-top: 6px;
     margin: 0;
-    
+
 }
 
-.custom-header{
+.custom-header {
     margin-bottom: 40px;
     color: #000;
     padding-top: 10px;
 
 }
 
-h1{
+h1 {
     font-weight: 400;
     font-style: normal;
     font-size: 2.827em;
 }
 
-.shadow-effect{
--webkit-box-shadow: 0px 5px 7px 0px rgba(0,0,0,0.25);
--moz-box-shadow: 0px 5px 7px 0px rgba(0,0,0,0.25);
-box-shadow: 0px 5px 7px 0px rgba(0,0,0,0.25);
-min-height: 100vh;
+.shadow-effect {
+    -webkit-box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.25);
+    min-height: 100vh;
 
 }
 
-strong{
+strong {
     font-weight: 700;
 }
 
-.specs li p{
+.specs li p {
     padding-bottom: 3px;
     padding-top: 3px;
 }
-.specs{
-    list-style-type: disc; 
+
+.specs {
+    list-style-type: disc;
 }
 
-.small-class{
+.small-class {
     font-size: 0.5em;
 }
 

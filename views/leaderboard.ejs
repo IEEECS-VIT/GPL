@@ -46,18 +46,26 @@
 
 <div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
     <header class="banner" role="banner">
-        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo" src="/images/gpllogo.png" height="50" class="pull-left"/><span class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg" height="60" class="pull-right"/></span>
+        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo"
+                                                                                     src="/images/gpllogo.png"
+                                                                                     height="50"
+                                                                                     class="pull-left"/><span
+                    class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg"
+                                                                                    height="60"
+                                                                                    class="pull-right"/></span>
     </header>
 </div>
 
 <div id="navbar-wrapper">
-    <nav id="navbar" ></nav>
+    <nav id="navbar"></nav>
 </div>
 
 <div class="container shadow-effect">
     <div class="row">
-        <div  class="col-sm-offset-3 page-header text-left">
-            <h1>Leaderboard<br><small class="small-class">graVITas Premier League 2.0, graVITas 2015</small></h1>
+        <div class="col-sm-offset-3 page-header text-left">
+            <h1>Leaderboard<br>
+                <small class="small-class">graVITas Premier League 2.0, graVITas 2015</small>
+            </h1>
         </div>
     </div>
     <% if(leaderboard[0].points === 0) { %>
@@ -93,7 +101,8 @@
                     <td> <%= leaderboard[i].net_run_rate %> </td>
 
                     <% } else if(i === 10){ %>
-                    <td>    <% var ra = "My Stats" %>
+                    <td>
+                        <% var ra = "My Stats" %>
                         <%= ra %>
                     </td>
                     <td>  <%= leaderboard[i]._id %>    </td>
@@ -103,7 +112,7 @@
                     <td> <%= leaderboard[i].net_run_rate %> </td>
                     <% } %>
                 </tr>
-                <% } }%>
+                <% } } %>
                 </tbody>
             </table>
         </div>
@@ -113,7 +122,8 @@
 <footer id="footer" class="footer">
 </footer>
 <!--[if lt IE 10]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 
 <!-- build:js(.) scripts/vendor.js -->
