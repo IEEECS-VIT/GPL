@@ -47,7 +47,7 @@ if (process.env.LOGENTRIES_TOKEN) {
     });
 }
 
-exports.getCount = function (doc, callback) {
+exports.getCount = function (callback) {
     var onConnect = function (err, db) {
         if (err) {
             callback(err);
@@ -63,7 +63,7 @@ exports.getCount = function (doc, callback) {
                     callback(null, count);
                 }
             };
-            collection.count(doc, onFetch);
+            collection.count(onFetch);
         }
     };
     MongoClient.connect(mongoUri, onConnect);

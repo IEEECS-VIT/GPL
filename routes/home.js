@@ -48,8 +48,8 @@ router.get('/', function (req, res) {
             }
             else if (doc) {
                 results.user = doc;
-                if (doc.team.length == 0) {
-                    res.redirect("/home/players");
+                if (doc.team.length === 0) {
+                    res.redirect('/home/players');
                 }
 
                 var getDetails = function (id, callback) {

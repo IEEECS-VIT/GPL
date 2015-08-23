@@ -365,7 +365,7 @@ router.post('/register', function (req, res) {
         }
         else {
             if (req.body.confirm_password === req.body.password) {
-                var newUser = record;
+                var newUser = {};
                 newUser._id = req.body.team_name;
                 newUser.dob = new Date();
                 newUser.team_no = parseInt(number) + 1;
@@ -373,6 +373,8 @@ router.post('/register', function (req, res) {
                 newUser.manager_name = req.body.manager_name;
                 newUser.email = req.body.email;
                 newUser.phone = req.body.phone;
+                newUser.team = [];
+                newUser.squad = [];
                 newUser.authStrategy = 'local';
 
                 var onInsert = function (err, docs) {
@@ -381,10 +383,10 @@ router.post('/register', function (req, res) {
                         res.render('register', {response: "Team Name Already Exists"});
                     }
                     else {
-                        var name = docs[0]['_id'];
+                        var name = newUser._id;
                         var message = email.wrap({
                             from: 'gravitaspremierleague@gmail.com',
-                            to: docs[0]['email'],
+                            to: newUser.email,
                             subject: 'Welcome to graVITas premier league 2.0!'
                         });
 
@@ -407,7 +409,7 @@ router.post('/register', function (req, res) {
             }
             else {
                 console.log("Incorrect Password");
-                res.render('register', {response: "Passwords do not match"});
+                res.render('register', {response: "Passwords do not match", csrfToken: req.csrfToken()});
             }
         }
     };

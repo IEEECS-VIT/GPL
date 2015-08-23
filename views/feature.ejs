@@ -23,7 +23,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
-    <link href="/stylesheets/style1.css" rel="stylesheet" TYPE="text/css"/>
+    <link href="/stylesheets/feature.css" rel="stylesheet" type="text/css"/>
     <link href="/stylesheets/main.css" rel="stylesheet">
     <script>
         (function (i, s, o, g, r, a, m) {
@@ -43,7 +43,7 @@
 
     </script>
 </head>
-<body style="background: url('/images/img.jpg') no-repeat;background-size: cover;">
+<body>
 <div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
     <header class="banner" role="banner">
 
@@ -62,31 +62,31 @@
 <div id="navbar-wrapper">
     <nav id="navbar"></nav>
 </div>
-<div id="header">
-    <h1> graVITas Premier League</h1>
-</div>
-
 <div class="container">
     <div class="row">
-
+        <div class="col-xs-12 col-sm-offset-2 col-sm-8">
+            <h4>Let us know what we can add to make it better for you!</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-offset-2 col-sm-8">
         <form role="form" method="post" action="/home/feature">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-
             <div class="form-group">
-                <label for="name">Enter your Name :</label>
+                <label for="name">Name: </label>
                 <input type="text" class="form-control" placeholder="Name" id="name" name="f_name">
             </div>
             <div class="form-group">
-                <label for="e-mail">Enter your E-mail address :</label>
+                <label for="e-mail">E-mail ID: </label>
                 <input type="email" class="form-control" placeholder="Email id" id="e-mail" name="f_email">
             </div>
             <div class="form-group">
-                <label for="features-requested">Features Requested : </label>
+                <label for="features-requested">Features you would like us to add: </label>
                 <textarea class="form-control" rows="5" id="features-requested" name="f_requests"></textarea>
             </div>
             <button type="submit" class="btn btn-primary" id="b">Submit</button>
         </form>
-
+        </div>
     </div>
 </div>
 <footer id="footer" class="footer">
