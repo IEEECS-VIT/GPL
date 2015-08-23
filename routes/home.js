@@ -360,7 +360,7 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
                 res.redirect('/home');
             }
             else {
-                res.render('team', {Squad: documents});
+                res.render('team', {Squad: documents, csrfToken: req.csrfToken()});
             }
         };
         mongoTeam.getTeam(credentials, getTeam);
