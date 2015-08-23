@@ -15,14 +15,15 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+<head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schedule | GPL</title>
     <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/schedule.css"/>
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -41,159 +42,69 @@
 
     </script>
 </head>
-<body style="background-color:#646464;font-family: 'PT Sans', sans-serif;height:100%;">
-<div style="min-height: 100%">
-    <!--TOP BAR-->
-    <div class="large-12 top-bar" style="overflow: visible;">
-        <section class="top-bar-section small-only-text-center">
-            <ul class="left">
-                <li><a href="/"><img src="http://res.cloudinary.com/gpl/general/small.png"
-                                     style="height:42px;padding-bottom:3px;"/></a></li>
-                <li><a href="https://www.facebook.com/ieeecsvit"><img
-                                src="http://res.cloudinary.com/gpl/general/ieee.png" style="height:40px;"
-                                align="center"/></a></li>
+<body>
 
-            </ul>
-            <ul class="right">
-                <li><a href="/register">Register</a></li>
-                <li class="has-dropdown not-click" style="border-radius: 5px">
-                    <a href="#" style="border-radius: 5px">Sign In</a>
-                    <ul class="dropdown" style="width:300%;">
-                        <form method="post" action="/login">
-                            <li class="title back js-generated">
-                                <h5>
-                                    <a href="javascript:void(0)">
-                                        Back
-                                    </a>
-                                </h5>
-                            </li>
+<div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
+    <header class="banner" role="banner">
+        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo" src="/images/gpllogo.png" height="50" class="pull-left"/><span class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg" height="60" class="pull-right"/></span>
+    </header>
+</div>
 
+<div id="navbar-wrapper">
+    <nav id="navbar" ></nav>
+</div>
 
-                            <li>
-
-                                <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
-                                    <div class="row">
-                                        <div class="small-3 columns" style="margin-left: -5%">
-                                            <label for="team" class="right inline" style="color: white;">Team
-                                                Name: </label>
-                                        </div>
-                                        <div class="small-9 columns">
-                                            <input type="text" id="team" name="team_name" placeholder="Team Name"
-                                                   value=""
-                                                   style="margin:-4% 0 0 1%;border-radius: 5px">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <!--Username/Team Name -->
-
-
-                                <div class="small-12 left" style="margin:1%;padding-bottom: 5%">
-                                    <div class="row" style="margin-top: 2%">
-                                        <div class="small-3 columns" style="margin-left: -5%">
-                                            <label for="pass" class="right inline"
-                                                   style="color: white;">Password: </label>
-                                        </div>
-                                        <div class="small-9 columns">
-                                            <input type="password" id="p
-                              ass" placeholder="Password" name="password" value=""
-                                                   style="margin:-4% 0 0 1%;border-radius: 5px">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- password-->
-
-
-                            </li>
-                            <li>
-                                <input type="submit" align="center" class="button [tiny small large]" value="Login"
-                                       id="button" name="login"
-                                       style="border-radius: 5px;background: rgba(30,30,30,1);margin-left: 38%;margin-bottom: 3%;"/>
-                            </li>
-
-                            <li class="divider"><a href="/forgot">Forgot Password?</a></li>
-                        </form>
-                    </ul>
-                </li>
-            </ul>
-        </section>
-    </div>
-    <!-- top bar -->
-    <div class="row" align="center">
-
-        <div class="small-12 medium-12 large-12"
-             style="background:rgba(200,200,200,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-top:3%; ">
-            <h4 style="color: white;text-align: center;background-color: rgba(30,30,30,0.8);border-radius: 5px;margin-top: 0;width: 100%;padding: 1%;">
-                Schedule</h4>
-            <table cellspacing="5px" style="border: none;border-radius: 5px;width:90%;">
-                <tr>
-                    <td colspan="3"
-                        style="color: #ffffff;font-weight: bold;text-align: center;margin:2%;border-radius: 5px;height: auto;line-height: 100%;background-color: #000000;">
-                        Event goes live on 1<sup>st</sup> Sep 2014 at 7:00p.m.
-                    </td>
-                </tr>
-                <tr>
-                    <th style="text-align: center;font-weight: bolder;">Round</th>
-                    <th style="text-align: center;font-weight: bolder;">Dates</th>
-                </tr>
-                <tr>
-                    <td style="color: #ffffff;font-weight: bold;text-align: center;margin:2%;border-radius: 5px;height: auto;line-height: 100%;background-color: #000000;">
-                        1
-                    </td>
-                    <td style="color: #ffffff;font-weight: bold;text-align: center;margin:2%;border-radius: 5px;height: auto;line-height: 100%;background-color: #000000;">
-                        5<sup>th</sup> September to 11<sup>th</sup> September
-                    </td>
-                </tr>
-                <tr>
-                    <td style="color: #ffffff;font-weight: bold;text-align: center;margin:2%;border-radius: 5px;height: auto;line-height: 100%;background-color: #000000;">
-                        2
-                    </td>
-                    <td style="color: #ffffff;font-weight: bold;text-align: center;margin:2%;border-radius: 5px;height: auto;line-height: 100%;background-color: #000000;">
-                        13<sup>th</sup> September to 19<sup>th</sup> September
-                    </td>
-                </tr>
-                <tr>
-                    <td style="color: #ffffff;font-weight: bold;text-align: center;margin:2%;border-radius: 5px;height: auto;line-height: 100%;background-color: #000000;">
-                        Auctions And Finals
-                    </td>
-                    <td style="color: #ffffff;font-weight: bold;text-align: center;margin:2%;border-radius: 5px;height: auto;line-height: 100%;background-color: #000000;">
-                        28<sup>th</sup> September
-                    </td>
-                </tr>
-            </table>
-
-            <p style="color: white;text-align: left;margin-left: 1%;">Note: The dates mentioned above are subject to
-                change. All matches simulation is carried out at midnight.</p>
+<div class="container shadow-effect">
+    <div class="row">
+        <div class="col-sm-offset-2 col-sm-8 page-header text-info">
+            <h1>Schedule.<br><small>graVITas Premiere League 2.0 </small></h1>
         </div>
     </div>
-
-    <!-- content -->
+    <table class="table-fill">
+        <thead>
+        <tr>
+            <th colspan="2">Event goes live on 1st September 2015 at 7:00p.m.</th>
+        </tr>
+        </thead>
+        <tbody class="table-hover">
+        <tr>
+            <td class="header">Round</td>
+            <td class="header">Dates</td>
+        </tr>
+        <tr>
+            <td>Round 1</td>
+            <td>9<sup>th</sup> September to 15<sup>th</sup> September</td>
+        </tr>
+        <tr>
+            <td >Round 2</td>
+            <td >16<sup>th</sup> September to 22<sup>nd</sup> September</td>
+        </tr>
+        <tr>
+            <td >Auctions and Finals</td>
+            <td >27<sup>th</sup> September</td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
 </div>
-<footer class="large-12" style="bottom:0; position:relative;">
-    <div class="top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">
-        <section class="top-bar-section">
-            <ul class="left">
-                <li style="display:block;"><a href="http://vitgravitas.com/"><img
-                                src="http://res.cloudinary.com/gpl/general/gravitas.png"
-                                style="height:45px;"/></a></li>
-                <li><a href="https://www.vit.ac.in"><img
-                                src="http://res.cloudinary.com/gpl/general/vit_logo_white.png"
-                                style="height:40px;padding-top: 5px" align="center"/></a></li>
-            </ul>
-            <ul class="right">
-                <li><a href="/home/developers"><img src="http://res.cloudinary.com/gpl/general/symbol.png"
-                                                    style="height:35px;" align="center"/><span
-                                style="color:white;text-shadow: 1px 1px rgba(68,59,50,1);">Developers</span></a></li>
 
-            </ul>
 
-        </section>
-        <p style="margin-left: 46%; font-size:60%;color:white;bottom:0; margin-top:2%">&copy;IEEE-CS VIT Chapter</p>
-
-    </div>
+<footer id="footer" class="footer">
 </footer>
-<!-- footer -->
+<!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+<script src="/javascripts/main.js"></script>
+
+
 </body>
 </html>
