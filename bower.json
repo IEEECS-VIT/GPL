@@ -37,6 +37,7 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.4",
-    "chartjs": "~1.0.2"
+    "chartjs": "~1.0.2",
+    "angularjs": "~1.4.4"
   }
 }
