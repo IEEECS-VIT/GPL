@@ -1,5 +1,7 @@
 html {
     font-family: "Roboto", helvetica, arial, sans-serif;
+    -webkit-transition: all 1s ease; /* Safari and Chrome */
+    transition: all 1s ease;
 }
 
 form ul li,
@@ -11,19 +13,13 @@ form ul li.active {
     user-select: none;
     -o-user-select: none;
     line-height: 30px;
-    -webkit-transition: all 0.2 ease; /* Safari and Chrome */
+    -webkit-transition: all 0.2s ease; /* Safari and Chrome */
     transition: all 0.2s ease;
 }
 
-form ul li.active {
-    background-color: #8ec16d;
-
-}
-
-.close-icon {
-
-    font-size: inherit;
-    cursor: pointer;
+form ul * {
+    -webkit-transition: all linear 0.2s; /* Safari and Chrome */
+    transition: all linear 0.2s;
 }
 
 .fixed-side {
@@ -43,10 +39,12 @@ form ul li.active {
     text-transform: lowercase;
     font-variant: small-caps;
     margin: 0;
+    font-weight: normal;
 }
 
-.page-header {
+.page-header * {
     line-height: 1;
+    color: #000000;
 }
 
 .batsmanactive {
@@ -71,4 +69,36 @@ form ul li.active {
 
 .limit-exceeded {
     cursor: default;
+}
+
+.no-padding-left {
+    padding-left: 0;
+}
+
+.no-padding-right {
+    padding-right: 0;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.nav-pills,
+.nav-pills li a {
+    padding: 5px;
+}
+
+* {
+    font-family: "Roboto", helvetica, arial, sans-serif;
+
+}
+
+.playerlist {
+    -webkit-transition: all linear 0.2s; /* Safari and Chrome */
+    transition: all linear 0.2s;
+}
+
+.aside {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #EEE;;
 }
