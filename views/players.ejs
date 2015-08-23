@@ -81,7 +81,7 @@
 
                         <form name="playersForm" method="post"
                               action="/home/getTeam">
-
+                              <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
                             <input type="hidden" ng-repeat="selectedPlayer in computeSelectedPlayers()"
                                    id="{{'t'+($index+1)}}" name="{{'p'+($index+1)}}" value="{{selectedPlayer._id}}"/>
 

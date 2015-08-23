@@ -157,17 +157,17 @@ router.post('/getsquad', function (req, res) {
             '_id': teamname
         };
         var squad = [];
-        squad.push(parseInt(req.body.p1));
-        squad.push(parseInt(req.body.p2));
-        squad.push(parseInt(req.body.p3));
-        squad.push(parseInt(req.body.p4));
-        squad.push(parseInt(req.body.p5));
-        squad.push(parseInt(req.body.p6));
-        squad.push(parseInt(req.body.p7));
-        squad.push(parseInt(req.body.p8));
-        squad.push(parseInt(req.body.p9));
-        squad.push(parseInt(req.body.p10));
-        squad.push(parseInt(req.body.p11));
+        squad.push(req.body.p1);
+        squad.push(req.body.p2);
+        squad.push(req.body.p3);
+        squad.push(req.body.p4);
+        squad.push(req.body.p5);
+        squad.push(req.body.p6);
+        squad.push(req.body.p7);
+        squad.push(req.body.p8);
+        squad.push(req.body.p9);
+        squad.push(req.body.p10);
+        squad.push(req.body.p11);
         var onFetch = function (err, document) {
             if (err) {
                 console.log(err.message);
@@ -187,22 +187,22 @@ router.post('/getsquad', function (req, res) {
 
 router.post('/getTeam', function (req, res) {
     var players = [], cost = 0;
-    players.push(parseInt(req.body.p1));
-    players.push(parseInt(req.body.p2));
-    players.push(parseInt(req.body.p3));
-    players.push(parseInt(req.body.p4));
-    players.push(parseInt(req.body.p5));
-    players.push(parseInt(req.body.p6));
-    players.push(parseInt(req.body.p7));
-    players.push(parseInt(req.body.p8));
-    players.push(parseInt(req.body.p9));
-    players.push(parseInt(req.body.p10));
-    players.push(parseInt(req.body.p11));
-    players.push(parseInt(req.body.p12));
-    players.push(parseInt(req.body.p13));
-    players.push(parseInt(req.body.p14));
-    players.push(parseInt(req.body.p15));
-    players.push(parseInt(req.body.p16));
+    players.push(req.body.p1);
+    players.push(req.body.p2);
+    players.push(req.body.p3);
+    players.push(req.body.p4);
+    players.push(req.body.p5);
+    players.push(req.body.p6);
+    players.push(req.body.p7);
+    players.push(req.body.p8);
+    players.push(req.body.p9);
+    players.push(req.body.p10);
+    players.push(req.body.p11);
+    players.push(req.body.p12);
+    players.push(req.body.p13);
+    players.push(req.body.p14);
+    players.push(req.body.p15);
+    players.push(req.body.p16);
 
     var onUpdate = function (err, documents) {
         if (err) {
@@ -330,7 +330,7 @@ router.get('/players', function (req, res) // page for all players, only availab
                             res.redirect('/home');
                         }
                         else {
-                            res.render('players', {Players: documents});
+                            res.render('players', {Players: documents, csrfToken: req.csrfToken()});
                         }
                     };
                     mongoPlayers.fetchPlayers(onFetch);
