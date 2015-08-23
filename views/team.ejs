@@ -1,380 +1,237 @@
-<!--
-  GraVITas Premier League <gravitaspremierleague@gmail.com>
-  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
-
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js">
 <head>
-    <meta charset="UTF-8">
-    <title>Team | GPL</title>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <!--<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>-->
     <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    <link rel="stylesheet" href="/stylesheets/main.css"/>
+    <link rel="stylesheet" href="/stylesheets/playerselect.css"/>
 
-        ga('create', 'UA-57505316-2', 'auto');
-        ga('send', 'pageview');
-
-    </script>
-    <script type="text/javascript"> var team = [];
-        var k = 0;
-        var r;
-        var che;
-        var cb = 5, cbo = 5, ca = 1;
-        function subm() {
-
-            if (k < 11) {
-
-                alert("Team not full");
-
-
-            }
-            else {
-                var id;
-                for (var j = 1; j <= 11; j++) {
-                    id = 't' + j;
-                    document.getElementById(id).value = team[j - 1];
-
-                }
-
-                document.getElementById('form').action = "/home/getsquad";
-                document.getElementById('form').method = "post";
-
-                document.getElementById('form').submit();
-
-            }
-
-        }
-        function sel(r) {
-            if (k == 11) {
-
-                alert("Team limit Reached");
-                return -1;
-            }
-
-            che = ch(r);
-
-            if (che != -1) {
-                if (k < 11) {
-
-                    team[k] = r;
-                    k++;
-                    document.getElementById("box" + r).style.visibility = 'hidden';
-                    ch(0);
-                    disp();
-
-
-                }
-
-
-                ch(0);
-            }
-        }
-        var count;
-        var di = [];
-        function disp() {
-
-
-            if (k == 0) {
-                document.getElementById("squad").innerHTML = "";
-
-                document.getElementById('budget').innerHTML = "Line Up <b style='font-size: 60%'><br />" + "Batsmen : " + cb + "<br />" + "Bowlers : " + cbo + "<br />" + "All Rounders : " + ca + "<br />" + "</b>";
-            }
-            else {
-                for (count = 0; count < k; count++) {
-
-                    var cut = team[count];
-                    var n = 'cn' + String(cut);
-
-
-                    var t = 'ct' + String(cut);
-
-                    var w = document.getElementById(n);
-
-
-                    var z = document.getElementById(t);
-                    document.getElementById('budget').innerHTML = "Selected Players <b style='font-size: 60%'>" + "<br />" + "Batsmen : " + cb + "<br />" + "Bowlers : " + cbo + "<br />" + "All Rounders : " + ca + "<br />" + "</b>";
-                    di[count] = "<div style='border-radius: 5px;background-color: rgba(0,0,0,0.2);margin-top: 1%;'>" + "<p align='center' style='color: white;padding: 1%;' >" + w.value + "<br />" + z.value + "</p>" + "<button class='button [tiny small large]' style='height: auto;width:auto;margin-left:75%;padding:1%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid red;background-color:rgba(255,255,255,0.1);color: red;border-radius: 5px;' onclick='rem(" + cut + ")'>" + " Remove</div></button>" + "</div>";
-
-                }
-
-                document.getElementById("squad").innerHTML = di.join(" ");
-            }
-        }
-        function rem(co) {
-            document.getElementById("box" + co).style.visibility = 'visible';
-
-            for (var b = 0; b < k; b++) {
-                if (team[b] == co) {
-                    var a = b;
-                    while (a < k) {
-
-                        team[a] = team[a + 1];
-
-                        a++;
-
-                    }
-
-                    k -= 1;
-                    di[k] = "";
-
-                    break;
-
-                }
-            }
-
-            ch(0);
-            disp();
-
-        }
-        function ch(r) {
-
-            var t, z;
-
-            var b = 0;
-            var bo = 0;
-            var al = 0;
-
-
-            if (r != 0) {
-                var asd = 'ct' + String(r);
-                var y = document.getElementById(asd);
-                if (cb == 0 && y.value.localeCompare('bat') == 0) {
-                    alert("Maximum number of Batsmen reached");
-                    return -1;
-                }
-                if (cbo == 0 && y.value.localeCompare('bowl') == 0) {
-                    alert("Maximum number of Bowlers reached");
-                    return -1;
-                }
-                if (ca == 0 && y.value.localeCompare('all') == 0) {
-                    alert("Maximum number of All Rounders reached");
-                    return -1;
-
-                }
-            }
-            for (var a = 0; a < k; a++) {
-
-
-                t = 'ct' + String(team[a]);
-                z = document.getElementById(t);
-                if (z.value.localeCompare('bat') == 0) {
-                    b++;
-                }
-                else if (z.value.localeCompare('bowl') == 0) {
-                    bo++;
-                }
-                else if (z.value.localeCompare('all') == 0) {
-                    al++;
-                }
-            }
-
-
-            cb = 5 - b;
-            cbo = 5 - bo;
-            ca = 1 - al;
-
-        }
-
-
-    </script>
+    <!-- endbuild -->
 </head>
-<body style="background-color: #646464;font-family: 'PT Sans', sans-serif;height:100%;">
-<div style="min-height: 100%">
-    <!--TOP BAR-->
-    <div class="large-12 top-bar" style="font-family: 'PT Sans', sans-serif;overflow: visible;">
-        <section class="top-bar-section small-only-text-center">
-            <ul class="left">
-                <li><a href="/"><img src="http://res.cloudinary.com/gpl/general/small.png"
-                                     style="height:42px;padding-bottom:3px;"/></a></li>
-                <li><a href="https://www.facebook.com/ieeecsvit"><img
-                                src="http://res.cloudinary.com/gpl/general/ieee.png" style="height:40px;"
-                                align="center"/></a></li>
+<body ng-app="formApp">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
 
-            </ul>
-            <ul class="right">
-                <li><a href="/logout">Log Out</a></li>
-            </ul>
-        </section>
-    </div>
-    <!-- top bar -->
-    <div class="row" align="center">
-        <ul class="breadcrumbs"
-            style="background:rgba(30,30,30,0.9); border: none; box-shadow: inset 0 0 5px 3px rgba(255,255,255,0.2);margin-top: 5%;">
-            <li><a href="/home" style="color: #ffffff;">Home</a></li>
-            <li><a href="/matches" style="color: #ffffff;">Match</a></li>
-            <li><a href="/home/rules" style="color:#ffffff;">Rules</a></li>
-            <li><a href="/home/leaderboard" style="color:#ffffff;">Leader Board</a></li>
-            <li><a href="/home/sponsors" style="color:#ffffff;">Sponsors</a></li>
-            <li><a href="/home/prize" style="color: white;">Prizes</a></li>
-            <li><a href="/home/trailer" style="color:#ffffff;">Trailer</a></li>
-        </ul>
-    </div>
-    <div class="row" align="center">
-        <div class="small-12 medium-12 large-12"
-             style="background:rgba(0,0,0,0.5); border-radius: 5px 5px 5px 5px;box-shadow: 0 1px 25px 5px rgba(0,0,0,0.5);box-shadow-top:0 0 0 0 rgba(0,0,0,0);margin-top:3%; ">
-            <h3 style="color: white;padding: 1%;margin-top: 1%;font-weight: bold;">Squad</h3>
+<div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
+    <header class="banner" role="banner">
 
-            <p align="center" style="font-weight: bold;color: white;padding: 0.5%;">Please select line up in the batting
-                order you want.</p>
-        </div>
-        <div class="large-3 small-12 left"
-             style="height:auto;background-color: rgba(10,10,10,0.5);margin-right: 1%;margin-left: 2%;border-radius: 5px;">
-            <h4 style="color: white;background-color: rgba(80,80,80,1);margin-top: 0;border-radius: 5px;padding: 2%;text-align: center;"
-                id="budget">
-                Line Up <b style='font-size: 60%'>
-                    <script type="text/javascript">document.write("<br />" + "Batsmen : " + cb + "<br />" + "Bowlers : " + cbo + "<br />" + "All Rounders : " + ca + "<br />")</script>
-                </b>
-            </h4>
+        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo pull-left"
+                                                                                     src="/images/gpllogo.png"
+                                                                                     height="50"/><span
+                    class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg"
+                                                                                    height="60"
+                                                                                    class="pull-right"/></span>
 
-            <div style="max-height:29em;overflow-y:scroll" id="squad">
 
+    </header>
+</div>
+
+<div id="navbar-wrapper">
+    <nav id="navbar"></nav>
+</div>
+
+<!-- Add your site or application content here -->
+
+<div class="container" ng-controller="PlayerController" ng-hide="">
+    <div class="col-md-8 col-md-offset-2 shadow-effect " id="main">
+        <div class="col-md-10 col-md-offset-1">
+            <div class=" page-header row">
+                <h1>
+                    <span class="col-xs-7">Team Selection</span>
+          <span class="col-xs-5" id=" searchBoxContainer">
+            <input type="text" id="searchBox" class="form-control pull-right" placeholder="search"
+                   ng-model="searchText"/></span>
+                </h1>
             </div>
+            <div class="row">
+
+                <div class="col-sm-5 aside">
+
+                    <div class="container-fluid">
 
 
-            <form style="text-align: center" id="form">
-                <input style="display: none" id="t1" name="p1" value=""/>
-                <input style="display: none" id="t2" name="p2" value=""/>
-                <input style="display: none" id="t3" name="p3" value=""/>
-                <input style="display: none" id="t4" name="p4" value=""/>
-                <input style="display: none" id="t5" name="p5" value=""/>
-                <input style="display: none" id="t6" name="p6" value=""/>
-                <input style="display: none" id="t7" name="p7" value=""/>
-                <input style="display: none" id="t8" name="p8" value=""/>
-                <input style="display: none" id="t9" name="p9" value=""/>
-                <input style="display: none" id="t10" name="p10" value=""/>
-                <input style="display: none" id="t11" name="p11" value=""/>
-                <input onmousedown="subm();" type="submit"
-                       style="background: rgba(60,60,60,1);border-radius: 5px;margin:1%" id="sub" class="button"/>
+                        <ul class="list-group ">
+                            <li class="list-group-item container-fluid selectedPlayer"
+                                ng-repeat="selectedPlayer in computeSelectedPlayers()"
+                                    >
+                            <span class="col-xs-2 pull-left no-padding-left clickable"><i
+                                        class="glyphicon glyphicon-remove pull-left"
+                                        ng-click="toggleActive(selectedPlayer)"></i></span>
+                            <span class="col-xs-9 no-padding-left no-padding-right">{{$index + 1}}.
+                            {{selectedPlayer.Name}}</span>
+                            </li>
+                        </ul>
 
-            </form>
-        </div>
-        <div class="large-8 small-12 columns">
+                        <p>{{alertMessage}}</p>
 
-            <div style="height: 42em;overflow-y: scroll;background-color: rgba(60,60,60,0.2);padding:2%;margin-right: 2%;border-radius: 5px;"
-                 class="large-12 small-12 right">
-                <table cellspacing="10px"
-                       style="background-color: rgba(60,60,60,0.8); border: none;border-radius: 5px;width:100%;">
-                    <% for(i = 0;i < Squad.length;i++) { %>
-                    <% if(Squad[i]._id > 'd') { %>
-                    <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;"
-                        colspan="3">
-                        <img src="http://res.cloudinary.com/gpl/players/coaches/d<%= Squad[i]._id %>.jpg"
-                             style="width: 40%; margin: 0"/>
+                        <p><strong>Remaining Amount: </strong><span>{{remaining() | number}}</span></p>
 
-                        <p style="text-align: center;">
-                            <%= Squad[i].Name %>
-                        </p>
 
-                        <p style="text-align: center;">Coach</p>
-                    </td>
-                    <% } } %>
-                    <% k = 4;i = 0; var z = 1;for(i = 0;i < Squad.length;i++) { %>
-                    <% if(k < 3){ %>
+                        <form name="playersForm" method="post"
+                              action="/home/getTeam">
 
-                    <% if(Squad[i]._id < 'd'){ %>
-                    <td style="color: #ffffff;font-weight: bold;text-align: center;border:dashed white 1px;margin:2%;border-radius: 5px;width: 34%;"
-                        id="box<%= Squad[i]._id %>">
+                            <input type="hidden" ng-repeat="selectedPlayer in computeSelectedPlayers()"
+                                   id="{{'t'+($index+1)}}" name="{{'p'+($index+1)}}" value="{{selectedPlayer._id}}"/>
 
-                        <% if (Squad[i]._id < 'b'){ %>
-                        <img src="http://res.cloudinary.com/gpl/players/bat/a<%= Squad[i]._id %>.jpg"
-                             style="width: 40%;margin: 0;float: left;"/>
 
-                        <p style="text-align: center;"><%= Squad[i].Name %></p>
-
-                        <p style="text-align: center;">Batsman</p>
-                        <% } else if(Squad[i]._id < 'c') { %>
-                        <img src="http://res.cloudinary.com/gpl/players/bowl/b<%= Squad[i]._id %>.jpg"
-                             style="width: 40%;margin: 0;float: left;"/>
-
-                        <p style="text-align: center;"><%= Squad[i].Name %></p>
-
-                        <p style="text-align: center;">Bowler</p>
-                        <% } else if(Squad[i]._id < 'd') { %>
-                        <img src="http://res.cloudinary.com/gpl/players/all/c<%= Squad[i]._id %>.jpg"
-                             style="width: 40%;margin: 0;float: left;"/>
-
-                        <p style="text-align: center;"><%= Squad[i].Name %></p>
-
-                        <p style="text-align: center;">All Rounder</p>
-                        <% } %>
-
-                        <form name="h" style="display: none">
-                            <input value="<%= Squad[i].Name %>" id="cn<%= Squad[i]._id %>"/>
-                            <input value="<%= Squad[i].Type %>" id="ct<%= Squad[i]._id %>"/>
+                            <input type="submit" class="btn btn-primary" ng-class="{disabled:isNotValid()}"
+                                   value="Submit"
+                                   ng-disabled="isNotValid()"/>
                         </form>
-                        <button class='button [tiny small large]' onclick="<%- 'sel(' + Squad[i]._id + ')' %>"
-                                style="height: auto;width: auto;margin-left:75%;padding:1.5%;margin-bottom:1%;text-align: center;font-weight: bolder;border: 2px solid green;background-color:rgba(255,255,255,0.1);color: green;border-radius: 5px;">
-                            Select
 
-                        </button>
-                    </td>
-                    <% k++; } else {
-                        continue;
-                    } %>
-                    <% } else { if(z == 1) { %>
-                    <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                        <% z = 0;k = 0;i--;} else { %>
-                    </tr>
-                    <% k = 0;i--; %>
-                    <tr style="background-color: rgba(60,60,60,0.8);border: none;padding:2%;border-radius: 5px;">
-                        <% } } } %>
-                    </tr>
-                </table>
+                    </div>
+                </div>
+
+                <div class="col-sm-7">
+                    <form>
+                        <ul class="list-group media-list">
+
+
+                            <div class="playerlist">
+
+                                <li ng-repeat="player in players|filter:searchText|orderBy:'-Cost'"
+                                    class="media list-group-item player"
+                                    ng-click="toggleActive(player)"
+                                    ng-class="{'batsmanactive':player.active, 'text-muted limit-exceeded': !canSelectMore() && !player.active}"
+                                    unselectable="on">
+
+                                    <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
+
+                                    <span>{{player.Name}}</span><span class="pull-right">{{player.Type}}</span>
+                                </li>
+                            </div>
+
+
+                        </ul>
+
+
+                    </form>
+
+
+                </div>
+
             </div>
         </div>
     </div>
-
 </div>
-</div>
-<!-- content -->
-<footer class="large-12" style="bottom:0; position:relative;">
-    <div class="top-bar" style="position:relative;margin:2% 0 0 0; overflow: hidden;">
-        <section class="top-bar-section">
-            <ul class="left">
-                <li style="display:block;"><a href="http://vitgravitas.com/"><img
-                                src="http://res.cloudinary.com/gpl/general/gravitas.png"
-                                style="height:45px;"/></a></li>
-                <li><a href="http://vit.ac.in/"><img
-                                src="http://res.cloudinary.com/gpl/general/vit_logo_white.png"
-                                style="height:40px;padding-top: 5px" align="center"/></a></li>
-            </ul>
-            <ul class="right">
-                <li><a href="/home/developers"><img src="http://res.cloudinary.com/gpl/general/symbol.png"
-                                                    style="height:35px;" align="center"/><span
-                                style="color:white;text-shadow: 1px 1px rgba(68,59,50,1);">Developers</span></a></li>
 
-            </ul>
-
-        </section>
-        <p style="margin-left: 46%; font-size:60%;color:white;bottom:0; margin-top:2%">&copy;IEEE-CS VIT Chapter</p>
-
-    </div>
+<footer id="footer" class="footer">
 </footer>
-<!-- footer -->
+
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/angularjs/angular.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script type="text/javascript">
+    var myApp = angular.module('formApp', []);
+    function PlayerController($scope) {
+
+
+        $scope.players = <%- JSON.stringify(Players)%>;
+
+        for (var i = 0; i < $scope.players.length; ++i) {
+            $scope.players[i].active = false;
+            $scope.players[i].image = ("https://res.cloudinary.com/gpl/players/" + $scope.players[i].Type + "/" + $scope.players[i]._id + ".jpg");
+
+        }
+
+
+        $scope.computeSelectedPlayers = function () {
+            var selectedPlayers = [];
+            for (var i = 0; i < $scope.players.length; ++i)
+                if ($scope.players[i].active) {
+                    selectedPlayers.push($scope.players[i]);
+                }
+            return selectedPlayers;
+        };
+
+
+        $scope.searchText = "";
+        $scope.toggleActive = function (s) {
+
+            if (s.active || $scope.computeSelectedPlayers().length < 11) {
+                s.active = !s.active;
+            }
+
+
+        };
+
+        // Helper method for calculating the total cost
+
+
+        $scope.MAX_PLAYERS = 11;
+        $scope.alertMessage = "";
+
+        $scope.canSelectMore = function () {
+            return $scope.computeSelectedPlayers().length < $scope.MAX_PLAYERS;
+        };
+
+        $scope.isNotValid = function (players) {
+            $scope.alertMessage = "";
+
+            var valid = true;
+
+
+            var selectedPlayers = $scope.computeSelectedPlayers();
+
+            var remainingPlayers = $scope.MAX_PLAYERS - selectedPlayers.length;
+            if (remainingPlayers > 0) {
+
+                if (remainingPlayers == 1) {
+                    $scope.alertMessage = "Please Select " + remainingPlayers + " player";
+                }
+                else {
+                    $scope.alertMessage = "Please Select " + remainingPlayers + " players";
+                }
+
+            }
+
+
+            if (remainingPlayers == 0) {
+                valid = true;
+            }
+            else {
+                valid = false;
+            }
+            if (valid) {
+                $scope.alertMessage = "Alright ! You are good to go.";
+            }
+            //if(!valid){
+            //  window.alert(alertMessage);
+            //}
+
+
+            return !valid;
+
+
+        };
+
+
+    }
+    ;
+    myApp.controller('PlayerController', ['$scope', PlayerController]);
+</script>
+
+<!-- endbuild -->
+<script src="/javascript/main.js"></script>
 </body>
 </html>

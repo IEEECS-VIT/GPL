@@ -13,13 +13,13 @@ form ul li.active {
     user-select: none;
     -o-user-select: none;
     line-height: 30px;
-    -webkit-transition: all 0.2s ease; /* Safari and Chrome */
-    transition: all 0.2s ease;
+    -webkit-transition: all 0.1s ease; /* Safari and Chrome */
+    transition: all 0.1s ease;
 }
 
 form ul * {
-    -webkit-transition: all linear 0.2s; /* Safari and Chrome */
-    transition: all linear 0.2s;
+    -webkit-transition: all linear 0.1s; /* Safari and Chrome */
+    transition: all linear 0.1s;
 }
 
 .fixed-side {
@@ -94,8 +94,8 @@ form ul * {
 }
 
 .playerlist {
-    -webkit-transition: all linear 0.2s; /* Safari and Chrome */
-    transition: all linear 0.2s;
+    -webkit-transition: all linear 0.1s; /* Safari and Chrome */
+    transition: all linear 0.1s;
 }
 
 .aside {

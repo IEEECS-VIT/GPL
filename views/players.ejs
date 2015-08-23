@@ -80,7 +80,7 @@
 
 
                         <form name="playersForm" method="post"
-                              action="/home/getTeam">
+                              action="/home/getsquad">
                               <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
                             <input type="hidden" ng-repeat="selectedPlayer in computeSelectedPlayers()"
                                    id="{{'t'+($index+1)}}" name="{{'p'+($index+1)}}" value="{{selectedPlayer._id}}"/>
@@ -118,7 +118,7 @@
 
                                     <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
 
-                                    {{player.Name}}<span class="pull-right">{{player.Price}}</span>
+                                    <span>{{player.Name}}</span><span class="pull-right">{{player.Price}}</span>
                                 </li>
                             </div>
 
@@ -133,7 +133,7 @@
 
                                     <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
 
-                                    {{player.Name}}<span class="pull-right">{{player.Price }}</span>
+                                    <span>{{player.Name}}</span><span class="pull-right">{{player.Price }}</span>
                                 </li>
                             </div>
 
@@ -148,7 +148,7 @@
 
                                     <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
 
-                                    {{player.Name}}<span class="pull-right">{{player.Price}}</span>
+                                    <span>{{player.Name}}</span><span class="pull-right">{{player.Price}}</span>
                                 </li>
                             </div>
 
@@ -163,7 +163,7 @@
 
                                     <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
 
-                                    {{player.Name}}<span class="pull-right">{{player.Price}}</span>
+                                    <span>{{player.Name}}</span><span class="pull-right">{{player.Price}}</span>
                                 </li>
 
                             </div>
