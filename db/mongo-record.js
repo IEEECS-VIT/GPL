@@ -16,7 +16,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-module.exports = {
+module.exports =
+{
     _id: '',
     dob: '',
     team_no: '',

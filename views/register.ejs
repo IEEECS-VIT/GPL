@@ -71,32 +71,32 @@
 
                 <div class="form-group">
                     <label for="team">Team Name: </label>
-                    <input type="text" id="team" placeholder="Team Name" class="form-control" name="team_name"/>
+                    <input type="text" id="team" placeholder="Team Name" class="form-control" name="team_name" required/>
                 </div>
                 <div class="form-group">
                     <label for="pass">Password: </label>
-                    <input type="password" id="pass" class="form-control" placeholder="Password" name="password"/>
+                    <input type="password" id="pass" class="form-control" placeholder="Password" name="password" required/>
                 </div>
                 <div class="form-group">
                     <label for="cpass">Confirm Password: </label>
                     <input type="password" id="cpass" class="form-control" placeholder="Confirm Password"
-                           name="confirm_password"/>
+                           name="confirm_password" required/>
                 </div>
                 <div class="form-group">
                     <label for="manager">Manager Name: </label>
                     <input type="text" id="manager" placeholder="Manager Name" class="form-control"
-                           name="manager_name"/>
+                           name="manager_name" required/>
                 </div>
                 <div class="form-group">
                     <label for="email">Email: </label>
-                    <input type="email" id="email" placeholder="username@domain.com" class="form-control" name="email"/>
+                    <input type="email" id="email" placeholder="username@domain.com" class="form-control" name="email" required/>
                 </div>
                 <div class="form-group">
                     <label for="mobile">Mobile Number: </label>
-                    <input type="text" id="mobile" placeholder="Mobile Number" class="form-control" name="phone"/>
+                    <input type="text" id="mobile" placeholder="Mobile Number" class="form-control" name="phone" required/>
                 </div>
                 <input type="submit" id="button" class="btn btn-primary btn-lg centered" name="button" value="Submit"
-                       onclick="validator()"/>
+                       onclick="validator()" required/>
             </form>
         </div>
     </div>

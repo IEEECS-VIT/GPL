@@ -48,18 +48,24 @@ if (process.env.LOGENTRIES_TOKEN) {
 }
 
 exports.getCount = function (callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
-            var onFetch = function (err, count) {
+            var onFetch = function (err, count)
+            {
                 db.close();
-                if (err) {
+                if (err)
+                {
                     callback(err);
                 }
-                else {
+                else
+                {
                     callback(null, count);
                 }
             };
@@ -70,18 +76,24 @@ exports.getCount = function (callback) {
 };
 
 exports.insert = function (doc, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
-            var onInsert = function (err, docs) {
+            var onInsert = function (err, docs)
+            {
                 db.close();
-                if (err) {
+                if (err)
+                {
                     callback(err, null);
                 }
-                else {
+                else
+                {
                     callback(null, docs);
                 }
             };
@@ -92,26 +104,35 @@ exports.insert = function (doc, callback) {
 };
 
 exports.fetch = function (doc, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
-            var onFetch = function (err, document) {
+            var onFetch = function (err, document)
+            {
                 db.close();
-                if (err) {
+                if (err)
+                {
                     callback(err, null);
                 }
-                else if (document) {
-                    if (doc['_id'] === document['_id']) {
+                else if (document)
+                {
+                    if (doc['_id'] === document['_id'])
+                    {
                         callback(null, document);
                     }
-                    else {
+                    else
+                    {
                         callback(false, null);
                     }
                 }
-                else {
+                else
+                {
                     callback(false, null);
                 }
             };
@@ -121,30 +142,40 @@ exports.fetch = function (doc, callback) {
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.getLeader = function (user, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+exports.getLeader = function (user, callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
-            var onFetch = function (err, documents) {
-                if (err) {
+            var onFetch = function (err, documents)
+            {
+                if (err)
+                {
                     callback(err, null);
                 }
                 else {
                     flag = false;
                     leaderboard = [];
-                    for (i = 0; i < documents.length; ++i) {
-                        if (documents[i]._id == user) {
+                    for (i = 0; i < documents.length; ++i)
+                    {
+                        if (documents[i]._id == user)
+                        {
                             flag = true;
                             documents[i].rank = i + 1;
                             leaderboard.push(documents[i]);
                         }
-                        else if (leaderboard.length < 10) {
+                        else if (leaderboard.length < 10)
+                        {
                             leaderboard.push(documents[i]);
                         }
-                        else if (flag) {
+                        else if (flag)
+                        {
                             break;
                         }
                     }
@@ -158,21 +189,28 @@ exports.getLeader = function (user, callback) {
 };
 
 exports.forgotPassword = function (doc, op, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err, null);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
-            var onFetch = function (err, document) {
+            var onFetch = function (err, document)
+            {
                 db.close();
-                if (err) {
+                if (err)
+                {
                     callback(err, null);
                 }
-                else if (document) {
+                else if (document)
+                {
                     callback(null, document);
                 }
-                else {
+                else
+                {
                     callback(false, null);
                 }
             };
@@ -183,25 +221,33 @@ exports.forgotPassword = function (doc, op, callback) {
 };
 
 exports.forgotUser = function (doc, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err, null);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
-            var onFetch = function (err, docs) {
+            var onFetch = function (err, docs)
+            {
                 db.close();
-                if (err) {
+                if (err)
+                {
                     callback(err, null);
                 }
-                else if (docs.length) {
+                else if (docs.length)
+                {
                     var results = "";
-                    for (i = 0; i < docs.length; ++i) {
+                    for (i = 0; i < docs.length; ++i)
+                    {
                         results += '<li>' + docs[i]._id + '</li>';
                     }
                     callback(null, results);
                 }
-                else {
+                else
+                {
                     callback(false, null);
                 }
             };
@@ -212,21 +258,28 @@ exports.forgotUser = function (doc, callback) {
 };
 
 exports.getReset = function (doc, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err, null);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
-            var onFetch = function (err, document) {
+            var onFetch = function (err, document)
+            {
                 db.close();
-                if (err) {
+                if (err)
+                {
                     callback(err, null);
                 }
-                else if (document) {
+                else if (document)
+                {
                     callback(null, document);
                 }
-                else {
+                else
+                {
                     callback(false, null);
                 }
             };
@@ -237,21 +290,27 @@ exports.getReset = function (doc, callback) {
 };
 
 exports.resetPassword = function (doc, op, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err, null);
         }
         else {
             collection = db.collection(match);
-            var onFetch = function (err, document) {
+            var onFetch = function (err, document)
+            {
                 db.close();
-                if (err) {
+                if (err)
+                {
                     callback(err, null);
                 }
-                else if (document) {
+                else if (document)
+                {
                     callback(null, document);
                 }
-                else {
+                else
+                {
                     callback(false, null);
                 }
             };
@@ -262,23 +321,30 @@ exports.resetPassword = function (doc, op, callback) {
 };
 
 exports.updateUserTeam = function (doc, arr, stats, cost, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
-            var onUpdate = function (err, document) {
-                if (err) {
+            var onUpdate = function (err, document)
+            {
+                if (err)
+                {
                     callback(err, null);
                 }
-                else {
+                else
+                {
                     db.close();
                     callback(true, document);
                 }
             };
             collection.findOneAndUpdate(doc, {
-                $set: {
+                $set:
+                {
                     'team': arr,
                     'stats': stats,
                     'surplus': 10000000 - cost
@@ -290,17 +356,22 @@ exports.updateUserTeam = function (doc, arr, stats, cost, callback) {
 };
 
 exports.updateMatchSquad = function (doc, arr, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
             var onUpdate = function (err, document) {
-                if (err) {
+                if (err)
+                {
                     callback(err, null);
                 }
-                else {
+                else
+                {
                     console.log("Done");
                     db.close();
                     callback(null, document);
@@ -313,18 +384,24 @@ exports.updateMatchSquad = function (doc, arr, callback) {
 };
 
 exports.fetchUser = function (doc, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
-            var onFetch = function (err, document) {
+            var onFetch = function (err, document)
+            {
                 db.close();
-                if (err) {
+                if (err)
+                {
                     callback(err, null);
                 }
-                else if (document) {
+                else if (document)
+                {
                     callback(null, document);
                 }
 
@@ -336,23 +413,31 @@ exports.fetchUser = function (doc, callback) {
 };
 
 exports.update = function (query, update, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
-            if (log) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
+            if (log)
+            {
                 log.log('debug', {Error: err, Message: err.message});
             }
         }
-        else {
+        else
+        {
             collection = db.collection(match);
-            var onUpdate = function (err, doc) {
+            var onUpdate = function (err, doc)
+            {
                 db.close();
-                if (err) {
-                    if (log) {
+                if (err)
+                {
+                    if (log)
+                    {
                         log.log('debug', {Error: err, Message: err.message});
                     }
                     callback(true, null);
                 }
-                else {
+                else
+                {
                     callback(null, doc);
                 }
             };
@@ -363,18 +448,24 @@ exports.update = function (query, update, callback) {
 };
 
 exports.get = function (doc, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
-            var onFind = function (err, user) {
+            var onFind = function (err, user)
+            {
                 db.close();
-                if (err) {
+                if (err)
+                {
                     callback(err);
                 }
-                else {
+                else
+                {
                     callback(null, user);
                 }
             };
@@ -385,18 +476,24 @@ exports.get = function (doc, callback) {
 };
 
 exports.save = function (doc, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
-            var onSave = function (err) {
+            var onSave = function (err)
+            {
                 db.close();
-                if (err) {
+                if (err)
+                {
                     callback(err);
                 }
-                else {
+                else
+                {
                     callback(null, doc);
                 }
             };
@@ -407,18 +504,23 @@ exports.save = function (doc, callback) {
 };
 
 exports.admin = function (doc, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection('admin');
             var onGetAdmin = function (err, doc) {
                 db.close();
-                if (err) {
+                if (err)
+                {
                     callback(err);
                 }
-                else {
+                else
+                {
                     callback(null, doc);
                 }
             };
@@ -430,16 +532,20 @@ exports.admin = function (doc, callback) {
 
 exports.addSocialTeam = function (team, callback) {
     var onConnect = function (err, db) {
-        if (err) {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection('users');
             var onUpdate = function (err, doc) {
-                if (err) {
+                if (err)
+                {
                     callback(err);
                 }
-                else {
+                else
+                {
                     callback(null, doc);
                 }
             };
