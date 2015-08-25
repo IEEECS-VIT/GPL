@@ -96,9 +96,14 @@
 
 
                         <ul class="list-group ">
+                            <li class="list-group-item container-fluid selectedPlayer coachactive">
+
+                                <span class="col-xs-9 no-padding-left no-padding-right">
+                                {{coach.Name}}</span>
+                            </li>
                             <li class="list-group-item container-fluid selectedPlayer"
-                                ng-repeat="selectedPlayer in computeSelectedPlayers()"
-                                    >
+                                ng-repeat="selectedPlayer in selectedPlayers"
+                                ng-if="selectedPlayer.Type != 'coach'">
                             <span class="col-xs-2 pull-left no-padding-left clickable"><i
                                         class="glyphicon glyphicon-remove pull-left"
                                         ng-click="toggleActive(selectedPlayer)"></i></span>
@@ -109,13 +114,13 @@
 
                         <p>{{alertMessage}}</p>
 
-                        <p><strong>Remaining Amount: </strong><span>{{remaining() | number}}</span></p>
+                        <p>Select your players in batting order.</p>
 
 
                         <form name="playersForm" method="post"
                               action="/home/getsquad">
                             <input type="hidden" value="<%= csrfToken %>" name="_csrf" />
-                            <input type="hidden" ng-repeat="selectedPlayer in computeSelectedPlayers()"
+                            <input type="hidden" ng-repeat="selectedPlayer in selectedPlayers"
                                    id="{{'t'+($index+1)}}" name="{{'p'+($index+1)}}" value="{{selectedPlayer._id}}"/>
 
 
@@ -134,7 +139,7 @@
 
                             <div class="playerlist">
 
-                                <li ng-repeat="player in players|filter:searchText|orderBy:'-Cost'"
+                                <li ng-repeat="player in players|filter:searchText"
                                     class="media list-group-item player"
                                     ng-click="toggleActive(player)"
                                     ng-class="{'batsmanactive':player.active, 'text-muted limit-exceeded': !canSelectMore() && !player.active}"
@@ -180,33 +185,52 @@
 
 
         $scope.players = <%- JSON.stringify(Squad)%>;
-
-        for (var i = 0; i < $scope.players.length; ++i) {
-            $scope.players[i].active = false;
-            $scope.players[i].image = ("https://res.cloudinary.com/gpl/players/" + $scope.players[i].Type + "/" + $scope.players[i]._id + ".jpg");
-
-        }
+        $scope.selectedPlayers = [];
 
 
-        $scope.computeSelectedPlayers = function () {
-            var selectedPlayers = [];
-            for (var i = 0; i < $scope.players.length; ++i)
-                if ($scope.players[i].active) {
-                    selectedPlayers.push($scope.players[i]);
-                }
-            return selectedPlayers;
-        };
-
-
-        $scope.searchText = "";
         $scope.toggleActive = function (s) {
 
-            if (s.active || $scope.computeSelectedPlayers().length < 11) {
-                s.active = !s.active;
+            if (s.active || $scope.selectedPlayers.length < 11) {
+
+                if (s.Type != "coach") {
+                    s.active = !s.active;
+                    if (s.active) {
+
+                        $scope.selectedPlayers.push(s);
+
+                    }
+                    else {
+
+                        for (var i = 0; i < $scope.selectedPlayers.length; i++) {
+                            if ($scope.selectedPlayers[i]._id == s._id) {
+                                $scope.selectedPlayers.splice(i, 1);
+                                break;
+                            }
+                        }
+
+                    }
+
+
+                }
             }
 
 
         };
+        for (var i = 0; i < $scope.players.length; ++i) {
+
+            $scope.players[i].active = false;
+            $scope.players[i].image = ("https://res.cloudinary.com/gpl/players/" + $scope.players[i].Type + "/" + $scope.players[i]._id + ".jpg");
+            if ($scope.players[i].Type == "coach") {
+                $scope.coach = $scope.players[i];
+                $scope.players.splice(i, 1);
+            }
+
+        }
+
+
+
+        $scope.searchText = "";
+
 
         // Helper method for calculating the total cost
 
@@ -215,7 +239,7 @@
         $scope.alertMessage = "";
 
         $scope.canSelectMore = function () {
-            return $scope.computeSelectedPlayers().length < $scope.MAX_PLAYERS;
+            return $scope.selectedPlayers.length < $scope.MAX_PLAYERS;
         };
 
         $scope.isNotValid = function (players) {
@@ -224,7 +248,7 @@
             var valid = true;
 
 
-            var selectedPlayers = $scope.computeSelectedPlayers();
+            var selectedPlayers = $scope.selectedPlayers;
 
             var remainingPlayers = $scope.MAX_PLAYERS - selectedPlayers.length;
             if (remainingPlayers > 0) {
