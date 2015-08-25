@@ -123,7 +123,7 @@ html, body {
 }
 
 .overlay-text {
-    font-family: "Lato", Arial, sans-serif;
+    font-family: Arial, sans-serif;
     padding-top: 5%;
     position: absolute;
     z-index: 99;
@@ -140,19 +140,19 @@ html, body {
     position: relative;
 
     font-size: 28px;
-    font-variant: all-small-caps;
-    font-weight: 700;
+
     color: #fff;
 
 }
 
 .overlay-text a, .overlay-text a:hover {
 
+    font-family: "Lobster", arial, sans-serif;
     border-radius: 4px;
     text-decoration: none;
     padding-left: 4px;
     padding-right: 4px;
-    font-variant: small-caps;
+
     -webkit-transition: 1s ease;
     -moz-transition: 1s ease;
     -ms-transition: 1s ease;
