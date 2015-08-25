@@ -113,8 +113,8 @@
 
 
                         <form name="playersForm" method="post"
-                              action="/home/getTeam">
-
+                              action="/home/getsquad">
+                            <input type="hidden" value="<%= csrfToken %>" name="_csrf" />
                             <input type="hidden" ng-repeat="selectedPlayer in computeSelectedPlayers()"
                                    id="{{'t'+($index+1)}}" name="{{'p'+($index+1)}}" value="{{selectedPlayer._id}}"/>
 
@@ -179,7 +179,7 @@
     function PlayerController($scope) {
 
 
-        $scope.players = <%- JSON.stringify(Players)%>;
+        $scope.players = <%- JSON.stringify(Squad)%>;
 
         for (var i = 0; i < $scope.players.length; ++i) {
             $scope.players[i].active = false;

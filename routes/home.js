@@ -200,7 +200,7 @@ router.post('/getsquad', function (req, res) {
                 res.redirect('/home');
             }
         };
-        mongoUsers.updateUserSquad(credentials, squad, onFetch);
+        mongoUsers.updateMatchSquad(credentials, squad, onFetch);
     }
     else
     {
@@ -215,7 +215,7 @@ router.post('/getTeam', function (req, res) {
     {
         players.push(req.body['p' + i]);
     }
-
+    console.log(players);
     var onUpdate = function (err, documents)
     {
         if (err)
