@@ -48,7 +48,7 @@
         <div class="col-sm-6">
             <% var f = false; for(var i = 0;i < results.team.length;i++) { %>
             <% if(results.team[i]._id > 'd') { %>
-            <img src="http://res.cloudinary.com/gpl/players/coaches/d<%= results.team[i]._id %>.jpg"
+            <img src="http://res.cloudinary.com/gpl/players/coach/<%= results.team[i]._id %>.jpg"
                  style="width: 40%; margin: 0"/>
 
             <p style="text-align: center;">
@@ -56,17 +56,8 @@
             </p>
 
             <p style="text-align: center;">Coach</p>
-            <% f = true; } }
-            if(!f) { %>
-            <img src="http://res.cloudinary.com/gpl/players/coaches/d21.jpg"
-                 style="width: 40%; margin: 0"/>
+            <% f = true; } } %>
 
-            <p style="text-align: center;">
-                Ray Jennings
-            </p>
-
-            <p style="text-align: center;">Coach</p>
-            <% } %>
         </div>
         <div class="col-sm-6">
 
@@ -75,10 +66,10 @@
 
             <% if(results.team[i]._id < 'd'){ %>
 
-            id="box<%= results.team[i]._id %>">
+            <div id="box<%= results.team[i]._id %>">
 
             <% if (results.team[i]._id < 'b'){ %>
-            <img src="http://res.cloudinary.com/gpl/players/bat/a<%= results.team[i]._id %>.jpg"
+                <img src="http://res.cloudinary.com/gpl/players/bat/<%= results.team[i]._id %>.jpg"
                  style="width: 40%;margin: 0;float: left;"/>
 
             <p style="text-align: center;"><%= results.team[i].Name %></p>
@@ -86,20 +77,21 @@
             <p style="text-align: center;">Batsman</p>
 
             <% } else if(results.team[i]._id < 'c') { %>
-            <img src="http://res.cloudinary.com/gpl/players/bowl/b<%= results.team[i]._id %>.jpg"
+                <img src="http://res.cloudinary.com/gpl/players/bowl/<%= results.team[i]._id %>.jpg"
                  style="width: 40%;margin: 0;float: left;"/>
 
             <p style="text-align: center;"><%= results.team[i].Name %></p>
 
             <p style="text-align: center;">Bowler</p>
             <% } else if(results.team[i]._id < 'd') { %>
-            <img src="http://res.cloudinary.com/gpl/players/all/c<%= results.team[i]._id %>.jpg"
+                <img src="http://res.cloudinary.com/gpl/players/all/<%= results.team[i]._id %>.jpg"
                  style="width: 40%;margin: 0;float: left;"/>
 
             <p style="text-align: center;"><%= results.team[i].Name %></p>
 
             <p style="text-align: center;">All Rounder</p>
             <% } %>
+            </div>
             <% k++; } else {
                 continue;
             } %>
@@ -108,6 +100,7 @@
             <% k = 0;i--; %>
             <% } } } %>
         </div>
+
     </div>
     <a href="/home/team" class="button small [radius round]" id="line">Change Line Up</a>
 
