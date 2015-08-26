@@ -112,7 +112,7 @@ router.post('/interest', function (req, res) // interest form
                 {
                     console.log('Sent!');
                 }
-                res.redirect('/');
+                res.redirect('/interest');
             };
 
             var message = email.wrap({
@@ -142,6 +142,17 @@ router.get(/\/^.*$/, function (req, res, next) {
     else
     {
         next();
+    }
+});
+
+router.get('/login', function(req, res){
+    if(req.signedCookies.name)
+    {
+        res.redirect('/home');
+    }
+    else
+    {
+        res.render('login', {csrfToken : req.csrfToken()});
     }
 });
 

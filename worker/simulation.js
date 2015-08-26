@@ -68,43 +68,43 @@ exports.simulate = function (data, callback) {
             this.bowl_strike_rate = [];
             this.avg_bat_rating = 0;
             this.avg_bowl_rating = 0;
-            this.coach_rating = team[11]['Rating (15)'] ? team[11]['Rating (15)'] : -50;
+            this.coach_rating = team[11].Rating || -50;
             for (i = 0; i < 11; ++i)
             {
                 switch (team[i].Type)
                 {
                     case 'bat':
-                        this.bat_name.push(team[i]['Name']);
-                        this.bat_avg.push(team[i]['Average']);
-                        this.bat_rating.push(team[i]['Rating (900)']);
-                        this.avg_bat_rating += team[i]['Rating (900)'];
+                        this.bat_name.push(team[i].Name);
+                        this.bat_avg.push(team[i].Average);
+                        this.bat_rating.push(team[i].Rating);
+                        this.avg_bat_rating += team[i].Rating;
                         this.bat_strike_rate.push(team[i]['Strike Rate']);
                         break;
                     case 'bowl':
                         this.bowl_index.push(i);
-                        this.bowl_avg.push(team[i]['Avg']);
-                        this.bat_name.push(team[i]['Name']);
-                        this.bowl_name.push(team[i]['Name']);
-                        this.economy.push(team[i]['Economy']);
-                        this.bat_avg.push(team[i]['Average']);
-                        this.bowl_strike_rate.push(team[i]['SR']);
-                        this.bowl_rating.push(team[i]['Rating (900)']);
-                        this.avg_bowl_rating += team[i]['Rating (900)'];
+                        this.bowl_avg.push(team[i].Avg);
+                        this.bat_name.push(team[i].Name);
+                        this.bowl_name.push(team[i].Name);
+                        this.economy.push(team[i].Economy);
+                        this.bat_avg.push(team[i].Average);
+                        this.bowl_strike_rate.push(team[i].SR);
+                        this.bowl_rating.push(team[i].Rating);
+                        this.avg_bowl_rating += team[i].Rating;
                         this.bat_strike_rate.push(team[i]['Strike Rate']);
-                        this.bat_rating.push(900 - team[i]['Rating (900)']);
+                        this.bat_rating.push(900 - team[i].Rating);
                         break;
                     case 'all':
                         this.bowl_index.push(i);
-                        this.bowl_avg.push(team[i]['Avg']);
-                        this.bat_name.push(team[i]['Name']);
-                        this.bowl_name.push(team[i]['Name']);
-                        this.bat_rating.push(team[i]['Bat']);
-                        this.avg_bat_rating += team[i]['Bat'];
-                        this.economy.push(team[i]['Economy']);
-                        this.bat_avg.push(team[i]['Average']);
-                        this.bowl_rating.push(team[i]['Bowl']);
-                        this.avg_bowl_rating += team[i]['Bowl'];
-                        this.bowl_strike_rate.push(team[i]['SR']);
+                        this.bowl_avg.push(team[i].Avg);
+                        this.bat_name.push(team[i].Name);
+                        this.bowl_name.push(team[i].Name);
+                        this.bat_rating.push(team[i].Bat);
+                        this.avg_bat_rating += team[i].Bat;
+                        this.economy.push(team[i].Economy);
+                        this.bat_avg.push(team[i].Average);
+                        this.bowl_rating.push(team[i].Bowl);
+                        this.avg_bowl_rating += team[i].Bowl;
+                        this.bowl_strike_rate.push(team[i].SR);
                         this.bat_strike_rate.push(team[i]['Strike Rate']);
                         break;
                 }
