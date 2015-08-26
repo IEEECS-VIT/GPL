@@ -1,7 +1,11 @@
 html
 {
-    text-align: center;
+
     font-family: "Roboto", helvetica, arial, sans-serif;
+}
+
+.container-fluid {
+    text-align: center;
 }
 .main
 {
