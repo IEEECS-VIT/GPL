@@ -19,7 +19,7 @@ function toggleSidenav() {
 
 (function () {
     $("#top-navigation").load("/html/playerNavbar.html");
-    $("side-navigation").load("/html/playerSidenav.html");
+
 })();
 
 
