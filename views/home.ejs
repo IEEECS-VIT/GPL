@@ -5,118 +5,141 @@
     <title>Home page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/stylesheets/main.css">
+
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+    <link rel="stylesheet" href="/stylesheets/home.css"/>
     <script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
-    <link href="/stylesheets/home.css" rel="stylesheet" type="text/css">
+
 </head>
-<body>
-<div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
-    <header class="banner" role="banner">
+<div>
+    <div id="wrapper" class="container-fluid">
 
-        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo" src="/images/gpllogo.png" height="50" class="pull-left"/><span class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg" height="60" class="pull-right"/></span>
+        <div id="side-navigation">
+            <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
+                <div class="container-fluid">
+                    <ul class="nav nav-pills nav-stacked wrapper  ">
+                        <img src="/images/gpllogo.png" class="img-responsive" style="margin: 5px;padding-right:10px;">
+                        <li role="presentation" class="active"><a href="/home">Home</a></li>
+                        <li role="presentation"><a href="/home/dashboard">Dashboard</a></li>
+                        <li role="presentation"><a href="/home/team">Team</a></li>
+                        <li role="presentation"><a href="/home/matches">Matches</a></li>
 
-
-    </header>
-</div>
-<div id="navbar-wrapper">
-    <nav id="navbar" ></nav>
-</div>
-<div id="right">
-    <a href="*">Logout</a>
-</div>
-
-<div class="container">
-
-    <div class="row">
-        <div class="col-sm-6">
-            <% var f = false; for(var i = 0;i < results.team.length;i++) { %>
-            <% if(results.team[i]._id > 'd') { %>
-            <img src="http://res.cloudinary.com/gpl/players/coach/<%= results.team[i]._id %>.jpg"
-                 style="width: 40%; margin: 0"/>
-
-            <p style="text-align: center;">
-                <%= results.team[i].Name %>
-            </p>
-
-            <p style="text-align: center;">Coach</p>
-            <% f = true; } } %>
-
-        </div>
-        <div class="col-sm-6">
-
-            <% k = 4;i = 0; var z = 1;for(i = 0;i < results.team.length;i++) { %>
-            <% if(k < 3){ %>
-
-            <% if(results.team[i]._id < 'd'){ %>
-
-            <div id="box<%= results.team[i]._id %>">
-
-            <% if (results.team[i]._id < 'b'){ %>
-                <img src="http://res.cloudinary.com/gpl/players/bat/<%= results.team[i]._id %>.jpg"
-                 style="width: 40%;margin: 0;float: left;"/>
-
-            <p style="text-align: center;"><%= results.team[i].Name %></p>
-
-            <p style="text-align: center;">Batsman</p>
-
-            <% } else if(results.team[i]._id < 'c') { %>
-                <img src="http://res.cloudinary.com/gpl/players/bowl/<%= results.team[i]._id %>.jpg"
-                 style="width: 40%;margin: 0;float: left;"/>
-
-            <p style="text-align: center;"><%= results.team[i].Name %></p>
-
-            <p style="text-align: center;">Bowler</p>
-            <% } else if(results.team[i]._id < 'd') { %>
-                <img src="http://res.cloudinary.com/gpl/players/all/<%= results.team[i]._id %>.jpg"
-                 style="width: 40%;margin: 0;float: left;"/>
-
-            <p style="text-align: center;"><%= results.team[i].Name %></p>
-
-            <p style="text-align: center;">All Rounder</p>
-            <% } %>
+                    </ul>
+                </div>
             </div>
-            <% k++; } else {
-                continue;
-            } %>
-            <% } else { if(z == 1) { %>
-            <% z = 0;k = 0;i--;} else { %>
-            <% k = 0;i--; %>
-            <% } } } %>
         </div>
+        <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
 
+            <div id="top-navigation"></div>
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="container-fluid ">
+                            <div class="col-xs-10 col-xs-offset-1">
+                                <% var f = false; for(var i = 0;i < results.team.length;i++) { %>
+                                <% if(results.team[i]._id > 'd') { %>
+
+                                <img src="http://res.cloudinary.com/gpl/players/coach/<%= results.team[i]._id %>.jpg"
+                                     class="img-responsive"/>
+
+                                <p style="text-align: center;">
+                                    <%= results.team[i].Name %>
+                                </p>
+
+                                <p style="text-align: center;">Coach</p>
+                                <% f = true; } } %>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <ul class="list-group">
+
+                            <% k = 4;i = 0; var z = 1;for(i = 0;i < results.team.length;i++) { %>
+                            <% if(k < 3){ %>
+
+                            <% if(results.team[i]._id < 'd'){ %>
+
+                            <div id="box<%= results.team[i]._id %>" class="list-group-item player">
+
+                                <% if (results.team[i]._id < 'b'){ %>
+                                <div class="player-name"><img
+                                            src="http://res.cloudinary.com/gpl/players/bat/<%= results.team[i]._id %>.jpg"
+                                            class="img-circle pull-left" height="40" width="40"/>
+
+                                    <span class="h4"><%= results.team[i].Name %></span>
+                                </div>
+                                <span class="pull-right type">Batsman</span>
+
+                                <% } else if(results.team[i]._id < 'c') { %>
+                                <div class="player-name"><img
+                                            src="http://res.cloudinary.com/gpl/players/bowl/<%= results.team[i]._id %>.jpg"
+                                            class="img-circle pull-left" height="40" width="40"/>
+
+                                    <span class="h4"><%= results.team[i].Name %></span>
+                                </div>
+                                <span class="pull-right type">Bowler</span>
+
+                                <% } else if(results.team[i]._id < 'd') { %>
+                                <div class="player-name"><img
+                                            src="http://res.cloudinary.com/gpl/players/all/<%= results.team[i]._id %>.jpg"
+                                            class="img-circle pull-left" height="40" width="40"/>
+
+                                    <span class="h4"><%= results.team[i].Name %></span>
+                                </div>
+                                <span class="pull-right type">All Rounder</span>
+                                <% } %>
+                            </div>
+                            <% k++; } else {
+                                continue;
+                            } %>
+                            <% } else { if(z == 1) { %>
+                            <% z = 0;k = 0;i--;} else { %>
+                            <% k = 0;i--; %>
+                            <% } } } %>
+
+                        </ul>
+                        <a href="/home/team" class="btn btn-lg btn-primary" id="line">Change Line Up</a>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <div id="stats" class="container">
+                <h3>Team Statistics</h3>
+
+                <p style="text-align:left;">
+                    <b>Matches Played:</b> <%= results.user.played %><br/>
+                    <b>Matches Won:</b> <%= results.user.win %><br/>
+                    <b>Matches Lost:</b> <%= results.user.loss %><br/>
+                    <b>Matches Tied:</b> <%= results.user.tied %><br/>
+                    <b>Points:</b> <%= results.user.points %><br/>
+                    <b>Runs for:</b> <%= results.user.runs_for %><br/>
+                    <b>Runs against:</b> <%= results.user.runs_against %><br/>
+                    <b>Overs batted:</b> <%= results.user.balls_for %><br/>
+                    <b>Overs bowled:</b> <%= results.user.balls_against %><br/>
+                    <b>Wickets taken:</b> <%= results.user.wickets_taken %><br/>
+                    <b>Wickets lost:</b> <%= results.user.wickets_lost %><br/>
+                    <b>Streak:</b> <%= results.user.streak %><br/>
+                    <b>All outs:</b> <%= results.user.all_outs %><br/>
+                    <b>Average runs scored:</b> <%= results.user.avg_runs_for %><br/>
+                    <b>Average runs conceded:</b> <%= results.user.avg_runs_against %><br/>
+                    <b>Average wickets taken:</b> <%= results.user.avg_wickets_taken %><br/>
+                    <b>Average wickets lost:</b> <%= results.user.avg_wickets_lost %><br/>
+                    <b>Average overs batted:</b> <%= results.user.avg_overs_for %><br/>
+                    <b>Average overs bowled:</b> <%= results.user.avg_overs_against %><br/>
+                    <b>Highest total:</b> <%= results.user.highest_total %><br/>
+                    <b>Lowest total:</b> <%= results.user.lowest_total %><br/>
+                    <b>Net Run Rate:</b> <%= results.user.net_run_rate %><br/>
+                    <b>Win - loss ratio:</b> <%= results.user.ratio %><br/>
+                </p>
+            </div>
+        </div>
     </div>
-    <a href="/home/team" class="button small [radius round]" id="line">Change Line Up</a>
-
-</div>
-<div id="stats" class="container">
-    <h3>Team Statistics</h3>
-
-    <p style="text-align:left;">
-        <b>Matches Played:</b> <%= results.user.played %><br/>
-        <b>Matches Won:</b> <%= results.user.win %><br/>
-        <b>Matches Lost:</b> <%= results.user.loss %><br/>
-        <b>Matches Tied:</b> <%= results.user.tied %><br/>
-        <b>Points:</b> <%= results.user.points %><br/>
-        <b>Runs for:</b> <%= results.user.runs_for %><br/>
-        <b>Runs against:</b> <%= results.user.runs_against %><br/>
-        <b>Overs batted:</b> <%= results.user.balls_for %><br/>
-        <b>Overs bowled:</b> <%= results.user.balls_against %><br/>
-        <b>Wickets taken:</b> <%= results.user.wickets_taken %><br/>
-        <b>Wickets lost:</b> <%= results.user.wickets_lost %><br/>
-        <b>Streak:</b> <%= results.user.streak %><br/>
-        <b>All outs:</b> <%= results.user.all_outs %><br/>
-        <b>Average runs scored:</b> <%= results.user.avg_runs_for %><br/>
-        <b>Average runs conceded:</b> <%= results.user.avg_runs_against %><br/>
-        <b>Average wickets taken:</b> <%= results.user.avg_wickets_taken %><br/>
-        <b>Average wickets lost:</b> <%= results.user.avg_wickets_lost %><br/>
-        <b>Average overs batted:</b> <%= results.user.avg_overs_for %><br/>
-        <b>Average overs bowled:</b> <%= results.user.avg_overs_against %><br/>
-        <b>Highest total:</b> <%= results.user.highest_total %><br/>
-        <b>Lowest total:</b> <%= results.user.lowest_total %><br/>
-        <b>Net Run Rate:</b> <%= results.user.net_run_rate %><br/>
-        <b>Win - loss ratio:</b> <%= results.user.ratio %><br/>
-    </p>
-</div>
 </div>
 <footer id="footer" class="footer">
 </footer>
@@ -132,7 +155,7 @@
 <!-- build:js(.) scripts/plugins.js -->
 
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/javascript/main.js"></script>
+<script src="/javascript/playerCommon.js"></script>
 
 </body>
 </html>

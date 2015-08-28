@@ -1,4 +1,4 @@
-html {
+/*html {
     color: black;
     text-align: center;
 }
@@ -36,4 +36,27 @@ html {
 {
     text-decoration: underline;
     color: black;
+}*/
+.player {
+    height: 80px;
+
+
+
+
+}
+
+.player-name {
+    padding-top: 10px;
+    height: 100%;
+}
+
+.player-name .h4 {
+    position: absolute;
+    margin: 5px;
+}
+
+.type {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }

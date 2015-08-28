@@ -30,7 +30,7 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="/stylesheets/dashboard.css">
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <!-- endbuild -->
 </head>
 <body>
@@ -41,7 +41,20 @@
 
 <div id="wrapper" class="container-fluid">
 
-    <div id="side-navigation"></div>
+    <div id="side-navigation">
+        <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
+            <div class="container-fluid">
+                <ul class="nav nav-pills nav-stacked wrapper  ">
+                    <img src="/images/gpllogo.png" class="img-responsive" style="margin: 5px;padding-right:10px;">
+                    <li role="presentation"><a href="/home">Home</a></li>
+                    <li role="presentation" class="active"><a href="/home/dashboard">Dashboard</a></li>
+                    <li role="presentation"><a href="/home/team">Team</a></li>
+                    <li role="presentation"><a href="/home/matches">Matches</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
     <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
 
         <div id="top-navigation"></div>
@@ -132,32 +145,32 @@
 <!-- endbuild -->
 
 <!-- build:js({app,.tmp}) scripts/main.js -->
-<script src="javascript/playerCommon.js"></script>
+<script src="/javascript/playerCommon.js"></script>
 <script>
 
-    <% var json_data = result; %>
-    <% function string_range(start, stop){
+    var json_data = <%- JSON.stringify(result) %>;
+    function string_range(start, stop) {
         var string_array = [];
         for(i=start; i<=stop; i++){
             string_array.push(i.toString());
         }
+        return string_array;
 
     }
-     %>
+
 
     Chart.defaults.global.responsive = true;
 
-
-    <% var run_rate = [];
-    for (i=0; i<scores.length; i++){
-        run_rate.push(scores[i]/overs[i]);
+    var run_rate = []
+    for (i = 0; i < json_data.scores.length; i++) {
+        run_rate.push(json_data.scores[i] / overs[i]);
     }
-     %>
+
 
     var line = $("#line-chart").get(0).getContext("2d");
 
     var line_data = {
-        labels: <%= string_range(1, json_data.run_rate.length) %>,
+        labels: string_range(1, run_rate.length),
         datasets: [
             {
                 label: "Run rate",
@@ -167,7 +180,7 @@
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
-                data: <%= json_data.run_rate %>
+                data: run_rate
             }
 
         ]
@@ -180,7 +193,7 @@
     var bar = $("#bar-chart").get(0).getContext("2d");
 
     var bar_data = {
-        labels: <%= string_range(1, json_data.scored_per_over.length) %>,
+        labels: string_range(1, json_data.scored_per_over.length),
         datasets: [
             {
                 label: "Runs scored",
@@ -188,7 +201,7 @@
                 strokeColor: "transparent",
                 highlightFill: "rgba(220,220,220,1)",
                 highlightStroke: "transparent",
-                data: <%= json_data.scored_per_over %>
+                data: json_data.scored_per_over
             },
             {
                 label: "Runs given",
@@ -196,7 +209,7 @@
                 strokeColor: "transparent",
                 highlightFill: "rgba(151,187,205,1)",
                 highlightStroke: "transparent",
-                data: <%= json_data.conceded_per_over %>
+                data: json_data.conceded_per_over
             }
         ]
     };
@@ -207,7 +220,7 @@
     var winloss = $("#win-loss").get(0).getContext("2d");
 
     var winloss_data = {
-        labels: <%= string_range(1, json_data.progression.length) %>,
+        labels: string_range(1, json_data.progression.length),
         datasets: [
             {
                 label: "Points",
@@ -217,7 +230,7 @@
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
-                data: <%= json_data.progression %>
+                data: json_data.progression
             }
         ]
     };
@@ -231,13 +244,13 @@
 
     var pie_data = [
         {
-            value: <%= json_data.fours %>,
+            value: json_data.fours,
             color: "rgba(7, 51, 58,0.2)",
             highlight: "rgba(7, 51, 58,0.5)",
             label: "Fours"
         },
         {
-            value: <%= json_data.sixes %>,
+            value: json_data.sixes,
             color: "rgba(19,131,148,0.2)",
             highlight: "rgba(19,131,148,0.5)",
             label: "Sixes"
