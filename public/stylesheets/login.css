@@ -64,14 +64,18 @@ opacity:0.9;
 .omb_login .omb_loginForm .input-group.i {
     width: 2em;
 }
-.omb_login .omb_loginForm  .help-block {
+.omb_login .omb_loginForm {
     color: red;
+}
+.help-block{
+    margin: 20px 0 10px 0;
 }
 body {
     font-size: 18px;
 }
 .form-control{
-    font-size: 16px;
+    font-size: 20px;
+    height: 40px;
 }
 @media (min-width: 768px) {
     .omb_login .omb_forgotPwd {
