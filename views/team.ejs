@@ -102,7 +102,7 @@
 
                         <form name="playersForm" method="post"
                               action="/home/getsquad">
-                            <input type="hidden" value="<%= csrfToken %>" name="_csrf" />
+                            <input type="hidden" value="<%= csrfToken %>" name="_csrf"/>
                             <input type="hidden" ng-repeat="selectedPlayer in selectedPlayers"
                                    id="{{'t'+($index+1)}}" name="{{'p'+($index+1)}}" value="{{selectedPlayer._id}}"/>
 
@@ -209,7 +209,6 @@
             }
 
         }
-
 
 
         $scope.searchText = "";

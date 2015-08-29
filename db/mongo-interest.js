@@ -19,26 +19,19 @@
 var MongoClient = require('mongodb').MongoClient;
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
 
-exports.insert = function (doc, callback)
-{
-    var onConnect = function (err, db)
-    {
-        if (err)
-        {
+exports.insert = function (doc, callback) {
+    var onConnect = function (err, db) {
+        if (err) {
             callback(err);
         }
-        else
-        {
+        else {
             var collection = db.collection('interest');
-            var onInsert = function (err, docs)
-            {
+            var onInsert = function (err, docs) {
                 db.close();
-                if (err)
-                {
+                if (err) {
                     callback(err, null);
                 }
-                else
-                {
+                else {
                     callback(null, docs);
                 }
             };

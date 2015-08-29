@@ -21,26 +21,19 @@ var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
 
-exports.insert = function (doc, callback)
-{
-    var onConnect = function (err, db)
-    {
-        if (err)
-        {
+exports.insert = function (doc, callback) {
+    var onConnect = function (err, db) {
+        if (err) {
             callback(err);
         }
-        else
-        {
+        else {
             collection = db.collection('features');
-            var onInsert = function (err, docs)
-            {
+            var onInsert = function (err, docs) {
                 db.close();
-                if (err)
-                {
+                if (err) {
                     callback(err, null);
                 }
-                else
-                {
+                else {
                     callback(null, docs)
                 }
             };
@@ -50,26 +43,19 @@ exports.insert = function (doc, callback)
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.getInfo = function (callback)
-{
-    var onConnect = function (err, db)
-    {
-        if (err)
-        {
+exports.getInfo = function (callback) {
+    var onConnect = function (err, db) {
+        if (err) {
             callback(err);
         }
-        else
-        {
+        else {
             collection = db.collection('info');
-            var onGetInfo = function (err, doc)
-            {
+            var onGetInfo = function (err, doc) {
                 db.close();
-                if (err)
-                {
+                if (err) {
                     callback(err);
                 }
-                else
-                {
+                else {
                     callback(null, doc);
                 }
             };
@@ -79,25 +65,18 @@ exports.getInfo = function (callback)
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.notify = function (callback)
-{
-    var onConnect = function (err, db)
-    {
-        if (err)
-        {
+exports.notify = function (callback) {
+    var onConnect = function (err, db) {
+        if (err) {
             callback(err);
         }
-        else
-        {
+        else {
             collection = db.collection('features');
-            var onFind = function (err, docs)
-            {
-                if (err)
-                {
+            var onFind = function (err, docs) {
+                if (err) {
                     callback(err);
                 }
-                else
-                {
+                else {
                     callback(null, docs);
                 }
             };
@@ -107,17 +86,13 @@ exports.notify = function (callback)
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.simulate = function (callback)
-{
+exports.simulate = function (callback) {
     var simulationControl = require(path.join(__dirname, '..', 'worker', 'simulation-controller'));
-    var onSimulate = function (err, docs)
-    {
-        if (err)
-        {
+    var onSimulate = function (err, docs) {
+        if (err) {
             callback(err);
         }
-        else
-        {
+        else {
             callback(null, docs);
         }
     };

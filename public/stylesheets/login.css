@@ -1,4 +1,3 @@
-
 /*
     Note: It is best to use a less version of this file ( see http://css2less.cc
     For the media queries use @screen-sm-min instead of 768px.
@@ -17,21 +16,31 @@
 }
 
 .omb_login .omb_socialButtons a {
-    color: white; // In yourUse @body-bg
-opacity:0.9;
+    color: white;
+/ / In yourUse @body-bg opacity : 0.9;
 }
+
 .omb_login .omb_socialButtons a:hover {
     color: white;
-    opacity:1;
+    opacity: 1;
 }
-.omb_login .omb_socialButtons .omb_btn-facebook {background: #3b5998;}
-.omb_login .omb_socialButtons .omb_btn-twitter {background: #00aced;}
-.omb_login .omb_socialButtons .omb_btn-google {background: #c32f10;}
 
-.shadow-effect{
-    -webkit-box-shadow: 0px 5px 7px 0px rgba(0,0,0,0.25);
-    -moz-box-shadow: 0px 5px 7px 0px rgba(0,0,0,0.25);
-    box-shadow: 0px 5px 7px 0px rgba(0,0,0,0.25);
+.omb_login .omb_socialButtons .omb_btn-facebook {
+    background: #3b5998;
+}
+
+.omb_login .omb_socialButtons .omb_btn-twitter {
+    background: #00aced;
+}
+
+.omb_login .omb_socialButtons .omb_btn-google {
+    background: #c32f10;
+}
+
+.shadow-effect {
+    -webkit-box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.25);
     padding-bottom: 10px;
 }
 
@@ -44,12 +53,14 @@ opacity:0.9;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
 }
+
 .omb_login .omb_loginOr .omb_hrOr {
     background-color: #cdcdcd;
     height: 1px;
     margin-top: 0px !important;
     margin-bottom: 0px !important;
 }
+
 .omb_login .omb_loginOr .omb_spanOr {
     display: block;
     position: absolute;
@@ -64,26 +75,32 @@ opacity:0.9;
 .omb_login .omb_loginForm .input-group.i {
     width: 2em;
 }
+
 .omb_login .omb_loginForm {
     color: red;
 }
-.help-block{
+
+.help-block {
     margin: 20px 0 10px 0;
 }
+
 body {
     font-size: 18px;
 }
-.form-control{
+
+.form-control {
     font-size: 20px;
     height: 40px;
 }
+
 @media (min-width: 768px) {
     .omb_login .omb_forgotPwd {
         text-align: right;
-        margin-top:10px;
+        margin-top: 10px;
     }
 }
-#custom-container{
+
+#custom-container {
     padding: 0;
     width: 100%;;
 }
