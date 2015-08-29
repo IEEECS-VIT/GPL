@@ -35,31 +35,24 @@ if (process.env.LOGENTRIES_TOKEN) {
     });
 }
 
-router.get('/', function (req, res)
-{
+router.get('/', function (req, res) {
     var results = {};
-    if (req.signedCookies.name)
-    {
+    if (req.signedCookies.name) {
         var credentials =
         {
             '_id': req.signedCookies.name
         };
-        var onFetch = function (err, doc)
-        {
-            if (err)
-            {
+        var onFetch = function (err, doc) {
+            if (err) {
                 console.log(err);
             }
-            else if (doc)
-            {
+            else if (doc) {
                 results.user = doc;
-                if (doc.team.length === 0)
-                {
+                if (doc.team.length === 0) {
                     res.redirect('/home/players');
                 }
 
-                var getDetails = function (id, callback)
-                {
+                var getDetails = function (id, callback) {
                     var player =
                     {
                         '_id': id
@@ -75,58 +68,47 @@ router.get('/', function (req, res)
                     mongoPlayers.getPlayer(player, fields, callback)
                 };
 
-                var onFinish = function (err, documents)
-                {
-                    if (err)
-                    {
+                var onFinish = function (err, documents) {
+                    if (err) {
                         console.log(err.message);
                     }
-                    else
-                    {
+                    else {
                         results.team = documents;
                         res.render('home', {results: results});
                     }
                 };
 
-                if (err)
-                {
+                if (err) {
                     res.redirect('/');
                 }
-                else
-                {
+                else {
                     var document = doc.team;
                     async.map(document, getDetails, onFinish);
                 }
             }
-            else
-            {
+            else {
                 res.clearCookie('name', {});
                 res.redirect('/');
             }
         };
         mongoUsers.fetch(credentials, onFetch);
     }
-    else
-    {
+    else {
         res.redirect('/');
     }
 });
 
 router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
-    if (req.signedCookies.lead)
-    {
+    if (req.signedCookies.lead) {
         res.render("leaderboard", {leaderboard: req.signedCookies.lead});
     }
     else if (req.signedCookies.name)                           // if cookies exists then access the database
     {
-        var onFetch = function (err, documents)
-        {
-            if (err)
-            {
+        var onFetch = function (err, documents) {
+            if (err) {
                 console.log(err.message);
             }
-            else
-            {
+            else {
                 time = new Date;
                 time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
                 temp = new Date(time.getFullYear(), time.getMonth(), time.getDate() + 1);
@@ -136,31 +118,23 @@ router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
         };
         mongoUsers.getLeader(req.signedCookies.name, onFetch);
     }
-    else
-    {
+    else {
         res.redirect("/");
     }
 });
 
 router.get('/matches', function (req, res) {
-    if (req.signedCookies.name)
-    {
-        var onMap = function (err, num)
-        {
-            if (err)
-            {
+    if (req.signedCookies.name) {
+        var onMap = function (err, num) {
+            if (err) {
                 console.log(err.message);
             }
-            else
-            {
-                var onMatches = function (err, matches)
-                {
-                    if (err)
-                    {
+            else {
+                var onMatches = function (err, matches) {
+                    if (err) {
                         console.log(err.message);
                     }
-                    else
-                    {
+                    else {
                         res.render('matches', {match: matches});
                     }
                 };
@@ -169,41 +143,35 @@ router.get('/matches', function (req, res) {
         };
         mongoTeam.map({_id: req.signedCookies.name}, onMap);
     }
-    else
-    {
+    else {
         req.session.route = 'match';
         res.redirect('/');
     }
 });
 
 router.post('/getsquad', function (req, res) {
-    if (req.signedCookies.name)
-    {
+    if (req.signedCookies.name) {
         var teamname = req.signedCookies.name;
         var credentials =
         {
             '_id': teamname
         };
         var squad = [];
-        for(i = 1; i < 12; ++i)
-        {
+        for (i = 1; i < 12; ++i) {
             squad.push(req.body['p' + i]);
         }
         var onFetch = function (err, document) {
-            if (err)
-            {
+            if (err) {
                 console.log(err.message);
             }
-            else
-            {
+            else {
                 console.log(document);
                 res.redirect('/home');
             }
         };
         mongoUsers.updateMatchSquad(credentials, squad, onFetch);
     }
-    else
-    {
+    else {
         req.session.route = 'squad';
         res.redirect('/');
     }
@@ -211,26 +179,21 @@ router.post('/getsquad', function (req, res) {
 
 router.post('/getTeam', function (req, res) {
     var players = [], cost = 0;
-    for(i = 1; i < 17; ++i)
-    {
+    for (i = 1; i < 17; ++i) {
         players.push(req.body['p' + i]);
     }
     console.log(players);
-    var onUpdate = function (err, documents)
-    {
-        if (err)
-        {
+    var onUpdate = function (err, documents) {
+        if (err) {
             console.log(err.message);
         }
-        else
-        {
+        else {
             console.log(documents);
             res.redirect('/home');
         }
     };
 
-    var getCost = function (id, callback)
-    {
+    var getCost = function (id, callback) {
         var fields =
         {
             _id: 1,
@@ -246,20 +209,15 @@ router.post('/getTeam', function (req, res) {
         mongoPlayers.getPlayer(player, fields, callback)
     };
 
-    var onFinish = function (err, documents)
-    {
-        if (err)
-        {
+    var onFinish = function (err, documents) {
+        if (err) {
             console.log(err.message);
         }
-        else
-        {
+        else {
             console.log(documents);
-            for (var i = parseInt(0); i < documents.length; i++)
-            {
+            for (var i = parseInt(0); i < documents.length; i++) {
                 cost += documents[i].Cost;
-                if (cost > 10000000)
-                {
+                if (cost > 10000000) {
                     res.redirect('/home/players', {err: "Cost Exceeded"});
                 }
             }
@@ -275,10 +233,8 @@ router.post('/getTeam', function (req, res) {
         _id: teamName
     };
     var stats = {};
-    for (i = 0; i < players.length; ++i)
-    {
-        if (players[i] > 'd')
-        {
+    for (i = 0; i < players.length; ++i) {
+        if (players[i] > 'd') {
             continue;
         }
         stats[players[i]] = {};
@@ -288,8 +244,7 @@ router.post('/getTeam', function (req, res) {
         stats[players[i]].fatigue = 0;
         stats[players[i]].matches = 0;
         stats[players[i]].catches = 0;
-        if (!(players[i] > 'b' && players[i] < 'c'))
-        {
+        if (!(players[i] > 'b' && players[i] < 'c')) {
             stats[players[i]].outs = 0;
             stats[players[i]].balls = 0;
             stats[players[i]].high = -1;
@@ -302,8 +257,7 @@ router.post('/getTeam', function (req, res) {
             stats[players[i]].strike_rate = 0.0;
             stats[players[i]].low = Number.MAX_VALUE;
         }
-        if (players[i] > 'b' && players[i] < 'd')
-        {
+        if (players[i] > 'b' && players[i] < 'd') {
             stats[players[i]].sr = 0.0;
             stats[players[i]].overs = 0;
             stats[players[i]].avg = 0.0;
@@ -336,34 +290,25 @@ router.get('/trailer', function (req, res) // trailer page
 
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
-    if (req.signedCookies.name)
-    {
+    if (req.signedCookies.name) {
         var doc =
         {
             "_id": req.signedCookies.name
         };
-        var onFetchUser = function (err, document)
-        {
-            if (err)
-            {
+        var onFetchUser = function (err, document) {
+            if (err) {
                 console.log(err.message);
             }
-            else
-            {
-                if (document.team.length != 0)
-                {
+            else {
+                if (document.team.length != 0) {
                     res.redirect("/home");
                 }
-                else
-                {
-                    var onFetch = function (err, documents)
-                    {
-                        if (err)
-                        {
+                else {
+                    var onFetch = function (err, documents) {
+                        if (err) {
                             res.redirect('/home');
                         }
-                        else
-                        {
+                        else {
                             res.render('players', {Players: documents, csrfToken: req.csrfToken()});
                         }
                     };
@@ -373,8 +318,7 @@ router.get('/players', function (req, res) // page for all players, only availab
         };
         mongoUsers.fetch(doc, onFetchUser);
     }
-    else
-    {
+    else {
         req.session.route = 'player';
         res.redirect("/");
     }
@@ -389,15 +333,12 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
             '_id': req.signedCookies.name
         };
 
-        var getTeam = function (err, documents)
-        {
-            if (err)
-            {
+        var getTeam = function (err, documents) {
+            if (err) {
                 console.log(err.message);
                 res.redirect('/home');
             }
-            else
-            {
+            else {
                 res.render('team', {Squad: documents, csrfToken: req.csrfToken()});
             }
         };
@@ -411,23 +352,17 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
 });
 
 router.get('/info', function (req, res) {
-    if (req.signedCookies.name)
-    {
-        if (req.signedCookies.info)
-        {
+    if (req.signedCookies.name) {
+        if (req.signedCookies.info) {
             res.render('info', {info: req.signedCookies.info});
         }
-        else
-        {
-            var onGetInfo = function (err, doc)
-            {
-                if (err)
-                {
+        else {
+            var onGetInfo = function (err, doc) {
+                if (err) {
                     console.log(err.message);
                     res.redirect('/');
                 }
-                else
-                {
+                else {
                     res.cookie('info', doc, {maxAge: 86400000, signed: true});
                     res.render('info', {info: doc});
                 }
@@ -435,26 +370,22 @@ router.get('/info', function (req, res) {
             mongoFeatures.getInfo(onGetInfo);
         }
     }
-    else
-    {
+    else {
         res.redirect('/');
     }
 });
 
 router.get('/feature', function (req, res) {
-    if (req.signedCookies.name)
-    {
+    if (req.signedCookies.name) {
         res.render('feature', {csrfToken: req.csrfToken()});
     }
-    else
-    {
+    else {
         res.redirect('/');
     }
 });
 
 router.post('/feature', function (req, res) {
-    if (req.signedCookies.name)
-    {
+    if (req.signedCookies.name) {
         var feature =
         {
             teamName: req.signedCookies.name,
@@ -462,14 +393,11 @@ router.post('/feature', function (req, res) {
             email: req.body.f_email,
             features: req.body.f_requests
         };
-        var onInsert = function (err, docs)
-        {
-            if (err)
-            {
+        var onInsert = function (err, docs) {
+            if (err) {
                 console.log(err);
             }
-            else
-            {
+            else {
                 console.log(docs);
                 res.redirect('/home');
             }
@@ -482,35 +410,29 @@ router.post('/feature', function (req, res) {
 });
 
 router.get('/dashboard', function (req, res) {
-    if (req.signedCookies.name)
-    {
+    if (req.signedCookies.name) {
         var user =
         {
             _id: req.signedCookies.name
         };
-        var onFind = function (err, doc)
-        {
-            if (err)
-            {
+        var onFind = function (err, doc) {
+            if (err) {
                 console.log(err.message);
             }
-            else
-            {
+            else {
                 res.render('dashboard', {result: doc});
             }
         };
         mongoTeam.dashboard(user, onFind);
     }
-    else
-    {
+    else {
         res.redirect('/');
     }
 });
 
 router.get('/schedule', function (req, res) // schedule page
 {
-    if (req.signedCookies.name)
-    {
+    if (req.signedCookies.name) {
         res.render('schedule');
     }
 });

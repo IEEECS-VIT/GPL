@@ -23,20 +23,15 @@ var MongoClient = require('mongodb').MongoClient;
 var mongoTeam = require(path.join(__dirname, 'mongo-team'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
 
-exports.match = function (day, team, callback)
-{
-    var onConnect = function (err, db)
-    {
-        if (err)
-        {
+exports.match = function (day, team, callback) {
+    var onConnect = function (err, db) {
+        if (err) {
             callback(err);
         }
-        else
-        {
+        else {
             var filter =
             {
-                $or:
-                [
+                $or: [
                     {
                         Team_1: team
                     },
@@ -45,42 +40,31 @@ exports.match = function (day, team, callback)
                     }
                 ]
             };
-            if (day <= process.env.DAY)
-            {
+            if (day <= process.env.DAY) {
                 collection = db.collection('matchday' + day);
-                var onMatch = function (err, doc)
-                {
+                var onMatch = function (err, doc) {
                     db.close();
-                    if (err)
-                    {
+                    if (err) {
                         callback(err);
                     }
-                    else
-                    {
+                    else {
                         callback(null, doc);
                     }
                 };
                 collection.findOne(filter, onMatch);
             }
-            else
-            {
+            else {
                 db.close();
-                var onOpponent = function (err, doc)
-                {
-                    if (err)
-                    {
+                var onOpponent = function (err, doc) {
+                    if (err) {
                         console.log(err.message);
                     }
-                    else
-                    {
-                        var onGetSquad = function (err, squad)
-                        {
-                            if (err)
-                            {
+                    else {
+                        var onGetSquad = function (err, squad) {
+                            if (err) {
                                 callback(err);
                             }
-                            else
-                            {
+                            else {
                                 callback(null, squad);
                             }
                         };

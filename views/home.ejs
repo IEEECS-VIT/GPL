@@ -1,8 +1,25 @@
+<!--
+  GraVITas Premier League <gravitaspremierleague@gmail.com>
+  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Home page</title>
+    <title>Home | GPL</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
 
@@ -51,6 +68,47 @@
                                 <p style="text-align: center;">Coach</p>
                                 <% f = true; } } %>
                             </div>
+                            <div class="col-xs-10 col-xs-offset-1" id="stats">
+                                <h3>Team Statistics</h3>
+
+                                <p style="text-align:left;">
+                                    <b>Matches Played:</b> <%= results.user.played %><br/>
+                                    <b>Matches Won:</b> <%= results.user.win %><br/>
+                                    <b>Matches Lost:</b> <%= results.user.loss %><br/>
+                                    <b>Matches Tied:</b> <%= results.user.tied %><br/>
+                                    <b>Points:</b> <%= results.user.points %><br/>
+                                    <b>Runs for:</b> <%= results.user.runs_for %><br/>
+                                    <b>Runs against:</b> <%= results.user.runs_against %><br/>
+                                    <b>Overs batted:</b> <%= results.user.balls_for %><br/>
+                                    <b>Overs bowled:</b> <%= results.user.balls_against %><br/>
+                                    <b>Wickets taken:</b> <%= results.user.wickets_taken %><br/>
+                                    <b>Wickets lost:</b> <%= results.user.wickets_lost %><br/>
+                                    <b>Streak:</b> <%= results.user.streak %><br/>
+                                    <b>All outs:</b> <%= results.user.all_outs %><br/>
+                                    <b>Average runs scored:</b> <%= results.user.avg_runs_for %><br/>
+                                    <b>Average runs conceded:</b> <%= results.user.avg_runs_against %><br/>
+                                    <b>Average wickets taken:</b> <%= results.user.avg_wickets_taken %><br/>
+                                    <b>Average wickets lost:</b> <%= results.user.avg_wickets_lost %><br/>
+                                    <b>Average overs batted:</b> <%= results.user.avg_overs_for %><br/>
+                                    <b>Average overs bowled:</b> <%= results.user.avg_overs_against %><br/>
+                                    <b>Highest total:</b>
+                                    <% if (results.user.played !== 0) { %>
+                                    <%= results.user.highest_total %>
+                                    <% } else { %>
+                                    0
+                                    <% } %>
+                                    <br/>
+                                    <b>Lowest total:</b>
+                                    <% if (results.user.played !== 0) { %>
+                                    <%= results.user.lowest_total %>
+                                    <% } else { %>
+                                    0
+                                    <% } %>
+                                    <br/>
+                                    <b>Net Run Rate:</b> <%= results.user.net_run_rate %><br/>
+                                    <b>Win - loss ratio:</b> <%= results.user.ratio %><br/>
+                                </p>
+                            </div>
                         </div>
 
                     </div>
@@ -65,31 +123,38 @@
                             <div id="box<%= results.team[i]._id %>" class="list-group-item player">
 
                                 <% if (results.team[i]._id < 'b'){ %>
-                                <div class="player-name"><img
-                                            src="http://res.cloudinary.com/gpl/players/bat/<%= results.team[i]._id %>.jpg"
-                                            class="img-circle pull-left" height="40" width="40"/>
-
-                                    <span class="h4"><%= results.team[i].Name %></span>
+                                <div class="player-name">
+                                    <div class="col-xs-2"><img
+                                                src="http://res.cloudinary.com/gpl/players/bat/<%= results.team[i]._id %>.jpg"
+                                                class="img-circle pull-left" height="40" width="40"/>
+                                    </div>
+                                    <div class=col-xs-8><span class="h4"><%= results.team[i].Name %></span></div>
                                 </div>
                                 <span class="pull-right type">Batsman</span>
 
                                 <% } else if(results.team[i]._id < 'c') { %>
-                                <div class="player-name"><img
-                                            src="http://res.cloudinary.com/gpl/players/bowl/<%= results.team[i]._id %>.jpg"
-                                            class="img-circle pull-left" height="40" width="40"/>
-
-                                    <span class="h4"><%= results.team[i].Name %></span>
+                                <div class="player-name">
+                                    <div class="col-xs-2"><img
+                                                src="http://res.cloudinary.com/gpl/players/bowl/<%= results.team[i]._id %>.jpg"
+                                                class="img-circle pull-left" height="40" width="40"/>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <span class="h4"><%= results.team[i].Name %></span>
+                                    </div>
                                 </div>
                                 <span class="pull-right type">Bowler</span>
 
                                 <% } else if(results.team[i]._id < 'd') { %>
-                                <div class="player-name"><img
-                                            src="http://res.cloudinary.com/gpl/players/all/<%= results.team[i]._id %>.jpg"
-                                            class="img-circle pull-left" height="40" width="40"/>
-
-                                    <span class="h4"><%= results.team[i].Name %></span>
-                                </div>
-                                <span class="pull-right type">All Rounder</span>
+                                <div class="player-name">
+                                    <div class="col-xs-2">
+                                        <img
+                                                src="http://res.cloudinary.com/gpl/players/all/<%= results.team[i]._id %>.jpg"
+                                                class="img-circle pull-left" height="40" width="40"/>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <p class="lead"><span class="h4"><%= results.team[i].Name %></span></p>
+                                    </div>
+                                    <span class="pull-right type">All Rounder</span></div>
                                 <% } %>
                             </div>
                             <% k++; } else {
@@ -99,44 +164,9 @@
                             <% z = 0;k = 0;i--;} else { %>
                             <% k = 0;i--; %>
                             <% } } } %>
-
                         </ul>
-                        <a href="/home/team" class="btn btn-lg btn-primary" id="line">Change Line Up</a>
                     </div>
-
-
                 </div>
-
-
-            </div>
-            <div id="stats" class="container">
-                <h3>Team Statistics</h3>
-
-                <p style="text-align:left;">
-                    <b>Matches Played:</b> <%= results.user.played %><br/>
-                    <b>Matches Won:</b> <%= results.user.win %><br/>
-                    <b>Matches Lost:</b> <%= results.user.loss %><br/>
-                    <b>Matches Tied:</b> <%= results.user.tied %><br/>
-                    <b>Points:</b> <%= results.user.points %><br/>
-                    <b>Runs for:</b> <%= results.user.runs_for %><br/>
-                    <b>Runs against:</b> <%= results.user.runs_against %><br/>
-                    <b>Overs batted:</b> <%= results.user.balls_for %><br/>
-                    <b>Overs bowled:</b> <%= results.user.balls_against %><br/>
-                    <b>Wickets taken:</b> <%= results.user.wickets_taken %><br/>
-                    <b>Wickets lost:</b> <%= results.user.wickets_lost %><br/>
-                    <b>Streak:</b> <%= results.user.streak %><br/>
-                    <b>All outs:</b> <%= results.user.all_outs %><br/>
-                    <b>Average runs scored:</b> <%= results.user.avg_runs_for %><br/>
-                    <b>Average runs conceded:</b> <%= results.user.avg_runs_against %><br/>
-                    <b>Average wickets taken:</b> <%= results.user.avg_wickets_taken %><br/>
-                    <b>Average wickets lost:</b> <%= results.user.avg_wickets_lost %><br/>
-                    <b>Average overs batted:</b> <%= results.user.avg_overs_for %><br/>
-                    <b>Average overs bowled:</b> <%= results.user.avg_overs_against %><br/>
-                    <b>Highest total:</b> <%= results.user.highest_total %><br/>
-                    <b>Lowest total:</b> <%= results.user.lowest_total %><br/>
-                    <b>Net Run Rate:</b> <%= results.user.net_run_rate %><br/>
-                    <b>Win - loss ratio:</b> <%= results.user.ratio %><br/>
-                </p>
             </div>
         </div>
     </div>

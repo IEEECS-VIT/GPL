@@ -1,5 +1,4 @@
-html
-{
+html {
 
     font-family: "Roboto", helvetica, arial, sans-serif;
 }
@@ -7,26 +6,26 @@ html
 .container-fluid {
     text-align: center;
 }
-.main
-{
+
+.main {
     padding: 50px 0 50px;
 }
-#head1:hover
-{
+
+#head1:hover {
     cursor: pointer;
 }
-#p1
-{
+
+#p1 {
     height: 150px;
     width: 80px;
 }
-#p2
-{
+
+#p2 {
     height: 150px;
     width: 80px;
 }
-#p3
-{
+
+#p3 {
     height: 150px;
     width: 80px;
 }
