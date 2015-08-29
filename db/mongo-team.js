@@ -26,18 +26,25 @@ var mongoFeatures = require(path.join(__dirname, 'mongo-features'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection.js'));
 
-var getPlayer = function (id, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+var getPlayer = function (id, callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection('players');
-            var onFetch = function (err, document) {
-                if (err) {
+            var onFetch = function (err, document)
+            {
+                if (err)
+                {
                     callback(err, null);
                 }
-                else {
+                else
+                {
                     callback(false, document);
                 }
             };
@@ -47,24 +54,32 @@ var getPlayer = function (id, callback) {
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.getTeam = function (doc, callback) {
+exports.getTeam = function (doc, callback)
+{
     console.log(doc);
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match);   // match collection
-            var onFetch = function (err, document) {
+            var onFetch = function (err, document)
+            {
                 console.log("Length " + document.team.length);
-                if (document.team.length == 0) {
+                if (document.team.length == 0)
+                {
                     console.log("Reached");
                     callback(null, []);
                 }
-                else if (err) {
+                else if (err)
+                {
                     callback(err, null);
                 }
-                else {
+                else
+                {
                     async.map(document.team, getPlayer, callback);
                 }
             };
@@ -74,52 +89,68 @@ exports.getTeam = function (doc, callback) {
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.getSquad = function (doc, callback) {
+exports.getSquad = function (doc, callback)
+{
     var coach;
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match); // match collection
-            var onFinish = function (err, documents) {
-                var onGetCoach = function (err, doc) {
-                    if (err) {
+            var onFinish = function (err, documents)
+            {
+                var onGetCoach = function (err, doc)
+                {
+                    if (err)
+                    {
                         console.log(err.message);
                         callback(err, null)
                     }
-                    else {
+                    else
+                    {
                         documents.push(doc);
                         callback(null, documents);
                     }
                 };
-                if (err) {
+                if (err)
+                {
                     throw err;
                 }
-                else {
+                else
+                {
                     getPlayer(coach, onGetCoach);
                 }
             };
 
-            var onFetch = function (err, document) {
-                if (document) {
-                    if (err) {
+            var onFetch = function (err, document)
+            {
+                if (document)
+                {
+                    if (err)
+                    {
                         callback(err, null);
                     }
-                    else if (document.team.length != 0) {
-
+                    else if (document.team.length != 0)
+                    {
                         for (var i = 0; i < 16; i++) {
-                            if (document.team[i] >= 'd1') {
+                            if (document.team[i] >= 'd1')
+                            {
                                 coach = parseInt(document.team[i]);
                             }
                         }
                         async.map(document.squad, getPlayer, onFinish);
                     }
-                    else {
+                    else
+                    {
                         callback(null, []);
                     }
                 }
-                else {
+                else
+                {
                     callback(null, []);
                 }
             };
@@ -130,12 +161,16 @@ exports.getSquad = function (doc, callback) {
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.dashboard = function (doc, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+exports.dashboard = function (doc, callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
             var slice =
             {
@@ -148,11 +183,14 @@ exports.dashboard = function (doc, callback) {
                 authStrategy: 0,
                 surplus: 0
             };
-            var onFind = function (err, doc) {
-                if (err) {
+            var onFind = function (err, doc)
+            {
+                if (err)
+                {
                     callback(err);
                 }
-                else {
+                else
+                {
                     callback(null, doc);
                 }
             };
@@ -162,18 +200,25 @@ exports.dashboard = function (doc, callback) {
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.map = function (doc, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+exports.map = function (doc, callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
-            var onFind = function (err, doc) {
-                if (err) {
+            var onFind = function (err, doc)
+            {
+                if (err)
+                {
                     callback(err);
                 }
-                else {
+                else
+                {
                     callback(null, doc);
                 }
             };
@@ -183,18 +228,25 @@ exports.map = function (doc, callback) {
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.shortList = function (callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+exports.shortList = function (callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
-            var onShortList = function (err, doc) {
-                if (err) {
+            var onShortList = function (err, doc)
+            {
+                if (err)
+                {
                     callback(err);
                 }
-                else {
+                else
+                {
                     callback(null, doc);
                 }
             };
@@ -204,12 +256,16 @@ exports.shortList = function (callback) {
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.adminInfo = function (callback) {
-    var onParallel = function (err, result) {
-        if (err) {
+exports.adminInfo = function (callback)
+{
+    var onParallel = function (err, result)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             callback(null, result);
         }
     };
@@ -244,55 +300,73 @@ exports.adminInfo = function (callback) {
     async.parallel(parallelTasks, onParallel);
 };
 
-exports.fetchMatches = function (team, callback) {
-    var onParallel = function (err, result) {
-        if (err) {
+exports.fetchMatches = function (team, callback)
+{
+    var onParallel = function (err, result)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             callback(null, result);
         }
     };
 
     var parallelTasks =
         [
-            function (asyncCallback) {
+            function (asyncCallback)
+            {
                 mongoMatches.match(1, team, asyncCallback);
             },
-            function (asyncCallback) {
+            function (asyncCallback)
+            {
                 mongoMatches.match(2, team, asyncCallback);
             },
-            function (asyncCallback) {
+            function (asyncCallback)
+            {
                 mongoMatches.match(3, team, asyncCallback);
             },
-            function (asyncCallback) {
+            function (asyncCallback)
+            {
                 mongoMatches.match(4, team, asyncCallback);
             },
-            function (asyncCallback) {
+            function (asyncCallback)
+            {
                 mongoMatches.match(5, team, asyncCallback);
             },
-            function (asyncCallback) {
+            function (asyncCallback)
+            {
                 mongoMatches.match(6, team, asyncCallback);
             },
-            function (asyncCallback) {
+            function (asyncCallback)
+            {
                 mongoMatches.match(7, team, asyncCallback);
             }
         ];
     async.parallel(parallelTasks, onParallel);
 };
 
-exports.check = function (team, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+exports.check = function (team, callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection('users');
-            var onFind = function (err, result) {
-                if (err) {
+            var onFind = function (err, result)
+            {
+                if (err)
+                {
                     callback(err);
                 }
-                else {
+                else
+                {
                     callback(null, result ? false : true);
                 }
             };
@@ -302,26 +376,38 @@ exports.check = function (team, callback) {
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.opponent = function (day, team, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+exports.opponent = function (day, team, callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection('matchday' + day);
             var filter =
             {
-                $or: [
-                    {Team_1: team},
-                    {Team_2: team}
+                $or:
+                [
+                    {
+                        Team_1: team
+                    },
+                    {
+                        Team_2: team
+                    }
                 ]
             };
-            var onFind = function (err, doc) {
+            var onFind = function (err, doc)
+            {
                 db.close();
-                if (err) {
+                if (err)
+                {
                     callback(err);
                 }
-                else {
+                else
+                {
                     callback(null, (team == doc.Team_1) ? doc.Team_2 : doc.Team_1);
                 }
             };
@@ -331,19 +417,26 @@ exports.opponent = function (day, team, callback) {
     MongoClient.connect(mongoUri, onConnect);
 };
 
-var player = function (id, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+var player = function (id, callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection('players');
-            var onPlayer = function (err, player) {
+            var onPlayer = function (err, player)
+            {
                 db.close();
-                if (err) {
+                if (err)
+                {
                     callback(err);
                 }
-                else {
+                else
+                {
                     callback(null, player);
                 }
             };
@@ -353,21 +446,29 @@ var player = function (id, callback) {
     MongoClient.connect(mongoUri, onConnect);
 };
 
-exports.squad = function (doc, callback) {
-    var onConnect = function (err, db) {
-        if (err) {
+exports.squad = function (doc, callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             callback(err);
         }
-        else {
+        else
+        {
             collection = db.collection(match);
-            var onSquad = function (err, doc) {
+            var onSquad = function (err, doc)
+            {
                 doc.team.sort();
                 db.close();
-                if (err) {
+                if (err)
+                {
                     callback(err);
                 }
-                else {
-                    var onGet = function (err, results) {
+                else
+                {
+                    var onGet = function (err, results)
+                    {
                         doc.team = results;
                         callback(null, doc);
                     };

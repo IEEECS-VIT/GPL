@@ -42,21 +42,27 @@ passport.use(new facebook({
     },
     function (req, token, refreshToken, profile, done) {
         process.nextTick(function () {
-            if (!req.signedCookies.name) {
+            if (!req.signedCookies.name)
+            {
                 MongoUsers.fetch({'_id': req.cookies.temp}, function (err, user) {
-                    if (err) {
+                    if (err)
+                    {
                         return done(err);
                     }
-                    if (user) {
+                    if (user)
+                    {
                         return done(null, user); // user found, return that user
                     }
                     else // if there is no user, create them
                     {
-                        var onGetCount = function (err, number) {
-                            if (err) {
+                        var onGetCount = function (err, number)
+                        {
+                            if (err)
+                            {
                                 console.log(err.message);
                             }
-                            else {
+                            else
+                            {
                                 var newUser = record;
                                 newUser._id = req.cookies.temp;
                                 newUser.token = token;
@@ -66,7 +72,8 @@ passport.use(new facebook({
                                 newUser.email = (profile.emails[0].value || '').toLowerCase();
                                 newUser.manager_name = profile.name.givenName + ' ' + profile.name.familyName;
                                 MongoUsers.save(newUser, function (err, newUser) {
-                                    if (err) {
+                                    if (err)
+                                    {
                                         return done(err);
                                     }
                                     return done(null, newUser);
@@ -77,7 +84,8 @@ passport.use(new facebook({
                     }
                 });
             }
-            else {
+            else
+            {
                 var user = req.user; // pull the user out of the session
                 user._id = req.cookies.temp;
                 user.token = token;
@@ -85,7 +93,8 @@ passport.use(new facebook({
                 user.email = (profile.emails[0].value || '').toLowerCase();
                 user.manager_name = profile.name.givenName + ' ' + profile.name.familyName;
                 MongoUsers.save(user, function (err) {
-                    if (err) {
+                    if (err)
+                    {
                         return done(err);
                     }
                     return done(null, user);
@@ -104,13 +113,16 @@ passport.use(new twitter({
         process.nextTick(function () {
             if (!req.signedCookies.name) {
                 MongoUsers.fetch({'_id': req.body.team}, function (err, user) {
-                    if (err) {
+                    if (err)
+                    {
                         return done(err);
                     }
-                    if (user) {
+                    if (user)
+                    {
                         return done(null, user); // user found, return that user
                     }
-                    else {
+                    else
+                    {
                         var newUser = record;
                         newUser._id = req.cookies.temp;
                         newUser.token = token;
@@ -119,7 +131,8 @@ passport.use(new twitter({
                         newUser.team_no = parseInt(number) + 1;
                         newUser.manager_name = profile.displayName;
                         MongoUsers.save(newUser, function (err) {
-                            if (err) {
+                            if (err)
+                            {
                                 return done(err);
                             }
                             return done(null, newUser);
@@ -127,14 +140,16 @@ passport.use(new twitter({
                     }
                 });
             }
-            else {
+            else
+            {
                 var user = req.user; // pull the user out of the session
                 user._id = req.cookies.temp;
                 user.token = token;
                 user.profile = profile.id;
                 user.manager_name = profile.displayName;
                 MongoUsers.save(user, function (err) {
-                    if (err) {
+                    if (err)
+                    {
                         return done(err);
                     }
                     return done(null, user);
@@ -151,15 +166,19 @@ passport.use(new google({
     },
     function (req, token, refreshToken, profile, done) {
         process.nextTick(function () {
-            if (!req.signedCookies.name) {
+            if (!req.signedCookies.name)
+            {
                 MongoUsers.fetch({'_id': req.body.team}, function (err, user) {
-                    if (err) {
+                    if (err)
+                    {
                         return done(err);
                     }
-                    if (user) {
+                    if (user)
+                    {
                         return done(null, user);
                     }
-                    else {
+                    else
+                    {
                         var newUser = record;
                         newUser._id = req.cookies.temp;
                         newUser.token = token;
@@ -168,7 +187,8 @@ passport.use(new google({
                         newUser.manager_name = profile.displayName;
                         newUser.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email
                         MongoUsers.save(newUser, function (err) {
-                            if (err) {
+                            if (err)
+                            {
                                 return done(err);
                             }
                             return done(null, newUser);
@@ -176,7 +196,8 @@ passport.use(new google({
                     }
                 });
             }
-            else {
+            else
+            {
                 var user = req.user; // pull the user out of the session
                 user._id = req.cookies.temp;
                 user.token = token;
@@ -184,7 +205,8 @@ passport.use(new google({
                 user.manager_name = profile.displayName;
                 user.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email
                 MongoUsers.save(user, function (err) {
-                    if (err) {
+                    if (err)
+                    {
                         return done(err);
                     }
                     return done(null, user);

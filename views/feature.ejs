@@ -17,83 +17,69 @@
 -->
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Features | GPL</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
-    <link href="/stylesheets/feature.css" rel="stylesheet" type="text/css"/>
-    <link href="/stylesheets/main.css" rel="stylesheet">
-</head>
-<body>
-<div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
-    <header class="banner" role="banner">
-
-        <span><img src="/images/header-left.jpg" height="60" class="pull-left"/><img class="logo"
-                                                                                     src="/images/gpllogo.png"
-                                                                                     height="50"
-                                                                                     class="pull-left"/><span
-                    class="h2 gplheadertext">graVITas Premier League 2.0</span><img src="/images/header-right.jpg"
-                                                                                    height="60"
-                                                                                    class="pull-right"/></span>
-
-
-    </header>
-</div>
-
-<div id="navbar-wrapper">
-    <nav id="navbar"></nav>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-offset-2 col-sm-8">
-            <h4>Let us know what we can add to make it better for you!</h4>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Features | GPL</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+        <link href="/stylesheets/feature.css" rel="stylesheet" type="text/css"/>
+        <link href="/stylesheets/main.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
+            <header class="banner" role="banner">
+                <span>
+                    <img src="/images/header-left.jpg" height="60" class="pull-left"/>
+                    <img class="logo" src="/images/gpllogo.png" height="50" class="pull-left"/>
+                    <span class="h2 gplheadertext">graVITas Premier League 2.0</span>
+                    <img src="/images/header-right.jpg" height="60" class="pull-right"/></span>
+            </header>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-offset-2 col-sm-8">
-            <form role="form" method="post" action="/home/feature">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-
-                <div class="form-group">
-                    <label for="name">Name: </label>
-                    <input type="text" class="form-control" placeholder="Name" id="name" name="f_name" required>
-                </div>
-                <div class="form-group">
-                    <label for="e-mail">E-mail ID: </label>
-                    <input type="email" class="form-control" placeholder="Email id" id="e-mail" name="f_email" required>
-                </div>
-                <div class="form-group">
-                    <label for="features-requested">Features you would like us to add: </label>
-                    <textarea class="form-control" rows="5" id="features-requested" name="f_requests"
-                              required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" id="b">Submit</button>
-            </form>
+        <div id="navbar-wrapper">
+            <nav id="navbar"></nav>
         </div>
-    </div>
-</div>
-<footer id="footer" class="footer">
-</footer>
-<!--[if lt IE 10]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
-
-
-<!-- build:js(.) scripts/vendor.js -->
-<!-- bower:js -->
-<script src="/bower_components/jquery/dist/jquery.js"></script>
-<!-- endbower -->
-<!-- endbuild -->
-
-
-<!-- build:js(.) scripts/plugins.js -->
-
-<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/javascript/main.js"></script>
-
-
-</body>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-offset-2 col-sm-8">
+                    <h4>Let us know what we can add to make it better for you!</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-offset-2 col-sm-8">
+                    <form role="form" method="post" action="/home/feature">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <div class="form-group">
+                            <label for="name">Name: </label>
+                            <input type="text" class="form-control" placeholder="Name" id="name" name="f_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="e-mail">E-mail ID: </label>
+                            <input type="email" class="form-control" placeholder="Email id" id="e-mail" name="f_email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="features-requested">Features you would like us to add: </label>
+                            <textarea class="form-control" rows="5" id="features-requested" name="f_requests"
+                                      required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="b">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <footer id="footer" class="footer">
+        </footer>
+        <!--[if lt IE 10]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+            your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!-- build:js(.) scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="/bower_components/jquery/dist/jquery.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:js(.) scripts/plugins.js -->
+        <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/javascript/main.js"></script>
+    </body>
 </html>

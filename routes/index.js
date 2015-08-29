@@ -28,32 +28,40 @@ var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
 var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
 var mongoFeatures = require(path.join(__dirname, '..', 'db', 'mongo-features'));
 
-try {
+try
+{
     bcrypt = require('bcrypt');
 }
-catch (err) {
-    try {
+catch (err)
+{
+    try
+    {
         bcrypt = require('bcryptjs');
     }
-    catch (err) {
+    catch (err)
+    {
         throw "Failure to compile run time requirement: bcrypt(js)";
     }
 }
 
 
-if (process.env.LOGENTRIES_TOKEN) {
+if (process.env.LOGENTRIES_TOKEN)
+{
     var logentries = require('node-logentries');
     log = logentries.logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
 router.get('/', function (req, res) {
-    if (req.signedCookies.name) {
-        if (log) {
+    if (req.signedCookies.name)
+    {
+        if (log)
+        {
             log.log(req.signedCookies.name + "logged in");
         }
         res.redirect('/home');
     }
-    else if (process.env.NODE_ENV) {
+    else if (process.env.NODE_ENV)
+    {
         var time = new Date;
         time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
         var date =
@@ -67,7 +75,8 @@ router.get('/', function (req, res) {
         };
         res.render('static', {date: date});
     }
-    else {
+    else
+    {
         res.render('index');
     }
 });
@@ -85,16 +94,22 @@ router.post('/interest', function (req, res) // interest form
         email: req.body.email,
         phone: req.body.phone
     };
-    var onInsert = function (err, docs) {
-        if (err) {
+    var onInsert = function (err, docs)
+    {
+        if (err)
+        {
             console.log(err.message);
         }
-        else {
-            var onSend = function (err) {
-                if (err) {
+        else
+        {
+            var onSend = function (err)
+            {
+                if (err)
+                {
                     console.log(err.message);
                 }
-                else {
+                else
+                {
                     console.log('Sent!');
                 }
                 res.redirect('/interest');
@@ -120,19 +135,23 @@ router.post('/interest', function (req, res) // interest form
 
 // TODO: delete this route when ready to launch
 router.get(/\/^.*$/, function (req, res, next) {
-    if (process.env.NODE_ENV) {
+    if (process.env.NODE_ENV)
+    {
         res.redirect('/');
     }
-    else {
+    else
+    {
         next();
     }
 });
 
 router.get('/login', function (req, res) {
-    if (req.signedCookies.name) {
+    if (req.signedCookies.name)
+    {
         res.redirect('/home');
     }
-    else {
+    else
+    {
         res.render('login', {csrfToken: req.csrfToken()});
     }
 });
@@ -140,10 +159,12 @@ router.get('/login', function (req, res) {
 router.post('/login', function (req, res) {
     var user = req.body.team_name;
     var password = req.body.password;
-    if (req.signedCookies.name) {
+    if (req.signedCookies.name)
+    {
         res.clearCookie('name');
     }
-    if (log) {
+    if (log)
+    {
         log.log(user + " " + password + "recieved");
     }
 
@@ -151,40 +172,52 @@ router.post('/login', function (req, res) {
     {
         '_id': user
     };
-    var onFetch = function (err, doc) {
-        if (err) {
+    var onFetch = function (err, doc)
+    {
+        if (err)
+        {
             console.log(err.message);
             res.render('index', {response: "Incorrect Username"});
         }
-        else if (doc) {
-            if (bcrypt.compareSync(password, doc['password_hash'])) {
+        else if (doc)
+        {
+            if (bcrypt.compareSync(password, doc['password_hash']))
+            {
                 console.log("Login Successful" + user);
                 res.cookie('name', doc['_id'], {maxAge: 86400000, signed: true});
                 res.redirect('/home');
             }
-            else {
+            else
+            {
                 console.log('Incorrect Credentials');
                 res.render('index', {response: "Incorrect Password"});
             }
         }
-        else {
-            var onGetAdmin = function (err, doc) {
-                if (err) {
+        else
+        {
+            var onGetAdmin = function (err, doc)
+            {
+                if (err)
+                {
                     console.log(err.message);
                     res.render('index', {response: "Incorrect Username"});
                 }
-                else if (doc) {
-                    if (bcrypt.compareSync(password, doc['password_hash'])) {
+                else if (doc)
+                {
+                    if (bcrypt.compareSync(password, doc['password_hash']))
+                    {
                         console.log("Admin login successful" + user);
                         res.cookie('admin', doc['_id'], {signed: true});
                         res.redirect('/admin');
                     }
-                    else {
+                    else
+                    {
                         console.log('Incorrect Credentials');
                         res.render('index', {response: "Incorrect Password"});
                     }
                 }
-                else {
+                else
+                {
                     console.log('No user exists');
                     res.render('index', {response: "Incorrect Username"});
                 }
@@ -196,7 +229,7 @@ router.post('/login', function (req, res) {
 });
 
 router.get('/forgot/password', function (req, res) {
-    res.render('forgot', {csrfToken: req.csrfToken()});
+    res.render('forgot', {csrfToken: req.csrfToken(), mode:'password'});
 });
 
 router.post('/forgot/password', function (req, res) {
@@ -222,25 +255,32 @@ router.post('/forgot/password', function (req, res) {
         );
         var details =
         {
-            $set: {
+            $set:
+            {
                 token: token,
                 expire: Date.now() + 3600000
             }
         };
 
-        var onFetch = function (err, doc) {
-            if (err) {
+        var onFetch = function (err, doc)
+        {
+            if (err)
+            {
                 console.log(err.message);
             }
-            else if (doc) {
-                email.send(message, function (err) {
-                    if (err) {
+            else if (doc)
+            {
+                email.send(message, function (err)
+                {
+                    if (err)
+                    {
                         console.log(err.message);
                     }
                     res.redirect('/login');
                 });
             }
-            else {
+            else
+            {
                 console.log('Invalid credentials!');
                 res.redirect('/forgot/password');
             }
@@ -250,18 +290,26 @@ router.post('/forgot/password', function (req, res) {
 });
 
 router.get('/reset/:token', function (req, res) {
-    var onGetReset = function (err, doc) {
-        if (err) {
+    var onGetReset = function (err, doc)
+    {
+        if (err)
+        {
             console.log(err.message);
         }
-        else if (!doc) {
+        else if (!doc)
+        {
             res.redirect('/forgot');
         }
-        else {
+        else
+        {
             res.render('reset', {csrfToken: req.csrfToken()});
         }
     };
     mongoUsers.getReset({token: req.params.token, expire: {$gt: Date.now()}}, onGetReset);
+});
+
+router.get('/forgot/user', function(req, res){
+    res.render('forgot', {csrfToken: req.csrfToken(), mode:'user'});
 });
 
 router.post('/forgot/user', function (req, res) {
@@ -270,11 +318,14 @@ router.post('/forgot/user', function (req, res) {
         phone: req.body.phone,
         email: req.body.email
     };
-    var onFetch = function (err, docs) {
-        if (err) {
+    var onFetch = function (err, docs)
+    {
+        if (err)
+        {
             console.log(err.message);
         }
-        else if (docs) {
+        else if (docs)
+        {
             var message = email.wrap({
                 from: 'gravitaspremierleague@gmail.com',
                 to: req.body.email,
@@ -283,13 +334,15 @@ router.post('/forgot/user', function (req, res) {
 
             message.attach_alternative("The following teams were found in association with your details:<br><br><ol>" + docs + "</ol><br><br><br>Regards, <br>Team G.P.L<br>IEEE Computer Society");
             email.send(message, function (err) {
-                if (err) {
+                if (err)
+                {
                     console.log(err.message);
                 }
                 res.redirect('/login');
             });
         }
-        else {
+        else
+        {
             console.log('Invalid credentials!');
             res.redirect('/forgot/user');
         }
@@ -298,33 +351,41 @@ router.post('/forgot/user', function (req, res) {
 });
 
 router.post('/reset/:token', function (req, res) {
-    if (req.body.password === req.body.confirm) {
+    if (req.body.password === req.body.confirm)
+    {
         var query =
         {
             token: req.params.token,
-            expire: {
+            expire:
+            {
                 $gt: Date.now()
             }
         };
         var op =
         {
-            $set: {
+            $set:
+            {
                 password_hash: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
             },
-            $unset: {
+            $unset:
+            {
                 token: '',
                 expire: ''
             }
         };
-        var onReset = function (err, doc) {
-            if (err) {
+        var onReset = function (err, doc)
+        {
+            if (err)
+            {
                 console.log(err.message);
             }
-            else if (!doc) {
+            else if (!doc)
+            {
                 console.log('No matches found!');
                 res.redirect('/forgot');
             }
-            else {
+            else
+            {
                 var message = email.wrap({
                     from: 'gravitaspremierleague@gmail.com',
                     to: doc.email,
@@ -338,7 +399,8 @@ router.post('/reset/:token', function (req, res) {
                 );
 
                 email.send(message, function (err) {
-                    if (err) {
+                    if (err)
+                    {
                         console.log(err.message);
                     }
                     res.redirect('/login');
@@ -354,24 +416,31 @@ router.post('/reset/:token', function (req, res) {
 });
 
 router.get('/register', function (req, res) {
-    if (req.signedCookies.name) {
+    if (req.signedCookies.name)
+    {
         res.redirect('/home');
     }
-    else {
+    else
+    {
         res.render('register', {response: "", csrfToken: req.csrfToken()});
     }
 });
 
 router.post('/register', function (req, res) {
-    if (req.signedCookies.name) {
+    if (req.signedCookies.name)
+    {
         res.clearCookie('name');
     }
-    var onGetCount = function (err, number) {
-        if (err) {
+    var onGetCount = function (err, number)
+    {
+        if (err)
+        {
             console.log(err.message);
         }
-        else {
-            if (req.body.confirm_password === req.body.password) {
+        else
+        {
+            if (req.body.confirm_password === req.body.password)
+            {
                 var newUser = record;
                 newUser._id = req.body.team_name;
                 newUser.dob = new Date();
@@ -382,12 +451,15 @@ router.post('/register', function (req, res) {
                 newUser.phone = req.body.phone;
                 newUser.authStrategy = 'local';
 
-                var onInsert = function (err, docs) {
-                    if (err) {
+                var onInsert = function (err, docs)
+                {
+                    if (err)
+                    {
                         console.log(err.message);
                         res.render('register', {response: "Team Name Already Exists"});
                     }
-                    else {
+                    else
+                    {
                         var name = newUser._id;
                         var message = email.wrap({
                             from: 'gravitaspremierleague@gmail.com',
@@ -403,7 +475,8 @@ router.post('/register', function (req, res) {
                         );
                         res.cookie('name', name, {maxAge: 86400000, signed: true});
                         email.send(message, function (err) {
-                            if (err) {
+                            if (err)
+                            {
                                 console.log(err.message);
                             }
                             res.redirect('/home/players');
@@ -412,7 +485,8 @@ router.post('/register', function (req, res) {
                 };
                 mongoUsers.insert(newUser, onInsert);
             }
-            else {
+            else
+            {
                 console.log("Incorrect Password");
                 res.render('register', {response: "Passwords do not match", csrfToken: req.csrfToken()});
             }
@@ -422,41 +496,51 @@ router.post('/register', function (req, res) {
 });
 
 router.get('/logout', function (req, res) {
-    if (req.signedCookies.name) {
+    if (req.signedCookies.name)
+    {
         res.clearCookie('name');
         res.clearCookie('lead');
         res.redirect('/login');
     }
-    else {
+    else
+    {
         res.redirect('/');
     }
 });
 
 router.get('/admin', function (req, res) {
-    if (req.signedCookies.admin) {
-        var onGetInfo = function (err, doc) {
-            if (err) {
+    if (req.signedCookies.admin)
+    {
+        var onGetInfo = function (err, doc)
+        {
+            if (err)
+            {
                 console.log(err.message);
             }
-            else if (doc) {
+            else if (doc)
+            {
                 res.render('admin', {info: doc});
             }
-            else {
+            else
+            {
                 res.redirect('/');
             }
         };
         mongoUsers.adminInfo(onGetInfo);
     }
-    else {
+    else
+    {
         res.redirect('/');
     }
 });
 
 router.get('/social', function (req, res) {
-    if (req.signedCookies.name) {
+    if (req.signedCookies.name)
+    {
         res.render('home');
     }
-    else {
+    else
+    {
         res.render('social', {mode: req.cookies.temp ? 0 : 1});
     }
 });
@@ -467,13 +551,15 @@ router.post('/social', function (req, res) {
 });
 
 router.get('/social/callback', function (req, res) {
-    if (req.user) {
+    if (req.user)
+    {
         res.cookie('name', req.user._id, {maxAge: 86400000, signed: true});
         res.clearCookie('temp');
         delete req.user;
         res.redirect('/home');
     }
-    else {
+    else
+    {
         res.redirect('/social');
     }
 });
@@ -487,18 +573,23 @@ router.get('/privacy', function (req, res) {
 });
 
 router.get('/simulate', function (req, res) {
-    if (req.signedCookies.admin) {
-        var onSimulate = function (err, docs) {
-            if (err) {
+    if (req.signedCookies.admin)
+    {
+        var onSimulate = function (err, docs)
+        {
+            if (err)
+            {
                 console.log(err);
             }
-            else {
+            else
+            {
                 res.render('results', {results: docs});
             }
         };
         mongoFeatures.simulate(onSimulate);
     }
-    else {
+    else
+    {
         res.redirect('/');
     }
 });

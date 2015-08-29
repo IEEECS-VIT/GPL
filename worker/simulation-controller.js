@@ -29,7 +29,8 @@ var simulator = require(path.join(__dirname, 'simulation'));
 var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 
-if (process.env.LOGENTRIES_TOKEN) {
+if (process.env.LOGENTRIES_TOKEN)
+{
     var logentries = require('node-logentries');
     log = logentries.logger({
         token: process.env.LOGENTRIES_TOKEN
@@ -57,8 +58,10 @@ message.header.bcc = [];
 
 var databaseOptions =
 {
-    server: {
-        socketOptions: {
+    server:
+    {
+        socketOptions:
+        {
             keepAlive: 1,
             connectTimeoutMS: 30000
         },
@@ -67,36 +70,48 @@ var databaseOptions =
     }
 };
 
-exports.initSimulation = function (day, masterCallback) {
-    var forEachMatch = function (matchDoc, callback) {
+exports.initSimulation = function (day, masterCallback)
+{
+    var forEachMatch = function (matchDoc, callback)
+    {
         var parallelTasks =
         {
-            team1: function (asyncCallback) {
+            team1: function (asyncCallback)
+            {
                 getTeamDetails({team_no: matchDoc.Team_1}, asyncCallback);
             },
-            team2: function (asyncCallback) {
+            team2: function (asyncCallback)
+            {
                 getTeamDetails({team_no: matchDoc.Team_2}, asyncCallback);
             }
         };
 
-        var getTeamDetails = function (query, asyncCallback) {
-            var getRating = function (err, userDoc) {
-                var getEachRating = function (elt, subCallback) {
+        var getTeamDetails = function (query, asyncCallback)
+        {
+            var getRating = function (err, userDoc)
+            {
+                var getEachRating = function (elt, subCallback)
+                {
                     database.collection('players').findOne({_id: elt}, subCallback);
                 };
 
-                var onGetRating = function (err, results) {
+                var onGetRating = function (err, results)
+                {
                     userDoc.ratings = results;
                     asyncCallback(err, userDoc);
                 };
 
-                if (userDoc.squad.length < 11) {
+                if (userDoc.squad.length < 11)
+                {
                     userDoc.ratings = [];
                     asyncCallback(err, userDoc);
                 }
-                else {
-                    var addCoach = function (elt) {
-                        if (elt > 'd') {
+                else
+                {
+                    var addCoach = function (elt)
+                    {
+                        if (elt > 'd')
+                        {
                             userDoc.squad.push(elt);
                         }
                     };
@@ -107,21 +122,26 @@ exports.initSimulation = function (day, masterCallback) {
             database.collection(match).findOne(query, getRating);
         };
 
-        var updateData = function (err, newData) {
-            var updateUser = function (newUserDoc, asyncCallback) {
+        var updateData = function (err, newData)
+        {
+            var updateUser = function (newUserDoc, asyncCallback)
+            {
                 info.runs += newUserDoc.runs_for;
                 info.overs += newUserDoc.balls_for;
                 info.wickets += newUserDoc.wickets_lost;
-                for (i = 0; i < newUserDoc.squad.length; ++i) {
+                for (i = 0; i < newUserDoc.squad.length; ++i)
+                {
                     info.six += newUserDoc.stats[newUserDoc.squad[i]].sixes || 0;
                     info.four += newUserDoc.stats[newUserDoc.squad[i]].fours || 0;
-                    if (!newUserDoc.squad[i].match(/^b/) && newUserDoc.stats[newUserDoc.squad[i]].runs_scored > info.orange.runs) {
+                    if (!newUserDoc.squad[i].match(/^b/) && newUserDoc.stats[newUserDoc.squad[i]].runs_scored > info.orange.runs)
+                    {
                         info.orange.team = newUserDoc._id;
                         info.orange.player = newUserDoc.squad[i];
                         info.orange.runs = newUserDoc.stats[newUserDoc.squad[i]].runs_scored;
                         info.orange.strikeRate = newUserDoc.stats[newUserDoc.squad[i]].bat_strike_rate;
                     }
-                    if (newUserDoc.squad[i].match(/^[^a]/) && newUserDoc.stats[newUserDoc.squad[i]].wickets_taken > info.purple.wickets) {
+                    if (newUserDoc.squad[i].match(/^[^a]/) && newUserDoc.stats[newUserDoc.squad[i]].wickets_taken > info.purple.wickets)
+                    {
                         info.purple.team = newUserDoc._id;
                         info.purple.player = newUserDoc.squad[i];
                         info.purple.economy = newUserDoc.stats[newUserDoc.squad[i]].economy;
@@ -134,8 +154,10 @@ exports.initSimulation = function (day, masterCallback) {
                 });
             };
 
-            var updateMatch = function (newMatchDoc, asyncCallback) {
-                if (newMatchDoc.MoM.points > points) {
+            var updateMatch = function (newMatchDoc, asyncCallback)
+            {
+                if (newMatchDoc.MoM.points > points)
+                {
                     info.MoM = newMatchDoc.MoM;
                     points = newMatchDoc.MoM.points;
                 }
@@ -144,13 +166,16 @@ exports.initSimulation = function (day, masterCallback) {
 
             var parallelTasks2 =
                 [
-                    function (asyncCallback) {
+                    function (asyncCallback)
+                    {
                         updateUser(newData.team1, asyncCallback);
                     },
-                    function (asyncCallback) {
+                    function (asyncCallback)
+                    {
                         updateUser(newData.team2, asyncCallback);
                     },
-                    function (asyncCallback) {
+                    function (asyncCallback)
+                    {
                         updateMatch(newData.match, asyncCallback);
                     }
                 ];
@@ -158,10 +183,12 @@ exports.initSimulation = function (day, masterCallback) {
             async.parallel(parallelTasks2, callback);
         };
 
-        var onTeamDetails = function (err, results) {
+        var onTeamDetails = function (err, results)
+        {
             var data =
             {
-                team: [
+                team:
+                [
                     results.team1,
                     results.team2
                 ],
@@ -173,23 +200,31 @@ exports.initSimulation = function (day, masterCallback) {
         async.parallel(parallelTasks, onTeamDetails);
     };
 
-    var onFinish = function (err, results) {
+    var onFinish = function (err, results)
+    {
         console.log(info);
-        var onUpdate = function (error) {
+        var onUpdate = function (error)
+        {
             database.close();
-            if (error) {
+            if (error)
+            {
                 console.log(error.message);
             }
-            if (err) {
+            if (err)
+            {
                 console.log(err.message);
-                if (log) {
+                if (log)
+                {
                     log.log('debug', {Error: err.message});
                 }
                 throw err;
             }
-            else {
-                email.send(message, function (err) {
-                    if (err) {
+            else
+            {
+                email.send(message, function (err)
+                {
+                    if (err)
+                    {
                         console.log(err.message);
                     }
                     masterCallback(err, results);
@@ -199,9 +234,11 @@ exports.initSimulation = function (day, masterCallback) {
         database.collection('info').updateOne({_id: 'info'}, {$set: info}, onUpdate);
     };
 
-    var getAllMatches = function (err, callback) {
+    var getAllMatches = function (err, callback)
+    {
         var collectionName;
-        switch (days.indexOf(day)) {
+        switch (days.indexOf(day))
+        {
             case -1:
                 throw 'Invalid Day';
                 break;
@@ -214,34 +251,45 @@ exports.initSimulation = function (day, masterCallback) {
         collection.find().toArray(callback)
     };
 
-    var ForAllMatches = function (err, docs) {
-        if (err) {
+    var ForAllMatches = function (err, docs)
+    {
+        if (err)
+        {
             console.log(err.message);
-            if (log) {
+            if (log)
+            {
                 log.log('debug', {Error: err.message});
             }
             throw err;
         }
-        else {
+        else
+        {
             async.map(docs, forEachMatch, onFinish);
         }
     };
 
-    var onConnect = function (err, db) {
-        if (err) {
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
             console.log(err.message);
-            if (log) {
+            if (log)
+            {
                 log.log('debug', {Error: err.message});
             }
             throw err;
         }
-        else {
+        else
+        {
             database = db;
-            var onGetInfo = function (err, doc) {
-                if (err) {
+            var onGetInfo = function (err, doc)
+            {
+                if (err)
+                {
                     console.log(err.message);
                 }
-                else {
+                else
+                {
                     info.orange = doc.orange;
                     info.purple = doc.purple;
                     getAllMatches(err, ForAllMatches);

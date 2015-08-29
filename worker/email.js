@@ -6,9 +6,11 @@ var server = email.server.connect({
     ssl: true
 });
 
-exports.send = function (message, callback) {
+exports.send = function (message, callback)
+{
     server.send(message, callback);
 };
-exports.wrap = function (content) {
+exports.wrap = function (content)
+{
     return email.message.create(content);
 };
