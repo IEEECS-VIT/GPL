@@ -44,8 +44,8 @@ passport.use(new facebook({
         process.nextTick(function () {
             if (!req.signedCookies.name)
             {
-                MongoUsers.fetch({'_id': req.cookies.temp}, function (err, user) {
-                    if (err)
+                MongoUsers.fetch({'_id': req.signedCookies.team}, function (err, user) {
+                    if (err || user.authStrategy != 'facebook')
                     {
                         return done(err);
                     }
@@ -64,12 +64,13 @@ passport.use(new facebook({
                             else
                             {
                                 var newUser = record;
-                                newUser._id = req.cookies.temp;
+                                newUser._id = req.signedCookies.team;
                                 newUser.token = token;
                                 newUser.profile = profile.id;
                                 newUser.authStrategy = 'facebook';
                                 newUser.team_no = parseInt(number) + 1;
-                                newUser.email = (profile.emails[0].value || '').toLowerCase();
+                                newUser.email = req.signedCookies.email;
+                                newUser.phone = req.signedCookies.phone;
                                 newUser.manager_name = profile.name.givenName + ' ' + profile.name.familyName;
                                 MongoUsers.save(newUser, function (err, newUser) {
                                     if (err)
@@ -87,10 +88,11 @@ passport.use(new facebook({
             else
             {
                 var user = req.user; // pull the user out of the session
-                user._id = req.cookies.temp;
+                user._id = req.signedCookies.name;
                 user.token = token;
                 user.profile = profile.id;
-                user.email = (profile.emails[0].value || '').toLowerCase();
+                user.email = req.signedCookies.email;
+                user.phone = req.signedCookies.phone;
                 user.manager_name = profile.name.givenName + ' ' + profile.name.familyName;
                 MongoUsers.save(user, function (err) {
                     if (err)
@@ -112,8 +114,8 @@ passport.use(new twitter({
     function (req, token, tokenSecret, profile, done) {
         process.nextTick(function () {
             if (!req.signedCookies.name) {
-                MongoUsers.fetch({'_id': req.body.team}, function (err, user) {
-                    if (err)
+                MongoUsers.fetch({'_id': req.signedCookies.team}, function (err, user) {
+                    if (err || user.authStrategy != 'twitter')
                     {
                         return done(err);
                     }
@@ -124,12 +126,14 @@ passport.use(new twitter({
                     else
                     {
                         var newUser = record;
-                        newUser._id = req.cookies.temp;
+                        newUser._id = req.signedCookies.team;
                         newUser.token = token;
                         newUser.authStrategy = 'twitter';
                         newUser.profile = profile.id;
                         newUser.team_no = parseInt(number) + 1;
                         newUser.manager_name = profile.displayName;
+                        newUser.phone = req.signedCookies.phone;
+                        newUser.email = req.signedCookies.email;
                         MongoUsers.save(newUser, function (err) {
                             if (err)
                             {
@@ -143,10 +147,12 @@ passport.use(new twitter({
             else
             {
                 var user = req.user; // pull the user out of the session
-                user._id = req.cookies.temp;
+                user._id = req.signedCookies.team;
                 user.token = token;
                 user.profile = profile.id;
                 user.manager_name = profile.displayName;
+                user.email = req.signedCookies.email;
+                user.phone = req.signedCookies.phone;
                 MongoUsers.save(user, function (err) {
                     if (err)
                     {
@@ -168,8 +174,8 @@ passport.use(new google({
         process.nextTick(function () {
             if (!req.signedCookies.name)
             {
-                MongoUsers.fetch({'_id': req.body.team}, function (err, user) {
-                    if (err)
+                MongoUsers.fetch({'_id': req.signedCookies.team}, function (err, user) {
+                    if (err || user.authStrategy != 'google')
                     {
                         return done(err);
                     }
@@ -180,12 +186,13 @@ passport.use(new google({
                     else
                     {
                         var newUser = record;
-                        newUser._id = req.cookies.temp;
+                        newUser._id = req.signedCookies.team;
                         newUser.token = token;
                         newUser.authStrategy = 'google';
                         newUser.profile = profile.id;
                         newUser.manager_name = profile.displayName;
-                        newUser.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email
+                        newUser.phone = req.signedCookies.phone;
+                        newUser.email = req.signedCookies.email;
                         MongoUsers.save(newUser, function (err) {
                             if (err)
                             {
@@ -199,11 +206,12 @@ passport.use(new google({
             else
             {
                 var user = req.user; // pull the user out of the session
-                user._id = req.cookies.temp;
+                user._id = req.signedCookies.team;
                 user.token = token;
                 user.profile = profile.id;
                 user.manager_name = profile.displayName;
-                user.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email
+                user.email = req.signedCookies.email;
+                user.phone = req.signedCookies.phone;
                 MongoUsers.save(user, function (err) {
                     if (err)
                     {

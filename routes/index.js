@@ -24,6 +24,7 @@ var crypto = require('crypto');
 var router = require('express').Router();
 var email = require(path.join(__dirname, '..', 'worker', 'email'));
 var record = require(path.join(__dirname, '..', 'db', 'mongo-record'));
+var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
 var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
 var mongoFeatures = require(path.join(__dirname, '..', 'db', 'mongo-features'));
@@ -157,7 +158,7 @@ router.get('/login', function (req, res) {
 });
 
 router.post('/login', function (req, res) {
-    var user = req.body.team_name;
+    var user = req.body.team;
     var password = req.body.password;
     if (req.signedCookies.name)
     {
@@ -207,7 +208,7 @@ router.post('/login', function (req, res) {
                     if (bcrypt.compareSync(password, doc['password_hash']))
                     {
                         console.log("Admin login successful" + user);
-                        res.cookie('admin', doc['_id'], {signed: true});
+                        res.cookie('admin', doc['_id'], {signed: true, maxAge : 86400000});
                         res.redirect('/admin');
                     }
                     else
@@ -493,7 +494,7 @@ router.post('/register', function (req, res) {
             }
         }
     };
-    mongoUsers.getCount(onGetCount);
+    mongoUsers.getCount({}, onGetCount);
 });
 
 router.get('/logout', function (req, res) {
@@ -527,7 +528,7 @@ router.get('/admin', function (req, res) {
                 res.redirect('/');
             }
         };
-        mongoUsers.adminInfo(onGetInfo);
+        mongoTeam.adminInfo(onGetInfo);
     }
     else
     {
@@ -535,20 +536,38 @@ router.get('/admin', function (req, res) {
     }
 });
 
-router.get('/social', function (req, res) {
+router.get('/social/login', function (req, res) {
     if (req.signedCookies.name)
     {
         res.render('home');
     }
     else
     {
-        res.render('social', {mode: req.cookies.temp ? 0 : 1});
+        res.render('social', {mode: req.signedCookies.team ? 0 : 1, type : 'login', csrfToken : req.csrfToken()});
     }
 });
 
-router.post('/social', function (req, res) {
-    res.cookie('temp', req.body.team);
-    res.redirect('/social');
+router.post('/social/login', function (req, res) {
+    res.cookie('team', req.body.team, {signed : true});
+    res.redirect('/social/login');
+});
+
+router.get('/social/register', function (req, res) {
+    if (req.signedCookies.name)
+    {
+        res.render('home');
+    }
+    else
+    {
+        res.render('social', {mode: req.signedCookies.team ? 0 : 1, type : 'register', csrfToken : req.csrfToken()});
+    }
+});
+
+router.post('/social/register', function (req, res) {
+    res.cookie('team', req.body.team, {signed : true});
+    res.cookie('phone', req.body.phone, {signed : true});
+    res.cookie('email', req.body.email, {signed : true});
+    res.redirect('/social/register');
 });
 
 router.get('/social/callback', function (req, res) {
@@ -561,7 +580,7 @@ router.get('/social/callback', function (req, res) {
     }
     else
     {
-        res.redirect('/social');
+        res.redirect('/');
     }
 });
 

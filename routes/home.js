@@ -484,11 +484,11 @@ router.post('/feature', function (req, res) {
 });
 
 router.get('/dashboard', function (req, res) {
-    if (req.signedCookies.name)
+    if (req.signedCookies.name || 1)
     {
         var user =
         {
-            _id: req.signedCookies.name
+            _id: req.signedCookies.name || 'team_05'
         };
         var onFind = function (err, doc)
         {
@@ -498,6 +498,7 @@ router.get('/dashboard', function (req, res) {
             }
             else
             {
+                console.log(doc);
                 res.render('dashboard', {result: doc});
             }
         };

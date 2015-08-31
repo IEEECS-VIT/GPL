@@ -272,28 +272,36 @@ exports.adminInfo = function (callback)
 
     var parallelTasks =
     {
-        total: function (asyncCallback) {
+        total: function (asyncCallback)
+        {
             mongoUsers.getCount({}, asyncCallback);
         },
-        facebook: function (asyncCallback) {
+        facebook: function (asyncCallback)
+        {
             mongoUsers.getCount({authStrategy: 'facebook'}, asyncCallback);
         },
-        google: function (asyncCallback) {
+        google: function (asyncCallback)
+        {
             mongoUsers.getCount({authStrategy: 'google'}, asyncCallback);
         },
-        twitter: function (asyncCallback) {
+        twitter: function (asyncCallback)
+        {
             mongoUsers.getCount({authStrategy: 'twitter'}, asyncCallback);
         },
-        local: function (asyncCallback) {
+        local: function (asyncCallback)
+        {
             mongoUsers.getCount({authStrategy: 'local'}, asyncCallback);
         },
-        emptySquad: function (asyncCallback) {
+        emptySquad: function (asyncCallback)
+        {
             mongoUsers.getCount({squad: []}, asyncCallback);
         },
-        emptyTeam: function (asyncCallback) {
+        emptyTeam: function (asyncCallback)
+        {
             mongoUsers.getCount({team: []}, asyncCallback);
         },
-        features: function (asyncCallback) {
+        features: function (asyncCallback)
+        {
             mongoFeatures.notify(asyncCallback);
         }
     };
