@@ -39,18 +39,20 @@
         </div>
 
         <div class="container col-sm-offset-2 col-sm-8 shadow">
+            <div class="row">
+                <p class="page-header text-center" id="header">
+                    Get Social!
+                </p>
+            </div>
+
             <% if(mode){ %>
-                <div class="row">
-                    <p class="page-header text-center" id="header">
-                        Get Social!
-                    </p>
-                </div>
 
                 <div class="row">
                     <p class="text-info col-sm-offset-2 col-sm-6 info">
                         Please submit your Team Name below:
                     </p>
                 </div>
+
                 <div class="row">
                     <div class="col-sm-offset-2 col-sm-8">
                         <form class="form-horizontal" method="post" action="/social/<%=type%>">
@@ -92,7 +94,6 @@
                     <h1><span class="fa fa-lock"></span> Register with any one of your social accounts</h1>
                     <div class="row">
                         <div class="col-sm-offset-2 col-sm-8">
-                            <form class="form-horizontal" method="post" action="/social/register">
                                 <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                                 <div class="row omb_row-sm-offset-3 omb_socialButtons">
                                     <div class="col-xs-4 col-sm-2">
@@ -114,20 +115,31 @@
                                         </a>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 <%} else {%>
-                    <h1><span class="fa fa-lock"></span> Register with any one of your social accounts</h1>
+                    <h1><span class="fa fa-lock"></span> Login with the account that you used while registering</h1>
                     <div class="row">
                         <div class="col-sm-offset-2 col-sm-8">
                             <form class="form-horizontal" method="post" action="/social/login">
                                 <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                                 <div class="row omb_row-sm-offset-3 omb_socialButtons">
                                     <div class="col-xs-4 col-sm-2">
-                                        <a href="/auth/<%=strategy%>" class="btn btn-lg btn-block omb_btn-<%=strategy%>">
-                                            <i class="fa fa-<%strategy%> visible-xs"></i>
-                                            <span class="hidden-xs"><%=strategu%></span>
+                                        <a href="/auth/facebook" class="btn btn-lg btn-block omb_btn-facebook">
+                                            <i class="fa fa-facebook visible-xs"></i>
+                                            <span class="hidden-xs">Facebook</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-2">
+                                        <a href="/auth/twitter" class="btn btn-lg btn-block omb_btn-twitter">
+                                            <i class="fa fa-twitter visible-xs"></i>
+                                            <span class="hidden-xs">Twitter</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-2">
+                                        <a href="/auth/google" class="btn btn-lg btn-block omb_btn-google">
+                                            <i class="fa fa-google visible-xs"></i>
+                                            <span class="hidden-xs">Google</span>
                                         </a>
                                     </div>
                                 </div>

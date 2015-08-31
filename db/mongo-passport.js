@@ -45,15 +45,15 @@ passport.use(new facebook({
             if (!req.signedCookies.name)
             {
                 MongoUsers.fetch({'_id': req.signedCookies.team}, function (err, user) {
-                    if (err || user.authStrategy != 'facebook')
+                    if (err)
                     {
                         return done(err);
                     }
-                    if (user)
+                    if (user && user.authStrategy === 'facebook')
                     {
                         return done(null, user); // user found, return that user
                     }
-                    else // if there is no user, create them
+                    else if(req.signedCookies.email && req.signedCookies.phone && profile.id === user.profile)// if there is no user, create them
                     {
                         var onGetCount = function (err, number)
                         {
@@ -64,6 +64,7 @@ passport.use(new facebook({
                             else
                             {
                                 var newUser = record;
+                                newUser.dob = new Date();
                                 newUser._id = req.signedCookies.team;
                                 newUser.token = token;
                                 newUser.profile = profile.id;
@@ -81,7 +82,11 @@ passport.use(new facebook({
                                 });
                             }
                         };
-                        MongoUsers.getCount(onGetCount);
+                        MongoUsers.getCount({}, onGetCount);
+                    }
+                    else
+                    {
+                        return done(err);
                     }
                 });
             }
@@ -113,34 +118,51 @@ passport.use(new twitter({
     },
     function (req, token, tokenSecret, profile, done) {
         process.nextTick(function () {
-            if (!req.signedCookies.name) {
+            if (!req.signedCookies.name)
+            {
                 MongoUsers.fetch({'_id': req.signedCookies.team}, function (err, user) {
-                    if (err || user.authStrategy != 'twitter')
+                    if (err)
                     {
                         return done(err);
                     }
-                    if (user)
+                    if (user && user.authStrategy === 'twitter')
                     {
                         return done(null, user); // user found, return that user
                     }
-                    else
+                    else if(req.signedCookies.email && req.signedCookies.phone && profile.id === user.profile)
                     {
-                        var newUser = record;
-                        newUser._id = req.signedCookies.team;
-                        newUser.token = token;
-                        newUser.authStrategy = 'twitter';
-                        newUser.profile = profile.id;
-                        newUser.team_no = parseInt(number) + 1;
-                        newUser.manager_name = profile.displayName;
-                        newUser.phone = req.signedCookies.phone;
-                        newUser.email = req.signedCookies.email;
-                        MongoUsers.save(newUser, function (err) {
+                        var onGetCount = function (err, number)
+                        {
                             if (err)
                             {
-                                return done(err);
+                                console.log(err.message);
                             }
-                            return done(null, newUser);
-                        });
+                            else
+                            {
+                                var newUser = record;
+                                newUser.dob = new Date();
+                                newUser._id = req.signedCookies.team;
+                                newUser.token = token;
+                                newUser.authStrategy = 'twitter';
+                                newUser.profile = profile.id;
+                                newUser.team_no = parseInt(number) + 1;
+                                newUser.manager_name = profile.displayName;
+                                newUser.phone = req.signedCookies.phone;
+                                newUser.email = req.signedCookies.email;
+                                MongoUsers.save(newUser, function (err) {
+                                    if (err)
+                                    {
+                                        return done(err);
+                                    }
+                                    return done(null, newUser);
+                                });
+                            }
+                        };
+                        MongoUsers.getCount({}, onGetCount);
+                    }
+                    else
+                    {
+                        return done(err);
                     }
                 });
             }
@@ -174,37 +196,60 @@ passport.use(new google({
         process.nextTick(function () {
             if (!req.signedCookies.name)
             {
+                console.log('no cookies');
                 MongoUsers.fetch({'_id': req.signedCookies.team}, function (err, user) {
-                    if (err || user.authStrategy != 'google')
+                    if (err)
                     {
+                        console.log('err');
                         return done(err);
                     }
-                    if (user)
+                    if (user && user.authStrategy === 'google' && profile.id === user.profile)
                     {
+                        console.log('no cookies');
                         return done(null, user);
+                    }
+                    else if(req.signedCookies.email && req.signedCookies.phone)
+                    {
+                        console.log('new');
+                        var onGetCount = function (err, number)
+                        {
+                            if (err)
+                            {
+                                console.log(err.message);
+                            }
+                            else
+                            {
+                                var newUser = record;
+                                newUser.dob = new Date();
+                                newUser._id = req.signedCookies.team;
+                                newUser.token = token;
+                                newUser.authStrategy = 'google';
+                                newUser.profile = profile.id;
+                                newUser.team_no = parseInt(number) + 1;
+                                newUser.manager_name = profile.displayName;
+                                newUser.phone = req.signedCookies.phone;
+                                newUser.email = req.signedCookies.email;
+                                MongoUsers.save(newUser, function (err) {
+                                    if (err)
+                                    {
+                                        return done(err);
+                                    }
+                                    return done(null, newUser);
+                                });
+                            }
+                        };
+                        MongoUsers.getCount({}, onGetCount);
                     }
                     else
                     {
-                        var newUser = record;
-                        newUser._id = req.signedCookies.team;
-                        newUser.token = token;
-                        newUser.authStrategy = 'google';
-                        newUser.profile = profile.id;
-                        newUser.manager_name = profile.displayName;
-                        newUser.phone = req.signedCookies.phone;
-                        newUser.email = req.signedCookies.email;
-                        MongoUsers.save(newUser, function (err) {
-                            if (err)
-                            {
-                                return done(err);
-                            }
-                            return done(null, newUser);
-                        });
+                        console.log('other');
+                        return done(err);
                     }
                 });
             }
             else
             {
+                console.log('caching');
                 var user = req.user; // pull the user out of the session
                 user._id = req.signedCookies.team;
                 user.token = token;

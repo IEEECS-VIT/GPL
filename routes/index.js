@@ -147,6 +147,9 @@ router.get(/\/^.*$/, function (req, res, next) {
 });
 
 router.get('/login', function (req, res) {
+    res.clearCookie('team', {});
+    res.clearCookie('email', {});
+    res.clearCookie('phone', {});
     if (req.signedCookies.name)
     {
         res.redirect('/home');
@@ -500,8 +503,11 @@ router.post('/register', function (req, res) {
 router.get('/logout', function (req, res) {
     if (req.signedCookies.name)
     {
-        res.clearCookie('name');
-        res.clearCookie('lead');
+        res.clearCookie('name', {});
+        res.clearCookie('lead', {});
+        res.clearCookie('team', {});
+        res.clearCookie('email', {});
+        res.clearCookie('phone', {});
         res.redirect('/login');
     }
     else
@@ -543,6 +549,7 @@ router.get('/social/login', function (req, res) {
     }
     else
     {
+        console.log(req.signedCookies.team);
         res.render('social', {mode: req.signedCookies.team ? 0 : 1, type : 'login', csrfToken : req.csrfToken()});
     }
 });
@@ -559,6 +566,7 @@ router.get('/social/register', function (req, res) {
     }
     else
     {
+        console.log(req.signedCookies.team);
         res.render('social', {mode: req.signedCookies.team ? 0 : 1, type : 'register', csrfToken : req.csrfToken()});
     }
 });
@@ -571,10 +579,12 @@ router.post('/social/register', function (req, res) {
 });
 
 router.get('/social/callback', function (req, res) {
-    if (req.user)
+    if (req.signedCookies.team)
     {
         res.cookie('name', req.user._id, {maxAge: 86400000, signed: true});
-        res.clearCookie('temp');
+        res.clearCookie('team', {});
+        res.clearCookie('email', {});
+        res.clearCookie('phone', {});
         delete req.user;
         res.redirect('/home');
     }
