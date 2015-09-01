@@ -1,71 +1,82 @@
 <!--
-  GraVITas Premier League <gravitaspremierleague@gmail.com>
-  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
+   GraVITas Premier League <gravitaspremierleague@gmail.com>
+   Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
 
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   -->
 <!doctype html>
 <html class="no-js">
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css(.) styles/vendor.css -->
-        <!-- bower:css -->
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:css(.tmp) styles/main.css -->
-        <!--<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>-->
-        <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="/stylesheets/main.css"/>
-        <link rel="stylesheet" href="/stylesheets/playerselect.css"/>
-        <!-- endbuild -->
-    </head>
-    <body ng-app="formApp">
-        <!--[if lt IE 7]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-            your browser</a> to improve your experience.</p>
-        <![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <!--<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>-->
+    <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
 
-        <div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
-            <header class="banner" role="banner">
-                <span>
-                    <img src="/images/header-left.jpg" height="60" class="pull-left"/>
-                    <img class="logo pull-left" src="/images/gpllogo.png" height="50"/>
-                    <span class="h2 gplheadertext">graVITas Premier League 2.0</span>
-                    <img src="/images/header-right.jpg" height="60" class="pull-right"/>
-                </span>
-            </header>
+    <link rel="stylesheet" href="/stylesheets/team.css"/>
+
+    <style>
+        .selectedPlayer {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    </style>
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
+    <!-- endbuild -->
+</head>
+<body ng-app="formApp">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.
+</p>
+<![endif]-->
+<div id="wrapper" class="container-fluid">
+    <div id="side-navigation">
+        <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
+            <div class="container-fluid">
+                <ul class="nav nav-pills nav-stacked wrapper  ">
+                    <img src="/images/gpllogo.png" class="img-responsive" style="margin: 5px;padding-right:10px;"/>
+                    <li role="presentation"><a href="/home">Home</a></li>
+                    <li role="presentation"><a href="/home/dashboard">Dashboard</a></li>
+                    <li role="presentation" class="active"><a href="/home/team">Team</a></li>
+                    <li role="presentation"><a href="/home/matches">Matches</a></li>
+                </ul>
+            </div>
         </div>
-
-        <div id="navbar-wrapper">
-            <nav id="navbar"></nav>
-        </div>
-
-        <!-- Add your site or application content here -->
-        <div class="container" ng-controller="PlayerController" ng-hide="">
-            <div class="col-md-8 col-md-offset-2 shadow-effect " id="main">
+    </div>
+    <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
+        <div id="top-navigation"></div>
+        <div class="container-fluid ">
+            <!-- Add your site or application content here -->
+            <div class="col-xs-10 col-xs-offset-1" ng-controller="PlayerController" ng-hide="">
                 <div class="col-md-10 col-md-offset-1">
                     <div class=" page-header row">
                         <h1>
                             <span class="col-xs-7">Team Selection</span>
-                  <span class="col-xs-5" id=" searchBoxContainer">
-                    <input type="text" id="searchBox" class="form-control pull-right" placeholder="search"
-                           ng-model="searchText"/>
-                  </span>
+                           <span class="col-xs-5" id=" searchBoxContainer">
+                           <input type="text" id="searchBox" class="form-control pull-right" placeholder="search"
+                                  ng-model="searchText"/>
+                           </span>
                         </h1>
                     </div>
                     <div class="row">
@@ -73,9 +84,8 @@
                             <div class="container-fluid">
                                 <ul class="list-group ">
                                     <li class="list-group-item container-fluid selectedPlayer coachactive">
-
-                                        <span class="col-xs-9 no-padding-left no-padding-right">
-                                        {{coach.Name}}</span>
+                                    <span class="col-xs-9 no-padding-left no-padding-right">
+                                    {{coach.Name}}</span>
                                     </li>
                                     <li class="list-group-item container-fluid selectedPlayer"
                                         ng-repeat="selectedPlayer in selectedPlayers"
@@ -87,22 +97,20 @@
                                     {{selectedPlayer.Name}}</span>
                                     </li>
                                 </ul>
-                                <p>{{alertMessage}}</p>
                                 <p>Select your players in batting order.</p>
+
+                                <p>{{alertMessage}}</p>
                                 <form name="playersForm" method="post"
                                       action="/home/getsquad">
                                     <input type="hidden" value="<%= csrfToken %>" name="_csrf"/>
                                     <input type="hidden" ng-repeat="selectedPlayer in selectedPlayers"
                                            id="{{'t'+($index+1)}}" name="{{'p'+($index+1)}}" value="{{selectedPlayer._id}}"/>
-
-
                                     <input type="submit" class="btn btn-primary" ng-class="{disabled:isNotValid()}"
                                            value="Submit"
                                            ng-disabled="isNotValid()"/>
                                 </form>
                             </div>
                         </div>
-
                         <div class="col-sm-7">
                             <form>
                                 <ul class="list-group media-list">
@@ -123,102 +131,96 @@
                 </div>
             </div>
         </div>
-        <footer id="footer" class="footer"></footer>
-        <!-- build:js(.) scripts/vendor.js -->
-        <!-- bower:js -->
-        <script src="/bower_components/jquery/dist/jquery.js"></script>
-        <script src="/bower_components/angularjs/angular.js"></script>
-        <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script type="text/javascript">
-            var myApp = angular.module('formApp', []);
-            function PlayerController($scope)
+    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/angularjs/angular.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script type="text/javascript">
+    var myApp = angular.module('formApp', []);
+    function PlayerController($scope) {
+        $scope.players = <%- JSON.stringify(Squad)%>;
+        $scope.selectedPlayers = [];
+        $scope.toggleActive = function (s) {
+            if (s.active || $scope.selectedPlayers.length < 11)
             {
-                $scope.players = <%= JSON.stringify(Squad)%>;
-                $scope.selectedPlayers = [];
-                $scope.toggleActive = function (s)
+                if (s.Type != "coach")
                 {
-                    if (s.active || $scope.selectedPlayers.length < 11)
+                    s.active = !s.active;
+                    if (s.active)
                     {
-                        if (s.Type != "coach")
+                        $scope.selectedPlayers.push(s);
+                    }
+                    else {
+                        for (var i = 0; i < $scope.selectedPlayers.length; i++)
                         {
-                            s.active = !s.active;
-                            if (s.active)
+                            if ($scope.selectedPlayers[i]._id == s._id)
                             {
-                                $scope.selectedPlayers.push(s);
-                            }
-                            else
-                            {
-                                for (var i = 0; i < $scope.selectedPlayers.length; i++)
-                                {
-                                    if ($scope.selectedPlayers[i]._id == s._id)
-                                    {
-                                        $scope.selectedPlayers.splice(i, 1);
-                                        break;
-                                    }
-                                }
+                                $scope.selectedPlayers.splice(i, 1);
+                                break;
                             }
                         }
-                    }
-                };
-                for (var i = 0; i < $scope.players.length; ++i)
-                {
-                    $scope.players[i].active = false;
-                    $scope.players[i].image = ("https://res.cloudinary.com/gpl/players/" + $scope.players[i].Type + "/" + $scope.players[i]._id + ".jpg");
-                    if ($scope.players[i].Type == "coach")
-                    {
-                        $scope.coach = $scope.players[i];
-                        $scope.players.splice(i, 1);
                     }
                 }
-                $scope.searchText = "";
-                // Helper method for calculating the total cost
-                $scope.MAX_PLAYERS = 11;
-                $scope.alertMessage = "";
-                $scope.canSelectMore = function ()
+            }
+        };
+        for (var i = 0; i < $scope.players.length; ++i) {
+            $scope.players[i].active = false;
+            $scope.players[i].image = ("https://res.cloudinary.com/gpl/players/" + $scope.players[i].Type + "/" + $scope.players[i]._id + ".jpg");
+            if ($scope.players[i].Type == "coach") {
+                $scope.coach = $scope.players[i];
+                $scope.players.splice(i, 1);
+            }
+        }
+        $scope.searchText = "";
+        // Helper method for calculating the total cost
+        $scope.MAX_PLAYERS = 11;
+        $scope.alertMessage = "";
+        $scope.canSelectMore = function () {
+            return $scope.selectedPlayers.length < $scope.MAX_PLAYERS;
+        };
+        $scope.isNotValid = function (players) {
+            $scope.alertMessage = "";
+            var valid = true;
+            var selectedPlayers = $scope.selectedPlayers;
+            var remainingPlayers = $scope.MAX_PLAYERS - selectedPlayers.length;
+            if (remainingPlayers > 0) {
+                if (remainingPlayers == 1)
                 {
-                    return $scope.selectedPlayers.length < $scope.MAX_PLAYERS;
-                };
-                $scope.isNotValid = function (players)
+                    $scope.alertMessage = "Please Select " + remainingPlayers + " player";
+                }
+                else
                 {
-                    $scope.alertMessage = "";
-                    var valid = true;
-                    var selectedPlayers = $scope.selectedPlayers;
-                    var remainingPlayers = $scope.MAX_PLAYERS - selectedPlayers.length;
-                    if (remainingPlayers > 0)
-                    {
-                        if (remainingPlayers == 1)
-                        {
-                            $scope.alertMessage = "Please Select " + remainingPlayers + " player";
-                        }
-                        else
-                        {
-                            $scope.alertMessage = "Please Select " + remainingPlayers + " players";
-                        }
-                    }
-                    if (remainingPlayers == 0)
-                    {
-                        valid = true;
-                    }
-                    else
-                    {
-                        valid = false;
-                    }
-                    if (valid)
-                    {
-                        $scope.alertMessage = "Alright ! You are good to go.";
-                    }
-                    //if(!valid){
-                    //  window.alert(alertMessage);
-                    //}
-                    return !valid;
-                };
-            };
-            myApp.controller('PlayerController', ['$scope', PlayerController]);
-        </script>
-        <!-- endbuild -->
-        <script src="/javascript/main.js"></script>
-    </body>
+                    $scope.alertMessage = "Please Select " + remainingPlayers + " players";
+                }
+            }
+            if (remainingPlayers == 0) {
+                valid = true;
+            }
+            else {
+                valid = false;
+            }
+            if (valid) {
+                $scope.alertMessage = "Alright ! You are good to go.";
+            }
+            //if(!valid){
+            //  window.alert(alertMessage);
+            //}
+            return !valid;
+        };
+    }
+    ;
+    myApp.controller('PlayerController', ['$scope', PlayerController]);
+</script>
+<!-- endbuild -->
+<script src="/javascript/playerCommon.js"></script>
+</body>
 </html>
