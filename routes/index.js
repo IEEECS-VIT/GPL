@@ -624,4 +624,26 @@ router.get('/simulate', function (req, res) {
     }
 });
 
+router.get('/rules', function (req, res) {
+    if (req.signedCookies.name)
+    {
+        res.redirect('/home/rules');
+    }
+    else
+    {
+        res.render('rules');
+    }
+});
+
+router.get('/schedule', function (req, res) {
+    if (req.signedCookies.name)
+    {
+        res.redirect('/home/schedule');
+    }
+    else
+    {
+        res.render('schedule');
+    }
+});
+
 module.exports = router;
