@@ -6,6 +6,7 @@
     -webkit-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    min-height: 100vh;
 }
 
 .info {

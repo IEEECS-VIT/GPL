@@ -38,6 +38,7 @@
   "dependencies": {
     "bootstrap": "~3.3.4",
     "chartjs": "~1.0.2",
-    "angularjs": "~1.4.4"
+    "angularjs": "~1.4.4",
+    "font-awesome": "~4.4.0"
   }
 }

@@ -22,11 +22,13 @@
         <meta charset="UTF-8">
         <title>Register | GPL</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link type="text/css" rel="stylesheet" href="/stylesheets/register.css"/>
+
         <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
         <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
         <link rel="stylesheet" href="/stylesheets/main.css">
+        <link type="text/css" rel="stylesheet" href="/stylesheets/register.css"/>
     </head>
     <body>
         <div id="gplheader" class="page-title hidden-xs hidden-md hidden-sm">
@@ -46,8 +48,12 @@
         <div class="container">
             <div class="row" id="register-form">
                 <div class="col-xs-12 col-sm-offset-2 col-sm-8">
-                    <h3 class="omb_authTitle">Already have an account? Sign in <a href="/login">here</a></h3>
-                    <h3 class="omb_authTitle">Register with one of your social accounts <a href="/social/register">here</a></h3>
+                    <h1>Register<br>
+                        <small class="omb_authTitle">Already have an account? Sign in <a href="/login">here</a></small>
+                        <br>
+                        <small class="omb_authTitle">Register with one of your social accounts <a
+                                    href="/social/register">here</a></small>
+                    </h1>
                     <form name="register" action="/register" method="post">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
 
