@@ -21,9 +21,24 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login | GPL</title>
+
         <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css">
         <link rel='stylesheet' href='/stylesheets/login.css'/>
         <link rel="stylesheet" href="/stylesheets/main.css">
+
+        <style>
+            body {
+                overflow-y: auto !important;
+            }
+
+            .page-header {
+
+                border: none;
+                padding-bottom: 0;
+                padding-top: 10px;
+            }
+        </style>
     </head>
     <body>
         <div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
@@ -40,12 +55,22 @@
             <nav id="navbar"></nav>
         </div>
         <div class="container">
-            <div class="col-sm-offset-1 col-sm-10 shadow-effect">
-                <div class="omb_login">
-                    <h3 class="omb_authTitle">Don't have an account? Make one <a href="/register">here</a></h3>
-                    <h3 class="omb_authTitle">Login with one of your social accounts <a href="/social/login">here</a></h3>
 
-                    <div class="row omb_row-sm-offset-3">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 shadow-effect">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h1 class=" page-header">
+
+                            Login<br>
+                            <small class="omb_authTitle">Don't have an account? Make one <a href="/register">here</a>
+                            </small>
+                            <br>
+                            <small class="omb_authTitle">Login with one of your social accounts <a href="/social/login">here</a>
+                            </small>
+                        </h1>
+
+
+                        <div class="row omb_row-sm-offset-3">
                         <div class="col-xs-12 col-sm-6">
                             <form class="omb_loginForm" action="" autocomplete="off" method="POST">
                                 <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
@@ -57,28 +82,29 @@
                                 <span class="help-block"></span>
 
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
                                     <input type="password" class="form-control" name="password" placeholder="Password">
                                 </div>
                                 <span class="help-block"></span>
 
                                 <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
                             </form>
-                        </div>
-                    </div>
-                    <div class="row omb_row-sm-offset-3">
-                        <div class="col-xs-12 col-sm-3">
-                            <p class="omb_forgotPwd">
+                            <small>                                          <span class="omb_forgotPwd pull-left">
                                 <a href="/forgot/password">Forgot password?</a>
-                            </p>
-                            <p class="omb_forgotPwd">
+                            </span>
+                            <span class="omb_forgotPwd pull-right">
                                 <a href="/forgot/user">Forgot username?</a>
-                            </p>
+                            </span></small>
+
                         </div>
+
+                        </div>
+
+                    </div>
                     </div>
                 </div>
             </div>
-        </div>
+
         <footer id="footer" class="footer"></footer>
         <!--[if lt IE 10]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
