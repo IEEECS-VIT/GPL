@@ -188,7 +188,7 @@
             {
                 $scope.displayPlayersList = "Batsmen";
                 $scope.limitExceeded = false;
-                $scope.players = <%= JSON.stringify(Players)%>;
+                $scope.players = <%- JSON.stringify(Players)%>;
 
                 for (var i = 0; i < $scope.players.length; ++i)
                 {
