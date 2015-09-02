@@ -103,3 +103,17 @@ form ul * {
     max-height: 320px;
     max-height: 50vh;
 }
+
+#players {
+    border: 1px dashed #DDD;
+    max-width: 210px;
+
+}
+
+@media (max-width: 767px) {
+    #players {
+        position: static;
+        width: auto;
+        max-width: 100%;
+    }
+}
