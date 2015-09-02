@@ -23,7 +23,7 @@ var facebook = require('passport-facebook').Strategy;
 var google = require('passport-google-oauth').OAuth2Strategy;
 var record = require(path.join(__dirname, 'mongo-record.js'));
 var MongoUsers = require(path.join(__dirname, 'mongo-users.js'));
-var domain = 'http://' + ((process.env.NODE_ENV) ? 'gravitaspremierleague.com' : 'localhost:3000') + '/auth/';
+var domain = 'http://' + ((process.env.NODE_ENV === 'production') ? 'gravitaspremierleague.com' : ((process.env.NODE_ENV === 'dev') ? 'gpl-dev.herokuapp.com' : 'localhost:3000')) + '/auth/';
 
 passport.serializeUser(function (user, done) {
     done(null, user._id);
