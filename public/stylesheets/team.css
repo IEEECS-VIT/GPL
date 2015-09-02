@@ -95,5 +95,11 @@ form ul * {
 
 .aside {
     padding-bottom: 20px;
-    border-bottom: 1px solid #EEE;;
+
+}
+
+.playerlistcontainer {
+    overflow-y: auto;
+    max-height: 320px;
+    max-height: 50vh;
 }
