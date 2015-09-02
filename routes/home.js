@@ -143,7 +143,7 @@ router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
 });
 
 router.get('/matches', function (req, res) {
-    if (req.signedCookies.name)
+    /*if (req.signedCookies.name && process.env.LIVE === '1')
     {
         var onMap = function (err, num)
         {
@@ -169,9 +169,8 @@ router.get('/matches', function (req, res) {
         };
         mongoTeam.map({_id: req.signedCookies.name}, onMap);
     }
-    else
+    else*/
     {
-        req.session.route = 'match';
         res.redirect('/');
     }
 });
@@ -212,10 +211,11 @@ router.post('/getsquad', function (req, res) {
 
 router.post('/getTeam', function (req, res) {
     var players = [], cost = 0;
-    for (i = 1; i < 17; ++i)
+    for (i = 2; i < 17; ++i)
     {
         players.push(req.body['p' + i]);
     }
+    players.push(req.body.p1);
     console.log(players);
     var onUpdate = function (err, documents)
     {

@@ -61,7 +61,7 @@ router.get('/', function (req, res) {
         }
         res.redirect('/home');
     }
-    else if (process.env.NODE_ENV)
+    else if (process.env.NODE_ENV && process.env.LIVE === '0')
     {
         var time = new Date;
         time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
@@ -126,7 +126,7 @@ router.post('/interest', function (req, res) // interest form
                 "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
                 "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> Thank you for your interest in graVITas Premier League <br>" +
                 "Please check out  our Facebook <a href='http://www.facebook.com/gravitaspremierleague' style='text-decoration: none;'>page</a> to stay close to all the action! </td>" +
-                "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards,<br>Team GPL,<br>IEEE Computer Society<br>IEEE Computer Society</td></tr></table>");
+                "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards,<br>Team GPL,<br>IEEE Computer Society<br>IEEE Computer Society<br>VIT student chapter</td></tr></table>");
 
             email.send(message, onSend);
         }
@@ -136,7 +136,7 @@ router.post('/interest', function (req, res) // interest form
 
 // TODO: delete this route when ready to launch
 router.get(/\/^.*$/, function (req, res, next) {
-    if (process.env.NODE_ENV)
+    if (process.env.NODE_ENV && process.env.LIVE === '0')
     {
         res.redirect('/');
     }
@@ -181,20 +181,18 @@ router.post('/login', function (req, res) {
         if (err)
         {
             console.log(err.message);
-            res.render('index', {response: "Incorrect Username"});
+            res.redirect('/login');
         }
         else if (doc)
         {
             if (bcrypt.compareSync(password, doc['password_hash']))
             {
-                console.log("Login Successful" + user);
                 res.cookie('name', doc['_id'], {maxAge: 86400000, signed: true});
                 res.redirect('/home');
             }
             else
             {
-                console.log('Incorrect Credentials');
-                res.render('index', {response: "Incorrect Password"});
+                res.redirect('/login');
             }
         }
         else
@@ -204,26 +202,16 @@ router.post('/login', function (req, res) {
                 if (err)
                 {
                     console.log(err.message);
-                    res.render('index', {response: "Incorrect Username"});
+                    res.redirect('/login');
                 }
-                else if (doc)
+                else if (doc && (bcrypt.compareSync(password, doc['password_hash'])))
                 {
-                    if (bcrypt.compareSync(password, doc['password_hash']))
-                    {
-                        console.log("Admin login successful" + user);
-                        res.cookie('admin', doc['_id'], {signed: true, maxAge : 86400000});
-                        res.redirect('/admin');
-                    }
-                    else
-                    {
-                        console.log('Incorrect Credentials');
-                        res.render('index', {response: "Incorrect Password"});
-                    }
+                    res.cookie('admin', doc['_id'], {signed: true, maxAge: 86400000});
+                    res.redirect('/admin');
                 }
                 else
                 {
-                    console.log('No user exists');
-                    res.render('index', {response: "Incorrect Username"});
+                    res.redirect('/login');
                 }
             };
             mongoUsers.admin(credentials, onGetAdmin);
@@ -473,10 +461,10 @@ router.post('/register', function (req, res) {
                         });
 
                         message.attach_alternative("<table background='http://res.cloudinary.com/gpl/general/img4.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
-                            "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
+                            "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #FFFFFF;'>graVITas Premier League</td>" +
                             "</tr><tr><td align='left' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> This is to inform that that you have successfully registered for GPL 2.0 <br>" +
                             "Please click <a href='http://gravitaspremierleague.com' style='text-decoration: none;'> here </a> for more details<br> Good luck!  </td>" +
-                            "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards,<br>Team GPL<br>IEEE Computer Society<></td></tr></table>"
+                            "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards,<br>Team GPL<br>IEEE Computer Society<br>VIT student chapter</td></tr></table>"
                         );
                         res.cookie('name', name, {maxAge: 86400000, signed: true});
                         email.send(message, function (err) {
@@ -582,11 +570,38 @@ router.get('/social/callback', function (req, res) {
     if (req.signedCookies.team)
     {
         res.cookie('name', req.user._id, {maxAge: 86400000, signed: true});
-        res.clearCookie('team', {});
-        res.clearCookie('email', {});
-        res.clearCookie('phone', {});
         delete req.user;
-        res.redirect('/home');
+        res.clearCookie('team', {});
+        res.clearCookie('phone', {});
+        if(req.signedCookies.email)
+        {
+            var message = email.wrap({
+                from: 'gravitaspremierleague@gmail.com',
+                to: req.signedCookies.email,
+                subject: 'Welcome to graVITas premier league 2.0!'
+            });
+
+            res.clearCookie('email', {});
+
+            message.attach_alternative("<table background='http://res.cloudinary.com/gpl/general/img4.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+                "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
+                "</tr><tr><td align='left' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> This is to inform that that you have successfully registered for GPL 2.0 <br>" +
+                "Please click <a href='http://gravitaspremierleague.com' style='text-decoration: none;'> here </a> for more details<br> Good luck!  </td>" +
+                "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards,<br>Team GPL<br>IEEE Computer Society<br>VIT student chapter</td></tr></table>"
+            );
+
+            email.send(message, function (err) {
+                if (err)
+                {
+                    console.log(err.message);
+                }
+                res.redirect('/home/players');
+            });
+        }
+        else
+        {
+            res.redirect('/home/players');
+        }
     }
     else
     {

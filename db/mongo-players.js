@@ -17,7 +17,7 @@
  */
 
 var MongoClient = require('mongodb').MongoClient;
-var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 
 exports.fetchPlayers = function (callback)
 {

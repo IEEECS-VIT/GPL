@@ -21,7 +21,7 @@ var path = require('path');
 var async = require('async');
 var MongoClient = require('mongodb').MongoClient;
 var mongoTeam = require(path.join(__dirname, 'mongo-team'));
-var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 
 exports.match = function (day, team, callback)
 {

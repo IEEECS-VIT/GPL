@@ -27,7 +27,8 @@ var slice = {
 };
 var options =
 {
-    "sort": [
+    "sort":
+    [
         ['points', -1],
         ['net_run_rate', -1]
     ]
@@ -36,7 +37,7 @@ var collection;
 var leaderboard;
 var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
-var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/GPL';
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 var dbOptions = {server: {socketOptions: {connectTimeoutMS: 50000}}};
 var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection.js'));
 
@@ -124,16 +125,9 @@ exports.fetch = function (doc, callback)
                 {
                     callback(err, null);
                 }
-                else if (document)
+                else if (document && (doc['_id'] === document['_id']))
                 {
-                    if (doc['_id'] === document['_id'])
-                    {
-                        callback(null, document);
-                    }
-                    else
-                    {
-                        callback(false, null);
-                    }
+                    callback(null, document);
                 }
                 else
                 {
@@ -532,19 +526,24 @@ exports.admin = function (doc, callback)
         else
         {
             collection = db.collection('admin');
-            var onGetAdmin = function (err, doc)
+            var onGetAdmin = function (err, document)
             {
+
                 db.close();
                 if (err)
                 {
                     callback(err);
                 }
+                else if(document._id === doc._id)
+                {
+                    callback(null, document);
+                }
                 else
                 {
-                    callback(null, doc);
+                    callback(false, null);
                 }
             };
-            collection.find(onGetAdmin);
+            collection.findOne(doc, onGetAdmin);
         }
     };
     MongoClient.connect(mongoUri, onConnect);

@@ -49,11 +49,11 @@ passport.use(new facebook({
                     {
                         return done(err);
                     }
-                    if (user && user.authStrategy === 'facebook')
+                    if (user && user.authStrategy === 'facebook' && profile.id === user.profile)
                     {
                         return done(null, user); // user found, return that user
                     }
-                    else if(req.signedCookies.email && req.signedCookies.phone && profile.id === user.profile)// if there is no user, create them
+                    else if(req.signedCookies.email && req.signedCookies.phone)// if there is no user, create them
                     {
                         var onGetCount = function (err, number)
                         {
@@ -125,11 +125,11 @@ passport.use(new twitter({
                     {
                         return done(err);
                     }
-                    if (user && user.authStrategy === 'twitter')
+                    if (user && user.authStrategy === 'twitter' && profile.id === user.profile)
                     {
                         return done(null, user); // user found, return that user
                     }
-                    else if(req.signedCookies.email && req.signedCookies.phone && profile.id === user.profile)
+                    else if(req.signedCookies.email && req.signedCookies.phone)
                     {
                         var onGetCount = function (err, number)
                         {

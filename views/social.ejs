@@ -73,16 +73,10 @@
             <div class="col-md-10 col-md-offset-1">
 
                 <div class="container-fluid ">
-                    <h1 class="page-header">Social </h1>
+                    <h1 class="page-header">Get Social </h1>
             <% if(mode){ %>
-
-
-
                 <div class="row">
                     <div class="col-xs-12">
-                        <h1>
-                            <small>Please submit your Team Name below:</small>
-                        </h1>
                         <form class="form-horizontal" method="post" action="/social/<%=type%>">
                             <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                             <div class="form-group">
