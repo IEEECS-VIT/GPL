@@ -67,8 +67,9 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-5 aside">
-                            <div class="container-fluid affix playerlistcontainer" id="players">
-                                <ul class="list-group ">
+                            <div class="container-fluid affix playerlistcontainer card card-green" id="players">
+                                <div class="card-content">
+                                    <ul class="list-group">
                                     <li class="list-group-item container-fluid selectedPlayer"
                                         ng-repeat="selectedPlayer in computeSelectedPlayers()"
                                         ng-class="{coachactive: isCoach(selectedPlayer)}">
@@ -96,7 +97,7 @@
                                 </form>
                             </div>
                         </div>
-
+                        </div>
                         <div class="col-sm-7">
                             <form>
                                 <ul class="list-group media-list">

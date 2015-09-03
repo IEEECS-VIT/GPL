@@ -315,10 +315,10 @@ router.post('/getTeam', function (req, res) {
     }
     mongoUsers.updateUserTeam(credentials, players, stats, cost, onUpdate);
 });
-
+/*
 router.get(/\/rules?/, function (req, res) {
     res.render('rules');
-});
+ });*/
 
 /*router.get('/sponsors', function (req, res) // sponsors page
  {
@@ -517,5 +517,18 @@ router.get('/schedule', function (req, res) // schedule page
         res.render('schedule');
     }
 });
+
+router.get('/rules', function (req, res) {
+    if (req.signedCookies.name) {
+        res.render('homerules');
+    }
+});
+
+router.get('/privacy', function (req, res) {
+    if (req.signedCookies.name) {
+        res.render('homeprivacy');
+    }
+});
+
 
 module.exports = router;

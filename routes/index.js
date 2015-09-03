@@ -614,7 +614,13 @@ router.get(/\/developers?/, function (req, res) {
 });
 
 router.get('/privacy', function (req, res) {
-    res.render('privacy');
+    if (req.signedCookies.name) {
+        res.redirect('/home/privacy');
+    }
+    else {
+        res.render('privacy');
+    }
+
 });
 
 router.get('/simulate', function (req, res) {

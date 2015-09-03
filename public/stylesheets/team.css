@@ -105,9 +105,13 @@ form ul * {
 }
 
 #players {
-    border: 1px dashed #DDD;
+
     max-width: 210px;
 
+}
+
+.card-green {
+    background: #f1f8e9;
 }
 
 @media (max-width: 767px) {

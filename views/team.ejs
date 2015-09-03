@@ -67,9 +67,10 @@
     </div>
     <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
         <div id="top-navigation"></div>
-        <div class="container-fluid ">
+        <div class="container-fluid wrapper">
+
             <!-- Add your site or application content here -->
-            <div class="col-xs-10 col-xs-offset-1" ng-controller="PlayerController" ng-hide="">
+            <div class="col-xs-10 col-xs-offset-1 shadow-effect" ng-controller="PlayerController" ng-hide="">
                 <div class="col-md-10 col-md-offset-1">
                     <div class=" page-header row">
                         <h1>
@@ -82,7 +83,8 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-5 aside ">
-                            <div class="container-fluid affix playerlistcontainer" id="players">
+                            <div class="container-fluid affix playerlistcontainer card" id="players">
+                                <div class="card-content">
                                 <ul class="list-group   ">
                                     <li class="list-group-item container-fluid selectedPlayer coachactive">
                                     <span class="col-xs-9 no-padding-left no-padding-right">
@@ -111,6 +113,7 @@
                                            ng-disabled="isNotValid()"/>
                                 </form>
                             </div>
+                        </div>
                         </div>
                         <div class="col-sm-7">
                             <form>

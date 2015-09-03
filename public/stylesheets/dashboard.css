@@ -24,6 +24,10 @@ html, body {
     z-index: 5;
 }
 
+#main-content {
+    margin-top: 60px;
+}
+
 .container-fluid {
     height: 100%;
     padding-left: 0;
@@ -191,3 +195,5 @@ html, body {
 .navbar-inverse .navbar-nav > li > a {
     color: #ddd;
 }
+
+
