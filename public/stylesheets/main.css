@@ -48,36 +48,11 @@ h1 {
 
 }
 
-.one {
-    background: linear-gradient(
-            rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.5)
-    ), url(/images/one.jpg) no-repeat center center fixed;
-    background-size: cover;
-
-}
-
-.two {
-    background: linear-gradient(
-            rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.5)
-    ), url(/images/two.jpg) no-repeat center center fixed;
-    background-size: cover;
-}
-
-.three {
-    background: linear-gradient(
-            rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.5)
-    ), url(/images/three.jpg) no-repeat center center fixed;
-    background-size: cover;
-
-}
 
 /* Carousel base class */
 .carousel {
     height: 500px;
-    min-height: 90vh;
+    min-height: 95vh;
 
 }
 
@@ -101,7 +76,7 @@ h1 {
 
 .carousel .item {
     height: 500px;
-    min-height: 90vh;
+    min-height: 95vh;
     /*background-color: #777;*/
 
 }

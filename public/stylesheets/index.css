@@ -1,0 +1,59 @@
+
+.one {
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+    ), url(/images/one-medium.jpg) no-repeat center center fixed;
+    background-size: cover;
+
+}
+
+.two {
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+    ), url(/images/two-medium.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.three {
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+    ), url(/images/three-medium.jpg) no-repeat center center fixed;
+    background-size: cover;
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width: 786px) {
+
+    .one {
+        background: linear-gradient(
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.5)
+        ), url(/images/one-large.jpg) no-repeat center center fixed;
+        background-size: cover;
+
+    }
+
+    .two {
+        background: linear-gradient(
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.5)
+        ), url(/images/two-large.jpg) no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .three {
+        background: linear-gradient(
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.5)
+        ), url(/images/three.jpg) no-repeat center center fixed;
+        background-size: cover;
+
+    }
+
+}
+
+
