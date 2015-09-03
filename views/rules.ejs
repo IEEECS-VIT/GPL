@@ -15,140 +15,207 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js">
     <head>
-        <meta charset="UTF-8">
-        <title>Rules | GPL</title>
-        <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-        <link type="text/css" rel="stylesheet" href="/stylesheets/rules.css"/>
-        <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="/stylesheets/main.css">
+        <meta charset="utf-8">
+        <title>Dashboard | GPL</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css(.) styles/vendor.css -->
+        <!-- bower:css -->
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="/stylesheets/<%=(session)? 'dashboard' : 'main'%>.css">
+        <link rel="stylesheet" href="/stylesheets/rules.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+        <!-- endbuild -->
     </head>
     <body>
-        <div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
-            <header class="banner" role="banner">
-                <span>
-                    <img src="/images/header-left.jpg" height="60" class="pull-left"/>
-                    <img class="logo pull-left" src="/images/gpllogo.png" height="50"/>
-                    <span class="h2 gplheadertext">graVITas Premier League 2.0</span>
-                    <img src="/images/header-right.jpg" height="60" class="pull-right"/>
-                </span>
-            </header>
-        </div>
-
-        <div id="navbar-wrapper">
-            <nav id="navbar"></nav>
-        </div>
-        <div class="container">
-
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2 shadow-effect">
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="page-header rules-header">
-                            <h1>Rules and Regulations <br>
-                                <small class="small-class">graVITas Premier League 2.0, graVITas 2015</small>
-                            </h1>
-                            <h3>Some games are meant to be played without rules. <br>This is not one of them.</h3>
-                        </div>
-                        <ol class="rules">
-                            <li><p>All of the rules mentioned below are subject to change (wherever applicable) without prior
-                                    notice.
-                                    By signing up for graVITas premier league 2.0, you agree to follow all undermentioned
-                                    regulations.
-                                </p></li>
-
-                            <li><p> In the event of any disputes, the event coordinator’s decision shall hold.</p></li>
-
-                            <li><p>At the beginning of the event, each participant will have to create a squad of exactly 16
-                                    cricket players with exactly one coach and fifteen players.
-                                    The player categories will be explicitly mentioned during squad formation. The
-                                    appropriate amount will be deducted from the participant’s graVITas premier league auction
-                                    purse.
-                                    The surplus amount, if any will have no bearing whatsoever on future transactions, wherever
-                                    applicable.
-
-                                <div class="well">
-                                    <small>
-                                        <strong>Note</strong>: The purchase limit is virtual USD 10 million. All the individual
-                                        player
-                                        prices are scaled accordingly.
-                                    </small>
-                                </div>
-                            </li>
-
-                            <li><p>Before each match starts, participants can customize their teams to form the final playing
-                                    eleven. Participants can and are encouraged to facilitate squad rotation.
-                                </p></li>
-
-                            <li><p>Participants shall be notified of their next match well in advance. At specified times, the
-                                    game
-                                    engine will simulate the match, following which the participants will be able to see ball by
-                                    ball
-                                    commentary and advanced statistical analytics.
-                                </p></li>
-
-                            <li><p>Initially, each participant’s squad will play 7 matches with random opponent squads such that
-                                    no two teams play each other more than once. After this league stage has concluded, the top
-                                    25 % teams will be shortlisted for the next round, where a similar process will be repeated.
-                                    In the end, the 8 remaining finalists will participate in an actual player auction.
-                                </p></li>
-
-                            <li><p>As an extension to clause 6, should there be any clash in terms of rankings between multiple
-                                    teams due to points, then the priority of ascension will be decided by the net run rate,
-                                    which is calculated as follows:
-
-                                <div class="well">
-                                    <small>(total runs scored / total overs batted) - (total runs conceded / total overs bowled)
-                                    </small>
-                                </div>
-                            </li>
-
-                            <li><p><strong>Scoring:</strong> Each victory earns the winning team 2 points, whereas the losing
-                                    team gets 0 points. A match shall be declared a tie, if all of the following conditions hold
-                                    simultaneously:
-                                <ol>
-                                    <li><p> The number of runs scored by both teams is exactly the
-                                            same.
-                                        </p></li>
-                                    <li><p>The number of wickets lost by both teams is exactly the
-                                            same. If this does not hold, then the team that has lost fewer wickets shall be
-                                            declared
-                                            victorious.
-                                        </p></li>
-                                    <li><p>If the number of wickets lost is equal, then the team
-                                            with a higher run rate shall be declared victorious. In the highly unlikely event of
-                                            the
-                                            run rates being equal, the match shall be declared a <strong>Tie</strong>, and both
-                                            teams
-                                            shall be awarded one point apiece.
-                                    </li>
-                                </ol>
-                                <div class="well">
-                                    <small>Fun fact, among the 5, 348 matches from G.P.L 1.0 in 2014, only
-                                        one match was an actual TIE.
-                                    </small>
-                                </div>
-                            </li>
-
-                            <li><p>If a participant has failed to produce his / her playing eleven before the start of the first
-                                    match
-                                    of the first round, then that match shall be lost to the opposition. The same applies to all
-                                    matches
-                                    for which the team is undefined.
-                                </p></li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- FOOTER -->
-        <footer id="footer" class="footer"></footer>
         <!--[if lt IE 10]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
             your browser</a> to improve your experience.</p>
         <![endif]-->
+        <%if(session){%>
+            <div id="wrapper" class="container-fluid">
+                <div id="side-navigation">
+                    <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
+                        <div class="container-fluid">
+                            <ul class="nav nav-pills nav-stacked wrapper  ">
+                                <li><img src="/images/gpllogo.png" class="img-responsive" style="margin: 5px;padding-right:10px;"></li>
+                                <li role="presentation"><a href="/home">Home</a></li>
+                                <li role="presentation" class="active"><a href="/home/dashboard">Dashboard</a></li>
+                                <li role="presentation"><a href="/home/team">Team</a></li>
+                                <li role="presentation"><a href="/home/matches">Matches</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
+                    <div id="top-navigation"></div>
+                    <div class="container-fluid wrapper ">
+        <%} else {%>
+                <div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
+                    <header class="banner" role="banner">
+                        <span>
+                            <img src="/images/header-left.jpg" height="60" class="pull-left"/>
+                            <img class="logo pull-left" src="/images/gpllogo.png" height="50"/>
+                            <span class="h2 gplheadertext">graVITas Premier League 2.0</span>
+                            <img src="/images/header-right.jpg" height="60" class="pull-right"/>
+                        </span>
+                    </header>
+                </div>
+                <div id="navbar-wrapper">
+                    <nav id="navbar"></nav>
+                </div>
+        <%}%>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 shadow-effect">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="page-header rules-header">
+                                        <h1>Rules and Regulations <br>
+                                            <small class="small-class">graVITas Premier League 2.0, graVITas 2015</small>
+                                        </h1>
+                                        <h3>Some games are meant to be played without rules. <br>This is not one of them.</h3>
+                                    </div>
+                                    <ol class="rules">
+                                        <li>
+                                            <p>All of the rules mentioned below are subject to change (wherever applicable)
+                                                without prior
+                                                notice.
+                                                By signing up for graVITas premier league 2.0, you agree to follow all
+                                                undermentioned
+                                                regulations.
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p> In the event of any disputes, the event coordinator’s decision shall hold.</p>
+                                        </li>
+                                        <li>
+                                            <p>At the beginning of the event, each participant will have to create a squad of
+                                                exactly 16
+                                                cricket players with exactly one coach and fifteen players.
+                                                The player categories will be explicitly mentioned during squad formation. The
+                                                appropriate amount will be deducted from the participant’s graVITas premier
+                                                league auction
+                                                purse.
+                                                The surplus amount, if any will have no bearing whatsoever on future
+                                                transactions, wherever
+                                                applicable.
+
+                                            <div class="well">
+                                                <small>
+                                                    <strong>Note</strong>: The purchase limit is virtual USD 10 million. All the
+                                                    individual
+                                                    player
+                                                    prices are scaled accordingly.
+                                                </small>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p>Before each match starts, participants can customize their teams to form the
+                                                final playing
+                                                eleven. Participants can and are encouraged to facilitate squad rotation.
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>Participants shall be notified of their next match well in advance. At specified
+                                                times, the
+                                                game
+                                                engine will simulate the match, following which the participants will be able to
+                                                see ball by
+                                                ball
+                                                commentary and advanced statistical analytics.
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>Initially, each participant’s squad will play 7 matches with random opponent
+                                                squads such that
+                                                no two teams play each other more than once. After this league stage has
+                                                concluded, the top
+                                                25 % teams will be shortlisted for the next round, where a similar process will
+                                                be repeated.
+                                                In the end, the 8 remaining finalists will participate in an actual player
+                                                auction.
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>As an extension to clause 6, should there be any clash in terms of rankings
+                                                between multiple
+                                                teams due to points, then the priority of ascension will be decided by the net
+                                                run rate,
+                                                which is calculated as follows:
+
+                                            <div class="well">
+                                                <small>(total runs scored / total overs batted) - (total runs conceded / total
+                                                    overs bowled)
+                                                </small>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p><strong>Scoring:</strong> Each victory earns the winning team 2 points, whereas
+                                                the losing
+                                                team gets 0 points. A match shall be declared a tie, if all of the following
+                                                conditions hold
+                                                simultaneously:
+                                            <ol>
+                                                <li>
+                                                    <p> The number of runs scored by both teams is exactly the
+                                                        same.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p>The number of wickets lost by both teams is exactly the
+                                                        same. If this does not hold, then the team that has lost fewer wickets
+                                                        shall be
+                                                        declared
+                                                        victorious.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p>If the number of wickets lost is equal, then the team
+                                                        with a higher run rate shall be declared victorious. In the highly
+                                                        unlikely event of
+                                                        the
+                                                        run rates being equal, the match shall be declared a
+                                                        <strong>Tie</strong>, and both
+                                                        teams
+                                                        shall be awarded one point apiece.
+                                                </li>
+                                            </ol>
+                                            <div class="well">
+                                                <small>Fun fact, among the 5, 348 matches from G.P.L 1.0 in 2014, only
+                                                    one match was an actual TIE.
+                                                </small>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p>If a participant has failed to produce his / her playing eleven before the start
+                                                of the first
+                                                match
+                                                of the first round, then that match shall be lost to the opposition. The same
+                                                applies to all
+                                                matches
+                                                for which the team is undefined.
+                                            </p>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    <%if(session){%>
+                </div>
+            </div>
+        </div>
+    <%}%>
+        <%if(!session){%>
+            <footer id="footer" class="footer"></footer>
+        <%}%>
         <!-- build:js(.) scripts/vendor.js -->
         <!-- bower:js -->
         <script src="/bower_components/jquery/dist/jquery.js"></script>
@@ -156,6 +223,9 @@
         <!-- endbuild -->
         <!-- build:js(.) scripts/plugins.js -->
         <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="/javascript/main.js"></script>
+        <!-- endbuild -->
+        <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="/javascript/<%= (session) ? 'playerCommon' : 'main'%>.js"></script>
+        <!-- endbuild -->
     </body>
 </html>

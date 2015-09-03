@@ -315,10 +315,6 @@ router.post('/getTeam', function (req, res) {
     }
     mongoUsers.updateUserTeam(credentials, players, stats, cost, onUpdate);
 });
-/*
-router.get(/\/rules?/, function (req, res) {
-    res.render('rules');
- });*/
 
 /*router.get('/sponsors', function (req, res) // sponsors page
  {
@@ -330,10 +326,6 @@ router.get(/\/prizes?/, function (req, res) // page to view prizes
     res.render('prizes');
 });
 
-router.get('/trailer', function (req, res) // trailer page
-{
-    res.render('trailer');
-});
 
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
@@ -509,26 +501,5 @@ router.get('/dashboard', function (req, res) {
         res.redirect('/');
     }
 });
-
-router.get('/schedule', function (req, res) // schedule page
-{
-    if (req.signedCookies.name)
-    {
-        res.render('schedule');
-    }
-});
-
-router.get('/rules', function (req, res) {
-    if (req.signedCookies.name) {
-        res.render('homerules');
-    }
-});
-
-router.get('/privacy', function (req, res) {
-    if (req.signedCookies.name) {
-        res.render('homeprivacy');
-    }
-});
-
 
 module.exports = router;

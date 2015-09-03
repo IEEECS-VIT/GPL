@@ -534,7 +534,7 @@ exports.admin = function (doc, callback)
                 {
                     callback(err);
                 }
-                else if(document._id === doc._id)
+                else if(document && document._id === doc._id)
                 {
                     callback(null, document);
                 }

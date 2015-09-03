@@ -83,7 +83,10 @@ router.get('/', function (req, res) {
 });
 
 router.get('/interest', function (req, res) {
-    res.render('interest', {csrfToken: req.csrfToken()});
+    if(process.env.LIVE === '0')
+    {
+        res.render('interest', {csrfToken: req.csrfToken()});
+    }
 });
 
 router.post('/interest', function (req, res) // interest form
@@ -135,7 +138,7 @@ router.post('/interest', function (req, res) // interest form
 });
 
 // TODO: delete this route when ready to launch
-router.get(/\/^.*$/, function (req, res, next) {
+/*router.get(/\/^.*$/, function (req, res, next) {
     if (process.env.NODE_ENV && process.env.LIVE === '0')
     {
         res.redirect('/');
@@ -144,7 +147,7 @@ router.get(/\/^.*$/, function (req, res, next) {
     {
         next();
     }
-});
+});*/
 
 router.get('/login', function (req, res) {
     res.clearCookie('team', {});
@@ -660,16 +663,6 @@ router.get(/\/developers?/, function (req, res) {
     res.render('developers');
 });
 
-router.get('/privacy', function (req, res) {
-    if (req.signedCookies.name) {
-        res.redirect('/home/privacy');
-    }
-    else {
-        res.render('privacy');
-    }
-
-});
-
 router.get('/simulate', function (req, res) {
     if (req.signedCookies.admin)
     {
@@ -693,25 +686,21 @@ router.get('/simulate', function (req, res) {
 });
 
 router.get('/rules', function (req, res) {
-    if (req.signedCookies.name)
-    {
-        res.redirect('/home/rules');
-    }
-    else
-    {
-        res.render('rules');
-    }
+    res.render('rules', {session : req.signedCookies.name ? 1 : 0});
 });
 
-router.get('/schedule', function (req, res) {
-    if (req.signedCookies.name)
-    {
-        res.redirect('/home/schedule');
-    }
-    else
-    {
-        res.render('schedule');
-    }
+router.get('/privacy', function (req, res) {
+    res.render('privacy', {session : req.signedCookies.name ? 1 : 0});
+});
+
+router.get('/trailer', function (req, res) // trailer page
+{
+    res.render('trailer');
+});
+
+router.get('/schedule', function (req, res) // schedule page
+{
+    res.render('schedule');
 });
 
 module.exports = router;
