@@ -39,6 +39,7 @@ var getPlayer = function (id, callback)
             collection = db.collection('players');
             var onFetch = function (err, document)
             {
+                db.close();
                 if (err)
                 {
                     callback(err, null);
@@ -68,6 +69,7 @@ exports.getTeam = function (doc, callback)
             collection = db.collection(match);   // match collection
             var onFetch = function (err, document)
             {
+                db.close();
                 console.log("Length " + document.team.length);
                 if (document.team.length == 0)
                 {
@@ -128,6 +130,7 @@ exports.getSquad = function (doc, callback)
 
             var onFetch = function (err, document)
             {
+                db.close();
                 if (document)
                 {
                     if (err)
@@ -185,6 +188,7 @@ exports.dashboard = function (doc, callback)
             };
             var onFind = function (err, doc)
             {
+                db.close();
                 if (err)
                 {
                     callback(err);
@@ -213,16 +217,17 @@ exports.map = function (doc, callback)
             collection = db.collection(match);
             var onFind = function (err, doc)
             {
+                db.close();
                 if (err)
                 {
                     callback(err);
                 }
                 else
                 {
-                    callback(null, doc);
+                    callback(null, doc.team_no);
                 }
             };
-            collection.find(doc, {team_no: 1}, onFind);
+            collection.findOne(doc, {team_no: 1}, onFind);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
@@ -241,6 +246,7 @@ exports.shortList = function (callback)
             collection = db.collection(match);
             var onShortList = function (err, doc)
             {
+                db.close();
                 if (err)
                 {
                     callback(err);
@@ -369,6 +375,7 @@ exports.check = function (team, callback)
             collection = db.collection('users');
             var onFind = function (err, result)
             {
+                db.close();
                 if (err)
                 {
                     callback(err);

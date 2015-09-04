@@ -87,6 +87,10 @@ router.get('/interest', function (req, res) {
     {
         res.render('interest', {csrfToken: req.csrfToken()});
     }
+    else
+    {
+        res.redirect('/register');
+    }
 });
 
 router.post('/interest', function (req, res) // interest form

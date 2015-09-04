@@ -55,21 +55,21 @@
                 <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
                     <ul class="nav nav-sidebar">
                         <li class="active"><a href="#">Matches</a></li>
-                        <% for(var i = 0;i < match.length ; i++){ %>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= match[i] %> <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#"
-                                       onclick="document.getElementById('text').innerHTML='Commentary:<br><br><%= commentary[i] %>';tog();">Commentary</a>
-                                </li>
-                                <li role="separator" class="divider"></li>
-                                <li>
-                                    <a href="#"
-                                       onclick="document.getElementById('text').innerHTML='ScoreCard:<br><br><%= scorecard[i] %>';tog();">Scorecard</a>
-                                </li>
-                            </ul>
-                        </li>
+                        <% for(var i = 0; i < match.length; i++){ %>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= match[i] %> <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#"
+                                           onclick="document.getElementById('text').innerHTML='Commentary:<br><br><%= match[i].commentary %>';tog();">Commentary</a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a href="#"
+                                           onclick="document.getElementById('text').innerHTML='ScoreCard:<br><br><%= match[i].scorecard %>';tog();">Scorecard</a>
+                                    </li>
+                                </ul>
+                            </li>
                         <% } %>
                     </ul>
                 </div>
@@ -90,8 +90,7 @@
             </div>
         </div>
         <!--/.container-->
-        <footer id="footer" class="footer">
-        </footer>
+        <footer id="footer" class="footer"></footer>
         <!--[if lt IE 10]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
             your browser</a> to improve your experience.</p>

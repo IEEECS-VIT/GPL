@@ -153,6 +153,7 @@ exports.getLeader = function (user, callback)
             collection = db.collection(match);
             var onFetch = function (err, documents)
             {
+                db.close();
                 if (err)
                 {
                     callback(err, null);
@@ -338,13 +339,13 @@ exports.updateUserTeam = function (doc, arr, stats, cost, callback)
             collection = db.collection(match);
             var onUpdate = function (err, document)
             {
+                db.close();
                 if (err)
                 {
                     callback(err, null);
                 }
                 else
                 {
-                    db.close();
                     callback(true, document);
                 }
             };
@@ -374,6 +375,7 @@ exports.updateMatchSquad = function (doc, arr, callback)
             collection = db.collection(match);
             var onUpdate = function (err, document)
             {
+                db.close();
                 if (err)
                 {
                     callback(err, null);
@@ -381,7 +383,6 @@ exports.updateMatchSquad = function (doc, arr, callback)
                 else
                 {
                     console.log("Done");
-                    db.close();
                     callback(null, document);
                 }
             };
@@ -528,7 +529,6 @@ exports.admin = function (doc, callback)
             collection = db.collection('admin');
             var onGetAdmin = function (err, document)
             {
-
                 db.close();
                 if (err)
                 {
@@ -562,6 +562,7 @@ exports.addSocialTeam = function (team, callback)
             collection = db.collection('users');
             var onUpdate = function (err, doc)
             {
+                db.close();
                 if (err)
                 {
                     callback(err);

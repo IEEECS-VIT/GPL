@@ -143,7 +143,7 @@ router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
 });
 
 router.get('/matches', function (req, res) {
-    /*if (req.signedCookies.name && process.env.LIVE === '1')
+    if (req.signedCookies.name && process.env.LIVE === '1' && !process.env.NODE_ENV)
     {
         var onMap = function (err, num)
         {
@@ -153,6 +153,7 @@ router.get('/matches', function (req, res) {
             }
             else
             {
+                console.log(num);
                 var onMatches = function (err, matches)
                 {
                     if (err)
@@ -169,7 +170,7 @@ router.get('/matches', function (req, res) {
         };
         mongoTeam.map({_id: req.signedCookies.name}, onMap);
     }
-    else*/
+    else
     {
         res.redirect('/');
     }

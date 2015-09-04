@@ -42,7 +42,7 @@ exports.fetchPlayers = function (callback)
                     callback(null, documents);
                 }
             };
-            collection.find({}).toArray(onFetch);
+            collection.find().toArray(onFetch);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
@@ -59,14 +59,23 @@ exports.getPlayer = function (queryDoc, fields, callback)
         else
         {
             var collection = db.collection('players');
-            if (fields)
+            var onGetPlayer = function(err, player)
             {
-                collection.findOne(queryDoc, fields, callback);
-            }
-            else
-            {
-                collection.findOne(queryDoc, callback);
-            }
+                db.close();
+                if(err)
+                {
+                    callback(err);
+                }
+                else if(player)
+                {
+                    callback(null, player);
+                }
+                else
+                {
+                    callback(false, null);
+                }
+            };
+            collection.findOne(queryDoc, fields || {}, onGetPlayer);
         }
     };
     MongoClient.connect(mongoUri, onConnect);

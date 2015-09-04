@@ -89,6 +89,7 @@ exports.notify = function (callback) {
             collection = db.collection('features');
             var onFind = function (err, docs)
             {
+                db.close();
                 if (err)
                 {
                     callback(err);
