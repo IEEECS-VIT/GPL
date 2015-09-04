@@ -162,7 +162,7 @@ router.get('/matches', function (req, res) {
                     }
                     else
                     {
-                        res.render('matches', {match: matches});
+                        res.render('matches', {match: matches, day : process.env.DAY || 1});
                     }
                 };
                 mongoTeam.fetchMatches(num, onMatches);

@@ -75,6 +75,10 @@ app.use('/home', home);
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
+    if(process.env.NODE_ENV)
+    {
+        res.render('error');
+    }
     next(err);
 });
 
