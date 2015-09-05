@@ -28,7 +28,6 @@
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->
-        <!--<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>-->
         <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="/stylesheets/dashboard.css">
         <link rel="stylesheet" href="/stylesheets/team.css"/>
@@ -134,7 +133,7 @@
         </div>
         <!-- build:js(.) scripts/vendor.js -->
         <!-- bower:js -->
-        <script async src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script async src="/bower_components/angularjs/angular.min.js"></script>
         <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <!-- endbower -->
@@ -142,10 +141,12 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script async type="text/javascript">
             var myApp = angular.module('formApp', []);
-            function PlayerController($scope) {
-                $scope.players = <%- JSON.stringify(Squad)%>;
+            function PlayerController($scope)
+            {
+                $scope.players = JSON.stringify(<%=Squad%>);
                 $scope.selectedPlayers = [];
-                $scope.toggleActive = function (s) {
+                $scope.toggleActive = function (s)
+                {
                     if (s.active || $scope.selectedPlayers.length < 11)
                     {
                         if (s.Type != "coach")
@@ -154,13 +155,16 @@
                             if (s.active)
                             {
                                 $scope.selectedPlayers.push(s);
+                                $scope.apply();
                             }
-                            else {
-                                for (var i = 0; i < $scope.selectedPlayers.length; i++)
+                            else
+                            {
+                                for (var i = 0; i < $scope.selectedPlayers.length; ++i)
                                 {
                                     if ($scope.selectedPlayers[i]._id == s._id)
                                     {
                                         $scope.selectedPlayers.splice(i, 1);
+                                        $scope.apply();
                                         break;
                                     }
                                 }
@@ -168,10 +172,12 @@
                         }
                     }
                 };
-                for (var i = 0; i < $scope.players.length; ++i) {
+                for (var i = 0; i < $scope.players.length; ++i)
+                {
                     $scope.players[i].active = false;
                     $scope.players[i].image = ("https://res.cloudinary.com/gpl/players/" + $scope.players[i].Type + "/" + $scope.players[i]._id + ".jpg");
-                    if ($scope.players[i].Type == "coach") {
+                    if ($scope.players[i].Type == "coach")
+                    {
                         $scope.coach = $scope.players[i];
                         $scope.players.splice(i, 1);
                     }
@@ -180,10 +186,12 @@
                 // Helper method for calculating the total cost
                 $scope.MAX_PLAYERS = 11;
                 $scope.alertMessage = "";
-                $scope.canSelectMore = function () {
+                $scope.canSelectMore = function ()
+                {
                     return $scope.selectedPlayers.length < $scope.MAX_PLAYERS;
                 };
-                $scope.isNotValid = function (players) {
+                $scope.isNotValid = function (players)
+                {
                     $scope.alertMessage = "";
                     var valid = true;
                     var selectedPlayers = $scope.selectedPlayers;
@@ -198,13 +206,16 @@
                             $scope.alertMessage = "Please Select " + remainingPlayers + " players";
                         }
                     }
-                    if (remainingPlayers == 0) {
+                    if (remainingPlayers == 0)
+                    {
                         valid = true;
                     }
-                    else {
+                    else
+                    {
                         valid = false;
                     }
-                    if (valid) {
+                    if (valid)
+                    {
                         $scope.alertMessage = "Alright ! You are good to go.";
                     }
                     //if(!valid){

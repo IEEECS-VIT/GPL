@@ -30,7 +30,7 @@
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="/stylesheets/dashboard.css">
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <link href='/stylesheets/main.css' rel='stylesheet' type='text/css'>
         <!-- endbuild -->
     </head>
     <body>
@@ -122,8 +122,8 @@
 
         <!-- build:js(.) scripts/vendor.js -->
         <!-- bower:js -->
-        <script async src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <script async src="/bower_components/chartjs/Chart.js"></script>
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="/bower_components/chartjs/Chart.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:js(.) scripts/plugins.js -->
@@ -132,7 +132,7 @@
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script async src="/javascript/playerCommon.js"></script>
         <script async>
-            var json_data = <%- JSON.stringify(result) %>;
+            var json_data = JSON.stringify(<%=result%>);
             function string_range(start, stop) {
                 var string_array = [];
                 for (i = start; i <= stop; i++) {

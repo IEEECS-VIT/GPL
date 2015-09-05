@@ -19,10 +19,4 @@ function toggleSidenav() {
 
 (function () {
     $("#top-navigation").load("/html/playerNavbar.html");
-
 })();
-
-
-
-
-

@@ -2,8 +2,7 @@
   "name": "GPL",
   "version": "0.2.0",
   "homepage": "https://github.com/IEEECS-VIT/GPL",
-  "authors":
-  [
+  "authors": [
     "Aneesh Neelam <neelam.aneesh@gmail.com>",
     "Kashish Singhal <singhal2.kashish@gmail.com>",
     "Kunal Nagpal <kunagpal@gmail.com>",
@@ -18,22 +17,19 @@
   ],
   "description": "graVITas Premier League",
   "main": "bin/www",
-  "moduleType":
-  [
+  "moduleType": [
     "globals",
     "node"
   ],
   "license": "GPL-3.0+",
-  "licenses":
-  [
+  "licenses": [
     {
       "type": "GPL-3.0+",
       "url": "https://www.gnu.org/licenses/gpl-3.0-standalone.html"
     }
   ],
   "private": true,
-  "ignore":
-  [
+  "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
@@ -41,11 +37,11 @@
     "test",
     "tests"
   ],
-  "dependencies":
-  {
+  "dependencies": {
     "bootstrap": "~3.3.4",
     "chartjs": "~1.0.2",
     "angularjs": "~1.4.4",
-    "font-awesome": "~4.4.0"
+    "font-awesome": "~4.4.0",
+    "roboto-fontface": "~0.4.3"
   }
 }
