@@ -37,7 +37,6 @@
                 padding-right: 10px;
             }
         </style>
-        <script async type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
         <!-- endbuild -->
     </head>
     <body ng-app="formApp">
@@ -133,9 +132,9 @@
         </div>
         <!-- build:js(.) scripts/vendor.js -->
         <!-- bower:js -->
-        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <script async src="/bower_components/angularjs/angular.min.js"></script>
+        <script async src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/bower_components/angularjs/angular.min.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -143,7 +142,7 @@
             var myApp = angular.module('formApp', []);
             function PlayerController($scope)
             {
-                $scope.players = JSON.stringify(<%=Squad%>);
+                $scope.players = <%- JSON.stringify(Squad)%>;
                 $scope.selectedPlayers = [];
                 $scope.toggleActive = function (s)
                 {

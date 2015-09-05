@@ -57,9 +57,9 @@
                 <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
                     <ul class="nav nav-sidebar">
                         <li class="active"><a href="#">Matches</a></li>
-                        <% for(var i = 0; i < match.length; i++){ %>
+                        <% for(var i = 0; i <= day; ++i){ %>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= match[i] %> <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Match <%=(i+1)%><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="#"
@@ -69,6 +69,17 @@
                                     <li>
                                         <a href="#"
                                            onclick="document.getElementById('text').innerHTML='ScoreCard:<br><br><%= match[i].scorecard %>';tog();">Scorecard</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        <% } %>
+                        <% for(i = day + 1; i <= 6; ++i){ %>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Opponent <%=(i+1)%><b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#"
+                                           onclick="document.getElementById('text').innerHTML='Commentary:<br><br><%= match[i].team %>';tog();">Opponent</a>
                                     </li>
                                 </ul>
                             </li>
@@ -83,7 +94,7 @@
                             <i class="glyphicon glyphicon-chevron-left"></i>
                         </button>
                     </p>
-                    <h1 class="page-header">Match Details</h1>
+                    <h1 class="page-header">Round <%=round%></h1>
                     <div class="container-fluid text-center" id="text"><br><br>
                         <span id="text"></span>
                     </div>

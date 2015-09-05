@@ -46,7 +46,8 @@
                         <img class="logo pull-left" src="http://res.cloudinary.com/gpl/general/gpllogo.png" height="50"/>
                         <span class="h2 gplheadertext pull-left">graVITas Premier League 2.0</span>
                     </a>
-                    <img src="http://res.cloudinary.com/gpl/general/header-right.jpg" height="60" class="pull-right"/></span>
+                    <img src="http://res.cloudinary.com/gpl/general/header-right.jpg" height="60" class="pull-right"/>
+                </span>
             </header>
         </div>
 
@@ -165,7 +166,6 @@
                                             <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
                                             <span>{{player.Name}}</span><span class="pull-right">{{player.Price}}</span>
                                         </li>
-
                                     </div>
                                 </ul>
                             </form>
@@ -178,19 +178,19 @@
         <footer id="footer" class="footer"></footer>
         <!-- build:js(.) scripts/vendor.js -->
         <!-- bower:js -->
-        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script async src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script async src="/bower_components/angularjs/angular.min.js"></script>
         <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script async type="text/javascript">
+        <script type="text/javascript">
             var myApp = angular.module('formApp', []);
             function PlayerController($scope)
             {
                 $scope.displayPlayersList = "Batsmen";
                 $scope.limitExceeded = false;
-                $scope.players = <%- JSON.stringify(Players)%>;
+                $scope.players = <%- JSON.stringify(Players) %>;
 
                 for (var i = 0; i < $scope.players.length; ++i)
                 {

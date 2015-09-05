@@ -22,7 +22,7 @@
         <title>Features | GPL</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min,css">
+        <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link href="/stylesheets/feature.css" rel="stylesheet" type="text/css"/>
         <link href="/stylesheets/main.css" rel="stylesheet">
     </head>
@@ -52,16 +52,8 @@
                     <form role="form" method="post" action="/home/feature">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <div class="form-group">
-                            <label for="name">Name: </label>
-                            <input type="text" class="form-control" placeholder="Name" id="name" name="f_name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="e-mail">E-mail ID: </label>
-                            <input type="email" class="form-control" placeholder="Email id" id="e-mail" name="f_email" required>
-                        </div>
-                        <div class="form-group">
                             <label for="features-requested">Features you would like us to add: </label>
-                            <textarea class="form-control" rows="5" id="features-requested" name="f_requests"
+                            <textarea class="form-control" rows="5" id="features-requested" name="feature"
                                       required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" id="b">Submit</button>

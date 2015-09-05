@@ -591,7 +591,6 @@ router.get('/social/login', function (req, res) {
     }
     else
     {
-        console.log(req.signedCookies.team);
         res.render('social', {mode: req.signedCookies.team ? 0 : 1, type : 'login', csrfToken : req.csrfToken()});
     }
 });
@@ -608,7 +607,6 @@ router.get('/social/register', function (req, res) {
     }
     else
     {
-        console.log(req.signedCookies.team);
         res.render('social', {mode: req.signedCookies.team ? 0 : 1, type : 'register', csrfToken : req.csrfToken()});
     }
 });

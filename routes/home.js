@@ -19,6 +19,12 @@
 var log;
 var time;
 var temp;
+var ref =
+{
+    'users' : 1,
+    'round2' : 2,
+    'round3' : 3
+};
 var path = require('path');
 var async = require('async');
 var router = require('express').Router();
@@ -153,7 +159,6 @@ router.get('/matches', function (req, res) {
             }
             else
             {
-                console.log(num);
                 var onMatches = function (err, matches)
                 {
                     if (err)
@@ -162,7 +167,8 @@ router.get('/matches', function (req, res) {
                     }
                     else
                     {
-                        res.render('matches', {match: matches, day : process.env.DAY || 1});
+                        console.log(matches[0], matches[1]);
+                        res.render('matches', {match: matches, day : (process.env.DAY - 1)|| 0, round : ref[process.env.MATCH]});
                     }
                 };
                 mongoTeam.fetchMatches(num, onMatches);
@@ -399,7 +405,6 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
     }
     else                                                        // if cookies do not exist, go to login page
     {
-        req.session.route = 'team';
         res.redirect('/');
     }
 });
@@ -449,13 +454,6 @@ router.get('/feature', function (req, res) {
 router.post('/feature', function (req, res) {
     if (req.signedCookies.name)
     {
-        var feature =
-        {
-            teamName: req.signedCookies.name,
-            name: req.body.f_name,
-            email: req.body.f_email,
-            features: req.body.f_requests
-        };
         var onInsert = function (err, docs)
         {
             if (err)
@@ -464,11 +462,10 @@ router.post('/feature', function (req, res) {
             }
             else
             {
-                console.log(docs);
                 res.redirect('/home');
             }
         };
-        mongoFeatures.insert(feature, onInsert);
+        mongoFeatures.insert({user : req.signedCookies.name, features: req.body.feature}, onInsert);
     }
     else
     {

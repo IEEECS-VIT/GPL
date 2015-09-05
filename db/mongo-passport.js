@@ -196,7 +196,6 @@ passport.use(new google({
         process.nextTick(function () {
             if (!req.signedCookies.name)
             {
-                console.log('no cookies');
                 MongoUsers.fetch({'_id': req.signedCookies.team}, function (err, user) {
                     if (err)
                     {
@@ -205,12 +204,10 @@ passport.use(new google({
                     }
                     if (user && user.authStrategy === 'google' && profile.id === user.profile)
                     {
-                        console.log('no cookies');
                         return done(null, user);
                     }
                     else if(req.signedCookies.email && req.signedCookies.phone)
                     {
-                        console.log('new');
                         var onGetCount = function (err, number)
                         {
                             if (err)
@@ -242,14 +239,12 @@ passport.use(new google({
                     }
                     else
                     {
-                        console.log('other');
                         return done(err);
                     }
                 });
             }
             else
             {
-                console.log('caching');
                 var user = req.user; // pull the user out of the session
                 user._id = req.signedCookies.team;
                 user.token = token;
