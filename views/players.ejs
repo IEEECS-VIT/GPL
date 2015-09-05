@@ -179,13 +179,13 @@
         <footer id="footer" class="footer"></footer>
         <!-- build:js(.) scripts/vendor.js -->
         <!-- bower:js -->
-        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="/bower_components/angularjs/angular.min.js"></script>
-        <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script async src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script async src="/bower_components/angularjs/angular.min.js"></script>
+        <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script type="text/javascript">
+        <script async type="text/javascript">
             var myApp = angular.module('formApp', []);
             function PlayerController($scope)
             {
@@ -338,6 +338,6 @@
             myApp.controller('PlayerController', ['$scope', PlayerController]);
         </script>
         <!-- endbuild -->
-        <script src="/javascript/main.js"></script>
+        <script async src="/javascript/main.js"></script>
     </body>
 </html>
