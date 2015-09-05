@@ -16,7 +16,6 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #rightm header {
-
     background: rgba(25, 25, 25, 1);
     width: 100% /*42.3em*/;
     color: white;
@@ -48,18 +47,14 @@
 }
 
 #rightm img {
-
     width: 7em;
     height: 10em;
-
 }
 
 #dis {
     display: block;
-
 }
 
 #nodis {
-
     display: none;
 }

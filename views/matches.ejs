@@ -19,7 +19,7 @@
 <html>
     <head>
         <title>Match Details | GPL</title>
-        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <link rel='stylesheet' href='/stylesheets/matchDetails.css'/>
@@ -41,8 +41,10 @@
             <header class="banner" role="banner">
                 <span>
                     <img src="/images/header-left.jpg" height="60" class="pull-left"/>
-                    <img class="logo" src="/images/gpllogo.png" height="50" class="pull-left"/>
-                    <span class="h2 gplheadertext">graVITas Premier League 2.0</span>
+                    <a href="http://www.facebook.com/gravitaspremierleague" target="_blank">
+                        <img class="logo pull-left" src="http://res.cloudinary.com/gpl/general/gpllogo.png" height="50"/>
+                        <span class="h2 gplheadertext pull-left">graVITas Premier League 2.0</span>
+                    </a>
                     <img src="/images/header-right.jpg" height="60" class="pull-right"/>
                 </span>
             </header>
@@ -97,7 +99,7 @@
         <![endif]-->
         <!-- build:js(.) scripts/vendor.js -->
         <!-- bower:js -->
-        <script src="/bower_components/jquery/dist/jquery.js"></script>
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:js(.) scripts/plugins.js -->

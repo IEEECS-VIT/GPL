@@ -102,7 +102,6 @@ form ul * {
 
 * {
     font-family: "Roboto", helvetica, arial, sans-serif;
-
 }
 
 .playerlist {
@@ -122,9 +121,7 @@ form ul * {
 }
 
 #players {
-
     max-width: 210px;
-
 }
 
 .card-green {

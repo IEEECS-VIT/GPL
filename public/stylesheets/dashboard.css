@@ -19,7 +19,6 @@
 html, body {
     height: 100%;
     font-family: 'Roboto', arial, sans-serif;
-
 }
 
 #sidenav > .container-fluid > .nav > li,
@@ -34,7 +33,6 @@ html, body {
     border: none;
     z-index: 2;
     background: #0D5B67;
-
 }
 
 #main-content > .navbar > * {
@@ -67,7 +65,6 @@ html, body {
     box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.06), 0px 2px 5px 0px rgba(0, 0, 0, 0.2);
     margin-bottom: 15px;
     border-radius: 3px;
-
 }
 
 .chart-container {
@@ -80,15 +77,12 @@ html, body {
 #line-chart {
     height: 50px;
     width: 200px;
-
 }
 
 @media (max-width: 650px) {
     #line-chart {
-
         height: 300px;
         width: 300px;
-
     }
 }
 
@@ -195,7 +189,6 @@ html, body {
 
 #navbar {
     padding-right: 10px;
-
 }
 
 #sidenav-toggle:active,
@@ -206,11 +199,8 @@ html, body {
 
 #sidenav > ul > img {
     max-height: 270px;
-
 }
 
 .navbar-inverse .navbar-nav > li > a {
     color: #ddd;
 }
-
-

@@ -26,11 +26,9 @@
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
-
 }
 
 .rules {
-
     color: #777777;
     padding-left: 15px;
 }
@@ -41,21 +39,18 @@ body {
     padding-bottom: 12px;
     padding-left: 8px;
     font-size: 1.8rem;
-
 }
 
 .rules p {
     padding-bottom: 6px;
     padding-top: 6px;
     margin: 0;
-
 }
 
 .rules-header {
     margin-bottom: 40px;
     color: #000;
     padding-top: 10px;
-
 }
 
 h1 {

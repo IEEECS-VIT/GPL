@@ -30,14 +30,11 @@ html {
     background-color: white;
     position: relative;
     overflow: auto !important;
-
 }
 
 body {
-
     min-height: 100%;
     margin-bottom: 60px;
-
 }
 
 h1 {
@@ -49,7 +46,6 @@ h1 {
     -moz-box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.25);
     box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.25);
     min-height: 100vh;
-
 }
 
 * {
@@ -60,9 +56,7 @@ h1 {
 
 .logo-main {
     z-index: 20;
-
     position: absolute;
-
 }
 
 
@@ -70,8 +64,6 @@ h1 {
 .carousel {
     height: 500px;
     min-height: 95vh;
-
-
 }
 
 .caption-container {
@@ -79,25 +71,20 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     height: 100%;
     width: 100%;
-
 }
 
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
     z-index: 10;
-
     max-width: 70vw;
-
     margin: auto;
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-
 }
 
 /* Declare heights because of positioning of img element */
@@ -106,18 +93,14 @@ h1 {
     height: 500px;
     min-height: 95vh;
     /*background-color: #777;*/
-
 }
 
 .navbar {
-
     background: #0D5B67;
     -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.39);
     -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.39);
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.39);
-
     border-bottom: none;
-
 }
 
 .navbar .navbar-header .navbar-toggle,
@@ -168,7 +151,6 @@ h1 {
 #myCarousel {
     padding-bottom: 0;
     margin-bottom: 0;
-
 }
 
 .navbar {
@@ -178,7 +160,6 @@ h1 {
 .navbar .navbar-collapse .nav .navbar-active > a {
     color: #bbb;
     pointer-events: none;
-
 }
 
 .navbar .navbar-header,
@@ -186,12 +167,10 @@ h1 {
     color: #fff;
     font-size: 13px;
     line-height: 18px;
-
 }
 
 .navbar .navbar-collapse .nav li a:hover {
     color: #08c;
-
 }
 
 .navbar .banner {
@@ -200,10 +179,8 @@ h1 {
 
 .page-title {
     height: 60px;
-
     padding-top: 0;
     margin-top: 0;
-
 }
 
 .page-title h2 {
@@ -212,7 +189,6 @@ h1 {
 
 body {
     /* Margin bottom by footer height */
-
     /*margin-top: 50px;*/
 }
 
@@ -224,27 +200,22 @@ body {
     left: 0;
     bottom: 0;
     z-index: 50;
-
 }
 
 footer {
-
     background-color: #002834;
     margin-bottom: 0;
     height: 60px;
     -webkit-box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.39);
     -moz-box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.39);
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.39);
-
     width: 100%;
-
 }
 
 .footer-logo {
     max-height: 40px;
     min-height: 20px;
     margin-top: 14px;
-
 }
 
 .centered {
@@ -262,7 +233,6 @@ footer {
     padding-top: 0;
     margin-top: 0;
     top: 5px;
-
     position: absolute;
 }
 
@@ -278,9 +248,7 @@ footer {
 }
 
 #navbar * {
-
     z-index: 10000;
-
 }
 
 #navbar.affix {
