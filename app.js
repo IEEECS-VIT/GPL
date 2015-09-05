@@ -26,6 +26,7 @@ var express = require('express');
 var passport = require('passport');
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
+var compression = require('compression');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var loggerLevel = process.env.LOGGER_LEVEL || 'dev';
@@ -34,6 +35,7 @@ var index = require(path.join(__dirname, 'routes', 'index'));
 var social = require(path.join(__dirname, 'routes', 'social'));
 
 app = express();
+app.use(compression());
 if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 {
     newrelic = require('newrelic');
