@@ -65,6 +65,7 @@ passport.use(new facebook({
                             {
                                 var newUser = record;
                                 newUser.dob = new Date();
+                                delete newUser.password_hash;
                                 newUser._id = req.signedCookies.team;
                                 newUser.token = token;
                                 newUser.profile = profile.id;
@@ -141,6 +142,7 @@ passport.use(new twitter({
                             {
                                 var newUser = record;
                                 newUser.dob = new Date();
+                                delete newUser.password_hash;
                                 newUser._id = req.signedCookies.team;
                                 newUser.token = token;
                                 newUser.authStrategy = 'twitter';
@@ -218,6 +220,7 @@ passport.use(new google({
                             {
                                 var newUser = record;
                                 newUser.dob = new Date();
+                                delete newUser.password_hash;
                                 newUser._id = req.signedCookies.team;
                                 newUser.token = token;
                                 newUser.authStrategy = 'google';

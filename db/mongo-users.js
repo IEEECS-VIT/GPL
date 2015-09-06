@@ -37,6 +37,7 @@ var collection;
 var leaderboard;
 var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
+var mongoFeatures = require(path.join(__dirname, 'mongo-features.js'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection.js'));
 
