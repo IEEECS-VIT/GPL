@@ -38,7 +38,6 @@ var leaderboard;
 var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
-var dbOptions = {server: {socketOptions: {connectTimeoutMS: 50000}}};
 var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection.js'));
 
 if (process.env.LOGENTRIES_TOKEN)
@@ -208,7 +207,18 @@ exports.forgotPassword = function (doc, op, callback)
                 }
                 else if (document)
                 {
-                    callback(null, document);
+                    var onCount = function(err, doc)
+                    {
+                        if(err)
+                        {
+                            callback(err);
+                        }
+                        else
+                        {
+                            callback(null, document);
+                        }
+                    };
+                    mongoFeatures.forgotCount({password : 1}, onCount);
                 }
                 else
                 {
@@ -244,16 +254,27 @@ exports.forgotUser = function (doc, callback)
                     var results = "";
                     for (i = 0; i < docs.length; ++i)
                     {
-                        results += '<li>' + docs[i]._id + '</li>';
+                        results += '<li>' + docs[i]._id + ' (' + docs[i].authStrategy + ')' + '</li>';
                     }
-                    callback(null, results);
+                    var onCount = function(err, doc)
+                    {
+                        if(err)
+                        {
+                            callback(err);
+                        }
+                        else
+                        {
+                            callback(null, results);
+                        }
+                    };
+                    mongoFeatures.forgotCount({user : 1}, onCount);
                 }
                 else
                 {
                     callback(false, null);
                 }
             };
-            collection.find(doc, {_id: 1}).toArray(onFetch);
+            collection.find(doc, {_id: 1, authStrategy : 1}).toArray(onFetch);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
@@ -455,7 +476,7 @@ exports.update = function (query, update, callback)
             collection.findOneAndUpdate(query, update, {"upsert": true}, onUpdate);
         }
     };
-    MongoClient.connect(mongoUri, dbOptions, onConnect);
+    MongoClient.connect(mongoUri, onConnect);
 };
 
 exports.get = function (doc, callback)
@@ -544,35 +565,6 @@ exports.admin = function (doc, callback)
                 }
             };
             collection.findOne(doc, onGetAdmin);
-        }
-    };
-    MongoClient.connect(mongoUri, onConnect);
-};
-
-exports.addSocialTeam = function (team, callback)
-{
-    var onConnect = function (err, db)
-    {
-        if (err)
-        {
-            callback(err);
-        }
-        else
-        {
-            collection = db.collection('users');
-            var onUpdate = function (err, doc)
-            {
-                db.close();
-                if (err)
-                {
-                    callback(err);
-                }
-                else
-                {
-                    callback(null, doc);
-                }
-            };
-            collection.updateOne(team, onUpdate);
         }
     };
     MongoClient.connect(mongoUri, onConnect);

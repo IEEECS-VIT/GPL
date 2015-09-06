@@ -278,6 +278,10 @@ exports.adminInfo = function (callback)
 
     var parallelTasks =
     {
+        interest: function (asyncCallback)
+        {
+            mongoUsers.getCount({}, asyncCallback);
+        },
         total: function (asyncCallback)
         {
             mongoUsers.getCount({}, asyncCallback);
@@ -309,6 +313,14 @@ exports.adminInfo = function (callback)
         features: function (asyncCallback)
         {
             mongoFeatures.notify(asyncCallback);
+        },
+        password: function (asyncCallback)
+        {
+            mongoFeatures.forgotCount({password : 0}, asyncCallback);
+        },
+        user: function (asyncCallback)
+        {
+            mongoFeatures.forgotCount({user : 0}, asyncCallback);
         }
     };
     async.parallel(parallelTasks, onParallel);

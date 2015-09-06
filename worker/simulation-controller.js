@@ -231,7 +231,7 @@ exports.initSimulation = function (day, masterCallback)
                 });
             }
         };
-        database.collection('info').updateOne({_id: 'info'}, {$set: info}, onUpdate);
+        database.collection('stats').updateOne({_id: 'info'}, {$set: info}, onUpdate);
     };
 
     var getAllMatches = function (err, callback)
@@ -295,7 +295,7 @@ exports.initSimulation = function (day, masterCallback)
                     getAllMatches(err, ForAllMatches);
                 }
             };
-            database.collection('info').findOne({}, onGetInfo);
+            database.collection('stats').findOne({}, onGetInfo);
         }
     };
 

@@ -58,7 +58,7 @@ exports.getInfo = function (callback) {
         }
         else
         {
-            collection = db.collection('info');
+            collection = db.collection('stats');
             var onGetInfo = function (err, doc)
             {
                 db.close();
@@ -120,4 +120,32 @@ exports.simulate = function (callback)
         }
     };
     simulationControl.initSimulation(process.env.DAY || 1, onSimulate);
+};
+
+exports.forgotCount = function(option, callback)
+{
+      var onConnect = function(err, db)
+      {
+            if(err)
+            {
+                callback(err);
+            }
+            else
+            {
+                collection = db.collection('info');
+                var onInc = function(err, doc)
+                {
+                    if(err)
+                    {
+                        callback(err);
+                    }
+                    else
+                    {
+                        callback(null, doc);
+                    }
+                };
+                collection.findOneAndUpdate({_id : 'info'}, {$inc : option}, onInc);
+            }
+      };
+      MongoClient.connect(mongoUri, onConnect);
 };

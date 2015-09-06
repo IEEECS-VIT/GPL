@@ -24,7 +24,6 @@ TODO - Centre align header text
         <meta charset="UTF-8">
         <title>Developers | GPL</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script async src="/bower_components/jquery/dist/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link href="/stylesheets/timeline.css" rel="stylesheet">
         <link rel="stylesheet" href="/stylesheets/main.css">
@@ -45,7 +44,6 @@ TODO - Centre align header text
         <div id="navbar-wrapper">
             <nav id="navbar"></nav>
         </div>
-        <script async src="/javascript/timeline.js"></script>
         <div class="container">
             <div class="page-header">
                 <h1 id="timeline"><b><span>Developers</span></b></h1>
@@ -227,8 +225,7 @@ TODO - Centre align header text
                 </li>
             </ul>
         </div>
-        <footer id="footer" class="footer">
-        </footer>
+        <footer id="footer" class="footer"></footer>
         <!--[if lt IE 10]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
             your browser</a> to improve your experience.</p>
@@ -238,7 +235,9 @@ TODO - Centre align header text
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:js(.) scripts/plugins.js -->
-        <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script async src="/javascript/main.js"></script>
+        <script async src="/javascript/timeline.js"></script>
     </body>
 </html>
