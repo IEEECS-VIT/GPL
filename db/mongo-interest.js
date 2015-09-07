@@ -47,3 +47,32 @@ exports.insert = function (doc, callback)
     };
     MongoClient.connect(mongoUri, onConnect);
 };
+
+exports.quantify = function(callback)
+{
+    var onConnect = function (err, db)
+    {
+        if (err)
+        {
+            callback(err);
+        }
+        else
+        {
+            var collection = db.collection('interest');
+            var onCount = function (err, count)
+            {
+                db.close();
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else
+                {
+                    callback(null, count);
+                }
+            };
+            collection.count(onCount);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
+};

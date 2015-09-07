@@ -587,7 +587,7 @@ router.get('/admin', function (req, res) {
 router.get('/social/login', function (req, res) {
     if (req.signedCookies.name)
     {
-        res.render('home');
+        res.redirect('/home');
     }
     else
     {
@@ -603,7 +603,7 @@ router.post('/social/login', function (req, res) {
 router.get('/social/register', function (req, res) {
     if (req.signedCookies.name)
     {
-        res.render('home');
+        res.redirect('/home');
     }
     else
     {

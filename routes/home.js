@@ -43,7 +43,6 @@ if (process.env.LOGENTRIES_TOKEN)
 }
 
 router.get('/', function (req, res) {
-    var results = {};
     if (req.signedCookies.name)
     {
         var credentials =
@@ -54,54 +53,48 @@ router.get('/', function (req, res) {
         {
             if (err)
             {
-                console.log(err);
+                console.log(err.message);
+                res.redirect('/home');
             }
             else if (doc)
             {
-                results.user = doc;
                 if (doc.team.length === 0)
                 {
                     res.redirect('/home/players');
                 }
-
-                var getDetails = function (id, callback)
-                {
-                    var player =
-                    {
-                        '_id': id
-                    };
-                    var fields =
-                    {
-                        _id: 1,
-                        Name: 1,
-                        Cost: 1,
-                        Country: 1,
-                        Type: 1
-                    };
-                    mongoPlayers.getPlayer(player, fields, callback)
-                };
-
-                var onFinish = function (err, documents)
-                {
-                    if (err)
-                    {
-                        console.log(err.message);
-                    }
-                    else
-                    {
-                        results.team = documents;
-                        res.render('home', {results: results});
-                    }
-                };
-
-                if (err)
-                {
-                    res.redirect('/');
-                }
                 else
                 {
-                    var document = doc.team;
-                    async.map(document, getDetails, onFinish);
+                    var getDetails = function (id, callback)
+                    {
+                        var player =
+                            {
+                                '_id': id
+                            };
+                        var fields =
+                            {
+                                _id: 1,
+                                Name: 1,
+                                Cost: 1,
+                                Country: 1,
+                                Type: 1
+                            };
+                        mongoPlayers.getPlayer(player, fields, callback);
+                    };
+
+                    var onFinish = function (err, documents)
+                    {
+                        if (err)
+                        {
+                            console.log(err.message);
+                            res.redirect('/home');
+                        }
+                        else
+                        {
+                            res.render('home', {results: {team : documents, user : doc}});
+                        }
+                    };
+
+                    async.map(doc.team, getDetails, onFinish);
                 }
             }
             else
@@ -293,6 +286,7 @@ router.post('/getTeam', function (req, res) {
         stats[players[i]].MoM = 0;
         stats[players[i]].form = 0;
         stats[players[i]].morale = 0;
+        stats[players[i]].points = 0;
         stats[players[i]].fatigue = 0;
         stats[players[i]].matches = 0;
         stats[players[i]].catches = 0;
@@ -375,7 +369,6 @@ router.get('/players', function (req, res) // page for all players, only availab
     }
     else
     {
-        req.session.route = 'player';
         res.redirect("/");
     }
 });

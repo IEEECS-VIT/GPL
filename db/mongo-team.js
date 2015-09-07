@@ -23,6 +23,7 @@ var MongoClient = require('mongodb').MongoClient;
 var mongoUsers = require(path.join(__dirname, 'mongo-users'));
 var mongoMatches = require(path.join(__dirname, 'mongo-matches'));
 var mongoFeatures = require(path.join(__dirname, 'mongo-features'));
+var mongoInterest = require(path.join(__dirname, 'mongo-interest'));
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection.js'));
 
@@ -280,7 +281,7 @@ exports.adminInfo = function (callback)
     {
         interest: function (asyncCallback)
         {
-            mongoUsers.getCount({}, asyncCallback);
+            mongoInterest.quantify(asyncCallback);
         },
         total: function (asyncCallback)
         {

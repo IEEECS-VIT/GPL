@@ -18,6 +18,7 @@
 
 var collection;
 var path = require('path');
+var async = require('async');
 var MongoClient = require('mongodb').MongoClient;
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 
@@ -148,4 +149,48 @@ exports.forgotCount = function(option, callback)
             }
       };
       MongoClient.connect(mongoUri, onConnect);
+};
+
+exports.warnEmptyTeams = function(callback)
+{
+    var onConnect = function(err, db)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            collection = db.collection('users');
+            var onFind = function(err, docs)
+            {
+                if (err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    var onMap = function(arg, mapCallback)
+                    {
+                        mapCallback(null, arg.email);
+                    };
+
+                    var onFinish = function(err, result)
+                    {
+                        if(err)
+                        {
+                            callback(err);
+                        }
+                        else
+                        {
+                            callback(null, result);
+                        }
+                    };
+                    async.map(docs, onMap, onFinish);
+                }
+            };
+            collection.find({team : []}, {email : 1, _id : 0}).toArray(onFind);
+        }
+    };
+    MongoClient.connect(mongoUri, onConnect);
 };
