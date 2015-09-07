@@ -18,25 +18,44 @@
 
 <!doctype html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width">
-        <title>Admin | GPL</title>
-        <link href='/stylesheets/main.css' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6">
-                    <!--
-                    TODO- Data regarding count of users
-                            leader board top 8
-                    -->
-                </div>
-                <div class="col-xs-12 col-sm-6">
-                    <input class="btn btn-lg btn-primary" value="Simulate" action="/simulate"/>
-                </div>
-            </div>
+<head>
+    <meta name="viewport" content="width=device-width">
+    <title>Admin | GPL</title>
+    <link href='/stylesheets/main.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="text-center">Interests: <%= info.interest %></p>
+
+            <p class="text-center">Total: <%= info.total %></p>
+
+            <p class="text-center">FB: <%= info.facebook %></p>
+
+            <p class="text-center">G+: <%= info.google %></p>
+
+            <p class="text-center">Twitter: <%= info.twitter %></p>
+
+            <p class="text-center">Local: <%= info.local %></p>
+
+            <p class="text-center">Empty Team: <%= info.emptyTeam %></p>
+
+            <p class="text-center">Empty Squad: <%= info.emptySquad %></p>
+
+            <p class="text-center">Features:
+                <% for(var i = 0;i < info.features.length;i++) { %>
+                <%= info.features[i] %><br/>
+                <% } %>
+            </p>
         </div>
-    </body>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <span class="btn btn-lg btn-primary"><a href="/simulate">Simulate</a></span>
+        </div>
+    </div>
+</div>
+</body>
 </html>
