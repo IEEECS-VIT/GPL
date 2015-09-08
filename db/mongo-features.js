@@ -136,13 +136,14 @@ exports.forgotCount = function(option, callback)
                 collection = db.collection('info');
                 var onInc = function(err, doc)
                 {
+                    db.close();
                     if(err)
                     {
                         callback(err);
                     }
                     else
                     {
-                        callback(null, doc);
+                        callback(null, doc.value);
                     }
                 };
                 collection.findOneAndUpdate({_id : 'info'}, {$inc : option}, onInc);

@@ -112,11 +112,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
-    if (req.signedCookies.lead)
-    {
-        res.render("leaderboard", {leaderboard: req.signedCookies.lead});
-    }
-    else if (req.signedCookies.name)                           // if cookies exists then access the database
+    if (req.signedCookies.name && process.env.DAY >= '1')                           // if cookies exists then access the database
     {
         var onFetch = function (err, documents)
         {
@@ -126,11 +122,7 @@ router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
             }
             else
             {
-                time = new Date;
-                time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
-                temp = new Date(time.getFullYear(), time.getMonth(), time.getDate() + 1);
-                res.cookie('lead', documents, {maxAge: temp.getTime() - time.getTime(), signed: true});
-                res.render("leaderboard", {leaderboard: documents, name: req.signedCookies.name._id});
+                res.render("leaderboard", {leaderboard: documents, name: req.signedCookies.name});
             }
         };
         mongoUsers.getLeader(req.signedCookies.name, onFetch);
@@ -142,7 +134,7 @@ router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
 });
 
 router.get('/matches', function (req, res) {
-    if (req.signedCookies.name && process.env.LIVE === '1' && !process.env.NODE_ENV)
+    if (req.signedCookies.name && process.env.LIVE === '1' && !process.env.NODE_ENV && process.env.DAY >= '1')
     {
         var onMap = function (err, num)
         {
@@ -402,30 +394,22 @@ router.get('/team', function (req, res) // view the assigned playing 11 with opt
     }
 });
 
-router.get('/info', function (req, res) {
-    if (req.signedCookies.name)
+router.get('/stats', function (req, res) {
+    if (req.signedCookies.name && process.env.DAY >= '1')
     {
-        if (req.signedCookies.info)
+        var onGetStats = function (err, doc)
         {
-            res.render('info', {info: req.signedCookies.info});
-        }
-        else
-        {
-            var onGetInfo = function (err, doc)
+            if (err)
             {
-                if (err)
-                {
-                    console.log(err.message);
-                    res.redirect('/');
-                }
-                else
-                {
-                    res.cookie('info', doc, {maxAge: 86400000, signed: true});
-                    res.render('info', {info: doc});
-                }
-            };
-            mongoFeatures.getInfo(onGetInfo);
-        }
+                console.log(err.message);
+                res.redirect('/');
+            }
+            else
+            {
+                res.render('stats', {stats: doc});
+            }
+        };
+        mongoFeatures.getInfo(onGetStats);
     }
     else
     {
@@ -467,7 +451,7 @@ router.post('/feature', function (req, res) {
 });
 
 router.get('/dashboard', function (req, res) {
-    if (req.signedCookies.name || 1)
+    if (req.signedCookies.name && process.env.DAY >= '1')
     {
         var user =
         {
@@ -481,7 +465,6 @@ router.get('/dashboard', function (req, res) {
             }
             else
             {
-                console.log(doc);
                 res.render('dashboard', {result: doc});
             }
         };

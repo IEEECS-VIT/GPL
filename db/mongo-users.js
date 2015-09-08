@@ -206,8 +206,9 @@ exports.forgotPassword = function (doc, op, callback)
                 {
                     callback(err, null);
                 }
-                else if (document)
+                else if (document.value)
                 {
+                    console.log(document);
                     var onCount = function(err, doc)
                     {
                         if(err)
@@ -216,7 +217,7 @@ exports.forgotPassword = function (doc, op, callback)
                         }
                         else
                         {
-                            callback(null, document);
+                            callback(null, true);
                         }
                     };
                     mongoFeatures.forgotCount({password : 1}, onCount);
@@ -226,7 +227,7 @@ exports.forgotPassword = function (doc, op, callback)
                     callback(false, null);
                 }
             };
-            collection.findOneAndUpdate(doc, op, onFetch);
+            collection.findOneAndUpdate(doc, {$set : op}, onFetch);
         }
     };
     MongoClient.connect(mongoUri, onConnect);

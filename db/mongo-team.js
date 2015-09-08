@@ -315,13 +315,9 @@ exports.adminInfo = function (callback)
         {
             mongoFeatures.notify(asyncCallback);
         },
-        password: function (asyncCallback)
+        forgot: function (asyncCallback)
         {
             mongoFeatures.forgotCount({password : 0}, asyncCallback);
-        },
-        user: function (asyncCallback)
-        {
-            mongoFeatures.forgotCount({user : 0}, asyncCallback);
         }
     };
     async.parallel(parallelTasks, onParallel);

@@ -157,9 +157,14 @@ router.get('/login', function (req, res) {
     res.clearCookie('team', {});
     res.clearCookie('email', {});
     res.clearCookie('phone', {});
-    if (req.signedCookies.name)
+    if(req.signedCookies.name)
     {
+        console.log(req.signedCookies.name);
         res.redirect('/home');
+    }
+    else if(req.signedCookies.admin)
+    {
+        res.redirect('/admin');
     }
     else
     {
@@ -172,7 +177,7 @@ router.post('/login', function (req, res) {
     var password = req.body.password;
     if (req.signedCookies.name)
     {
-        res.clearCookie('name');
+        res.clearCookie('name', {});
     }
     if (log)
     {
@@ -235,7 +240,8 @@ router.post('/forgot/password', function (req, res) {
     var doc =
     {
         _id: req.body.team,
-        email: req.body.email
+        email: req.body.email,
+        authStrategy : 'local'
     };
 
     var message = email.wrap({
@@ -254,11 +260,8 @@ router.post('/forgot/password', function (req, res) {
         );
         var details =
         {
-            $set:
-            {
-                token: token,
-                expire: Date.now() + 3600000
-            }
+            resetToken: token,
+            expire: Date.now() + 3600000
         };
 
         var onFetch = function (err, doc)
@@ -280,7 +283,6 @@ router.post('/forgot/password', function (req, res) {
             }
             else
             {
-                console.log('Invalid credentials!');
                 res.redirect('/forgot/password');
             }
         };
@@ -304,7 +306,7 @@ router.get('/reset/:token', function (req, res) {
             res.render('reset', {csrfToken: req.csrfToken()});
         }
     };
-    mongoUsers.getReset({token: req.params.token, expire: {$gt: Date.now()}}, onGetReset);
+    mongoUsers.getReset({resetToken: req.params.token, expire: {$gt: Date.now()}}, onGetReset);
 });
 
 router.get('/forgot/user', function(req, res){
@@ -354,7 +356,7 @@ router.post('/reset/:token', function (req, res) {
     {
         var query =
         {
-            token: req.params.token,
+            resetToken: req.params.token,
             expire:
             {
                 $gt: Date.now()
@@ -368,7 +370,7 @@ router.post('/reset/:token', function (req, res) {
             },
             $unset:
             {
-                token: '',
+                resetToken: '',
                 expire: ''
             }
         };
@@ -543,10 +545,14 @@ router.post('/register', function (req, res) {
 });
 
 router.get('/logout', function (req, res) {
-    if (req.signedCookies.name)
+    if(req.signedCookies.admin)
+    {
+        res.clearCookie('admin', {});
+        res.redirect('/');
+    }
+    else if (req.signedCookies.name)
     {
         res.clearCookie('name', {});
-        res.clearCookie('lead', {});
         res.clearCookie('team', {});
         res.clearCookie('email', {});
         res.clearCookie('phone', {});

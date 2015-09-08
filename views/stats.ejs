@@ -1,0 +1,89 @@
+<!--
+*  GraVITas Premier League <gravitaspremierleague@gmail.com>
+*  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
+*
+*  This program is free software: you can redistribute it and/or modify
+*  it under the terms of the GNU General Public License as published by
+*  the Free Software Foundation, either version 3 of the License, or
+*  (at your option) any later version.
+*
+*  This program is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU General Public License for more details.
+*
+*  You should have received a copy of the GNU General Public License
+*  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Stats | GPL</title>
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+            your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div id="wrapper" class="container-fluid">
+            <div id="side-navigation">
+                <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
+                    <div class="container-fluid">
+                        <ul class="nav nav-pills nav-stacked wrapper  ">
+                            <li>
+                                <img src="http://res.cloudinary.com/gpl/general/gpllogo.png" class="img-responsive"
+                                     style="margin: 5px;padding-right:10px;">
+                            </li>
+                            <li role="presentation"><a href="/home">Home</a></li>
+                            <li role="presentation" class="active"><a href="/home/dashboard">Dashboard</a></li>
+                            <li role="presentation"><a href="/home/team">Team</a></li>
+                            <li role="presentation"><a href="/home/matches">Matches</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
+                <div id="top-navigation"></div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="text-center">Runs: <%= stats.runs %></p><br/>
+                            <p class="text-center">Overs: <%= stats.overs %></p><br/>
+                            <p class="text-center">Fours: <%= stats.four %></p><br/>
+                            <p class="text-center">Sixes: <%= stats.six %></p><br/>
+                            <p class="text-center">Highest Runs Scored: <br/><%= stats.high.total.value %>
+                                by <%= stats.high.total.team %></p><br/>
+
+                            <p class="text-center">Lowest Runs Scored: <%= stats.low.value %> by <%= stats.low.team %></p><br/>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="lead">Orange Cap Holder:</p>
+                            <p class="text-center">Player: <%= stats.orange.player %></p><br/>
+                            <p class="text-center">Runs Scored: <%= stats.orange.run %></p><br/>
+                            <p class="text-center">Balls Faced: <%= stats.orange.balls %></p><br/>
+                            <p class="text-center">Average: <%= stats.orange.avg %></p><br/>
+                            <p class="text-center">Strike Rate: <%= stats.orange.sr %></p><br/>
+                            <p class="text-center">Team: <%= stats.orange.team %></p><br/>
+                            <p class="lead">Purple Cap Holder:</p>
+                            <p class="text-center">Player: <%= stats.orange.player %></p><br/>
+                            <p class="text-center">Wickets Taken: <%= stats.orange.run %></p><br/>
+                            <p class="text-center">Balls Bowled: <%= stats.orange.balls %></p><br/>
+                            <p class="text-center">Economy: <%= stats.orange.economy %></p><br/>
+                            <p class="text-center">Average: <%= stats.orange.avg %></p><br/>
+                            <p class="text-center">Strike Rate: <%= stats.orange.sr %></p><br/>
+                            <p class="text-center">Team: <%= stats.orange.team %></p><br/>
+                            <p class="lead">Today's Best Performance: </p><br/>
+                            <p class="text-center">Team: <%= stats.daily.team %></p><br/>
+                            <p class="lead">Overall Best Performance: </p><br/>
+                            <p class="text-center">Team: <%= stats.daily.team %></p><br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script async src="/javascript/main.js"></script>
+    </body>
+</html>
