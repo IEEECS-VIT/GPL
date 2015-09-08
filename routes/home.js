@@ -189,14 +189,13 @@ router.post('/getsquad', function (req, res) {
             else
             {
                 console.log(document);
-                res.redirect('/home');
             }
+            res.redirect('/home');
         };
         mongoUsers.updateMatchSquad(credentials, squad, onFetch);
     }
     else
     {
-        req.session.route = 'squad';
         res.redirect('/');
     }
 });
@@ -218,8 +217,8 @@ router.post('/getTeam', function (req, res) {
         else
         {
             console.log(documents);
-            res.redirect('/home');
         }
+        res.redirect('/home');
     };
 
     var getCost = function (id, callback)
@@ -244,6 +243,7 @@ router.post('/getTeam', function (req, res) {
         if (err)
         {
             console.log(err.message);
+            res.redirect('/home');
         }
         else
         {
@@ -333,6 +333,7 @@ router.get('/players', function (req, res) // page for all players, only availab
             if (err)
             {
                 console.log(err.message);
+                res.redirect('/home');
             }
             else
             {
@@ -437,10 +438,7 @@ router.post('/feature', function (req, res) {
             {
                 console.log(err);
             }
-            else
-            {
-                res.redirect('/home');
-            }
+            res.redirect('/home');
         };
         mongoFeatures.insert({user : req.signedCookies.name, features: req.body.feature}, onInsert);
     }
@@ -462,6 +460,7 @@ router.get('/dashboard', function (req, res) {
             if (err)
             {
                 console.log(err.message);
+                res.redirect('/home');
             }
             else
             {

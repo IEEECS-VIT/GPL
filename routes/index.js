@@ -296,6 +296,7 @@ router.get('/reset/:token', function (req, res) {
         if (err)
         {
             console.log(err.message);
+            res.redirect('/forgot/password');
         }
         else if (!doc)
         {
@@ -324,6 +325,7 @@ router.post('/forgot/user', function (req, res) {
         if (err)
         {
             console.log(err.message);
+            res.redirect('/forgot/user');
         }
         else if (docs)
         {
@@ -379,6 +381,7 @@ router.post('/reset/:token', function (req, res) {
             if (err)
             {
                 console.log(err.message);
+                res.redirect('/reset/' + req.params.token);
             }
             else if (!doc)
             {
@@ -431,13 +434,14 @@ router.get('/register', function (req, res) {
 router.post('/register', function (req, res) {
     if (req.signedCookies.name)
     {
-        res.clearCookie('name');
+        res.clearCookie('name', {});
     }
     var onGetCount = function (err, number)
     {
         if (err)
         {
             console.log(err.message);
+            res.render('register', {response: "Unknown error, please try again", csrfToken : req.csrfToken()});
         }
         else
         {
@@ -458,7 +462,7 @@ router.post('/register', function (req, res) {
                     if (err)
                     {
                         console.log(err.message);
-                        res.render('register', {response: "Team Name Already Exists"});
+                        res.render('register', {response: "Team Name Already Exists", csrfToken : req.csrfToken()});
                     }
                     else
                     {
@@ -572,6 +576,7 @@ router.get('/admin', function (req, res) {
             if (err)
             {
                 console.log(err.message);
+                res.redirect('/');
             }
             else if (doc)
             {
@@ -679,6 +684,7 @@ router.get('/simulate', function (req, res) {
             if (err)
             {
                 console.log(err);
+                res.redirect('/admin');
             }
             else
             {
