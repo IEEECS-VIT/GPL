@@ -217,8 +217,8 @@ router.post('/getTeam', function (req, res) {
         else
         {
             console.log(documents);
+            res.redirect('/home');
         }
-        res.redirect('/home');
     };
 
     var getCost = function (id, callback)
@@ -248,7 +248,7 @@ router.post('/getTeam', function (req, res) {
         else
         {
             console.log(documents);
-            for (var i = parseInt(0); i < documents.length; i++)
+            for (var i = parseInt(0); i < documents.length; ++i)
             {
                 cost += documents[i].Cost;
                 if (cost > 10000000)
