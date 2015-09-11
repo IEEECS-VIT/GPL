@@ -55,7 +55,7 @@
     color: black;
 }*/
 .player {
-    height: 80px;
+    height: 60px;
 }
 
 .player-name {
@@ -78,4 +78,37 @@
     border: 1px solid rgb(221, 221, 221);
     padding-left: 0px;
     padding-right: 0px;
+}
+.accordion {
+    overflow:hidden;
+    box-shadow:0px 1px 3px rgba(0,0,0,0.25);
+    border-radius:3px;
+    background: #fffdfb;
+    color: black;
+}
+a.player-name.accordion-section-title
+{
+    color: black;
+}
+/*----- Section Titles -----*/
+.accordion-section-title {
+    width:100%;
+    padding:5%;
+    transition:all linear 0.15s;
+}
+
+.accordion-section-title.active, .accordion-section-title:hover {
+    background: #fefcfd;
+    /* Type */
+    text-decoration:none;
+}
+
+.accordion-section:last-child .accordion-section-title {
+    border-bottom:none;
+}
+
+/*----- Section Content -----*/
+.accordion-section-content {
+    padding-top: 2%;
+
 }

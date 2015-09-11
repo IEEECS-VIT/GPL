@@ -24,8 +24,10 @@
         <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="/stylesheets/dashboard.css">
         <link rel="stylesheet" href="/stylesheets/home.css"/>
+
     </head>
     <body>
+
         <div>
             <div id="wrapper" class="container-fluid">
                 <div id="side-navigation">
@@ -43,6 +45,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
                     <div id="top-navigation"></div>
                     <div class="container-fluid">
@@ -103,18 +106,19 @@
                                     <% k = 4;i = 0; var z = 1;for(i = 0;i < results.team.length;i++) { %>
                                     <% if(k < 3){ %>
                                     <% if(results.team[i]._id < 'd'){ %>
-                                    <div id="box<%= results.team[i]._id %>" class="list-group-item player">
+                                    <div id="box<%= results.team[i]._id %>" class="list-group-item player accordion-section">
                                         <% if (results.team[i]._id < 'b'){ %>
-                                        <div class="player-name">
+                                        <a class="player-name accordion-section-title" href="#<%results.team[i]._id%>">
                                             <div class="col-xs-2"><img
                                                         src="http://res.cloudinary.com/gpl/players/bat/<%= results.team[i]._id %>.jpg"
                                                         class="img-circle pull-left" height="40" width="40"/>
                                             </div>
                                             <div class=col-xs-8><span class="h4"><%= results.team[i].Name %></span></div>
-                                        </div>
-                                        <span class="pull-right type">Batsman</span>
+
+                                        <span class="pull-right type">Batsman</span></a>
+                                        <div class="accordion-section-content" id="<%results.team[i]._id%>"><p>ghjd hsidf bj d</p></div>
                                         <% } else if(results.team[i]._id < 'c') { %>
-                                        <div class="player-name">
+                                        <a class="player-name accordion-section-title" href="#">
                                             <div class="col-xs-2"><img
                                                         src="http://res.cloudinary.com/gpl/players/bowl/<%= results.team[i]._id %>.jpg"
                                                         class="img-circle pull-left" height="40" width="40"/>
@@ -122,10 +126,11 @@
                                             <div class="col-xs-8">
                                                 <span class="h4"><%= results.team[i].Name %></span>
                                             </div>
-                                        </div>
-                                        <span class="pull-right type">Bowler</span>
+
+                                        <span class="pull-right type">Bowler</span></a>
+                                        <div class="accordion-section-content"><p>ghjd hsidf bj d</p></div>
                                         <% } else if(results.team[i]._id < 'd') { %>
-                                        <div class="player-name">
+                                        <a class="player-name accordion-section-title" href="#<%results.team[i]._id%>">
                                             <div class="col-xs-2">
                                                 <img
                                                         src="http://res.cloudinary.com/gpl/players/all/<%= results.team[i]._id %>.jpg"
@@ -134,7 +139,8 @@
                                             <div class="col-xs-8">
                                                 <p class="lead"><span class="h4"><%= results.team[i].Name %></span></p>
                                             </div>
-                                            <span class="pull-right type">All Rounder</span></div>
+                                            <span class="pull-right type">All Rounder</span></a>
+                                        <div class="accordion-section-content" id="<%results.team[i]._id%>"><p>ghjd hsidf bj d</p></div>
                                         <% } %>
                                     </div>
                                     <% k++; } else { continue;} %>
@@ -161,5 +167,6 @@
         <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script async src="/javascript/playerCommon.js"></script>
+        <script type="text/javascript" src="/javascript/home.js"></script>
     </body>
 </html>
