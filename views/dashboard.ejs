@@ -133,9 +133,11 @@
         <script async src="/javascript/playerCommon.js"></script>
         <script async>
             var json_data = JSON.stringify(<%=result%>);
-            function string_range(start, stop) {
+            function string_range(start, stop)
+            {
                 var string_array = [];
-                for (i = start; i <= stop; i++) {
+                for (i = start; i <= stop; i++)
+                {
                     string_array.push(i.toString());
                 }
                 return string_array;

@@ -455,6 +455,7 @@ router.get('/dashboard', function (req, res) {
             }
             else
             {
+                console.log(doc);
                 res.render('dashboard', {result: doc});
             }
         };

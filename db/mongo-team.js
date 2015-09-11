@@ -179,6 +179,9 @@ exports.dashboard = function (doc, callback)
             var slice =
             {
                 dob: 0,
+                team_no : 0,
+                password_hash : 0,
+                stats : 0,
                 email: 0,
                 phone: 0,
                 squad: 0,
