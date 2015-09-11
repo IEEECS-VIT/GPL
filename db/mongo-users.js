@@ -208,7 +208,6 @@ exports.forgotPassword = function (doc, op, callback)
                 }
                 else if (document.value)
                 {
-                    console.log(document);
                     var onCount = function(err, doc)
                     {
                         if(err)
@@ -377,7 +376,7 @@ exports.updateUserTeam = function (doc, arr, stats, cost, callback)
                 {
                     'team': arr,
                     'stats': stats,
-                    'surplus': 10000000 - cost
+                    'surplus': cost
                 }
             }, {}, onUpdate)
         }

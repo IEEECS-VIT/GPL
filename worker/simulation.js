@@ -75,43 +75,41 @@ exports.simulate = function (data, callback)
             this.coach_rating = team[11].Rating || -50;
             for (i = 0; i < 11; ++i)
             {
+                this.bowl_index.push(i);
+                this.bat_name.push(team[i].Name);
+                this.bowl_name.push(team[i].Name);
                 switch (team[i].Type)
                 {
                     case 'bat':
-                        this.bat_name.push(team[i].Name);
+                        this.bowl_avg.push(30);
+                        this.economy.push(10);
                         this.bat_avg.push(team[i].Average);
                         this.bat_rating.push(team[i].Rating);
-                        this.avg_bat_rating += team[i].Rating;
+                        this.bowl_rating.push(900 - team[i].Rating);
+                        this.bowl_strike_rate.push(40);
                         this.bat_strike_rate.push(team[i]['Strike Rate']);
                         break;
                     case 'bowl':
-                        this.bowl_index.push(i);
                         this.bowl_avg.push(team[i].Avg);
-                        this.bat_name.push(team[i].Name);
-                        this.bowl_name.push(team[i].Name);
                         this.economy.push(team[i].Economy);
                         this.bat_avg.push(team[i].Average);
                         this.bowl_strike_rate.push(team[i].SR);
                         this.bowl_rating.push(team[i].Rating);
-                        this.avg_bowl_rating += team[i].Rating;
                         this.bat_strike_rate.push(team[i]['Strike Rate']);
                         this.bat_rating.push(900 - team[i].Rating);
                         break;
                     case 'all':
-                        this.bowl_index.push(i);
                         this.bowl_avg.push(team[i].Avg);
-                        this.bat_name.push(team[i].Name);
-                        this.bowl_name.push(team[i].Name);
                         this.bat_rating.push(team[i].Bat);
-                        this.avg_bat_rating += team[i].Bat;
                         this.economy.push(team[i].Economy);
                         this.bat_avg.push(team[i].Average);
                         this.bowl_rating.push(team[i].Bowl);
-                        this.avg_bowl_rating += team[i].Bowl;
                         this.bowl_strike_rate.push(team[i].SR);
                         this.bat_strike_rate.push(team[i]['Strike Rate']);
                         break;
                 }
+                this.avg_bat_rating += this.bat_rating[i];
+                this.avg_bowl_rating += this.bowl_rating[i];
             }
             mean_rating[arg] = ( this.avg_bat_rating + this.avg_bowl_rating) / (this.bat_name.length + this.bowl_name.length);
             this.avg_bat_rating /= this.bat_name.length;
@@ -153,7 +151,7 @@ exports.simulate = function (data, callback)
         var wide = require(path.join(__dirname, 'commentary', 'extra', 'wide'));
         var freehit = require(path.join(__dirname, 'commentary', 'extra', 'freehit'));
         var MoM = {};
-        var bat =    // decrease to strengthen batting,
+        var bat =    // decrease to strengthen batting
             [
                 process.env.BAT_AVG || 1000,
                 process.env.BAT_STR || 1000
@@ -165,7 +163,7 @@ exports.simulate = function (data, callback)
         var desperation = [];
         var team_object = [];
         var Overs = [120, 120];
-        var bowl =      // increase to strengthen bowling,
+        var bowl =      // increase to strengthen bowling
             [
                process.env.BOWL_AVG || 1000,
                process.env.BOWL_STR || 1000,

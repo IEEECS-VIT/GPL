@@ -152,7 +152,6 @@ router.get('/matches', function (req, res) {
                     }
                     else
                     {
-                        console.log(matches[0], matches[1]);
                         res.render('matches', {match: matches, day : (process.env.DAY - 1)|| 0, round : ref[process.env.MATCH]});
                     }
                 };
@@ -163,17 +162,16 @@ router.get('/matches', function (req, res) {
     }
     else
     {
-        res.redirect('/');
+        res.redirect('/home');
     }
 });
 
 router.post('/getsquad', function (req, res) {
     if (req.signedCookies.name)
     {
-        var teamname = req.signedCookies.name;
         var credentials =
         {
-            '_id': teamname
+            '_id': req.signedCookies.name
         };
         var squad = [];
         for (i = 1; i < 12; ++i)
@@ -201,13 +199,12 @@ router.post('/getsquad', function (req, res) {
 });
 
 router.post('/getTeam', function (req, res) {
-    var players = [], cost = 0;
+    var players = [], cost = 10000000, stats = {};
     for (i = 2; i < 17; ++i)
     {
         players.push(req.body['p' + i]);
     }
     players.push(req.body.p1);
-    console.log(players);
     var onUpdate = function (err, documents)
     {
         if (err)
@@ -235,6 +232,40 @@ router.post('/getTeam', function (req, res) {
         {
             _id: id
         };
+        if (id < 'd')
+        {
+            stats[id]         = {};
+            stats[id].MoM     = 0;
+            stats[id].form    = 0;
+            stats[id].morale  = 0;
+            stats[id].points  = 0;
+            stats[id].fatigue = 0;
+            stats[id].matches = 0;
+            stats[id].catches = 0;
+            if (!(id > 'b' && id < 'c'))
+            {
+                stats[id].outs        = 0;
+                stats[id].balls       = 0;
+                stats[id].high        = -1;
+                stats[id].fours       = 0;
+                stats[id].sixes       = 0;
+                stats[id].recent      = [];
+                stats[id].notouts     = 0;
+                stats[id].average     = 0.0;
+                stats[id].runs_scored = 0;
+                stats[id].strike_rate = 0.0;
+                stats[id].low         = Number.MAX_VALUE;
+            }
+            if (id > 'b' && id < 'd')
+            {
+                stats[id].sr            = 0.0;
+                stats[id].overs         = 0;
+                stats[id].avg           = 0.0;
+                stats[id].economy       = 0.0;
+                stats[id].runs_given    = 0;
+                stats[id].wickets_taken = 0;
+            }
+        }
         mongoPlayers.getPlayer(player, fields, callback)
     };
 
@@ -247,66 +278,26 @@ router.post('/getTeam', function (req, res) {
         }
         else
         {
-            console.log(documents);
-            for (var i = parseInt(0); i < documents.length; ++i)
+            for (var i = 0; i < documents.length; ++i)
             {
-                cost += documents[i].Cost;
-                if (cost > 10000000)
+                cost -= parseInt(documents[i].Cost);
+                if (cost < 0)
                 {
                     res.redirect('/home/players', {err: "Cost Exceeded"});
                 }
             }
+            mongoUsers.updateUserTeam(credentials, players, stats, cost, onUpdate);
             res.redirect('/home/team');
         }
     };
 
     async.map(players, getCost, onFinish);
 
-    var teamName = req.signedCookies.name;
     var credentials =
     {
-        _id: teamName
+        _id: req.signedCookies.name
     };
-    var stats = {};
-    for (i = 0; i < players.length; ++i)
-    {
-        if (players[i] > 'd')
-        {
-            continue;
-        }
-        stats[players[i]] = {};
-        stats[players[i]].MoM = 0;
-        stats[players[i]].form = 0;
-        stats[players[i]].morale = 0;
-        stats[players[i]].points = 0;
-        stats[players[i]].fatigue = 0;
-        stats[players[i]].matches = 0;
-        stats[players[i]].catches = 0;
-        if (!(players[i] > 'b' && players[i] < 'c'))
-        {
-            stats[players[i]].outs = 0;
-            stats[players[i]].balls = 0;
-            stats[players[i]].high = -1;
-            stats[players[i]].fours = 0;
-            stats[players[i]].sixes = 0;
-            stats[players[i]].recent = [];
-            stats[players[i]].notouts = 0;
-            stats[players[i]].average = 0.0;
-            stats[players[i]].runs_scored = 0;
-            stats[players[i]].strike_rate = 0.0;
-            stats[players[i]].low = Number.MAX_VALUE;
-        }
-        if (players[i] > 'b' && players[i] < 'd')
-        {
-            stats[players[i]].sr = 0.0;
-            stats[players[i]].overs = 0;
-            stats[players[i]].avg = 0.0;
-            stats[players[i]].economy = 0.0;
-            stats[players[i]].runs_given = 0;
-            stats[players[i]].wickets_taken = 0;
-        }
-    }
-    mongoUsers.updateUserTeam(credentials, players, stats, cost, onUpdate);
+
 });
 
 /*router.get('/sponsors', function (req, res) // sponsors page
@@ -453,7 +444,7 @@ router.get('/dashboard', function (req, res) {
     {
         var user =
         {
-            _id: req.signedCookies.name || 'team_05'
+            _id: req.signedCookies.name
         };
         var onFind = function (err, doc)
         {
