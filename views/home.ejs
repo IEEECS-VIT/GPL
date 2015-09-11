@@ -17,156 +17,181 @@
 -->
 <!DOCTYPE html>
 <html>
-    <head lang="en">
-        <meta charset="UTF-8">
-        <title>Home | GPL</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/stylesheets/dashboard.css">
-        <link rel="stylesheet" href="/stylesheets/home.css"/>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Home | GPL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+    <link rel="stylesheet" href="/stylesheets/home.css"/>
 
-    </head>
-    <body>
+</head>
+<body>
 
-        <div>
-            <div id="wrapper" class="container-fluid">
-                <div id="side-navigation">
-                    <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
-                        <div class="container-fluid">
-                            <ul class="nav nav-pills nav-stacked wrapper  ">
-                                <li>
-                                    <img src="http://res.cloudinary.com/gpl/general/gpllogo.png" class="img-responsive" style="margin: 5px;padding-right:10px;">
-                                </li>
-                                <li role="presentation" class="active"><a href="/home">Home</a></li>
-                                <li role="presentation"><a href="/home/dashboard">Dashboard</a></li>
-                                <li role="presentation"><a href="/home/team">Team</a></li>
-                                <li role="presentation"><a href="/home/matches">Matches</a></li>
-                            </ul>
+<div>
+    <div id="wrapper" class="container-fluid">
+        <div id="side-navigation">
+            <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
+                <div class="container-fluid">
+                    <ul class="nav nav-pills nav-stacked wrapper  ">
+                        <li>
+                            <img src="http://res.cloudinary.com/gpl/general/gpllogo.png" class="img-responsive"
+                                 style="margin: 5px;padding-right:10px;">
+                        </li>
+                        <li role="presentation" class="active"><a href="/home">Home</a></li>
+                        <li role="presentation"><a href="/home/dashboard">Dashboard</a></li>
+                        <li role="presentation"><a href="/home/team">Team</a></li>
+                        <li role="presentation"><a href="/home/matches">Matches</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
+            <div id="top-navigation"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="container-fluid ">
+                            <div class="col-xs-10 col-xs-offset-1" id="coachBox">
+                                <% var f = false; for(var i = 0;i < results.team.length;i++) { %>
+                                <% if(results.team[i]._id > 'd') { %>
+                                <img src="http://res.cloudinary.com/gpl/players/coach/<%= results.team[i]._id %>.jpg"
+                                     class="img-responsive"/>
+
+                                <p style="text-align: center;">
+                                    <%= results.team[i].Name %>
+                                </p>
+
+                                <p style="text-align: center;">Coach</p>
+                                <% f = true; } } %>
+                            </div>
+                            <div class="col-xs-10 col-xs-offset-1" id="stats">
+                                <h3>Team Statistics</h3>
+
+                                <p style="text-align:left;">
+                                    <b>Matches Played:</b> <%= results.user.played %><br/>
+                                    <b>Matches Won:</b> <%= results.user.win %><br/>
+                                    <b>Matches Lost:</b> <%= results.user.loss %><br/>
+                                    <b>Matches Tied:</b> <%= results.user.tied %><br/>
+                                    <b>Points:</b> <%= results.user.points %><br/>
+                                    <b>Runs for:</b> <%= results.user.runs_for %><br/>
+                                    <b>Runs against:</b> <%= results.user.runs_against %><br/>
+                                    <b>Overs batted:</b> <%= results.user.balls_for %><br/>
+                                    <b>Overs bowled:</b> <%= results.user.balls_against %><br/>
+                                    <b>Wickets taken:</b> <%= results.user.wickets_taken %><br/>
+                                    <b>Wickets lost:</b> <%= results.user.wickets_lost %><br/>
+                                    <b>Streak:</b> <%= results.user.streak %><br/>
+                                    <b>All outs:</b> <%= results.user.all_outs %><br/>
+                                    <b>Average runs scored:</b> <%= results.user.avg_runs_for %><br/>
+                                    <b>Average runs conceded:</b> <%= results.user.avg_runs_against %><br/>
+                                    <b>Average wickets taken:</b> <%= results.user.avg_wickets_taken %><br/>
+                                    <b>Average wickets lost:</b> <%= results.user.avg_wickets_lost %><br/>
+                                    <b>Average overs batted:</b> <%= results.user.avg_overs_for %><br/>
+                                    <b>Average overs bowled:</b> <%= results.user.avg_overs_against %><br/>
+                                    <b>Highest total:</b>
+                                    <% if (results.user.played !== 0) { %>
+                                    <%= results.user.highest_total %>
+                                    <% } else {
+                                        0
+                                    } %>
+                                    <br/>
+                                    <b>Lowest total:</b>
+                                    <% if (results.user.played !== 0) { %>
+                                    <%= results.user.lowest_total %>
+                                    <% } else {
+                                        0
+                                    } %>
+                                    <br/>
+                                    <b>Net Run Rate:</b> <%= results.user.net_run_rate %><br/>
+                                    <b>Win - loss ratio:</b> <%= results.user.ratio %><br/>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="col-sm-6">
+                        <ul class="list-group">
+                            <% k = 4; var z = 1;for(i = 0;i < results.team.length;i++) { %>
+                            <% if(k < 3){ %>
+                            <% if(results.team[i]._id < 'd'){ %>
+                            <div id="box<%= results.team[i]._id %>" class="list-group-item player accordion-section">
+                                <% if (results.team[i]._id < 'b'){ %>
+                                <a class="player-name accordion-section-title" href="#<%= results.team[i]._id %>"
+                                   aria-controls="<%= results.team[i]._id %>" data-toggle="collapse">
+                                    <div class="col-xs-2"><img
+                                                src="http://res.cloudinary.com/gpl/players/bat/<%= results.team[i]._id %>.jpg"
+                                                class="img-circle pull-left" height="40" width="40"/>
+                                    </div>
+                                    <div class=col-xs-8><span class="h4"><%= results.team[i].Name %></span></div>
+                                </a>
 
-                <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
-                    <div id="top-navigation"></div>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="container-fluid ">
-                                    <div class="col-xs-10 col-xs-offset-1" id="coachBox">
-                                        <% var f = false; for(var i = 0;i < results.team.length;i++) { %>
-                                        <% if(results.team[i]._id > 'd') { %>
-                                        <img src="http://res.cloudinary.com/gpl/players/coach/<%= results.team[i]._id %>.jpg"
-                                             class="img-responsive"/>
-                                        <p style="text-align: center;">
-                                            <%= results.team[i].Name %>
-                                        </p>
-                                        <p style="text-align: center;">Coach</p>
-                                        <% f = true; } } %>
+                                <span class="pull-right type">Batsman</span>
+
+                                <div class="accordion-section-content" id="<%= results.team[i]._id %>"
+                                     aria-labelledby="<%= results.team[i]._id %>"><p>ghjd hsidf bj
+                                        d</p></div>
+                                <% } else if(results.team[i]._id < 'c') { %>
+                                <a class="player-name accordion-section-title" href="#<%= results.team[i]._id %>"
+                                   aria-controls="<%= results.team[i]._id %>" data-toggle="collapse">
+                                    <div class="col-xs-2"><img
+                                                src="http://res.cloudinary.com/gpl/players/bowl/<%= results.team[i]._id %>.jpg"
+                                                class="img-circle pull-left" height="40" width="40"/>
                                     </div>
-                                    <div class="col-xs-10 col-xs-offset-1" id="stats">
-                                        <h3>Team Statistics</h3>
-                                        <p style="text-align:left;">
-                                            <b>Matches Played:</b> <%= results.user.played %><br/>
-                                            <b>Matches Won:</b> <%= results.user.win %><br/>
-                                            <b>Matches Lost:</b> <%= results.user.loss %><br/>
-                                            <b>Matches Tied:</b> <%= results.user.tied %><br/>
-                                            <b>Points:</b> <%= results.user.points %><br/>
-                                            <b>Runs for:</b> <%= results.user.runs_for %><br/>
-                                            <b>Runs against:</b> <%= results.user.runs_against %><br/>
-                                            <b>Overs batted:</b> <%= results.user.balls_for %><br/>
-                                            <b>Overs bowled:</b> <%= results.user.balls_against %><br/>
-                                            <b>Wickets taken:</b> <%= results.user.wickets_taken %><br/>
-                                            <b>Wickets lost:</b> <%= results.user.wickets_lost %><br/>
-                                            <b>Streak:</b> <%= results.user.streak %><br/>
-                                            <b>All outs:</b> <%= results.user.all_outs %><br/>
-                                            <b>Average runs scored:</b> <%= results.user.avg_runs_for %><br/>
-                                            <b>Average runs conceded:</b> <%= results.user.avg_runs_against %><br/>
-                                            <b>Average wickets taken:</b> <%= results.user.avg_wickets_taken %><br/>
-                                            <b>Average wickets lost:</b> <%= results.user.avg_wickets_lost %><br/>
-                                            <b>Average overs batted:</b> <%= results.user.avg_overs_for %><br/>
-                                            <b>Average overs bowled:</b> <%= results.user.avg_overs_against %><br/>
-                                            <b>Highest total:</b>
-                                            <% if (results.user.played !== 0) { %>
-                                            <%= results.user.highest_total %>
-                                            <% } else { 0 } %>
-                                            <br/>
-                                            <b>Lowest total:</b>
-                                            <% if (results.user.played !== 0) { %>
-                                            <%= results.user.lowest_total %>
-                                            <% } else { 0 } %>
-                                            <br/>
-                                            <b>Net Run Rate:</b> <%= results.user.net_run_rate %><br/>
-                                            <b>Win - loss ratio:</b> <%= results.user.ratio %><br/>
-                                        </p>
+                                    <div class="col-xs-8">
+                                        <span class="h4"><%= results.team[i].Name %></span>
                                     </div>
-                                </div>
+                                </a>
+
+                                <span class="pull-right type">Bowler</span>
+
+                                <div class="accordion-section-content" id="<%= results.team[i]._id %>"
+                                     aria-labelledby="<%= results.team[i]._id %>"><p>ghjd hsidf bj d</p></div>
+                                <% } else if(results.team[i]._id < 'd') { %>
+                                <a class="player-name accordion-section-title" href="#<%= results.team[i]._id %>"
+                                   aria-controls="<%= results.team[i]._id %>" data-toggle="collapse">
+                                    <div class="col-xs-2">
+                                        <img
+                                                src="http://res.cloudinary.com/gpl/players/all/<%= results.team[i]._id %>.jpg"
+                                                class="img-circle pull-left" height="40" width="40"/>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <p class="lead"><span class="h4"><%= results.team[i].Name %></span></p>
+                                    </div>
+                                </a>
+                                <span class="pull-right type">All Rounder</span>
+
+                                <div class="accordion-section-content" id="<%= results.team[i]._id %>"
+                                     aria-labelledby="<%= results.team[i]._id %>"><p>ghjd hsidf bj
+                                        d</p></div>
+                                <% } %>
                             </div>
-                            <div class="col-sm-6">
-                                <ul class="list-group">
-                                    <% k = 4;i = 0; var z = 1;for(i = 0;i < results.team.length;i++) { %>
-                                    <% if(k < 3){ %>
-                                    <% if(results.team[i]._id < 'd'){ %>
-                                    <div id="box<%= results.team[i]._id %>" class="list-group-item player accordion-section">
-                                        <% if (results.team[i]._id < 'b'){ %>
-                                        <a class="player-name accordion-section-title" href="#<%results.team[i]._id%>">
-                                            <div class="col-xs-2"><img
-                                                        src="http://res.cloudinary.com/gpl/players/bat/<%= results.team[i]._id %>.jpg"
-                                                        class="img-circle pull-left" height="40" width="40"/>
-                                            </div>
-                                            <div class=col-xs-8><span class="h4"><%= results.team[i].Name %></span></div>
-
-                                        <span class="pull-right type">Batsman</span></a>
-                                        <div class="accordion-section-content" id="<%results.team[i]._id%>"><p>ghjd hsidf bj d</p></div>
-                                        <% } else if(results.team[i]._id < 'c') { %>
-                                        <a class="player-name accordion-section-title" href="#">
-                                            <div class="col-xs-2"><img
-                                                        src="http://res.cloudinary.com/gpl/players/bowl/<%= results.team[i]._id %>.jpg"
-                                                        class="img-circle pull-left" height="40" width="40"/>
-                                            </div>
-                                            <div class="col-xs-8">
-                                                <span class="h4"><%= results.team[i].Name %></span>
-                                            </div>
-
-                                        <span class="pull-right type">Bowler</span></a>
-                                        <div class="accordion-section-content"><p>ghjd hsidf bj d</p></div>
-                                        <% } else if(results.team[i]._id < 'd') { %>
-                                        <a class="player-name accordion-section-title" href="#<%results.team[i]._id%>">
-                                            <div class="col-xs-2">
-                                                <img
-                                                        src="http://res.cloudinary.com/gpl/players/all/<%= results.team[i]._id %>.jpg"
-                                                        class="img-circle pull-left" height="40" width="40"/>
-                                            </div>
-                                            <div class="col-xs-8">
-                                                <p class="lead"><span class="h4"><%= results.team[i].Name %></span></p>
-                                            </div>
-                                            <span class="pull-right type">All Rounder</span></a>
-                                        <div class="accordion-section-content" id="<%results.team[i]._id%>"><p>ghjd hsidf bj d</p></div>
-                                        <% } %>
-                                    </div>
-                                    <% k++; } else { continue;} %>
-                                    <% } else { if(z == 1) { %>
-                                    <% z = 0;k = 0;i--;} else { %>
-                                    <% k = 0;i--; %>
-                                    <% } } } %>
-                                </ul>
-                            </div>
-                        </div>
+                            <% k++; } else {
+                                continue;
+                            } %>
+                            <% } else { if(z == 1) { %>
+                            <% z = 0;k = 0;i--;} else { %>
+                            <% k = 0;i--; %>
+                            <% } } } %>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <footer id="footer" class="footer"></footer>
-        <!--[if lt IE 10]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        <!-- build:js(.) scripts/vendor.js -->
-        <!-- bower:js -->
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:js(.) scripts/plugins.js -->
-        <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script async src="/javascript/playerCommon.js"></script>
-        <script type="text/javascript" src="/javascript/home.js"></script>
-    </body>
+    </div>
+</div>
+<footer id="footer" class="footer"></footer>
+<!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<!-- endbower -->
+<!-- endbuild -->
+<!-- build:js(.) scripts/plugins.js -->
+<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script async src="/javascript/playerCommon.js"></script>
+<script type="text/javascript" src="/javascript/home.js"></script>
+</body>
 </html>
