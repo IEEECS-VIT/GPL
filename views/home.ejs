@@ -128,8 +128,42 @@
                                 <span class="pull-right type">Batsman</span>
 
                                 <div class="accordion-section-content" id="<%= results.team[i]._id %>"
-                                     aria-labelledby="<%= results.team[i]._id %>"><p>ghjd hsidf bj
-                                        d</p></div>
+                                     aria-labelledby="<%= results.team[i]._id %>"><p class="text-center">
+                                        Man of the Matches Won:
+                                        <%= results.user.stats[results.team[i]._id].MoM %><br/>
+                                        Form:
+                                        <%= results.user.stats[results.team[i]._id].form %><br/>
+                                        Morale:
+                                        <%= results.user.stats[results.team[i]._id].morale %><br/>
+                                        Points:
+                                        <%= results.user.stats[results.team[i]._id].points %><br/>
+                                        Fatigue:
+                                        <%= results.user.stats[results.team[i]._id].fatigue %><br/>
+                                        Matches:
+                                        <%= results.user.stats[results.team[i]._id].matches %><br/>
+                                        Catches:
+                                        <%= results.user.stats[results.team[i]._id].catches %><br/>
+                                        Outs:
+                                        <%= results.user.stats[results.team[i]._id].outs %><br/>
+                                        Balls:
+                                        <%= results.user.stats[results.team[i]._id].balls %><br/>
+                                        Highest Runs Scored:
+                                        <%= results.user.stats[results.team[i]._id].high === -1 ? 0 : results.user.stats[results.team[i]._id].high %>
+                                        %>
+                                        <br/>
+                                        Fours:
+                                        <%= results.user.stats[results.team[i]._id].fours %><br/>
+                                        Sixes:
+                                        <%= results.user.stats[results.team[i]._id].sixes %><br/>
+                                        Not Outs:
+                                        <%= results.user.stats[results.team[i]._id].notouts %><br/>
+                                        Average:
+                                        <%= results.user.stats[results.team[i]._id].average %><br/>
+                                        Runs Scored:
+                                        <%= results.user.stats[results.team[i]._id].runs_scored %><br/>
+                                        Strike Rate:
+                                        <%= results.user.stats[results.team[i]._id].strike_rate %><br/>
+                                    </p></div>
                                 <% } else if(results.team[i]._id < 'c') { %>
                                 <a class="player-name accordion-section-title" href="#<%= results.team[i]._id %>"
                                    aria-controls="<%= results.team[i]._id %>" data-toggle="collapse">
@@ -145,7 +179,41 @@
                                 <span class="pull-right type">Bowler</span>
 
                                 <div class="accordion-section-content" id="<%= results.team[i]._id %>"
-                                     aria-labelledby="<%= results.team[i]._id %>"><p>ghjd hsidf bj d</p></div>
+                                     aria-labelledby="<%= results.team[i]._id %>"><p class="text-center">
+                                        Man of the Matches Won:
+                                        <%= results.user.stats[results.team[i]._id].MoM %><br/>
+                                        Form:
+                                        <%= results.user.stats[results.team[i]._id].form %><br/>
+                                        Morale:
+                                        <%= results.user.stats[results.team[i]._id].morale %><br/>
+                                        Points:
+                                        <%= results.user.stats[results.team[i]._id].points %><br/>
+                                        Fatigue:
+                                        <%= results.user.stats[results.team[i]._id].fatigue %><br/>
+                                        Matches:
+                                        <%= results.user.stats[results.team[i]._id].matches %><br/>
+                                        Catches:
+                                        <%= results.user.stats[results.team[i]._id].catches %><br/>
+                                        Outs:
+                                        <%= results.user.stats[results.team[i]._id].outs %><br/>
+                                        Balls:
+                                        <%= results.user.stats[results.team[i]._id].balls %><br/>
+                                        Highest Runs Scored:
+                                        <%= results.user.stats[results.team[i]._id].high === -1 ? 0 : results.user.stats[results.team[i]._id].high %>
+                                        %>
+                                        <br/>
+                                        Fours:
+                                        <%= results.user.stats[results.team[i]._id].fours %><br/>
+                                        Sixes:
+                                        <%= results.user.stats[results.team[i]._id].sixes %><br/>
+                                        Not Outs:
+                                        <%= results.user.stats[results.team[i]._id].notouts %><br/>
+                                        Average:
+                                        <%= results.user.stats[results.team[i]._id].average %><br/>
+                                        Runs Scored:
+                                        <%= results.user.stats[results.team[i]._id].runs_scored %><br/>
+                                        Strike Rate:
+                                        <%= results.user.stats[results.team[i]._id].strike_rate %><br/></p></div>
                                 <% } else if(results.team[i]._id < 'd') { %>
                                 <a class="player-name accordion-section-title" href="#<%= results.team[i]._id %>"
                                    aria-controls="<%= results.team[i]._id %>" data-toggle="collapse">
@@ -161,8 +229,41 @@
                                 <span class="pull-right type">All Rounder</span>
 
                                 <div class="accordion-section-content" id="<%= results.team[i]._id %>"
-                                     aria-labelledby="<%= results.team[i]._id %>"><p>ghjd hsidf bj
-                                        d</p></div>
+                                     aria-labelledby="<%= results.team[i]._id %>"><p class="text-center">
+                                        Man of the Matches Won:
+                                        <%= results.user.stats[results.team[i]._id].MoM %><br/>
+                                        Form:
+                                        <%= results.user.stats[results.team[i]._id].form %><br/>
+                                        Morale:
+                                        <%= results.user.stats[results.team[i]._id].morale %><br/>
+                                        Points:
+                                        <%= results.user.stats[results.team[i]._id].points %><br/>
+                                        Fatigue:
+                                        <%= results.user.stats[results.team[i]._id].fatigue %><br/>
+                                        Matches:
+                                        <%= results.user.stats[results.team[i]._id].matches %><br/>
+                                        Catches:
+                                        <%= results.user.stats[results.team[i]._id].catches %><br/>
+                                        Outs:
+                                        <%= results.user.stats[results.team[i]._id].outs %><br/>
+                                        Balls:
+                                        <%= results.user.stats[results.team[i]._id].balls %><br/>
+                                        Highest Runs Scored:
+                                        <%= results.user.stats[results.team[i]._id].high === -1 ? 0 : results.user.stats[results.team[i]._id].high %>
+                                        %>
+                                        <br/>
+                                        Fours:
+                                        <%= results.user.stats[results.team[i]._id].fours %><br/>
+                                        Sixes:
+                                        <%= results.user.stats[results.team[i]._id].sixes %><br/>
+                                        Not Outs:
+                                        <%= results.user.stats[results.team[i]._id].notouts %><br/>
+                                        Average:
+                                        <%= results.user.stats[results.team[i]._id].average %><br/>
+                                        Runs Scored:
+                                        <%= results.user.stats[results.team[i]._id].runs_scored %><br/>
+                                        Strike Rate:
+                                        <%= results.user.stats[results.team[i]._id].strike_rate %><br/></p></div>
                                 <% } %>
                             </div>
                             <% k++; } else {

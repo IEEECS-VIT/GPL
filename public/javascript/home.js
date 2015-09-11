@@ -6,11 +6,11 @@ $(document).ready(function () {
     $('.accordion-section-title').on("click", function () {
         var current = $(this).attr('href');
         $(current).slideToggle();
-        var player_id = current.substr(1);
-        var h = $("#box" + player_id).css("height");
+        /*
+        var h = $("#box" + player_id).css("min-height");
         if (h === '80px')
-            $("#box" + player_id).animate({'height': '60px'});
+            $("#box" + player_id).animate({'min-height': '60px'});
         else
-            $("#box" + player_id).animate({'height': '80px'});
+            $("#box" + player_id).animate({'min-height': '80px'});*/
     });
 });
