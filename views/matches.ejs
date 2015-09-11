@@ -17,107 +17,111 @@
 -->
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Match Details | GPL</title>
-        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <link rel='stylesheet' href='/stylesheets/matchDetails.css'/>
-        <link rel="stylesheet" href="/stylesheets/main.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script type="text/javascript">
-            function tog() {
+<head>
+    <title>Match Details | GPL</title>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/matchDetails.css'/>
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        function tog() {
+            $('.row-offcanvas').toggleClass('active');
+        }
+        $(document).ready(function () {
+            $('[data-toggle=offcanvas]').click(function () {
                 $('.row-offcanvas').toggleClass('active');
-            };
-            $(document).ready(function () {
-                $('[data-toggle=offcanvas]').click(function () {
-                    $('.row-offcanvas').toggleClass('active');
-                });
             });
-        </script>
-    </head>
-    <body>
-        <div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
-            <header class="banner" role="banner">
+        });
+    </script>
+</head>
+<body>
+<div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
+    <header class="banner" role="banner">
                 <span>
                     <img src="http://res.cloudinary.com/gpl/general/header-left.jpg" height="60" class="pull-left"/>
                     <a href="http://www.facebook.com/gravitaspremierleague" target="_blank">
-                        <img class="logo pull-left" src="http://res.cloudinary.com/gpl/general/gpllogo.png" height="50"/>
+                        <img class="logo pull-left" src="http://res.cloudinary.com/gpl/general/gpllogo.png"
+                             height="50"/>
                         <span class="h2 gplheadertext pull-left">graVITas Premier League 2.0</span>
                     </a>
                     <img src="http://res.cloudinary.com/gpl/general/header-right.jpg" height="60" class="pull-right"/>
                 </span>
-            </header>
-        </div>
-        <div id="navbar-wrapper">
-            <nav id="navbar"></nav>
-        </div>
-        <div class="container-fluid">
-            <div class="row row-offcanvas row-offcanvas-left">
-                <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-                    <ul class="nav nav-sidebar">
-                        <li class="active"><a href="#">Matches</a></li>
-                        <% for(var i = 0; i <= day; ++i){ %>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Match <%=(i+1)%><b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="#"
-                                           onclick="document.getElementById('text').innerHTML='Commentary:<br><br><%= match[i].commentary %>';tog();">Commentary</a>
-                                    </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li>
-                                        <a href="#"
-                                           onclick="document.getElementById('text').innerHTML='ScoreCard:<br><br><%= match[i].scorecard %>';tog();">Scorecard</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        <% } %>
-                        <% for(i = day + 1; i <= 6; ++i){ %>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Opponent <%=(i+1)%><b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="#"
-                                           onclick="document.getElementById('text').innerHTML='Commentary:<br><br><%= match[i].team %>';tog();">Opponent</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        <% } %>
+    </header>
+</div>
+<div id="navbar-wrapper">
+    <nav id="navbar"></nav>
+</div>
+<div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">Matches</a></li>
+                <% for(var i = 0; i < match.length; ++i){ %>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Match <%= (i + 1) %><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#"
+                               onclick="document.getElementById('text').innerHTML='Commentary:<br><br><%= match[i].commentary %>';tog();">Commentary</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a href="#"
+                               onclick="document.getElementById('text').innerHTML='ScoreCard:<br><br><%= match[i].scorecard %>';tog();">Scorecard</a>
+                        </li>
                     </ul>
-                </div>
-                <!--/span-->
-                <div class="col-sm-9 col-md-10 main shadow ">
-                    <!--toggle sidebar button-->
-                    <p class="visible-xs">
-                        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">
-                            <i class="glyphicon glyphicon-chevron-left"></i>
-                        </button>
-                    </p>
-                    <h1 class="page-header">Round <%=round%></h1>
-                    <div class="container-fluid text-center" id="text"><br><br>
-                        <span id="text"></span>
-                    </div>
-                </div>
-                <!--/row-->
+                </li>
+                <% } %>
+                <% for(i = day + 1; i <= 6; ++i){ %>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Opponent <%= (i + 1) %><b
+                                class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#"
+                               onclick="document.getElementById('text').innerHTML='Commentary:<br><br><%= match[i].team %>';tog();">Opponent</a>
+                        </li>
+                    </ul>
+                </li>
+                <% } %>
+            </ul>
+        </div>
+        <!--/span-->
+        <div class="col-sm-9 col-md-10 main shadow ">
+            <!--toggle sidebar button-->
+            <p class="visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                </button>
+            </p>
+            <h1 class="page-header">Round <%= round %></h1>
+
+            <div class="container-fluid text-center">
+                <br/><br/>
+                <span id="text"></span>
             </div>
         </div>
-        <!--/.container-->
-        <footer id="footer" class="footer"></footer>
-        <!--[if lt IE 10]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-            your browser</a> to improve your experience.</p>
-        <![endif]-->
-        <!-- build:js(.) scripts/vendor.js -->
-        <!-- bower:js -->
-        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:js(.) scripts/plugins.js -->
-        <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script async src="/javascript/main.js"></script>
-        <!-- endbuild -->
-        <!-- build:js({app,.tmp}) scripts/main.js -->
-        <!-- endbuild -->
-    </body>
+        <!--/row-->
+    </div>
+</div>
+<!--/.container-->
+<footer id="footer" class="footer"></footer>
+<!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+<!-- build:js(.) scripts/plugins.js -->
+<script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script async src="/javascript/main.js"></script>
+<!-- endbuild -->
+<!-- build:js({app,.tmp}) scripts/main.js -->
+<!-- endbuild -->
+</body>
 </html>
