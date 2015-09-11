@@ -84,7 +84,7 @@
                                             {{coach.Name}}</span>
                                             </li>
                                             <li class="list-group-item container-fluid selectedPlayer"
-                                                ng-repeat="selectedPlayer in selectedPlayers"
+                                                ng-repeat="selectedPlayer in getSelectedPlayers()"
                                                 ng-if="selectedPlayer.Type != 'coach'">
                                             <span class="col-xs-2 pull-left no-padding-left clickable"><i
                                                         class="glyphicon glyphicon-remove pull-left"
@@ -143,15 +143,15 @@
             function PlayerController($scope)
             {
                 $scope.players = <%- JSON.stringify(Squad)%>;
-                $scope.selectedPlayers = [];
+                //$scope.selectedPlayers = [];
                 $scope.toggleActive = function (s)
                 {
-                    if (s.active || $scope.selectedPlayers.length < 11)
+                    if (s.active || $scope.getSelectedPlayers().length < 11)
                     {
                         if (s.Type != "coach")
                         {
                             s.active = !s.active;
-                            if (s.active)
+                            /*if (s.active)
                             {
                                 $scope.selectedPlayers.push(s);
                                 $scope.apply();
@@ -167,10 +167,23 @@
                                         break;
                                     }
                                 }
-                            }
+                            }*/
                         }
                     }
                 };
+                $scope.getSelectedPlayers = function()
+                {
+                    var selectedPlayers = [];
+                    for (var i = 0; i < $scope.players.length; ++i)
+                    {
+                        if ($scope.players[i].active)
+                        {
+                            selectedPlayers.push($scope.players[i]);
+                        }
+                    }
+                    return selectedPlayers;
+
+                }
                 for (var i = 0; i < $scope.players.length; ++i)
                 {
                     $scope.players[i].active = false;
@@ -187,13 +200,13 @@
                 $scope.alertMessage = "";
                 $scope.canSelectMore = function ()
                 {
-                    return $scope.selectedPlayers.length < $scope.MAX_PLAYERS;
+                    return $scope.getSelectedPlayers().length < $scope.MAX_PLAYERS;
                 };
                 $scope.isNotValid = function (players)
                 {
                     $scope.alertMessage = "";
                     var valid = true;
-                    var selectedPlayers = $scope.selectedPlayers;
+                    var selectedPlayers = $scope.getSelectedPlayers();
                     var remainingPlayers = $scope.MAX_PLAYERS - selectedPlayers.length;
                     if (remainingPlayers > 0)
                     {
