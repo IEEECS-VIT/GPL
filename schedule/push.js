@@ -19,7 +19,7 @@
 var MongoClient = require('mongodb').MongoClient;
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 
-exports.insert = function (doc, collection, callback)
+exports.insert = function (doc, collectionName, callback)
 {
     var onConnect = function (err, db)
     {
@@ -29,7 +29,7 @@ exports.insert = function (doc, collection, callback)
         }
         else
         {
-            var collection = db.collection(collection);
+            var collection = db.collection(collectionName);
             var onInsert = function (err, docs)
             {
                 db.close();
