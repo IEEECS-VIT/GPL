@@ -115,9 +115,8 @@ form ul * {
 }
 
 .playerlistcontainer {
-    overflow-y: auto;
-    max-height: 320px;
-    max-height: 50vh;
+  height: auto;
+
 }
 
 #players {

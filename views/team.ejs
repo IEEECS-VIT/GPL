@@ -76,7 +76,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-5 aside ">
-                                    <div class="container-fluid affix playerlistcontainer card" id="players">
+                                    <div class="container-fluid playerlistcontainer card card-green" id="players">
                                         <div class="card-content">
                                         <ul class="list-group   ">
                                             <li class="list-group-item container-fluid selectedPlayer coachactive">
@@ -84,7 +84,7 @@
                                             {{coach.Name}}</span>
                                             </li>
                                             <li class="list-group-item container-fluid selectedPlayer"
-                                                ng-repeat="selectedPlayer in getSelectedPlayers()"
+                                                ng-repeat="selectedPlayer in selectedPlayers track by $index"
                                                 ng-if="selectedPlayer.Type != 'coach'">
                                             <span class="col-xs-2 pull-left no-padding-left clickable"><i
                                                         class="glyphicon glyphicon-remove pull-left"
@@ -143,18 +143,35 @@
             function PlayerController($scope)
             {
                 $scope.players = <%- JSON.stringify(Squad)%>;
-                //$scope.selectedPlayers = [];
+                $scope.selectedPlayers = [];
+
+
+                $scope.safeApply = function(fn) {
+                  var phase = this.$root.$$phase;
+                  if(phase == '$apply' || phase == '$digest') {
+                    if(fn && (typeof(fn) === 'function')) {
+                      fn();
+                    }
+                  } else {
+                    this.$apply(fn);
+                  }
+                };
+
                 $scope.toggleActive = function (s)
                 {
-                    if (s.active || $scope.getSelectedPlayers().length < 11)
+                    if (s.active || $scope.selectedPlayers.length < 11)
                     {
                         if (s.Type != "coach")
                         {
                             s.active = !s.active;
-                            /*if (s.active)
+                            if (s.active)
                             {
+                              $scope.safeApply(function() {
+
                                 $scope.selectedPlayers.push(s);
-                                $scope.apply();
+                              });
+
+
                             }
                             else
                             {
@@ -162,28 +179,22 @@
                                 {
                                     if ($scope.selectedPlayers[i]._id == s._id)
                                     {
+                                      $scope.safeApply(function() {
+
                                         $scope.selectedPlayers.splice(i, 1);
-                                        $scope.apply();
+                                      });
+
+
                                         break;
                                     }
+
                                 }
-                            }*/
+                            }
                         }
+
                     }
                 };
-                $scope.getSelectedPlayers = function()
-                {
-                    var selectedPlayers = [];
-                    for (var i = 0; i < $scope.players.length; ++i)
-                    {
-                        if ($scope.players[i].active)
-                        {
-                            selectedPlayers.push($scope.players[i]);
-                        }
-                    }
-                    return selectedPlayers;
 
-                }
                 for (var i = 0; i < $scope.players.length; ++i)
                 {
                     $scope.players[i].active = false;
@@ -192,6 +203,7 @@
                     {
                         $scope.coach = $scope.players[i];
                         $scope.players.splice(i, 1);
+                        i--;
                     }
                 }
                 $scope.searchText = "";
@@ -200,13 +212,13 @@
                 $scope.alertMessage = "";
                 $scope.canSelectMore = function ()
                 {
-                    return $scope.getSelectedPlayers().length < $scope.MAX_PLAYERS;
+                    return $scope.selectedPlayers.length < $scope.MAX_PLAYERS;
                 };
                 $scope.isNotValid = function (players)
                 {
                     $scope.alertMessage = "";
                     var valid = true;
-                    var selectedPlayers = $scope.getSelectedPlayers();
+                    var selectedPlayers = $scope.selectedPlayers;
                     var remainingPlayers = $scope.MAX_PLAYERS - selectedPlayers.length;
                     if (remainingPlayers > 0)
                     {
