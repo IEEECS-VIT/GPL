@@ -97,7 +97,7 @@ a.player-name.accordion-section-title
 
 }
 
-.collapsing {
+.list-group .collapsing {
     -webkit-transition: none;
     transition: none;
 }
