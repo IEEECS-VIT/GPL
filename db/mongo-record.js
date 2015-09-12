@@ -52,6 +52,7 @@ module.exports =
     morale: 0.0,
     streak: 0,
     all_outs: 0,
+    run_rates : [],
     avg_runs_for: 0.0,
     avg_runs_against: 0.0,
     avg_wickets_lost: 0.0,

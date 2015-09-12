@@ -132,7 +132,7 @@
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script async src="/javascript/playerCommon.js"></script>
         <script async>
-            var json_data = JSON.stringify(<%=result%>);
+            var json_data = <%- JSON.stringify(result)%>;
             function string_range(start, stop)
             {
                 var string_array = [];
@@ -145,16 +145,10 @@
 
             Chart.defaults.global.responsive = true;
 
-            var run_rate = []
-            for (i = 0; i < json_data.scores.length; i++)
-            {
-                run_rate.push(json_data.scores[i] / overs[i]);
-            }
-
             var line = $("#line-chart").get(0).getContext("2d");
             var line_data =
             {
-                labels: string_range(1, run_rate.length),
+                labels: string_range(1, json_data.run_rates.length),
                 datasets:
                 [
                     {
@@ -165,7 +159,7 @@
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: run_rate
+                        data: json_data.run_rates
                     }
                 ]
             };

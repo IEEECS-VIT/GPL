@@ -924,6 +924,8 @@ exports.simulate = function (data, callback)
             data.team[+winner].wickets_taken += wickets[+!winner];
             data.team[+!winner].wickets_taken += wickets[+winner];
             data.team[+!winner].wickets_lost += wickets[+!winner];
+            data.team[+winner].run_rates.push((Total[+winner] * 6 / Overs[+winner]));
+            data.team[+!winner].run_rates.push((Total[+!winner] * 6 / Overs[+!winner]));
             data.team[+winner].ratio = data.team[+winner].win / (data.team[+winner].loss || 1 );
             data.team[+!winner].ratio = data.team[+!winner].win / (data.team[+!winner].loss || 1);
             data.team[+!winner].progression.push(data.team[+!winner].progression[process.env.DAY - 2] || 0);
