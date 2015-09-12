@@ -696,7 +696,7 @@ router.get('/trailer', function (req, res) // trailer page
 
 router.get('/schedule', function (req, res) // schedule page
 {
-    res.render('schedule');
+    res.redirect('/');
 });
 
 module.exports = router;
