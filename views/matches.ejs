@@ -1,123 +1,167 @@
+
+
 <!--
-  GraVITas Premier League <gravitaspremierleague@gmail.com>
-  Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
+   GraVITas Premier League <gravitaspremierleague@gmail.com>
+   Copyright (C) 2014  IEEE Computer Society - VIT Student Chapter <ieeecs@vit.ac.in>
 
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   -->
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Match Details | GPL</title>
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <link rel='stylesheet' href='/stylesheets/matchDetails.css'/>
-    <link rel="stylesheet" href="/stylesheets/main.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript">
-        function tog() {
-            $('.row-offcanvas').toggleClass('active');
-        }
-        $(document).ready(function () {
-            $('[data-toggle=offcanvas]').click(function () {
-                $('.row-offcanvas').toggleClass('active');
-            });
-        });
-    </script>
-</head>
-<body>
-<div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
-    <header class="banner" role="banner">
-                <span>
-                    <img src="http://res.cloudinary.com/gpl/general/header-left.jpg" height="60" class="pull-left"/>
-                    <a href="http://www.facebook.com/gravitaspremierleague" target="_blank">
-                        <img class="logo pull-left" src="http://res.cloudinary.com/gpl/general/gpllogo.png"
-                             height="50"/>
-                        <span class="h2 gplheadertext pull-left">graVITas Premier League 2.0</span>
-                    </a>
-                    <img src="http://res.cloudinary.com/gpl/general/header-right.jpg" height="60" class="pull-right"/>
-                </span>
-    </header>
-</div>
-<div id="navbar-wrapper">
-    <nav id="navbar"></nav>
-</div>
-<div class="container-fluid">
-    <div class="row row-offcanvas row-offcanvas-left">
-        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-            <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Matches</a></li>
-                <% for(var i = 0; i < match.length; ++i){ %>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Match <%= (i + 1) %><b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <% if (i <= day) { %>
-                        <li>
-                            <a href="#"
-                               onclick="document.getElementById('text').innerHTML='Commentary:<br><br><%= match[i].commentary %>';tog();">Commentary</a>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li>
-                            <a href="#"
-                               onclick="document.getElementById('text').innerHTML='ScoreCard:<br><br><%= match[i].scorecard %>';tog();">Scorecard</a>
-                        </li>
-                        <% } else { %>
-                        <li>
-                            <a href="#"
-                               onclick="document.getElementById('text').innerHTML='Opponent Team:<br><br><% for (var j = 0;j < match[i].team.length;j++) {
-                                   match[i].team[j].Name
-                               } %>';tog();">Opponent</a>
-                        </li>
+   <head>
+      <title>Match Details | GPL</title>
+      <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+      <link rel="stylesheet" href="/stylesheets/dashboard.css">
+      <link rel="stylesheet" href="/stylesheets/main.css">
+      <link rel="stylesheet" href="/stylesheets/matchDetails.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+   </head>
+   <body>
+      <div>
+      <div id="wrapper" class="container-fluid">
+      <div id="side-navigation">
+         <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
+            <div class="container-fluid">
+               <ul id="sidenav-list" class="nav nav-pills nav-stacked wrapper  ">
+                  <li>
+                     <img src="http://res.cloudinary.com/gpl/general/gpllogo.png" class="img-responsive"
+                        style="margin: 5px;padding-right:10px;">
+                  </li>
+                  <li role="presentation"><a href="/home">Home</a></li>
+                  <li role="presentation"><a href="/home/dashboard">Dashboard</a></li>
+                  <li role="presentation"><a href="/home/team">Team</a></li>
+                  <li role="presentation"  class="active" data-toggle="collapse" data-parent="#sidenav-list" href="#matches">
+                    <a href="#">Matches<span class="caret-container"><span class="caret arrow"></span></span></a></li>
+                    <ul class="nav nav-pills nav-stacked collapse" id="matches">
+                      <% for(var i = 0; i < match.length; ++i){ %>
+
+
+                      <li role="presentation"  data-toggle="collapse" data-parent="#matches" href="#match<%= (i + 1) %>">
+                        <a href="#">Match <%= (i + 1) %><span class="caret-container"><span class="caret arrow"></span></span></a></li>
+                        <ul class="nav nav-pills nav-stacked collapse" id="match<%= (i + 1) %>">
+                          <% if (i <= day) { %>
+                          <li><a id="match<%= (i + 1) %>commentary" href="#"
+                             >Commentary</a></li>
+                             <li>
+                                <a id="match<%= (i + 1) %>scorecard" href="#"
+                                   >Scorecard</a>
+                             </li>
+                             <% } else { %>
+                             <li>
+                                <a id="match<%= (i + 1) %>opponent" href="#">Opponent</a>
+                             </li>
+                             <% } %>
+                             <li class="nav-divider"></li>
+                        </ul>
+
                         <% } %>
                     </ul>
-                </li>
-                <% } %>
-            </ul>
-        </div>
-        <!--/span-->
-        <div class="col-sm-9 col-md-10 main shadow ">
-            <!--toggle sidebar button-->
-            <p class="visible-xs">
-                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">
-                    <i class="glyphicon glyphicon-chevron-left"></i>
-                </button>
-            </p>
-            <h1 class="page-header">Round <%= round %></h1>
 
-            <div class="container-fluid text-center">
-                <br/><br/>
-                <span id="text"></span>
+               </ul>
             </div>
-        </div>
-        <!--/row-->
-    </div>
-</div>
-<!--/.container-->
-<footer id="footer" class="footer"></footer>
-<!--[if lt IE 10]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
-<!-- build:js(.) scripts/vendor.js -->
-<!-- bower:js -->
-<script src="/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- endbower -->
-<!-- endbuild -->
-<!-- build:js(.) scripts/plugins.js -->
-<script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script async src="/javascript/main.js"></script>
-<!-- endbuild -->
-<!-- build:js({app,.tmp}) scripts/main.js -->
-<!-- endbuild -->
-</body>
+         </div>
+      </div>
+      <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
+      <div id="top-navigation"></div>
+      <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 shadow-effect">
+                    <div class="col-md-10 col-md-offset-1">
+                      <div class="page-header custom-header">
+                          <h1>Match Details
+
+                          </h1>
+                      </div>
+
+                        <div id="text">
+                          <small>Select a match to view details</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      </div>
+
+      <!--/.container-->
+
+      <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+         your browser</a> to improve your experience.
+      </p>
+      <![endif]-->
+      <!-- build:js(.) scripts/vendor.js -->
+      <!-- bower:js -->
+      <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+      <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script async src="/javascript/playerCommon.js"></script>
+
+
+      <script type="text/javascript">
+        <% for(var i = 0; i < match.length; ++i){ %>
+          <% if( match[i].hasOwnProperty("team")){ %>
+          $("#match<%= (i + 1) %>opponent").on("click", function () {
+            var html = "<h3>Opponent Team (Match <%= i+1%>)</h3>"
+            + "<ol class='list-group'>"
+          <%  for (var j = 0;j < match[i].team.length;j++) { %>
+               + "<li class='list-group-item'><%=j+1%>. <%= match[i].team[j].Name%><small class='pull-right'><%= match[i].team[j].Type %> </small></li>"
+        <%     } %>
+            + "</ol>";
+             $("#text").html(html);
+          });
+
+          <% } else {if( match[i].hasOwnProperty("commentary") ){ %>
+
+            $("#match<%= (i + 1) %>commentary").on("click", function () {
+
+              var html = "<h3>Commentary (Match <%= i+1%>)</h3>"
+
+              <%  for (var j = 0;j < match[i].commentary.length;j++) { %>
+                + "<%= match[i].commentary[j]%><br/>"
+              <% } %>
+            +"<br/>";
+            $("#text").html(html);
+
+
+            });
+
+            <% }  if( match[i].hasOwnProperty("scorecard") ){ %>
+
+              $("#match<%= (i + 1) %>scorecard").on("click", function () {
+
+                var html = "<h3>Scorecard (Match <%= i+1%>)</h3>"
+
+                <%  for (var j = 0;j < match[i].scorecard.length;j++) { %>
+                  + "<%= match[i].scorecard[j]%><br/>"
+                <% } %>
+              +"<br/>";
+              $("#text").html(html);
+
+
+              });
+
+      <% } } %>
+    <% } %>
+      </script>
+
+      <!-- endbuild -->
+      <!-- build:js({app,.tmp}) scripts/main.js -->
+      <!-- endbuild -->
+   </body>
 </html>
