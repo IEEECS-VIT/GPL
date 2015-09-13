@@ -224,7 +224,6 @@ exports.initSimulation = function (day, masterCallback)
 
     var onFinish = function (err, results)
     {
-        console.log(info);
         var onUpdate = function (error)
         {
             database.close();
@@ -253,7 +252,7 @@ exports.initSimulation = function (day, masterCallback)
                 });
             }
         };
-        database.collection('stats').updateOne({_id: 'info'}, {$set: info}, onUpdate);
+        database.collection('stats').updateOne({_id: 'stats'}, {$set: stats}, onUpdate);
     };
 
     var getAllMatches = function (err, callback)
