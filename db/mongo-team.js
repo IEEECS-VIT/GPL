@@ -248,6 +248,24 @@ exports.shortList = function (callback)
         else
         {
             collection = db.collection(match);
+            var ref =
+            {
+                'users' :
+                {
+                    out : 'round2',
+                    limit : process.env.ONE
+                },
+                'round2' :
+                {
+                    out : 'round3',
+                    limit : 8
+                },
+                'round3' :
+                {
+                    out : null,
+                    limit : 8
+                }
+            };
             var onShortList = function (err, doc)
             {
                 db.close();
@@ -260,7 +278,22 @@ exports.shortList = function (callback)
                     callback(null, doc);
                 }
             };
-            collection.aggregate(onShortList);
+            collection.aggregate([{
+                                    $sort :
+                                        {
+                                            points : -1,
+                                            net_run_rate : -1,
+                                            win : -1,
+                                            loss : 1
+                                        }
+                                    },
+                                    {
+                                        $limit : ref[process.env.MATCH].limit
+                                    },
+                                    {
+                                        $out : ref[process.env.MATCH].out
+                                    }
+                                ], onShortList);
         }
     };
     MongoClient.connect(mongoUri, onConnect);
