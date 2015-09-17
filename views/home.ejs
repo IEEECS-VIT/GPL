@@ -17,311 +17,285 @@
 -->
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Home | GPL</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/stylesheets/dashboard.css">
-    <link rel="stylesheet" href="/stylesheets/home.css"/>
-
-</head>
-<body>
-
-<div>
-    <div id="wrapper" class="container-fluid">
-        <div id="side-navigation">
-            <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
-                <div class="container-fluid">
-                    <ul class="nav nav-pills nav-stacked wrapper  ">
-                        <li>
-                            <img src="http://res.cloudinary.com/gpl/general/gpllogo.png" class="img-responsive"
-                                 style="margin: 5px;padding-right:10px;">
-                        </li>
-                        <li role="presentation" class="active"><a href="/home">Home</a></li>
-                        <li role="presentation"><a href="/home/dashboard">Dashboard</a></li>
-                        <li role="presentation"><a href="/home/team">Team</a></li>
-                        <li role="presentation"><a href="/home/matches">Matches</a></li>
-                    </ul>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Home | GPL</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/dashboard.css">
+        <link rel="stylesheet" href="/stylesheets/home.css"/>
+    </head>
+    <body>
+        <div>
+            <div id="wrapper" class="container-fluid">
+                <div id="side-navigation">
+                    <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
+                        <div class="container-fluid">
+                            <ul class="nav nav-pills nav-stacked wrapper  ">
+                                <li>
+                                    <img src="http://res.cloudinary.com/gpl/general/gpllogo.png" class="img-responsive"
+                                         style="margin: 5px;padding-right:10px;">
+                                </li>
+                                <li role="presentation" class="active"><a href="/home">Home</a></li>
+                                <li role="presentation"><a href="/home/dashboard">Dashboard</a></li>
+                                <li role="presentation"><a href="/home/team">Team</a></li>
+                                <li role="presentation"><a href="/home/matches">Matches</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
-            <div id="top-navigation"></div>
-            <div class="container-fluid">
-                <p class="lead"><%= results.user._id%></p>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="container-fluid ">
-                            <div class="col-xs-10 col-xs-offset-1" id="coachBox">
-                                <% var f = false; for(var i = 0;i < results.team.length;i++) { %>
-                                <% if(results.team[i]._id > 'd') { %>
-                                <img src="http://res.cloudinary.com/gpl/players/coach/<%= results.team[i]._id %>.jpg"
-                                     class="img-responsive"/>
-
-                                <p style="text-align: center;">
-                                    <%= results.team[i].Name %>
-                                </p>
-
-                                <p style="text-align: center;">Coach</p>
-                                <% f = true; } } %>
+                <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
+                    <div id="top-navigation"></div>
+                    <div class="container-fluid">
+                        <p class="lead"><%= results.user._id%></p>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="container-fluid ">
+                                    <div class="col-xs-10 col-xs-offset-1" id="coachBox">
+                                        <% var f = false; for(var i = 0;i < results.team.length;i++) { %>
+                                        <% if(results.team[i]._id > 'd') { %>
+                                        <img src="http://res.cloudinary.com/gpl/players/coach/<%= results.team[i]._id %>.jpg"
+                                             class="img-responsive"/>
+                                        <p style="text-align: center;"><%= results.team[i].Name %></p>
+                                                <p style="text-align: center;">Coach</p>
+                                        <% f = true; } } %>
+                                    </div>
+                                    <div class="col-xs-10 col-xs-offset-1" id="stats">
+                                        <h3>Team Statistics</h3>
+                                        <table>
+                                          <tbody>
+                                            <tr><th>Matches Played:</th><td> <%= results.user.played %></td></tr>
+                                            <tr><th>Matches Won:</th><td> <%= results.user.win %></td></tr>
+                                            <tr><th>Matches Lost:</th><td> <%= results.user.loss %></td></tr>
+                                            <tr><th>Matches Tied:</th><td> <%= results.user.tied %></td></tr>
+                                            <tr><th>Points:</th><td> <%= results.user.points %></td></tr>
+                                            <tr><th>Runs for:</th><td> <%= results.user.runs_for %></td></tr>
+                                            <tr><th>Runs against:</th><td> <%= results.user.runs_against %></td></tr>
+                                            <tr><th>Overs batted:</th><td> <%= results.user.balls_for %></td></tr>
+                                            <tr><th>Overs bowled:</th><td> <%= results.user.balls_against %></td></tr>
+                                            <tr><th>Wickets taken:</th><td> <%= results.user.wickets_taken %></td></tr>
+                                            <tr><th>Wickets lost:</th><td> <%= results.user.wickets_lost %></td></tr>
+                                            <tr><th>Streak:</th><td> <%= results.user.streak %></td></tr>
+                                            <tr><th>All outs:</th><td> <%= results.user.all_outs %></td></tr>
+                                            <tr><th>Average runs scored:</th><td> <%= results.user.avg_runs_for %></td></tr>
+                                            <tr><th>Average runs conceded:</th><td> <%= results.user.avg_runs_against %></td></tr>
+                                            <tr><th>Average wickets taken:</th><td> <%= results.user.avg_wickets_taken %></td></tr>
+                                            <tr><th>Average wickets lost:</th><td> <%= results.user.avg_wickets_lost %></td></tr>
+                                            <tr><th>Average overs batted:</th><td> <%= results.user.avg_overs_for %></td></tr>
+                                            <tr><th>Average overs bowled:</th><td> <%= results.user.avg_overs_against %></td></tr>
+                                            <tr><th>Highest total:</th><td>
+                                            <% if (results.user.played !== 0) { %>
+                                            <%= results.user.highest_total %>
+                                            <% } else {
+                                                0
+                                            } %>
+                                            </td></tr>
+                                            <tr><th>Lowest total:</th><td>
+                                            <% if (results.user.played !== 0) { %>
+                                            <%= results.user.lowest_total %>
+                                            <% } else {
+                                                0
+                                            } %>
+                                            </td></tr>
+                                            <tr><th>Net Run Rate:</th><td> <%= results.user.net_run_rate %></td></tr>
+                                            <tr><th>Win - loss ratio:</th><td> <%= results.user.ratio %></td></tr>
+                                          </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-xs-10 col-xs-offset-1" id="stats">
-                                <h3>Team Statistics</h3>
-
-                                <table>
-                                  <tbody>
-                                    <tr><th>Matches Played:</th><td> <%= results.user.played %></td></tr>
-                                    <tr><th>Matches Won:</th><td> <%= results.user.win %></td></tr>
-                                    <tr><th>Matches Lost:</th><td> <%= results.user.loss %></td></tr>
-                                    <tr><th>Matches Tied:</th><td> <%= results.user.tied %></td></tr>
-                                    <tr><th>Points:</th><td> <%= results.user.points %></td></tr>
-                                    <tr><th>Runs for:</th><td> <%= results.user.runs_for %></td></tr>
-                                    <tr><th>Runs against:</th><td> <%= results.user.runs_against %></td></tr>
-                                    <tr><th>Overs batted:</th><td> <%= results.user.balls_for %></td></tr>
-                                    <tr><th>Overs bowled:</th><td> <%= results.user.balls_against %></td></tr>
-                                    <tr><th>Wickets taken:</th><td> <%= results.user.wickets_taken %></td></tr>
-                                    <tr><th>Wickets lost:</th><td> <%= results.user.wickets_lost %></td></tr>
-                                    <tr><th>Streak:</th><td> <%= results.user.streak %></td></tr>
-                                    <tr><th>All outs:</th><td> <%= results.user.all_outs %></td></tr>
-                                    <tr><th>Average runs scored:</th><td> <%= results.user.avg_runs_for %></td></tr>
-                                    <tr><th>Average runs conceded:</th><td> <%= results.user.avg_runs_against %></td></tr>
-                                    <tr><th>Average wickets taken:</th><td> <%= results.user.avg_wickets_taken %></td></tr>
-                                    <tr><th>Average wickets lost:</th><td> <%= results.user.avg_wickets_lost %></td></tr>
-                                    <tr><th>Average overs batted:</th><td> <%= results.user.avg_overs_for %></td></tr>
-                                    <tr><th>Average overs bowled:</th><td> <%= results.user.avg_overs_against %></td></tr>
-                                    <tr><th>Highest total:</th><td>
-                                    <% if (results.user.played !== 0) { %>
-                                    <%= results.user.highest_total %>
-                                    <% } else {
-                                        0
+                            <div class="col-sm-6">
+                                <ul class="list-group">
+                                    <% k = 4; var z = 1;for(i = 0;i < results.team.length;i++) { %>
+                                    <% if(k < 3){ %>
+                                    <% if(results.team[i]._id < 'd'){ %>
+                                    <div id="box<%= results.team[i]._id %>" class="list-group-item player accordion-section">
+                                        <% if (results.team[i]._id < 'b'){ %>
+                                        <a class="player-name accordion-section-title" href="#<%= results.team[i]._id %>"
+                                           aria-controls="<%= results.team[i]._id %>" data-toggle="collapse">
+                                            <div class="col-xs-2"><img
+                                                        src="http://res.cloudinary.com/gpl/players/bat/<%= results.team[i]._id %>.jpg"
+                                                        class="img-circle pull-left" height="40" width="40"/>
+                                            </div>
+                                            <div class=col-xs-8><span class="h4"><%= results.team[i].Name %></span></div>
+                                        </a>
+                                        <span class="pull-right type">Batsman</span>
+                                        <div class="accordion-section-content" id="<%= results.team[i]._id %>"
+                                             aria-labelledby="<%= results.team[i]._id %>">
+                                             <table >
+                                               <tbody>
+                                                <tr><th>Man of the Matches Won</th>
+                                                <td><%= results.user.stats[results.team[i]._id].MoM %></td></tr>
+                                                <tr><th>Form</th>
+                                                <td><%= results.user.stats[results.team[i]._id].form %></td></tr>
+                                                <tr><th>Morale</th>
+                                                <td><%= results.user.stats[results.team[i]._id].morale %></td></tr>
+                                                <tr><th>Points</th>
+                                                <td><%= results.user.stats[results.team[i]._id].points %></td></tr>
+                                                <tr><th>Fatigue</th>
+                                                <td><%= results.user.stats[results.team[i]._id].fatigue %></td></tr>
+                                                <tr><th>Matches</th>
+                                                <td><%= results.user.stats[results.team[i]._id].matches %></td></tr>
+                                                <tr><th>Catches</th>
+                                                <td><%= results.user.stats[results.team[i]._id].catches %></td></tr>
+                                                <tr><th>Outs</th>
+                                                <td><%= results.user.stats[results.team[i]._id].outs %></td></tr>
+                                                <tr><th>Balls</th>
+                                                <td><%= results.user.stats[results.team[i]._id].balls %></td></tr>
+                                                <tr><th>Highest Runs Scored</th>
+                                                <td><%= results.user.stats[results.team[i]._id].high === -1 ? 0 : results.user.stats[results.team[i]._id].high %>
+                                                </td></tr>
+                                                <tr><th>Fours</th>
+                                                <td><%= results.user.stats[results.team[i]._id].fours %></td></tr>
+                                                <tr><th>Sixes</th>
+                                                <td><%= results.user.stats[results.team[i]._id].sixes %></td></tr>
+                                                <tr><th>Not Outs</th>
+                                                <td><%= results.user.stats[results.team[i]._id].notouts %></td></tr>
+                                                <tr><th>Average</th>
+                                                <td><%= results.user.stats[results.team[i]._id].average %></td></tr>
+                                                <tr><th>Runs Scored</th>
+                                                <td><%= results.user.stats[results.team[i]._id].runs_scored %></td></tr>
+                                                <tr><th>Strike Rate</th>
+                                                <td><%= results.user.stats[results.team[i]._id].strike_rate %></td></tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                        <% } else if(results.team[i]._id < 'c') { %>
+                                        <a class="player-name accordion-section-title" href="#<%= results.team[i]._id %>"
+                                           aria-controls="<%= results.team[i]._id %>" data-toggle="collapse">
+                                            <div class="col-xs-2"><img
+                                                        src="http://res.cloudinary.com/gpl/players/bowl/<%= results.team[i]._id %>.jpg"
+                                                        class="img-circle pull-left" height="40" width="40"/>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <span class="h4"><%= results.team[i].Name %></span>
+                                            </div>
+                                        </a>
+                                        <span class="pull-right type">Bowler</span>
+                                        <div class="accordion-section-content" id="<%= results.team[i]._id %>"
+                                             aria-labelledby="<%= results.team[i]._id %>">
+                                            <table>
+                                                    <tbody>
+                                                         <tr><th>Man of the Matches Won</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].MoM %></td></tr>
+                                                         <tr><th>Form</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].form %></td></tr>
+                                                         <tr><th>Morale</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].morale %></td></tr>
+                                                         <tr><th>Points</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].points %></td></tr>
+                                                         <tr><th>Fatigue</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].fatigue %></td></tr>
+                                                         <tr><th>Matches</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].matches %></td></tr>
+                                                         <tr><th>Catches</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].catches %></td></tr>
+                                                         <tr><th>Outs</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].outs %></td></tr>
+                                                         <tr><th>Balls</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].balls %></td></tr>
+                                                         <tr><th>Highest Runs Scored</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].high === -1 ? 0 : results.user.stats[results.team[i]._id].high %>
+                                                         </td></tr>
+                                                         <tr><th>Fours</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].fours %></td></tr>
+                                                         <tr><th>Sixes</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].sixes %></td></tr>
+                                                         <tr><th>Not Outs</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].notouts %></td></tr>
+                                                         <tr><th>Average</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].average %></td></tr>
+                                                         <tr><th>Runs Scored</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].runs_scored %></td></tr>
+                                                         <tr><th>Strike Rate</th>
+                                                         <td><%= results.user.stats[results.team[i]._id].strike_rate %></td></tr>
+                                                   </tbody>
+                                            </table>
+                                        </div>
+                                        <% } else if(results.team[i]._id < 'd') { %>
+                                        <a class="player-name accordion-section-title" href="#<%= results.team[i]._id %>"
+                                           aria-controls="<%= results.team[i]._id %>" data-toggle="collapse">
+                                            <div class="col-xs-2">
+                                                <img
+                                                        src="http://res.cloudinary.com/gpl/players/all/<%= results.team[i]._id %>.jpg"
+                                                        class="img-circle pull-left" height="40" width="40"/>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <p class="lead"><span class="h4"><%= results.team[i].Name %></span></p>
+                                            </div>
+                                        </a>
+                                        <span class="pull-right type">All Rounder</span>
+                                        <div class="accordion-section-content" id="<%= results.team[i]._id %>"
+                                             aria-labelledby="<%= results.team[i]._id %>">
+                                            <table>
+                                                    <tbody>
+                                                     <tr><th>Man of the Matches Won</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].MoM %></td></tr>
+                                                     <tr><th>Form</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].form %></td></tr>
+                                                     <tr><th>Morale</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].morale %></td></tr>
+                                                     <tr><th>Points</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].points %></td></tr>
+                                                     <tr><th>Fatigue</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].fatigue %></td></tr>
+                                                     <tr><th>Matches</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].matches %></td></tr>
+                                                     <tr><th>Catches</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].catches %></td></tr>
+                                                     <tr><th>Outs</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].outs %></td></tr>
+                                                     <tr><th>Balls</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].balls %></td></tr>
+                                                     <tr><th>Highest Runs Scored</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].high === -1 ? 0 : results.user.stats[results.team[i]._id].high %>
+                                                     </td></tr>
+                                                     <tr><th>Fours</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].fours %></td></tr>
+                                                     <tr><th>Sixes</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].sixes %></td></tr>
+                                                     <tr><th>Not Outs</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].notouts %></td></tr>
+                                                     <tr><th>Average</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].average %></td></tr>
+                                                     <tr><th>Runs Scored</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].runs_scored %></td></tr>
+                                                     <tr><th>Strike Rate</th>
+                                                     <td><%= results.user.stats[results.team[i]._id].strike_rate %></td></tr>
+                                                   </tbody>
+                                            </table>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                    <% k++; } else {
+                                        continue;
                                     } %>
-                                    </td></tr>
-                                    <tr><th>Lowest total:</th><td>
-                                    <% if (results.user.played !== 0) { %>
-                                    <%= results.user.lowest_total %>
-                                    <% } else {
-                                        0
-                                    } %>
-                                    </td></tr>
-                                    <tr><th>Net Run Rate:</th><td> <%= results.user.net_run_rate %></td></tr>
-                                    <tr><th>Win - loss ratio:</th><td> <%= results.user.ratio %></td></tr>
-                                  </tbody>
-                                </table>
+                                    <% } else { if(z == 1) { %>
+                                    <% z = 0;k = 0;i--;} else { %>
+                                    <% k = 0;i--; %>
+                                    <% } } } %>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <ul class="list-group">
-                            <% k = 4; var z = 1;for(i = 0;i < results.team.length;i++) { %>
-                            <% if(k < 3){ %>
-                            <% if(results.team[i]._id < 'd'){ %>
-                            <div id="box<%= results.team[i]._id %>" class="list-group-item player accordion-section">
-                                <% if (results.team[i]._id < 'b'){ %>
-                                <a class="player-name accordion-section-title" href="#<%= results.team[i]._id %>"
-                                   aria-controls="<%= results.team[i]._id %>" data-toggle="collapse">
-                                    <div class="col-xs-2"><img
-                                                src="http://res.cloudinary.com/gpl/players/bat/<%= results.team[i]._id %>.jpg"
-                                                class="img-circle pull-left" height="40" width="40"/>
-                                    </div>
-                                    <div class=col-xs-8><span class="h4"><%= results.team[i].Name %></span></div>
-                                </a>
-
-                                <span class="pull-right type">Batsman</span>
-
-                                <div class="accordion-section-content" id="<%= results.team[i]._id %>"
-                                     aria-labelledby="<%= results.team[i]._id %>">
-                                     <table >
-                                       <tbody>
-                                        <tr><th>Man of the Matches Won</th>
-
-                                        <td><%= results.user.stats[results.team[i]._id].MoM %></td></tr>
-                                        <tr><th>Form</th>
-                                        <td><%= results.user.stats[results.team[i]._id].form %></td></tr>
-                                        <tr><th>Morale</th>
-                                        <td><%= results.user.stats[results.team[i]._id].morale %></td></tr>
-                                        <tr><th>Points</th>
-                                        <td><%= results.user.stats[results.team[i]._id].points %></td></tr>
-                                        <tr><th>Fatigue</th>
-                                        <td><%= results.user.stats[results.team[i]._id].fatigue %></td></tr>
-                                        <tr><th>Matches</th>
-                                        <td><%= results.user.stats[results.team[i]._id].matches %></td></tr>
-                                        <tr><th>Catches</th>
-                                        <td><%= results.user.stats[results.team[i]._id].catches %></td></tr>
-
-                                        <tr><th>Outs</th>
-                                        <td><%= results.user.stats[results.team[i]._id].outs %></td></tr>
-                                        <tr><th>Balls</th>
-                                        <td><%= results.user.stats[results.team[i]._id].balls %></td></tr>
-                                        <tr><th>Highest Runs Scored</th>
-                                        <td><%= results.user.stats[results.team[i]._id].high === -1 ? 0 : results.user.stats[results.team[i]._id].high %>
-
-
-                                        </td></tr>
-                                        <tr><th>Fours</th>
-                                        <td><%= results.user.stats[results.team[i]._id].fours %></td></tr>
-                                        <tr><th>Sixes</th>
-                                        <td><%= results.user.stats[results.team[i]._id].sixes %></td></tr>
-                                        <tr><th>Not Outs</th>
-                                        <td><%= results.user.stats[results.team[i]._id].notouts %></td></tr>
-                                        <tr><th>Average</th>
-                                        <td><%= results.user.stats[results.team[i]._id].average %></td></tr>
-                                        <tr><th>Runs Scored</th>
-                                        <td><%= results.user.stats[results.team[i]._id].runs_scored %></td></tr>
-                                        <tr><th>Strike Rate</th>
-                                        <td><%= results.user.stats[results.team[i]._id].strike_rate %></td></tr>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                <% } else if(results.team[i]._id < 'c') { %>
-                                <a class="player-name accordion-section-title" href="#<%= results.team[i]._id %>"
-                                   aria-controls="<%= results.team[i]._id %>" data-toggle="collapse">
-                                    <div class="col-xs-2"><img
-                                                src="http://res.cloudinary.com/gpl/players/bowl/<%= results.team[i]._id %>.jpg"
-                                                class="img-circle pull-left" height="40" width="40"/>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <span class="h4"><%= results.team[i].Name %></span>
-                                    </div>
-                                </a>
-
-                                <span class="pull-right type">Bowler</span>
-
-                                <div class="accordion-section-content" id="<%= results.team[i]._id %>"
-                                     aria-labelledby="<%= results.team[i]._id %>">                         <table >
-                                                                <tbody>
-                                                                 <tr><th>Man of the Matches Won</th>
-
-                                                                 <td><%= results.user.stats[results.team[i]._id].MoM %></td></tr>
-                                                                 <tr><th>Form</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].form %></td></tr>
-                                                                 <tr><th>Morale</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].morale %></td></tr>
-                                                                 <tr><th>Points</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].points %></td></tr>
-                                                                 <tr><th>Fatigue</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].fatigue %></td></tr>
-                                                                 <tr><th>Matches</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].matches %></td></tr>
-                                                                 <tr><th>Catches</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].catches %></td></tr>
-
-                                                                 <tr><th>Outs</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].outs %></td></tr>
-                                                                 <tr><th>Balls</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].balls %></td></tr>
-                                                                 <tr><th>Highest Runs Scored</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].high === -1 ? 0 : results.user.stats[results.team[i]._id].high %>
-
-
-                                                                 </td></tr>
-                                                                 <tr><th>Fours</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].fours %></td></tr>
-                                                                 <tr><th>Sixes</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].sixes %></td></tr>
-                                                                 <tr><th>Not Outs</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].notouts %></td></tr>
-                                                                 <tr><th>Average</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].average %></td></tr>
-                                                                 <tr><th>Runs Scored</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].runs_scored %></td></tr>
-                                                                 <tr><th>Strike Rate</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].strike_rate %></td></tr>
-                                                               </tbody>
-                                                             </table></div>
-                                <% } else if(results.team[i]._id < 'd') { %>
-                                <a class="player-name accordion-section-title" href="#<%= results.team[i]._id %>"
-                                   aria-controls="<%= results.team[i]._id %>" data-toggle="collapse">
-                                    <div class="col-xs-2">
-                                        <img
-                                                src="http://res.cloudinary.com/gpl/players/all/<%= results.team[i]._id %>.jpg"
-                                                class="img-circle pull-left" height="40" width="40"/>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <p class="lead"><span class="h4"><%= results.team[i].Name %></span></p>
-                                    </div>
-                                </a>
-                                <span class="pull-right type">All Rounder</span>
-
-                                <div class="accordion-section-content" id="<%= results.team[i]._id %>"
-                                     aria-labelledby="<%= results.team[i]._id %>">                         <table >
-                                                                <tbody>
-                                                                 <tr><th>Man of the Matches Won</th>
-
-                                                                 <td><%= results.user.stats[results.team[i]._id].MoM %></td></tr>
-                                                                 <tr><th>Form</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].form %></td></tr>
-                                                                 <tr><th>Morale</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].morale %></td></tr>
-                                                                 <tr><th>Points</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].points %></td></tr>
-                                                                 <tr><th>Fatigue</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].fatigue %></td></tr>
-                                                                 <tr><th>Matches</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].matches %></td></tr>
-                                                                 <tr><th>Catches</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].catches %></td></tr>
-
-                                                                 <tr><th>Outs</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].outs %></td></tr>
-                                                                 <tr><th>Balls</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].balls %></td></tr>
-                                                                 <tr><th>Highest Runs Scored</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].high === -1 ? 0 : results.user.stats[results.team[i]._id].high %>
-
-
-                                                                 </td></tr>
-                                                                 <tr><th>Fours</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].fours %></td></tr>
-                                                                 <tr><th>Sixes</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].sixes %></td></tr>
-                                                                 <tr><th>Not Outs</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].notouts %></td></tr>
-                                                                 <tr><th>Average</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].average %></td></tr>
-                                                                 <tr><th>Runs Scored</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].runs_scored %></td></tr>
-                                                                 <tr><th>Strike Rate</th>
-                                                                 <td><%= results.user.stats[results.team[i]._id].strike_rate %></td></tr>
-                                                               </tbody>
-                                                             </table></div>
-                                <% } %>
-                            </div>
-                            <% k++; } else {
-                                continue;
-                            } %>
-                            <% } else { if(z == 1) { %>
-                            <% z = 0;k = 0;i--;} else { %>
-                            <% k = 0;i--; %>
-                            <% } } } %>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<footer id="footer" class="footer"></footer>
-<!--[if lt IE 10]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
-<!-- build:js(.) scripts/vendor.js -->
-<!-- bower:js -->
-<!-- endbower -->
-<!-- endbuild -->
-<!-- build:js(.) scripts/plugins.js -->
-<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-<script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script async src="/javascript/playerCommon.js"></script>
-<script type="text/javascript" src="/javascript/home.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-    <%for(var i=0 ; i<results.user.squad.length ; i++){%>
-    $('#box<%=results.user.squad[i]%>').css('background-color', '#a5d6ac');
-    <%}%>
-            } );
-</script>
-</body>
+        <footer id="footer" class="footer"></footer>
+        <!--[if lt IE 10]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+            your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script async src="/javascript/playerCommon.js"></script>
+        <script type="text/javascript" src="/javascript/home.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+            <%for(var i=0 ; i<results.user.squad.length ; i++){%>
+            $('#box<%=results.user.squad[i]%>').css('background-color', '#a5d6ac');
+            <%}%>
+                    } );
+        </script>
+    </body>
 </html>

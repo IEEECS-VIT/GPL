@@ -89,14 +89,11 @@
                     </div>
                   </div>
           </div>
-          <!--/.container-->
           <!--[if lt IE 10]>
           <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
              your browser</a> to improve your experience.
           </p>
           <![endif]-->
-          <!-- build:js(.) scripts/vendor.js -->
-          <!-- bower:js -->
           <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
           <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
           <script async src="/javascript/playerCommon.js"></script>
@@ -113,7 +110,6 @@
                         + "    <span class='h4'><%= match[i].team[j].Name %></span>"
                         + "    <small class='pull-right'><%= match[i].team[j].Type %> </small>"
                         + "  </li>"
-
                         <%  } %>
                         + "</ol>";
                          $("#text").html(html);
@@ -139,9 +135,6 @@
                     <% } %>
                 <%} }%>
           </script>
-          <!-- endbuild -->
-          <!-- build:js({app,.tmp}) scripts/main.js -->
-          <!-- endbuild -->
         </div>
       </div>
    </body>
