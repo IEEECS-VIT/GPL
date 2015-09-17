@@ -104,10 +104,16 @@
                 <% for(var i = 0; i < match.length; ++i){ %>
                     <% if( match[i].hasOwnProperty("team")){ %>
                         $("#match<%= (i + 1) %>opponent").on("click", function () {
-                        var html = "<h3>Opponent Team (Match <%= i+1%>)</h3>"
+                        var html = "<h3>Opponent Team: <%= match[i]._id%> (Match <%= i+1%>)</h3>"
                         + "<ol class='list-group'>"
                         <%  for (var j = 0;j < match[i].team.length; ++j) { %>
-                           + "<li class='list-group-item'><%=j+1%>. <%= match[i].team[j].Name%><small class='pull-right'><%= match[i].team[j].Type %> </small></li>"
+                        + " <li class='list-group-item'>"
+                        + "    <img src='http://res.cloudinary.com/gpl/players/<%= match[i].team[j].Type %>/<%= match[i].team[j]._id %>.jpg' class='img-circle' height='40' width='40'/>"
+
+                        + "    <span class='h4'><%= match[i].team[j].Name %></span>"
+                        + "    <small class='pull-right'><%= match[i].team[j].Type %> </small>"
+                        + "  </li>"
+
                         <%  } %>
                         + "</ol>";
                          $("#text").html(html);
