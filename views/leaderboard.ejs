@@ -29,7 +29,9 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="/stylesheets/main.css">
+
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+    <link rel="stylesheet" href="/stylesheets/rules.css">
     <link rel="stylesheet" href="/stylesheets/leaderboard.css">
 
     <!-- endbuild -->
@@ -45,10 +47,11 @@
             <div class="container-fluid">
                 <ul class="nav nav-pills nav-stacked wrapper  ">
                     <li>
-                        <img src="http://res.cloudinary.com/gpl/general/gpllogo.png" class="img-responsive" style="margin: 5px;padding-right:10px;">
+                        <img src="http://res.cloudinary.com/gpl/general/gpllogo.png" class="img-responsive"
+                             style="margin: 5px;padding-right:10px;">
                     </li>
                     <li role="presentation"><a href="/home">Home</a></li>
-                    <li role="presentation" class="active"><a href="/home/dashboard">Dashboard</a></li>
+                    <li role="presentation"><a href="/home/dashboard">Dashboard</a></li>
                     <li role="presentation"><a href="/home/team">Team</a></li>
                     <li role="presentation"><a href="/home/matches">Matches</a></li>
                 </ul>
@@ -58,18 +61,17 @@
     <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
         <div id="top-navigation"></div>
         <div class="container-fluid wrapper stats-view">
-<!--            <div class="col-md-12">
-                <div class="row">
 
-                </div>
-            </div>
---><div class="row">
-                <div class="col-sm-offset-3 page-header text-left">
-                    <h1>Leaderboard<br>
-                        <small class="small-class">graVITas Premier League 2.0, graVITas 2015</small>
-                    </h1>
-                </div>
-            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 shadow-effect">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="page-header rules-header">
+                                <h1>Leaderboard <br>
+                                    <small class="small-class">graVITas Premier League 2.0, graVITas 2015</small>
+                                </h1>
+
+                            </div>
             <% if(leaderboard[0].points === 0) { %>
             <div class="row">
                 <h3 class="col-sm-offset-3 text-info">
@@ -77,7 +79,7 @@
                 </h3>
             </div>
             <% } else { %>
-            <div class="col-sm-offset-2 col-sm-8">
+
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered text-center">
                         <thead>
@@ -117,9 +119,7 @@
                     </table>
                 </div>
             </div>
-            <div class="row">
-                <div></div>
-            </div>
+
         </div>
     </div>
 </div>
@@ -133,7 +133,7 @@
 <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- endbuild -->
 <!-- build:js({app,.tmp}) scripts/main.js -->
-<script async src="/javascript/main.js"></script>
+<script async src="/javascript/playerCommon.js"></script>
 <!-- endbuild -->
 </body>
 </html>
