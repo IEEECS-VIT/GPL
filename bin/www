@@ -57,3 +57,20 @@ var onBind = function ()
 };
 
 var server = app.listen(app.get('port'), onBind);
+process.on('SIGINT', function(err){
+    if(err)
+    {
+        console.log(err.message);
+    }
+    require('../db/database')(function(err, db){
+        if(err)
+        {
+            console.log(err.message);
+        }
+        else
+        {
+            db.close();
+            process.exit(0);
+        }
+    });
+});

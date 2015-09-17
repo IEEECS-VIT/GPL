@@ -19,78 +19,70 @@
 var collection;
 var path = require('path');
 var async = require('async');
-var MongoClient = require('mongodb').MongoClient;
-var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 
-exports.insert = function (doc, callback) {
-    var onConnect = function (err, db)
+require('./database')(function(err, db){
+    if(err)
     {
-        if (err)
+        throw err;
+    }
+    else
+    {
+        exports.insert = function (doc, callback)
         {
-            callback(err);
-        }
-        else
-        {
-            collection = db.collection('features');
-            var onInsert = function (err, docs)
-            {
-                db.close();
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else
-                {
-                    callback(null, docs)
-                }
-            };
-            collection.insertOne(doc, {w: 1}, onInsert);
-        }
-    };
-    MongoClient.connect(mongoUri, onConnect);
-};
+                    collection = db.collection('features');
+                    var onInsert = function (err, docs)
+                    {
+                        if (err)
+                        {
+                            callback(err, null);
+                        }
+                        else
+                        {
+                            callback(null, docs)
+                        }
+                    };
+                    collection.insertOne(doc, {w: 1}, onInsert);
+        };
 
-exports.getInfo = function (callback) {
-    var onConnect = function (err, db)
-    {
-        if (err)
+        exports.getInfo = function (callback)
         {
-            callback(err);
-        }
-        else
-        {
-            collection = db.collection('stats');
-            var onGetInfo = function (err, doc)
-            {
-                db.close();
-                if (err)
-                {
-                    callback(err);
-                }
-                else
-                {
-                    callback(null, doc);
-                }
-            };
-            collection.findOne(onGetInfo);
-        }
-    };
-    MongoClient.connect(mongoUri, onConnect);
-};
+                    collection = db.collection('stats');
+                    var onGetInfo = function (err, doc)
+                    {
+                        if (err)
+                        {
+                            callback(err);
+                        }
+                        else
+                        {
+                            callback(null, doc);
+                        }
+                    };
+                    collection.findOne(onGetInfo);
+        };
 
-exports.notify = function (callback) {
-    var onConnect = function (err, db)
-    {
-        if (err)
+        exports.notify = function (callback)
         {
-            callback(err);
-        }
-        else
+                    collection = db.collection('features');
+                    var onFind = function (err, docs)
+                    {
+                        if (err)
+                        {
+                            callback(err);
+                        }
+                        else
+                        {
+                            callback(null, docs);
+                        }
+                    };
+                    collection.find().toArray(onFind);
+        };
+
+        exports.simulate = function (callback)
         {
-            collection = db.collection('features');
-            var onFind = function (err, docs)
+            var simulationControl = require(path.join(__dirname, '..', 'worker', 'simulation-controller'));
+            var onSimulate = function (err, docs)
             {
-                db.close();
                 if (err)
                 {
                     callback(err);
@@ -100,83 +92,13 @@ exports.notify = function (callback) {
                     callback(null, docs);
                 }
             };
-            collection.find().toArray(onFind);
-        }
-    };
-    MongoClient.connect(mongoUri, onConnect);
-};
+            simulationControl.initSimulation(process.env.DAY || 1, onSimulate);
+        };
 
-exports.simulate = function (callback)
-{
-    var simulationControl = require(path.join(__dirname, '..', 'worker', 'simulation-controller'));
-    var onSimulate = function (err, docs)
-    {
-        if (err)
+        exports.forgotCount = function(option, callback)
         {
-            callback(err);
-        }
-        else
-        {
-            callback(null, docs);
-        }
-    };
-    simulationControl.initSimulation(process.env.DAY || 1, onSimulate);
-};
-
-exports.forgotCount = function(option, callback)
-{
-      var onConnect = function(err, db)
-      {
-            if(err)
-            {
-                callback(err);
-            }
-            else
-            {
-                collection = db.collection('info');
-                var onInc = function(err, doc)
-                {
-                    db.close();
-                    if(err)
-                    {
-                        callback(err);
-                    }
-                    else
-                    {
-                        callback(null, doc.value);
-                    }
-                };
-                collection.findOneAndUpdate({_id : 'info'}, {$inc : option}, onInc);
-            }
-      };
-      MongoClient.connect(mongoUri, onConnect);
-};
-
-exports.warnEmptyTeams = function(callback)
-{
-    var onConnect = function(err, db)
-    {
-        if(err)
-        {
-            callback(err);
-        }
-        else
-        {
-            collection = db.collection('users');
-            var onFind = function(err, docs)
-            {
-                if (err)
-                {
-                    callback(err);
-                }
-                else
-                {
-                    var onMap = function(arg, mapCallback)
-                    {
-                        mapCallback(null, arg.email);
-                    };
-
-                    var onFinish = function(err, result)
+                    collection = db.collection('info');
+                    var onInc = function(err, doc)
                     {
                         if(err)
                         {
@@ -184,14 +106,100 @@ exports.warnEmptyTeams = function(callback)
                         }
                         else
                         {
-                            callback(null, result);
+                            callback(null, doc.value);
                         }
                     };
-                    async.map(docs, onMap, onFinish);
-                }
-            };
-            collection.find({team : []}, {email : 1, _id : 0}).toArray(onFind);
-        }
-    };
-    MongoClient.connect(mongoUri, onConnect);
-};
+                    collection.findOneAndUpdate({_id : 'info'}, {$inc : option}, onInc);
+        };
+
+        exports.warnEmptyTeams = function(callback)
+        {
+                    collection = db.collection('users');
+                    var onFind = function(err, docs)
+                    {
+                        if (err)
+                        {
+                            callback(err);
+                        }
+                        else
+                        {
+                            var onMap = function(arg, mapCallback)
+                            {
+                                mapCallback(null, arg.email);
+                            };
+
+                            var onFinish = function(err, result)
+                            {
+                                if(err)
+                                {
+                                    callback(err);
+                                }
+                                else
+                                {
+                                    callback(null, result);
+                                }
+                            };
+                            async.map(docs, onMap, onFinish);
+                        }
+                    };
+                    collection.find({team : []}, {email : 1, _id : 0}).toArray(onFind);
+        };
+        exports.match = function (day, team, callback)
+        {
+            var filter =
+                {
+                    $or:
+                        [
+                            {
+                                Team_1: team
+                            },
+                            {
+                                Team_2: team
+                            }
+                        ]
+                };
+            if (day <= process.env.DAY)
+            {
+                collection = db.collection('matchday' + day);
+                var onMatch = function (err, doc)
+                {
+                    if (err)
+                    {
+                        callback(err);
+                    }
+                    else
+                    {
+                        callback(null, doc);
+                    }
+                };
+                collection.findOne(filter, onMatch);
+            }
+            else
+            {
+                var onOpponent = function (err, doc)
+                {
+                    if (err)
+                    {
+                        console.log(err.message);
+                    }
+                    else
+                    {
+                        var onGetSquad = function (err, squad)
+                        {
+                            if (err)
+                            {
+                                callback(err);
+                            }
+                            else
+                            {
+                                callback(null, squad);
+                            }
+                        };
+                        mongoTeam.squad({team_no: doc}, onGetSquad);
+                    }
+                };
+                mongoTeam.opponent(day, team, onOpponent);
+            }
+        };
+    }
+});

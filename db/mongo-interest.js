@@ -16,23 +16,17 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var MongoClient = require('mongodb').MongoClient;
-var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
-
-exports.insert = function (doc, callback)
+require('./database')(function(err, db)
 {
-    var onConnect = function (err, db)
+    if(err)
     {
-        if (err)
-        {
-            callback(err);
-        }
-        else
-        {
-            var collection = db.collection('interest');
-            var onInsert = function (err, docs)
-            {
-                db.close();
+        throw err;
+    }
+    exports.insert = function (doc, callback)
+    {
+         var collection = db.collection('interest');
+         var onInsert = function (err, docs)
+         {
                 if (err)
                 {
                     callback(err, null);
@@ -41,27 +35,15 @@ exports.insert = function (doc, callback)
                 {
                     callback(null, docs);
                 }
-            };
-            collection.insertOne(doc, {w: 1}, onInsert);
-        }
+         };
+         collection.insertOne(doc, {w: 1}, onInsert);
     };
-    MongoClient.connect(mongoUri, onConnect);
-};
 
-exports.quantify = function(callback)
-{
-    var onConnect = function (err, db)
+    exports.quantify = function(callback)
     {
-        if (err)
-        {
-            callback(err);
-        }
-        else
-        {
-            var collection = db.collection('interest');
-            var onCount = function (err, count)
-            {
-                db.close();
+         var collection = db.collection('interest');
+         var onCount = function (err, count)
+         {
                 if (err)
                 {
                     callback(err, null);
@@ -70,9 +52,7 @@ exports.quantify = function(callback)
                 {
                     callback(null, count);
                 }
-            };
-            collection.count(onCount);
-        }
+         };
+         collection.count(onCount);
     };
-    MongoClient.connect(mongoUri, onConnect);
-};
+});
