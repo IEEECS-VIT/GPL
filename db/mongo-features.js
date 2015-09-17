@@ -19,6 +19,7 @@
 var collection;
 var path = require('path');
 var async = require('async');
+var mongoTeam = require('./mongo-team');
 
 require('./database')(function(err, db){
     if(err)
