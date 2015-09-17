@@ -90,8 +90,6 @@ router.get('/', function (req, res) {
                         }
                         else
                         {
-                            console.log(documents);
-                            console.log(doc);
                             res.render('home', {results: {team : documents, user : doc}});
                         }
                     };
