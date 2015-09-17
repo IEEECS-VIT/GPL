@@ -316,5 +316,12 @@
 <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script async src="/javascript/playerCommon.js"></script>
 <script type="text/javascript" src="/javascript/home.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    <%for(var i=0 ; i<results.user.squad.length ; i++){%>
+    $('#box<%=results.user.squad[i]%>').css('background-color', '#a5d6ac');
+    <%}%>
+            } );
+</script>
 </body>
 </html>
