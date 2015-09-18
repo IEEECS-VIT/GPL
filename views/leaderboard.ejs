@@ -44,6 +44,7 @@
                                 <li role="presentation"><a href="/home">Home</a></li>
                                 <li role="presentation"><a href="/home/dashboard">Dashboard</a></li>
                                 <li role="presentation"><a href="/home/team">Team</a></li>
+                                <li role="presentation"><a href="/home/stats">Statistics</a></li>
                                 <li role="presentation"><a href="/home/matches">Matches</a></li>
                             </ul>
                         </div>
@@ -62,10 +63,10 @@
                                             </h1>
                                         </div>
                         <% if(leaderboard[0].points === 0) { %>
-                        <div class="row">
-                            <h3 class="col-sm-offset-3 text-info">
+                        <div class="container">
+                            <p>
                                 The Leader Board will be active as soon as the games begin!
-                            </h3>
+                            </p>
                         </div>
                         <% } else { %>
                                         <div class="table-responsive">
