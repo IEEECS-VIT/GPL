@@ -128,12 +128,12 @@
                         <% }else {%>
                         html = "<h3>Commentary (Match <%= i+1%>)</h3>"
                                 <%    var j;%>
-                                <% for(j=0;j<7; j++){ %>
+                                <% for(j = 0; j < 5; ++j){ %>
 
                                 + "<%=match[i].commentary[j] %><br/>"
                                 <%}%>
-                                + "<div class='col-sm-8 col-sm-offset-2'> <div class='row'> <table class='table table-bordered'> <thead><th><%=match[i].commentary[7].split("|")[0]%></th> <th><%=match[i].commentary[7].split("|")[1]%></th>  </thead> <tbody>"
-                                <%for(var k=8;k<19; k++){%>
+                                + "<div class='col-sm-8 col-sm-offset-2'> <div class='row'> <table class='table table-bordered'> <thead><th><%=match[i].commentary[5].split("|")[0]%></th> <th><%=match[i].commentary[5].split("|")[1]%></th>  </thead> <tbody>"
+                                <%for(var k = 6; k < 17; ++k){%>
 
                                 <% var cols = match[i].commentary[k].split("|");%>
                                 <% var c1 = cols[0]%>
@@ -141,7 +141,7 @@
                                 + "<tr><td><%=c1%></td><td><%=c2%></td></tr>"
                                 <%}%>
                                 + "</tbody></table></div></div><br/><div class='row'><div class='col-xs-12'><pre>"
-                                <%for(var m=19;m<match[i].commentary.length; m++){%>
+                                <%for(var m = 17; m < match[i].commentary.length; ++m){%>
                                 + "<%=match[i].commentary[m] %><br/>"
                                 <%}%>
                                 + "</pre></div></div>"
@@ -222,7 +222,7 @@
                                 <%}%>
                                 <% for (j=44;j<50;j++) {%>
                                 + "<tr>"
-                                <% for (k=0;k<match[i].scorecard[j].length;k++){%>
+                                <% for (k=0;k<(match[i].scorecard[j] || '').length;k++){%>
                                 + "<td><%= match[i].scorecard[j][k]%></td>"
                                 <%}%>
                                 + "</tr>"

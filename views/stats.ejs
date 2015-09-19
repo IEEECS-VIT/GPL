@@ -72,7 +72,7 @@
                             <tr><th>Fours </th> <td><%= stats.four %></td></tr>
                             <tr><th>Sixes </th> <td><%= stats.six %></td></tr>
                             <%if (stats.high.total.team != ''){%>
-                            <tr><th>Highest Runs Scored </th> <td><br/><%= stats.high.total.value %>by <%= stats.high.total.team %></td></tr>
+                            <tr><th>Highest Runs Scored </th> <td><br/><%= stats.high.total.value %> by <%= stats.high.total.team %></td></tr>
                             <%}if (stats.low.team != ''){%>
                             <tr><th>Lowest Runs Scored </th> <td><%= stats.low.value %> by <%= stats.low.team %></td></tr>
                             <%}%>
@@ -82,7 +82,7 @@
                             <p class="lead">Orange Cap Holder:</p>
                             <table class="table table-bordered">
                             <tr><th>Player </th> <td><%= stats.orange.player %></td></tr>
-                            <tr><th>Runs Scored </th> <td><%= stats.orange.run %></td></tr>
+                            <tr><th>Runs Scored </th> <td><%= stats.orange.runs %></td></tr>
                             <tr><th>Balls Faced </th> <td><%= stats.orange.balls %></td></tr>
                             <tr><th>Average </th> <td><%= stats.orange.avg %></td></tr>
                             <tr><th>Strike Rate </th> <td><%= stats.orange.sr %></td></tr>
@@ -90,13 +90,13 @@
                           </table>
                             <p class="lead">Purple Cap Holder:</p>
                             <table class="table table-bordered">
-                            <tr><th>Player </th> <td><%= stats.orange.player %></td></tr>
-                            <tr><th>Wickets Taken </th> <td><%= stats.orange.run %></td></tr>
-                            <tr><th>Balls Bowled </th> <td><%= stats.orange.balls %></td></tr>
-                            <tr><th>Economy </th> <td><%= stats.orange.economy %></td></tr>
-                            <tr><th>Average </th> <td><%= stats.orange.avg %></td></tr>
-                            <tr><th>Strike Rate </th> <td><%= stats.orange.sr %></td></tr>
-                            <tr><th>Team </th> <td><%= stats.orange.team %></td></tr>
+                            <tr><th>Player </th> <td><%= stats.purple.player %></td></tr>
+                            <tr><th>Wickets Taken </th> <td><%= stats.purple.wickets %></td></tr>
+                            <tr><th>Balls Bowled </th> <td><%= stats.purple.balls %></td></tr>
+                            <tr><th>Economy </th> <td><%= stats.purple.economy %></td></tr>
+                            <tr><th>Average </th> <td><%= stats.purple.avg %></td></tr>
+                            <tr><th>Strike Rate </th> <td><%= stats.purple.sr %></td></tr>
+                            <tr><th>Team </th> <td><%= stats.purple.team %></td></tr>
                           </table>
                             <p class="lead">Today's Best Performance </th> <td></td></tr>
                               <table class="table">

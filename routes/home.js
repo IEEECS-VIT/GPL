@@ -213,7 +213,6 @@ router.post('/getTeam', function (req, res) {
         }
         else
         {
-            console.log(documents);
             res.redirect('/home');
         }
     };
