@@ -22,16 +22,9 @@
         <title>Players | GPL</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css(.) styles/vendor.css -->
-        <!-- bower:css -->
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:css(.tmp) styles/main.css -->
         <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="/stylesheets/main.css"/>
         <link rel="stylesheet" href="/stylesheets/playerselect.css"/>
-        <!-- endbuild -->
     </head>
     <body ng-app="formApp">
         <!--[if lt IE 7]>
@@ -50,12 +43,7 @@
                 </span>
             </header>
         </div>
-
-        <div id="navbar-wrapper">
-            <nav id="navbar"></nav>
-        </div>
-
-        <!-- Add your site or application content here -->
+        <div id="navbar-wrapper"><nav id="navbar"></nav></div>
         <div class="container" ng-controller="PlayerController" ng-hide="">
             <div class="col-md-8 col-md-offset-2 shadow-effect " id="main">
                 <div class="col-md-10 col-md-offset-1">
@@ -82,17 +70,13 @@
                                     {{selectedPlayer.Name}}</span>
                                     </li>
                                 </ul>
-
                                 <p>{{alertMessage}}</p>
-
                                 <p><strong>Remaining Amount: </strong><span>{{remaining() | number}}</span></p>
-
                                 <form name="playersForm" method="post"
                                       action="/home/getTeam">
                                     <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
                                     <input type="hidden" ng-repeat="selectedPlayer in computeSelectedPlayers()"
                                            id="{{'t'+($index+1)}}" name="{{'p'+($index+1)}}" value="{{selectedPlayer._id}}"/>
-
                                     <input type="submit" class="btn btn-primary" ng-class="{disabled:isNotValid()}"
                                            value="Submit"
                                            ng-disabled="isNotValid()"/>
@@ -113,7 +97,6 @@
                                         <li role="presentation" ng-class="{active:displayPlayersList=='Coaches'}"
                                             ng-click="displayPlayersList='Coaches'"><a href="#">Coaches</a></li>
                                     </ul>
-
                                     <div ng-show="displayPlayersList == 'Batsmen'" class="playerlist">
                                         <h2>Batsmen</h2>
                                         <li ng-repeat="player in players|filter:searchText|orderBy:'-Cost'"
@@ -121,13 +104,10 @@
                                             ng-click="toggleActive(player)"
                                             ng-class="{'batsmanactive':player.active, 'text-muted limit-exceeded': !canBeBought(player) && !player.active}"
                                             unselectable="on" ng-if="player._id[0]=='a'">
-
                                             <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
-
                                             <span>{{player.Name}}</span><span class="pull-right">{{player.Price}}</span>
                                         </li>
                                     </div>
-
                                     <div ng-show="displayPlayersList == 'Bowlers'" class="playerlist">
                                         <h2>Bowlers</h2>
                                         <li ng-repeat="player in players|filter:searchText|orderBy:'-Cost'"
@@ -140,7 +120,6 @@
                                             <span>{{player.Name}}</span><span class="pull-right">{{player.Price }}</span>
                                         </li>
                                     </div>
-
                                     <div ng-show="displayPlayersList == 'AllRounders'" class="playerlist">
                                         <h2>All Rounders</h2>
                                         <li ng-repeat="player in players|filter:searchText|orderBy:'-Cost'"
@@ -149,12 +128,10 @@
                                             ng-class="{'allrounderactive':player.active, 'text-muted limit-exceeded': !canBeBought(player) && !player.active}"
                                             unselectable="on"
                                             ng-if="player._id[0]=='c'">
-
                                             <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
                                             <span>{{player.Name}}</span><span class="pull-right">{{player.Price}}</span>
                                         </li>
                                     </div>
-
                                     <div ng-show="displayPlayersList == 'Coaches'" class="playerlist">
                                         <h2>Coaches</h2>
                                         <li ng-repeat="player in players|filter:searchText|orderBy:'-Cost'"
@@ -174,16 +151,10 @@
                 </div>
             </div>
         </div>
-
         <footer id="footer" class="footer"></footer>
-        <!-- build:js(.) scripts/vendor.js -->
-        <!-- bower:js -->
         <script async src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/bower_components/angularjs/angular.min.js"></script>
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script type="text/javascript">
             var myApp = angular.module('formApp', []);
             function PlayerController($scope)
@@ -191,13 +162,11 @@
                 $scope.displayPlayersList = "Batsmen";
                 $scope.limitExceeded = false;
                 $scope.players = <%- JSON.stringify(Players) %>;
-
                 for (var i = 0; i < $scope.players.length; ++i)
                 {
                     $scope.players[i].active = false;
                     $scope.players[i].image = ("https://res.cloudinary.com/gpl/players/" + $scope.players[i].Type + "/" + $scope.players[i]._id + ".jpg");
                 }
-
                 $scope.nSelectedPlayers =
                 {
                     batsmen: 0,
@@ -206,7 +175,6 @@
                     coaches: 0,
                     total: 0
                 }
-
                 $scope.computeSelectedPlayers = function ()
                 {
                     $scope.nSelectedPlayers =
@@ -214,7 +182,6 @@
                         coaches: 0,
                         total: 0
                     }
-
                     var a = [];
                     angular.forEach($scope.players, function (s)
                     {
@@ -238,37 +205,27 @@
                         s.active = !s.active;
                     }
                 };
-                // Helper method for calculating the total cost
                 $scope.total = function ()
                 {
                     var total = 0;
-                    // Use the angular forEach helper method to
-                    // loop through the services array:
                     angular.forEach($scope.computeSelectedPlayers(), function (s) {
                         if (s.active)
                         {
                             total += s.Cost;
                         }
                     });
-
                     return total;
                 };
-
                 $scope.isCoach = function (player)
                 {
                     return player._id[0] == 'd';
                 }
-
                 $scope.alertMessage = "";
-
                 $scope.isNotValid = function (players)
                 {
                     $scope.alertMessage = "";
-
                     var valid = true;
                     var MAX_PLAYERS = 15;
-
-
                     if ($scope.nSelectedPlayers.total < MAX_PLAYERS + 1)
                     {
                         var remainingPlayers = MAX_PLAYERS - ($scope.nSelectedPlayers.total - $scope.nSelectedPlayers.coaches);
@@ -290,7 +247,6 @@
                             }
                         }
                     }
-
                     else
                     {
                         if ($scope.nSelectedPlayers.coaches != 1)
@@ -301,16 +257,13 @@
                                 $scope.alertMessage = "Please select a coach for your team";
                             }
                         }
-
-
                         if ($scope.nSelectedPlayers.total > MAX_PLAYERS + 1)
                         {
                             $scope.alertMessage = "You need to select exactly 15 players and 1 coach.";
                         }
                     }
-
-
-                    if ($scope.nSelectedPlayers.total == MAX_PLAYERS + 1 && $scope.nSelectedPlayers.coaches == 1) {
+                    if ($scope.nSelectedPlayers.total == MAX_PLAYERS + 1 && $scope.nSelectedPlayers.coaches == 1)
+                    {
                         valid = true;
                     }
                     else
@@ -323,12 +276,10 @@
                     }
                     return !valid;
                 };
-
                 $scope.remaining = function ()
                 {
                     return 10000000 - $scope.total();
                 };
-
                 $scope.canBeBought = function (player)
                 {
                     return ($scope.remaining() >= player.Cost);
@@ -336,7 +287,6 @@
             };
             myApp.controller('PlayerController', ['$scope', PlayerController]);
         </script>
-        <!-- endbuild -->
         <script async src="/javascript/main.js"></script>
     </body>
 </html>

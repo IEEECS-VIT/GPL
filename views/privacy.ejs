@@ -22,16 +22,9 @@
         <title>Privacy | GPL</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css(.) styles/vendor.css -->
-        <!-- bower:css -->
         <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="/stylesheets/privacy.css">
         <link rel="stylesheet" href="/stylesheets/<%=(session) ? 'dashboard' : 'main'%>.css">
-        <!-- endbuild -->
     </head>
     <body>
         <!--[if lt IE 10]>
@@ -48,6 +41,7 @@
                                         <li role="presentation"><a href="/home">Home</a></li>
                                         <li role="presentation"><a href="/home/dashboard">Dashboard</a></li>
                                         <li role="presentation"><a href="/home/team">Team</a></li>
+                                        <li role="presentation"><a href="/home/stats">Statistics</a></li>
                                         <li role="presentation"><a href="/home/matches">Matches</a></li>
                                 </ul>
                             </div>
@@ -103,16 +97,8 @@
         <%if(!session){%>
             <footer id="footer" class="footer"></footer>
         <%}%>
-        <!-- build:js(.) scripts/vendor.js -->
-        <!-- bower:js -->
         <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:js(.) scripts/plugins.js -->
         <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- endbuild -->
-        <!-- build:js({app,.tmp}) scripts/main.js -->
         <script async src="/javascript/<%=(session) ? 'playerCommon' : 'main'%>.js"></script>
-        <!-- endbuild -->
     </body>
 </html>

@@ -22,16 +22,8 @@
         <title>Dashboard | GPL</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css(.) styles/vendor.css -->
-        <!-- bower:css -->
         <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="/stylesheets/dashboard.css">
-      
-        <!-- endbuild -->
     </head>
     <body>
         <!--[if lt IE 10]>
@@ -49,7 +41,9 @@
                             <li role="presentation"><a href="/home">Home</a></li>
                             <li role="presentation" class="active"><a href="/home/dashboard">Dashboard</a></li>
                             <li role="presentation"><a href="/home/team">Team</a></li>
+                            <li role="presentation"><a href="/home/stats">Statistics</a></li>
                             <li role="presentation"><a href="/home/matches">Matches</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -71,7 +65,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-md-4 col-xs-12">
                                 <div class="card card-green">
                                     <div class="card-content wide">
@@ -84,7 +77,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-md-4 col-xs-12">
                                 <div class="card card-green">
                                     <div class="card-content wide">
@@ -97,7 +89,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-md-4 col-xs-12">
                                 <div class="card card-green">
                                     <div class="card-content wide">
@@ -112,24 +103,15 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div></div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- build:js(.) scripts/vendor.js -->
-        <!-- bower:js -->
         <script src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="/bower_components/chartjs/Chart.js"></script>
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:js(.) scripts/plugins.js -->
         <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- endbuild -->
-        <!-- build:js({app,.tmp}) scripts/main.js -->
         <script async src="/javascript/playerCommon.js"></script>
         <script async>
             var json_data = <%- JSON.stringify(result)%>;
@@ -142,9 +124,7 @@
                 }
                 return string_array;
             }
-
             Chart.defaults.global.responsive = true;
-
             var line = $("#line-chart").get(0).getContext("2d");
             var line_data =
             {
@@ -163,7 +143,6 @@
                     }
                 ]
             };
-
             var myLineChart = new Chart(line).Line(line_data, {scaleShowGridLines: false});
             var bar = $("#bar-chart").get(0).getContext("2d");
             var bar_data =
@@ -189,7 +168,6 @@
                     }
                 ]
             };
-
             var myBarChart = new Chart(bar).Bar(bar_data, {scaleShowGridLines: false});
             var winloss = $("#win-loss").get(0).getContext("2d");
             var winloss_data =
@@ -209,7 +187,6 @@
                     }
                 ]
             };
-
             var myLineChart2 = new Chart(winloss).Line(winloss_data, {bezierCurveTension: 0, scaleShowGridLines: false});
             var pie = $("#pie-chart").get(0).getContext("2d");
             var pie_data =
@@ -227,9 +204,7 @@
                     label: "Sixes"
                 }
             ];
-
             var myPieChart = new Chart(pie).Pie(pie_data);
         </script>
-        <!-- endbuild -->
     </body>
 </html>

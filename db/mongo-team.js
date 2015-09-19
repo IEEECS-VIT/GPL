@@ -19,11 +19,9 @@
 var collection;
 var path = require('path');
 var async = require('async');
-var MongoClient = require('mongodb').MongoClient;
 var mongoUsers = require(path.join(__dirname, 'mongo-users'));
 var mongoFeatures = require(path.join(__dirname, 'mongo-features'));
 var mongoInterest = require(path.join(__dirname, 'mongo-interest'));
-var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection.js'));
 
 require('./database')(function(err, db){
@@ -203,7 +201,7 @@ require('./database')(function(err, db){
                                 limit : 8
                             }
                         };
-                    var onShortList = function (err, doc)
+                    var onShortList = function (err, docs)
                     {
                         if (err)
                         {
@@ -211,7 +209,39 @@ require('./database')(function(err, db){
                         }
                         else
                         {
-                            callback(null, doc);
+                            collection = db.collection(ref[process.env.MATCH].out);
+                            var email = require(path.join(__dirname, '..', 'worker', 'email'));
+                            var message = email.wrap({
+                                from: 'gravitaspremierleague@gmail.com',
+                                subject: 'Congratulations!'
+                            });
+                            message.attach_alternative("<table background='http://res.cloudinary.com/gpl/general/img0.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
+                                "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
+                                "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> Hi _user_,<br>This is to inform that your team _team_ has made it to the next round of G.P.L 2.0<br>" +
+                                "Please check out  our Facebook <a href='http://www.facebook.com/gravitaspremierleague' style='text-decoration: none;'>page</a> to stay close to all the action! </td>" +
+                                "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards,<br>Team GPL,<br>IEEE Computer Society<br>IEEE Computer Society<br>VIT student chapter</td></tr></table>");
+                            var parallelTasks = [];
+                            var onFind = function(err, result)
+                            {
+                                if(err)
+                                {
+                                    callback(err);
+                                }
+                                else if(result)
+                                {
+                                    parallelTasks.push(function(asyncCallback){
+                                        message.header.to = result.email;
+                                        message.alternative.data = message.alternative.data.replace('_user_', result.manager_name);
+                                        message.alternative.data = message.alternative.data.replace('_team_', result._id);
+                                        email.send(message, asyncCallback);
+                                    });
+                                }
+                                else
+                                {
+                                    async.parallel(parallelTasks, callback);
+                                }
+                            };
+                            collection.find({}, {email : 1, manager_name : 1}).forEach(onFind);
                         }
                     };
                     collection.aggregate([{

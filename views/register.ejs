@@ -15,7 +15,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -40,9 +39,7 @@
                 </span>
             </header>
         </div>
-        <div id="navbar-wrapper">
-            <nav id="navbar"></nav>
-        </div>
+        <div id="navbar-wrapper"><nav id="navbar"></nav></div>
         <div class="container">
             <div class="row" id="register-form">
                 <div class="col-xs-12 col-sm-offset-2 col-sm-8">
@@ -54,7 +51,6 @@
                     </h1>
                     <form name="register" action="/register" method="post">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
-
                         <div class="form-group">
                             <label for="team">Team Name: </label>
                             <input type="text" id="team" placeholder="Team Name" class="form-control" name="team_name"

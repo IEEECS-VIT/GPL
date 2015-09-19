@@ -22,12 +22,6 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css(.) styles/vendor.css -->
-        <!-- bower:css -->
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:css(.tmp) styles/main.css -->
         <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="/stylesheets/dashboard.css">
         <link rel="stylesheet" href="/stylesheets/team.css"/>
@@ -37,7 +31,6 @@
                 padding-right: 10px;
             }
         </style>
-        <!-- endbuild -->
     </head>
     <body ng-app="formApp">
         <!--[if lt IE 7]>
@@ -54,7 +47,9 @@
                             <li role="presentation"><a href="/home">Home</a></li>
                             <li role="presentation"><a href="/home/dashboard">Dashboard</a></li>
                             <li role="presentation" class="active"><a href="/home/team">Team</a></li>
+                            <li role="presentation"><a href="/home/stats">Statistics</a></li>
                             <li role="presentation"><a href="/home/matches">Matches</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -63,7 +58,7 @@
                 <div id="top-navigation"></div>
                 <div class="container-fluid wrapper">
                     <!-- Add your site or application content here -->
-                    <div class="col-xs-10 col-xs-offset-1 shadow-effect" ng-controller="PlayerController" ng-hide="">
+                    <div class="col-xs-10 col-xs-offset-1 " ng-controller="PlayerController" ng-hide="">
                         <div class="col-md-10 col-md-offset-1">
                             <div class=" page-header row">
                                 <h1>
@@ -130,33 +125,30 @@
                 </div>
             </div>
         </div>
-        <!-- build:js(.) scripts/vendor.js -->
-        <!-- bower:js -->
         <script async src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/bower_components/angularjs/angular.min.js"></script>
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script async type="text/javascript">
             var myApp = angular.module('formApp', []);
             function PlayerController($scope)
             {
                 $scope.players = <%- JSON.stringify(Squad)%>;
                 $scope.selectedPlayers = [];
-
-
-                $scope.safeApply = function(fn) {
+                $scope.safeApply = function(fn)
+                {
                   var phase = this.$root.$$phase;
-                  if(phase == '$apply' || phase == '$digest') {
-                    if(fn && (typeof(fn) === 'function')) {
+                  if(phase == '$apply' || phase == '$digest')
+                  {
+                    if(fn && (typeof(fn) === 'function'))
+                    {
                       fn();
                     }
-                  } else {
+                  }
+                  else
+                  {
                     this.$apply(fn);
                   }
                 };
-
                 $scope.toggleActive = function (s)
                 {
                     if (s.active || $scope.selectedPlayers.length < 11)
@@ -167,11 +159,8 @@
                             if (s.active)
                             {
                               $scope.safeApply(function() {
-
                                 $scope.selectedPlayers.push(s);
                               });
-
-
                             }
                             else
                             {
@@ -183,18 +172,13 @@
 
                                         $scope.selectedPlayers.splice(i, 1);
                                       });
-
-
                                         break;
                                     }
-
                                 }
                             }
                         }
-
                     }
                 };
-
                 for (var i = 0; i < $scope.players.length; ++i)
                 {
                     $scope.players[i].active = false;
@@ -207,7 +191,6 @@
                     }
                 }
                 $scope.searchText = "";
-                // Helper method for calculating the total cost
                 $scope.MAX_PLAYERS = 11;
                 $scope.alertMessage = "";
                 $scope.canSelectMore = function ()
@@ -243,15 +226,11 @@
                     {
                         $scope.alertMessage = "Alright ! You are good to go.";
                     }
-                    //if(!valid){
-                    //  window.alert(alertMessage);
-                    //}
                     return !valid;
                 };
             };
             myApp.controller('PlayerController', ['$scope', PlayerController]);
         </script>
-        <!-- endbuild -->
         <script async src="/javascript/playerCommon.js"></script>
     </body>
 </html>

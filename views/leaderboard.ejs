@@ -17,123 +17,105 @@
 -->
 <!doctype html>
 <html class="no-js">
-<head>
-    <meta charset="utf-8">
-    <title>Leaderboard | GPL</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-
-    <link rel="stylesheet" href="/stylesheets/dashboard.css">
-    <link rel="stylesheet" href="/stylesheets/rules.css">
-    <link rel="stylesheet" href="/stylesheets/leaderboard.css">
-
-    <!-- endbuild -->
-</head>
-<body>
-<!--[if lt IE 10]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
-<div id="wrapper" class="container-fluid">
-    <div id="side-navigation">
-        <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
-            <div class="container-fluid">
-                <ul class="nav nav-pills nav-stacked wrapper  ">
-                    <li>
-                        <img src="http://res.cloudinary.com/gpl/general/gpllogo.png" class="img-responsive"
-                             style="margin: 5px;padding-right:10px;">
-                    </li>
-                    <li role="presentation"><a href="/home">Home</a></li>
-                    <li role="presentation"><a href="/home/dashboard">Dashboard</a></li>
-                    <li role="presentation"><a href="/home/team">Team</a></li>
-                    <li role="presentation"><a href="/home/matches">Matches</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
-        <div id="top-navigation"></div>
-        <div class="container-fluid wrapper stats-view">
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 shadow-effect">
-                        <div class="col-md-10 col-md-offset-1">
-                            <div class="page-header rules-header">
-                                <h1>Leaderboard <br>
-                                    <small class="small-class">graVITas Premier League 2.0, graVITas 2015</small>
-                                </h1>
-
+        <head>
+            <meta charset="utf-8">
+            <title>Leaderboard | GPL</title>
+            <meta name="description" content="">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+            <link rel="stylesheet" href="/stylesheets/dashboard.css">
+            <link rel="stylesheet" href="/stylesheets/rules.css">
+            <link rel="stylesheet" href="/stylesheets/leaderboard.css">
+        </head>
+        <body>
+            <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+                your browser</a> to improve your experience.</p>
+            <![endif]-->
+            <div id="wrapper" class="container-fluid">
+                <div id="side-navigation">
+                    <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
+                        <div class="container-fluid">
+                            <ul class="nav nav-pills nav-stacked wrapper  ">
+                                <li>
+                                    <img src="http://res.cloudinary.com/gpl/general/gpllogo.png" class="img-responsive"
+                                         style="margin: 5px;padding-right:10px;">
+                                </li>
+                                <li role="presentation"><a href="/home">Home</a></li>
+                                <li role="presentation"><a href="/home/dashboard">Dashboard</a></li>
+                                <li role="presentation"><a href="/home/team">Team</a></li>
+                                <li role="presentation"><a href="/home/stats">Statistics</a></li>
+                                <li role="presentation"><a href="/home/matches">Matches</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
+                    <div id="top-navigation"></div>
+                    <div class="container-fluid wrapper stats-view">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2 shadow-effect">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="page-header rules-header">
+                                            <h1>Leaderboard <br>
+                                                <small class="small-class">graVITas Premier League 2.0, graVITas 2015</small>
+                                            </h1>
+                                        </div>
+                        <% if(leaderboard[0].points === 0) { %>
+                        <div class="container">
+                            <p>
+                                The Leader Board will be active as soon as the games begin!
+                            </p>
+                        </div>
+                        <% } else { %>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-bordered text-center">
+                                                <thead>
+                                                <tr>
+                                                    <th>Rank</th>
+                                                    <th>Team Name</th>
+                                                    <th>Points</th>
+                                                    <th>Matches Played</th>
+                                                    <th>Matches Won</th>
+                                                    <th>Net Run Rate</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <% for(var i = 0; i < leaderboard.length ; i++) { %>
+                                                <tr>
+                                                    <% if(i != 10){ %>
+                                                    <td> <%= i + 1 %>    </td>
+                                                    <td>  <%= leaderboard[i]._id %>    </td>
+                                                    <td> <%= leaderboard[i].points %>  </td>
+                                                    <td> <%= leaderboard[i].played %>  </td>
+                                                    <td> <%= leaderboard[i].win %>     </td>
+                                                    <td> <%= leaderboard[i].net_run_rate %> </td>
+                                                    <% } else if(i === 10){ %>
+                                                    <td>
+                                                        <% var ra = "My Stats" %>
+                                                        <%= ra %>
+                                                    </td>
+                                                    <td>  <%= leaderboard[i]._id %>    </td>
+                                                    <td> <%= leaderboard[i].points %>  </td>
+                                                    <td> <%= leaderboard[i].played %>  </td>
+                                                    <td> <%= leaderboard[i].win %>     </td>
+                                                    <td> <%= leaderboard[i].net_run_rate %> </td>
+                                                    <% } %>
+                                                </tr>
+                                                <% } } %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-            <% if(leaderboard[0].points === 0) { %>
-            <div class="row">
-                <h3 class="col-sm-offset-3 text-info">
-                    The Leader Board will be active as soon as the games begin!
-                </h3>
-            </div>
-            <% } else { %>
-
-                <div class="table-responsive">
-                    <table class="table table-hover table-bordered text-center">
-                        <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Team Name</th>
-                            <th>Points</th>
-                            <th>Matches Played</th>
-                            <th>Matches Won</th>
-                            <th>Net Run Rate</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <% for(var i = 0; i < leaderboard.length ; i++) { %>
-                        <tr>
-                            <% if(i != 10){ %>
-                            <td> <%= i + 1 %>    </td>
-                            <td>  <%= leaderboard[i]._id %>    </td>
-                            <td> <%= leaderboard[i].points %>  </td>
-                            <td> <%= leaderboard[i].played %>  </td>
-                            <td> <%= leaderboard[i].win %>     </td>
-                            <td> <%= leaderboard[i].net_run_rate %> </td>
-                            <% } else if(i === 10){ %>
-                            <td>
-                                <% var ra = "My Stats" %>
-                                <%= ra %>
-                            </td>
-                            <td>  <%= leaderboard[i]._id %>    </td>
-                            <td> <%= leaderboard[i].points %>  </td>
-                            <td> <%= leaderboard[i].played %>  </td>
-                            <td> <%= leaderboard[i].win %>     </td>
-                            <td> <%= leaderboard[i].net_run_rate %> </td>
-                            <% } %>
-                        </tr>
-                        <% } } %>
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-        </div>
-    </div>
-</div>
-
-<!-- build:js(.) scripts/vendor.js -->
-<!-- bower:js -->
-<script src="/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- endbower -->
-<!-- endbuild -->
-<!-- build:js(.) scripts/plugins.js -->
-<script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- endbuild -->
-<!-- build:js({app,.tmp}) scripts/main.js -->
-<script async src="/javascript/playerCommon.js"></script>
-<!-- endbuild -->
-</body>
+            <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+            <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script async src="/javascript/playerCommon.js"></script>
+    </body>
 </html>

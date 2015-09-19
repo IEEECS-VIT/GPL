@@ -28,25 +28,21 @@
             body {
                 overflow-y: auto !important;
             }
-
             .page-header {
                 margin-bottom: 40px;
                 border-bottom: none;
                 padding-top: 10px;
             }
-
             .fb, .fb:hover, .fb:focus, .fb:active {
                 background: #3B5998 none repeat scroll 0% 0%;
                 color: white;
                 width: 100%;
             }
-
             .twitter, .twitter:hover, .twitter:focus, .twitter:active {
                 background: #00ACED none repeat scroll 0% 0%;
                 color: white;
                 width: 100%;
             }
-
             .google-plus, .google-plus:hover, .google-plus:focus, .google-plus:active {
                 background: #C32F10 none repeat scroll 0% 0%;
                 color: white;
@@ -67,14 +63,9 @@
                 </span>
             </header>
         </div>
-
-        <div id="navbar-wrapper">
-            <nav id="navbar"></nav>
-        </div>
-
+        <div id="navbar-wrapper"><nav id="navbar"></nav></div>
         <div class="col-md-8 col-md-offset-2">
             <div class="col-md-10 col-md-offset-1">
-
                 <div class="container-fluid ">
                     <h1 class="page-header">Get Social </h1>
             <% if(mode){ %>
@@ -84,31 +75,19 @@
                             <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                             <div class="form-group">
                                 <label for="teamName">Team Name</label>
-
                                 <input type="text" class="form-control" name="team" id="teamName" placeholder="Team Name" required>
-
                             </div>
-
                             <%if(type === 'register'){%>
-
                                 <div class="form-group">
                                     <label for="teamName">Phone Number</label>
-
                                     <input type="text" class="form-control" name="phone" id="phoneNumber" placeholder="Phone Number" required>
-
                                 </div>
-
                                 <div class="form-group">
                                     <label for="emailId">Email address</label>
-
                                     <input type="text" class="form-control" name="email" id="emailId" placeholder="Email address" required>
-
                                 </div>
                             <%}%>
-
                             <button type="submit" class="btn btn-lg btn-default btn-primary centered">Submit</button>
-
-
                         </form>
                     </div>
                 </div>
@@ -180,22 +159,13 @@
         </div>
             </div>
         </div>
-        <!--/.container-->
         <footer id="footer" class="footer"></footer>
         <!--[if lt IE 10]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
             your browser</a> to improve your experience.</p>
         <![endif]-->
-        <!-- build:js(.) scripts/vendor.js -->
-        <!-- bower:js -->
         <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:js(.) scripts/plugins.js -->
         <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script async src="/javascript/main.js"></script>
-        <!-- endbuild -->
-        <!-- build:js({app,.tmp}) scripts/main.js -->
-        <!-- endbuild -->
     </body>
 </html>
