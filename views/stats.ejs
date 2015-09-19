@@ -64,28 +64,7 @@
                             </h1>
 
                         </div>
-                        <div class="col-sm-6">
-                            <p class="lead">Total Statistics </p>
-                          <table class="table table-bordered">
-                            <tr><th>Runs </th> <td><%= stats.runs %></td></tr>
-                            <tr><th>Overs </th> <td><%= stats.overs %></td></tr>
-                            <tr><th>Fours </th> <td><%= stats.four %></td></tr>
-                            <tr><th>Sixes </th> <td><%= stats.six %></td></tr>
-                            <%if (stats.high.total.team != ''){%>
-                            <tr><th>Highest Runs Scored </th> <td><br/><%= stats.high.total.value %> by <%= stats.high.total.team %></td></tr>
-                            <%}if (stats.low.team != ''){%>
-                            <tr><th>Lowest Runs Scored </th> <td><%= stats.low.value %> by <%= stats.low.team %></td></tr>
-                            <%}%>
-                          </table>
-                            <p class="lead">Today's Best Performance</p>
-                            <table class="table">
-                                <tr><th>Team </th> <td><%= stats.daily.team %></td></tr>
-                            </table>
-                            <p class="lead">Overall Best Performance </p>
-                            <table class="table">
-                                <tr><th>Team </th> <td><%= stats.daily.team %></td></tr>
-                            </table>
-                        </div>
+
                         <div class="col-sm-6">
                             <p class="lead">Orange Cap Holder:</p>
                             <table class="table table-bordered orange">
@@ -107,6 +86,33 @@
                             <tr><th>Team </th> <td><%= stats.purple.team %></td></tr>
                           </table>
                         </div>
+                            <div class="col-sm-6">
+                                <p class="lead">Cumulative Statistics </p>
+                                <table class="table table-bordered">
+                                    <tr><th>Runs </th> <td><%= stats.runs %></td></tr>
+                                    <tr><th>Overs </th> <td><%= stats.overs %></td></tr>
+                                    <tr><th>Fours </th> <td><%= stats.four %></td></tr>
+                                    <tr><th>Sixes </th> <td><%= stats.six %></td></tr>
+                                    <%if (stats.high.total.team != ''){%>
+                                    <tr><th>Highest Runs Scored </th> <td><%= stats.high.total.value %> by <%= stats.high.total.team %></td></tr>
+                                    <%}if (stats.low.team != ''){%>
+                                    <tr><th>Lowest Runs Scored </th> <td><%= stats.low.value %> by <%= stats.low.team %></td></tr>
+                                    <%}%>
+                                </table>
+                                <p class="lead">Today's Highest Total</p>
+                                <table class="table">
+                                    <tr><th>Team </th> <td><%= stats.daily.team %></td></tr>
+                                </table>
+                                <p class="lead">Overall Highest Total </p>
+                                <table class="table">
+                                    <tr><th>Team </th> <td><%= stats.daily.team %></td></tr>
+                                </table>
+
+                                <p class="lead">Highest Score By an individual </p>
+                                <table class="table">
+                                    <tr><th>Score </th> <td><%= stats.high.individual.value %></td></tr>
+                                </table>
+                            </div>
                     </div>
                   </div>
                   </div>
