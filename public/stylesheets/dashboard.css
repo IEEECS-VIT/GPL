@@ -15,12 +15,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 @import url('../bower_components/roboto-fontface/css/roboto-fontface.css');
+
 html, body {
     height: 100%;
     font-family: 'Roboto', arial, sans-serif;
 }
+
 .shadow-effect {
     -webkit-box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.25);
@@ -28,14 +29,13 @@ html, body {
     min-height: 100vh;
 }
 
-.nav ,
+.nav,
 .navbar .navbar-header,
 .navbar .navbar-collapse .nav li a {
 
     font-size: 13px;
     line-height: 18px;
 }
-
 
 #sidenav > .container-fluid > .nav > li,
 #sidenav > .container-fluid > .nav > li:hover,
@@ -54,8 +54,6 @@ html, body {
 #main-content > .navbar > * {
     z-index: 5;
 }
-
-
 
 .container-fluid {
     height: 100%;
@@ -217,4 +215,12 @@ html, body {
 
 .navbar-inverse .navbar-nav > li > a {
     color: #ddd;
+}
+
+.orange {
+    background-color: rgba(255, 165, 0, 0.5);
+}
+
+.purple {
+    background-color: rgba(147, 112, 219, 0.5);
 }
