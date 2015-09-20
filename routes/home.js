@@ -397,6 +397,12 @@ router.get('/stats', function (req, res) {
             }
             else
             {
+                doc.overs = parseInt(doc.overs / 6) + '.' + (doc.overs % 6);
+                doc.orange.avg = doc.orange.avg.toFixed(2);
+                doc.orange.sr = doc.orange.sr.toFixed(2);
+                doc.purple.economy = doc.purple.economy.toFixed(2);
+                doc.purple.sr = doc.purple.sr.toFixed(2);
+                doc.purple.avg = doc.purple.avg.toFixed(2);
                 res.render('stats', {stats: doc});
             }
         };

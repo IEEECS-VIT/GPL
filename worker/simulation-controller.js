@@ -18,8 +18,10 @@
 var i;
 var log;
 var database;
+var daily = -1;
 var stats = {};
 var points = 0;
+var individual = -1;
 var path = require('path');
 var async = require('async');
 var days = [1, 2, 3, 4, 5, 6, 7];
@@ -126,9 +128,15 @@ exports.initSimulation = function (day, masterCallback)
         {
             var updateUser = function (newUserDoc, asyncCallback)
             {
-                stats.runs += newUserDoc.runs_for;
+                stats.runs += newUserDoc.scores[day - 1];
                 stats.overs += newUserDoc.balls_for;
                 stats.wickets += newUserDoc.wickets_lost;
+                if(newUserDoc.scores[day - 1] > daily)
+                {
+                    console.log(stats.daily, '----');
+                    stats.daily.total.team = newUserDoc._id;
+                    daily = stats.daily.total.value = newUserDoc.scores[day - 1];
+                }
                 if(newUserDoc.highest_total > stats.high.total.value)
                 {
                     stats.high.total.team = newUserDoc._id;
@@ -145,24 +153,33 @@ exports.initSimulation = function (day, masterCallback)
                     stats.four += (newUserDoc.stats[newUserDoc.squad[i]].fours || 0);
                     if (!newUserDoc.squad[i].match(/^b/))
                     {
-                        if(newUserDoc.stats[newUserDoc.squad[i]].runs_scored > stats.high.score)
+                        if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > individual) // TODO: adjust
                         {
-                            stats.high.score = newUserDoc.stats[newUserDoc.squad[i]].runs_scored;
+                            individual = newUserDoc.val;
+                            stats.daily.individual.team = newUserDoc._id;
+                            stats.daily.individual.value = newUserDoc.val;
+                            stats.daily.individual.player = newUserDoc.names[i];
+                        }
+                        if(newUserDoc.stats[newUserDoc.squad[i]].high > stats.high.individual.value)
+                        {
+                            stats.high.individual.team = newUserDoc._id;
+                            stats.high.individual.player = newUserDoc.names[i];
+                            stats.high.individual.value = newUserDoc.stats[newUserDoc.squad[i]].high;
                         }
                         if(newUserDoc.stats[newUserDoc.squad[i]].runs_scored > stats.orange.runs)
                         {
                             stats.orange.team = newUserDoc._id;
-                            stats.orange.player = newUserDoc.squad[i];
+                            stats.orange.player = newUserDoc.names[i];
                             stats.orange.avg = newUserDoc.stats[newUserDoc.squad[i]].average;
                             stats.orange.balls = newUserDoc.stats[newUserDoc.squad[i]].balls;
                             stats.orange.runs = newUserDoc.stats[newUserDoc.squad[i]].runs_scored;
-                            stats.orange.sr = newUserDoc.stats[newUserDoc.squad[i]].bat_strike_rate;
+                            stats.orange.sr = newUserDoc.stats[newUserDoc.squad[i]].strike_rate;
                         }
                     }
                     if (newUserDoc.squad[i].match(/^[^a]/) && newUserDoc.stats[newUserDoc.squad[i]].wickets_taken > stats.purple.wickets)
                     {
                         stats.purple.team = newUserDoc._id;
-                        stats.purple.player = newUserDoc.squad[i];
+                        stats.purple.player = newUserDoc.names[i];
                         stats.purple.sr = newUserDoc.stats[newUserDoc.squad[i]].sr;
                         stats.purple.avg = newUserDoc.stats[newUserDoc.squad[i]].avg;
                         stats.purple.balls = newUserDoc.stats[newUserDoc.squad[i]].overs;
@@ -170,6 +187,7 @@ exports.initSimulation = function (day, masterCallback)
                         stats.purple.wickets = newUserDoc.stats[newUserDoc.squad[i]].wickets_taken;
                     }
                 }
+                delete newUserDoc.names;
                 database.collection(match).updateOne({_id: newUserDoc._id}, newUserDoc, function () {
                     message.header.bcc.push(newUserDoc.email);
                     asyncCallback();
@@ -180,7 +198,7 @@ exports.initSimulation = function (day, masterCallback)
             {
                 if (newMatchDoc.MoM.points > points)
                 {
-                    stats.daily = newMatchDoc.MoM;
+                    stats.daily.MoM = newMatchDoc.MoM;
                     points = newMatchDoc.MoM.points;
                 }
                 database.collection('matchday' + day).updateOne({_id: newMatchDoc._id}, newMatchDoc, asyncCallback);

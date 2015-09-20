@@ -127,28 +127,25 @@
                 html = "<p>Either you or you opponent did not select the playing 11. Thus, the match was forfeited.</p>"
                 <% } else {%>
                 html = "<h3>Commentary (Match <%= i+1%>)</h3>"
-                        <% for(j = 0; j < 7; ++j){ %>
+                        <% for(j = 0; j < 5; ++j){ %>
 
                         + "<%=match[i].commentary[j] %><br/>"
                         <%}%>
-                        + "<div class='col-sm-8 col-sm-offset-2'> <div class='row'> <table class='table table-bordered'> <thead><th><%=match[i].commentary[7].split("|")[0]%></th> <th><%=match[i].commentary[7].split("|")[1]%></th>  </thead> <tbody>"
-                        <%for(var k = 8; k < 19; ++k){%>
-
-                        <% var cols = match[i].commentary[k].split("|");%>
-                        <% var c1 = cols[0]%>
-                        <%  var c2 = cols[1]%>
-                        + "<tr><td><%=c1%></td><td><%=c2%></td></tr>"
+                        + "<div class='col-sm-8 col-sm-offset-2'> <div class='row'> <table class='table table-bordered'> <thead><th><%=match[i].commentary[5].split("|")[0]%></th> <th><%=match[i].commentary[5].split("|")[1]%></th>  </thead> <tbody>"
+                        <%for(var k = 6; k < 17; ++k){%>
+                            <% var cols = match[i].commentary[k].split("|");%>
+                            <% var c1 = cols[0]%>
+                            <%  var c2 = cols[1]%>
+                            + "<tr><td><%=c1%></td><td><%=c2%></td></tr>"
                         <%}%>
                         + "</tbody></table></div></div><br/><div class='row'><div class='col-xs-12'><pre>"
-
-                        <%for(m=19;m<match[i].commentary.length; m++){%>
-                        <%match[i].commentary[m] = match[i].commentary[m].replace('FOUR', '<strong>FOUR</strong>')%>
-                        <%match[i].commentary[m] = match[i].commentary[m].replace('SIX', '<strong>SIX</strong>')%>
-                        <%match[i].commentary[m] = match[i].commentary[m].replace(', OUT', ', <strong>OUT</strong>')%>
-                        <%match[i].commentary[m] = match[i].commentary[m].replace('Free Hit:', '<strong>Free Hit:</strong>')%>
-                        <%match[i].commentary[m] = match[i].commentary[m].replace(/(\d+)\.(\d)\s/, '<strong>$1.$2 </strong>')%>
-                        + "<%-match[i].commentary[m] %><br/>"
-
+                        <%for(m=17;m<match[i].commentary.length; ++m){%>
+                            <%match[i].commentary[m] = match[i].commentary[m].replace('FOUR', '<big><strong>FOUR</strong></big>')%>
+                            <%match[i].commentary[m] = match[i].commentary[m].replace('SIX', '<big><strong>SIX</strong></big>')%>
+                            <%match[i].commentary[m] = match[i].commentary[m].replace(', OUT', ', <big><strong>OUT</strong></big>')%>
+                            <%match[i].commentary[m] = match[i].commentary[m].replace('Free Hit:', '<big><strong>Free Hit:</strong></big>')%>
+                            <%match[i].commentary[m] = match[i].commentary[m].replace(/(\d+)\.(\d)\s/, '<big><strong>$1.$2 </strong></big>')%>
+                            + "<%-match[i].commentary[m] %><br/>"
                         <%}%>
                         + "</pre></div></div>"
                 <%}%>
@@ -164,12 +161,12 @@
                 html = "<h3>Scorecard (Match <%= i+1%>)</h3>"
                         + "<div class='col-xs-12'> <div class='row'> <table class='table table-bordered text-center'>"
                         + "<th>Name</th>"
-                        <%  for (j = 0;j < match[i].scorecard[1].length;j++) { %>
+                        <%  for (j = 0;j < match[i].scorecard[1].length;++j) { %>
                         + "<th><%=match[i].scorecard[1][j]%></th>"
                         <% } %>
                         <%  for (j = 2;j < 13;j++) { %>
                         + "<tr>"
-                        <%  for (k = 0;k < match[i].scorecard[j].length;k++) { %>
+                        <%  for (k = 0;k < match[i].scorecard[j].length;++k) { %>
                         <%if (match[i].scorecard[j].length == 9 && k == 8){break;%>
                         <% } else if(match[i].scorecard[j].length == 2 && k != 0){%>
                         + "<td colspan='7'><%=match[i].scorecard[j][k]%></td>"
@@ -182,32 +179,32 @@
                         <%}%>
                         + "</table></div></div>"
                         + "<p><%=match[i].scorecard[13]%></p>"
-                        <% for (j =14;j<16;j++) {%>
+                        <% for (j =14;j<16;++j) {%>
                         + "<p><%= match[i].scorecard[j]%></p>"
                         <%}%>
                         + "<div class='col-xs-12'> <div class='row'> <table class='table table-bordered text-center'>"
-                        <%for (j=0;j<match[i].scorecard[16].length;j++){%>
+                        <%for (j=0;j<match[i].scorecard[16].length;++j){%>
                         + "<th><%=match[i].scorecard[16][j]%></th>"
                         <%}%>
-                        <% for (j=17;j<23;j++) {%>
+                        <% for (j=17;j<17 + match[i].count[0];++j) {%>
                         + "<tr>"
-                        <% for (k=0;k<match[i].scorecard[j].length;k++){%>
+                        <% for (k=0;k<match[i].scorecard[j].length;++k){%>
                         + "<td><%= match[i].scorecard[j][k]%></td>"
                         <%}%>
                         + "</tr>"
                         <%}%>
                         + "</table></div></div>"
-                        <% for (j=23;j<26;j++) {%>
+                        <% for (j=17 + match[i].count[0];j<20 + match[i].count[0];++j) {%>
                         + "<p><%= match[i].scorecard[j]%></p>"
                         <%}%>
                         + "<div class='col-xs-12'> <div class='row'> <table class='table table-bordered text-center'>"
                         + "<th>Name</th>"
-                        <%  for (j = 0;j < match[i].scorecard[28].length;j++) { %>
-                        + "<th><%=match[i].scorecard[28][j]%></th>"
+                        <%  for (j = 0;j < match[i].scorecard[22 + match[i].count[0]].length;++j) { %>
+                        + "<th><%=match[i].scorecard[22 + match[i].count[0]][j]%></th>"
                         <% } %>
-                        <%  for (j = 29;j < 40;j++) { %>
+                        <%  for (j = 23 + match[i].count[0];j < 34 + match[i].count[0];j++) { %>
                         + "<tr>"
-                        <%  for (k = 0;k < match[i].scorecard[j].length;k++) { %>
+                        <%  for (k = 0;k < match[i].scorecard[j].length;++k) { %>
                         <%if (match[i].scorecard[j].length == 9 && k == 8){break;%>
                         <% } else if(match[i].scorecard[j].length == 2 && k != 0){%>
                         + "<td colspan='7'><%=match[i].scorecard[j][k]%></td>"
@@ -219,23 +216,23 @@
                         + "</tr>"
                         <%}%>
                         + "</table></div></div>"
-                        + "<p><%=match[i].scorecard[40]%></p>"
-                        <% for (j =41;j<43;j++) {%>
+                        + "<p><%=match[i].scorecard[34 + match[i].count[0]]%></p>"
+                        <% for (j =35 + match[i].count[0];j<37 + match[i].count[0];j++) {%>
                         + "<p><%= match[i].scorecard[j]%></p>"
                         <%}%>
                         + "<div class='col-xs-12'> <div class='row'> <table class='table table-bordered text-center'>"
-                        <%for (j=0;j<match[i].scorecard[43].length;j++){%>
-                        + "<th><%=match[i].scorecard[43][j]%></th>"
+                        <%for (j=0;j<match[i].scorecard[37 + match[i].count[0]].length;++j){%>
+                        + "<th><%=match[i].scorecard[37 + match[i].count[0]][j]%></th>"
                         <%}%>
-                        <% for (j=44;j<50;j++) {%>
+                        <% for (j=38 + match[i].count[0];j<38 + match[i].count[0] + match[i].count[1];++j) {%>
                         + "<tr>"
-                        <% for (k=0;k<(match[i].scorecard[j] || '').length;k++){%>
+                        <% for (k=0;k<(match[i].scorecard[j] || '').length;++k){%>
                         + "<td><%= match[i].scorecard[j][k]%></td>"
                         <%}%>
                         + "</tr>"
                         <%}%>
                         + "</table></div></div>"
-                        <% for (j=50;j<53;j++) {%>
+                        <% for (j=38 + match[i].count[0] + match[i].count[1];j<41 + match[i].count[0] + match[i].count[1];++j) {%>
                         + "<p><%= match[i].scorecard[j]%></p>"
                 <%}%>
                 <%}%>

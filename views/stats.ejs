@@ -101,16 +101,14 @@
                                 </table>
                                 <p class="lead">Today's Highest Total</p>
                                 <table class="table">
-                                    <tr><th>Team </th> <td><%= stats.daily.team %></td></tr>
+                                    <tr><th>Team</th> <td><%= stats.daily.total.team %></td></tr>
+                                    <tr><th>Score</th> <td><%= stats.daily.total.value %></td></tr>
                                 </table>
-                                <p class="lead">Overall Highest Total </p>
+                                <p class="lead">Highest individual score</p>
                                 <table class="table">
-                                    <tr><th>Team </th> <td><%= stats.daily.team %></td></tr>
-                                </table>
-
-                                <p class="lead">Highest Score By an individual </p>
-                                <table class="table">
-                                    <tr><th>Score </th> <td><%= stats.high.individual.value %></td></tr>
+                                    <tr><th>Score</th> <td><%= stats.high.individual.value %></td></tr>
+                                    <tr><th>Player</th> <td><%= stats.high.individual.player %></td></tr>
+                                    <tr><th>Team</th> <td><%= stats.high.individual.team %></td></tr>
                                 </table>
                             </div>
                     </div>
