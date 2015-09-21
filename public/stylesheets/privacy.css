@@ -28,6 +28,17 @@ body {
     font-size: 16px;
     overflow: hidden;
 }
+@media all and (max-width:768px){
+  html{
+    overflow: hidden !important;
+  }
+}
+
+@media all and (max-width:768px){
+  html{
+    overflow: scroll;
+  }
+}
 
 p {
     font-style: normal;

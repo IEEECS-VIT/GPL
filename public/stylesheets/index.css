@@ -39,7 +39,9 @@
     ), url('http://res.cloudinary.com/gpl/general/three-medium.jpg') no-repeat center center fixed;
     background-size: cover;
 }
-
+#myCarousel{
+  overflow: hidden;
+}
 /* Large Devices, Wide Screens */
 @media only screen and (min-width: 786px) {
     .one {
@@ -64,4 +66,8 @@
         ), url('http://res.cloudinary.com/gpl/general/three.jpg') no-repeat center center fixed;
         background-size: cover;
     }
+}
+
+html{
+  overflow: hidden;
 }

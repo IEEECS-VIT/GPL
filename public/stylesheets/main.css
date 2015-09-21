@@ -29,8 +29,10 @@ html {
     min-height: 100%;
     background-color: white;
     position: relative;
-    overflow: auto !important;
+
 }
+
+
 
 body {
     min-height: 100%;
@@ -87,12 +89,13 @@ h1 {
     right: 0;
 }
 
-/* Declare heights because of positioning of img element */
+/* Declare heights because of positioning of imgf element */
 
 .carousel .item {
     height: 500px;
     min-height: 95vh;
     /*background-color: #777;*/
+    overflow-y: hidden; 
 }
 
 .navbar {
@@ -275,9 +278,4 @@ footer {
 
 label {
     font-weight: normal;
-}
-@media all and (min-width:768px){
-  html{
-    overflow: hidden !important;
-  }
 }
