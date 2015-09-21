@@ -904,7 +904,7 @@ module.exports =
         "towards the stumps and he hammers that with a powerful pull to the wide long on boundary for a cracking six!",
         "mauled over square leg, miles over it in fact! That's how a long hop should he dealt with, steps down the track" +
         " and simply heaves it away. Nothing pretty about the shot, but it hits the spot fine",
-        "\"oh, come on,\" says the frustrated keeper as he watches a length ball muscled over long-on! Picks it up and " +
+        "&quot;oh, come on,&quot; says the frustrated keeper as he watches a length ball muscled over long-on! Picks it up and " +
         "launches it flat over the boundary",
         "flighted on off stump, and the batsman goes for a heave down the ground. I didn't think he got much bat on that," +
         " but there's enough to burst through the fielder's outstretched hands at long-off",

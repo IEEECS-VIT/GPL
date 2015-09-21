@@ -2040,7 +2040,7 @@ module.exports =
         "in the deep. Good plans",
         "misfield at point! The bowling attack is being shred to bits. This was a short ball outside off, slapped right " +
         "at the fielder but he isn't good enough",
-        "flighted outside off, thumped to through extra cover. \"Two, two, two,\" he yelled, but he's got four! What an " +
+        "flighted outside off, thumped to through extra cover. &quot;Two, two, two,&quot; he yelled, but he's got four! What an " +
         "outfield we have here! Long off can't catch up",
         "gets down the pitch, takes the ball on the full and tonks it over the bowler's head. He runs to his left from " +
         "long-on , throws in a big dive, slaps the ball away but it still trickles to the boundary",

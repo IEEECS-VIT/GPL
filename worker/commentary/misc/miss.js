@@ -19,10 +19,10 @@
 exports.half =
     [
         "",
-        "looks like there won\'t be any fifty for /b. He came so close, and was yet so far."
+        "looks like there won&lsquo;t be any fifty for /b. He came so close, and was yet so far."
     ];
 exports.full =
     [
         "",
-        "He\'ll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team."
+        "He&lsquo;ll be gutted, no doubt. But it was a fantastic innings nevertheless. He has definitely done a job for his team."
     ];

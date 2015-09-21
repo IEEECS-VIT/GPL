@@ -2783,7 +2783,7 @@ module.exports =
         "onto pad",
 
         "huge inside edge off , because he was making room having not picked it. The ball dribbles away to slip",
-        "\"Catch it\", was a cry as he plays outside the line of a googly. No bat involved even as the keeper runs past " +
+        "&quot;Catch it&quot;, was a cry as he plays outside the line of a googly. No bat involved even as the keeper runs past " +
         "short leg to get to it",
         "trouble with pace at the other end, with Russell making a short ball hold up. He was looking for a flick, and " +
         "gets a leading edge that goes a few feet to the right of the bowler",
@@ -2895,7 +2895,7 @@ module.exports =
         "wrong 'un beats Faf! He was making room, and ends up having too much as he goes for a wild slog. Beaten",
         "it's a delivery that he can't pick. Pokes after it having read it from the pitch and is easily beaten.",
         "struck in the gut! He's winded, goes down on his haunches. Can't respond to his partner's call for a single. " +
-        "It's bowled short. Sticks in the pitch and foil's the timing on the pull. \"Ooof\", the striker yells but he's okay",
+        "It's bowled short. Sticks in the pitch and foil's the timing on the pull. &quot;Ooof&quot;, the striker yells but he's okay",
         "the offcutter again and he runs outside off for a scoop. Can't connect and somehow the ball manages to bounce " +
         "over the stumps",
         "some calm after the drama off the first two deliveries, left alone outside off",
@@ -3217,7 +3217,7 @@ module.exports =
         " picked it. Hurries into a flick to try and save himself. Lucky escape that",
         "flighted on middle and off, was reaching forward with his hands and the leading edge squirts to point",
         "fuller delivery on middle, pushed back at the bowler",
-        "goes around the wicket to a flighted delivery outside off, defended and the keeper screams, \"Bowl like that\"",
+        "goes around the wicket to a flighted delivery outside off, defended and the keeper screams, &quot;Bowl like that&quot;",
         "tossed up, doesn't spin outside off, he waits and cuts to backward point",
         "there's proper result to a delivery. Drifts towards off, then darts to leg. The flight makes Morgan nervous as " +
         "he plays a flick far too late for his own good",
@@ -3698,7 +3698,7 @@ module.exports =
         "cut and misses",
         "clears the front leg in light of a slower and fuller delivery. But the offcutter beats his big swing, and only " +
         "just misses off stump. Lovely bowling",
-        "\"catch,\" the keeper yells. But it doesn't happen. This was a bump ball. Nicely tossed up on off stump and he " +
+        "&quot;catch,&quot; the keeper yells. But it doesn't happen. This was a bump ball. Nicely tossed up on off stump and he " +
         "drills it back at the bowler",
         "doesn't pick this one and he's nearly bowled 'im! Set up for a cut, has to hurry to protect his stumps and the " +
         "flick bounces off his boot and scurries away past the keeper",
@@ -3724,7 +3724,7 @@ module.exports =
         "back of a length and on off stump, tucked to midwicket",
         "dances down, but the bowler changes his length to a short one on middle. The batsman has to pull out of the stroke",
         "full on off stump, ends up a low full toss, which is pushed to cover.",
-        "\"catch it,\" is the call as the flighted delivery on middle is turned towards midwicket. Falls on the bounce.",
+        "&quot;catch it,&quot; is the call as the flighted delivery on middle is turned towards midwicket. Falls on the bounce.",
         "pushed through on middle and leg, defended down the pitch. Not quite. Slid straight on",
         "shortish and outside off, guided to point",
         "good length ball brings the batsman forward with a push into the covers",

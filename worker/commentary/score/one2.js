@@ -65,7 +65,7 @@ module.exports =
         "swiped to long-on with plenty of bottom hand",
         "banged in short and hurries on, Miller loads up for a pull and gets an edge behind square leg",
         "low full toss on the leg stump, whipped away to deep midwicket. THe non-striker wants two, but is sent back. He" +
-        "\ dives and beats the throw from the deep",
+        " dives and beats the throw from the deep",
         "low full toss on the stumps, dragged to deep midwicket. No mix-ups here",
         "another low full toss, clubbed to deep midwicket. The striker attacks the ball and keeps it to a single.",
         "skips down the track again. He is wary of it as he drags his length back. Punched through cover-point",

@@ -1146,7 +1146,7 @@ module.exports =
         "he strikes, he gets rid of his man! This was an innocuous ball on the hips, he picks it up and flicks it straight " +
         "to short fine leg, who bends forward and pouches it",
         "and the fielder pulls off a brilliant catch! Around off with some extra bounce, he sinks to one knee and goes for " +
-        "a sweep. He mis-hits it in the air, the batsman sprints in from deep backward square leg, dives forward and takes \a" +
+        "a sweep. He mis-hits it in the air, the batsman sprints in from deep backward square leg, dives forward and takes a" +
         " superb, low catch! ",
         "holes out to long-on. Low full toss on middle, instead of launching it over long-on, he scoops it straight into the" +
         " hands of mid-on, caught near chest height.. The bat twisted in his hand, foiling his timing. The coach winces in " +

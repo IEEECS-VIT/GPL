@@ -133,9 +133,9 @@ exports.initSimulation = function (day, masterCallback)
                 stats.wickets += newUserDoc.wickets_lost;
                 if(newUserDoc.scores[day - 1] > daily)
                 {
-                    console.log(stats.daily, '----');
+                    daily = newUserDoc.scores[day - 1];
                     stats.daily.total.team = newUserDoc._id;
-                    daily = stats.daily.total.value = newUserDoc.scores[day - 1];
+                    stats.daily.total.value = newUserDoc.scores[day - 1];
                 }
                 if(newUserDoc.highest_total > stats.high.total.value)
                 {
@@ -153,7 +153,7 @@ exports.initSimulation = function (day, masterCallback)
                     stats.four += (newUserDoc.stats[newUserDoc.squad[i]].fours || 0);
                     if (!newUserDoc.squad[i].match(/^b/))
                     {
-                        if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > individual) // TODO: adjust
+                        if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > individual)
                         {
                             individual = newUserDoc.val;
                             stats.daily.individual.team = newUserDoc._id;
@@ -265,6 +265,10 @@ exports.initSimulation = function (day, masterCallback)
                     if (err)
                     {
                         console.log(err.message);
+                    }
+                    else
+                    {
+                        console.log(message.header.bcc.length + ' emails sent for round ' + ref[process.env.MATCH] + ', match ' + process.env.DAY);
                     }
                     masterCallback(err, results);
                 });

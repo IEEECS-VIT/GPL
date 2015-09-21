@@ -3370,7 +3370,7 @@ module.exports =
         "another shortish delivery, he comes forward and flat-bats it down the ground. Didn't time this one though",
         "shortish on middle, nudged to mid-on",
         "too full for the swipe through midwicket. Nice, fullish length from him and doesn't offer much room. Inside edge" +
-        "\ to fine leg",
+        " to fine leg",
         "fullish, and perhaps a shade slower, defended into the covers for a quick single",
         "tossed up outside off, steps forward and nudges the ball behind square leg",
         "goes back and punches a flatter ball to long-on",
@@ -3414,7 +3414,7 @@ module.exports =
         "full on off stump, he huffs and puffs for a mistimed swipe that skews to long-off",
         "shortish, but not quite enough room even after he made room. Slapped to extra cover for a single",
         "skips down the track, but only gets an inside edge to the length ball that skews away behind square leg",
-        "low full toss on off stump, he slaps it down to long-on. \"two\" is the call, but the non-striker wasn't quick " +
+        "low full toss on off stump, he slaps it down to long-on. &quot;two&quot; is the call, but the non-striker wasn't quick " +
         "enough. The throw comes in quick, but its wayward. The keeper misses it, the first back up misses it, but the " +
         "second takes it. Which foils them seeking an overthrow",
         "pitched up slightly outside off, it's pushed into the covers for a quick single and the fielder has a shy at " +
@@ -3738,7 +3738,7 @@ module.exports =
         "length ball outside off, slapped away to the sweeper. Good work from the fielder to keep it to a single",
         "that's on off stump, he was opening his shoulders to lift it over extra cover. All he can do is skew it to long-on",
         "down the track to a good length ball and nudges it to long-on. He wants a second run, but the man at the other " +
-        "end makes a loud and clear call of \"no\"",
+        "end makes a loud and clear call of &quot;no&quot;",
         "ample turn off a shortish delivery outside off. He looks for a whip through the leg side, but ends up with an " +
         "inside edge through his legs. Classy",
         "looped up outside off, turned to long-on",
@@ -3761,7 +3761,7 @@ module.exports =
         "another mistimed heave. He's playing against the angle, and when he can't get to the pitch of it, the slog sweep" +
         " will go off the outside edge",
         "nudged away behind square on the leg side for a single",
-        "flighted on off stump, pushed through to extra cover and calls, \"two, two, two.\" Unless he wants to take on " +
+        "flighted on off stump, pushed through to extra cover and calls, &quot;two, two, two.&quot; Unless he wants to take on " +
         "the fielder's arm, that's not on offer.",
         "another googly, but he picks it and clips it through to deep midwicket",
         "flighted on middle, turned through square leg",
@@ -4097,7 +4097,7 @@ module.exports =
         "lovely, loopy one from the bowler. Even got a hint of drift. But he's played a serene cover drive off the middle," +
         " of course",
         "heaved away to deep midwicket. Was looking aerial again, but mis-hit the ball",
-        "flatter and quicker on off stump, he slaps it through extra cover and yells \"Yeah, yeah, yeah,\" well before he" +
+        "flatter and quicker on off stump, he slaps it through extra cover and yells &quot;Yeah, yeah, yeah,&quot; well before he" +
         " was unable to dive to his right and stop the ball. Boy, this guy knows cricket!",
         "gets a back of a length delivery to stay low. AB was off his feet trying to punch through cover, and gets an " +
         "inside edge.",
