@@ -481,7 +481,8 @@ router.get('/register', function (req, res) {
     }
     else
     {
-        res.render('register', {response: "", csrfToken: req.csrfToken()});
+        res.redirect('/');
+        //res.render('register', {response: "", csrfToken: req.csrfToken()});
     }
 });
 
@@ -661,7 +662,7 @@ router.get(/\/developers?/, function (req, res) {
 router.get('/simulate', function (req, res) {
     if (req.signedCookies.admin)
     {
-        var onSimulate = function (err, docs)
+/*        var onSimulate = function (err, docs)
         {
             if (err)
             {
@@ -673,7 +674,7 @@ router.get('/simulate', function (req, res) {
                 res.render('results', {results: docs});
             }
         };
-        mongoFeatures.simulate(onSimulate);
+        mongoFeatures.simulate(onSimulate);*/
     }
     else
     {
