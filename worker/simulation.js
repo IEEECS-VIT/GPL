@@ -368,7 +368,7 @@ exports.simulate = function (data, callback)
                         if (bat_perf_index <= -out && bat_perf_index > -(1 + out))
                         {
                             data.match.commentary[data.match.commentary.length - 1] += rand(caught);
-                            temp = parseInt((bat_perf_index + 1) * 22);
+                            temp = parseInt((bat_perf_index + 1 + out) * 11);
                             wicket_index = 0;
                         }
                         else if (bat_perf_index <= -(1 + out) && bat_perf_index > -(2 + out))
