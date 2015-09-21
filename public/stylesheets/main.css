@@ -95,7 +95,6 @@ h1 {
     height: 500px;
     min-height: 95vh;
     /*background-color: #777;*/
-    overflow-y: hidden; 
 }
 
 .navbar {
