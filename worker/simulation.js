@@ -353,7 +353,7 @@ exports.simulate = function (data, callback)
                     {
                         data.match.commentary.push(i + '.' + j + ' ' + team_object[+!toss_index].bowl_name[current_bowler] + ' to ' + team_object[+toss_index].bat_name[strike[+strike_index]] + ', ');
                     }
-                    if (bat_perf_index <= -1 && !free_hit)
+                    if (bat_perf_index <= -out && !free_hit)
                     {
                         ++boundary_gap;
                         previous_batsman = strike[+strike_index];
@@ -381,12 +381,12 @@ exports.simulate = function (data, callback)
                             data.match.commentary[data.match.commentary.length - 1] += rand(lbw);
                             wicket_index = 2;
                         }
-                        else if (bat_perf_index <= -(3 + out) && bat_perf_index > -(3.5 + out))
+                        else if (bat_perf_index <= -(3 + out) && bat_perf_index > -(4 + out))
                         {
                             data.match.commentary[data.match.commentary.length - 1] += rand(cnb);
                             wicket_index = 3;
                         }
-                        else if (bat_perf_index <= -(3.5 + out) && bat_perf_index > -(4 + out))
+                        else if (bat_perf_index <= -(4 + out) && bat_perf_index > -(5 + out))
                         {
                             data.match.commentary[data.match.commentary.length - 1] += rand(stumped);
                             wicket_index = 4;
