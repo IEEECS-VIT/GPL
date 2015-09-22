@@ -158,20 +158,20 @@ exports.initSimulation = function (day, masterCallback)
                             if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > individual)
                             {
                                 stats.daily.individual.team = newUserDoc._id;
-                                stats.daily.individual.player = newUserDoc.names[i];
+                                stats.daily.individual.player = newUserDoc.names[i] || '';
                                 individual = newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1];
                                 stats.daily.individual.value = newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1];
                             }
                             if(newUserDoc.stats[newUserDoc.squad[i]].high > stats.high.individual.value)
                             {
                                 stats.high.individual.team = newUserDoc._id;
-                                stats.high.individual.player = newUserDoc.names[i];
+                                stats.high.individual.player = newUserDoc.names[i] || '';
                                 stats.high.individual.value = newUserDoc.stats[newUserDoc.squad[i]].high;
                             }
                             if(newUserDoc.stats[newUserDoc.squad[i]].runs_scored > stats.orange.runs)
                             {
                                 stats.orange.team = newUserDoc._id;
-                                stats.orange.player = newUserDoc.names[i];
+                                stats.orange.player = newUserDoc.names[i] || '';
                                 stats.orange.avg = newUserDoc.stats[newUserDoc.squad[i]].average;
                                 stats.orange.balls = newUserDoc.stats[newUserDoc.squad[i]].balls;
                                 stats.orange.runs = newUserDoc.stats[newUserDoc.squad[i]].runs_scored;
@@ -181,7 +181,7 @@ exports.initSimulation = function (day, masterCallback)
                         if (newUserDoc.squad[i].match(/^[^a]/) && newUserDoc.stats[newUserDoc.squad[i]].wickets_taken > stats.purple.wickets)
                         {
                             stats.purple.team = newUserDoc._id;
-                            stats.purple.player = newUserDoc.names[i];
+                            stats.purple.player = newUserDoc.names[i] || '';
                             stats.purple.sr = newUserDoc.stats[newUserDoc.squad[i]].sr;
                             stats.purple.avg = newUserDoc.stats[newUserDoc.squad[i]].avg;
                             stats.purple.balls = newUserDoc.stats[newUserDoc.squad[i]].overs;
