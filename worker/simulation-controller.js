@@ -128,75 +128,75 @@ exports.initSimulation = function (day, masterCallback)
         {
             var updateUser = function (newUserDoc, asyncCallback)
             {
-                stats.runs += newUserDoc.scores[day - 1];
-                stats.overs += newUserDoc.balls_for;
-                stats.wickets += newUserDoc.wickets_lost;
-                if(newUserDoc.scores[day - 1] > daily)
+                if(newUserDoc.team.length)
                 {
-                    daily = newUserDoc.scores[day - 1];
-                    stats.daily.total.team = newUserDoc._id;
-                    stats.daily.total.value = newUserDoc.scores[day - 1];
-                }
-                if(newUserDoc.highest_total > stats.high.total.value)
-                {
-                    stats.high.total.team = newUserDoc._id;
-                    stats.high.total.value = newUserDoc.highest_total;
-                }
-                if(newUserDoc.lowest_total < stats.low.value)
-                {
-                    stats.low.team = newUserDoc._id;
-                    stats.low.value = newUserDoc.lowest_total;
-                }
-                for (i = 0; i < newUserDoc.squad.length; ++i)
-                {
-                    stats.six += (newUserDoc.stats[newUserDoc.squad[i]].sixes || 0);
-                    stats.four += (newUserDoc.stats[newUserDoc.squad[i]].fours || 0);
-                    if (!newUserDoc.squad[i].match(/^b/))
+                    stats.runs += newUserDoc.scores[day - 1];
+                    stats.overs += newUserDoc.balls_for;
+                    stats.wickets += newUserDoc.wickets_lost;
+                    if(newUserDoc.scores[day - 1] > daily)
                     {
-                        if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > individual)
+                        daily = newUserDoc.scores[day - 1];
+                        stats.daily.total.team = newUserDoc._id;
+                        stats.daily.total.value = newUserDoc.scores[day - 1];
+                    }
+                    if(newUserDoc.highest_total > stats.high.total.value)
+                    {
+                        stats.high.total.team = newUserDoc._id;
+                        stats.high.total.value = newUserDoc.highest_total;
+                    }
+                    if(newUserDoc.lowest_total < stats.low.value)
+                    {
+                        stats.low.team = newUserDoc._id;
+                        stats.low.value = newUserDoc.lowest_total;
+                    }
+                    for (i = 0; i < newUserDoc.squad.length; ++i)
+                    {
+                        stats.six += (newUserDoc.stats[newUserDoc.squad[i]].sixes || 0);
+                        stats.four += (newUserDoc.stats[newUserDoc.squad[i]].fours || 0);
+                        if (!newUserDoc.squad[i].match(/^b/))
                         {
-                            individual = newUserDoc.val;
-                            stats.daily.individual.team = newUserDoc._id;
-                            stats.daily.individual.value = newUserDoc.val;
-                            stats.daily.individual.player = newUserDoc.names[i];
+                            if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > individual)
+                            {
+                                stats.daily.individual.team = newUserDoc._id;
+                                stats.daily.individual.player = newUserDoc.names[i];
+                                individual = newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1];
+                                stats.daily.individual.value = newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1];
+                            }
+                            if(newUserDoc.stats[newUserDoc.squad[i]].high > stats.high.individual.value)
+                            {
+                                stats.high.individual.team = newUserDoc._id;
+                                stats.high.individual.player = newUserDoc.names[i];
+                                stats.high.individual.value = newUserDoc.stats[newUserDoc.squad[i]].high;
+                            }
+                            if(newUserDoc.stats[newUserDoc.squad[i]].runs_scored > stats.orange.runs)
+                            {
+                                stats.orange.team = newUserDoc._id;
+                                stats.orange.player = newUserDoc.names[i];
+                                stats.orange.avg = newUserDoc.stats[newUserDoc.squad[i]].average;
+                                stats.orange.balls = newUserDoc.stats[newUserDoc.squad[i]].balls;
+                                stats.orange.runs = newUserDoc.stats[newUserDoc.squad[i]].runs_scored;
+                                stats.orange.sr = newUserDoc.stats[newUserDoc.squad[i]].strike_rate;
+                            }
                         }
-                        if(newUserDoc.stats[newUserDoc.squad[i]].high > stats.high.individual.value)
+                        if (newUserDoc.squad[i].match(/^[^a]/) && newUserDoc.stats[newUserDoc.squad[i]].wickets_taken > stats.purple.wickets)
                         {
-                            stats.high.individual.team = newUserDoc._id;
-                            stats.high.individual.player = newUserDoc.names[i];
-                            stats.high.individual.value = newUserDoc.stats[newUserDoc.squad[i]].high;
-                        }
-                        if(newUserDoc.stats[newUserDoc.squad[i]].runs_scored > stats.orange.runs)
-                        {
-                            stats.orange.team = newUserDoc._id;
-                            stats.orange.player = newUserDoc.names[i];
-                            stats.orange.avg = newUserDoc.stats[newUserDoc.squad[i]].average;
-                            stats.orange.balls = newUserDoc.stats[newUserDoc.squad[i]].balls;
-                            stats.orange.runs = newUserDoc.stats[newUserDoc.squad[i]].runs_scored;
-                            stats.orange.sr = newUserDoc.stats[newUserDoc.squad[i]].strike_rate;
+                            stats.purple.team = newUserDoc._id;
+                            stats.purple.player = newUserDoc.names[i];
+                            stats.purple.sr = newUserDoc.stats[newUserDoc.squad[i]].sr;
+                            stats.purple.avg = newUserDoc.stats[newUserDoc.squad[i]].avg;
+                            stats.purple.balls = newUserDoc.stats[newUserDoc.squad[i]].overs;
+                            stats.purple.economy = newUserDoc.stats[newUserDoc.squad[i]].economy;
+                            stats.purple.wickets = newUserDoc.stats[newUserDoc.squad[i]].wickets_taken;
                         }
                     }
-                    if (newUserDoc.squad[i].match(/^[^a]/) && newUserDoc.stats[newUserDoc.squad[i]].wickets_taken > stats.purple.wickets)
-                    {
-                        stats.purple.team = newUserDoc._id;
-                        stats.purple.player = newUserDoc.names[i];
-                        stats.purple.sr = newUserDoc.stats[newUserDoc.squad[i]].sr;
-                        stats.purple.avg = newUserDoc.stats[newUserDoc.squad[i]].avg;
-                        stats.purple.balls = newUserDoc.stats[newUserDoc.squad[i]].overs;
-                        stats.purple.economy = newUserDoc.stats[newUserDoc.squad[i]].economy;
-                        stats.purple.wickets = newUserDoc.stats[newUserDoc.squad[i]].wickets_taken;
-                    }
+                    delete newUserDoc.names;
                 }
-                delete newUserDoc.names;
-                database.collection(match).updateOne({_id: newUserDoc._id}, newUserDoc, function () {
-                    message.header.bcc.push(newUserDoc.email);
-                    asyncCallback();
-                });
+                database.collection(match).updateOne({_id: newUserDoc._id}, newUserDoc, asyncCallback);
             };
 
             var updateMatch = function (newMatchDoc, asyncCallback)
             {
-                if (newMatchDoc.MoM.points > points)
+                if (points < (newMatchDoc.MoM.points || 0))
                 {
                     stats.daily.MoM = newMatchDoc.MoM;
                     points = newMatchDoc.MoM.points;
