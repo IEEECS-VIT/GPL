@@ -44,6 +44,10 @@ exports.simulate = function (data, callback)
     }
     else
     {
+        data.team[0].s = 0;
+        data.team[1].s = 0;
+        data.team[0].f = 0;
+        data.team[1].f = 0;
         data.match.scorecard = [];
         data.match.commentary = [];
         var temp = 0;
@@ -818,6 +822,8 @@ exports.simulate = function (data, callback)
                     partnership_runs[i] = partnership_balls[i] = 0;
                 }
                 k += fours[i] * 4 + maximums[i] * 6;
+                data.team[+toss_index].f += fours[i];
+                data.team[+toss_index].s += maximums[i];
                 data.team[+toss_index].fours += fours[i];
                 data.team[+toss_index].sixes += maximums[i];
                 balls[i] = fours[i] = maximums[i] = dismissed[i] = milestone[i] = score[i] = balls[i] = fours[i] = maximums[i] = control[i] = catches[i] = dot_balls[i] = 0;

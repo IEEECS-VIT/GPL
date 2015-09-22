@@ -132,8 +132,8 @@ exports.initSimulation = function (day, masterCallback)
                 {
                     console.log(newUserDoc.team.length);
                     stats.runs += newUserDoc.scores[day - 1];
-                    stats.overs += newUserDoc.balls_for;
-                    stats.wickets += newUserDoc.wickets_lost;
+                    stats.overs += newUserDoc.overs[day - 1];
+                    stats.wickets += newUserDoc.wickets[day - 1];
                     if(newUserDoc.scores[day - 1] > daily)
                     {
                         daily = newUserDoc.scores[day - 1];
@@ -152,8 +152,8 @@ exports.initSimulation = function (day, masterCallback)
                     }
                     for (i = 0; i < newUserDoc.squad.length; ++i)
                     {
-                        stats.six += (newUserDoc.stats[newUserDoc.squad[i]].sixes || 0);
-                        stats.four += (newUserDoc.stats[newUserDoc.squad[i]].fours || 0);
+                        stats.six += (newUserDoc.s || 0);
+                        stats.four += (newUserDoc.f || 0);
                         if (!newUserDoc.squad[i].match(/^b/))
                         {
                             if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > individual)
@@ -190,8 +190,10 @@ exports.initSimulation = function (day, masterCallback)
                             stats.purple.wickets = newUserDoc.stats[newUserDoc.squad[i]].wickets_taken;
                         }
                     }
-                    delete newUserDoc.names;
                 }
+                delete newUserDoc.f;
+                delete newUserDoc.s;
+                delete newUserDoc.names;
                 database.collection(match).updateOne({_id: newUserDoc._id}, newUserDoc, asyncCallback);
             };
 
