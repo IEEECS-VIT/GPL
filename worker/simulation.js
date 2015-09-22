@@ -24,6 +24,7 @@ exports.simulate = function (data, callback)
         console.log('Both teams forfeit');
         ++data.team[0].loss;
         ++data.team[1].loss;
+        data.team[0].names = data.team[1].names = ['', '', '', '', '', '', '', '', '', '', ''];
     }
     else if (data.team[0].ratings.length < 12)
     {
@@ -31,6 +32,7 @@ exports.simulate = function (data, callback)
         ++data.team[1].win;
         ++data.team[0].loss;
         ++data.team[1].points;
+        data.team[0].names = ['', '', '', '', '', '', '', '', '', '', ''];
     }
     else if (data.team[1].ratings.length < 12)
     {
@@ -38,6 +40,7 @@ exports.simulate = function (data, callback)
         ++data.team[0].win;
         ++data.team[1].loss;
         ++data.team[0].points;
+        data.team[1].names = ['', '', '', '', '', '', '', '', '', '', ''];
     }
     else
     {
