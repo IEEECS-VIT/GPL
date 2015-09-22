@@ -134,7 +134,7 @@ router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
 });
 
 router.get('/matches', function (req, res) {
-    if (req.signedCookies.name && process.env.LIVE === '1' && !process.env.NODE_ENV && process.env.DAY >= '1')
+    if (req.signedCookies.name && process.env.LIVE === '1' && process.env.DAY >= '1')
     {
         var onMap = function (err, num)
         {
