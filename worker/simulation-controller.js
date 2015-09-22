@@ -128,9 +128,8 @@ exports.initSimulation = function (day, masterCallback)
         {
             var updateUser = function (newUserDoc, asyncCallback)
             {
-                if(newUserDoc.team.length)
+                if(newUserDoc.squad.length)
                 {
-                    console.log(newUserDoc.team.length);
                     stats.runs += newUserDoc.scores[day - 1];
                     stats.overs += newUserDoc.overs[day - 1];
                     stats.wickets += newUserDoc.wickets[day - 1];
