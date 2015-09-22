@@ -260,19 +260,36 @@ exports.initSimulation = function (day, masterCallback)
             }
             else
             {
-                email.send(message, function (err)
+                masterCallback(null, results);
+/*              if(message.header.bcc.length > 500)
                 {
-                    if (err)
+                    var temp = message.header.bcc;
+                    var parallelEmails = [];
+                    while(temp.length)
                     {
-                        console.log(err.message);
+                        parallelEmails.push(function(asyncCallback){
+                            message.header.bcc = temp.splice(0, 500);
+                            email.send(message, asyncCallback);
+                        });
                     }
-                    else
+                    async.parallel(parallelEmails, masterCallback(err, results));
+                }
+                else
+                {
+                  email.send(message, function (err)
                     {
-                        console.log(message.header.bcc.length + ' emails sent for round ' + ref[process.env.MATCH] + ', match ' + process.env.DAY);
-                    }
-                    masterCallback(err, results);
-                });
-            }
+                        if (err)
+                        {
+                            console.log(err.message);
+                        }
+                        else
+                        {
+                            console.log(message.header.bcc.length + ' emails sent for round ' + ref[process.env.MATCH] + ', match ' + process.env.DAY);
+                        }
+                        masterCallback(err, results);
+                    });
+                }
+ */            }
         };
         database.collection('stats').updateOne({_id: 'stats'}, {$set: stats}, onUpdate);
     };
