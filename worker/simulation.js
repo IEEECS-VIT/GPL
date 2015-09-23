@@ -31,16 +31,16 @@ exports.simulate = function (data, callback)
         console.log(data.team[0]._id + ' forfeits');
         ++data.team[1].win;
         ++data.team[0].loss;
-        ++data.team[1].points;
-        data.team[0].names = ['', '', '', '', '', '', '', '', '', '', ''];
+        data.team[1].points += 2;
+        data.team[0].names = data.team[1].names = ['', '', '', '', '', '', '', '', '', '', ''];
     }
     else if (data.team[1].ratings.length < 12)
     {
         console.log(data.team[1]._id + ' forfeits');
         ++data.team[0].win;
         ++data.team[1].loss;
-        ++data.team[0].points;
-        data.team[1].names = ['', '', '', '', '', '', '', '', '', '', ''];
+        data.team[0].points += 2;
+        data.team[0].names = data.team[1].names = ['', '', '', '', '', '', '', '', '', '', ''];
     }
     else
     {
