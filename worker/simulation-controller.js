@@ -18,10 +18,10 @@
 var i;
 var log;
 var database;
-var daily = -1;
+var daily = 0;
 var stats = {};
 var points = 0;
-var individual = -1;
+var individual = 0;
 var path = require('path');
 var async = require('async');
 var days = [1, 2, 3, 4, 5, 6, 7];
@@ -130,9 +130,11 @@ exports.initSimulation = function (day, masterCallback)
             {
                 if(newUserDoc.squad.length)
                 {
-                    stats.runs += newUserDoc.scores[day - 1];
-                    stats.overs += newUserDoc.overs[day - 1];
-                    stats.wickets += newUserDoc.wickets[day - 1];
+                    stats.six += (newUserDoc.s || 0);
+                    stats.four += (newUserDoc.f || 0);
+                    stats.runs += newUserDoc.scores[day - 1] || 0;
+                    stats.overs += newUserDoc.overs[day - 1] || 0;
+                    stats.wickets += newUserDoc.wickets[day - 1] || 0;
                     if(newUserDoc.scores[day - 1] > daily)
                     {
                         daily = newUserDoc.scores[day - 1];
@@ -151,8 +153,6 @@ exports.initSimulation = function (day, masterCallback)
                     }
                     for (i = 0; i < newUserDoc.squad.length; ++i)
                     {
-                        stats.six += (newUserDoc.s || 0);
-                        stats.four += (newUserDoc.f || 0);
                         if (!newUserDoc.squad[i].match(/^b/))
                         {
                             if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > individual)

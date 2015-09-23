@@ -85,13 +85,13 @@
                                 <table class="table table-bordered">
                                     <tr><th>Runs </th> <td><%= stats.runs %></td></tr>
                                     <tr><th>Overs </th> <td><%= stats.overs %></td></tr>
-                                    <tr><th>Overs </th> <td><%= stats.wickets %></td></tr>
+                                    <tr><th>Wickets </th> <td><%= stats.wickets %></td></tr>
                                     <tr><th>Fours </th> <td><%= stats.four %></td></tr>
                                     <tr><th>Sixes </th> <td><%= stats.six %></td></tr>
                                     <%if (stats.high.total.team != ''){%>
-                                    <tr><th>Highest Runs Scored </th> <td><%= stats.high.total.value %> by <%= stats.high.total.team %></td></tr>
+                                        <tr><th>Highest Runs Scored </th> <td><%= stats.high.total.value %> by <%= stats.high.total.team %></td></tr>
                                     <%}if (stats.low.team != ''){%>
-                                    <tr><th>Lowest Runs Scored </th> <td><%= stats.low.value %> by <%= stats.low.team %></td></tr>
+                                        <tr><th>Lowest Runs Scored </th> <td><%= stats.low.value %> by <%= stats.low.team %></td></tr>
                                     <%}%>
                                 </table>
                                 <p class="lead">Today's Highest Total</p>
