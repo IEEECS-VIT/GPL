@@ -311,7 +311,6 @@ router.get(/\/prizes?/, function (req, res) // page to view prizes
     res.render('prizes');
 });
 
-
 router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
 {
     if (req.signedCookies.name)

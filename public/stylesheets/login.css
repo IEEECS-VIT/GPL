@@ -55,9 +55,9 @@
 }
 
 .shadow-effect {
-    -webkit-box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.25);
-    -moz-box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.25);
-    box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.25);
     padding-bottom: 10px;
 }
 
@@ -74,8 +74,8 @@
 .omb_login .omb_loginOr .omb_hrOr {
     background-color: #cdcdcd;
     height: 1px;
-    margin-top: 0px !important;
-    margin-bottom: 0px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
 }
 
 .omb_login .omb_loginOr .omb_spanOr {

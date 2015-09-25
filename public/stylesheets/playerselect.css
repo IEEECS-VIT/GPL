@@ -107,7 +107,6 @@ form ul * {
 
 * {
     font-family: "Roboto", helvetica, arial, sans-serif;
-
 }
 
 .playerlist {
@@ -117,7 +116,6 @@ form ul * {
 
 .aside {
     padding-bottom: 20px;
-
 }
 
 .playerlistcontainer {
@@ -127,9 +125,7 @@ form ul * {
 }
 
 #players {
-
     max-width: 210px;
-
 }
 
 .card-content {
@@ -143,10 +139,9 @@ form ul * {
 
 .card {
     width: auto;
-    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.06), 0px 2px 5px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.2);
     margin-bottom: 15px;
     border-radius: 3px;
-
 }
 
 @media (max-width: 767px) {

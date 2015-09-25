@@ -15,6 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 var i;
 var log;
 var database;
@@ -291,7 +292,7 @@ exports.initSimulation = function (day, masterCallback)
                         masterCallback(err, results);
                     });
                 }
- */            }
+ */         }
         };
         database.collection('stats').updateOne({_id: 'stats'}, {$set: stats}, onUpdate);
     };

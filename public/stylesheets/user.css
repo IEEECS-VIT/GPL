@@ -76,7 +76,7 @@ body {
     margin: auto;
     top: 2em;
     padding: 0.3em 0;
-    box-shadow: inset 0em 0.1em 0.1em rgba(255, 255, 255, 0.5), inset 0em -0.1em 0.1em rgba(255, 255, 255, 0.5), inset 0 0.2em 0.5em rgba(255, 255, 255, 0.2), inset 0 -0.2em 0.5em rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 0.1em 0.1em rgba(255, 255, 255, 0.5), inset 0 -0.1em 0.1em rgba(255, 255, 255, 0.5), inset 0 0.2em 0.5em rgba(255, 255, 255, 0.2), inset 0 -0.2em 0.5em rgba(255, 255, 255, 0.2);
     border-radius: 5px;
 }
 
@@ -146,7 +146,7 @@ body {
 }
 
 #leftm a {
-    text-color: white;
+    color: white;
 }
 
 #leftm ul {
@@ -255,9 +255,7 @@ body {
     list-style: none;
     float: right;
     border-left: 0 white solid;
-    padding: 0.3em;
-    padding-left: 0.4em;
-    padding-top: 0.5em;
+    padding: 0.5em 0.3em 0.3em 0.4em;
     height: 27px;
     box-shadow: inset 0.1em 0 0 rgba(255, 255, 255, 0.6), inset -0.1em 0 0.2em rgba(255, 255, 255, 0.3), inset 0.1em 0 0.5em rgba(255, 255, 255, 0.3);
     font-weight: bold;
@@ -279,9 +277,7 @@ body {
     list-style: none;
     float: left;
     border-left: 0 white solid;
-    padding: 0.3em;
-    padding-left: 0.4em;
-    padding-top: 0.5em;
+    padding: 0.5em 0.3em 0.3em 0.4em;
     height: 27px;
     box-shadow: inset -0.1em 0 0 rgba(255, 255, 255, 0.6), inset 0.1em 0 0.2em rgba(255, 255, 255, 0.3), inset -0.1em 0 0.5em rgba(255, 255, 255, 0.3);
     font-weight: bold;
@@ -306,13 +302,13 @@ body {
     margin: 0;
     top: 2em;
     margin-top: 1em;
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0 0;
     height: auto;
     width: 100%/84.4em/;
     background: rgba(0, 0, 0, 1);
     position: relative;
     left: 0;
-    text-color: rgba(255, 255, 255, 1);
+    color: rgba(255, 255, 255, 1);
     box-shadow: inset 0.1em 0.1em 0.1em rgba(255, 255, 255, 0.5), inset -0.1em 0.1em 0.1em rgba(255, 255, 255, 0.5), inset 0 0.3em 0.5em rgba(255, 255, 255, 0.2);
 }
 

@@ -475,14 +475,17 @@ router.post('/reset/:token', function (req, res) {
 });
 
 router.get('/register', function (req, res) {
+    if(process.env.DAY >= 1)
+    {
+        res.redirect('/login');
+    }
     if (req.signedCookies.name)
     {
         res.redirect('/home');
     }
     else
     {
-        res.redirect('/');
-        //res.render('register', {response: "", csrfToken: req.csrfToken()});
+        res.render('register', {response: "", csrfToken: req.csrfToken()});
     }
 });
 
@@ -608,7 +611,11 @@ router.post('/social/login', function (req, res) {
 });
 
 router.get('/social/register', function (req, res) {
-    if (req.signedCookies.name)
+    if(process.env.DAY >= 1)
+    {
+        res.redirect('/login');
+    }
+    else if (req.signedCookies.name)
     {
         res.redirect('/home');
     }
@@ -676,10 +683,7 @@ router.get('/simulate', function (req, res) {
         };
         mongoFeatures.simulate(onSimulate);*/
     }
-    else
-    {
-        res.redirect('/');
-    }
+    res.redirect('/');
 });
 
 router.get('/rules', function (req, res) {

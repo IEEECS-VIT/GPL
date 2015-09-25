@@ -30,59 +30,46 @@ require('./database')(function(err, db){
     {
         exports.insert = function (doc, callback)
         {
-                    collection = db.collection('features');
-                    var onInsert = function (err, docs)
-                    {
-                        if (err)
-                        {
-                            callback(err, null);
-                        }
-                        else
-                        {
-                            callback(null, docs)
-                        }
-                    };
-                    collection.insertOne(doc, {w: 1}, onInsert);
+            db.collection('features').insertOne(doc, {w: 1}, callback);
         };
 
         exports.getInfo = function (callback)
         {
-                    collection = db.collection('stats');
-                    var onGetInfo = function (err, doc)
-                    {
-                        if (err)
-                        {
-                            callback(err);
-                        }
-                        else
-                        {
-                            callback(null, doc);
-                        }
-                    };
-                    collection.findOne(onGetInfo);
+            db.collection('stats').findOne(callback);
         };
 
         exports.notify = function (callback)
         {
-                    collection = db.collection('features');
-                    var onFind = function (err, docs)
-                    {
-                        if (err)
-                        {
-                            callback(err);
-                        }
-                        else
-                        {
-                            callback(null, docs);
-                        }
-                    };
-                    collection.find().toArray(onFind);
+            db.collection('features').find().toArray(callback);
         };
 
         exports.simulate = function (callback)
         {
             var simulationControl = require(path.join(__dirname, '..', 'worker', 'simulation-controller'));
-            var onSimulate = function (err, docs)
+            simulationControl.initSimulation(process.env.DAY || 1, callback);
+        };
+
+        exports.forgotCount = function(option, callback)
+        {
+            collection = db.collection('info');
+            var onInc = function(err, doc)
+            {
+                if(err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    callback(null, doc.value);
+                }
+            };
+            collection.findOneAndUpdate({_id : 'info'}, {$inc : option}, onInc);
+        };
+
+        exports.warnEmptyTeams = function(callback)
+        {
+            collection = db.collection('users');
+            var onFind = function(err, docs)
             {
                 if (err)
                 {
@@ -90,90 +77,33 @@ require('./database')(function(err, db){
                 }
                 else
                 {
-                    callback(null, docs);
+                    var onMap = function(arg, mapCallback)
+                    {
+                        mapCallback(null, arg.email);
+                    };
+
+                    async.map(docs, onMap, callback);
                 }
             };
-            simulationControl.initSimulation(process.env.DAY || 1, onSimulate);
-        };
-
-        exports.forgotCount = function(option, callback)
-        {
-                    collection = db.collection('info');
-                    var onInc = function(err, doc)
-                    {
-                        if(err)
-                        {
-                            callback(err);
-                        }
-                        else
-                        {
-                            callback(null, doc.value);
-                        }
-                    };
-                    collection.findOneAndUpdate({_id : 'info'}, {$inc : option}, onInc);
-        };
-
-        exports.warnEmptyTeams = function(callback)
-        {
-                    collection = db.collection('users');
-                    var onFind = function(err, docs)
-                    {
-                        if (err)
-                        {
-                            callback(err);
-                        }
-                        else
-                        {
-                            var onMap = function(arg, mapCallback)
-                            {
-                                mapCallback(null, arg.email);
-                            };
-
-                            var onFinish = function(err, result)
-                            {
-                                if(err)
-                                {
-                                    callback(err);
-                                }
-                                else
-                                {
-                                    callback(null, result);
-                                }
-                            };
-                            async.map(docs, onMap, onFinish);
-                        }
-                    };
-                    collection.find({team : []}, {email : 1, _id : 0}).toArray(onFind);
+            collection.find({team : []}, {email : 1, _id : 0}).toArray(onFind);
         };
         exports.match = function (day, team, callback)
         {
             var filter =
-                {
-                    $or:
-                        [
-                            {
-                                Team_1: team
-                            },
-                            {
-                                Team_2: team
-                            }
-                        ]
-                };
+            {
+                $or:
+                    [
+                        {
+                            Team_1: team
+                        },
+                        {
+                            Team_2: team
+                        }
+                    ]
+            };
             if (day <= process.env.DAY)
             {
-                collection = db.collection('matchday' + day);
-                var onMatch = function (err, doc)
-                {
-                    if (err)
-                    {
-                        callback(err);
-                    }
-                    else
-                    {
-                        callback(null, doc);
-                    }
-                };
-                collection.findOne(filter, onMatch);
+                db.collection('matchday' + day).findOne(filter, callback);
             }
             else
             {
@@ -185,18 +115,7 @@ require('./database')(function(err, db){
                     }
                     else
                     {
-                        var onGetSquad = function (err, squad)
-                        {
-                            if (err)
-                            {
-                                callback(err);
-                            }
-                            else
-                            {
-                                callback(null, squad);
-                            }
-                        };
-                        mongoTeam.squad({team_no: doc}, onGetSquad);
+                        mongoTeam.squad({team_no: doc}, callback);
                     }
                 };
                 mongoTeam.opponent(day, team, onOpponent);

@@ -76,12 +76,12 @@
 
 #coachBox {
     border: 1px solid rgb(221, 221, 221);
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 0;
+    padding-right: 0;
 }
 .accordion {
 
-    box-shadow:0px 1px 3px rgba(0,0,0,0.25);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
     border-radius:3px;
     background: #fffdfb;
     color: black;
@@ -94,7 +94,6 @@ a.player-name.accordion-section-title
 .accordion-section-title {
     width:100%;
     padding:5%;
-
 }
 
 .list-group .collapsing {
@@ -115,14 +114,12 @@ a.player-name.accordion-section-title
 /*----- Section Content -----*/
 .accordion-section-content {
     padding-top: 2%;
-
 }
 
 table {
 	width: 80%;
 	margin: 0;
 	background: rgba(0, 0, 0, 0.1);
-
 	border-collapse: collapse;
 }
 

@@ -24,35 +24,11 @@ require('./database')(function(err, db)
     }
     exports.insert = function (doc, callback)
     {
-         var collection = db.collection('interest');
-         var onInsert = function (err, docs)
-         {
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else
-                {
-                    callback(null, docs);
-                }
-         };
-         collection.insertOne(doc, {w: 1}, onInsert);
+         db.collection('interest').insertOne(doc, {w: 1}, callback);
     };
 
     exports.quantify = function(callback)
     {
-         var collection = db.collection('interest');
-         var onCount = function (err, count)
-         {
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else
-                {
-                    callback(null, count);
-                }
-         };
-         collection.count(onCount);
+         db.collection('interest').count(callback);
     };
 });

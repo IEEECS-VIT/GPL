@@ -18,7 +18,8 @@
  */
 const d_hour = 24, h_min = 60, m_sec = 60;
 var m_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-function get_time() {
+function get_time()
+{
     var current = new Date;
     var month = current.getMonth();
     var date = current.getDate();
@@ -26,16 +27,16 @@ function get_time() {
     var mins = current.getMinutes();
     var sec = current.getSeconds();
     var days = 0;
-    for (var i = 0; i < month; i++) {
+    for (var i = 0; i < month; ++i)
+    {
         days += m_days[i];
     }
     return days * d_hour * h_min * m_sec + date * d_hour * h_min * m_sec + hour * h_min * m_sec + mins * m_sec + sec;
 
 }
 
-function countdown() {
-    var time = function () {
-    };
+function countdown()
+{
     var month = 9; //final month
     var date = 1; //final date
     var hour = 0;//final hour 0-23
@@ -44,7 +45,8 @@ function countdown() {
     var days = 0; //total days left
     var temp;//To manage decimals e.g days = 100.3, above .5 decimal value results in negative deadline using Math.round()
     // Math.round(0.5) = 1 .
-    for (var i = 0; i < month - 1; i++) {
+    for (var i = 0; i < month - 1; ++i)
+    {
         days += m_days[i];
     }
     var time_deadline = days * d_hour * h_min * m_sec + date * d_hour * h_min * m_sec + hour * h_min * m_sec + mins * m_sec + sec;
@@ -62,7 +64,8 @@ function countdown() {
     time.sec = deadline;
     return time;
 }
-function start() {
+function start()
+{
     var clear = countdown.deadline;
     var d = document.getElementById('countdowndays'),
         h = document.getElementById('countdownhours'),
@@ -73,9 +76,12 @@ function start() {
         counter(d, h, m, s);
     }, 1000);
     if (clear == 0)
+    {
         clearInterval(a);
+    }
 }
-function counter(d, h, m, s) {
+function counter(d, h, m, s)
+{
     var time = countdown();
     d.innerHTML = Math.round(time.days) + "<br>Days";
     h.innerHTML = Math.round(time.hour) + "<br>Hours";

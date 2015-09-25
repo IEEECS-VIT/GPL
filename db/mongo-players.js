@@ -26,19 +26,7 @@ require('./database')(function(err, db){
    {
        exports.fetchPlayers = function (callback)
        {
-            collection = db.collection('players');
-            var onFetch = function (err, documents)
-            {
-                   if (err)
-                   {
-                       callback(err, null);
-                   }
-                   else
-                   {
-                       callback(null, documents);
-                   }
-            };
-            collection.find().toArray(onFetch);
+            db.collection('players').find().toArray(callback);
        };
 
        exports.getPlayer = function (queryDoc, fields, callback)

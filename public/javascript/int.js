@@ -16,32 +16,37 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-function valid() {
+function valid()
+{
     var display = "Error:\n";
     var name = document.int.name;
     var email = document.int.email;
     var mob = document.int.mob;
     var i = 0;
 
-    if (name.value.length == 0) {
+    if (name.value.length == 0)
+    {
         i++;
         name.style.backgroundColor = 'Yellow';
         display += i.toString() + ". Enter Name.\n";
     }
 
-    if (email.value.length == 0) {
+    if (email.value.length == 0)
+    {
         i++;
         email.style.backgroundColor = 'Yellow';
         display += i.toString() + ". Enter Email.\n";
     }
 
-    if (mob.value.length < 10) {
+    if (mob.value.length < 10)
+    {
         i++;
         mob.style.backgroundColor = 'Yellow';
         display += i.toString() + ". Enter a valid mobile number.\n";
     }
 
-    for (var z = 0; z < mob.value.length; z++) {
+    for (var z = 0; z < mob.value.length; z++)
+    {
         if (isNaN(mob.value[z])) {
             i++;
             mob.style.backgroundColor = 'Yellow';
@@ -50,7 +55,8 @@ function valid() {
         }
     }
 
-    if (display != "Error:\n") {
+    if (display != "Error:\n")
+    {
         confirm(display);
         return false;
     }

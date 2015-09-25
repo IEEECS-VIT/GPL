@@ -56,341 +56,238 @@ require('./database')(function(err, db){
     {
         exports.getCount = function (query, callback)
         {
-                    collection = db.collection(match);
-                    var onFetch = function (err, count)
-                    {
-                        if (err)
-                        {
-                            callback(err);
-                        }
-                        else
-                        {
-                            callback(null, count);
-                        }
-                    };
-                    collection.count(query, onFetch);
+            db.collection(match).count(query, callback);
         };
 
         exports.insert = function (doc, callback)
         {
-                    collection = db.collection(match);
-                    var onInsert = function (err, docs)
-                    {
-                        if (err)
-                        {
-                            callback(err, null);
-                        }
-                        else
-                        {
-                            callback(null, docs);
-                        }
-                    };
-                    collection.insertOne(doc, {w: 1}, onInsert);
+            db.collection('users').insertOne(doc, {w: 1}, callback);
         };
 
         exports.fetch = function (doc, callback)
         {
-                    collection = db.collection(match);
-                    var onFetch = function (err, document)
-                    {
-                        if (err)
-                        {
-                            callback(err, null);
-                        }
-                        else if (document && (doc['_id'] === document['_id']))
-                        {
-                            callback(null, document);
-                        }
-                        else
-                        {
-                            callback(false, null);
-                        }
-                    };
-                    collection.findOne(doc, onFetch);
+            var onFetch = function (err, document)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (document && (doc['_id'] === document['_id']))
+                {
+                    callback(null, document);
+                }
+                else
+                {
+                    callback(false, null);
+                }
+            };
+            db.collection(match).findOne(doc, onFetch);
         };
 
         exports.getLeader = function (user, callback)
         {
-                    collection = db.collection(match);
-                    var onFetch = function (err, documents)
+            collection = db.collection(match);
+            var onFetch = function (err, documents)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else
+                {
+                    flag = false;
+                    leaderboard = [];
+                    for (i = 0; i < documents.length; ++i)
                     {
-                        if (err)
+                        if (documents[i]._id == user)
                         {
-                            callback(err, null);
+                            flag = true;
+                            documents[i].rank = i + 1;
+                            leaderboard.push(documents[i]);
                         }
-                        else
+                        else if (leaderboard.length < 10)
                         {
-                            flag = false;
-                            leaderboard = [];
-                            for (i = 0; i < documents.length; ++i)
-                            {
-                                if (documents[i]._id == user)
-                                {
-                                    flag = true;
-                                    documents[i].rank = i + 1;
-                                    leaderboard.push(documents[i]);
-                                }
-                                else if (leaderboard.length < 10)
-                                {
-                                    leaderboard.push(documents[i]);
-                                }
-                                else if (flag)
-                                {
-                                    break;
-                                }
-                            }
-                            callback(null, leaderboard);
+                            leaderboard.push(documents[i]);
                         }
-                    };
-                    collection.find({}, slice, options).toArray(onFetch);
+                        else if (flag)
+                        {
+                            break;
+                        }
+                    }
+                    callback(null, leaderboard);
+                }
+            };
+            db.collection(match).find({}, slice, options).toArray(onFetch);
         };
 
         exports.forgotPassword = function (doc, op, callback)
         {
-                    collection = db.collection(match);
-                    var onFetch = function (err, document)
-                    {
-                        if (err)
-                        {
-                            callback(err, null);
-                        }
-                        else if (document.value)
-                        {
-                            var onCount = function(err, doc)
-                            {
-                                if(err)
-                                {
-                                    callback(err);
-                                }
-                                else
-                                {
-                                    callback(null, true);
-                                }
-                            };
-                            mongoFeatures.forgotCount({password : 1}, onCount);
-                        }
-                        else
-                        {
-                            callback(false, null);
-                        }
-                    };
-                    collection.findOneAndUpdate(doc, {$set : op}, onFetch);
+            var onFetch = function (err, document)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (document.value)
+                {
+                    mongoFeatures.forgotCount({password : 1}, callback);
+                }
+                else
+                {
+                    callback(false, null);
+                }
+            };
+            db.collection(match).findOneAndUpdate(doc, {$set : op}, onFetch);
         };
 
         exports.forgotUser = function (doc, callback)
         {
-                    collection = db.collection(match);
-                    var onFetch = function (err, docs)
+            var onFetch = function (err, docs)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (docs.length)
+                {
+                    var results = "";
+                    for (i = 0; i < docs.length; ++i)
                     {
-                        if (err)
-                        {
-                            callback(err, null);
-                        }
-                        else if (docs.length)
-                        {
-                            var results = "";
-                            for (i = 0; i < docs.length; ++i)
-                            {
-                                results += '<li>' + docs[i]._id + ' (' + docs[i].authStrategy + ')' + '</li>';
-                            }
-                            var onCount = function(err, doc)
-                            {
-                                if(err)
-                                {
-                                    callback(err);
-                                }
-                                else
-                                {
-                                    callback(null, results);
-                                }
-                            };
-                            mongoFeatures.forgotCount({user : 1}, onCount);
-                        }
-                        else
-                        {
-                            callback(false, null);
-                        }
-                    };
-                    collection.find(doc, {_id: 1, authStrategy : 1}).toArray(onFetch);
+                        results += '<li>' + docs[i]._id + ' (' + docs[i].authStrategy + ')' + '</li>';
+                    }
+                    mongoFeatures.forgotCount({user : 1}, callback);
+                }
+                else
+                {
+                    callback(false, null);
+                }
+            };
+            collection(match).find(doc, {_id: 1, authStrategy : 1}).toArray(onFetch);
         };
 
 
         exports.getReset = function (doc, callback)
         {
-                    collection = db.collection(match);
-                    var onFetch = function (err, document)
-                    {
-                        if (err)
-                        {
-                            callback(err, null);
-                        }
-                        else if (document)
-                        {
-                            callback(null, document);
-                        }
-                        else
-                        {
-                            callback(false, null);
-                        }
-                    };
-                    collection.findOne(doc, onFetch);
+            var onFetch = function (err, document)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (document)
+                {
+                    callback(null, document);
+                }
+                else
+                {
+                    callback(false, null);
+                }
+            };
+            db.collection(match).findOne(doc, onFetch);
         };
 
         exports.resetPassword = function (doc, op, callback)
         {
-                    collection = db.collection(match);
-                    var onFetch = function (err, document)
-                    {
-                        if (err)
-                        {
-                            callback(err, null);
-                        }
-                        else if (document)
-                        {
-                            callback(null, document);
-                        }
-                        else
-                        {
-                            callback(false, null);
-                        }
-                    };
-                    collection.findOneAndUpdate(doc, op, onFetch);
+            var onFetch = function (err, document)
+            {
+                if (err)
+                {
+                    callback(err, null);
+                }
+                else if (document)
+                {
+                    callback(null, document);
+                }
+                else
+                {
+                    callback(false, null);
+                }
+            };
+            db.collection(match).findOneAndUpdate(doc, op, onFetch);
         };
 
         exports.updateUserTeam = function (doc, arr, stats, cost, callback)
         {
-                    collection = db.collection(match);
-                    var onUpdate = function (err, document)
-                    {
-                        if (err)
-                        {
-                            callback(err, null);
-                        }
-                        else
-                        {
-                            callback(true, document);
-                        }
-                    };
-                    collection.findOneAndUpdate(doc, {
-                        $set:
-                        {
-                            'team': arr,
-                            'stats': stats,
-                            'surplus': cost
-                        }
-                    }, {}, onUpdate)
+            db.collection(match).findOneAndUpdate(doc, {
+                $set:
+                {
+                    'team': arr,
+                    'stats': stats,
+                    'surplus': cost
+                }
+            }, {}, callback)
         };
 
         exports.updateMatchSquad = function (doc, arr, callback)
         {
-                    collection = db.collection(match);
-                    var onUpdate = function (err, document)
-                    {
-                        if (err)
-                        {
-                            callback(err, null);
-                        }
-                        else
-                        {
-                            console.log("Done");
-                            callback(null, document);
-                        }
-                    };
-                    collection.findOneAndUpdate(doc, {$set: {'squad': arr}}, {}, onUpdate);
+            db.collection(match).findOneAndUpdate(doc, {$set: {'squad': arr}}, {}, callback);
         };
 
         exports.fetchUser = function (doc, callback)
         {
-                    collection = db.collection(match);
-                    var onFetch = function (err, document)
-                    {
-                        if (err)
-                        {
-                            callback(err, null);
-                        }
-                        else if (document)
-                        {
-                            callback(null, document);
-                        }
-
-                    };
-                    collection.findOne(doc, onFetch);
+            db.collection(match).findOne(doc, callback);
         };
 
         exports.update = function (query, update, callback)
         {
-                    collection = db.collection(match);
-                    var onUpdate = function (err, doc)
+            var onUpdate = function (err, doc)
+            {
+                if (err)
+                {
+                    if (log)
                     {
-                        if (err)
-                        {
-                            if (log)
-                            {
-                                log.log('debug', {Error: err, Message: err.message});
-                            }
-                            callback(true, null);
-                        }
-                        else
-                        {
-                            callback(null, doc);
-                        }
-                    };
-                    collection.findOneAndUpdate(query, update, {"upsert": true}, onUpdate);
+                        log.log('debug', {Error: err, Message: err.message});
+                    }
+                    callback(true, null);
+                }
+                else
+                {
+                    callback(null, doc);
+                }
+            };
+            db.collection(match).findOneAndUpdate(query, update, {"upsert": true}, onUpdate);
         };
 
         exports.get = function (doc, callback)
         {
-                    collection = db.collection(match);
-                    var onFind = function (err, user)
-                    {
-                        if (err)
-                        {
-                            callback(err);
-                        }
-                        else
-                        {
-                            callback(null, user);
-                        }
-                    };
-                    collection.findOne({_id: doc}, onFind);
+            db.collection(match).findOne({_id: doc}, callback);
         };
 
         exports.save = function (doc, callback)
         {
-                    collection = db.collection(match);
-                    var onSave = function (err)
-                    {
-                        if (err)
-                        {
-                            callback(err);
-                        }
-                        else
-                        {
-                            callback(null, doc);
-                        }
-                    };
-                    collection.save(doc, onSave);
+            var onSave = function (err)
+            {
+                if (err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    callback(null, doc);
+                }
+            };
+            db.collection(match).save(doc, onSave);
         };
 
         exports.admin = function (doc, callback)
         {
-                    collection = db.collection('admin');
-                    var onGetAdmin = function (err, document)
-                    {
-                        if (err)
-                        {
-                            callback(err);
-                        }
-                        else if(document && document._id === doc._id)
-                        {
-                            callback(null, document);
-                        }
-                        else
-                        {
-                            callback(false, null);
-                        }
-                    };
-                    collection.findOne(doc, onGetAdmin);
+            collection = db.collection('admin');
+            var onGetAdmin = function (err, document)
+            {
+                if (err)
+                {
+                    callback(err);
+                }
+                else if(document && document._id === doc._id)
+                {
+                    callback(null, document);
+                }
+                else
+                {
+                    callback(false, null);
+                }
+            };
+            collection.findOne(doc, onGetAdmin);
         };
     }
 });

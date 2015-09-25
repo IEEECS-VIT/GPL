@@ -29,8 +29,8 @@
         </head>
         <body>
             <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-                your browser</a> to improve your experience.</p>
+                <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+                    your browser</a> to improve your experience.</p>
             <![endif]-->
             <div id="wrapper" class="container-fluid">
                 <div id="side-navigation">
@@ -63,11 +63,7 @@
                                             </h1>
                                         </div>
                         <% if(leaderboard[0].points === 0) { %>
-                        <div class="container">
-                            <p>
-                                The Leader Board will be active as soon as the games begin!
-                            </p>
-                        </div>
+                            <div class="container"><p>The Leader Board will be active as soon as the games begin!</p></div>
                         <% } else { %>
                                         <div class="table-responsive">
                                             <table class="table table-hover table-bordered text-center">
@@ -83,26 +79,23 @@
                                                 </thead>
                                                 <tbody>
                                                 <% for(var i = 0; i < leaderboard.length ; i++) { %>
-                                                <tr>
-                                                    <% if(i != 10){ %>
-                                                    <td> <%= i + 1 %>    </td>
-                                                    <td>  <%= leaderboard[i]._id %>    </td>
-                                                    <td> <%= leaderboard[i].points %>  </td>
-                                                    <td> <%= leaderboard[i].played %>  </td>
-                                                    <td> <%= leaderboard[i].win %>     </td>
-                                                    <td> <%= leaderboard[i].net_run_rate %> </td>
-                                                    <% } else if(i === 10){ %>
-                                                    <td>
-                                                        <% var ra = "My Stats" %>
-                                                        <%= ra %>
-                                                    </td>
-                                                    <td>  <%= leaderboard[i]._id %>    </td>
-                                                    <td> <%= leaderboard[i].points %>  </td>
-                                                    <td> <%= leaderboard[i].played %>  </td>
-                                                    <td> <%= leaderboard[i].win %>     </td>
-                                                    <td> <%= leaderboard[i].net_run_rate %> </td>
-                                                    <% } %>
-                                                </tr>
+                                                    <tr>
+                                                        <% if(i != 10){ %>
+                                                            <td> <%= i + 1 %>    </td>
+                                                            <td>  <%= leaderboard[i]._id %>    </td>
+                                                            <td> <%= leaderboard[i].points %>  </td>
+                                                            <td> <%= leaderboard[i].played %>  </td>
+                                                            <td> <%= leaderboard[i].win %>     </td>
+                                                            <td> <%= leaderboard[i].net_run_rate %> </td>
+                                                        <% } else if(i === 10){ %>
+                                                            <td><%= leaderboard[i].rank %></td>
+                                                            <td>  <%= leaderboard[i]._id %>    </td>
+                                                            <td> <%= leaderboard[i].points %>  </td>
+                                                            <td> <%= leaderboard[i].played %>  </td>
+                                                            <td> <%= leaderboard[i].win %>     </td>
+                                                            <td> <%= leaderboard[i].net_run_rate %> </td>
+                                                        <% } %>
+                                                    </tr>
                                                 <% } } %>
                                                 </tbody>
                                             </table>
