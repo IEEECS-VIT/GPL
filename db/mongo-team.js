@@ -158,25 +158,24 @@ require('./database')(function(err, db){
 
         exports.shortList = function (callback) // TODO: add email notification for shortlisted team owners.
         {
-            collection = db.collection(match);
             var ref =
+            {
+                'users' :
                 {
-                    'users' :
-                    {
-                        out : 'round2',
-                        limit : process.env.ONE
-                    },
-                    'round2' :
-                    {
-                        out : 'round3',
-                        limit : 8
-                    },
-                    'round3' :
-                    {
-                        out : null,
-                        limit : 8
-                    }
-                };
+                    out : 'round2',
+                    limit : parseInt(process.env.ONE)
+                },
+                'round2' :
+                {
+                    out : 'round3',
+                    limit : 8
+                },
+                'round3' :
+                {
+                    out : null,
+                    limit : 8
+                }
+            };
             var onShortList = function (err, docs)
             {
                 if (err)
@@ -185,42 +184,15 @@ require('./database')(function(err, db){
                 }
                 else
                 {
-                    collection = db.collection(ref[process.env.MATCH].out);
-                    var email = require(path.join(__dirname, '..', 'worker', 'email'));
-                    var message = email.wrap({
-                        from: 'gravitaspremierleague@gmail.com',
-                        subject: 'Congratulations!'
-                    });
-                    message.attach_alternative("<table background='http://res.cloudinary.com/gpl/general/img0.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
-                        "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
-                        "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> Hi _user_,<br>This is to inform that your team _team_ has made it to the next round of G.P.L 2.0<br>" +
-                        "Please check out  our Facebook <a href='http://www.facebook.com/gravitaspremierleague' style='text-decoration: none;'>page</a> to stay close to all the action! </td>" +
-                        "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards,<br>Team GPL,<br>IEEE Computer Society<br>IEEE Computer Society<br>VIT student chapter</td></tr></table>");
-                    var parallelTasks = [];
-                    var onFind = function(err, result)
+                    console.log('-', docs);
+                    for(i = 0; i < docs.length; ++i)
                     {
-                        if(err)
-                        {
-                            callback(err);
-                        }
-                        else if(result)
-                        {
-                            parallelTasks.push(function(asyncCallback){
-                                message.header.to = result.email;
-                                message.alternative.data = message.alternative.data.replace('_user_', result.manager_name);
-                                message.alternative.data = message.alternative.data.replace('_team_', result._id);
-                                email.send(message, asyncCallback);
-                            });
-                        }
-                        else
-                        {
-                            async.parallel(parallelTasks, callback);
-                        }
-                    };
-                    collection.find({}, {email : 1, manager_name : 1}).forEach(onFind);
+                        docs[i].team_no = i + 1;
+                    }
+                    db.collection(ref[match].out).insertMany(docs, callback);
                 }
             };
-            collection.aggregate([{
+            db.collection(match).aggregate([{
                 $sort :
                 {
                     points : -1,
@@ -230,10 +202,7 @@ require('./database')(function(err, db){
                 }
             },
                 {
-                    $limit : ref[process.env.MATCH].limit
-                },
-                {
-                    $out : ref[process.env.MATCH].out
+                    $limit : ref[match].limit
                 }
             ], onShortList);
         };

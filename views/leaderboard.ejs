@@ -78,24 +78,24 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <% for(var i = 0; i < leaderboard.length ; i++) { %>
-                                                    <tr>
-                                                        <% if(i != 10){ %>
-                                                            <td> <%= i + 1 %>    </td>
-                                                            <td>  <%= leaderboard[i]._id %>    </td>
-                                                            <td> <%= leaderboard[i].points %>  </td>
-                                                            <td> <%= leaderboard[i].played %>  </td>
-                                                            <td> <%= leaderboard[i].win %>     </td>
-                                                            <td> <%= leaderboard[i].net_run_rate %> </td>
-                                                        <% } else if(i === 10){ %>
-                                                            <td><%= leaderboard[i].rank %></td>
-                                                            <td>  <%= leaderboard[i]._id %>    </td>
-                                                            <td> <%= leaderboard[i].points %>  </td>
-                                                            <td> <%= leaderboard[i].played %>  </td>
-                                                            <td> <%= leaderboard[i].win %>     </td>
-                                                            <td> <%= leaderboard[i].net_run_rate %> </td>
-                                                        <% } %>
-                                                    </tr>
+                                                    <% for(var i = 0; i < leaderboard.length ; ++i) { %>
+                                                        <tr id=<%=leaderboard[i]._id === name ? 'current' : ''%>>
+                                                            <% if(i != 10){ %>
+                                                                <td> <%= i + 1 %>    </td>
+                                                                <td>  <%= leaderboard[i]._id %>    </td>
+                                                                <td> <%= leaderboard[i].points %>  </td>
+                                                                <td> <%= leaderboard[i].played %>  </td>
+                                                                <td> <%= leaderboard[i].win %>     </td>
+                                                                <td> <%= leaderboard[i].net_run_rate %> </td>
+                                                            <% } else if(i === 10){ %>
+                                                                <td><%= leaderboard[i].rank %></td>
+                                                                <td>  <%= leaderboard[i]._id %>    </td>
+                                                                <td> <%= leaderboard[i].points %>  </td>
+                                                                <td> <%= leaderboard[i].played %>  </td>
+                                                                <td> <%= leaderboard[i].win %>     </td>
+                                                                <td> <%= leaderboard[i].net_run_rate %> </td>
+                                                            <% } %>
+                                                        </tr>
                                                 <% } } %>
                                                 </tbody>
                                             </table>
