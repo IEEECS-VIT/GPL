@@ -255,7 +255,8 @@ router.post('/login', function (req, res) {
 
     var credentials =
     {
-        '_id': user
+        '_id': user,
+        authStrategy : 'local'
     };
     var onFetch = function (err, doc)
     {
