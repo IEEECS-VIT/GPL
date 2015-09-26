@@ -995,8 +995,8 @@ exports.simulate = function (data, callback)
             temp = ((((Overs[+winner] * mean_rating[+!winner]) / (Total[+winner] || 1))) - ((Overs[+!winner] * mean_rating[+winner]) / (Total[+!winner] || 1))) / 2000;
             data.team[+winner].form += temp;
             data.team[+!winner].form -= temp;
-            data.team[+winner].net_run_rate = (((data.team[+winner].runs_for) / (data.team[+winner].balls_for) - (data.team[+winner].runs_against) / (data.team[+winner].balls_against)) * 6).toFixed(4);
-            data.team[+!winner].net_run_rate = (((data.team[+!winner].runs_for) / (data.team[+!winner].balls_for) - (data.team[+!winner].runs_against) / (data.team[+!winner].balls_against)) * 6).toFixed(4);
+            data.team[+winner].net_run_rate = parseFloat((((data.team[+winner].runs_for) / (data.team[+winner].balls_for) - (data.team[+winner].runs_against) / (data.team[+winner].balls_against)) * 6).toFixed(4));
+            data.team[+!winner].net_run_rate = parseFloat((((data.team[+!winner].runs_for) / (data.team[+!winner].balls_for) - (data.team[+!winner].runs_against) / (data.team[+!winner].balls_against)) * 6).toFixed(4));
         }
         ++data.team[MoM.team].stats[data.team[MoM.team].ratings[MoM.id]._id].MoM;
         data.match.commentary.push('Man of the Match: ' + data.team[MoM.team].ratings[MoM.id].Name + '( ' + data.team[MoM.team]._id + ')');
