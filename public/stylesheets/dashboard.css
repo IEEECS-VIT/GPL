@@ -178,7 +178,7 @@ html, body {
 
 #topbar-toggle {
     height: 44px;
-    background: url(/images/ellipsis.png) no-repeat center;
+    background: url(../images/ellipsis.png) no-repeat center;
     background-size: 5px;
     border: none;
 }
@@ -188,24 +188,13 @@ html, body {
     border: none;
 }
 
-#sidenav-toggle:hover {
-    background: transparent;
-    border: none;
-}
-
-#sidenav-toggle {
+#sidenav-toggle:hover, #sidenav-toggle, #sidenav-toggle:active, #sidenav-toggle:visited {
     background: transparent;
     border: none;
 }
 
 #navbar {
     padding-right: 10px;
-}
-
-#sidenav-toggle:active,
-#sidenav-toggle:visited {
-    background: transparent;
-    border: none;
 }
 
 #sidenav > ul > img {

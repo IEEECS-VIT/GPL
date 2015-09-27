@@ -15,21 +15,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-html, body {
+html, body, .fill {
     height: 100%;
     overflow-x: hidden;
 }
 
-.carousel, .item, .active {
-    height: 100%;
-}
-
-.carousel-inner {
-    height: 100%;
-}
-
-.fill {
-    width: 100%;
+.carousel, .item, .active, .carousel-inner, .fill {
     height: 100%;
 }
 
@@ -37,8 +28,7 @@ html, body {
     background: linear-gradient(
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0.5)
-    ), url("http://res.cloudinary.com/gpl/image/upload/general/img0.jpg");
-    background-repeat: no-repeat;
+    ) no-repeat, url("http://res.cloudinary.com/gpl/image/upload/general/img0.jpg");
     background-size: cover;
 }
 
@@ -46,8 +36,7 @@ html, body {
     background: linear-gradient(
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0.5)
-    ), url("http://res.cloudinary.com/gpl/image/upload/general/img1.jpg");
-    background-repeat: no-repeat;
+    ) no-repeat, url("http://res.cloudinary.com/gpl/image/upload/general/img1.jpg");
     background-size: cover;
 
 }
@@ -56,8 +45,7 @@ html, body {
     background: linear-gradient(
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0.5)
-    ), url("http://res.cloudinary.com/gpl/image/upload/general/img2.jpg");
-    background-repeat: no-repeat;
+    ) no-repeat, url("http://res.cloudinary.com/gpl/image/upload/general/img2.jpg");
     background-size: cover;
 }
 
@@ -65,8 +53,7 @@ html, body {
     background: linear-gradient(
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0.5)
-    ), url("http://res.cloudinary.com/gpl/image/upload/general/img3.jpg");
-    background-repeat: no-repeat;
+    ) no-repeat, url("http://res.cloudinary.com/gpl/image/upload/general/img3.jpg");
     background-size: cover;
 
 }
@@ -75,8 +62,7 @@ html, body {
     background: linear-gradient(
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0.5)
-    ), url("http://res.cloudinary.com/gpl/image/upload/general/img4.jpg");
-    background-repeat: no-repeat;
+    ) no-repeat, url("http://res.cloudinary.com/gpl/image/upload/general/img4.jpg");
     background-size: cover;
 
 }
@@ -85,8 +71,7 @@ html, body {
     background: linear-gradient(
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0.5)
-    ), url("http://res.cloudinary.com/gpl/image/upload/general/img5.jpg");
-    background-repeat: no-repeat;
+    ) no-repeat, url("http://res.cloudinary.com/gpl/image/upload/general/img5.jpg");
     background-size: cover;
 }
 
@@ -94,8 +79,7 @@ html, body {
     background: linear-gradient(
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0.5)
-    ), url("http://res.cloudinary.com/gpl/image/upload/general/img6.jpg");
-    background-repeat: no-repeat;
+    ) no-repeat, url("http://res.cloudinary.com/gpl/image/upload/general/img6.jpg");
     background-size: cover;
 }
 
@@ -127,13 +111,11 @@ html, body {
 }
 
 .overlay-text a, .overlay-text a:hover {
-
     font-family: "Lobster", arial, sans-serif;
     border-radius: 4px;
     text-decoration: none;
     padding-left: 4px;
     padding-right: 4px;
-
     -webkit-transition: 1s ease;
     -moz-transition: 1s ease;
     -ms-transition: 1s ease;
@@ -154,7 +136,6 @@ html, body {
 .social {
     z-index: 11;
     padding: 5px;
-
     margin: 20px;
     bottom: 0 !important;
     text-align: center;

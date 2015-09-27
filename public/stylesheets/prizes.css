@@ -31,17 +31,7 @@ html {
     cursor: pointer;
 }
 
-#p1 {
-    height: 150px;
-    width: 80px;
-}
-
-#p2 {
-    height: 150px;
-    width: 80px;
-}
-
-#p3 {
+#p1, #p2, #p3{
     height: 150px;
     width: 80px;
 }

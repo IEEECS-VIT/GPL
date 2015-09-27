@@ -32,7 +32,6 @@ var record = require(path.join(__dirname, '..', 'db', 'mongo-record'));
 var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
 var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
-var mongoFeatures = require(path.join(__dirname, '..', 'db', 'mongo-features'));
 
 register = interest = email.wrap({
     from: 'gravitaspremierleague@gmail.com',
@@ -242,7 +241,7 @@ router.get('/login', function (req, res) {
 });
 
 router.post('/login', function (req, res) {
-    var user = req.body.team;
+    var user = req.body.team.trim().toUpperCase();
     var password = req.body.password;
     if (req.signedCookies.name)
     {
@@ -309,7 +308,7 @@ router.get('/forgot/password', function (req, res) {
 router.post('/forgot/password', function (req, res) {
     var doc =
     {
-        _id: req.body.team,
+        _id: req.body.team.trim().toUpperCase(),
         email: req.body.email,
         authStrategy : 'local'
     };
@@ -507,7 +506,7 @@ router.post('/register', function (req, res) {
             if (req.body.confirm_password === req.body.password)
             {
                 var newUser = record;
-                newUser._id = req.body.team_name;
+                newUser._id = req.body.team_name.trim().toUpperCase();
                 newUser.dob = new Date();
                 newUser.team_no = parseInt(number) + 1;
                 newUser.password_hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
@@ -607,7 +606,7 @@ router.get('/social/login', function (req, res) {
 });
 
 router.post('/social/login', function (req, res) {
-    res.cookie('team', req.body.team, {signed : true});
+    res.cookie('team', req.body.team.trim().toUpperCase, {signed : true});
     res.redirect('/social/login');
 });
 
@@ -627,7 +626,7 @@ router.get('/social/register', function (req, res) {
 });
 
 router.post('/social/register', function (req, res) {
-    res.cookie('team', req.body.team, {signed : true});
+    res.cookie('team', req.body.team.trim().toUpperCase, {signed : true});
     res.cookie('phone', req.body.phone, {signed : true});
     res.cookie('email', req.body.email, {signed : true});
     res.redirect('/social/register');

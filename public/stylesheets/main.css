@@ -58,8 +58,6 @@ h1 {
     position: absolute;
 }
 
-
-/* Carousel base class */
 .carousel {
     height: 500px;
     min-height: 95vh;
@@ -74,7 +72,6 @@ h1 {
     width: 100%;
 }
 
-/* Since positioning the image, we need to help out the caption */
 .carousel-caption {
     z-index: 10;
     max-width: 70vw;
@@ -86,12 +83,9 @@ h1 {
     right: 0;
 }
 
-/* Declare heights because of positioning of imgf element */
-
 .carousel .item {
     height: 500px;
     min-height: 95vh;
-    /*background-color: #777;*/
 }
 
 .navbar {
@@ -116,7 +110,6 @@ h1 {
     color: darkred;
 }
 
-/* Special class on .container surrounding .navbar, used for positioning it into place. */
 .carousel-fade .carousel-inner .item {
     -webkit-transition-property: opacity;
     transition-property: opacity;
@@ -186,14 +179,8 @@ h1 {
     margin-top: 0;
 }
 
-body {
-    /* Margin bottom by footer height */
-    /*margin-top: 50px;*/
-}
-
 .footer {
     width: 100%;
-    /* Set the fixed height of the footer here */
     height: 60px;
     position: fixed;
     left: 0;

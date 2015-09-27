@@ -16,7 +16,6 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 a {
-    target: _self;
     color: rgba(255, 255, 255, 1);
     text-decoration: none;
 }
@@ -81,8 +80,7 @@ body {
 }
 
 #menu #box {
-    margin: 0;
-    margin-left: 2.2em;
+    margin: 0 0 0 2.2em;
     padding: 0;
     width: auto;
     position: relative;
@@ -98,9 +96,8 @@ body {
     height: auto;
     font-size: 1.2em;
     font-weight: bold;
-    margin: 0;
+    margin: 0 2em 0 0;
     left: 1em;
-    margin-right: 2em;
     /*border-right:1px rgba(0, 172, 237,0.3) solid;*/
 }
 
@@ -193,9 +190,8 @@ body {
 
 #rightm {
     padding: 0;
-    margin: 0;
+    margin: 0 0 0 30.4%;
     /* margin-top:3em;*/
-    margin-left: 30.4% /*21em*/;
     width: 69.6% /*50em*/;
     height: auto;
     background: rgba(255, 255, 255, 0.8);
@@ -299,12 +295,11 @@ body {
 
 /*FOOTER SECTION */
 #footer {
-    margin: 0;
+    margin: 1em 0 0 0;
     top: 2em;
-    margin-top: 1em;
     border-radius: 5px 5px 0 0;
     height: auto;
-    width: 100%/84.4em/;
+    width: 100% /*84.4em*/;
     background: rgba(0, 0, 0, 1);
     position: relative;
     left: 0;
