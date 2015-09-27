@@ -606,7 +606,7 @@ router.get('/social/login', function (req, res) {
 });
 
 router.post('/social/login', function (req, res) {
-    res.cookie('team', req.body.team.trim().toUpperCase, {signed : true});
+    res.cookie('team', req.body.team.trim().toUpperCase(), {signed : true});
     res.redirect('/social/login');
 });
 
@@ -626,7 +626,7 @@ router.get('/social/register', function (req, res) {
 });
 
 router.post('/social/register', function (req, res) {
-    res.cookie('team', req.body.team.trim().toUpperCase, {signed : true});
+    res.cookie('team', req.body.team.trim().toUpperCase(), {signed : true});
     res.cookie('phone', req.body.phone, {signed : true});
     res.cookie('email', req.body.email, {signed : true});
     res.redirect('/social/register');
