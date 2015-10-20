@@ -15,14 +15,14 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js">
     <head>
         <meta charset="utf-8">
         <title>Dashboard | GPL</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="/stylesheets/dashboard.css">
     </head>
     <body>
@@ -109,16 +109,16 @@
                 </div>
             </div>
         </div>
-        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="/bower_components/chartjs/Chart.js"></script>
-        <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/bower/jquery/dist/jquery.min.js"></script>
+        <script src="/bower/chartjs/Chart.js"></script>
+        <script async src="/bower/bootstrap/dist/js/bootstrap.min.js"></script>
         <script async src="/javascript/playerCommon.js"></script>
         <script async>
             var json_data = <%- JSON.stringify(result)%>;
             function string_range(start, stop)
             {
                 var string_array = [];
-                for (i = start; i <= stop; i++)
+                for (i = start; i <= stop; ++i)
                 {
                     string_array.push(i.toString());
                 }

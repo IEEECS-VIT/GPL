@@ -32,7 +32,6 @@ function get_time()
         days += m_days[i];
     }
     return days * d_hour * h_min * m_sec + date * d_hour * h_min * m_sec + hour * h_min * m_sec + mins * m_sec + sec;
-
 }
 
 function countdown()

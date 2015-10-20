@@ -16,13 +16,13 @@
 *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
         <meta name="viewport" content="width=device-width">
         <title>Admin | GPL</title>
         <link href='/stylesheets/main.css' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap.min.css"/>
     </head>
     <body>
         <div class="container">
@@ -38,11 +38,27 @@
                     <p class="text-center">Empty Squad: <%= info.emptySquad %></p><br/>
                     <p class="text-center">Forgot Password: <%= info.forgot.password %></p><br/>
                     <p class="text-center">Forgot User: <%= info.forgot.user %></p><br/>
-                    <p class="text-center">Features:
-                        <% for(var i = 0;i < info.features.length;i++) { %>
-                            <%= info.features[i] %><br/>
-                        <% } %>
-                    </p>
+                    <p class="text-center">Features:</p>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered text-center">
+                            <thead>
+                                <tr>
+                                    <th>SNo</th>
+                                    <th>User</th>
+                                    <th>Feature</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i = 0; i < info.features.length; ++i) {%>
+                                    <tr>
+                                        <td><%= i + 1 %></td>
+                                        <td><%= info.features[i].user %></td>
+                                        <td><%= info.features[i].features %></td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="row">

@@ -15,45 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- /*html {
-    color: black;
-    text-align: center;
-}
-#right
-{
-    text-align: right;
-    text-decoration: none;
-    font-size: large;
-}
-.row {
-    background: #ffffff;
-    border-radius: 5px 5px 5px 5px;
-    box-shadow: 0 1px 25px 5px rgba(171, 171, 171, 0.52);
-}
-.col-sm-6
-{
-    font-weight: bold;
-    text-align: center;
 
-}
-#stats
-{
-    background: rgba(255, 255, 255, 1);
-    border-radius: 5px 5px 5px 5px;
-    box-shadow: 0 1px 25px 5px rgba(171, 171, 171, 0.52);
-    margin-top: 5%;
-}
-#line {
-    font-size: medium;
-    text-decoration: none;
-    color: #005975;
-
-}
-#line:hover
-{
-    text-decoration: underline;
-    color: black;
-}*/
 .player {
     min-height: 60px;
 }

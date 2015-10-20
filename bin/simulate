@@ -18,8 +18,10 @@
 
 var day;
 var path = require('path');
-var simulationControl = require(path.join(__dirname, '..', 'worker', 'simulation-controller'));
+var mongo = require('mongodb').MongoClient.connect;
+var mongoUri = process.env.MONGO || 'mongodb://127.0.0.1:27017/GPL';
 var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team'));
+var simulationControl = require(path.join(__dirname, '..', 'worker', 'simulation-controller'));
 
 if (process.argv.length < 3)
 {
@@ -38,16 +40,28 @@ else
 {
     day = parseInt(process.argv[2]);
 }
-simulationControl.initSimulation(day, function (){
-    console.log('Simulation of Matches for Day ' + day + ' is complete');
-    if(day == 7)
+
+mongo(mongoUri, function(err, database){
+    if(err)
     {
-        mongoTeam.shortList(function(err, result){
-            if(err)
+        throw err;
+    }
+    else
+    {
+        db = database;
+        simulationControl.initSimulation(day, function (){
+            console.log('Simulation of Matches for Day ' + day + ' is complete');
+            if(day == 7)
             {
-                console.log(err.message);
+                mongoTeam.shortList(function(err, result){
+                    if(err)
+                    {
+                        console.log(err.message);
+                    }
+                });
             }
+            db.close();
+            process.exit(0);
         });
     }
-    process.exit(0);
 });

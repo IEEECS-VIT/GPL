@@ -38,7 +38,9 @@ function noise(ctx)
         i = 0;
 
     for (; i < len;)
+    {
         buffer32[i++] = ((255 * Math.random()) | 0) << 24;
+    }
 
     ctx.putImageData(idata, 0, 0);
 }
@@ -46,9 +48,11 @@ function noise(ctx)
 var toggle = true;
 
 // added toggle to get 30 FPS instead of 60 FPS
-(function loop() {
+(function loop()
+{
     toggle = !toggle;
-    if (toggle) {
+    if (toggle)
+    {
         requestAnimationFrame(loop);
         return;
     }

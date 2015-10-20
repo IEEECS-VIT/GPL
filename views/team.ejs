@@ -15,14 +15,15 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
    -->
-<!doctype html>
+
+<!DOCTYPE html>
 <html class="no-js">
     <head>
         <meta charset="utf-8">
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link type="text/css" rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="/stylesheets/dashboard.css">
         <link rel="stylesheet" href="/stylesheets/team.css"/>
         <style>
@@ -106,16 +107,16 @@
                                 <div class="col-sm-7">
                                     <form>
                                         <ul class="list-group media-list">
-                                            <div class="playerlist">
                                                 <li ng-repeat="player in players|filter:searchText"
                                                     class="media list-group-item player"
                                                     ng-click="toggleActive(player)"
                                                     ng-class="{'batsmanactive':player.active, 'text-muted limit-exceeded': !canSelectMore() && !player.active}"
                                                     unselectable="on">
+                                                    <div class="playerlist">
                                                     <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
                                                     <span>{{player.Name}}</span><span class="pull-right">{{player.Type}}</span>
+                                                    </div>
                                                 </li>
-                                            </div>
                                         </ul>
                                     </form>
                                 </div>
@@ -125,9 +126,9 @@
                 </div>
             </div>
         </div>
-        <script async src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="/bower_components/angularjs/angular.min.js"></script>
+        <script src="/bower/jquery/dist/jquery.min.js"></script>
+        <script async src="/bower/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/bower/angularjs/angular.min.js"></script>
         <script async type="text/javascript">
             var myApp = angular.module('formApp', []);
             function PlayerController($scope)
@@ -226,6 +227,7 @@
                     {
                         $scope.alertMessage = "Alright ! You are good to go.";
                     }
+
                     return !valid;
                 };
             };

@@ -15,6 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 html {
     font-family: "Roboto", helvetica, arial, sans-serif;
     -webkit-transition: all 1s ease; /* Safari and Chrome */
@@ -121,7 +122,7 @@ form ul * {
 .playerlistcontainer {
     overflow-y: auto;
     max-height: 320px;
-    max-height: 50vh;
+    max-width: 50vh;
 }
 
 #players {

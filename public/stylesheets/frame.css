@@ -15,12 +15,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #rightm header {
     background: rgba(25, 25, 25, 1);
-    width: 100% /*42.3em*/;
+    width: 100%;
     color: white;
-    /*padding:0.3em;
-    padding-left:1em;*/
     position: absolute;
     margin: 0;
     font-weight: normal;
@@ -31,10 +30,8 @@
 #rightm table {
     position: absolute;
     margin-top: 5em;
-    /*border:0.1em black solid;*/
     padding: 1em 0;
     text-align: center;
-    /* background: rgba(255,0,0,0.1);*/
     margin-left: 1em;
 }
 

@@ -11,7 +11,7 @@ This website is hosted [here](http://www.gravitaspremierleague.com)
 Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues) 
 
 #### Instructions for Installation:
-###### Install Node.js 0.12.x
+###### Install Node.js 4.2.x
 ###### Install the latest version of MongoDB
 ###### Install all dependencies (Ignore the errors that would come up on a Windows environment)
 
@@ -19,8 +19,27 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
     
 ###### Install security dependency manually (Microsoft Windows only)
 
-    # npm install bcryptjs
+    $ npm install bcryptjs
     
+###### Create a file .env in the main project directory, and add the process environment variables to it. For instance:
+
+      DAY=value
+      OUT=value
+      LIVE=value
+      MATCH=value
+      BAT_AVG=value
+      BAT_STR=value
+      BOWL_AVG=value
+      BOWL_STR=value
+      BOWL_ECO=value
+      KEY=value
+      FACEBOOK_ID=value
+      FACEBOOK_KEY=value
+      TWITTER_ID=value
+      TWITTER_KEY=value
+      GOOGLE_ID=value
+      GOOGLE_KEY=value
+
 ###### Run the server locally at port 3000 or "PORT" in process.env
 
     $ npm start

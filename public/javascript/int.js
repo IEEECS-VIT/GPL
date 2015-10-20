@@ -45,9 +45,10 @@ function valid()
         display += i.toString() + ". Enter a valid mobile number.\n";
     }
 
-    for (var z = 0; z < mob.value.length; z++)
+    for (var z = 0; z < mob.value.length; ++z)
     {
-        if (isNaN(mob.value[z])) {
+        if (isNaN(mob.value[z]))
+        {
             i++;
             mob.style.backgroundColor = 'Yellow';
             display += i.toString() + ". Enter a valid mobile number.\n";

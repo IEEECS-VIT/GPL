@@ -24,6 +24,19 @@ var bcrypt;
 var register;
 var interest;
 var password;
+var ref =
+{
+    'admin' :
+    [
+        'admin',
+        '/admin'
+    ],
+    'local' :
+    [
+        'name',
+        '/home'
+    ]
+};
 var path = require('path');
 var crypto = require('crypto');
 var router = require('express').Router();
@@ -31,7 +44,6 @@ var email = require(path.join(__dirname, '..', 'worker', 'email'));
 var record = require(path.join(__dirname, '..', 'db', 'mongo-record'));
 var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
-var mongoInterest = require(path.join(__dirname, '..', 'db', 'mongo-interest'));
 
 register = interest = email.wrap({
     from: 'gravitaspremierleague@gmail.com',
@@ -66,13 +78,13 @@ register.attach_alternative("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict
     "        <center style='width: 100%; min-width: 580px;'>" +
     "          <table class='row header' style='border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 100%; position: relative; background: #0D5B67; padding: 0px;' bgcolor='#0D5B67'><tr style='vertical-align: top; text-align: left; padding: 0;' align='left'><td class='center' align='center' style='word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: center; color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;' valign='top'>" +
     "                <center style='width: 100%; min-width: 580px;'>" +
-    "                  <table class='container' style='border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: inherit; width: 580px; margin: 0 auto; padding: 0;'><tr style='vertical-align: top; text-align: left; padding: 0;' align='left'><td class='wrapper last' style='word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: left; position: relative; color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 10px 0px 0px;' align='left' valign='top'>" +
-    "                        <table class='twelve columns' style='border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 580px; margin: 0 auto; padding: 0;'><tr style='vertical-align: top; text-align: left; padding: 0;' align='left'><td class='six sub-columns' style='word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: left; min-width: 0px; width: 50%; color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0px 10px 10px 0px;' align='left' valign='top'>" +
+    "                  <table class='container' style='border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: inherit; width: 580px; margin: 0 auto; padding: 0;'><tr style='vertical-align: top; text-align: left; padding: 0;' align='left'><td class='wrapper last' style='word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: left; position: relative; color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 10px 0 0' align='left' valign='top'>" +
+    "                        <table class='twelve columns' style='border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 580px; margin: 0 auto; padding: 0;'><tr style='vertical-align: top; text-align: left; padding: 0;' align='left'><td class='six sub-columns' style='word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: left; min-width: 0; width: 50%; color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0 10px 10px 0;' align='left' valign='top'>" +
     "                              <img src='http://res.cloudinary.com/gpl/general/gpllogo.png' height='50' style='outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%; float: left; clear: both; display: block;' align='left' /></td>" +
-    "                            <td class='six sub-columns last' style='text-align: right; vertical-align: middle; word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; min-width: 0px; width: 50%; color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0px 0px 10px;' align='right' valign='middle'>" +
+    "                            <td class='six sub-columns last' style='text-align: right; vertical-align: middle; word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; min-width: 0; width: 50%; color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0px 0px 10px;' align='right' valign='middle'>" +
     "                              <span class='template-label' style='color: #ffffff; font-weight: bold; font-size: 11px;'>Gravitas Premier League</span>" +
     "                            </td>" +
-    "                            <td class='expander' style='word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0px; color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;' align='left' valign='top'></td>" +
+    "                            <td class='expander' style='word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0; color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;' align='left' valign='top'></td>" +
     "                          </tr></table></td>" +
     "                    </tr></table></center>" +
     "              </td>" +
@@ -125,7 +137,6 @@ catch (err)
     }
 }
 
-
 if (process.env.LOGENTRIES_TOKEN)
 {
     var logentries = require('node-logentries');
@@ -139,6 +150,7 @@ router.get('/', function (req, res) {
         {
             log.log(req.signedCookies.name + "logged in");
         }
+
         res.redirect('/home');
     }
     else if (process.env.NODE_ENV && process.env.LIVE === '0')
@@ -154,6 +166,7 @@ router.get('/', function (req, res) {
             month: time.getMonth() + 1,
             year: time.getFullYear()
         };
+
         res.render('static', {date: date});
     }
     else
@@ -182,7 +195,8 @@ router.post('/interest', function (req, res) // interest form
         email: req.body.email,
         phone: req.body.phone
     };
-    var onInsert = function (err, docs)
+
+    var onInsert = function (err)
     {
         if (err)
         {
@@ -200,13 +214,16 @@ router.post('/interest', function (req, res) // interest form
                 {
                     console.log('Sent!');
                 }
+
                 res.redirect('/interest');
             };
+
             interest.header.to = newUser.email;
             email.send(interest, onSend);
         }
     };
-    mongoInterest.insert(newUser, onInsert);
+
+    mongoUsers.insert('interest', newUser, onInsert);
 });
 
 // TODO: delete this route when ready to launch
@@ -225,6 +242,7 @@ router.get('/login', function (req, res) {
     res.clearCookie('team', {});
     res.clearCookie('email', {});
     res.clearCookie('phone', {});
+
     if(req.signedCookies.name)
     {
         console.log(req.signedCookies.name);
@@ -241,22 +259,30 @@ router.get('/login', function (req, res) {
 });
 
 router.post('/login', function (req, res) {
-    var user = req.body.team.trim().toUpperCase();
     var password = req.body.password;
+    var credentials =
+    {
+        '_id': req.body.team.trim().toUpperCase(),
+        $or :
+            [
+                {
+                    'authStrategy' : 'admin'
+                },
+                {
+                    'authStrategy' : 'local'
+                }
+            ]
+    };
+
     if (req.signedCookies.name)
     {
         res.clearCookie('name', {});
     }
     if (log)
     {
-        log.log(user + " " + password + "recieved");
+        log.log(user + "received");
     }
 
-    var credentials =
-    {
-        '_id': user,
-        authStrategy : 'local'
-    };
     var onFetch = function (err, doc)
     {
         if (err)
@@ -266,10 +292,10 @@ router.post('/login', function (req, res) {
         }
         else if (doc)
         {
-            if (bcrypt.compareSync(password, doc['password_hash']))
+            if (bcrypt.compareSync(password, doc.password_hash))
             {
-                res.cookie('name', doc['_id'], {maxAge: 86400000, signed: true});
-                res.redirect('/home');
+                res.cookie(ref[doc.authStrategy][0], doc._id, {signed: true, maxAge: 86400000});
+                res.redirect(ref[doc.authStrategy][1]);
             }
             else
             {
@@ -278,27 +304,11 @@ router.post('/login', function (req, res) {
         }
         else
         {
-            var onGetAdmin = function (err, doc)
-            {
-                if (err)
-                {
-                    console.log(err.message);
-                    res.redirect('/login');
-                }
-                else if (doc && (bcrypt.compareSync(password, doc['password_hash'])))
-                {
-                    res.cookie('admin', doc['_id'], {signed: true, maxAge: 86400000});
-                    res.redirect('/admin');
-                }
-                else
-                {
-                    res.redirect('/login');
-                }
-            };
-            mongoUsers.admin(credentials, onGetAdmin);
+            res.redirect('/');
         }
     };
-    mongoUsers.fetch(credentials, onFetch);
+
+    mongoUsers.fetchUser(credentials, onFetch);
 });
 
 router.get('/forgot/password', function (req, res) {
@@ -322,11 +332,6 @@ router.post('/forgot/password', function (req, res) {
             "For the purposes of security, this link is valid for one use only, and shall expire in sixty minutes. <br> In the event that this password reset was not requested by you, please ignore this message and your password shall remain intact.<br>" +
             "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards,<br>Team GPL<br>IEEE Computer Society<br>VIT Student chapter</td></tr></table>"
         );
-        var details =
-        {
-            resetToken: token,
-            expire: Date.now() + 3600000
-        };
 
         var onFetch = function (err, doc)
         {
@@ -350,7 +355,8 @@ router.post('/forgot/password', function (req, res) {
                 res.redirect('/forgot/password');
             }
         };
-        mongoUsers.forgotPassword(doc, details, onFetch);
+
+        mongoUsers.forgotPassword(doc, token, onFetch);
     });
 });
 
@@ -371,6 +377,7 @@ router.get('/reset/:token', function (req, res) {
             res.render('reset', {csrfToken: req.csrfToken()});
         }
     };
+
     mongoUsers.getReset({resetToken: req.params.token, expire: {$gt: Date.now()}}, onGetReset);
 });
 
@@ -384,6 +391,7 @@ router.post('/forgot/user', function (req, res) {
         phone: req.body.phone,
         email: req.body.email
     };
+
     var onFetch = function (err, docs)
     {
         if (err)
@@ -395,11 +403,13 @@ router.post('/forgot/user', function (req, res) {
         {
             user.header.to = req.body.email;
             user.attach_alternative("The following teams were found in association with your details:<br><br><ol>" + docs + "</ol><br><br><br>Regards, <br>Team G.P.L<br>IEEE Computer Society");
+
             email.send(user, function (err) {
                 if (err)
                 {
                     console.log(err.message);
                 }
+
                 res.redirect('/login');
             });
         }
@@ -415,26 +425,8 @@ router.post('/forgot/user', function (req, res) {
 router.post('/reset/:token', function (req, res) {
     if (req.body.password === req.body.confirm)
     {
-        var query =
-        {
-            resetToken: req.params.token,
-            expire:
-            {
-                $gt: Date.now()
-            }
-        };
-        var op =
-        {
-            $set:
-            {
-                password_hash: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
-            },
-            $unset:
-            {
-                resetToken: '',
-                expire: ''
-            }
-        };
+        var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+
         var onReset = function (err, doc)
         {
             if (err)
@@ -462,11 +454,13 @@ router.post('/reset/:token', function (req, res) {
                     {
                         console.log(err.message);
                     }
+
                     res.redirect('/login');
                 });
             }
         };
-        mongoUsers.resetPassword(query, op, onReset);
+
+        mongoUsers.resetPassword(req.params.token, hash, onReset);
     }
     else // passwords do not match
     {
@@ -475,7 +469,7 @@ router.post('/reset/:token', function (req, res) {
 });
 
 router.get('/register', function (req, res) {
-    if(process.env.DAY >= 1)
+    if(process.env.DAY >= '1' && process.env.NODE_ENV)
     {
         res.redirect('/login');
     }
@@ -503,7 +497,7 @@ router.post('/register', function (req, res) {
         }
         else
         {
-            if (req.body.confirm_password === req.body.password)
+            if (req.body.confirm === req.body.password)
             {
                 var newUser = record;
                 newUser._id = req.body.team_name.trim().toUpperCase();
@@ -515,7 +509,7 @@ router.post('/register', function (req, res) {
                 newUser.phone = req.body.phone;
                 newUser.authStrategy = 'local';
 
-                var onInsert = function (err, docs)
+                var onInsert = function (err)
                 {
                     if (err)
                     {
@@ -526,16 +520,19 @@ router.post('/register', function (req, res) {
                     {
                         register.header.to = newUser.email;
                         res.cookie('name', newUser._id, {maxAge: 86400000, signed: true});
+
                         email.send(register, function (err) {
                             if (err)
                             {
                                 console.log(err.message);
                             }
+
                             res.redirect('/home/players');
                         });
                     }
                 };
-                mongoUsers.insert(newUser, onInsert);
+
+                mongoUsers.insert('users', newUser, onInsert);
             }
             else
             {
@@ -544,7 +541,7 @@ router.post('/register', function (req, res) {
             }
         }
     };
-    mongoUsers.getCount({}, onGetCount);
+    mongoUsers.getCount({authStrategy : {$ne : 'admin'}}, onGetCount);
 });
 
 router.get('/logout', function (req, res) {
@@ -586,6 +583,7 @@ router.get('/admin', function (req, res) {
                 res.redirect('/');
             }
         };
+
         mongoTeam.adminInfo(onGetInfo);
     }
     else
@@ -601,7 +599,7 @@ router.get('/social/login', function (req, res) {
     }
     else
     {
-        res.render('social', {mode: req.signedCookies.team ? 0 : 1, type : 'login', csrfToken : req.csrfToken()});
+        res.render('social', {mode: +!req.signedCookies.team, type : 'login', csrfToken : req.csrfToken()});
     }
 });
 
@@ -611,7 +609,7 @@ router.post('/social/login', function (req, res) {
 });
 
 router.get('/social/register', function (req, res) {
-    if(process.env.DAY >= 1)
+    if(process.env.DAY >= 1 && process.env.NODE_ENV)
     {
         res.redirect('/login');
     }
@@ -621,7 +619,7 @@ router.get('/social/register', function (req, res) {
     }
     else
     {
-        res.render('social', {mode: req.signedCookies.team ? 0 : 1, type : 'register', csrfToken : req.csrfToken()});
+        res.render('social', {mode: +!req.signedCookies.team, type : 'register', csrfToken : req.csrfToken()});
     }
 });
 
@@ -639,15 +637,18 @@ router.get('/social/callback', function (req, res) {
         delete req.user;
         res.clearCookie('team', {});
         res.clearCookie('phone', {});
+
         if(req.signedCookies.email)
         {
             register.header.to = req.signedCookies.email;
             res.clearCookie('email', {});
+
             email.send(register, function (err) {
                 if (err)
                 {
                     console.log(err.message);
                 }
+
                 res.redirect('/home/players');
             });
         }
@@ -687,11 +688,11 @@ router.get('/simulate', function (req, res) {
 });
 
 router.get('/rules', function (req, res) {
-    res.render('rules', {session : req.signedCookies.name ? 1 : 0});
+    res.render('rules', {session : +req.signedCookies.name});
 });
 
 router.get('/privacy', function (req, res) {
-    res.render('privacy', {session : req.signedCookies.name ? 1 : 0});
+    res.render('privacy', {session : +req.signedCookies.name});
 });
 
 router.get('/trailer', function (req, res) // trailer page

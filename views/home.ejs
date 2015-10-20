@@ -15,13 +15,14 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
+
 <!DOCTYPE html>
 <html>
     <head lang="en">
         <meta charset="UTF-8">
         <title>Home | GPL</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/bower/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="/stylesheets/dashboard.css">
         <link rel="stylesheet" href="/stylesheets/home.css"/>
     </head>
@@ -41,7 +42,6 @@
                                 <li role="presentation"><a href="/home/team">Team</a></li>
                                 <li role="presentation"><a href="/home/stats">Statistics</a></li>
                                 <li role="presentation"><a href="/home/matches">Matches</a></li>
-
                             </ul>
                         </div>
                     </div>
@@ -49,14 +49,13 @@
                 <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
                     <div id="top-navigation"></div>
                     <div class="container-fluid">
-
                         <div class="row">
                           <div class="col-md-10 col-md-offset-1">
                             <h3><%= results.user._id%></h3>
                             <div class="col-sm-6">
                                 <div class="container-fluid ">
                                     <div class="col-xs-10 col-xs-offset-1" id="coachBox">
-                                        <% var f = false; for(var i = 0;i < results.team.length;i++) { %>
+                                        <% var f = false; for(var i = 0;i < results.team.length; ++i) { %>
                                         <% if(results.team[i]._id > 'd') { %>
                                         <img src="http://res.cloudinary.com/gpl/players/coach/<%= results.team[i]._id %>.jpg"
                                              class="img-responsive"/>
@@ -89,14 +88,14 @@
                                             <tr><th>Average overs bowled:</th><td> <%= results.user.avg_overs_against %></td></tr>
                                             <tr><th>Highest total:</th><td>
                                             <% if (results.user.played !== 0) { %>
-                                            <%= results.user.highest_total %>
+                                                <%= results.user.highest_total %>
                                             <% } else {
                                                 0
                                             } %>
                                             </td></tr>
                                             <tr><th>Lowest total:</th><td>
                                             <% if (results.user.played !== 0) { %>
-                                            <%= results.user.lowest_total %>
+                                                <%= results.user.lowest_total %>
                                             <% } else {
                                                 0
                                             } %>
@@ -267,13 +266,13 @@
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
             your browser</a> to improve your experience.</p>
         <![endif]-->
-        <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <script async src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/bower/jquery/dist/jquery.min.js"></script>
+        <script async src="/bower/bootstrap/dist/js/bootstrap.min.js"></script>
         <script async src="/javascript/playerCommon.js"></script>
         <script type="text/javascript" src="/javascript/home.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-            <%for(var i=0 ; i<results.user.squad.length ; i++){%>
+            <%for( i=0 ; i<results.user.squad.length ; ++i){%>
             $('#box<%=results.user.squad[i]%>').css('background-color', '#a5d6ac');
             <%}%>
                     } );

@@ -16,12 +16,19 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var log;
+var server;
+var path = require('path');
+var debug = require('debug')('GPL');
+var mongo = require('mongodb').MongoClient.connect;
+var app = require(path.join(__dirname, '..', 'app'));
+var mongoUri = process.env.MONGO || 'mongodb://127.0.0.1:27017/GPL';
+
 if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 {
     require('newrelic');
 }
 
-var log;
 if (process.env.LOGENTRIES_TOKEN)
 {
     var logentries = require('node-logentries');
@@ -30,16 +37,10 @@ if (process.env.LOGENTRIES_TOKEN)
                             });
 }
 
-var debug = require('debug')('GPL');
-var path = require('path');
-
-var app = require(path.join(__dirname, '..', 'app'));
-
 app.set('port', process.env.PORT || 3000);
 
 var onBind = function ()
 {
-    var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/GPL';
     if (log)
     {
         log.log('info', {MongoUri: mongoUri, Port: server.address().port});
@@ -56,21 +57,23 @@ var onBind = function ()
     }
 };
 
-var server = app.listen(app.get('port'), onBind);
+mongo(mongoUri, function(err, database){
+    if(err)
+    {
+        throw err;
+    }
+    else
+    {
+        db = database;
+        server = app.listen(app.get('port'), onBind);
+    }
+});
+
 process.on('SIGINT', function(err){
     if(err)
     {
         console.log(err.message);
     }
-    require('../db/database')(function(err, db){
-        if(err)
-        {
-            console.log(err.message);
-        }
-        else
-        {
-            db.close();
-            process.exit(0);
-        }
-    });
+    db.close();
+    process.exit(0);
 });

@@ -15,7 +15,8 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-@import url('../bower_components/roboto-fontface/css/roboto-fontface.css');
+
+@import url('../bower/roboto-fontface/css/roboto-fontface.css');
 
 html, body {
     height: 100%;
@@ -178,7 +179,6 @@ html, body {
 
 #topbar-toggle {
     height: 44px;
-    background: url(../images/ellipsis.png) no-repeat center;
     background-size: 5px;
     border: none;
 }

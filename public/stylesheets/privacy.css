@@ -15,6 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 * {
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
@@ -28,6 +29,7 @@ body {
     font-size: 16px;
     overflow: hidden;
 }
+
 @media all and (max-width:768px){
   html{
     overflow: hidden !important;

@@ -19,7 +19,8 @@
 var i;
 var log;
 var flag;
-var slice = {
+var slice =
+{
     win: 1,
     points: 1,
     played: 1,
@@ -33,11 +34,10 @@ var options =
         ['net_run_rate', -1]
     ]
 };
-var collection;
 var leaderboard;
 var path = require('path');
+var match = process.env.MATCH;
 var mongoFeatures = require(path.join(__dirname, 'mongo-features.js'));
-var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection.js'));
 
 if (process.env.LOGENTRIES_TOKEN)
 {
@@ -47,247 +47,209 @@ if (process.env.LOGENTRIES_TOKEN)
     });
 }
 
-require('./database')(function(err, db){
-    if(err)
+exports.getCount = function (query, callback)
+{
+    db.collection(match).count(query, callback);
+};
+
+exports.insert = function (col, doc, callback)
+{
+    db.collection(col).insertOne(doc, {w: 1}, callback);
+};
+
+exports.getLeader = function (user, callback)
+{
+    var onFetch = function (err, documents)
     {
-        throw err;
-    }
-    else
+        if (err)
+        {
+            callback(err, null);
+        }
+        else
+        {
+            flag = false;
+            leaderboard = [];
+
+            for (i = 0; i < documents.length; ++i)
+            {
+                if (documents[i]._id == user)
+                {
+                    flag = true;
+                    documents[i].rank = i + 1;
+                    leaderboard.push(documents[i]);
+                }
+                else if (leaderboard.length < 10)
+                {
+                    leaderboard.push(documents[i]);
+                }
+                else if (flag)
+                {
+                    break;
+                }
+            }
+
+            callback(null, leaderboard);
+        }
+    };
+
+    db.collection(match).find({}, slice, options).toArray(onFetch);
+};
+
+exports.forgotPassword = function (doc, token, callback)
+{
+    var op =
     {
-        exports.getCount = function (query, callback)
+        $set:
         {
-            db.collection(match).count(query, callback);
-        };
+            resetToken : token,
+            expire : Date.now() + 3600000
+        }
+    };
 
-        exports.insert = function (doc, callback)
+    var onFetch = function (err, document)
+    {
+        if (err)
         {
-            db.collection('users').insertOne(doc, {w: 1}, callback);
-        };
+            callback(err, null);
+        }
+        else if (document.value)
+        {
+            mongoFeatures.forgotCount({password : 1}, callback);
+        }
+        else
+        {
+            callback(false, null);
+        }
+    };
 
-        exports.fetch = function (doc, callback)
+    db.collection(match).findOneAndUpdate(doc, op, onFetch);
+};
+
+exports.forgotUser = function (doc, callback)
+{
+    var onFetch = function (err, docs)
+    {
+        if (err)
         {
-            var onFetch = function (err, document)
+            callback(err, null);
+        }
+        else if (docs.length)
+        {
+            var results = "";
+            var onForgot = function(err)
             {
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else if (document && (doc['_id'] === document['_id']))
-                {
-                    callback(null, document);
-                }
-                else
-                {
-                    callback(false, null);
-                }
-            };
-            db.collection(match).findOne(doc, onFetch);
-        };
-
-        exports.getLeader = function (user, callback)
-        {
-            collection = db.collection(match);
-            var onFetch = function (err, documents)
-            {
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else
-                {
-                    flag = false;
-                    leaderboard = [];
-                    for (i = 0; i < documents.length; ++i)
-                    {
-                        if (documents[i]._id == user)
-                        {
-                            flag = true;
-                            documents[i].rank = i + 1;
-                            leaderboard.push(documents[i]);
-                        }
-                        else if (leaderboard.length < 10)
-                        {
-                            leaderboard.push(documents[i]);
-                        }
-                        else if (flag)
-                        {
-                            break;
-                        }
-                    }
-                    callback(null, leaderboard);
-                }
-            };
-            db.collection(match).find({}, slice, options).toArray(onFetch);
-        };
-
-        exports.forgotPassword = function (doc, op, callback)
-        {
-            var onFetch = function (err, document)
-            {
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else if (document.value)
-                {
-                    mongoFeatures.forgotCount({password : 1}, callback);
-                }
-                else
-                {
-                    callback(false, null);
-                }
-            };
-            db.collection(match).findOneAndUpdate(doc, {$set : op}, onFetch);
-        };
-
-        exports.forgotUser = function (doc, callback)
-        {
-            var onFetch = function (err, docs)
-            {
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else if (docs.length)
-                {
-                    var results = "";
-                    for (i = 0; i < docs.length; ++i)
-                    {
-                        results += '<li>' + docs[i]._id + ' (' + docs[i].authStrategy + ')' + '</li>';
-                    }
-                    mongoFeatures.forgotCount({user : 1}, callback);
-                }
-                else
-                {
-                    callback(false, null);
-                }
-            };
-            collection(match).find(doc, {_id: 1, authStrategy : 1}).toArray(onFetch);
-        };
-
-
-        exports.getReset = function (doc, callback)
-        {
-            var onFetch = function (err, document)
-            {
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else if (document)
-                {
-                    callback(null, document);
-                }
-                else
-                {
-                    callback(false, null);
-                }
-            };
-            db.collection(match).findOne(doc, onFetch);
-        };
-
-        exports.resetPassword = function (doc, op, callback)
-        {
-            var onFetch = function (err, document)
-            {
-                if (err)
-                {
-                    callback(err, null);
-                }
-                else if (document)
-                {
-                    callback(null, document);
-                }
-                else
-                {
-                    callback(false, null);
-                }
-            };
-            db.collection(match).findOneAndUpdate(doc, op, onFetch);
-        };
-
-        exports.updateUserTeam = function (doc, arr, stats, cost, callback)
-        {
-            db.collection(match).findOneAndUpdate(doc, {
-                $set:
-                {
-                    'team': arr,
-                    'stats': stats,
-                    'surplus': cost
-                }
-            }, {}, callback)
-        };
-
-        exports.updateMatchSquad = function (doc, arr, callback)
-        {
-            db.collection(match).findOneAndUpdate(doc, {$set: {'squad': arr}}, {}, callback);
-        };
-
-        exports.fetchUser = function (doc, callback)
-        {
-            db.collection(match).findOne(doc, callback);
-        };
-
-        exports.update = function (query, update, callback)
-        {
-            var onUpdate = function (err, doc)
-            {
-                if (err)
-                {
-                    if (log)
-                    {
-                        log.log('debug', {Error: err, Message: err.message});
-                    }
-                    callback(true, null);
-                }
-                else
-                {
-                    callback(null, doc);
-                }
-            };
-            db.collection(match).findOneAndUpdate(query, update, {"upsert": true}, onUpdate);
-        };
-
-        exports.get = function (doc, callback)
-        {
-            db.collection(match).findOne({_id: doc}, callback);
-        };
-
-        exports.save = function (doc, callback)
-        {
-            var onSave = function (err)
-            {
-                if (err)
+                if(err)
                 {
                     callback(err);
                 }
                 else
                 {
-                    callback(null, doc);
+                    callback(null, results);
                 }
             };
-            db.collection(match).save(doc, onSave);
-        };
 
-        exports.admin = function (doc, callback)
-        {
-            collection = db.collection('admin');
-            var onGetAdmin = function (err, document)
+            for (i = 0; i < docs.length; ++i)
             {
-                if (err)
-                {
-                    callback(err);
-                }
-                else if(document && document._id === doc._id)
-                {
-                    callback(null, document);
-                }
-                else
-                {
-                    callback(false, null);
-                }
-            };
-            collection.findOne(doc, onGetAdmin);
-        };
-    }
-});
+                results += '<li>' + docs[i]._id + ' (' + docs[i].authStrategy + ')' + '</li>';
+            }
+
+            mongoFeatures.forgotCount({user : 1}, onForgot);
+        }
+        else
+        {
+            callback(false, null);
+        }
+    };
+
+    db.collection(match).find(doc, {_id: 1, authStrategy : 1}).toArray(onFetch);
+};
+
+exports.getReset = function (doc, callback)
+{
+    var onFetch = function (err, document)
+    {
+        if (err)
+        {
+            callback(err, null);
+        }
+        else if (document)
+        {
+            callback(null, document);
+        }
+        else
+        {
+            callback(false, null);
+        }
+    };
+
+    db.collection(match).find(doc).limit(1).next(onFetch);
+};
+
+exports.resetPassword = function (token, hash, callback)
+{
+    var query =
+    {
+        resetToken: token,
+        expire:
+        {
+            $gt: Date.now()
+        }
+    };
+    var op =
+    {
+        $set:
+        {
+            password_hash: hash
+        },
+        $unset:
+        {
+            resetToken: '',
+            expire: ''
+        }
+    };
+
+    var onFetch = function (err, document)
+    {
+        if (err)
+        {
+            callback(err, null);
+        }
+        else if (document)
+        {
+            callback(null, document);
+        }
+        else
+        {
+            callback(false, null);
+        }
+    };
+
+    db.collection(match).findOneAndUpdate(query, op, onFetch);
+};
+
+exports.updateUserTeam = function (doc, team, stats, cost, callback)
+{
+    db.collection(match).findOneAndUpdate(doc, {
+        $set:
+        {
+            'team': team,
+            'stats': stats,
+            'surplus': cost
+        }
+    }, {}, callback)
+};
+
+exports.updateMatchSquad = function (doc, arr, callback)
+{
+    db.collection(match).findOneAndUpdate(doc, {$set: {'squad': arr}}, {}, callback);
+};
+
+exports.fetchUser = function (query, callback)
+{
+    db.collection(match).find(query).limit(1).next(callback);
+};
+
+exports.save = function (doc, callback)
+{
+    db.collection(match).save(doc, callback);
+};

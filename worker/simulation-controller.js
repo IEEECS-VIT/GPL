@@ -22,16 +22,23 @@ var database;
 var daily = 0;
 var stats = {};
 var points = 0;
+var ref =
+    {
+        'users': 1,
+        'round2': 2,
+        'round3': 3
+    };
 var individual = 0;
 var path = require('path');
 var async = require('async');
 var days = [1, 2, 3, 4, 5, 6, 7];
-var MongoClient = require('mongodb').MongoClient;
-var email = require(path.join(__dirname, 'email.js'));
+var email = require(path.join(__dirname, 'email'));
 var simulator = require(path.join(__dirname, 'simulation'));
-var match = require(path.join(__dirname, '..', 'schedule', 'matchCollection'));
-var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/GPL';
 
+if(!process.env.NODE_ENV)
+{
+    require('dotenv').load({path : path.join(__dirname, '..', '.env')});
+}
 if (process.env.LOGENTRIES_TOKEN)
 {
     var logentries = require('node-logentries');
@@ -39,13 +46,8 @@ if (process.env.LOGENTRIES_TOKEN)
         token: process.env.LOGENTRIES_TOKEN
     });
 }
-var ref =
-{
-    'users': 1,
-    'round2': 2,
-    'round3': 3
-};
 
+var match = process.env.MATCH;
 var message = email.wrap({
     from: 'gravitaspremierleague@gmail.com',
     subject: 'Round ' + ref[match] + ', match ' + (process.env.DAY || 1) + ' results are out!'
@@ -58,20 +60,6 @@ message.attach_alternative("<table background='http://res.cloudinary.com/gpl/gen
     "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards,<br>Team GPL<br>IEEE Computer Society<br>VIT Student chapter</td></tr></table>");
 
 message.header.bcc = [];
-
-var databaseOptions =
-{
-    server:
-    {
-        socketOptions:
-        {
-            keepAlive: 1,
-            connectTimeoutMS: 30000
-        },
-        auto_reconnect: true,
-        poolSize: 100
-    }
-};
 
 exports.initSimulation = function (day, masterCallback)
 {
@@ -95,7 +83,7 @@ exports.initSimulation = function (day, masterCallback)
             {
                 var getEachRating = function (elt, subCallback)
                 {
-                    database.collection('players').findOne({_id: elt}, subCallback);
+                    db.collection('players').find({_id: elt}).limit(1).next(subCallback);
                 };
 
                 var onGetRating = function (err, results)
@@ -118,11 +106,13 @@ exports.initSimulation = function (day, masterCallback)
                             userDoc.squad.push(elt);
                         }
                     };
+
                     userDoc.team.forEach(addCoach);
                     async.map(userDoc.squad, getEachRating, onGetRating);
                 }
             };
-            database.collection(match).findOne(query, getRating);
+
+            db.collection(match).find(query).limit(1).next(getRating);
         };
 
         var updateData = function (err, newData)
@@ -136,6 +126,7 @@ exports.initSimulation = function (day, masterCallback)
                     stats.runs += newUserDoc.scores[day - 1] || 0;
                     stats.overs += newUserDoc.overs[day - 1] || 0;
                     stats.wickets += newUserDoc.wickets[day - 1] || 0;
+
                     if(newUserDoc.scores[day - 1] > daily)
                     {
                         daily = newUserDoc.scores[day - 1];
@@ -152,6 +143,7 @@ exports.initSimulation = function (day, masterCallback)
                         stats.low.team = newUserDoc._id;
                         stats.low.value = newUserDoc.lowest_total;
                     }
+
                     for (i = 0; i < newUserDoc.squad.length; ++i)
                     {
                         if (!newUserDoc.squad[i].match(/^b/))
@@ -191,10 +183,12 @@ exports.initSimulation = function (day, masterCallback)
                         }
                     }
                 }
+
                 delete newUserDoc.f;
                 delete newUserDoc.s;
                 delete newUserDoc.names;
-                database.collection(match).updateOne({_id: newUserDoc._id}, newUserDoc, asyncCallback);
+
+                db.collection(match).updateOne({_id: newUserDoc._id}, newUserDoc, asyncCallback);
             };
 
             var updateMatch = function (newMatchDoc, asyncCallback)
@@ -204,24 +198,26 @@ exports.initSimulation = function (day, masterCallback)
                     stats.daily.MoM = newMatchDoc.MoM;
                     points = newMatchDoc.MoM.points;
                 }
-                database.collection('matchday' + day).updateOne({_id: newMatchDoc._id}, newMatchDoc, asyncCallback);
+
+                db.collection('matchday' + day).updateOne({_id: newMatchDoc._id}, newMatchDoc, asyncCallback);
             };
 
             var parallelTasks2 =
-                [
-                    function (asyncCallback)
-                    {
-                        updateUser(newData.team1, asyncCallback);
-                    },
-                    function (asyncCallback)
-                    {
-                        updateUser(newData.team2, asyncCallback);
-                    },
-                    function (asyncCallback)
-                    {
-                        updateMatch(newData.match, asyncCallback);
-                    }
-                ];
+            [
+                function (asyncCallback)
+                {
+                    updateUser(newData.team1, asyncCallback);
+                },
+                function (asyncCallback)
+                {
+                    updateUser(newData.team2, asyncCallback);
+                },
+                function (asyncCallback)
+                {
+                    updateMatch(newData.match, asyncCallback);
+                }
+            ];
+
             console.log(newData.team1._id + ' vs ' + newData.team2._id + ' (Match ' + newData.match._id + ') is now being updated');
             async.parallel(parallelTasks2, callback);
         };
@@ -237,6 +233,7 @@ exports.initSimulation = function (day, masterCallback)
                 ],
                 match: matchDoc
             };
+
             simulator.simulate(data, updateData);
         };
 
@@ -247,7 +244,6 @@ exports.initSimulation = function (day, masterCallback)
     {
         var onUpdate = function (error)
         {
-            database.close();
             if (error)
             {
                 console.log(error.message);
@@ -259,6 +255,7 @@ exports.initSimulation = function (day, masterCallback)
                 {
                     log.log('debug', {Error: err.message});
                 }
+
                 throw err;
             }
             else
@@ -294,24 +291,24 @@ exports.initSimulation = function (day, masterCallback)
                 }
  */         }
         };
-        database.collection('stats').updateOne({_id: 'stats'}, {$set: stats}, onUpdate);
+
+        db.collection('stats').updateOne({_id: 'stats'}, {$set: stats}, onUpdate);
     };
 
     var getAllMatches = function (err, callback)
     {
-        var collectionName;
+        var collection;
         switch (days.indexOf(day))
         {
             case -1:
                 throw 'Invalid Day';
                 break;
             default:
-                collectionName = 'matchday' + day;
+                collection = 'matchday' + day;
                 break;
         }
 
-        var collection = database.collection(collectionName);
-        collection.find().toArray(callback)
+        db.collection(collection).find().toArray(callback)
     };
 
     var ForAllMatches = function (err, docs)
@@ -331,35 +328,18 @@ exports.initSimulation = function (day, masterCallback)
         }
     };
 
-    var onConnect = function (err, db)
+    var onGetInfo = function (err, doc)
     {
         if (err)
         {
             console.log(err.message);
-            if (log)
-            {
-                log.log('debug', {Error: err.message});
-            }
-            throw err;
         }
         else
         {
-            database = db;
-            var onGetInfo = function (err, doc)
-            {
-                if (err)
-                {
-                    console.log(err.message);
-                }
-                else
-                {
-                    stats = doc;
-                    getAllMatches(err, ForAllMatches);
-                }
-            };
-            database.collection('stats').findOne({}, onGetInfo);
+            stats = doc;
+            getAllMatches(err, ForAllMatches);
         }
     };
 
-    MongoClient.connect(mongoUri, databaseOptions, onConnect);
+    db.collection('stats').find().limit(1).next(onGetInfo);
 };

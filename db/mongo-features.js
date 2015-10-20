@@ -16,110 +16,144 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var collection;
 var path = require('path');
 var async = require('async');
 var mongoTeam = require('./mongo-team');
 
-require('./database')(function(err, db){
-    if(err)
+exports.getStats = function (callback)
+{
+    db.collection('stats').find().limit(1).next(callback);
+};
+
+exports.notify = function (callback)
+{
+    db.collection('features').find().toArray(callback);
+};
+
+exports.simulate = function (callback)
+{
+    var simulationControl = require(path.join(__dirname, '..', 'worker', 'simulation-controller'));
+    simulationControl.initSimulation(process.env.DAY, callback);
+};
+
+exports.forgotCount = function(option, callback)
+{
+    var onInc = function(err, doc)
     {
-        throw err;
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            callback(null, doc.value);
+        }
+    };
+
+    db.collection('info').findOneAndUpdate({_id : 'info'}, {$inc : option}, onInc);
+};
+
+exports.warnEmptyTeams = function(callback)
+{
+    var onFind = function(err, docs)
+    {
+        if (err)
+        {
+            callback(err);
+        }
+        else
+        {
+            var onMap = function(arg, mapCallback)
+            {
+                mapCallback(null, arg.email);
+            };
+
+            async.map(docs, onMap, callback);
+        }
+    };
+
+    db.collection('users').find({$or : [{team : []}, {squad : []}]}, {email : 1, _id : 0}).toArray(onFind);
+};
+
+exports.match = function (day, team, callback)
+{
+    var filter =
+    {
+        $or:
+        [
+            {
+                Team_1: team
+            },
+            {
+                Team_2: team
+            }
+        ]
+    };
+
+    if (day <= process.env.DAY)
+    {
+        db.collection('matchday' + day).find(filter).limit(1).next(callback);
     }
     else
     {
-        exports.insert = function (doc, callback)
+        var onOpponent = function (err, doc)
         {
-            db.collection('features').insertOne(doc, {w: 1}, callback);
-        };
-
-        exports.getInfo = function (callback)
-        {
-            db.collection('stats').findOne(callback);
-        };
-
-        exports.notify = function (callback)
-        {
-            db.collection('features').find().toArray(callback);
-        };
-
-        exports.simulate = function (callback)
-        {
-            var simulationControl = require(path.join(__dirname, '..', 'worker', 'simulation-controller'));
-            simulationControl.initSimulation(process.env.DAY || 1, callback);
-        };
-
-        exports.forgotCount = function(option, callback)
-        {
-            collection = db.collection('info');
-            var onInc = function(err, doc)
+            if (err)
             {
-                if(err)
-                {
-                    callback(err);
-                }
-                else
-                {
-                    callback(null, doc.value);
-                }
-            };
-            collection.findOneAndUpdate({_id : 'info'}, {$inc : option}, onInc);
-        };
-
-        exports.warnEmptyTeams = function(callback)
-        {
-            collection = db.collection('users');
-            var onFind = function(err, docs)
-            {
-                if (err)
-                {
-                    callback(err);
-                }
-                else
-                {
-                    var onMap = function(arg, mapCallback)
-                    {
-                        mapCallback(null, arg.email);
-                    };
-
-                    async.map(docs, onMap, callback);
-                }
-            };
-            collection.find({team : []}, {email : 1, _id : 0}).toArray(onFind);
-        };
-        exports.match = function (day, team, callback)
-        {
-            var filter =
-            {
-                $or:
-                    [
-                        {
-                            Team_1: team
-                        },
-                        {
-                            Team_2: team
-                        }
-                    ]
-            };
-            if (day <= process.env.DAY)
-            {
-                db.collection('matchday' + day).findOne(filter, callback);
+                console.log(err.message);
             }
             else
             {
-                var onOpponent = function (err, doc)
-                {
-                    if (err)
-                    {
-                        console.log(err.message);
-                    }
-                    else
-                    {
-                        mongoTeam.squad({team_no: doc}, callback);
-                    }
-                };
-                mongoTeam.opponent(day, team, onOpponent);
+                mongoTeam.squad({team_no: doc}, callback);
             }
         };
+
+        mongoTeam.opponent(day, team, onOpponent);
     }
-});
+};
+
+exports.quantify = function(callback)
+{
+    db.collection('interest').count(callback);
+};
+
+exports.fetchPlayers = function (callback)
+{
+    db.collection('players').find({}, {_id : 1, Name : 1, Type : 1, Country : 1, Price : 1, Cost : 1}).toArray(callback);
+};
+
+exports.getPlayer = function (id, fields, callback)
+{
+    var query =
+    {
+        "_id" : id
+    };
+    if(typeof fields == 'function')
+    {
+        callback = fields;
+        fields =
+        {
+            Type: 1,
+            Name: 1,
+            Country: 1
+        }
+    }
+
+    var onGetPlayer = function(err, player)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else if(player)
+        {
+            callback(null, player);
+        }
+        else
+        {
+            callback(false, null);
+        }
+    };
+
+    db.collection('players').find(query, fields).limit(1).next(onGetPlayer);
+};

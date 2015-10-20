@@ -15,7 +15,8 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+
+@import url('../bower/roboto-fontface/css/roboto-fontface.css');
 
 html {
     min-height: 100%;

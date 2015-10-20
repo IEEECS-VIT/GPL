@@ -42,6 +42,7 @@
 #myCarousel{
   overflow: hidden;
 }
+
 /* Large Devices, Wide Screens */
 @media only screen and (min-width: 786px) {
     .one {
@@ -50,7 +51,6 @@
                 rgba(0, 0, 0, 0.5)
         ), url('http://res.cloudinary.com/gpl/general/one-large.jpg') no-repeat center center fixed;
         background-size: cover;
-
     }
     .two {
         background: linear-gradient(

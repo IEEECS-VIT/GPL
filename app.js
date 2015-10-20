@@ -16,17 +16,20 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var app;
-var log;
-var newrelic;
+var express = require('express');
+var app = express();
+app.use(require('compression')());
+if(!process.env.NODE_ENV)
+{
+    require('dotenv').load();
+}
+
 var path = require('path');
 var csurf = require('csurf');
 var logger = require('morgan');
-var express = require('express');
 var passport = require('passport');
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
-var compression = require('compression');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var loggerLevel = process.env.LOGGER_LEVEL || 'dev';
@@ -34,24 +37,16 @@ var home = require(path.join(__dirname, 'routes', 'home'));
 var index = require(path.join(__dirname, 'routes', 'index'));
 var social = require(path.join(__dirname, 'routes', 'social'));
 
-app = express();
-app.use(compression());
 if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 {
-    newrelic = require('newrelic');
+    app.locals.newrelic = require('newrelic');
 }
 
 if (process.env.LOGENTRIES_TOKEN)
 {
-    var logentries = require('node-logentries');
-    log = logentries.logger({
+    var log = require('node-logentries').logger({
         token: process.env.LOGENTRIES_TOKEN
     });
-}
-
-if (newrelic)
-{
-    app.locals.newrelic = newrelic;
 }
 
 app.use(logger(loggerLevel));
