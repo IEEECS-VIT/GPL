@@ -53,7 +53,6 @@ exports.getSquad = function (doc, callback)
         {
             if (err)
             {
-                console.log(err.message);
                 callback(err, null)
             }
             else
@@ -69,7 +68,7 @@ exports.getSquad = function (doc, callback)
         }
         else
         {
-            getPlayer(coach, onGetCoach);
+            mongoFeatures.getPlayer(coach, onGetCoach);
         }
     };
 
@@ -83,7 +82,7 @@ exports.getSquad = function (doc, callback)
             }
             else if (document.team.length != 0)
             {
-                for (var i = 0; i < 16; i++)
+                for (var i = 0; i < 16; ++i)
                 {
                     if (document.team[i] >= 'd1')
                     {
@@ -91,7 +90,7 @@ exports.getSquad = function (doc, callback)
                     }
                 }
 
-                async.map(document.squad, getPlayer, onFinish);
+                async.map(document.squad, mongoFeatures.getPlayer, onFinish);
             }
             else
             {
@@ -215,7 +214,7 @@ exports.adminInfo = function (callback)
         },
         total: function (asyncCallback)
         {
-            mongoUsers.getCount({}, asyncCallback);
+            mongoUsers.getCount({authStrategy : {$ne : 'admin'}}, asyncCallback);
         },
         facebook: function (asyncCallback)
         {

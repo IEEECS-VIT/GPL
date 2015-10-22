@@ -24,7 +24,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="/stylesheets/<%=(session)? 'dashboard' : 'main'%>.css">
+        <link rel="stylesheet" href="/stylesheets/<%=(session)? 'main' : 'dashboard'%>.css">
         <link rel="stylesheet" href="/stylesheets/rules.css">
     </head>
     <body>
@@ -32,7 +32,7 @@
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
             your browser</a> to improve your experience.</p>
         <![endif]-->
-        <%if(session){%>
+        <%if(!session){%>
             <div id="wrapper" class="container-fluid">
                 <div id="side-navigation">
                     <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
@@ -201,16 +201,16 @@
                             </div>
                         </div>
                     </div>
-    <%if(session){%>
+    <%if(!session){%>
                 </div>
             </div>
         </div>
     <%}%>
-        <%if(!session){%>
+        <%if(session){%>
             <footer id="footer" class="footer"></footer>
         <%}%>
         <script src="/bower/jquery/dist/jquery.min.js"></script>
         <script async src="/bower/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script async src="/javascript/<%= (session) ? 'playerCommon' : 'main'%>.js"></script>
+        <script async src="/javascript/<%= (session) ? 'main' : 'playerCommon'%>.js"></script>
     </body>
 </html>

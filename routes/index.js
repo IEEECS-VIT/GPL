@@ -17,10 +17,13 @@
  */
 
 var log;
+var time;
+var date;
 var user;
 var reset;
 var token;
 var bcrypt;
+var newUser;
 var register;
 var interest;
 var password;
@@ -37,6 +40,7 @@ var ref =
         '/home'
     ]
 };
+var credentials;
 var path = require('path');
 var crypto = require('crypto');
 var router = require('express').Router();
@@ -44,6 +48,8 @@ var email = require(path.join(__dirname, '..', 'worker', 'email'));
 var record = require(path.join(__dirname, '..', 'db', 'mongo-record'));
 var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team'));
 var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
+var developers = require(path.join(__dirname, '..', 'package.json')).contributors;
+developers.map((arg) => arg.map((x) => x.img = x.name.split(' ')[0]));
 
 register = interest = email.wrap({
     from: 'gravitaspremierleague@gmail.com',
@@ -65,7 +71,6 @@ interest.attach_alternative("<table background='http://res.cloudinary.com/gpl/ge
     "</tr><tr><td align='center' style='padding: 5px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> Thank you for your interest in graVITas Premier League <br>" +
     "Please check out  our Facebook <a href='http://www.facebook.com/gravitaspremierleague' style='text-decoration: none;'>page</a> to stay close to all the action! </td>" +
     "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards,<br>Team GPL,<br>IEEE Computer Society<br>IEEE Computer Society<br>VIT student chapter</td></tr></table>");
-
 
 register.attach_alternative("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>" +
     "<html xmlns='http://www.w3.org/1999/xhtml' xmlns='http://www.w3.org/1999/xhtml'>" +
@@ -98,7 +103,7 @@ register.attach_alternative("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict
     "                          Regards<br />" +
     "                          Team GPL,<br />" +
     "                          IEEE Computer Society,<br />" +
-    "                          VIT Chapter" +
+    "                          VIT Student Chapter" +
     "                             </p>" +
     "                          </td>" +
     "                          <td class='expander' style='word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0px; color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;' align='left' valign='top'></td>" +
@@ -155,9 +160,9 @@ router.get('/', function (req, res) {
     }
     else if (process.env.NODE_ENV && process.env.LIVE === '0')
     {
-        var time = new Date;
+        time = new Date;
         time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
-        var date =
+        date =
         {
             seconds: time.getSeconds(),
             minutes: time.getMinutes(),
@@ -188,7 +193,7 @@ router.get('/interest', function (req, res) {
 
 router.post('/interest', function (req, res) // interest form
 {
-    var newUser =
+    newUser =
     {
         name: req.body.name,
         regno: req.body.regno,
@@ -245,7 +250,6 @@ router.get('/login', function (req, res) {
 
     if(req.signedCookies.name)
     {
-        console.log(req.signedCookies.name);
         res.redirect('/home');
     }
     else if(req.signedCookies.admin)
@@ -260,18 +264,18 @@ router.get('/login', function (req, res) {
 
 router.post('/login', function (req, res) {
     var password = req.body.password;
-    var credentials =
+    credentials =
     {
         '_id': req.body.team.trim().toUpperCase(),
         $or :
-            [
-                {
-                    'authStrategy' : 'admin'
-                },
-                {
-                    'authStrategy' : 'local'
-                }
-            ]
+        [
+            {
+                'authStrategy' : 'admin'
+            },
+            {
+                'authStrategy' : 'local'
+            }
+        ]
     };
 
     if (req.signedCookies.name)
@@ -288,7 +292,7 @@ router.post('/login', function (req, res) {
         if (err)
         {
             console.log(err.message);
-            res.redirect('/login');
+            res.render('index', {response: "Incorrect credentials!"});
         }
         else if (doc)
         {
@@ -299,12 +303,12 @@ router.post('/login', function (req, res) {
             }
             else
             {
-                res.redirect('/login');
+                res.render('index', {response: "Incorrect credentials!"});
             }
         }
         else
         {
-            res.redirect('/');
+            res.render('index', {response: "Incorrect credentials!"});
         }
     };
 
@@ -316,7 +320,7 @@ router.get('/forgot/password', function (req, res) {
 });
 
 router.post('/forgot/password', function (req, res) {
-    var doc =
+    credentials =
     {
         _id: req.body.team.trim().toUpperCase(),
         email: req.body.email,
@@ -347,6 +351,7 @@ router.post('/forgot/password', function (req, res) {
                     {
                         console.log(err.message);
                     }
+
                     res.redirect('/login');
                 });
             }
@@ -356,7 +361,7 @@ router.post('/forgot/password', function (req, res) {
             }
         };
 
-        mongoUsers.forgotPassword(doc, token, onFetch);
+        mongoUsers.forgotPassword(credentials, token, onFetch);
     });
 });
 
@@ -379,47 +384,6 @@ router.get('/reset/:token', function (req, res) {
     };
 
     mongoUsers.getReset({resetToken: req.params.token, expire: {$gt: Date.now()}}, onGetReset);
-});
-
-router.get('/forgot/user', function(req, res){
-    res.render('forgot', {csrfToken: req.csrfToken(), mode:'user'});
-});
-
-router.post('/forgot/user', function (req, res) {
-    var doc =
-    {
-        phone: req.body.phone,
-        email: req.body.email
-    };
-
-    var onFetch = function (err, docs)
-    {
-        if (err)
-        {
-            console.log(err.message);
-            res.redirect('/forgot/user');
-        }
-        else if (docs)
-        {
-            user.header.to = req.body.email;
-            user.attach_alternative("The following teams were found in association with your details:<br><br><ol>" + docs + "</ol><br><br><br>Regards, <br>Team G.P.L<br>IEEE Computer Society");
-
-            email.send(user, function (err) {
-                if (err)
-                {
-                    console.log(err.message);
-                }
-
-                res.redirect('/login');
-            });
-        }
-        else
-        {
-            console.log('Invalid credentials!');
-            res.redirect('/forgot/user');
-        }
-    };
-    mongoUsers.forgotUser(doc, onFetch);
 });
 
 router.post('/reset/:token', function (req, res) {
@@ -468,12 +432,52 @@ router.post('/reset/:token', function (req, res) {
     }
 });
 
+router.get('/forgot/user', function(req, res){
+    res.render('forgot', {csrfToken: req.csrfToken(), mode:'user'});
+});
+
+router.post('/forgot/user', function (req, res) {
+    credentials =
+    {
+        phone: req.body.phone,
+        email: req.body.email
+    };
+
+    var onFetch = function (err, docs)
+    {
+        if (err)
+        {
+            console.log(err.message);
+            res.redirect('/forgot/user');
+        }
+        else if (docs)
+        {
+            user.header.to = req.body.email;
+            user.attach_alternative("The following teams were found in association with your details:<br><br><ol>" + docs + "</ol><br><br><br>Regards, <br>Team G.P.L<br>IEEE Computer Society");
+
+            email.send(user, function (err) {
+                if (err)
+                {
+                    console.log(err.message);
+                }
+
+                res.redirect('/login');
+            });
+        }
+        else
+        {
+            res.redirect('/forgot/user');
+        }
+    };
+    mongoUsers.forgotUser(credentials, onFetch);
+});
+
 router.get('/register', function (req, res) {
-    if(process.env.DAY >= '1' && process.env.NODE_ENV)
+    if(process.env.DAY >= '1' && process.env.NODE_ENV && process.env.MATCH == 'users')
     {
         res.redirect('/login');
     }
-    if (req.signedCookies.name)
+    else if (req.signedCookies.name)
     {
         res.redirect('/home');
     }
@@ -487,7 +491,9 @@ router.post('/register', function (req, res) {
     if (req.signedCookies.name)
     {
         res.clearCookie('name', {});
+        res.clearCookie('admin', {});
     }
+
     var onGetCount = function (err, number)
     {
         if (err)
@@ -499,7 +505,7 @@ router.post('/register', function (req, res) {
         {
             if (req.body.confirm === req.body.password)
             {
-                var newUser = record;
+                newUser = record;
                 newUser._id = req.body.team_name.trim().toUpperCase();
                 newUser.dob = new Date();
                 newUser.team_no = parseInt(number) + 1;
@@ -541,27 +547,17 @@ router.post('/register', function (req, res) {
             }
         }
     };
+
     mongoUsers.getCount({authStrategy : {$ne : 'admin'}}, onGetCount);
 });
 
 router.get('/logout', function (req, res) {
-    if(req.signedCookies.admin)
-    {
-        res.clearCookie('admin', {});
-        res.redirect('/');
-    }
-    else if (req.signedCookies.name)
-    {
-        res.clearCookie('name', {});
-        res.clearCookie('team', {});
-        res.clearCookie('email', {});
-        res.clearCookie('phone', {});
-        res.redirect('/login');
-    }
-    else
-    {
-        res.redirect('/');
-    }
+    res.clearCookie('team', {});
+    res.clearCookie('email', {});
+    res.clearCookie('phone', {});
+    res.clearCookie('admin', {});
+    res.clearCookie('name', {});
+    res.redirect('/login');
 });
 
 router.get('/admin', function (req, res) {
@@ -664,7 +660,8 @@ router.get('/social/callback', function (req, res) {
 });
 
 router.get(/\/developers?/, function (req, res) {
-    res.render('developers');
+
+    res.render('developers', {obj : developers});
 });
 
 router.get('/simulate', function (req, res) {
@@ -684,15 +681,16 @@ router.get('/simulate', function (req, res) {
         };
         mongoFeatures.simulate(onSimulate);*/
     }
+
     res.redirect('/');
 });
 
 router.get('/rules', function (req, res) {
-    res.render('rules', {session : +req.signedCookies.name});
+    res.render('rules', {session : +!req.signedCookies.name});
 });
 
 router.get('/privacy', function (req, res) {
-    res.render('privacy', {session : +req.signedCookies.name});
+    res.render('privacy', {session : +!req.signedCookies.name});
 });
 
 router.get('/trailer', function (req, res) // trailer page

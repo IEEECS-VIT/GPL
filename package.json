@@ -17,50 +17,62 @@
   },
   "cacheDirectories":
   [
-    "public/bower_components"
+    "public/bower/"
   ],
   "contributors":
   [
-    {
-      "name": "Aneesh Neelam",
-      "email": "neelam.aneesh@gmail.com"
-    },
-    {
-      "name": "Kashish Singhal",
-      "email": "singhal2.kashish@gmail.com"
-    },
-    {
-      "name": "Kunal Nagpal",
-      "email": "kunagpal@gmail.com"
-    },
-    {
-      "name": "Ayush Agarwal",
-      "email": "agarwalayush161@gmail.com"
-    },
-    {
-      "name": "Shivam Mathur",
-      "email": "burnualive@hotmail.com"
-    },
-    {
-      "name": "Sakshi Anand",
-      "email": "sakku.anand3@gmail.com"
-    },
-    {
-      "name": "Saurabh Mathur",
-      "email": "saurabhmathur96@gmail.com"
-    },
-    {
-      "name": "Tanisha Chawla",
-      "email": "chawlatanisha20@gmail.com"
-    },
-    {
-      "name": "Harshal Varday",
-      "email": "harshal.varday2014@vit.ac.in"
-    },
-    {
-      "name": "Waris Chutani",
-      "email": "waris0023@gmail.com"
-    }
+    [
+      {
+        "name": "Aneesh Neelam",
+        "email": "neelam.aneesh@gmail.com"
+      },
+      {
+        "name": "Kashish Singhal",
+        "email": "singhal2.kashish@gmail.com"
+      },
+      {
+        "name": "Kunal Nagpal",
+        "email": "kunagpal@gmail.com"
+      },
+      {
+        "name": "Ayush Agarwal",
+        "email": "agarwalayush161@gmail.com"
+      },
+      {
+        "name": "Shivam Mathur",
+        "email": "burnualive@hotmail.com"
+      },
+      {
+        "name": "Karan Pittie",
+        "email": "karan.pittie@yahoo.com"
+      },
+      {
+        "name": "Vikhyati Singh",
+        "email": "vikhyati.singh2012@vit.ac.in"
+      }
+    ],
+    [
+      {
+        "name": "Sakshi Anand",
+        "email": "sakku.anand3@gmail.com"
+      },
+      {
+        "name": "Saurabh Mathur",
+        "email": "saurabhmathur96@gmail.com"
+      },
+      {
+        "name": "Tanisha Chawla",
+        "email": "chawlatanisha20@gmail.com"
+      },
+      {
+        "name": "Harshal Varday",
+        "email": "harshal.varday2014@vit.ac.in"
+      },
+      {
+        "name": "Waris Chutani",
+        "email": "waris0023@gmail.com"
+      }
+    ]
   ],
   "dependencies":
   {

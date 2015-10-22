@@ -69,14 +69,10 @@ app.use('/auth', social);
 app.use('/home', home);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function (req, res) {
     var err = new Error('Not Found');
     err.status = 404;
-    if(process.env.NODE_ENV)
-    {
-        res.render('error');
-    }
-    next(err);
+    res.render('error');
 });
 
 // error handlers
@@ -109,6 +105,7 @@ app.use(function (err, req, res) {
         status: err.status,
         stack: ''
     });
+
 });
 
 module.exports = app;

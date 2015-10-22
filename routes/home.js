@@ -17,14 +17,20 @@
  */
 
 var log;
-var time;
 var temp;
+var team;
+var cost;
+var squad;
+var stats;
+var fields;
+var players;
 var ref =
 {
     'users' : 1,
     'round2' : 2,
     'round3' : 3
 };
+var credentials;
 var path = require('path');
 var async = require('async');
 var match = process.env.MATCH;
@@ -44,7 +50,7 @@ if (process.env.LOGENTRIES_TOKEN)
 router.get('/', function (req, res) {
     if (req.signedCookies.name)
     {
-        var credentials =
+        credentials =
         {
             '_id': req.signedCookies.name
         };
@@ -62,24 +68,12 @@ router.get('/', function (req, res) {
                 {
                     res.redirect('/home/players');
                 }
+                else if(doc.squad.length === 0)
+                {
+                    res.redirect('/home/team');
+                }
                 else
                 {
-                    var getDetails = function (id, callback)
-                    {
-                        var player =
-                        {
-                            '_id': id
-                        };
-                        var fields =
-                        {
-                            _id: 1,
-                            Name: 1,
-                            Type: 1
-                        };
-
-                        mongoFeatures.getPlayer(id, fields, callback);
-                    };
-
                     var onFinish = function (err, documents)
                     {
                         if (err)
@@ -95,7 +89,7 @@ router.get('/', function (req, res) {
                         }
                     };
 
-                    async.map(doc.team, getDetails, onFinish);
+                    async.map(doc.team, mongoFeatures.getPlayer, onFinish);
                 }
             }
             else
@@ -114,7 +108,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
-    if (req.signedCookies.name && process.env.DAY >= '1')                           // if cookies exists then access the database
+    if ((req.signedCookies.name && process.env.DAY >= '1') || !process.env.NODE_ENV)                           // if cookies exists then access the database
     {
         var onFetch = function (err, documents)
         {
@@ -137,8 +131,13 @@ router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
 });
 
 router.get('/matches', function (req, res) {
-    if (req.signedCookies.name && process.env.LIVE === '1' && process.env.DAY >= '1')
+    if ((req.signedCookies.name && process.env.DAY >= '1'))
     {
+        credentials =
+        {
+            '_id' : req.signedCookies.name
+        };
+
         var onMap = function (err, num)
         {
             if (err)
@@ -163,7 +162,7 @@ router.get('/matches', function (req, res) {
             }
         };
 
-        mongoTeam.map({_id: req.signedCookies.name}, onMap);
+        mongoTeam.map(credentials, onMap);
     }
     else
     {
@@ -174,11 +173,11 @@ router.get('/matches', function (req, res) {
 router.post('/getsquad', function (req, res) {
     if (req.signedCookies.name)
     {
-        var credentials =
+        credentials =
         {
             '_id': req.signedCookies.name
         };
-        var squad = [];
+        squad = [];
 
         for (i = 1; i < 12; ++i)
         {
@@ -204,20 +203,22 @@ router.post('/getsquad', function (req, res) {
 });
 
 router.post('/getTeam', function (req, res) {
-    var players = [];
-    var stats = {};
-    var cost = 10000000;
-    var credentials =
+    stats = {};
+    players = [];
+    fields =
+    {
+        Cost: 1
+    };
+    cost = 10000000;
+    credentials =
     {
         _id: req.signedCookies.name
     };
 
-    for (i = 2; i < 17; ++i)
+    for (i = 1; i < 17; ++i)
     {
         players.push(req.body['p' + i]);
     }
-
-    players.push(req.body.p1);
 
     var onUpdate = function (err)
     {
@@ -233,15 +234,6 @@ router.post('/getTeam', function (req, res) {
 
     var getCost = function (id, callback)
     {
-        var fields =
-        {
-            _id: 1,
-            Name: 1,
-            Cost: 1,
-            Country: 1,
-            Type: 1
-        };
-
         if (id < 'd')
         {
             stats[id]         = {};
@@ -312,16 +304,14 @@ router.post('/getTeam', function (req, res) {
  res.render('sponsors');
  });*/
 
-router.get(/\/prizes?/, function (req, res) // page to view prizes
-{
+router.get(/\/prizes?/, function (req, res) {// page to view prizes
     res.render('prizes');
 });
 
-router.get('/players', function (req, res) // page for all players, only available if no squad has been chosen
-{
+router.get('/players', function (req, res) {// page for all players, only available if no squad has been chosen
     if (req.signedCookies.name)
     {
-        var doc =
+        credentials =
         {
             "_id": req.signedCookies.name
         };
@@ -358,7 +348,7 @@ router.get('/players', function (req, res) // page for all players, only availab
             }
         };
 
-        mongoUsers.fetchUser(doc, onFetchUser);
+        mongoUsers.fetchUser(credentials, onFetchUser);
     }
     else
     {
@@ -366,11 +356,10 @@ router.get('/players', function (req, res) // page for all players, only availab
     }
 });
 
-router.get('/team', function (req, res) // view the assigned playing 11 with options to change the playing 11
-{
+router.get('/team', function (req, res) {// view the assigned playing 11 with options to change the playing 11
     if (req.signedCookies.name)                           // if cookies exist, then access the database
     {
-        var credentials =
+        credentials =
         {
             '_id': req.signedCookies.name
         };
@@ -456,7 +445,7 @@ router.post('/feature', function (req, res) {
 router.get('/dashboard', function (req, res) {
     if (req.signedCookies.name && process.env.DAY >= '1')
     {
-        var user =
+        credentials =
         {
             _id: req.signedCookies.name
         };
@@ -474,7 +463,7 @@ router.get('/dashboard', function (req, res) {
             }
         };
 
-        mongoTeam.dashboard(user, onFind);
+        mongoTeam.dashboard(credentials, onFind);
     }
     else
     {

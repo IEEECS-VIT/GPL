@@ -62,11 +62,9 @@ mongo(mongoUri, function(err, database){
     {
         throw err;
     }
-    else
-    {
-        db = database;
-        server = app.listen(app.get('port'), onBind);
-    }
+
+    db = database;
+    server = app.listen(app.get('port'), onBind);
 });
 
 process.on('SIGINT', function(err){

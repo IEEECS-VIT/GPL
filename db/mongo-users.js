@@ -76,6 +76,7 @@ exports.getLeader = function (user, callback)
                 {
                     flag = true;
                     documents[i].rank = i + 1;
+
                     leaderboard.push(documents[i]);
                 }
                 else if (leaderboard.length < 10)
@@ -161,7 +162,7 @@ exports.forgotUser = function (doc, callback)
         }
     };
 
-    db.collection(match).find(doc, {_id: 1, authStrategy : 1}).toArray(onFetch);
+    db.collection(match).find(doc, {authStrategy : 1}).toArray(onFetch);
 };
 
 exports.getReset = function (doc, callback)
@@ -229,7 +230,8 @@ exports.resetPassword = function (token, hash, callback)
 
 exports.updateUserTeam = function (doc, team, stats, cost, callback)
 {
-    db.collection(match).findOneAndUpdate(doc, {
+    db.collection(match).findOneAndUpdate(doc,
+    {
         $set:
         {
             'team': team,
