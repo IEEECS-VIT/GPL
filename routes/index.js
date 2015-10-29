@@ -144,8 +144,7 @@ catch (err)
 
 if (process.env.LOGENTRIES_TOKEN)
 {
-    var logentries = require('node-logentries');
-    log = logentries.logger({token: process.env.LOGENTRIES_TOKEN});
+    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
 router.get('/', function (req, res) {
@@ -263,7 +262,6 @@ router.get('/login', function (req, res) {
 });
 
 router.post('/login', function (req, res) {
-    var password = req.body.password;
     credentials =
     {
         '_id': req.body.team.trim().toUpperCase(),
@@ -296,7 +294,7 @@ router.post('/login', function (req, res) {
         }
         else if (doc)
         {
-            if (bcrypt.compareSync(password, doc.password_hash))
+            if (bcrypt.compareSync(req.body.password, doc.password_hash))
             {
                 res.cookie(ref[doc.authStrategy][0], doc._id, {signed: true, maxAge: 86400000});
                 res.redirect(ref[doc.authStrategy][1]);
@@ -542,7 +540,6 @@ router.post('/register', function (req, res) {
             }
             else
             {
-                console.log("Incorrect Password");
                 res.render('register', {response: "Passwords do not match", csrfToken: req.csrfToken()});
             }
         }
@@ -576,7 +573,7 @@ router.get('/admin', function (req, res) {
             }
             else
             {
-                res.redirect('/');
+                res.redirect('/login');
             }
         };
 
@@ -584,7 +581,7 @@ router.get('/admin', function (req, res) {
     }
     else
     {
-        res.redirect('/');
+        res.redirect('/login');
     }
 });
 
@@ -655,7 +652,7 @@ router.get('/social/callback', function (req, res) {
     }
     else
     {
-        res.redirect('/');
+        res.redirect('/login');
     }
 });
 

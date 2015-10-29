@@ -92,7 +92,7 @@ exports.match = function (day, team, callback)
 
     if (day <= process.env.DAY)
     {
-        db.collection('matchday' + day).find(filter).limit(1).next(callback);
+        db.collection('matchday' + day).find(filter, {commentary : 1, scorecard : 1, count : 1}).limit(1).next(callback);
     }
     else
     {

@@ -62,7 +62,9 @@
                 <ul class="timeline" id="timeline<%=i + 1%>">
                     <%for(j = 0; j < obj[i].length; ++j) {%>
                         <li class="<%=ref[(k + 1) % 2]%>">
-                            <div class="timeline-badge <%=colour[k % colour.length]%>"><i class="glyphicon glyphicon-<%=icon[k++ % icon.length]%>"></i></div>
+                            <div class="timeline-badge <%=colour[k % colour.length]%>">
+                                <i class="glyphicon glyphicon-<%=icon[k++ % icon.length]%>"></i>
+                            </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h3 class="timeline-title">

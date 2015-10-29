@@ -18,12 +18,15 @@
 
 var express = require('express');
 var app = express();
+
 app.use(require('compression')());
+
 if(!process.env.NODE_ENV)
 {
     require('dotenv').load();
 }
 
+var log;
 var path = require('path');
 var csurf = require('csurf');
 var logger = require('morgan');
@@ -44,9 +47,7 @@ if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 
 if (process.env.LOGENTRIES_TOKEN)
 {
-    var log = require('node-logentries').logger({
-        token: process.env.LOGENTRIES_TOKEN
-    });
+    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
 app.use(logger(loggerLevel));

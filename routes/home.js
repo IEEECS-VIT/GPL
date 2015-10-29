@@ -16,6 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var i;
 var log;
 var temp;
 var team;
@@ -41,10 +42,7 @@ var mongoFeatures = require(path.join(__dirname, '..', 'db', 'mongo-features'));
 
 if (process.env.LOGENTRIES_TOKEN)
 {
-    var logentries = require('node-logentries');
-    log = logentries.logger({
-        token: process.env.LOGENTRIES_TOKEN
-    });
+    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
 router.get('/', function (req, res) {
@@ -103,12 +101,16 @@ router.get('/', function (req, res) {
     }
     else
     {
-        res.redirect('/');
+        res.redirect('/login');
     }
 });
 
-router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
-    if ((req.signedCookies.name && process.env.DAY >= '1') || !process.env.NODE_ENV)                           // if cookies exists then access the database
+router.get('/leaderboard', function (req, res) {
+    if(req.signedCookies.lead && req.signedCookies.day == process.env.DAY)
+    {
+        res.render("leaderboard", {leaderboard: JSON.parse(req.signedCookies.lead)});
+    }
+    else if ((req.signedCookies.name && process.env.DAY >= '1') || !process.env.NODE_ENV)                           // if cookies exists then access the database
     {
         var onFetch = function (err, documents)
         {
@@ -118,7 +120,9 @@ router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
             }
             else
             {
-                res.render("leaderboard", {leaderboard: documents, name: req.signedCookies.name});
+                res.cookie('day', process.env.DAY, {signed : true, maxAge : 86400000});
+                res.cookie('lead', JSON.stringify(documents), {signed : true, maxAge : 86400000});
+                res.render("leaderboard", {leaderboard: documents});
             }
         };
 
@@ -126,12 +130,12 @@ router.get('/leaderboard', function (req, res) {    // Leaderboard/Standings
     }
     else
     {
-        res.redirect("/");
+        res.redirect("/login");
     }
 });
 
 router.get('/matches', function (req, res) {
-    if ((req.signedCookies.name && process.env.DAY >= '1'))
+    if (req.signedCookies.name && process.env.DAY >= '1')
     {
         credentials =
         {
@@ -154,6 +158,7 @@ router.get('/matches', function (req, res) {
                     }
                     else
                     {
+                        res.cookie('day', process.env.DAY, {signed : true, maxAge : 86400000});
                         res.render('matches', {match: matches, day : (process.env.DAY - 1) || 0, round : ref[process.env.MATCH]});
                     }
                 };
@@ -198,7 +203,7 @@ router.post('/getsquad', function (req, res) {
     }
     else
     {
-        res.redirect('/');
+        res.redirect('/login');
     }
 });
 
@@ -352,7 +357,7 @@ router.get('/players', function (req, res) {// page for all players, only availa
     }
     else
     {
-        res.redirect("/");
+        res.redirect("/login");
     }
 });
 
@@ -381,12 +386,16 @@ router.get('/team', function (req, res) {// view the assigned playing 11 with op
     }
     else                                                        // if cookies do not exist, go to login page
     {
-        res.redirect('/');
+        res.redirect('/login');
     }
 });
 
 router.get('/stats', function (req, res) {
-    if (req.signedCookies.name && process.env.DAY >= '1')
+    if(req.signedCookies.stats && req.signedCookies.day == process.env.DAY)
+    {
+        res.render('stats', {stats : JSON.parse(req.signedCookies.stats)});
+    }
+    else if (req.signedCookies.name && process.env.DAY >= '1')
     {
         var onGetStats = function (err, doc)
         {
@@ -398,6 +407,8 @@ router.get('/stats', function (req, res) {
             else
             {
                 doc.overs = parseInt(doc.overs / 6) + '.' + (doc.overs % 6);
+                res.cookie('day', process.env.DAY, {signed : true, maxAge : 86400000});
+                res.cookie('stats', JSON.stringify(doc), {signed : true, maxAge : 86400000});
                 res.render('stats', {stats: doc});
             }
         };
@@ -406,7 +417,7 @@ router.get('/stats', function (req, res) {
     }
     else
     {
-        res.redirect('/');
+        res.redirect('/login');
     }
 });
 
@@ -417,7 +428,7 @@ router.get('/feature', function (req, res) {
     }
     else
     {
-        res.redirect('/');
+        res.redirect('/login');
     }
 });
 
@@ -438,12 +449,16 @@ router.post('/feature', function (req, res) {
     }
     else
     {
-        res.redirect('/');
+        res.redirect('/login');
     }
 });
 
 router.get('/dashboard', function (req, res) {
-    if (req.signedCookies.name && process.env.DAY >= '1')
+    if(req.signedCookies.dash && req.signedCookies.day == process.env.DAY)
+    {
+        res.render('dashboard', {result : JSON.parse(req.signedCookies.dash)});
+    }
+    else if (req.signedCookies.name && process.env.DAY >= '1')
     {
         credentials =
         {
@@ -459,6 +474,8 @@ router.get('/dashboard', function (req, res) {
             }
             else
             {
+                res.cookie('day', process.env.DAY, {signed : true, maxAge : 86400000});
+                res.cookie('dash', JSON.stringify(doc), {signed : true, maxAge : 86400000});
                 res.render('dashboard', {result: doc});
             }
         };
@@ -467,7 +484,18 @@ router.get('/dashboard', function (req, res) {
     }
     else
     {
-        res.redirect('/');
+        res.redirect('/login');
+    }
+});
+
+router.get('/settings', function(req, res){
+    if(req.signedCookies.name)
+    {
+        res.render('settings', {csrfToken : req.csrfToken()});
+    }
+    else
+    {
+        res.redirect('/login');
     }
 });
 

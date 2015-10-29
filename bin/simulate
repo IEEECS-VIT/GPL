@@ -26,6 +26,7 @@ var simulationControl = require(path.join(__dirname, '..', 'worker', 'simulation
 if (process.argv.length < 3)
 {
     console.log('Using application environment variable');
+
     if(process.env.DAY)
     {
         day = parseInt(process.env.DAY);
@@ -49,9 +50,11 @@ mongo(mongoUri, function(err, database){
     else
     {
         db = database;
+
         simulationControl.initSimulation(day, function (){
             console.log('Simulation of Matches for Day ' + day + ' is complete');
-            if(day == 7)
+
+            if(day == 7 && process.env.MATCH !== 'round3')
             {
                 mongoTeam.shortList(function(err, result){
                     if(err)
@@ -60,6 +63,7 @@ mongo(mongoUri, function(err, database){
                     }
                 });
             }
+
             db.close();
             process.exit(0);
         });
