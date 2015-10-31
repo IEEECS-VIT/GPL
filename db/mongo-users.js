@@ -41,10 +41,7 @@ var mongoFeatures = require(path.join(__dirname, 'mongo-features.js'));
 
 if (process.env.LOGENTRIES_TOKEN)
 {
-    var logentries = require('node-logentries');
-    log = logentries.logger({
-        token: process.env.LOGENTRIES_TOKEN
-    });
+    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
 exports.getCount = function (query, callback)

@@ -180,7 +180,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/interest', function (req, res) {
-    if(process.env.LIVE === '0')
+    if(process.env.LIVE === '0' || !process.env.NODE_ENV)
     {
         res.render('interest', {csrfToken: req.csrfToken()});
     }

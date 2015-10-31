@@ -129,7 +129,7 @@ exports.getPlayer = function (id, fields, callback)
         "_id" : id
     };
 
-    if(typeof fields == 'function')
+    if(typeof fields === 'function')
     {
         callback = fields;
         fields =
