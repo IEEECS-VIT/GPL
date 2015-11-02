@@ -25,6 +25,7 @@ var onSave = function(err)
     {
         return callback(err);
     }
+
     return callback(null, user);
 };
 var match = process.env.MATCH;
@@ -60,63 +61,48 @@ passport.use(new facebook({
         callback = done;
 
         process.nextTick(function () {
-            if (!req.signedCookies.name)
-            {
-                mongoUsers.fetchUser({'_id': req.signedCookies.team}, function (err, doc) {
-                    if (err)
+            mongoUsers.fetchUser({'_id': req.signedCookies.team}, function (err, doc) {
+                if (err)
+                {
+                    return done(err);
+                }
+                if (doc && doc.authStrategy === 'facebook' && profile.id === doc.profile)
+                {
+                    return done(null, doc); // user found, return that user
+                }
+                else if(req.signedCookies.email && req.signedCookies.phone)// if there is no user, create them
+                {
+                    var onGetCount = function (err, number)
                     {
-                        return done(err);
-                    }
-                    if (doc && doc.authStrategy === 'facebook' && profile.id === doc.profile)
-                    {
-                        return done(null, doc); // user found, return that user
-                    }
-                    else if(req.signedCookies.email && req.signedCookies.phone)// if there is no user, create them
-                    {
-                        var onGetCount = function (err, number)
+                        if (err)
                         {
-                            if (err)
-                            {
-                                console.log(err.message);
-                            }
-                            else
-                            {
-                                user = record;
-                                user.dob = new Date();
-                                delete user.password_hash;
-                                user._id = req.signedCookies.team;
-                                user.token = token;
-                                user.profile = profile.id;
-                                user.authStrategy = 'facebook';
-                                user.team_no = parseInt(number) + 1;
-                                user.email = req.signedCookies.email;
-                                user.phone = req.signedCookies.phone;
-                                user.manager_name = profile.name.givenName + ' ' + profile.name.familyName;
+                            return done(err);
+                        }
+                        else
+                        {
+                            user = record;
+                            user.dob = new Date();
+                            delete user.password_hash;
+                            user._id = req.signedCookies.team;
+                            user.token = token;
+                            user.profile = profile.id;
+                            user.authStrategy = 'facebook';
+                            user.team_no = parseInt(number) + 1;
+                            user.email = req.signedCookies.email;
+                            user.phone = req.signedCookies.phone;
+                            user.manager_name = profile.name.givenName + ' ' + profile.name.familyName;
 
-                                mongoUsers.save(user, onSave);
-                            }
-                        };
+                            mongoUsers.save(user, onSave);
+                        }
+                    };
 
-                        mongoUsers.getCount({authStrategy : {$ne : 'admin'}}, onGetCount);
-                    }
-                    else
-                    {
-                        return done(err);
-                    }
-                });
-            }
-            else
-            {
-                user = req.user; // pull the user out of the session
-                user._id = req.signedCookies.name;
-                user.token = token;
-                user.profile = profile.id;
-                user.email = req.signedCookies.email;
-                user.phone = req.signedCookies.phone;
-                user.manager_name = profile.name.givenName + ' ' + profile.name.familyName;
-
-                mongoUsers.save(user, onSave);
-            }
+                    mongoUsers.getCount({authStrategy : {$ne : 'admin'}}, onGetCount);
+                }
+                else
+                {
+                    return done(err);
+                }
+            });
         });
     }));
 
@@ -130,63 +116,48 @@ passport.use(new twitter({
         callback = done;
 
         process.nextTick(function () {
-            if (!req.signedCookies.name)
-            {
-                mongoUsers.fetchUser({'_id': req.signedCookies.team}, function (err, doc) {
-                    if (err)
+            mongoUsers.fetchUser({'_id': req.signedCookies.team}, function (err, doc) {
+                if (err)
+                {
+                    return done(err);
+                }
+                if (doc && doc.authStrategy === 'twitter' && profile.id === doc.profile)
+                {
+                    return done(null, doc); // user found, return that user
+                }
+                else if(req.signedCookies.email && req.signedCookies.phone)
+                {
+                    var onGetCount = function (err, number)
                     {
-                        return done(err);
-                    }
-                    if (doc && doc.authStrategy === 'twitter' && profile.id === doc.profile)
-                    {
-                        return done(null, doc); // user found, return that user
-                    }
-                    else if(req.signedCookies.email && req.signedCookies.phone)
-                    {
-                        var onGetCount = function (err, number)
+                        if (err)
                         {
-                            if (err)
-                            {
-                                console.log(err.message);
-                            }
-                            else
-                            {
-                                user = record;
-                                user.dob = new Date();
-                                delete user.password_hash;
-                                user._id = req.signedCookies.team;
-                                user.token = token;
-                                user.authStrategy = 'twitter';
-                                user.profile = profile.id;
-                                user.team_no = parseInt(number) + 1;
-                                user.manager_name = profile.displayName;
-                                user.phone = req.signedCookies.phone;
-                                user.email = req.signedCookies.email;
+                            return done(err);
+                        }
+                        else
+                        {
+                            user = record;
+                            user.dob = new Date();
+                            delete user.password_hash;
+                            user._id = req.signedCookies.team;
+                            user.token = token;
+                            user.authStrategy = 'twitter';
+                            user.profile = profile.id;
+                            user.team_no = parseInt(number) + 1;
+                            user.manager_name = profile.displayName;
+                            user.phone = req.signedCookies.phone;
+                            user.email = req.signedCookies.email;
 
-                                mongoUsers.save(user, onSave);
-                            }
-                        };
+                            mongoUsers.save(user, onSave);
+                        }
+                    };
 
-                        mongoUsers.getCount({authStrategy : {$ne : 'admin'}}, onGetCount);
-                    }
-                    else
-                    {
-                        return done(err);
-                    }
-                });
-            }
-            else
-            {
-                user = req.user; // pull the user out of the session
-                user._id = req.signedCookies.team;
-                user.token = token;
-                user.profile = profile.id;
-                user.manager_name = profile.displayName;
-                user.email = req.signedCookies.email;
-                user.phone = req.signedCookies.phone;
-
-                mongoUsers.save(user, onSave);
-            }
+                    mongoUsers.getCount({authStrategy : {$ne : 'admin'}}, onGetCount);
+                }
+                else
+                {
+                    return done(err);
+                }
+            });
         });
     }));
 
@@ -200,63 +171,47 @@ passport.use(new google({
         callback = done;
 
         process.nextTick(function () {
-            if (!req.signedCookies.name)
-            {
-                mongoUsers.fetchUser({'_id': req.signedCookies.team}, function (err, doc) {
-                    if (err)
+            mongoUsers.fetchUser({'_id': req.signedCookies.team}, function (err, doc) {
+                if (err)
+                {
+                    return done(err);
+                }
+                if (doc && doc.authStrategy === 'google' && profile.id === doc.profile)
+                {
+                    return done(null, doc);
+                }
+                else if(req.signedCookies.email && req.signedCookies.phone)
+                {
+                    var onGetCount = function (err, number)
                     {
-                        console.log('err');
-                        return done(err);
-                    }
-                    if (doc && doc.authStrategy === 'google' && profile.id === doc.profile)
-                    {
-                        return done(null, doc);
-                    }
-                    else if(req.signedCookies.email && req.signedCookies.phone)
-                    {
-                        var onGetCount = function (err, number)
+                        if (err)
                         {
-                            if (err)
-                            {
-                                console.log(err.message);
-                            }
-                            else
-                            {
-                                user = record;
-                                user.dob = new Date();
-                                delete user.password_hash;
-                                user._id = req.signedCookies.team;
-                                user.token = token;
-                                user.authStrategy = 'google';
-                                user.profile = profile.id;
-                                user.team_no = parseInt(number) + 1;
-                                user.manager_name = profile.displayName;
-                                user.phone = req.signedCookies.phone;
-                                user.email = req.signedCookies.email;
+                            return done(err);
+                        }
+                        else
+                        {
+                            user = record;
+                            user.dob = new Date();
+                            delete user.password_hash;
+                            user._id = req.signedCookies.team;
+                            user.token = token;
+                            user.authStrategy = 'google';
+                            user.profile = profile.id;
+                            user.team_no = parseInt(number) + 1;
+                            user.manager_name = profile.displayName;
+                            user.phone = req.signedCookies.phone;
+                            user.email = req.signedCookies.email;
 
-                                mongoUsers.save(user, onSave);
-                            }
-                        };
+                            mongoUsers.save(user, onSave);
+                        }
+                    };
 
-                        mongoUsers.getCount({authStrategy : {$ne : 'admin'}}, onGetCount);
-                    }
-                    else
-                    {
-                        return done(err);
-                    }
-                });
-            }
-            else
-            {
-                user = req.user; // pull the user out of the session
-                user._id = req.signedCookies.team;
-                user.token = token;
-                user.profile = profile.id;
-                user.manager_name = profile.displayName;
-                user.email = req.signedCookies.email;
-                user.phone = req.signedCookies.phone;
-
-                mongoUsers.save(user, onSave);
-            }
+                    mongoUsers.getCount({authStrategy : {$ne : 'admin'}}, onGetCount);
+                }
+                else
+                {
+                    return done(err);
+                }
+            });
         });
     }));

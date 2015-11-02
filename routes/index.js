@@ -290,7 +290,7 @@ router.post('/login', function (req, res) {
         if (err)
         {
             console.log(err.message);
-            res.render('index', {response: "Incorrect credentials!"});
+            res.render('login', {response: "Incorrect credentials!"});
         }
         else if (doc)
         {
@@ -301,12 +301,12 @@ router.post('/login', function (req, res) {
             }
             else
             {
-                res.render('index', {response: "Incorrect credentials!"});
+                res.render('login', {response: "Incorrect credentials!"});
             }
         }
         else
         {
-            res.render('index', {response: "Incorrect credentials!"});
+            res.render('login', {response: "Incorrect credentials!"});
         }
     };
 
@@ -471,9 +471,9 @@ router.post('/forgot/user', function (req, res) {
 });
 
 router.get('/register', function (req, res) {
-    if(process.env.DAY >= '1' && process.env.NODE_ENV && process.env.MATCH == 'users')
+    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH == 'users' && process.env.LIVE === '1'))
     {
-        res.redirect('/login');
+        res.render('register', {response: "", csrfToken: req.csrfToken()});
     }
     else if (req.signedCookies.name)
     {
@@ -481,7 +481,7 @@ router.get('/register', function (req, res) {
     }
     else
     {
-        res.render('register', {response: "", csrfToken: req.csrfToken()});
+        res.redirect('/login');
     }
 });
 
@@ -536,7 +536,7 @@ router.post('/register', function (req, res) {
                     }
                 };
 
-                mongoUsers.insert('users', newUser, onInsert);
+                mongoUsers.insert(process.env.MATCH, newUser, onInsert);
             }
             else
             {
@@ -602,9 +602,9 @@ router.post('/social/login', function (req, res) {
 });
 
 router.get('/social/register', function (req, res) {
-    if(process.env.DAY >= 1 && process.env.NODE_ENV)
+    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users' && process.env.LIVE === '1'))
     {
-        res.redirect('/login');
+        res.render('social', {mode: +!req.signedCookies.team, type : 'register', csrfToken : req.csrfToken()});
     }
     else if (req.signedCookies.name)
     {
@@ -612,7 +612,7 @@ router.get('/social/register', function (req, res) {
     }
     else
     {
-        res.render('social', {mode: +!req.signedCookies.team, type : 'register', csrfToken : req.csrfToken()});
+        res.redirect('/login');
     }
 });
 
@@ -679,7 +679,7 @@ router.get('/simulate', function (req, res) {
         mongoFeatures.simulate(onSimulate);*/
     }
 
-    res.redirect('/');
+    res.redirect('/admin');
 });
 
 router.get('/rules', function (req, res) {

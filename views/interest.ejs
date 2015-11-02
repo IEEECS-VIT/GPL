@@ -25,11 +25,9 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script async type="text/javascript" src="/bower/bootstrap/dist/js/bootstrap.min.js"></script>
         <link type="text/css" rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap.min.css"/>
         <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
         <link type="text/css" rel="stylesheet" href="/stylesheets/interest.css"/>
-        <script async src="/javascript/int.js"></script>
         <link rel="stylesheet" href="/stylesheets/main.css">
     </head>
     <body id="interest">
@@ -39,7 +37,7 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <a href="http://www.facebook.com/ieeecsvit" target="_blank">
-                                <img src="images/logo_nbg.png" class="img-responsive pull-left padding-2 centered margin-top-4">
+                                <img src="http://res.cloudinary.com/gpl/general/logo_nbg.png" class="img-responsive pull-left padding-2 centered margin-top-4">
                             </a>
                         </div>
                         <div class="col-xs-4">
@@ -49,7 +47,7 @@
                         </div>
                         <div class="col-xs-4">
                             <a href="http://www.vitgravitas.com" target="_blank">
-                                <img src="/images/gravitas'15.png" class="img-responsive padding-2 pull-right margin-top-4">
+                                <img src="http://res.cloudinary.com/gpl/general/gravitas_15.png" class="img-responsive padding-2 pull-right margin-top-4">
                             </a>
                         </div>
                     </div>
@@ -62,31 +60,29 @@
                         <form name="int" action="/interest" method="post">
                             <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
                             <div class="form-group">
-                                <label for="team">Name:<i
-                                            style="color:red;">*</i> </label>
-                                <input type="text" id="team" class="form-control" placeholder="Name" name="name"/>
+                                <label for="team">Name:<i style="color:red;">*</i> </label>
+                                <input type="text" id="team" class="form-control" placeholder="Name" name="name"
+                                       required autofocus/>
                             </div>
                             <div class="form-group">
                                 <label for="team">Registration Number: (VIT Students Only)</label>
-                                <input type="text" id="team" class="form-control"
-                                       value="NA" name="regno"/>
+                                <input type="text" id="team" class="form-control" value="NA" name="regno"
+                                       pattern="1[3-6]\w{3}\d{4}"/>
                             </div>
                             <!--Username/Team Name -->
                             <div class="form-group">
                                 <label for="mob">Mobile:<i style="color:red;">*</i> </label>
-                                <input type="tel" id="mob" class="form-control" placeholder="9876543210" name="phone"/>
+                                <input type="tel" id="mob" class="form-control" placeholder="9876543210" name="phone"
+                                       required pattern="\d{10}"/>
                             </div>
                             <!-- password-->
                             <div class="form-group">
-                                <label for="email">Email:<i
-                                            style="color:red;">*</i> </label>
+                                <label for="email">Email:<i style="color:red;">*</i> </label>
                                 <input type="email" id="email" class="form-control" placeholder="example@domain.com"
-                                       name="email"/>
+                                       name="email" required/>
                             </div>
-                            <input type="submit" id="button" class="btn btn-primary btn-lg centered"
-                                   name="button"
-                                   value="Submit"
-                                   onclick="valid()"/>
+                            <input type="submit" id="button" class="btn btn-primary btn-lg centered" name="button"
+                                   value="Submit"/>
                         </form>
                     </div>
                 </div>

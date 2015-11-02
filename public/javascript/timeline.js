@@ -15,6 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 $(document).ready(function () {
     $(".timeline").hide();
     $("#head1").on("click", function () {

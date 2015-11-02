@@ -36,11 +36,13 @@ router.get('/twitter/callback', passport.authenticate('twitter', {
 }));
 
 router.get('/google', passport.authenticate('google', {
-    scope: [
-        'https://www.googleapis.com/auth/userinfo.profile',
-        'https://www.googleapis.com/auth/userinfo.email'
-    ]
-}));
+        scope:
+        [
+            'https://www.googleapis.com/auth/userinfo.profile',
+            'https://www.googleapis.com/auth/userinfo.email'
+        ]
+    }
+));
 
 router.get('/google/callback', passport.authenticate('google', {
     successRedirect: '/social/callback',

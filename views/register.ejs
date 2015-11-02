@@ -25,6 +25,7 @@
         <link type="text/css" rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="/stylesheets/main.css">
         <link type="text/css" rel="stylesheet" href="/stylesheets/register.css"/>
+        <script lang="javascript" type="text/javascript" src="/javascript/valid.js"></script>
     </head>
     <body>
         <div id="gplheader" class="page-title hidden-xs hidden-md hidden-sm">
@@ -49,12 +50,12 @@
                         <small class="omb_authTitle">Register with one of your social accounts <a
                                     href="/social/register">here</a></small>
                     </h1>
-                    <form name="register" action="/register" method="post">
+                    <form name="register" action="/register" method="post" onsubmit="">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
                         <div class="form-group">
                             <label for="team">Team Name: </label>
-                            <input type="text" id="team" placeholder="Team Name" class="form-control" name="team_name"
-                                   required/>
+                            <input type="text" placeholder="Team Name" class="form-control" name="team_name"
+                                   required autofocus/>
                         </div>
                         <div class="form-group">
                             <label for="pass">Password: </label>
@@ -68,21 +69,20 @@
                         </div>
                         <div class="form-group">
                             <label for="manager">Manager Name: </label>
-                            <input type="text" id="manager" placeholder="Manager Name" class="form-control"
+                            <input type="text" placeholder="Manager Name" class="form-control"
                                    name="manager_name" required/>
                         </div>
                         <div class="form-group">
                             <label for="email">Email: </label>
-                            <input type="email" id="email" placeholder="username@domain.com" class="form-control" name="email"
+                            <input type="email" placeholder="username@domain.com" class="form-control" name="email"
                                    required/>
                         </div>
                         <div class="form-group">
                             <label for="mobile">Mobile Number: </label>
-                            <input type="text" id="mobile" placeholder="Mobile Number" class="form-control" name="phone"
-                                   required/>
+                            <input type="text" placeholder="Mobile Number" class="form-control" name="phone"
+                                   required pattern="\d{10}"/>
                         </div>
-                        <input type="submit" id="button" class="btn btn-primary btn-lg centered" name="button" value="Submit"
-                               onclick="validator()" required/>
+                        <input type="submit" class="btn btn-primary btn-lg centered" value="Submit"/>
                     </form>
                 </div>
             </div>
