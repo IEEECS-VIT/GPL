@@ -180,7 +180,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/interest', function (req, res) {
-    if(process.env.LIVE === '0' || !process.env.NODE_ENV)
+    if(process.env.LIVE === '0' || !process.env.NODE_ENV || req.signedCookies.admin)
     {
         res.render('interest', {csrfToken: req.csrfToken()});
     }
@@ -244,7 +244,6 @@ router.post('/interest', function (req, res) // interest form
 
 router.get('/login', function (req, res) {
     res.clearCookie('team', {});
-    res.clearCookie('email', {});
     res.clearCookie('phone', {});
 
     if(req.signedCookies.name)
@@ -398,7 +397,6 @@ router.post('/reset/:token', function (req, res) {
             }
             else if (!doc)
             {
-                console.log('No matches found!');
                 res.redirect('/forgot');
             }
             else
@@ -467,6 +465,7 @@ router.post('/forgot/user', function (req, res) {
             res.redirect('/forgot/user');
         }
     };
+
     mongoUsers.forgotUser(credentials, onFetch);
 });
 
@@ -550,7 +549,6 @@ router.post('/register', function (req, res) {
 
 router.get('/logout', function (req, res) {
     res.clearCookie('team', {});
-    res.clearCookie('email', {});
     res.clearCookie('phone', {});
     res.clearCookie('admin', {});
     res.clearCookie('name', {});
@@ -619,7 +617,6 @@ router.get('/social/register', function (req, res) {
 router.post('/social/register', function (req, res) {
     res.cookie('team', req.body.team.trim().toUpperCase(), {signed : true});
     res.cookie('phone', req.body.phone, {signed : true});
-    res.cookie('email', req.body.email, {signed : true});
     res.redirect('/social/register');
 });
 
@@ -627,28 +624,20 @@ router.get('/social/callback', function (req, res) {
     if (req.signedCookies.team)
     {
         res.cookie('name', req.user._id, {maxAge: 86400000, signed: true});
-        delete req.user;
         res.clearCookie('team', {});
         res.clearCookie('phone', {});
 
-        if(req.signedCookies.email)
-        {
-            register.header.to = req.signedCookies.email;
-            res.clearCookie('email', {});
+        register.header.to = req.user.email;
+        delete req.user;
 
-            email.send(register, function (err) {
-                if (err)
-                {
-                    console.log(err.message);
-                }
+        email.send(register, function (err) {
+            if (err)
+            {
+                console.log(err.message);
+            }
 
-                res.redirect('/home/players');
-            });
-        }
-        else
-        {
             res.redirect('/home/players');
-        }
+        });
     }
     else
     {
@@ -657,7 +646,6 @@ router.get('/social/callback', function (req, res) {
 });
 
 router.get(/\/developers?/, function (req, res) {
-
     res.render('developers', {obj : developers});
 });
 
@@ -677,9 +665,12 @@ router.get('/simulate', function (req, res) {
             }
         };
         mongoFeatures.simulate(onSimulate);*/
+        res.redirect('/admin');
     }
-
-    res.redirect('/admin');
+    else
+    {
+        res.redirect('/login');
+    }
 });
 
 router.get('/rules', function (req, res) {
@@ -690,13 +681,11 @@ router.get('/privacy', function (req, res) {
     res.render('privacy', {session : +!req.signedCookies.name});
 });
 
-router.get('/trailer', function (req, res) // trailer page
-{
+router.get('/trailer', function (req, res) {// trailer page
     res.render('trailer');
 });
 
-router.get('/schedule', function (req, res) // schedule page
-{
+router.get('/schedule', function (req, res) { // schedule page
     res.redirect('/');
 });
 

@@ -27,6 +27,7 @@ if(!process.env.NODE_ENV)
 }
 
 var log;
+var error;
 var status;
 var path = require('path');
 var csurf = require('csurf');
@@ -85,13 +86,24 @@ app.use(function (err, req, res, next) {
     }
 
     status = err.status || 500;
+    error =
+    {
+        status: status
+    };
+
+    if(process.env.NODE_ENV)
+    {
+        error.message = '';
+        error.stack =  '';
+    }
+    else
+    {
+        error.message = err.message;
+        error.stack =  err.stack;
+    }
 
     res.status(status);
-    res.render('error', {
-        message: err.message,
-        status: status,
-        stack: process.env.NODE_ENV ? '' : err.stack
-    });
+    res.render('error', error);
 });
 
 module.exports = app;

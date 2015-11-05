@@ -28,12 +28,14 @@ router.get('/facebook/callback', passport.authenticate('facebook', {
     failureRedirect: '/login'
 }));
 
+/*
 router.get('/twitter', passport.authenticate('twitter', {scope: 'email'}));
 
 router.get('/twitter/callback', passport.authenticate('twitter', {
     successRedirect: '/social/callback',
     failureRedirect: '/login'
 }));
+*/
 
 router.get('/google', passport.authenticate('google', {
         scope:

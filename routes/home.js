@@ -166,7 +166,7 @@ router.get('/matches', authenticated, function (req, res) {
                     else
                     {
                         res.cookie('day', process.env.DAY, {signed : true, maxAge : 86400000});
-                        res.render('matches', {match: matches, day : (process.env.DAY - 1) || 0, round : ref[process.env.MATCH]});
+                        res.render('matches', {match: matches || [], day : (process.env.DAY - 1) || 0, round : ref[process.env.MATCH]});
                     }
                 };
 
@@ -396,7 +396,7 @@ router.get('/stats', authenticated, function (req, res) {
             if (err)
             {
                 console.log(err.message);
-                res.redirect('/');
+                res.redirect('/home');
             }
             else
             {
@@ -408,6 +408,10 @@ router.get('/stats', authenticated, function (req, res) {
         };
 
         mongoFeatures.getStats(onGetStats);
+    }
+    else
+    {
+        res.redirect('/home');
     }
 });
 
@@ -457,6 +461,10 @@ router.get('/dashboard', authenticated, function (req, res) {
         };
 
         mongoTeam.dashboard(credentials, onFind);
+    }
+    else
+    {
+        res.redirect('/home');
     }
 });
 

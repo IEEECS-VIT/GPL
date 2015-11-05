@@ -64,15 +64,13 @@
                             <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                             <div class="form-group">
                                 <label for="Name" class="col-md-3 control-label email"><%=(mode == 'user') ? 'Phone' : 'Team'%></label>
-
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" id="team" placeholder="<%=(mode == 'user') ? 'Phone' : 'Team Name'%>"
-                                           name="<%=(mode == 'user') ? 'phone' : 'team'%>" required>
+                                           name="<%=(mode == 'user') ? 'phone' : 'team'%>" required autofocus>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-md-3 control-label email">Email</label>
-
                                 <div class="col-md-9">
                                     <input type="email" class="form-control" id="inputEmail3" placeholder="Email" name="email"
                                            required>

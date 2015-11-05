@@ -28,7 +28,6 @@ var onSave = function(err)
 
     return callback(null, user);
 };
-var match = process.env.MATCH;
 var ref =
 {
     'production' : 'http://gravitaspremierleague.com/auth/',
@@ -36,7 +35,7 @@ var ref =
     undefined : 'http://localhost:3000/auth/'
 };
 var passport = require('passport');
-var twitter = require('passport-twitter').Strategy;
+//var twitter = require('passport-twitter').Strategy;
 var facebook = require('passport-facebook').Strategy;
 var google = require('passport-google-oauth').OAuth2Strategy;
 var record = require(path.join(__dirname, 'mongo-record.js'));
@@ -70,7 +69,7 @@ passport.use(new facebook({
                 {
                     return done(null, doc); // user found, return that user
                 }
-                else if(req.signedCookies.email && req.signedCookies.phone)// if there is no user, create them
+                else if(req.signedCookies.phone)// if there is no user, create them
                 {
                     var onGetCount = function (err, number)
                     {
@@ -86,9 +85,9 @@ passport.use(new facebook({
                             user._id = req.signedCookies.team;
                             user.token = token;
                             user.profile = profile.id;
-                            user.authStrategy = 'facebook';
+                            user.authStrategy = profile.provider;
                             user.team_no = parseInt(number) + 1;
-                            user.email = req.signedCookies.email;
+                            user.email = profile.emails[0].value;
                             user.phone = req.signedCookies.phone;
                             user.manager_name = profile.name.givenName + ' ' + profile.name.familyName;
 
@@ -106,6 +105,63 @@ passport.use(new facebook({
         });
     }));
 
+
+passport.use(new google({
+        clientID: process.env.GOOGLE_ID,
+        clientSecret: process.env.GOOGLE_KEY,
+        callbackURL: ref[process.env.NODE_ENV] + 'google/callback',
+        passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+    },
+    function (req, token, refreshToken, profile, done) {
+        callback = done;
+
+        process.nextTick(function () {
+            mongoUsers.fetchUser({'_id': req.signedCookies.team}, function (err, doc) {
+                if (err)
+                {
+                    return done(err);
+                }
+                if (doc && doc.authStrategy === 'google' && profile.id === doc.profile)
+                {
+                    return done(null, doc);
+                }
+                else if(req.signedCookies.phone)
+                {
+                    var onGetCount = function (err, number)
+                    {
+                        if (err)
+                        {
+                            return done(err);
+                        }
+                        else
+                        {
+                            user = record;
+                            user.dob = new Date();
+                            delete user.password_hash;
+                            user._id = req.signedCookies.team;
+                            user.token = token;
+                            user.authStrategy = profile.provider;
+                            user.profile = profile.id;
+                            user.team_no = parseInt(number) + 1;
+                            user.manager_name = profile.displayName;
+                            user.phone = req.signedCookies.phone;
+                            user.email = profile.emails[0].value;
+
+                            mongoUsers.save(user, onSave);
+                        }
+                    };
+
+                    mongoUsers.getCount({authStrategy : {$ne : 'admin'}}, onGetCount);
+                }
+                else
+                {
+                    return done(err);
+                }
+            });
+        });
+    }));
+
+/*
 passport.use(new twitter({
         consumerKey: process.env.TWITTER_ID,
         consumerSecret: process.env.TWITTER_KEY,
@@ -114,7 +170,7 @@ passport.use(new twitter({
     },
     function (req, token, tokenSecret, profile, done) {
         callback = done;
-
+        console.log(profile._json.status.entities.urls[0].indices, profile._json.status.entities.urls[1].indices); console.log(profile._json.entities.url.urls[0].indices);
         process.nextTick(function () {
             mongoUsers.fetchUser({'_id': req.signedCookies.team}, function (err, doc) {
                 if (err)
@@ -160,58 +216,4 @@ passport.use(new twitter({
             });
         });
     }));
-
-passport.use(new google({
-        clientID: process.env.GOOGLE_ID,
-        clientSecret: process.env.GOOGLE_KEY,
-        callbackURL: ref[process.env.NODE_ENV] + 'google/callback',
-        passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
-    },
-    function (req, token, refreshToken, profile, done) {
-        callback = done;
-
-        process.nextTick(function () {
-            mongoUsers.fetchUser({'_id': req.signedCookies.team}, function (err, doc) {
-                if (err)
-                {
-                    return done(err);
-                }
-                if (doc && doc.authStrategy === 'google' && profile.id === doc.profile)
-                {
-                    return done(null, doc);
-                }
-                else if(req.signedCookies.email && req.signedCookies.phone)
-                {
-                    var onGetCount = function (err, number)
-                    {
-                        if (err)
-                        {
-                            return done(err);
-                        }
-                        else
-                        {
-                            user = record;
-                            user.dob = new Date();
-                            delete user.password_hash;
-                            user._id = req.signedCookies.team;
-                            user.token = token;
-                            user.authStrategy = 'google';
-                            user.profile = profile.id;
-                            user.team_no = parseInt(number) + 1;
-                            user.manager_name = profile.displayName;
-                            user.phone = req.signedCookies.phone;
-                            user.email = req.signedCookies.email;
-
-                            mongoUsers.save(user, onSave);
-                        }
-                    };
-
-                    mongoUsers.getCount({authStrategy : {$ne : 'admin'}}, onGetCount);
-                }
-                else
-                {
-                    return done(err);
-                }
-            });
-        });
-    }));
+*/

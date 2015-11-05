@@ -83,79 +83,39 @@
                                     <label for="teamName">Phone Number</label>
                                     <input type="text" class="form-control" name="phone" id="phoneNumber" placeholder="Phone Number" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="emailId">Email address</label>
-                                    <input type="text" class="form-control" name="email" id="emailId" placeholder="Email address" required>
-                                </div>
                             <%}%>
                             <button type="submit" class="btn btn-lg btn-default btn-primary centered">Submit</button>
                         </form>
                     </div>
                 </div>
             <% } else { %>
-                <%if(type === 'register') {%>
-                    <h1>
-                        <small>Register with any one of your social accounts</small>
-                    </h1>
-                    <div class="row">
-                        <div class="col-xs-12">
-                                <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-
-                            <div class="row row-sm-offset-3 ">
-                                <div class="col-xs-3 col-sm-4">
-                                    <a href="/auth/facebook" class="btn btn-lg btn-default fb">
-                                        <i class="fa fa-facebook pull-left "></i>
-                                            <span class="hidden-xs">Facebook</span>
-                                        </a>
-                                    </div>
-                                <div class="col-xs-3 col-sm-4">
-                                    <a href="/auth/twitter" class="btn btn-lg btn-default twitter">
-                                        <i class="fa fa-twitter pull-left"></i>
-                                            <span class="hidden-xs">Twitter</span>
-                                        </a>
-                                    </div>
-                                <div class="col-xs-3 col-sm-4">
-                                    <a href="/auth/google" class="btn btn-lg btn-default google-plus">
-                                        <i class="fa fa-google-plus pull-left"></i>
-                                        <span class="hidden-xs">Google+</span>
-                                        </a>
-                                    </div>
-                                </div>
+                <h1>
+                    <small>
+                        <%if(type === 'register') {%>
+                            Register with any one of your social accounts
+                        <%} else {%>
+                            Login with the account that you used while registering
+                        <%}%>
+                    </small>
+                </h1>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row row-sm-offset-3 ">
+                            <div class="col-xs-3 col-sm-4">
+                                <a href="/auth/facebook" class="btn btn-lg btn-default fb">
+                                    <i class="fa fa-facebook pull-left "></i>
+                                        <span class="hidden-xs">Facebook</span>
+                                </a>
+                            </div>
+                            <div class="col-xs-3 col-sm-4">
+                                <a href="/auth/google" class="btn btn-lg btn-default google-plus">
+                                    <i class="fa fa-google-plus pull-left"></i>
+                                    <span class="hidden-xs">Google+</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                <%} else {%>
-                    <h1>
-                        <small>Login with the account that you used while registering</small>
-                    </h1>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <form class="form-horizontal" method="post" action="/social/login">
-                                <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-
-                                <div class="row row-sm-offset-3 ">
-                                    <div class="col-xs-3 col-sm-4">
-                                        <a href="/auth/facebook" class="btn btn-lg btn-default fb">
-                                            <i class="fa fa-facebook pull-left"></i>
-                                            <span class="hidden-xs">Facebook</span>
-                                        </a>
-                                    </div>
-                                    <div class="col-xs-3 col-sm-4">
-                                        <a href="/auth/twitter" class="btn btn-lg btn-default twitter">
-                                            <i class="fa fa-twitter pull-left"></i>
-                                            <span class="hidden-xs">Twitter</span>
-                                        </a>
-                                    </div>
-                                    <div class="col-xs-3 col-sm-4">
-                                        <a href="/auth/google" class="btn btn-lg btn-default google-plus">
-                                            <i class="fa fa-google pull-left"></i>
-                                            <span class="hidden-xs">Google</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                <% } %>
+                </div>
             <% } %>
         </div>
             </div>

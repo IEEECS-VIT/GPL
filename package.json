@@ -90,7 +90,6 @@
     "passport": "^0.3.0",
     "passport-facebook": "~2.0.0",
     "passport-google-oauth": "~0.2.0",
-    "passport-twitter": "~1.0.3",
     "serve-favicon": "^2.3.0"
   },
   "optionalDependencies": {
@@ -108,6 +107,6 @@
     }
   ],
   "engines": {
-    "node": "4.2.x"
+    "node": "5.0.x"
   }
 }
