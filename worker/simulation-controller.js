@@ -18,19 +18,13 @@
 
 var i;
 var log;
-var database;
 var daily = 0;
 var stats = {};
 var points = 0;
-var ref =
-    {
-        'users': 1,
-        'round2': 2,
-        'round3': 3
-    };
 var individual = 0;
 var path = require('path');
 var async = require('async');
+var match = process.env.MATCH;
 var days = [1, 2, 3, 4, 5, 6, 7];
 var email = require(path.join(__dirname, 'email'));
 var simulator = require(path.join(__dirname, 'simulation'));
@@ -47,19 +41,7 @@ if (process.env.LOGENTRIES_TOKEN)
     });
 }
 
-var match = process.env.MATCH;
-var message = email.wrap({
-    from: 'gravitaspremierleague@gmail.com',
-    subject: 'Round ' + ref[match] + ', match ' + (process.env.DAY || 1) + ' results are out!'
-});
-
-message.attach_alternative("<table background='http://res.cloudinary.com/gpl/general/img7.jpg' align='center' cellpadding='0' cellspacing='0' width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center; border-collapse: collapse;'>" +
-    "<tr><td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;color: #ffd195;'>graVITas Premier League</td>" +
-    "</tr><tr><td align='center' style='padding: 40px 30px 40px 30px;font-family: Arial; line-height:30px; font-size:x-large;'> This is to inform that the match results are out<br>" +
-    "Please click <a href='http://gravitaspremierleague.com/home/matches' style='text-decoration: none;'>here </a> to view your scores.  </td>" +
-    "</tr><tr><td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color: #ffd195; font-weight: bold;'>Regards,<br>Team GPL<br>IEEE Computer Society<br>VIT Student chapter</td></tr></table>");
-
-message.header.bcc = [];
+email.match.header.bcc = [];
 
 exports.initSimulation = function (day, masterCallback)
 {
@@ -276,7 +258,7 @@ exports.initSimulation = function (day, masterCallback)
                 }
                 else
                 {
-                  email.send(message, function (err)
+                  email.send(email.match, function (err)
                     {
                         if (err)
                         {
@@ -286,6 +268,7 @@ exports.initSimulation = function (day, masterCallback)
                         {
                             console.log(message.header.bcc.length + ' emails sent for round ' + ref[process.env.MATCH] + ', match ' + process.env.DAY);
                         }
+
                         masterCallback(err, results);
                     });
                 }

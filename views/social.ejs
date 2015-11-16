@@ -39,11 +39,11 @@
                 color: white;
                 width: 100%;
             }
-            .twitter, .twitter:hover, .twitter:focus, .twitter:active {
+            /*.twitter, .twitter:hover, .twitter:focus, .twitter:active {
                 background: #00ACED none repeat scroll 0 0;
                 color: white;
                 width: 100%;
-            }
+            }*/
             .google-plus, .google-plus:hover, .google-plus:focus, .google-plus:active {
                 background: #C32F10 none repeat scroll 0 0;
                 color: white;
@@ -76,7 +76,7 @@
                             <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                             <div class="form-group">
                                 <label for="teamName">Team Name</label>
-                                <input type="text" class="form-control" name="team" id="teamName" placeholder="Team Name" required>
+                                <input type="text" class="form-control" name="team" id="teamName" placeholder="Team Name" autofocus required>
                             </div>
                             <%if(type === 'register'){%>
                                 <div class="form-group">

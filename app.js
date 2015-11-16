@@ -86,24 +86,32 @@ app.use(function (err, req, res, next) {
     }
 
     status = err.status || 500;
-    error =
-    {
-        status: status
-    };
+    res.status(status);
 
-    if(process.env.NODE_ENV)
+    if(err.code === 'EBADCSRFTOKEN')
     {
-        error.message = '';
-        error.stack =  '';
+        res.redirect(req.headers.referer);
     }
     else
     {
-        error.message = err.message;
-        error.stack =  err.stack;
-    }
+        error =
+        {
+            status: status
+        };
 
-    res.status(status);
-    res.render('error', error);
+        if(process.env.NODE_ENV)
+        {
+            error.message = '';
+            error.stack =  '';
+        }
+        else
+        {
+            error.message = err.message;
+            error.stack =  err.stack;
+        }
+
+        res.render('error', error);
+    }
 });
 
 module.exports = app;

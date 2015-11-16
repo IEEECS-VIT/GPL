@@ -37,7 +37,16 @@ var options =
 var leaderboard;
 var path = require('path');
 var match = process.env.MATCH;
+var email = require(path.join(__dirname, '..', 'worker', 'email'));
 var mongoFeatures = require(path.join(__dirname, 'mongo-features.js'));
+
+var ref =
+{
+    interest: email.interest,
+    other: email.message
+};
+
+ref[match] = email.register;
 
 if (process.env.LOGENTRIES_TOKEN)
 {
@@ -51,7 +60,27 @@ exports.getCount = function (query, callback)
 
 exports.insert = function (col, doc, callback)
 {
-    db.collection(col).insertOne(doc, {w: 1}, callback);
+    var onInsert = function(err)
+    {
+        if(err)
+        {
+            callback(err);
+        }
+        else
+        {
+            if(col !== 'features')
+            {
+                ref[col].header.to = doc.email;
+                email.send(ref[col], callback);
+            }
+            else
+            {
+                callback(null);
+            }
+        }
+    };
+
+    db.collection(col).insertOne(doc, {w: 1}, onInsert);
 };
 
 exports.getLeader = function (user, callback)
@@ -93,7 +122,7 @@ exports.getLeader = function (user, callback)
     db.collection(match).find({}, slice, options).toArray(onFetch);
 };
 
-exports.forgotPassword = function (doc, token, callback)
+exports.forgotPassword = function (doc, token, host, callback)
 {
     var op =
     {
@@ -112,7 +141,47 @@ exports.forgotPassword = function (doc, token, callback)
         }
         else if (document.value)
         {
-            mongoFeatures.forgotCount({password : 1}, callback);
+            ref.other.header.to = document.value.email;
+            ref.other.header.subject = 'Time to get back in the game.';
+            ref.other.attach_alternative(
+            "<table background='http://res.cloudinary.com/gpl/general/img1.jpg' align='center' cellpadding='0' " +
+                "cellspacing='0' width='600' style ='box-shadow: 5px 5px 15px #888888; border-radius: 12px; " +
+                "background-position: center; border-collapse: collapse;'>" +
+                "<tr>" +
+                    "<td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 " +
+                    "40px 0;color: #ffd195;'>" +
+                    "graVITas Premier League" +
+                    "</td>" +
+                "</tr>" +
+                "<tr>" +
+                    "<td style='color:#FFFFFF;' align=\'left\' style=\'padding: 2px 30px 40px 30px;font-family: Arial;" +
+                    " line-height:30px; font-size:large;\'>" +
+                    "Please click <a href='http://" + host + "/reset/" + token + "'>here</a> in " +
+                    "order to reset your password.<br>For the purposes of security, this link is valid for one " +
+                    "use only, and shall expire in sixty minutes. <br> In the event that this password reset was" +
+                    " not requested by you, please ignore this message and your password shall remain intact.<br>" +
+                "</tr>" +
+                "<tr>" +
+                    "<td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;" +
+                    "color: #ffd195; font-weight: bold;'>Regards,<br>Team GPL<br>IEEE Computer Society<br>VIT Student chapter" +
+                "</td>" +
+                "</tr>" +
+            "</table>"
+            );
+
+            var onUpdate = function(err)
+            {
+                if(err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    mongoFeatures.forgotCount({password : 1}, callback);
+                }
+            };
+
+            email.send(ref.other, onUpdate);
         }
         else
         {
@@ -134,7 +203,15 @@ exports.forgotUser = function (doc, callback)
         else if (docs.length)
         {
             var results = "";
-            var onForgot = function(err)
+
+            docs.map((arg) => (results += '<li>' + arg._id + ' (' + arg.authStrategy + ')' + '</li>'));
+
+            ref.other.header.to = doc.email;
+            ref.other.header.subject = 'Time to get back in the game';
+            ref.other.attach_alternative("The following teams were found in association with your details:<br><br>" +
+                "<ol>" + results + "</ol><br><br>Regards, <br>Team G.P.L<br>IEEE Computer Society");
+
+            var onUser = function(err)
             {
                 if(err)
                 {
@@ -142,16 +219,11 @@ exports.forgotUser = function (doc, callback)
                 }
                 else
                 {
-                    callback(null, results);
+                    mongoFeatures.forgotCount({user : 1}, callback);
                 }
             };
 
-            for (i = 0; i < docs.length; ++i)
-            {
-                results += '<li>' + docs[i]._id + ' (' + docs[i].authStrategy + ')' + '</li>';
-            }
-
-            mongoFeatures.forgotCount({user : 1}, onForgot);
+            email.send(ref.other, onUser);
         }
         else
         {
@@ -206,15 +278,43 @@ exports.resetPassword = function (token, hash, callback)
         }
     };
 
-    var onFetch = function (err, document)
+    var onFetch = function (err, doc)
     {
         if (err)
         {
             callback(err, null);
         }
-        else if (document)
+        else if (doc)
         {
-            callback(null, document);
+            ref.other.header.to = doc.value.email;
+            ref.other.header.subject = 'Password change successful!';
+            ref.other.attach_alternative(
+            "<table background='http://res.cloudinary.com/gpl/general/img3.jpg' align='center' cellpadding='0' cellspacing='0'" +
+                " width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center;" +
+                " border-collapse: collapse;'>" +
+                "<tr>" +
+                    "<td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;" +
+                        "color: #ffd195;'>" +
+                        "graVITas Premier League" +
+                    "</td>" +
+                "</tr>" +
+                "<tr>" +
+                    "<td style='color:#FFFFFF;' align='left' style='padding: 5px 30px 40px 30px;font-family: Arial; " +
+                        "line-height:30px; font-size:x-large;'>" +
+                        "Hey there, " + doc.value.manager_name + "!<br>We\'re just writing in to let you know that " +
+                        "the recent password change for your team " + doc.value._id + " was successful.<br>Welcome " +
+                        "Back to G.P.L!" +
+                "</tr>" +
+                "<tr>" +
+                    "<td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color:" +
+                        " #ffd195; font-weight: bold;'>" +
+                        "Regards,<br>Team GPL<br>IEEE Computer Society<br>VIT Student chapter" +
+                    "</td>" +
+                "</tr>" +
+            "</table>"
+            );
+
+            email.send(ref.other, callback);
         }
         else
         {
@@ -246,9 +346,4 @@ exports.updateMatchSquad = function (doc, arr, callback)
 exports.fetchUser = function (query, callback)
 {
     db.collection(match).find(query).limit(1).next(callback);
-};
-
-exports.save = function (doc, callback)
-{
-    db.collection(match).save(doc, callback);
 };

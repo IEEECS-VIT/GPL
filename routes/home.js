@@ -18,7 +18,6 @@
 
 var i;
 var log;
-var temp;
 var team;
 var cost;
 var squad;
@@ -34,7 +33,6 @@ var ref =
 var credentials;
 var path = require('path');
 var async = require('async');
-var match = process.env.MATCH;
 var router = require('express').Router();
 var authenticated = function(req, res, next)
 {
@@ -305,12 +303,11 @@ router.post('/getTeam', authenticated, function (req, res) {
     async.map(players, getCost, onFinish);
 });
 
-/*router.get('/sponsors', function (req, res) // sponsors page
- {
- res.render('sponsors');
- });*/
+/*router.get('/sponsors', function (req, res) { // sponsors page TODO: Sponsor hunt ;)
+    res.render('sponsors');
+});*/
 
-router.get(/\/prizes?/, function (req, res) {// page to view prizes
+router.get(/\/prizes?/, function (req, res) { // page to view prizes
     res.render('prizes');
 });
 
