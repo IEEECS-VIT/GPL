@@ -43,10 +43,10 @@
   ],
   "dependencies":
   {
-    "bootstrap": "~3.3.4",
+    "bootstrap": "~3.3.6",
     "chartjs": "~1.0.2",
-    "angularjs": "~1.4.4",
-    "font-awesome": "~4.4.0",
+    "angularjs": "~1.4.8",
+    "font-awesome": "~4.5.0",
     "roboto-fontface": "~0.4.3"
   }
 }

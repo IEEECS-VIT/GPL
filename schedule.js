@@ -18,7 +18,6 @@
 
 var log;
 var path = require('path');
-var async = require('async');
 var mongo = require('mongodb').MongoClient.connect;
 
 if(!process.env.NODE_ENV)
@@ -27,9 +26,7 @@ if(!process.env.NODE_ENV)
 }
 if (process.env.LOGENTRIES_TOKEN)
 {
-    log = require('node-logentries').logger({
-        token: process.env.LOGENTRIES_TOKEN
-    });
+    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
 var match = process.env.MATCH;

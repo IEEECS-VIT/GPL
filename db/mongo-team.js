@@ -26,7 +26,7 @@ exports.getTeam = function (doc, callback)
 {
     var onFetch = function (err, document)
     {
-        if (document.team.length == 0)
+        if (!document.team.length)
         {
             callback(null, []);
         }
@@ -80,15 +80,9 @@ exports.getSquad = function (doc, callback)
             {
                 callback(err, null);
             }
-            else if (document.team.length != 0)
+            else if (document.team.length)
             {
-                for (var i = 0; i < 16; ++i)
-                {
-                    if (document.team[i] >= 'd1')
-                    {
-                        coach = parseInt(document.team[i]);
-                    }
-                }
+                coach = parseInt(document.team.filter((arg) => arg > 'd')[0])
 
                 async.map(document.squad, mongoFeatures.getPlayer, onFinish);
             }
@@ -168,10 +162,7 @@ exports.shortList = function (callback) // TODO: add email notification for shor
         }
         else
         {
-            for(i = 0; i < docs.length; ++i)
-            {
-                docs[i].team_no = i + 1;
-            }
+            docs.map((arg, i) => arg.team_no = i + 1);
 
             db.collection(ref[match].out).insertMany(docs, callback);
         }
@@ -210,7 +201,7 @@ exports.adminInfo = function (callback)
     {
         interest: function (asyncCallback)
         {
-            mongoFeatures.quantify(asyncCallback);
+            mongoUsers.getCount('interest', {}, asyncCallback);
         },
         total: function (asyncCallback)
         {
@@ -246,7 +237,7 @@ exports.adminInfo = function (callback)
         },
         forgot: function (asyncCallback)
         {
-            mongoFeatures.forgotCount({password : 0}, asyncCallback);
+            mongoFeatures.getCount('info', {}, asyncCallback);
         }
     };
 
@@ -288,23 +279,6 @@ exports.fetchMatches = function (team, callback)
     ];
 
     async.parallel(parallelTasks, callback);
-};
-
-exports.check = function (team, callback)
-{
-    var onFind = function (err, result)
-    {
-        if (err)
-        {
-            callback(err);
-        }
-        else
-        {
-            callback(null, result ? false : true);
-        }
-    };
-
-    db.collection('users').find(team).limit(1).next(onFind);
 };
 
 exports.opponent = function (day, team, callback)
@@ -352,6 +326,7 @@ exports.squad = function (doc, callback)
             var onGet = function (err, results)
             {
                 doc.team = results;
+
                 callback(null, doc);
             };
 

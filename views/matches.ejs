@@ -18,234 +18,235 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Match Details | GPL</title>
-    <link rel="stylesheet" type="text/css" href="/bower/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/stylesheets/dashboard.css">
-    <link rel="stylesheet" href="/stylesheets/matchDetails.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-<div>
-    <div id="wrapper" class="container-fluid">
-        <div id="side-navigation">
-            <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
-                <div class="container-fluid">
-                    <ul id="sidenav-list" class="nav nav-pills nav-stacked wrapper  ">
-                        <li>
-                            <img src="http://res.cloudinary.com/gpl/general/gpllogo.png" class="img-responsive"
-                                 style="margin: 5px;padding-right:10px;">
-                        </li>
-                        <li role="presentation"><a href="/home">Home</a></li>
-                        <li role="presentation"><a href="/home/dashboard">Dashboard</a></li>
-                        <li role="presentation"><a href="/home/team">Team</a></li>
-                        <li role="presentation"><a href="/home/stats">Statistics</a></li>
-                        <li role="presentation" class="active" data-toggle="collapse" data-parent="#sidenav-list"
-                            href="#matches">
-                            <a href="#">Matches<span class="caret-container"><span class="caret arrow"></span></span>
-                            </a>
-                        </li>
-                        <li>
-                            <ul class="nav nav-pills nav-stacked collapse" id="matches">
-                                <% for(var i = 0; i < match.length; ++i){ %>
-                                    <li role="presentation" data-toggle="collapse" data-parent="#matches"
-                                        href="#match<%= (i + 1) %>">
-                                        <a href="#">Match <%= (i + 1) %>
-                                            <span class="caret-container">
-                                                <span class="caret arrow"></span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <ul class="nav nav-pills nav-stacked collapse" id="match<%= (i + 1) %>">
-                                        <% if (i <= day) { %>
-                                            <li><a id="match<%= (i + 1) %>commentary" href="#">Commentary</a></li>
-                                            <li><a id="match<%= (i + 1) %>scorecard" href="#">Scorecard</a></li>
-                                        <% } else { %>
-                                            <li><a id="match<%= (i + 1) %>opponent" href="#">Opponent</a></li>
+    <head>
+        <meta charset="utf-8">
+        <title>Match Details | GPL</title>
+        <link rel="stylesheet" type="text/css" href="/bower/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/dashboard.min.css">
+        <link rel="stylesheet" href="/stylesheets/matchDetails.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <div id="wrapper" class="container-fluid">
+                <div id="side-navigation">
+                    <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
+                        <div class="container-fluid">
+                            <ul id="sidenav-list" class="nav nav-pills nav-stacked wrapper  ">
+                                <li>
+                                    <img src="http://res.cloudinary.com/gpl/general/gpllogo.png" class="img-responsive"
+                                         style="margin: 5px;padding-right:10px;">
+                                </li>
+                                <li role="presentation"><a href="/home">Home</a></li>
+                                <li role="presentation"><a href="/home/dashboard">Dashboard</a></li>
+                                <li role="presentation"><a href="/home/team">Team</a></li>
+                                <li role="presentation"><a href="/home/stats">Statistics</a></li>
+                                <li role="presentation" class="active" data-toggle="collapse" data-parent="#sidenav-list"
+                                    href="#matches">
+                                    <a href="#">Matches<span class="caret-container"><span class="caret arrow"></span></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <ul class="nav nav-pills nav-stacked collapse" id="matches">
+                                        <% for(var i = 0; i < match.length; ++i){ %>
+                                            <li role="presentation" data-toggle="collapse" data-parent="#matches"
+                                                href="#match<%= (i + 1) %>">
+                                                <a href="#">Match <%= (i + 1) %>
+                                                    <span class="caret-container">
+                                                        <span class="caret arrow"></span>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <ul class="nav nav-pills nav-stacked collapse" id="match<%= (i + 1) %>">
+                                                <% if (i <= day) { %>
+                                                    <li><a id="match<%= (i + 1) %>commentary" href="#">Commentary</a></li>
+                                                    <li><a id="match<%= (i + 1) %>scorecard" href="#">Scorecard</a></li>
+                                                <% } else { %>
+                                                    <li><a id="match<%= (i + 1) %>opponent" href="#">Opponent</a></li>
+                                                <% } %>
+                                                <li class="nav-divider"></li>
+                                            </ul>
                                         <% } %>
-                                        <li class="nav-divider"></li>
                                     </ul>
-                                <% } %>
+                                </li>
                             </ul>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
-            <div id="top-navigation"></div>
-            <div class="container-fluid">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-10 col-xs-offset-1 ">
-                            <div class="col-md-10 col-md-offset-1">
-                                <div class="page-header custom-header">
-                                    <h1>Match Details</h1>
-                                </div>
-                                <div id="text">
-                                    <small>Select a match to view details</small>
+                <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
+                    <div id="top-navigation"></div>
+                    <div class="container-fluid">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-10 col-xs-offset-1 ">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="page-header custom-header">
+                                            <h1>Match Details</h1>
+                                        </div>
+                                        <div id="text">
+                                            <small>Select a match to view details</small>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--[if lt IE 10]>
+                <p class="browsehappy">
+                    You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+                    your browser</a> to improve your experience.
+                </p>
+                <![endif]-->
+                <script type="text/javascript" src="/bower/jquery/dist/jquery.min.js"></script>
+                <script async src="/bower/bootstrap/dist/js/bootstrap.min.js"></script>
+                <script async src="/javascript/playerCommon.min.js"></script>
+                <script type="text/javascript">
+                    <% for(var i = 0; i < match.length; ++i) { %>
+                        <% if( match[i].hasOwnProperty("team")) { %>
+                            $("#match<%= (i + 1) %>opponent").on("click", function () {
+                                var html = "<h3>Opponent Team: <%= match[i]._id%> (Match <%= i+1%>)</h3>"
+                                        + "<ol class='list-group'>"
+                                        <%  for (var j = 0; j < match[i].team.length; ++j) { %>
+                                            + " <li class='list-group-item'>"
+                                            + "    <img src='http://res.cloudinary.com/gpl/players/<%= match[i].team[j].Type %>/<%= match[i].team[j]._id %>.jpg' class='img-circle' height='40' width='40'/>"
+                                            + "    <span class='h4'><%= match[i].team[j].Name %></span>"
+                                            + "    <small class='pull-right'><%= match[i].team[j].Type %> </small>"
+                                            + "  </li>"
+                                        <%  } %>
+                                        + "</ol>";
+                                $("#text").html(html);
+                            });
+                        <% } else { if( match[i].hasOwnProperty("commentary") ) { %>
+                            $("#match<%= (i + 1) %>commentary").on("click", function () {
+                                var html;
+                                <%if (!match[i].commentary.length){ %>
+                                    html = "<p>Either you or you opponent did not select the playing 11. Thus, the match was forfeited.</p>"
+                                <% } else {%>
+                                html = "<h3>Ball by ball commentary</h3>"
+                                        <% for(j = 0; j < 4; ++j){ %>
+                                            + "<%= match[i].commentary[j] %><br/>"
+                                        <%}%>
+                                        + "<div class='col-sm-8 col-sm-offset-2'> <div class='row'> <table class='table table-bordered'>"
+                                        + " <thead><th><center><%=match[i].commentary[4][0]%></center></th><th><center><%=match[i].commentary[4][1]%></center></th></thead><tbody>"
+                                        <%for(var k = 5; k < 16; ++k){%>
+                                            + "<tr><td><center><%=match[i].commentary[k][0]%></center></td><td><center><%=match[i].commentary[k][1]%></center></td></tr>"
+                                        <%}%>
+                                        + "</tbody></table></div></div><br/><div class='row'><div class='col-xs-12'><pre>"
+                                        <%for(m = 16; m < match[i].commentary.length; ++m){%>
+                                            <%if(match[i].commentary[m].slice(0, 4).match(/\d{1,2}\.1.?/) && (match[i].commentary[m - 1].split(', ')[1] != 'wide')){%>
+                                                + "<hr>"
+                                            <%}%>
+                                            <%match[i].commentary[m] = match[i].commentary[m].replace('FOUR', '<big><strong>FOUR</strong></big>')%>
+                                            <%match[i].commentary[m] = match[i].commentary[m].replace('SIX', '<big><strong>SIX</strong></big>')%>
+                                            <%match[i].commentary[m] = match[i].commentary[m].replace(', OUT', ', <big><strong>OUT</strong></big>')%>
+                                            <%match[i].commentary[m] = match[i].commentary[m].replace('Free Hit:', '<big><strong>Free Hit:</strong></big>')%>
+                                            <%match[i].commentary[m] = match[i].commentary[m].replace(/(\d+)\.(\d)\s/, '<big><strong>$1.$2 </strong></big>')%>
+                                            + "<%-match[i].commentary[m] %><br/>"
+                                        <%}%>
+                                        + "</pre></div></div>"
+                                <%}%>
+                                $("#text").html(html);
+                            });
+                        <% } %>
+                        <%  if( match[i].hasOwnProperty("scorecard") ) { %>
+                        $("#match<%= (i + 1) %>scorecard").on("click", function () {
+                            var html;
+                            <%if (!match[i].scorecard.length) {%>
+                                html = "<p>The match was forfeited.</p>"
+                            <%} else {%>
+                                html = "<h3>Scorecard (Match <%= i+1%>)</h3>"
+                                        + "<div class='col-xs-12'> <div class='row'> <table class='table table-bordered text-center'>"
+                                        + "<th><center>Name</center></th>"
+                                        <%  for (j = 0; j < match[i].scorecard[1].length; ++j) { %>
+                                        + "<th><center><%=match[i].scorecard[1][j]%></center></th>"
+                                        <% } %>
+                                        <%  for (j = 2; j < 13; ++j) { %>
+                                            + "<tr>"
+                                            <%  for (k = 0; k < match[i].scorecard[j].length; ++k) { %>
+                                            <%if (match[i].scorecard[j].length == 9 && k == 8){break;%>
+                                            <% } else if(match[i].scorecard[j].length == 2 && k){%>
+                                                + "<td colspan='7'><%=match[i].scorecard[j][k]%></td>"
+                                            <%}else if (match[i].scorecard[j].length == 9 && !k) {%>
+                                                + "<td><%=match[i].scorecard[j][k]%> *</td>"
+                                            <%}else{%>
+                                                + "<td ><%=match[i].scorecard[j][k]%></td>"
+                                        <%}}%>
+                                        + "</tr>"
+                                        <%}%>
+                                        + "</table></div></div>"
+                                        <% for (j = 13; j < 15; ++j) {%>
+                                            + "<p><%= match[i].scorecard[j]%></p>"
+                                        <%}%>
+                                        + "<b><p><%= match[i].scorecard[15]%></p></b>"
+                                        + "<div class='col-xs-12'> <div class='row'> <table class='table table-bordered text-center'>"
+                                        <%for (j = 0; j < match[i].scorecard[16].length; ++j){%>
+                                            + "<th><center><%=match[i].scorecard[16][j]%></center></th>"
+                                        <%}%>
+                                        <% for (j = 17; j < 17 + match[i].count[0]; ++j) {%>
+                                            + "<tr>"
+                                            <% for (k = 0; k < match[i].scorecard[j].length; ++k){%>
+                                                + "<td><%= match[i].scorecard[j][k]%></td>"
+                                            <%}%>
+                                            + "</tr>"
+                                        <%}%>
+                                        + "</table></div></div>"
+                                        <%if(match[i].scorecard[18 + match[i].count[0]].length){%>
+                                            + "<p><b><%= match[i].scorecard[17 + match[i].count[0]]%></b></p>"
+                                        <%}%>
+                                        <%for(j = 0; j < match[i].scorecard[18 + match[i].count[0]].length; ++j){%>
+                                            + "<p><%= match[i].scorecard[18 + match[i].count[0]][j]%></p>"
+                                        <%}%>
+                                        + "<p><%= match[i].scorecard[19 + match[i].count[0]]%></p>"
+                                        + "<div class='col-xs-12'> <div class='row'> <table class='table table-bordered text-center'>"
+                                        + "<th><center>Name</center></th>"
+                                        <%  for (j = 0; j < match[i].scorecard[22 + match[i].count[0]].length; ++j) { %>
+                                            + "<th><center><%=match[i].scorecard[22 + match[i].count[0]][j]%></center></th>"
+                                        <% } %>
+                                        <%  for (j = 23 + match[i].count[0]; j < 34 + match[i].count[0]; ++j){%>
+                                            + "<tr>"
+                                            <%  for (k = 0;k < match[i].scorecard[j].length; ++k){%>
+                                                <%if (match[i].scorecard[j].length == 9 && k == 8){break;%>
+                                                <% } else if(match[i].scorecard[j].length == 2 && k){%>
+                                                    + "<td colspan='7'><%=match[i].scorecard[j][k]%></td>"
+                                                <%}else if (match[i].scorecard[j].length == 9 && !k){%>
+                                                    + "<td><%=match[i].scorecard[j][k]%> *</td>"
+                                                <%}else{%>
+                                                    + "<td ><%=match[i].scorecard[j][k]%></td>"
+                                        <%}}%>
+                                        + "</tr>"
+                                        <%}%>
+                                        + "</table></div></div>"
+                                        <% for (j = 34 + match[i].count[0]; j < 36 + match[i].count[0]; ++j) {%>
+                                            + "<p><%= match[i].scorecard[j]%></p>"
+                                        <%}%>
+                                        + "<b><p><%= match[i].scorecard[36+match[i].count[0]]%></p></b>"
+                                        + "<div class='col-xs-12'> <div class='row'> <table class='table table-bordered text-center'>"
+                                        <%for (j = 0; j < match[i].scorecard[37 + match[i].count[0]].length; ++j){%>
+                                            + "<th><center><%=match[i].scorecard[37 + match[i].count[0]][j]%></center></th>"
+                                        <%}%>
+                                        <% for (j = 38 + match[i].count[0]; j < 38 + match[i].count[0] + match[i].count[1]; ++j) {%>
+                                            + "<tr>"
+                                        <% for (k = 0;k < (match[i].scorecard[j] || '').length; ++k){%>
+                                            + "<td><%= match[i].scorecard[j][k]%></td>"
+                                        <%}%>
+                                        + "</tr>"
+                                        <%}%>
+                                        + "</table></div></div>"
+                                        <%if(match[i].scorecard[39 + match[i].count[0] + match[i].count[1]].length){%>
+                                            + "<b><p><%= match[i].scorecard[38 + match[i].count[0] + match[i].count[1]]%></p></b>"
+                                        <%}%>
+                                        <% for (j = 0; j < match[i].scorecard[39 + match[i].count[0] + match[i].count[1]].length; ++j) {%>
+                                            + "<p><%= match[i].scorecard[39 + match[i].count[0] + match[i].count[1]][j]%></p>"
+                                        <%}%>
+                                        + "<p><%= match[i].scorecard[40 + match[i].count[0] + match[i].count[1]]%></p>"
+                                <%}%>
+                                $("#text").html(html);
+                            });
+                        <% } } %>
+                    <%}%>
+                </script>
             </div>
         </div>
-        <!--[if lt IE 10]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a
-                href="http://browsehappy.com/">upgrade
-            your browser</a> to improve your experience.
-        </p>
-        <![endif]-->
-        <script type="text/javascript" src="/bower/jquery/dist/jquery.min.js"></script>
-        <script async src="/bower/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script async src="/javascript/playerCommon.js"></script>
-        <script type="text/javascript">
-            <% for(var i = 0; i < match.length; ++i) { %>
-                <% if( match[i].hasOwnProperty("team")) { %>
-                    $("#match<%= (i + 1) %>opponent").on("click", function () {
-                        var html = "<h3>Opponent Team: <%= match[i]._id%> (Match <%= i+1%>)</h3>"
-                                + "<ol class='list-group'>"
-                                <%  for (var j = 0; j < match[i].team.length; ++j) { %>
-                                    + " <li class='list-group-item'>"
-                                    + "    <img src='http://res.cloudinary.com/gpl/players/<%= match[i].team[j].Type %>/<%= match[i].team[j]._id %>.jpg' class='img-circle' height='40' width='40'/>"
-                                    + "    <span class='h4'><%= match[i].team[j].Name %></span>"
-                                    + "    <small class='pull-right'><%= match[i].team[j].Type %> </small>"
-                                    + "  </li>"
-                                <%  } %>
-                                + "</ol>";
-                        $("#text").html(html);
-                    });
-                <% } else { if( match[i].hasOwnProperty("commentary") ) { %>
-                    $("#match<%= (i + 1) %>commentary").on("click", function () {
-                        var html;
-                        <%if (match[i].commentary.length == 0){ %>
-                            html = "<p>Either you or you opponent did not select the playing 11. Thus, the match was forfeited.</p>"
-                        <% } else {%>
-                        html = "<h3>Ball by ball commentary</h3>"
-                                <% for(j = 0; j < 4; ++j){ %>
-                                    + "<%= match[i].commentary[j] %><br/>"
-                                <%}%>
-                                + "<div class='col-sm-8 col-sm-offset-2'> <div class='row'> <table class='table table-bordered'>"
-                                + " <thead><th><center><%=match[i].commentary[4][0]%></center></th><th><center><%=match[i].commentary[4][1]%></center></th></thead><tbody>"
-                                <%for(var k = 5; k < 16; ++k){%>
-                                    + "<tr><td><center><%=match[i].commentary[k][0]%></center></td><td><center><%=match[i].commentary[k][1]%></center></td></tr>"
-                                <%}%>
-                                + "</tbody></table></div></div><br/><div class='row'><div class='col-xs-12'><pre>"
-                                <%for(m = 16; m < match[i].commentary.length; ++m){%>
-                                    <%if(match[i].commentary[m].slice(0, 4).match(/\d{1,2}\.1.?/) && (match[i].commentary[m - 1].split(', ')[1] != 'wide')){%>
-                                        + "<hr>"
-                                    <%}%>
-                                    <%match[i].commentary[m] = match[i].commentary[m].replace('FOUR', '<big><strong>FOUR</strong></big>')%>
-                                    <%match[i].commentary[m] = match[i].commentary[m].replace('SIX', '<big><strong>SIX</strong></big>')%>
-                                    <%match[i].commentary[m] = match[i].commentary[m].replace(', OUT', ', <big><strong>OUT</strong></big>')%>
-                                    <%match[i].commentary[m] = match[i].commentary[m].replace('Free Hit:', '<big><strong>Free Hit:</strong></big>')%>
-                                    <%match[i].commentary[m] = match[i].commentary[m].replace(/(\d+)\.(\d)\s/, '<big><strong>$1.$2 </strong></big>')%>
-                                    + "<%-match[i].commentary[m] %><br/>"
-                                <%}%>
-                                + "</pre></div></div>"
-                        <%}%>
-                        $("#text").html(html);
-                    });
-                <% } %>
-                <%  if( match[i].hasOwnProperty("scorecard") ) { %>
-                $("#match<%= (i + 1) %>scorecard").on("click", function () {
-                    var html;
-                    <%if (match[i].scorecard.length == 0) {%>
-                        html = "<p>The match was forfeited.</p>"
-                    <%} else {%>
-                        html = "<h3>Scorecard (Match <%= i+1%>)</h3>"
-                                + "<div class='col-xs-12'> <div class='row'> <table class='table table-bordered text-center'>"
-                                + "<th><center>Name</center></th>"
-                                <%  for (j = 0; j < match[i].scorecard[1].length; ++j) { %>
-                                + "<th><center><%=match[i].scorecard[1][j]%></center></th>"
-                                <% } %>
-                                <%  for (j = 2; j < 13; ++j) { %>
-                                    + "<tr>"
-                                    <%  for (k = 0; k < match[i].scorecard[j].length; ++k) { %>
-                                    <%if (match[i].scorecard[j].length == 9 && k == 8){break;%>
-                                    <% } else if(match[i].scorecard[j].length == 2 && k != 0){%>
-                                        + "<td colspan='7'><%=match[i].scorecard[j][k]%></td>"
-                                    <%}else if (match[i].scorecard[j].length == 9 && k == 0) {%>
-                                        + "<td><%=match[i].scorecard[j][k]%> *</td>"
-                                    <%}else{%>
-                                        + "<td ><%=match[i].scorecard[j][k]%></td>"
-                                <%}}%>
-                                + "</tr>"
-                                <%}%>
-                                + "</table></div></div>"
-                                <% for (j = 13; j < 15; ++j) {%>
-                                    + "<p><%= match[i].scorecard[j]%></p>"
-                                <%}%>
-                                + "<b><p><%= match[i].scorecard[15]%></p></b>"
-                                + "<div class='col-xs-12'> <div class='row'> <table class='table table-bordered text-center'>"
-                                <%for (j = 0; j < match[i].scorecard[16].length; ++j){%>
-                                    + "<th><center><%=match[i].scorecard[16][j]%></center></th>"
-                                <%}%>
-                                <% for (j = 17; j < 17 + match[i].count[0]; ++j) {%>
-                                    + "<tr>"
-                                    <% for (k = 0; k < match[i].scorecard[j].length; ++k){%>
-                                        + "<td><%= match[i].scorecard[j][k]%></td>"
-                                    <%}%>
-                                    + "</tr>"
-                                <%}%>
-                                + "</table></div></div>"
-                                <%if(match[i].scorecard[18 + match[i].count[0]].length){%>
-                                    + "<p><b><%= match[i].scorecard[17 + match[i].count[0]]%></b></p>"
-                                <%}%>
-                                <%for(j = 0; j < match[i].scorecard[18 + match[i].count[0]].length; ++j){%>
-                                    + "<p><%= match[i].scorecard[18 + match[i].count[0]][j]%></p>"
-                                <%}%>
-                                + "<p><%= match[i].scorecard[19 + match[i].count[0]]%></p>"
-                                + "<div class='col-xs-12'> <div class='row'> <table class='table table-bordered text-center'>"
-                                + "<th><center>Name</center></th>"
-                                <%  for (j = 0; j < match[i].scorecard[22 + match[i].count[0]].length; ++j) { %>
-                                    + "<th><center><%=match[i].scorecard[22 + match[i].count[0]][j]%></center></th>"
-                                <% } %>
-                                <%  for (j = 23 + match[i].count[0]; j < 34 + match[i].count[0]; ++j){%>
-                                    + "<tr>"
-                                    <%  for (k = 0;k < match[i].scorecard[j].length; ++k){%>
-                                        <%if (match[i].scorecard[j].length == 9 && k == 8){break;%>
-                                        <% } else if(match[i].scorecard[j].length == 2 && k != 0){%>
-                                            + "<td colspan='7'><%=match[i].scorecard[j][k]%></td>"
-                                        <%}else if (match[i].scorecard[j].length == 9 && k == 0){%>
-                                            + "<td><%=match[i].scorecard[j][k]%> *</td>"
-                                        <%}else{%>
-                                            + "<td ><%=match[i].scorecard[j][k]%></td>"
-                                <%}}%>
-                                + "</tr>"
-                                <%}%>
-                                + "</table></div></div>"
-                                <% for (j = 34 + match[i].count[0]; j < 36 + match[i].count[0]; ++j) {%>
-                                    + "<p><%= match[i].scorecard[j]%></p>"
-                                <%}%>
-                                + "<b><p><%= match[i].scorecard[36+match[i].count[0]]%></p></b>"
-                                + "<div class='col-xs-12'> <div class='row'> <table class='table table-bordered text-center'>"
-                                <%for (j = 0; j < match[i].scorecard[37 + match[i].count[0]].length; ++j){%>
-                                    + "<th><center><%=match[i].scorecard[37 + match[i].count[0]][j]%></center></th>"
-                                <%}%>
-                                <% for (j = 38 + match[i].count[0]; j < 38 + match[i].count[0] + match[i].count[1]; ++j) {%>
-                                    + "<tr>"
-                                <% for (k = 0;k < (match[i].scorecard[j] || '').length; ++k){%>
-                                    + "<td><%= match[i].scorecard[j][k]%></td>"
-                                <%}%>
-                                + "</tr>"
-                                <%}%>
-                                + "</table></div></div>"
-                                <%if(match[i].scorecard[39 + match[i].count[0] + match[i].count[1]].length){%>
-                                    + "<b><p><%= match[i].scorecard[38 + match[i].count[0] + match[i].count[1]]%></p></b>"
-                                <%}%>
-                                <% for (j = 0; j < match[i].scorecard[39 + match[i].count[0] + match[i].count[1]].length; ++j) {%>
-                                    + "<p><%= match[i].scorecard[39 + match[i].count[0] + match[i].count[1]][j]%></p>"
-                                <%}%>
-                                + "<p><%= match[i].scorecard[40 + match[i].count[0] + match[i].count[1]]%></p>"
-                        <%}%>
-                        $("#text").html(html);
-                    });
-                <% } } %>
-            <%}%>
-        </script>
-    </div>
-</div>
-</body>
+    </body>
 </html>

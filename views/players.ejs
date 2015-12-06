@@ -51,9 +51,10 @@
                     <div class=" page-header row">
                         <h1>
                             <span class="col-xs-7">Players</span>
-                  <span class="col-xs-5" id=" searchBoxContainer">
-                    <input type="text" id="searchBox" class="form-control pull-right" placeholder="search"
-                           ng-model="searchText"/></span>
+                            <span class="col-xs-5" id=" searchBoxContainer">
+                                <input type="text" id="searchBox" class="form-control pull-right" placeholder="search"
+                                ng-model="searchText"/>
+                            </span>
                         </h1>
                     </div>
                     <div class="row">
@@ -64,23 +65,23 @@
                                     <li class="list-group-item container-fluid selectedPlayer"
                                         ng-repeat="selectedPlayer in computeSelectedPlayers()"
                                         ng-class="{coachactive: isCoach(selectedPlayer)}">
-                                    <span class="col-xs-2 pull-left no-padding-left clickable"><i
-                                                class="glyphicon glyphicon-remove pull-left"
-                                                ng-click="toggleActive(selectedPlayer)"></i></span>
-                                    <span class="col-xs-9 no-padding-left no-padding-right">{{$index + 1}}.
-                                    {{selectedPlayer.Name}}</span>
+                                        <span class="col-xs-2 pull-left no-padding-left clickable">
+                                            <i class="glyphicon glyphicon-remove pull-left" ng-click="toggleActive(selectedPlayer)">
+                                            </i>
+                                        </span>
+                                        <span class="col-xs-9 no-padding-left no-padding-right">
+                                            {{$index + 1}}.{{selectedPlayer.Name}}
+                                        </span>
                                     </li>
                                 </ul>
                                 <p>{{alertMessage}}</p>
                                 <p><strong>Remaining Amount: </strong><span>{{remaining() | number}}</span></p>
-                                <form name="playersForm" method="post"
-                                      action="/home/getTeam">
+                                <form name="playersForm" method="post" action="/home/players">
                                     <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
                                     <input type="hidden" ng-repeat="selectedPlayer in computeSelectedPlayers()"
                                            id="{{'t'+($index+1)}}" name="{{'p'+($index+1)}}" value="{{selectedPlayer._id}}"/>
                                     <input type="submit" class="btn btn-primary" ng-class="{disabled:isNotValid()}"
-                                           value="Submit"
-                                           ng-disabled="isNotValid()"/>
+                                           value="Submit" ng-disabled="isNotValid()"/>
                                 </form>
                             </div>
                         </div>
@@ -88,63 +89,52 @@
                         <div class="col-sm-7">
                             <form>
                                 <ul class="list-group media-list">
+                                    <%
+                                        var ref =
+                                        [
+                                            {
+                                                pre: 'a',
+                                                cat: 'Batsmen',
+                                                select: 'batsman'
+                                            },
+                                            {
+                                                pre: 'b',
+                                                cat: 'Bowlers',
+                                                select: 'bowler'
+                                            },
+                                            {
+                                                pre: 'c',
+                                                cat: 'All Rounders',
+                                                select: 'allrounder'
+                                            },
+                                            {
+                                                pre: 'd',
+                                                cat: 'Coaches',
+                                                select: 'coach'
+                                            }
+                                        ];
+                                    %>
                                     <ul class="nav nav-pills">
-                                        <li role="presentation" ng-class="{active:displayPlayersList=='Batsmen'}"
-                                            ng-click="displayPlayersList='Batsmen'"><a href="#">Batsmen</a></li>
-                                        <li role="presentation" ng-class="{active:displayPlayersList=='Bowlers'}"
-                                            ng-click="displayPlayersList='Bowlers'"><a href="#">Bowlers</a></li>
-                                        <li role="presentation" ng-class="{active:displayPlayersList=='AllRounders'}"
-                                            ng-click="displayPlayersList='AllRounders'"><a href="#">All Rounders</a></li>
-                                        <li role="presentation" ng-class="{active:displayPlayersList=='Coaches'}"
-                                            ng-click="displayPlayersList='Coaches'"><a href="#">Coaches</a></li>
+                                        <%for(i = 0; i < 4; ++i){%>
+                                            <li role="presentation" ng-class="{active:displayPlayersList=='<%=ref[i].cat%>'}"
+                                                ng-click="displayPlayersList='<%=ref[i].cat%>'">
+                                                <a href="#"><%=ref[i].cat%></a>
+                                            </li>
+                                        <%}%>
                                     </ul>
-                                    <div ng-show="displayPlayersList == 'Batsmen'" class="playerlist">
-                                        <h2>Batsmen</h2>
-                                        <li ng-repeat="player in players|filter:searchText|orderBy:'-Cost'"
-                                            class="media list-group-item player"
-                                            ng-click="toggleActive(player)"
-                                            ng-class="{'batsmanactive':player.active, 'text-muted limit-exceeded': !canBeBought(player) && !player.active}"
-                                            unselectable="on" ng-if="player._id[0]=='a'">
-                                            <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
-                                            <span>{{player.Name}}</span><span class="pull-right">{{player.Price}}</span>
-                                        </li>
-                                    </div>
-                                    <div ng-show="displayPlayersList == 'Bowlers'" class="playerlist">
-                                        <h2>Bowlers</h2>
-                                        <li ng-repeat="player in players|filter:searchText|orderBy:'-Cost'"
-                                            class="media list-group-item player"
-                                            ng-click="toggleActive(player)"
-                                            ng-class="{'bowleractive':player.active, 'text-muted limit-exceeded': !canBeBought(player) && !player.active}"
-                                            unselectable="on"
-                                            ng-if="player._id[0]=='b'">
-                                            <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
-                                            <span>{{player.Name}}</span><span class="pull-right">{{player.Price }}</span>
-                                        </li>
-                                    </div>
-                                    <div ng-show="displayPlayersList == 'AllRounders'" class="playerlist">
-                                        <h2>All Rounders</h2>
-                                        <li ng-repeat="player in players|filter:searchText|orderBy:'-Cost'"
-                                            class="media list-group-item player"
-                                            ng-click="toggleActive(player)"
-                                            ng-class="{'allrounderactive':player.active, 'text-muted limit-exceeded': !canBeBought(player) && !player.active}"
-                                            unselectable="on"
-                                            ng-if="player._id[0]=='c'">
-                                            <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
-                                            <span>{{player.Name}}</span><span class="pull-right">{{player.Price}}</span>
-                                        </li>
-                                    </div>
-                                    <div ng-show="displayPlayersList == 'Coaches'" class="playerlist">
-                                        <h2>Coaches</h2>
-                                        <li ng-repeat="player in players|filter:searchText|orderBy:'-Cost'"
-                                            class="media list-group-item player"
-                                            ng-click="toggleActive(player)"
-                                            ng-class="{'coachactive':player.active, 'text-muted limit-exceeded': !canBeBought(player) && !player.active}"
-                                            unselectable="on"
-                                            ng-if="player._id[0]=='d'">
-                                            <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
-                                            <span>{{player.Name}}</span><span class="pull-right">{{player.Price}}</span>
-                                        </li>
-                                    </div>
+                                    <%for(i = 0; i < 4; ++i){%>
+                                        <div ng-show="displayPlayersList == '<%=ref[i].cat%>'" class="playerlist">
+                                            <h2><%=ref[i].cat%></h2>
+                                            <li ng-repeat="player in players|filter:searchText|orderBy:'-Cost'"
+                                                class="media list-group-item player" ng-click="toggleActive(player)"
+                                                ng-class="{'<%=ref[i].select%>active':player.active, 'text-muted limit-exceeded': !canBeBought(player) && !player.active}"
+                                                unselectable="on" ng-if="player._id[0]=='<%=ref[i].pre%>'">
+                                                <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
+                                                <span>{{player.Name}}</span>
+                                                <span class="pull-right">{{player.Price}}</span>
+                                            </li>
+                                        </div>
+                                    <%}%>
                                 </ul>
                             </form>
                         </div>
@@ -153,52 +143,50 @@
             </div>
         </div>
         <footer id="footer" class="footer"></footer>
-        <script src="/bower/jquery/dist/jquery.min.js"></script>
-        <script async src="/bower/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/bower/angularjs/angular.min.js"></script>
         <script type="text/javascript">
+            var a;
+            var valid;
+            var total;
+            var remainingPlayers;
             var myApp = angular.module('formApp', []);
+
             function PlayerController($scope)
             {
-                $scope.displayPlayersList = "Batsmen";
                 $scope.limitExceeded = false;
+                $scope.displayPlayersList = "Batsmen";
                 $scope.players = <%- JSON.stringify(Players) %>;
-                for (var i = 0; i < $scope.players.length; ++i)
-                {
-                    $scope.players[i].active = false;
-                    $scope.players[i].image = ("https://res.cloudinary.com/gpl/players/" + $scope.players[i].Type + "/" + $scope.players[i]._id + ".jpg");
-                }
-                $scope.nSelectedPlayers =
-                {
-                    batsmen: 0,
-                    bowlers: 0,
-                    allrounders: 0,
-                    coaches: 0,
-                    total: 0
-                }
+
                 $scope.computeSelectedPlayers = function ()
                 {
                     $scope.nSelectedPlayers =
                     {
-                        coaches: 0,
-                        total: 0
+                        total: 0,
+                        coaches: 0
                     }
-                    var a = [];
+
+                    a = [];
+
                     angular.forEach($scope.players, function (s)
                     {
                         if (s.active)
                         {
                             a.push(s);
+
                             if (s._id[0] == 'd')
                             {
-                                $scope.nSelectedPlayers.coaches++;
+                                ++$scope.nSelectedPlayers.coaches;
                             }
                         }
                     });
+
                     $scope.nSelectedPlayers.total = a.length;
+
                     return a;
                 }
+
                 $scope.searchText = "";
+
                 $scope.toggleActive = function (s)
                 {
                     if (s.active || $scope.canBeBought(s))
@@ -206,43 +194,46 @@
                         s.active = !s.active;
                     }
                 };
+
                 $scope.total = function ()
                 {
-                    var total = 0;
+                    total = 0;
+
                     angular.forEach($scope.computeSelectedPlayers(), function (s) {
                         if (s.active)
                         {
                             total += s.Cost;
                         }
                     });
+
                     return total;
                 };
+
                 $scope.isCoach = function (player)
                 {
                     return player._id[0] == 'd';
                 }
+
                 $scope.alertMessage = "";
+
                 $scope.isNotValid = function (players)
                 {
                     $scope.alertMessage = "";
-                    var valid = true;
-                    var MAX_PLAYERS = 15;
-                    if ($scope.nSelectedPlayers.total < MAX_PLAYERS + 1)
+
+                    if ($scope.nSelectedPlayers.total < 16)
                     {
-                        var remainingPlayers = MAX_PLAYERS - ($scope.nSelectedPlayers.total - $scope.nSelectedPlayers.coaches);
-                        if (remainingPlayers == 1)
+                        remainingPlayers = 15 - ($scope.nSelectedPlayers.total - $scope.nSelectedPlayers.coaches);
+
+                        if (remainingPlayers)
                         {
-                            $scope.alertMessage = "Please select 1 player";
-                        }
-                        else if (remainingPlayers > 0)
-                        {
-                            $scope.alertMessage = "Please select " + remainingPlayers + " players";
+                            $scope.alertMessage = "Please select " + remainingPlayers + " player" + ((remainingPlayers > 1) ? "s" : "");
                         }
 
                         if ($scope.nSelectedPlayers.coaches < 1)
                         {
                             $scope.alertMessage += " and 1 coach.";
-                            if (remainingPlayers == 0)
+
+                            if (!remainingPlayers)
                             {
                                 $scope.alertMessage = "Please select a coach for your team";
                             }
@@ -253,41 +244,43 @@
                         if ($scope.nSelectedPlayers.coaches != 1)
                         {
                             $scope.alertMessage = "Please select exactly one coach.";
+
                             if ($scope.nSelectedPlayers.coaches < 1)
                             {
                                 $scope.alertMessage = "Please select a coach for your team";
                             }
                         }
-                        if ($scope.nSelectedPlayers.total > MAX_PLAYERS + 1)
+                        if ($scope.nSelectedPlayers.total > 16)
                         {
                             $scope.alertMessage = "You need to select exactly 15 players and 1 coach.";
                         }
                     }
-                    if ($scope.nSelectedPlayers.total == MAX_PLAYERS + 1 && $scope.nSelectedPlayers.coaches == 1)
-                    {
-                        valid = true;
-                    }
-                    else
-                    {
-                        valid = false;
-                    }
+
+                    valid = ($scope.nSelectedPlayers.total == 16 && $scope.nSelectedPlayers.coaches == 1)
+
                     if (valid)
                     {
                         $scope.alertMessage = "Alright ! You are good to go.";
                     }
+
                     return !valid;
                 };
+
                 $scope.remaining = function ()
                 {
                     return 10000000 - $scope.total();
                 };
+
                 $scope.canBeBought = function (player)
                 {
                     return ($scope.remaining() >= player.Cost);
                 }
             };
+
             myApp.controller('PlayerController', ['$scope', PlayerController]);
         </script>
-        <script async src="/javascript/main.js"></script>
+        <script src="/bower/jquery/dist/jquery.min.js"></script>
+        <script async src="/bower/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script async src="/javascript/main.min.js"></script>
     </body>
 </html>

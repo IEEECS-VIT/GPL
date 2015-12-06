@@ -31,10 +31,7 @@ if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 
 if (process.env.LOGENTRIES_TOKEN)
 {
-    var logentries = require('node-logentries');
-    log = logentries.logger({
-                                token: process.env.LOGENTRIES_TOKEN
-                            });
+    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
 app.set('port', process.env.PORT || 3000);

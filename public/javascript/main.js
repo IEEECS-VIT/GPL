@@ -22,7 +22,6 @@ $(document).ready(function () {
     sticky_nav = function ()
     {
         var calculated_offset =  $('#navbar').offset().top;
-        console.log(calculated_offset);
         $('#navbar').affix({
             offset: {top: calculated_offset}
         });

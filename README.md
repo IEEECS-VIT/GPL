@@ -11,11 +11,11 @@ This website is hosted [here](http://www.gravitaspremierleague.com)
 Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues) 
 
 #### Instructions for Installation:
-###### Install Node.js 4.2.x
-###### Install the latest version of MongoDB
-###### Install all dependencies (Ignore the errors that would come up on a Windows environment)
+###### Install the latest edition of Node.js from [here] (https://nodejs.org/en/download/)
+###### Install the latest version of MongoDB from [here] (https://www.mongodb.org/downloads#production)
+###### Install all dependencies
 
-    $ npm install
+    $ npm install --silent
     
 ###### Install security dependency manually (Microsoft Windows only)
 
@@ -23,6 +23,7 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
     
 ###### Create a file .env in the main project directory, and add the process environment variables to it. For instance:
 
+      KEY=value
       DAY=value
       OUT=value
       LIVE=value
@@ -32,19 +33,18 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
       BOWL_AVG=value
       BOWL_STR=value
       BOWL_ECO=value
-      KEY=value
-      FACEBOOK_ID=value
-      FACEBOOK_KEY=value
-      TWITTER_ID=value
-      TWITTER_KEY=value
       GOOGLE_ID=value
       GOOGLE_KEY=value
+      TWITTER_ID=value
+      TWITTER_KEY=value
+      FACEBOOK_ID=value
+      FACEBOOK_KEY=value
 
 ###### Run the server locally at port 3000 or "PORT" in process.env
 
     $ npm start
     
-###### View the website at localhost:3000 within your browser    
+###### View the website at localhost:3000 within your browser
     
 #### External Requirements:
 * A MongoDB instance running locally or valid "MONGOLAB_URI"/"MONGOHQ_URI" string in process.env
@@ -52,3 +52,5 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
 * A valid "COOKIE_SECRET" string in process.env for better security (Optional)
 * A valid "LOGENTRIES_TOKEN" in process.env for Logentries support (Optional)
 * A valid "NEWRELIC_APP_NAME" and "NEWRELIC_LICENSE" in process.env for New Relic support (Optional)
+
+PS: Configure a file watcher with the public directory scope to incorporate auto-minification of public .css and .js files.

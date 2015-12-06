@@ -42,8 +42,8 @@ var mongoFeatures = require(path.join(__dirname, 'mongo-features.js'));
 
 var ref =
 {
-    interest: email.interest,
-    other: email.message
+    other: email.message,
+    interest: email.interest
 };
 
 ref[match] = email.register;
@@ -53,9 +53,24 @@ if (process.env.LOGENTRIES_TOKEN)
     log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
-exports.getCount = function (query, callback)
+exports.getCount = function (col, query, callback)
 {
-    db.collection(match).count(query, callback);
+    switch(typeof col)
+    {
+      case 'object':
+                    callback = query;
+                    query = col;
+                    col = match;
+                    break;
+
+      case 'function':
+                      callback = col;
+                      query = {};
+                      col = match;
+                      break;
+    }
+
+    db.collection(col).count(query, callback);
 };
 
 exports.insert = function (col, doc, callback)
@@ -155,16 +170,17 @@ exports.forgotPassword = function (doc, token, host, callback)
                 "</tr>" +
                 "<tr>" +
                     "<td style='color:#FFFFFF;' align=\'left\' style=\'padding: 2px 30px 40px 30px;font-family: Arial;" +
-                    " line-height:30px; font-size:large;\'>" +
-                    "Please click <a href='http://" + host + "/reset/" + token + "'>here</a> in " +
-                    "order to reset your password.<br>For the purposes of security, this link is valid for one " +
-                    "use only, and shall expire in sixty minutes. <br> In the event that this password reset was" +
-                    " not requested by you, please ignore this message and your password shall remain intact.<br>" +
+                        " line-height:30px; font-size:large;\'>" +
+                        "Please click <a href='http://" + host + "/reset/" + token + "'>here</a> in " +
+                        "order to reset your password.<br>For the purposes of security, this link is valid for one " +
+                        "use only, and shall expire in sixty minutes. <br> In the event that this password reset was" +
+                        " not requested by you, please ignore this message and your password shall remain intact.<br>" +
+                    "</td>" +
                 "</tr>" +
                 "<tr>" +
                     "<td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;" +
-                    "color: #ffd195; font-weight: bold;'>Regards,<br>Team GPL<br>IEEE Computer Society<br>VIT Student chapter" +
-                "</td>" +
+                        "color: #ffd195; font-weight: bold;'>Regards,<br>Team GPL<br>IEEE Computer Society<br>VIT Student chapter" +
+                    "</td>" +
                 "</tr>" +
             "</table>"
             );
@@ -304,6 +320,7 @@ exports.resetPassword = function (token, hash, callback)
                         "Hey there, " + doc.value.manager_name + "!<br>We\'re just writing in to let you know that " +
                         "the recent password change for your team " + doc.value._id + " was successful.<br>Welcome " +
                         "Back to G.P.L!" +
+                    "</td>" +
                 "</tr>" +
                 "<tr>" +
                     "<td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color:" +

@@ -18,7 +18,8 @@
 
 var path = require('path');
 var async = require('async');
-var mongoTeam = require('./mongo-team');
+var mongoTeam = require(path.join(__dirname, 'mongo-team'));
+var simulator = require(path.join(__dirname, '..', 'worker', 'simulation-controller'));
 
 exports.getStats = function (callback)
 {
@@ -32,8 +33,7 @@ exports.notify = function (callback)
 
 exports.simulate = function (callback)
 {
-    var simulationControl = require(path.join(__dirname, '..', 'worker', 'simulation-controller'));
-    simulationControl.initSimulation(process.env.DAY, callback);
+    simulator.initSimulation(process.env.DAY, callback);
 };
 
 exports.forgotCount = function(option, callback)
@@ -110,11 +110,6 @@ exports.match = function (day, team, callback)
 
         mongoTeam.opponent(day, team, onOpponent);
     }
-};
-
-exports.quantify = function(callback)
-{
-    db.collection('interest').count(callback);
 };
 
 exports.fetchPlayers = function (callback)

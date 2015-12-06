@@ -26,7 +26,6 @@
         <link rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="/stylesheets/main.css">
         <link rel="stylesheet" href="/stylesheets/error.css">
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     </head>
     <body>
         <div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
@@ -57,7 +56,7 @@
             <div class="text-muted text-info">
                 <%=message%>
                 <br>
-                <%=stack%>
+                <pre><%=stack%></pre>
             </div>
         </div>
         <footer id="footer" class="footer">
@@ -68,6 +67,6 @@
         <![endif]-->
         <script src="/bower/jquery/dist/jquery.min.js"></script>
         <script async src="/bower/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script async src="/javascript/main.js"></script>
+        <script async src="/javascript/main.min.js"></script>
     </body>
 </html>

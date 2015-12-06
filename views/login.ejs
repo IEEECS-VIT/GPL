@@ -56,19 +56,28 @@
                 </span>
             </header>
         </div>
-        <div id="navbar-wrapper"><nav id="navbar"></nav></div>
+        <div id="navbar-wrapper">
+            <nav id="navbar"></nav>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 shadow-effect">
                     <div class="col-md-10 col-md-offset-1">
                         <h1 class=" page-header">
                             Login<br>
-                            <small class="omb_authTitle">Don't have an account? Make one <a href="/register">here</a>
+                            <small class="omb_authTitle">
+                                Don't have an account? Make one <a href="/register">here</a>
                             </small>
                             <br>
-                            <small class="omb_authTitle">Login with one of your social accounts <a href="/social/login">here</a>
+                            <small class="omb_authTitle">
+                                Login with one of your social accounts <a href="/social/login">here</a>
                             </small>
                         </h1>
+                        <%if(response){%>
+                            <div id="msg" class="alert alert-<%=type%> alert-dismissible fade in" role="alert">
+                                <strong>Oops!</strong> <%=response%>
+                            </div>
+                        <%}%>
                         <div class="row omb_row-sm-offset-3">
                             <div class="col-xs-12 col-sm-6">
                                 <form class="omb_loginForm" action="" autocomplete="off" method="POST">
@@ -106,6 +115,6 @@
         <![endif]-->
         <script src="/bower/jquery/dist/jquery.min.js"></script>
         <script async src="/bower/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script async src="/javascript/main.js"></script>
+        <script async src="/javascript/main.min.js"></script>
     </body>
 </html>

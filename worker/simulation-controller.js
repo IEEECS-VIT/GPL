@@ -18,13 +18,13 @@
 
 var i;
 var log;
+var match;
 var daily = 0;
 var stats = {};
 var points = 0;
 var individual = 0;
 var path = require('path');
 var async = require('async');
-var match = process.env.MATCH;
 var days = [1, 2, 3, 4, 5, 6, 7];
 var email = require(path.join(__dirname, 'email'));
 var simulator = require(path.join(__dirname, 'simulation'));
@@ -33,14 +33,13 @@ if(!process.env.NODE_ENV)
 {
     require('dotenv').load({path : path.join(__dirname, '..', '.env')});
 }
+
 if (process.env.LOGENTRIES_TOKEN)
 {
-    var logentries = require('node-logentries');
-    log = logentries.logger({
-        token: process.env.LOGENTRIES_TOKEN
-    });
+    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
+match = process.env.MATCH;
 email.match.header.bcc = [];
 
 exports.initSimulation = function (day, masterCallback)

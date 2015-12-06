@@ -87,6 +87,8 @@ app.use(function (err, req, res, next) {
 
     status = err.status || 500;
     res.status(status);
+    res.clearCookie('team', {});
+    res.clearCookie('phone', {});
 
     if(err.code === 'EBADCSRFTOKEN')
     {

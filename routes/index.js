@@ -68,7 +68,7 @@ if (process.env.LOGENTRIES_TOKEN)
     log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
-router.get('/', function (req, res) {
+router.get('/', function (req, res){
     if (req.signedCookies.name)
     {
         if (log)
@@ -100,7 +100,7 @@ router.get('/', function (req, res) {
     }
 });
 
-router.get('/interest', function (req, res) {
+router.get('/interest', function (req, res){
     if(process.env.LIVE === '0' || !process.env.NODE_ENV || req.signedCookies.admin)
     {
         res.render('interest', {csrfToken: req.csrfToken()});
@@ -111,8 +111,7 @@ router.get('/interest', function (req, res) {
     }
 });
 
-router.post('/interest', function (req, res) // interest form
-{
+router.post('/interest', function (req, res){
     newUser =
     {
         name: req.body.name,
@@ -136,7 +135,7 @@ router.post('/interest', function (req, res) // interest form
     mongoUsers.insert('interest', newUser, onInsert);
 });
 
-router.get('/login', function (req, res) {
+router.get('/login', function (req, res){
     res.clearCookie('team', {});
     res.clearCookie('phone', {});
 
@@ -150,21 +149,21 @@ router.get('/login', function (req, res) {
     }
     else
     {
-        res.render('login', {csrfToken: req.csrfToken()});
+        res.render('login', {csrfToken: req.csrfToken(), response: ""});
     }
 });
 
-router.post('/login', function (req, res) {
+router.post('/login', function (req, res){
     credentials =
     {
-        '_id': req.body.team.trim().toUpperCase(),
+        _id: req.body.team.trim().toUpperCase(),
         $or:
         [
             {
-                'authStrategy': 'admin'
+                authStrategy: 'admin'
             },
             {
-                'authStrategy': 'local'
+                authStrategy: 'local'
             }
         ]
     };
@@ -183,7 +182,7 @@ router.post('/login', function (req, res) {
         if (err)
         {
             console.log(err.message);
-            res.render('login', {response: "Incorrect credentials!"});
+            res.render('login', {response: "Incorrect credentials!", type:"danger", csrfToken: req.csrfToken()});
         }
         else if (doc)
         {
@@ -194,23 +193,23 @@ router.post('/login', function (req, res) {
             }
             else
             {
-                res.render('login', {response: "Incorrect credentials!"});
+                res.render('login', {response: "Incorrect credentials!", type:"danger", csrfToken: req.csrfToken()});
             }
         }
         else
         {
-            res.render('login', {response: "Incorrect credentials!"});
+            res.render('login', {response: "Incorrect credentials!", type:"danger", csrfToken: req.csrfToken()});
         }
     };
 
     mongoUsers.fetchUser(credentials, onFetch);
 });
 
-router.get(/^\/forgot\/password|user$/, function (req, res) {
+router.get(/^\/forgot\/password|user$/, function (req, res){
     res.render('forgot', {csrfToken: req.csrfToken(), mode: req.originalUrl.split('/')[2]});
 });
 
-router.post('/forgot/password', function (req, res) {
+router.post('/forgot/password', function (req, res){
     credentials =
     {
         _id: req.body.team.trim().toUpperCase(),
@@ -218,7 +217,7 @@ router.post('/forgot/password', function (req, res) {
         authStrategy : 'local'
     };
 
-    crypto.randomBytes(20, function (err, buf) {
+    crypto.randomBytes(20, function (err, buf){
         token = buf.toString('hex');
 
         var onFetch = function (err, doc)
@@ -228,7 +227,7 @@ router.post('/forgot/password', function (req, res) {
                 console.log(err.message);
                 res.redirect('/forgot/password');
             }
-            else if (doc)
+            else
             {
                 res.redirect('/login');
             }
@@ -238,7 +237,7 @@ router.post('/forgot/password', function (req, res) {
     });
 });
 
-router.get('/reset/:token', function (req, res) {
+router.get('/reset/:token', function (req, res){
     var onGetReset = function (err, doc)
     {
         if (err)
@@ -259,7 +258,7 @@ router.get('/reset/:token', function (req, res) {
     mongoUsers.getReset({resetToken: req.params.token, expire: {$gt: Date.now()}}, onGetReset);
 });
 
-router.post('/reset/:token', function (req, res) {
+router.post('/reset/:token', function (req, res){
     if (req.body.password === req.body.confirm)
     {
         var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
@@ -289,7 +288,7 @@ router.post('/reset/:token', function (req, res) {
     }
 });
 
-router.post('/forgot/user', function (req, res) {
+router.post('/forgot/user', function (req, res){
     credentials =
     {
         phone: req.body.phone,
@@ -312,9 +311,9 @@ router.post('/forgot/user', function (req, res) {
     mongoUsers.forgotUser(credentials, onFetch);
 });
 
-router.get('/register', function (req, res) {
-    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH == 'users' && process.env.LIVE === '1'))
-    {
+router.get('/register', function (req, res){
+    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH == 'users' && process.env.LIVE === '1')) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
+    {                                                                                                                  // the schedule has been constructed and the game engine is match ready.
         res.render('register', {response: "", csrfToken: req.csrfToken()});
     }
     else if (req.signedCookies.name)
@@ -327,7 +326,7 @@ router.get('/register', function (req, res) {
     }
 });
 
-router.post('/register', function (req, res) {
+router.post('/register', function (req, res){
     res.clearCookie('name', {});
     res.clearCookie('admin', {});
 
@@ -336,7 +335,7 @@ router.post('/register', function (req, res) {
         if (err)
         {
             console.log(err.message);
-            res.render('register', {response: "Unknown error, please try again", csrfToken: req.csrfToken()});
+            res.render('register', {response: "Unknown error, please try again", type:"danger", csrfToken: req.csrfToken()});
         }
         else
         {
@@ -357,12 +356,10 @@ router.post('/register', function (req, res) {
                     if (err)
                     {
                         console.log(err.message);
-                        res.render('register', {response: "Team Name Already Exists", csrfToken : req.csrfToken()});
+                        res.render('register', {response: "Team Name Already Exists", type: "danger", csrfToken: req.csrfToken()});
                     }
                     else
                     {
-                        register.header.to = newUser.email;
-
                         res.cookie('name', newUser._id, {maxAge: 86400000, signed: true});
                         res.redirect('/home/players');
                     }
@@ -372,7 +369,7 @@ router.post('/register', function (req, res) {
             }
             else
             {
-                res.render('register', {response: "Passwords do not match", csrfToken: req.csrfToken()});
+                res.render('register', {response: "Passwords do not match", type: "danger", csrfToken: req.csrfToken()});
             }
         }
     };
@@ -380,7 +377,7 @@ router.post('/register', function (req, res) {
     mongoUsers.getCount({authStrategy : {$ne : 'admin'}}, onGetCount);
 });
 
-router.get('/logout', function (req, res) {
+router.get('/logout', function (req, res){
     res.clearCookie('team', {});
     res.clearCookie('phone', {});
     res.clearCookie('admin', {});
@@ -388,8 +385,8 @@ router.get('/logout', function (req, res) {
     res.redirect('/login');
 });
 
-router.get('/admin', function (req, res) {
-    if (req.signedCookies.admin)
+router.get('/admin', function (req, res){
+    if (req.signedCookies.admin || !process.env.NODE_ENV)
     {
         var onGetInfo = function (err, doc)
         {
@@ -416,7 +413,7 @@ router.get('/admin', function (req, res) {
     }
 });
 
-router.get('/social/login', function (req, res) {
+router.get('/social/login', function (req, res){
     if (req.signedCookies.name)
     {
         res.redirect('/home');
@@ -427,14 +424,14 @@ router.get('/social/login', function (req, res) {
     }
 });
 
-router.post('/social/login', function (req, res) {
-    res.cookie('team', req.body.team.trim().toUpperCase(), {signed : true});
+router.post('/social/login', function (req, res){
+    res.cookie('team', req.body.team.trim().toUpperCase(), {maxAge : 300000, signed : true});
     res.redirect('/social/login');
 });
 
-router.get('/social/register', function (req, res) {
-    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users' && process.env.LIVE === '1'))
-    {
+router.get('/social/register', function (req, res){
+    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users' && process.env.LIVE === '1')) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
+    {                                                                                                                   // the schedule has been constructed and the game engine is match ready
         res.render('social', {mode: +!req.signedCookies.team, type : 'register', csrfToken : req.csrfToken()});
     }
     else if (req.signedCookies.name)
@@ -447,17 +444,17 @@ router.get('/social/register', function (req, res) {
     }
 });
 
-router.post('/social/register', function (req, res) {
-    res.cookie('team', req.body.team.trim().toUpperCase(), {signed : true});
-    res.cookie('phone', req.body.phone, {signed : true});
+router.post('/social/register', function (req, res){
+    res.cookie('team', req.body.team.trim().toUpperCase(), {maxAge: 300000, signed: true});
+    res.cookie('phone', req.body.phone, {maxAge: 300000, signed: true});
     res.redirect('/social/register');
 });
 
-router.get(/\/developers?/, function (req, res) {
-    res.render('developers', {obj : developers});
+router.get(/\/developers?/, function (req, res){
+    res.render('developers', {obj: developers});
 });
 
-router.get('/simulate', function (req, res) {
+router.get('/simulate', function (req, res){
     if (req.signedCookies.admin)
     {
 /*        var onSimulate = function (err, docs)
@@ -481,16 +478,29 @@ router.get('/simulate', function (req, res) {
     }
 });
 
-router.get(/^\/rules|privacy$/, function (req, res) {
-    res.render('rules', {session : +!req.signedCookies.name});
+router.get(/^\/rules|privacy$/, function (req, res){
+    res.render(req.originalUrl.slice(1), {session : +!req.signedCookies.name});
 });
 
-router.get('/trailer', function (req, res) {// trailer page
+router.get('/trailer', function (req, res){ // trailer page
     res.render('trailer');
 });
 
-router.get('/schedule', function (req, res) { // schedule page
+router.get('/schedule', function (req, res){ // schedule page
     res.redirect('/');
+});
+
+router.get('/check/:name', function(req, res){
+    if(req.headers.referer && req.headers.referer.split('/')[2] === req.headers.host)
+    {
+        mongoUsers.fetchUser({_id: req.params.name.trim().toUpperCase()}, function(err, result){
+            res.send(!result);
+        })
+    }
+    else
+    {
+        res.end();
+    }
 });
 
 module.exports = router;

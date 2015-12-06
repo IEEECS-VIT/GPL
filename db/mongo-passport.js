@@ -50,12 +50,8 @@ var callback = function(req, token, refresh, profile, done)
                         user.team_no = parseInt(number) + 1;
                         user.authStrategy = profile.provider;
                         user.phone = req.signedCookies.phone;
-                        user.manager_name = profile.displayName;
-
-                        if(profile.provider !== 'twitter')
-                        {
-                            user.email = profile.emails[0].value;
-                        }
+                        user.email = profile.emails[0].value;
+                        user.manager_name = profile.displayName; // TODO: Use manager_name as the primary key object, possibly have _id as a compound instance instead of a regular string.
 
                         mongoUsers.insert(process.env.MATCH, user, done);
                     }

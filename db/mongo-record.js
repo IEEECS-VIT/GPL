@@ -20,7 +20,7 @@ module.exports =
 {
     _id: '',
     dob: '',
-    team_no: '',
+    team_no: '', // TODO: change to an array, in order to make tracking matchday information for previous rounds simpler.
     manager_name: '',
     password_hash: '',
     email: '',

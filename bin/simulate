@@ -56,7 +56,7 @@ mongo(mongoUri, function(err, database){
 
             if(day == 7 && process.env.MATCH !== 'round3')
             {
-                mongoTeam.shortList(function(err, result){
+                mongoTeam.shortList(function(err){
                     if(err)
                     {
                         console.log(err.message);

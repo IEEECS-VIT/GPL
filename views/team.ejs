@@ -20,7 +20,7 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <title>Team | GPL</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link type="text/css" rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap.min.css"/>
@@ -76,30 +76,29 @@
                                         <div class="card-content">
                                         <ul class="list-group   ">
                                             <li class="list-group-item container-fluid selectedPlayer coachactive">
-                                            <span class="col-xs-9 no-padding-left no-padding-right">
-                                            {{coach.Name}}</span>
+                                                <span class="col-xs-9 no-padding-left no-padding-right">
+                                                    {{coach.Name}}
+                                                </span>
                                             </li>
                                             <li class="list-group-item container-fluid selectedPlayer"
                                                 ng-repeat="selectedPlayer in selectedPlayers track by $index"
                                                 ng-if="selectedPlayer.Type != 'coach'">
-                                            <span class="col-xs-2 pull-left no-padding-left clickable"><i
-                                                        class="glyphicon glyphicon-remove pull-left"
-                                                        ng-click="toggleActive(selectedPlayer)"></i></span>
-                                            <span class="col-xs-9 no-padding-left no-padding-right">{{$index + 1}}.
-                                            {{selectedPlayer.Name}}</span>
+                                            <span class="col-xs-2 pull-left no-padding-left clickable">
+                                                <i class="glyphicon glyphicon-remove pull-left"
+                                                   ng-click="toggleActive(selectedPlayer)"></i>
+                                            </span>
+                                            <span class="col-xs-9 no-padding-left no-padding-right">
+                                                {{$index + 1}}.{{selectedPlayer.Name}}</span>
                                             </li>
                                         </ul>
                                         <p>Select your players in batting order.</p>
-
                                         <p>{{alertMessage}}</p>
-                                        <form name="playersForm" method="post"
-                                              action="/home/getsquad">
+                                        <form name="playersForm" method="post" action="/home/getsquad">
                                             <input type="hidden" value="<%= csrfToken %>" name="_csrf"/>
                                             <input type="hidden" ng-repeat="selectedPlayer in selectedPlayers"
                                                    id="{{'t'+($index+1)}}" name="{{'p'+($index+1)}}" value="{{selectedPlayer._id}}"/>
                                             <input type="submit" class="btn btn-primary" ng-class="{disabled:isNotValid()}"
-                                                   value="Submit"
-                                                   ng-disabled="isNotValid()"/>
+                                                   value="Submit" ng-disabled="isNotValid()"/>
                                         </form>
                                     </div>
                                 </div>
@@ -107,16 +106,15 @@
                                 <div class="col-sm-7">
                                     <form>
                                         <ul class="list-group media-list">
-                                                <li ng-repeat="player in players|filter:searchText"
-                                                    class="media list-group-item player"
-                                                    ng-click="toggleActive(player)"
-                                                    ng-class="{'batsmanactive':player.active, 'text-muted limit-exceeded': !canSelectMore() && !player.active}"
-                                                    unselectable="on">
-                                                    <div class="playerlist">
+                                            <li ng-repeat="player in players|filter:searchText"
+                                                class="media list-group-item player" ng-click="toggleActive(player)"
+                                                ng-class="{'batsmanactive':player.active, 'text-muted limit-exceeded': !canSelectMore() && !player.active}"
+                                                unselectable="on">
+                                                <div class="playerlist">
                                                     <img src="" ng-src="{{player.image}}" height="30" width="30" class="img-circle "/>
                                                     <span>{{player.Name}}</span><span class="pull-right">{{player.Type}}</span>
-                                                    </div>
-                                                </li>
+                                                </div>
+                                            </li>
                                         </ul>
                                     </form>
                                 </div>
@@ -170,7 +168,6 @@
                                     if ($scope.selectedPlayers[i]._id == s._id)
                                     {
                                       $scope.safeApply(function() {
-
                                         $scope.selectedPlayers.splice(i, 1);
                                       });
                                         break;
@@ -187,8 +184,7 @@
                     if ($scope.players[i].Type == "coach")
                     {
                         $scope.coach = $scope.players[i];
-                        $scope.players.splice(i, 1);
-                        i--;
+                        $scope.players.splice(i--, 1);
                     }
                 }
                 $scope.searchText = "";
@@ -201,7 +197,7 @@
                 $scope.isNotValid = function (players)
                 {
                     $scope.alertMessage = "";
-                    var valid = true;
+                    var valid;
                     var selectedPlayers = $scope.selectedPlayers;
                     var remainingPlayers = $scope.MAX_PLAYERS - selectedPlayers.length;
                     if (remainingPlayers > 0)
@@ -215,14 +211,9 @@
                             $scope.alertMessage = "Please Select " + remainingPlayers + " players";
                         }
                     }
-                    if (remainingPlayers == 0)
-                    {
-                        valid = true;
-                    }
-                    else
-                    {
-                        valid = false;
-                    }
+
+                    valid = !remainingPlayers;
+
                     if (valid)
                     {
                         $scope.alertMessage = "Alright ! You are good to go.";
@@ -233,6 +224,6 @@
             };
             myApp.controller('PlayerController', ['$scope', PlayerController]);
         </script>
-        <script async src="/javascript/playerCommon.js"></script>
+        <script async src="/javascript/playerCommon.min.js"></script>
     </body>
 </html>

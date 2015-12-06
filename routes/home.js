@@ -19,7 +19,6 @@
 var i;
 var log;
 var team;
-var cost;
 var squad;
 var stats;
 var fields;
@@ -36,7 +35,7 @@ var async = require('async');
 var router = require('express').Router();
 var authenticated = function(req, res, next)
 {
-    if(req.signedCookies.name || req.signedCookies.admin)
+    if((process.env.LIVE === '1') && (req.signedCookies.name || req.signedCookies.admin))
     {
         next();
     }
@@ -54,7 +53,7 @@ if (process.env.LOGENTRIES_TOKEN)
     log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
-router.get('/', authenticated, function (req, res) {
+router.get('/', authenticated, function (req, res){
     credentials =
     {
         '_id': req.signedCookies.name
@@ -107,12 +106,12 @@ router.get('/', authenticated, function (req, res) {
     mongoUsers.fetchUser(credentials, onFetch);
 });
 
-router.get('/leaderboard', authenticated, function (req, res) {
+router.get('/leaderboard', authenticated, function (req, res){
     if(req.signedCookies.lead && req.signedCookies.day == process.env.DAY)
     {
         res.render("leaderboard", {leaderboard: JSON.parse(req.signedCookies.lead)});
     }
-    else if (process.env.DAY >= '1'|| !process.env.NODE_ENV)                           // if cookies exists then access the database
+    else if (process.env.DAY >= '1'|| !process.env.NODE_ENV)                           // if cookie exists then access the database
     {
         var onFetch = function (err, documents)
         {
@@ -137,9 +136,9 @@ router.get('/leaderboard', authenticated, function (req, res) {
     }
 });
 
-router.get('/matches', authenticated, function (req, res) {
-    if (process.env.DAY >= '1')
-    {
+router.get('/matches', authenticated, function (req, res){ // Deprecated
+    if (process.env.DAY >= '0') // Initialize process.env.LIVE with -1, set to zero once the schedule has been constructed and
+    {                           // the game engine is match ready.
         credentials =
         {
             '_id' : req.signedCookies.name
@@ -180,6 +179,49 @@ router.get('/matches', authenticated, function (req, res) {
     }
 });
 
+router.get('/match/:day', authenticated, function(req, res){
+      if(process.env.DAY >= '0' && req.params.day >= '1' && req.params.day <= '7')
+      {
+          credentials =
+          {
+              '_id' : req.signedCookies.name
+          };
+
+          var onMap = function (err, num)
+          {
+              if (err)
+              {
+                  console.log(err.message);
+                  res.redirect('/home');
+              }
+              else
+              {
+                  var onMatch = function (err, match)
+                  {
+                      if (err)
+                      {
+                          console.log(err.message);
+                          res.redirect('/home');
+                      }
+                      else
+                      {
+                          res.cookie('day', process.env.DAY, {signed : true, maxAge : 86400000});
+                          res.render('match', {match: match || {}, day : (process.env.DAY - 1) || 0, round : ref[process.env.MATCH]});
+                      }
+                  };
+
+                  mongoFeatures.match(req.params.day, num, onMatch);
+              }
+          };
+
+          mongoTeam.map(credentials, onMap);
+      }
+      else
+      {
+          res.redirect('/home');
+      }
+});
+
 router.post('/getsquad', authenticated, function (req, res) {
     credentials =
     {
@@ -205,14 +247,13 @@ router.post('/getsquad', authenticated, function (req, res) {
     mongoUsers.updateMatchSquad(credentials, squad, onFetch);
 });
 
-router.post('/getTeam', authenticated, function (req, res) {
+router.post('/players', function (req, res){
     stats = {};
     players = [];
     fields =
     {
         Cost: 1
     };
-    cost = 10000000;
     credentials =
     {
         _id: req.signedCookies.name
@@ -286,14 +327,9 @@ router.post('/getTeam', authenticated, function (req, res) {
         }
         else
         {
-            for (var i = 0; i < documents.length; ++i)
+            if (documents.reduce((a, b) => a + parseInt(b.Cost), 0) > 10000000)
             {
-                cost -= parseInt(documents[i].Cost);
-
-                if (cost < 0)
-                {
-                    res.render('/home/players', {err: "Cost Exceeded"});
-                }
+                res.render('players', {err: "Cost Exceeded"});
             }
 
             mongoUsers.updateUserTeam(credentials, players, stats, cost, onUpdate);
@@ -303,15 +339,17 @@ router.post('/getTeam', authenticated, function (req, res) {
     async.map(players, getCost, onFinish);
 });
 
-/*router.get('/sponsors', function (req, res) { // sponsors page TODO: Sponsor hunt ;)
+/*
+router.get('/sponsors', function (req, res){ // sponsors page TODO: Sponsor hunt ;)
     res.render('sponsors');
-});*/
+});
+*/
 
-router.get(/\/prizes?/, function (req, res) { // page to view prizes
+router.get(/\/prizes?/, function (req, res){ // page to view prizes
     res.render('prizes');
 });
 
-router.get('/players', authenticated, function (req, res) {// page for all players, only available if no squad has been chosen
+router.get('/players', authenticated, function (req, res){ // page for all players, only available if no squad has been chosen
     credentials =
     {
         "_id": req.signedCookies.name
@@ -347,6 +385,11 @@ router.get('/players', authenticated, function (req, res) {// page for all playe
                     }
                     else
                     {
+                        documents.map((arg) => {
+                            arg.active = false;
+                            arg.image = ("https://res.cloudinary.com/gpl/players/" + arg.Type + "/" + arg._id + ".jpg");
+                        });
+
                         res.render('players', {Players: documents, csrfToken: req.csrfToken()});
                     }
                 };
@@ -359,7 +402,7 @@ router.get('/players', authenticated, function (req, res) {// page for all playe
     mongoUsers.fetchUser(credentials, onFetchUser);
 });
 
-router.get('/team', authenticated, function (req, res) {// view the assigned playing 11 with options to change the playing 11
+router.get('/team', authenticated, function (req, res){ // view the assigned playing 11 with options to change the playing 11
     credentials =
     {
         '_id': req.signedCookies.name
@@ -381,7 +424,7 @@ router.get('/team', authenticated, function (req, res) {// view the assigned pla
     mongoTeam.getTeam(credentials, getTeam);
 });
 
-router.get('/stats', authenticated, function (req, res) {
+router.get('/stats', authenticated, function (req, res){
     if(req.signedCookies.stats && req.signedCookies.day == process.env.DAY)
     {
         res.render('stats', {stats : JSON.parse(req.signedCookies.stats)});
@@ -412,11 +455,11 @@ router.get('/stats', authenticated, function (req, res) {
     }
 });
 
-router.get('/feature', authenticated, function (req, res) {
+router.get('/feature', authenticated, function (req, res){
     res.render('feature', {csrfToken: req.csrfToken()});
 });
 
-router.post('/feature', authenticated, function (req, res) {
+router.post('/feature', authenticated, function (req, res){
     var onInsert = function (err)
     {
         if (err)
@@ -430,7 +473,7 @@ router.post('/feature', authenticated, function (req, res) {
     mongoUsers.insert('features', {user : req.signedCookies.name, features: req.body.feature}, onInsert);
 });
 
-router.get('/dashboard', authenticated, function (req, res) {
+router.get('/dashboard', authenticated, function (req, res){
     if(req.signedCookies.dash && req.signedCookies.day == process.env.DAY)
     {
         res.render('dashboard', {result : JSON.parse(req.signedCookies.dash)});

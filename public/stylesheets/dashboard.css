@@ -16,8 +16,6 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@import url('../bower/roboto-fontface/css/roboto-fontface.css');
-
 html, body {
     height: 100%;
     font-family: 'Roboto', arial, sans-serif;

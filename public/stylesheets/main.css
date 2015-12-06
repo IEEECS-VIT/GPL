@@ -89,7 +89,7 @@ h1 {
 }
 
 .navbar {
-    background: #0D5B67;
+    background: #0D5B67 !important;
     -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.39);
     -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.39);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.39);
@@ -162,7 +162,7 @@ h1 {
 }
 
 .navbar .navbar-collapse .nav li a:hover {
-    color: #08c;
+    color: #08c !important;
 }
 
 .navbar .banner {
@@ -189,7 +189,7 @@ h1 {
 }
 
 footer {
-    background-color: #002834;
+    background-color: #002834 !important;
     margin-bottom: 0;
     height: 60px;
     -webkit-box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.39);
@@ -225,7 +225,7 @@ footer {
 .gplheadertext {
     position: absolute;
     margin: 10px;
-    color: #0D5B67;
+    color: #0D5B67 !important;
 }
 
 .logo {

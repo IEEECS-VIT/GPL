@@ -18,6 +18,7 @@
 
 var path = require('path');
 var passport = require('passport');
+var router = require('express').Router();
 var onRetrieve = function(req, res, next)
 {
     passport.authenticate(req.originalUrl.split('/')[2], function(err, user){
@@ -33,12 +34,13 @@ var onRetrieve = function(req, res, next)
         else
         {
             res.cookie('name', req.signedCookies.team.trim().toUpperCase(), {maxAge: 86400000, signed: true});
+            res.clearCookie('team', {});
+            res.clearCookie('phone', {});
             return res.redirect('/home/players');
         }
     })(req, res, next);
 };
 
-var router = require('express').Router();
 require(path.join(__dirname, '..', 'db', 'mongo-passport')); // pass passport for configuration
 
 router.get('/facebook', passport.authenticate('facebook', {scope: 'email'}));
