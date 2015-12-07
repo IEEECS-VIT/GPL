@@ -82,7 +82,7 @@ exports.getSquad = function (doc, callback)
             }
             else if (document.team.length)
             {
-                coach = parseInt(document.team.filter((arg) => arg > 'd')[0])
+                coach = parseInt(document.team.filter((arg) => arg > 'd')[0]);
 
                 async.map(document.squad, mongoFeatures.getPlayer, onFinish);
             }
@@ -193,6 +193,16 @@ exports.adminInfo = function (callback)
         }
         else
         {
+            delete result.database.ok;
+            delete result.database.extentFreeList;
+            result.database.indexSize = (result.database.indexSize / 1024).toFixed(2) + ' KB';
+            result.database.avgObjSize = (result.database.avgObjSize / 1024).toFixed(2) + ' KB';
+            result.database.dataSize = (result.database.dataSize / 1024 / 1024).toFixed(2) + ' MB';
+            result.database.fileSize = (result.database.fileSize / 1024 / 1024).toFixed(2) + ' MB';
+            result.database.storageSize = (result.database.storageSize / 1024 / 1024).toFixed(2) + ' MB';
+            result.database.version = result.database.dataFileVersion.major + '.' + result.database.dataFileVersion.minor;
+            delete result.database.dataFileVersion;
+
             callback(null, result);
         }
     };
@@ -237,7 +247,11 @@ exports.adminInfo = function (callback)
         },
         forgot: function (asyncCallback)
         {
-            mongoFeatures.getCount('info', {}, asyncCallback);
+            mongoFeatures.forgotCount({password: 0}, asyncCallback);
+        },
+        database: function(asyncCallback)
+        {
+            mongoFeatures.adminStats(asyncCallback);
         }
     };
 

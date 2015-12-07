@@ -19,6 +19,7 @@
 var i;
 var log;
 var flag;
+var result;
 var slice =
 {
     win: 1,
@@ -57,17 +58,17 @@ exports.getCount = function (col, query, callback)
 {
     switch(typeof col)
     {
-      case 'object':
-                    callback = query;
-                    query = col;
-                    col = match;
-                    break;
+        case 'object':
+            callback = query;
+            query = col;
+            col = match;
+            break;
 
-      case 'function':
-                      callback = col;
-                      query = {};
-                      col = match;
-                      break;
+        case 'function':
+            callback = col;
+            query = {};
+            col = match;
+            break;
     }
 
     db.collection(col).count(query, callback);
@@ -218,14 +219,12 @@ exports.forgotUser = function (doc, callback)
         }
         else if (docs.length)
         {
-            var results = "";
-
-            docs.map((arg) => (results += '<li>' + arg._id + ' (' + arg.authStrategy + ')' + '</li>'));
+            result = docs.reduce((a, b) => a + '<li>' + b._id + ' (' + b.authStrategy + ')' + '</li>', "");
 
             ref.other.header.to = doc.email;
             ref.other.header.subject = 'Time to get back in the game';
             ref.other.attach_alternative("The following teams were found in association with your details:<br><br>" +
-                "<ol>" + results + "</ol><br><br>Regards, <br>Team G.P.L<br>IEEE Computer Society");
+                "<ol>" + result + "</ol><br><br>Regards, <br>Team G.P.L<br>IEEE Computer Society");
 
             var onUser = function(err)
             {

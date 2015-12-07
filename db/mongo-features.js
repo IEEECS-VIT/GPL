@@ -153,3 +153,8 @@ exports.getPlayer = function (id, fields, callback)
 
     db.collection('players').find(query, fields).limit(1).next(onGetPlayer);
 };
+
+exports.adminStats = function(callback)
+{
+    db.stats(callback);
+};

@@ -44,7 +44,7 @@
             <nav id="navbar"></nav>
         </div>
         <div class="center-block">
-            <img id="errimg" src="http://res.cloudinary.com/gpl/general/404.png" height="50" class="img-responsive center-block">
+            <img id="errimg" src="http://res.cloudinary.com/gpl/general/error.png" height="50" class="img-responsive center-block">
         </div>
         <div class="container">
             <div class="text-warning text-center">
@@ -56,7 +56,9 @@
             <div class="text-muted text-info">
                 <%=message%>
                 <br>
-                <pre><%=stack%></pre>
+                <%if(stack){%>
+                    <pre><%=stack%></pre>
+                <%}%>
             </div>
         </div>
         <footer id="footer" class="footer">

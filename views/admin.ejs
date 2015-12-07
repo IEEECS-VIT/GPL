@@ -21,7 +21,7 @@
     <head>
         <meta charset="utf-8"/>
         <title>Admin | GPL</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href='/stylesheets/main.min.css' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap.min.css"/>
     </head>
@@ -29,17 +29,33 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <p class="text-center">Interests: <%= info.interest %></p><br/>
-                    <p class="text-center">Total: <%= info.total %></p><br/>
-                    <p class="text-center">FB: <%= info.facebook %></p><br/>
-                    <p class="text-center">G+: <%= info.google %></p><br/>
-                    <p class="text-center">Twitter: <%= info.twitter %></p><br/>
-                    <p class="text-center">Local: <%= info.local %></p><br/>
-                    <p class="text-center">Empty Team: <%= info.emptyTeam %></p><br/>
-                    <p class="text-center">Empty Squad: <%= info.emptySquad %></p><br/>
-                    <p class="text-center">Forgot Password: <%= info.forgot.password %></p><br/>
-                    <p class="text-center">Forgot User: <%= info.forgot.user %></p><br/>
-                    <p class="text-center">Features:</p>
+                    <p class="text-center"><b>Event status:</b></p>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered text-center">
+                            <thead>
+                                <tr>
+                                    <th>SNo</th>
+                                    <th>Item</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%var i = 0, ref = {'Interest': info.interest, 'Total': info.total, 'FB': info.facebook,
+                                            'G+': info.google, 'Twitter': info.twitter, 'Local': info.local,
+                                            'Empty team': info.emptyTeam, 'Empty squad': info.emptySquad,
+                                            'Forgot password': info.forgot.password, 'Forgot user': info.forgot.user};%>
+                                <% for(var arg in ref) {%>
+                                    <tr>
+                                        <td><%= ++i %></td>
+                                        <td><%= arg %></td>
+                                        <td><%= ref[arg] %></td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="text-center"><b>Features:</b></p>
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered text-center">
                             <thead>
@@ -50,11 +66,38 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% for(var i = 0; i < info.features.length; ++i) {%>
+                                <% for(i = 0; i < info.features.length; ++i) {%>
                                     <tr>
                                         <td><%= i + 1 %></td>
                                         <td><%= info.features[i].user %></td>
                                         <td><%= info.features[i].features %></td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="text-center"><b>Database:</b></p>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered text-center">
+                            <thead>
+                                <tr>
+                                    <th>SNo</th>
+                                    <th>Item</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%i = 0; ref = {'Name': info.database.db, 'Collections': info.database.collections, 'Objects': info.database.objects,
+                                        'Average record size': info.database.avgObjSize, 'Total Data': info.database.dataSize, 'Net Storage': info.database.storageSize,
+                                        'Extensions': info.database.numExtents, 'Indexes': info.database.indexes, 'Index size': info.database.indexSize, 'File size': info.database.fileSize,
+                                        'Cluster limit': info.database.nsSizeMB, 'Data version': info.database.version
+                                        };%>
+                                <% for(arg in ref) {%>
+                                    <tr>
+                                        <td><%= ++i %></td>
+                                        <td><%= arg %></td>
+                                        <td><%= ref[arg] %></td>
                                     </tr>
                                 <% } %>
                             </tbody>
