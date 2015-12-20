@@ -382,6 +382,9 @@ router.get('/logout', function (req, res){
     res.clearCookie('phone', {});
     res.clearCookie('admin', {});
     res.clearCookie('name', {});
+    res.clearCookie('lead', {});
+    res.clearCookie('dash', {});
+    res.clearCookie('stats', {});
     res.redirect('/login');
 });
 
@@ -499,7 +502,7 @@ router.get('/check/:name', function(req, res){
     }
     else
     {
-        res.end();
+        res.redirect('/');
     }
 });
 
