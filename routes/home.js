@@ -18,6 +18,7 @@
 
 var i;
 var log;
+var cost;
 var team;
 var squad;
 var stats;
@@ -89,7 +90,7 @@ router.get('/', authenticated, function (req, res){
                     {
                         doc.balls_for = parseInt(doc.balls_for / 6) + '.' + (doc.balls_for % 6);
                         doc.balls_against = parseInt(doc.balls_against / 6) + '.' + (doc.balls_against % 6);
-                        res.render('home', {results: {team : documents, user : doc}});
+                        res.render('home', {results: {team: documents, user: doc, msg: req.flash()}});
                     }
                 };
 
@@ -99,7 +100,7 @@ router.get('/', authenticated, function (req, res){
         else
         {
             res.clearCookie('name', {});
-            res.redirect('/home');
+            res.redirect('/login');
         }
     };
 
@@ -118,6 +119,7 @@ router.get('/leaderboard', authenticated, function (req, res){
             if (err)
             {
                 console.log(err.message);
+                req.flash('Unable to process the leaderboard at this time, please re-try');
                 res.redirect('/home');
             }
             else
@@ -149,6 +151,7 @@ router.get('/matches', authenticated, function (req, res){ // Deprecated
             if (err)
             {
                 console.log(err.message);
+                req.flash('Error fetching match details, please retry.');
                 res.redirect('/home');
             }
             else
@@ -158,6 +161,7 @@ router.get('/matches', authenticated, function (req, res){ // Deprecated
                     if (err)
                     {
                         console.log(err.message);
+                        req.flash('Error fetching match details, please retry.');
                         res.redirect('/home');
                     }
                     else
@@ -192,6 +196,7 @@ router.get('/match/:day', authenticated, function(req, res){
               if (err)
               {
                   console.log(err.message);
+                  req.flash('Error loading match ' + req.params.day + 'details.');
                   res.redirect('/home');
               }
               else
@@ -201,6 +206,7 @@ router.get('/match/:day', authenticated, function(req, res){
                       if (err)
                       {
                           console.log(err.message);
+                          req.flash('Error loading match ' + req.params.day + 'details.');
                           res.redirect('/home');
                       }
                       else
@@ -239,6 +245,7 @@ router.post('/getsquad', authenticated, function (req, res) {
         if (err)
         {
             console.log(err.message);
+            req.flash('That request encountered an error, please re-try.');
         }
 
         res.redirect('/home');
@@ -269,6 +276,7 @@ router.post('/players', function (req, res){
         if (err)
         {
             console.log(err.message);
+            req.flash('Your squad was not updated, please re-try.');
             res.redirect('/home/players');
         }
         else
@@ -323,13 +331,15 @@ router.post('/players', function (req, res){
         if (err)
         {
             console.log(err.message);
+            req.flash('Error creating team record.');
             res.redirect('/home');
         }
         else
         {
-            if (documents.reduce((a, b) => a + parseInt(b.Cost), 0) > 10000000)
+            if ((cost = documents.reduce((a, b) => a - parseInt(b.Cost), 10000000)) < 0)
             {
-                res.render('players', {err: "Cost Exceeded"});
+                req.flash('Cost exceeded!');
+                res.redirect('/home/players');
             }
 
             mongoUsers.updateUserTeam(credentials, players, stats, cost, onUpdate);
@@ -360,6 +370,7 @@ router.get('/players', authenticated, function (req, res){ // page for all playe
         if (err)
         {
             console.log(err.message);
+            req.flash('That request encountered an error, please re-try.');
             res.redirect('/home');
         }
         else
@@ -381,6 +392,8 @@ router.get('/players', authenticated, function (req, res){ // page for all playe
                 {
                     if (err)
                     {
+                        console.log(err.message);
+                        req.flash('Error loading player data.');
                         res.redirect('/home');
                     }
                     else
@@ -390,7 +403,7 @@ router.get('/players', authenticated, function (req, res){ // page for all playe
                             arg.image = ("https://res.cloudinary.com/gpl/players/" + arg.Type + "/" + arg._id + ".jpg");
                         });
 
-                        res.render('players', {Players: documents, csrfToken: req.csrfToken()});
+                        res.render('players', {Players: documents, csrfToken: req.csrfToken(), msg: req.flash()});
                     }
                 };
 
@@ -413,6 +426,7 @@ router.get('/team', authenticated, function (req, res){ // view the assigned pla
         if (err)
         {
             console.log(err.message);
+            req.flash('Error loading team data.');
             res.redirect('/home');
         }
         else
@@ -427,7 +441,7 @@ router.get('/team', authenticated, function (req, res){ // view the assigned pla
 router.get('/stats', authenticated, function (req, res){
     if(req.signedCookies.stats && req.signedCookies.day == process.env.DAY)
     {
-        res.render('stats', {stats : JSON.parse(req.signedCookies.stats)});
+        res.render('stats', {stats: JSON.parse(req.signedCookies.stats)});
     }
     else if (process.env.DAY >= '1')
     {
@@ -436,6 +450,7 @@ router.get('/stats', authenticated, function (req, res){
             if (err)
             {
                 console.log(err.message);
+                req.flash('Error loading stats');
                 res.redirect('/home');
             }
             else
@@ -490,6 +505,7 @@ router.get('/dashboard', authenticated, function (req, res){
             if (err)
             {
                 console.log(err.message);
+                req.flash('Error loading dashboard.');
                 res.redirect('/home');
             }
             else

@@ -64,15 +64,34 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser(process.env.COOKIE_SECRET || 'randomsecretstring', {signed: true}));
 app.use(session({secret: 'session secret key', resave: '', saveUninitialized: ''}));
+app.use(function(req, res, next){
+    if(!req.session.flash)
+    {
+        req.session.flash = [];
+    }
+
+    req.flash = function(content)
+    {
+        if(content)
+        {
+            this.session.flash.push(content);
+        }
+        else
+        {
+            return this.session.flash.pop();
+        }
+
+        next();
+    };
+});
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
 app.use(csurf());
 app.use('/', index);
 app.use('/auth', social);
 app.use('/home', home);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function (req, res) {
     res.redirect('/');
 });
 

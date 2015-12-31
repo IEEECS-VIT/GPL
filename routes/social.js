@@ -24,12 +24,12 @@ var onRetrieve = function(req, res, next)
     passport.authenticate(req.originalUrl.split('/')[2], function(err, user){
         if(err)
         {
-            console.log(err.message);
             return next(err);
         }
         if(!user)
         {
-            return res.redirect('/login');
+            req.flash('That request failed, please re-try.');
+            return res.redirect('/social/login');
         }
         else
         {

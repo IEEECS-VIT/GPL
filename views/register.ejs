@@ -54,9 +54,9 @@
                             Register with one of your social accounts <a href="/social/register">here</a>
                         </small>
                     </h1>
-                    <%if(response){%>
-                        <div class="alert alert-<%=type%> alert-dismissible fade in" role="alert">
-                            <strong>Oops!</strong> <%=response%>
+                    <%if(msg){%>
+                        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                            <strong>Oops!</strong> <%=msg%>
                         </div>
                     <%}%>
                     <form name="register" action="/register" method="post">

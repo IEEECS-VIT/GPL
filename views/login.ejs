@@ -73,9 +73,9 @@
                                 Login with one of your social accounts <a href="/social/login">here</a>
                             </small>
                         </h1>
-                        <%if(response){%>
-                            <div id="msg" class="alert alert-<%=type%> alert-dismissible fade in" role="alert">
-                                <strong>Oops!</strong> <%=response%>
+                        <%if(msg){%>
+                            <div id="msg" class="alert alert-danger alert-dismissible fade in" role="alert">
+                                <strong>Oops!</strong> <%=msg%>
                             </div>
                         <%}%>
                         <div class="row omb_row-sm-offset-3">

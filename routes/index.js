@@ -149,7 +149,7 @@ router.get('/login', function (req, res){
     }
     else
     {
-        res.render('login', {csrfToken: req.csrfToken(), response: ""});
+        res.render('login', {csrfToken: req.csrfToken(), msg: req.flash()});
     }
 });
 
@@ -182,7 +182,8 @@ router.post('/login', function (req, res){
         if (err)
         {
             console.log(err.message);
-            res.render('login', {response: "Incorrect credentials!", type:"danger", csrfToken: req.csrfToken()});
+            req.flash('Incorrect credentials!');
+            res.redirect('/login');
         }
         else if (doc)
         {
@@ -193,12 +194,14 @@ router.post('/login', function (req, res){
             }
             else
             {
-                res.render('login', {response: "Incorrect credentials!", type:"danger", csrfToken: req.csrfToken()});
+                req.flash('Incorrect credentials!');
+                res.redirect('/login');
             }
         }
         else
         {
-            res.render('login', {response: "Incorrect credentials!", type:"danger", csrfToken: req.csrfToken()});
+            req.flash('Incorrect credentials!');
+            res.redirect('/login');
         }
     };
 
@@ -206,7 +209,7 @@ router.post('/login', function (req, res){
 });
 
 router.get(/^\/forgot\/password|user$/, function (req, res){
-    res.render('forgot', {csrfToken: req.csrfToken(), mode: req.originalUrl.split('/')[2]});
+    res.render('forgot', {csrfToken: req.csrfToken(), mode: req.originalUrl.split('/')[2], msg: req.flash()});
 });
 
 router.post('/forgot/password', function (req, res){
@@ -224,7 +227,8 @@ router.post('/forgot/password', function (req, res){
         {
             if (err || !doc)
             {
-                console.log(err.message);
+                console.log((err || {}).message);
+                req.flash('Incorrect credentials!');
                 res.redirect('/forgot/password');
             }
             else
@@ -243,15 +247,16 @@ router.get('/reset/:token', function (req, res){
         if (err)
         {
             console.log(err.message);
+            req.flash('That password reset link had expired, or is invalid.');
             res.redirect('/forgot/password');
         }
         else if (!doc)
         {
-            res.redirect('/forgot');
+            res.redirect('/forgot/password');
         }
         else
         {
-            res.render('reset', {csrfToken: req.csrfToken()});
+            res.render('reset', {csrfToken: req.csrfToken(), msg: req.flash()});
         }
     };
 
@@ -268,11 +273,12 @@ router.post('/reset/:token', function (req, res){
             if (err)
             {
                 console.log(err.message);
+                req.flash('That request failed, please re-try.');
                 res.redirect('/reset/' + req.params.token);
             }
             else if (!doc)
             {
-                res.redirect('/forgot');
+                res.redirect('/forgot/password');
             }
             else
             {
@@ -284,6 +290,7 @@ router.post('/reset/:token', function (req, res){
     }
     else // passwords do not match
     {
+        req.flash('Passwords do not match.');
         res.redirect('/reset/' + req.params.token);
     }
 });
@@ -299,7 +306,8 @@ router.post('/forgot/user', function (req, res){
     {
         if (err || !docs)
         {
-            console.log(err.message);
+            console.log((err || {}).message);
+            req.flash('Invalid credentials!');
             res.redirect('/forgot/user');
         }
         else
@@ -314,7 +322,7 @@ router.post('/forgot/user', function (req, res){
 router.get('/register', function (req, res){
     if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH == 'users' && process.env.LIVE === '1')) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
     {                                                                                                                  // the schedule has been constructed and the game engine is match ready.
-        res.render('register', {response: "", csrfToken: req.csrfToken()});
+        res.render('register', {msg: req.flash(), csrfToken: req.csrfToken()});
     }
     else if (req.signedCookies.name)
     {
@@ -335,7 +343,8 @@ router.post('/register', function (req, res){
         if (err)
         {
             console.log(err.message);
-            res.render('register', {response: "Unknown error, please try again", type:"danger", csrfToken: req.csrfToken()});
+            req.flash('Unknown error, please try again');
+            res.redirect('/register');
         }
         else
         {
@@ -356,7 +365,8 @@ router.post('/register', function (req, res){
                     if (err)
                     {
                         console.log(err.message);
-                        res.render('register', {response: "Team Name Already Exists", type: "danger", csrfToken: req.csrfToken()});
+                        req.flash('This team name already exists.');
+                        res.redirect('/register');
                     }
                     else
                     {
@@ -369,7 +379,8 @@ router.post('/register', function (req, res){
             }
             else
             {
-                res.render('register', {response: "Passwords do not match", type: "danger", csrfToken: req.csrfToken()});
+                req.flash('Passwords do not match');
+                res.redirect('/register');
             }
         }
     };
@@ -498,7 +509,7 @@ router.get('/check/:name', function(req, res){
     {
         mongoUsers.fetchUser({_id: req.params.name.trim().toUpperCase()}, function(err, result){
             res.send(!result);
-        })
+        });
     }
     else
     {
