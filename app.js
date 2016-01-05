@@ -30,14 +30,16 @@ var log;
 var error;
 var status;
 var path = require('path');
-var csurf = require('csurf');
-var logger = require('morgan');
-var passport = require('passport');
-var favicon = require('serve-favicon');
+var csurf = require('csurf')();
 var bodyParser = require('body-parser');
-var session = require('express-session');
-var cookieParser = require('cookie-parser');
-var loggerLevel = process.env.LOGGER_LEVEL || 'dev';
+var json = bodyParser.json();
+var passport = require('passport').initialize();
+var url = bodyParser.urlencoded({extended: true});
+var logger = require('morgan')(process.env.LOGGER_LEVEL || 'dev');
+var stat = express.static(path.join(__dirname, '/public'), {maxAge : 86400000 * 30});
+var favicon = require('serve-favicon')(path.join(__dirname, 'public', 'images', 'favicon.ico'));
+var session = require('express-session')({secret: 'session secret key', resave: '', saveUninitialized: ''});
+var cookieParser = require('cookie-parser')(process.env.COOKIE_SECRET || 'randomsecretstring', {signed: true});
 var home = require(path.join(__dirname, 'routes', 'home'));
 var index = require(path.join(__dirname, 'routes', 'index'));
 var social = require(path.join(__dirname, 'routes', 'social'));
@@ -52,18 +54,18 @@ if (process.env.LOGENTRIES_TOKEN)
     log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
-app.use(logger(loggerLevel));
+app.use(logger);
 app.set('title', 'GPL');
-app.use(express.static(path.join(__dirname, '/public'), {maxAge : 86400000 * 30}));
-app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+app.use(stat);
+app.use(favicon);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.enable('trust proxy');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(cookieParser(process.env.COOKIE_SECRET || 'randomsecretstring', {signed: true}));
-app.use(session({secret: 'session secret key', resave: '', saveUninitialized: ''}));
+app.use(json);
+app.use(url);
+app.use(cookieParser);
+app.use(session);
 app.use(function(req, res, next){
     if(!req.session.flash)
     {
@@ -84,8 +86,8 @@ app.use(function(req, res, next){
         next();
     };
 });
-app.use(passport.initialize());
-app.use(csurf());
+app.use(passport);
+app.use(csurf);
 app.use('/', index);
 app.use('/auth', social);
 app.use('/home', home);
