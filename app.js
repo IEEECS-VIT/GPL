@@ -31,6 +31,7 @@ var error;
 var status;
 var path = require('path');
 var csurf = require('csurf')();
+var helmet = require('helmet')();
 var bodyParser = require('body-parser');
 var json = bodyParser.json();
 var passport = require('passport').initialize();
@@ -54,6 +55,7 @@ if (process.env.LOGENTRIES_TOKEN)
     log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
+app.use(helmet);
 app.use(logger);
 app.set('title', 'GPL');
 app.use(stat);
