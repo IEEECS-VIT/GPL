@@ -16,11 +16,6 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var express = require('express');
-var app = express();
-
-app.use(require('compression')());
-
 if(!process.env.NODE_ENV)
 {
     require('dotenv').load();
@@ -29,46 +24,29 @@ if(!process.env.NODE_ENV)
 var log;
 var error;
 var status;
+var newrelic;
 var path = require('path');
 var csurf = require('csurf')();
+var each = require('async').each;
 var helmet = require('helmet')();
+var express = require('express');
+var app = express();
 var bodyParser = require('body-parser');
 var json = bodyParser.json();
+var compression = require('compression')();
 var passport = require('passport').initialize();
 var url = bodyParser.urlencoded({extended: true});
-var logger = require('morgan')(process.env.LOGGER_LEVEL || 'dev');
-var stat = express.static(path.join(__dirname, '/public'), {maxAge : 86400000 * 30});
-var favicon = require('serve-favicon')(path.join(__dirname, 'public', 'images', 'favicon.ico'));
-var session = require('express-session')({secret: 'session secret key', resave: '', saveUninitialized: ''});
-var cookieParser = require('cookie-parser')(process.env.COOKIE_SECRET || 'randomsecretstring', {signed: true});
 var home = require(path.join(__dirname, 'routes', 'home'));
 var index = require(path.join(__dirname, 'routes', 'index'));
 var social = require(path.join(__dirname, 'routes', 'social'));
+var logger = require('morgan')(process.env.LOGGER_LEVEL || 'dev');
+var stat = express.static(path.join(__dirname, '/public'), {maxAge: 86400000 * 30});
+var favicon = require('serve-favicon')(path.join(__dirname, 'public', 'images', 'favicon.ico'));
+var session = require('express-session')({secret: 'session secret key', resave: '', saveUninitialized: ''});
+var cookieParser = require('cookie-parser')(process.env.COOKIE_SECRET || 'randomsecretstring', {signed: true});
 
-if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
+var flash = function(req, res, next)
 {
-    app.locals.newrelic = require('newrelic');
-}
-
-if (process.env.LOGENTRIES_TOKEN)
-{
-    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
-}
-
-app.use(helmet);
-app.use(logger);
-app.set('title', 'GPL');
-app.use(stat);
-app.use(favicon);
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-app.enable('trust proxy');
-app.use(json);
-app.use(url);
-app.use(cookieParser);
-app.use(session);
-app.use(function(req, res, next){
     if(!req.session.flash)
     {
         req.session.flash = [];
@@ -87,9 +65,38 @@ app.use(function(req, res, next){
 
         next();
     };
+};
+
+if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
+{
+    app.locals.newrelic = require('newrelic');
+}
+
+if (process.env.LOGENTRIES_TOKEN)
+{
+    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
+}
+
+if (newrelic)
+{
+    app.locals.newrelic = newrelic;
+}
+
+app.use(function(req, res, next){
+    each([compression, helmet, logger, stat, favicon, json, url, session], function(middleware, callback){
+        middleware(req, res, callback);
+    }, next);
 });
-app.use(passport);
-app.use(csurf);
+app.set('title', 'GPL');
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.enable('trust proxy');
+app.use(function(req, res, next){
+    each([cookieParser, flash, passport, csurf], function(middleware, callback){
+        middleware(req, res, callback);
+    }, next);
+});
 app.use('/', index);
 app.use('/auth', social);
 app.use('/home', home);
@@ -107,6 +114,7 @@ app.use(function (err, req, res, next) {
     }
 
     status = err.status || 500;
+
     res.status(status);
     res.clearCookie('team', {});
     res.clearCookie('phone', {});

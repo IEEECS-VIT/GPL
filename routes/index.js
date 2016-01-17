@@ -181,22 +181,28 @@ router.post('/login', function (req, res){
     {
         if (err)
         {
-            console.log(err.message);
             req.flash('Incorrect credentials!');
             res.redirect('/login');
         }
         else if (doc)
         {
-            if (bcrypt.compareSync(req.body.password, doc.password_hash))
-            {
-                res.cookie(ref[doc.authStrategy][0], doc._id, {signed: true, maxAge: 86400000});
-                res.redirect(ref[doc.authStrategy][1]);
-            }
-            else
-            {
-                req.flash('Incorrect credentials!');
-                res.redirect('/login');
-            }
+            bcrypt.compare(req.body.password, doc.password_hash, function(err, result){
+                if(err)
+                {
+                    req.flash('An unexpected error has occurred, please re-try.');
+                    res.redirect('/login');
+                }
+                else if(result)
+                {
+                    res.cookie(ref[doc.authStrategy][0], doc._id, {signed: true, maxAge: 86400000});
+                    res.redirect(ref[doc.authStrategy][1]);
+                }
+                else
+                {
+                    req.flash('Incorrect credentials!');
+                    res.redirect('/login');
+                }
+            });
         }
         else
         {
@@ -227,7 +233,6 @@ router.post('/forgot/password', function (req, res){
         {
             if (err || !doc)
             {
-                console.log((err || {}).message);
                 req.flash('Incorrect credentials!');
                 res.redirect('/forgot/password');
             }
@@ -246,7 +251,6 @@ router.get('/reset/:token', function (req, res){
     {
         if (err)
         {
-            console.log(err.message);
             req.flash('That password reset link had expired, or is invalid.');
             res.redirect('/forgot/password');
         }
@@ -266,13 +270,10 @@ router.get('/reset/:token', function (req, res){
 router.post('/reset/:token', function (req, res){
     if (req.body.password === req.body.confirm)
     {
-        var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-
         var onReset = function (err, doc)
         {
             if (err)
             {
-                console.log(err.message);
                 req.flash('That request failed, please re-try.');
                 res.redirect('/reset/' + req.params.token);
             }
@@ -286,7 +287,17 @@ router.post('/reset/:token', function (req, res){
             }
         };
 
-        mongoUsers.resetPassword(req.params.token, hash, onReset);
+        bcrypt.hash(req.body.password, 10, function(err, hash){
+            if(err)
+            {
+                req.flash('An unexpected error has occurred, and your password could not be rest. Please re-try.');
+                res.redirect('/reset/' + req.params.token);
+            }
+            else
+            {
+                mongoUsers.resetPassword(req.params.token, hash, onReset);
+            }
+        });
     }
     else // passwords do not match
     {
@@ -306,7 +317,6 @@ router.post('/forgot/user', function (req, res){
     {
         if (err || !docs)
         {
-            console.log((err || {}).message);
             req.flash('Invalid credentials!');
             res.redirect('/forgot/user');
         }
@@ -342,7 +352,6 @@ router.post('/register', function (req, res){
     {
         if (err)
         {
-            console.log(err.message);
             req.flash('Unknown error, please try again');
             res.redirect('/register');
         }
@@ -350,21 +359,10 @@ router.post('/register', function (req, res){
         {
             if (req.body.confirm === req.body.password)
             {
-                newUser = record;
-                newUser.dob = new Date();
-                newUser.email = req.body.email;
-                newUser.phone = req.body.phone;
-                newUser.authStrategy = 'local';
-                newUser.team_no = parseInt(number) + 1;
-                newUser.manager_name = req.body.manager_name; // TODO: treat manager_name as _id, to make the creation of multiple teams for one manager possible
-                newUser._id = req.body.team.trim().toUpperCase();
-                newUser.password_hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-
                 var onInsert = function (err)
                 {
                     if (err)
                     {
-                        console.log(err.message);
                         req.flash('This team name already exists.');
                         res.redirect('/register');
                     }
@@ -375,7 +373,27 @@ router.post('/register', function (req, res){
                     }
                 };
 
-                mongoUsers.insert(process.env.MATCH, newUser, onInsert);
+                newUser = record;
+                newUser.dob = new Date();
+                newUser.email = req.body.email;
+                newUser.phone = req.body.phone;
+                newUser.authStrategy = 'local';
+                newUser.team_no = parseInt(number) + 1;
+                newUser.manager_name = req.body.manager_name; // TODO: treat manager_name as _id, to make the creation of multiple teams for one manager possible
+                newUser._id = req.body.team.trim().toUpperCase();
+
+                bcrypt.hash(req.body.password, 10, function(err, hash){
+                    if(err)
+                    {
+                        req.flash('An unexpected error occurred and your details could not be saved. Please re-try.');
+                        res.redirect('/register');
+                    }
+                    else
+                    {
+                        newUser.password_hash = hash;
+                        mongoUsers.insert(process.env.MATCH, newUser, onInsert);
+                    }
+                });
             }
             else
             {
@@ -406,7 +424,6 @@ router.get('/admin', function (req, res){
         {
             if (err)
             {
-                console.log(err.message);
                 res.redirect('/');
             }
             else if (doc)
@@ -434,7 +451,7 @@ router.get('/social/login', function (req, res){
     }
     else
     {
-        res.render('social', {mode: +!req.signedCookies.team, type : 'login', csrfToken : req.csrfToken()});
+        res.render('social', {mode: +!req.signedCookies.team, type: 'login', csrfToken: req.csrfToken()});
     }
 });
 
@@ -464,7 +481,7 @@ router.post('/social/register', function (req, res){
     res.redirect('/social/register');
 });
 
-router.get(/\/developers?/, function (req, res){
+router.get('/developers', function (req, res){
     res.render('developers', {obj: developers});
 });
 
@@ -492,8 +509,12 @@ router.get('/simulate', function (req, res){
     }
 });
 
-router.get(/^\/rules|privacy$/, function (req, res){
-    res.render(req.originalUrl.slice(1), {session : +!req.signedCookies.name});
+router.get('/rules', function (req, res){
+    res.render('rules', {session : +!req.signedCookies.name});
+});
+
+router.get('/privacy', function (req, res){
+    res.render('privacy', {session : +!req.signedCookies.name});
 });
 
 router.get('/trailer', function (req, res){ // trailer page
@@ -507,8 +528,8 @@ router.get('/schedule', function (req, res){ // schedule page
 router.get('/check/:name', function(req, res){
     if(req.headers.referer && req.headers.referer.split('/')[2] === req.headers.host)
     {
-        mongoUsers.fetchUser({_id: req.params.name.trim().toUpperCase()}, function(err, result){
-            res.send(!result);
+        mongoUsers.fetchUser({_id: req.params.name.trim().toUpperCase()}, function(err, user){
+            res.send(!user);
         });
     }
     else

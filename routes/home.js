@@ -64,7 +64,6 @@ router.get('/', authenticated, function (req, res){
     {
         if (err)
         {
-            console.log(err.message);
             res.redirect('/home');
         }
         else if (doc)
@@ -195,7 +194,6 @@ router.get('/match/:day', authenticated, function(req, res){
           {
               if (err)
               {
-                  console.log(err.message);
                   req.flash('Error loading match ' + req.params.day + 'details.');
                   res.redirect('/home');
               }
@@ -205,7 +203,6 @@ router.get('/match/:day', authenticated, function(req, res){
                   {
                       if (err)
                       {
-                          console.log(err.message);
                           req.flash('Error loading match ' + req.params.day + 'details.');
                           res.redirect('/home');
                       }
@@ -244,7 +241,6 @@ router.post('/getsquad', authenticated, function (req, res) {
     {
         if (err)
         {
-            console.log(err.message);
             req.flash('That request encountered an error, please re-try.');
         }
 
@@ -261,6 +257,7 @@ router.post('/players', function (req, res){
     {
         Cost: 1
     };
+    cost = 10000000;
     credentials =
     {
         _id: req.signedCookies.name
@@ -275,7 +272,6 @@ router.post('/players', function (req, res){
     {
         if (err)
         {
-            console.log(err.message);
             req.flash('Your squad was not updated, please re-try.');
             res.redirect('/home/players');
         }
@@ -330,19 +326,34 @@ router.post('/players', function (req, res){
     {
         if (err)
         {
-            console.log(err.message);
             req.flash('Error creating team record.');
             res.redirect('/home');
         }
         else
         {
-            if ((cost = documents.reduce((a, b) => a - parseInt(b.Cost), 10000000)) < 0)
+            var reduction = function(arg)
             {
-                req.flash('Cost exceeded!');
-                res.redirect('/home/players');
-            }
+                cost -= parseInt(arg.Cost);
+            };
+            var onReduce = function(err)
+            {
+                if(err)
+                {
+                    req.flash('An unexpected error occurred, please re-try.');
+                    res.redirect('/players');
+                }
+                else if(cost < 0)
+                {
+                    req.flash('Cost exceeded!');
+                    res.redirect('/home/players');
+                }
+                else
+                {
+                    mongoUsers.updateUserTeam(credentials, players, stats, cost, onUpdate);
+                }
+            };
 
-            mongoUsers.updateUserTeam(credentials, players, stats, cost, onUpdate);
+            async.each(documents, reduction, onReduce);
         }
     };
 
@@ -369,7 +380,6 @@ router.get('/players', authenticated, function (req, res){ // page for all playe
     {
         if (err)
         {
-            console.log(err.message);
             req.flash('That request encountered an error, please re-try.');
             res.redirect('/home');
         }
@@ -392,18 +402,30 @@ router.get('/players', authenticated, function (req, res){ // page for all playe
                 {
                     if (err)
                     {
-                        console.log(err.message);
                         req.flash('Error loading player data.');
                         res.redirect('/home');
                     }
                     else
                     {
-                        documents.map((arg) => {
+                        var map = function(arg)
+                        {
                             arg.active = false;
                             arg.image = ("https://res.cloudinary.com/gpl/players/" + arg.Type + "/" + arg._id + ".jpg");
-                        });
+                        };
 
-                        res.render('players', {Players: documents, csrfToken: req.csrfToken(), msg: req.flash()});
+                        var onMap = function(err, result)
+                        {
+                            if(err)
+                            {
+                                res.redirect('/players');
+                            }
+                            else
+                            {
+                                res.render('players', {Players: result, csrfToken: req.csrfToken(), msg: req.flash()});
+                            }
+                        };
+
+                        async.map(documents, map, onMap);
                     }
                 };
 
@@ -425,7 +447,6 @@ router.get('/team', authenticated, function (req, res){ // view the assigned pla
     {
         if (err)
         {
-            console.log(err.message);
             req.flash('Error loading team data.');
             res.redirect('/home');
         }
@@ -449,7 +470,6 @@ router.get('/stats', authenticated, function (req, res){
         {
             if (err)
             {
-                console.log(err.message);
                 req.flash('Error loading stats');
                 res.redirect('/home');
             }
@@ -504,7 +524,6 @@ router.get('/dashboard', authenticated, function (req, res){
         {
             if (err)
             {
-                console.log(err.message);
                 req.flash('Error loading dashboard.');
                 res.redirect('/home');
             }

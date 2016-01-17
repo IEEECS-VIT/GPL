@@ -19,6 +19,7 @@
 var log;
 var server;
 var path = require('path');
+var exit = require('forever').stop;
 var debug = require('debug')('GPL');
 var mongo = require('mongodb').MongoClient.connect;
 var app = require(path.join(__dirname, '..', 'app'));
@@ -74,5 +75,5 @@ process.on('SIGINT', function(err){
     }
 
     db.close();
-    process.exit(0);
+    exit();
 });
