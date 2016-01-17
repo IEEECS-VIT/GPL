@@ -36,7 +36,7 @@ var async = require('async');
 var router = require('express').Router();
 var authenticated = function(req, res, next)
 {
-    if((process.env.LIVE === '1') && (req.signedCookies.name || req.signedCookies.admin))
+    if(req.signedCookies.name || req.signedCookies.admin)
     {
         next();
     }
@@ -82,7 +82,6 @@ router.get('/', authenticated, function (req, res){
                 {
                     if (err)
                     {
-                        console.log(err.message);
                         res.redirect('/home');
                     }
                     else
@@ -331,9 +330,10 @@ router.post('/players', function (req, res){
         }
         else
         {
-            var reduction = function(arg)
+            var reduction = function(arg, callback)
             {
                 cost -= parseInt(arg.Cost);
+                callback();
             };
             var onReduce = function(err)
             {
