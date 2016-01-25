@@ -83,7 +83,7 @@ if (newrelic)
 }
 
 app.use(function(req, res, next){
-    each([compression, helmet, logger, stat, favicon, json, url, session], function(middleware, callback){
+    each([compression, helmet, logger, stat, favicon, json, url, session, passport], function(middleware, callback){
         middleware(req, res, callback);
     }, next);
 });
@@ -93,7 +93,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.enable('trust proxy');
 app.use(function(req, res, next){
-    each([cookieParser, flash, passport, csurf], function(middleware, callback){
+    each([cookieParser, flash, csurf], function(middleware, callback){
         middleware(req, res, callback);
     }, next);
 });

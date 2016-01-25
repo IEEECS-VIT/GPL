@@ -69,6 +69,7 @@ if (process.env.LOGENTRIES_TOKEN)
 }
 
 router.get('/', function (req, res){
+    console.log('router callback');
     if (req.signedCookies.name)
     {
         if (log)
