@@ -3241,8 +3241,8 @@ module.exports =
         "this with an open face, placing it to the left of point and right of third man. Top shot",
         "only slightly short of a length, he rocks back to turn this into a proper short ball and pulls this between " +
         "long-on an deep midwicket for a scorching four. The cheerleaders there nearly cleaned up",
-        "Rain finally gets four for his chip over cover. They have a deep cover placed for this shot, but this time he " +
-        "places it straight of the man",
+        "he finally gets four for his chip over cover. They have a deep cover placed for this shot, but this time he " +
+        "places it straight of the fielder",
         "this is proper short ball, and he has cleared the front leg to pull this to deep square for four",
         "gets a freebie first up. A leg-stump half-volley that he glances away for four.",
         "top edge over the keeper's head"

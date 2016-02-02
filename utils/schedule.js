@@ -24,13 +24,8 @@ if(!process.env.NODE_ENV)
 {
     require('dotenv').load({path : path.join(__dirname, '..', '.env')});
 }
-if (process.env.LOGENTRIES_TOKEN)
-{
-    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
-}
 
 var match = process.env.MATCH;
-var mongoUri = process.env.MONGO;
 
 var onConnect = function (err, database)
 {
@@ -44,7 +39,7 @@ var onConnect = function (err, database)
         {
             if (err)
             {
-                console.log(err.message);
+                console.error(err.message);
             }
             else
             {
@@ -148,4 +143,4 @@ var onConnect = function (err, database)
     }
 };
 
-mongo(mongoUri, onConnect);
+mongo(process.env.MONGO, onConnect);

@@ -611,7 +611,7 @@ module.exports =
         "short of a length, and beats Smith as he backs away",
         "short of a length, seams in a touch, beats the inside edge, hits the pad, draws another dot",
         "big shout. This is short of a length, outside off, and skids through and seams in to hit him dead in front. The " +
-        "umpire doesn't doesn't give him. He thinks it is too high as this has hit him on the knee roll, but his leg is " +
+        "umpire doesn't give him. He thinks it is too high as this has hit him on the knee roll, but his leg is " +
         "bent and he is deep in the crease. Awfully close, this. Hitting the top of middle, show the reviews",
         "flighted outside off, looks for the slog sweep and is beaten comprehensively",
         "looks for the reverse-sweep, gets an edge that falls short of short third man. He has not only played an ordinary " +

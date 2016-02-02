@@ -26,8 +26,8 @@ var individual = 0;
 var path = require('path');
 var async = require('async');
 var days = [1, 2, 3, 4, 5, 6, 7];
-var email = require(path.join(__dirname, '..', 'utils', 'email'));
 var simulator = require(path.join(__dirname, 'simulation'));
+var email = require(path.join(__dirname, '..', 'utils', 'email'));
 
 if(!process.env.NODE_ENV)
 {
@@ -64,7 +64,7 @@ exports.initSimulation = function (day, masterCallback)
             {
                 var getEachRating = function (elt, subCallback)
                 {
-                    db.collection('players').find({_id: elt}).limit(1).next(subCallback);
+                    database.collection('players').find({_id: elt}).limit(1).next(subCallback);
                 };
 
                 var onGetRating = function (err, results)
@@ -93,7 +93,7 @@ exports.initSimulation = function (day, masterCallback)
                 }
             };
 
-            db.collection(match).find(query).limit(1).next(getRating);
+            database.collection(match).find(query).limit(1).next(getRating);
         };
 
         var updateData = function (err, newData)
@@ -169,7 +169,7 @@ exports.initSimulation = function (day, masterCallback)
                 delete newUserDoc.s;
                 delete newUserDoc.names;
 
-                db.collection(match).updateOne({_id: newUserDoc._id}, newUserDoc, asyncCallback);
+                database.collection(match).updateOne({_id: newUserDoc._id}, newUserDoc, asyncCallback);
             };
 
             var updateMatch = function (newMatchDoc, asyncCallback)
@@ -180,7 +180,7 @@ exports.initSimulation = function (day, masterCallback)
                     points = newMatchDoc.MoM.points;
                 }
 
-                db.collection('matchday' + day).updateOne({_id: newMatchDoc._id}, newMatchDoc, asyncCallback);
+                database.collection('matchday' + day).updateOne({_id: newMatchDoc._id}, newMatchDoc, asyncCallback);
             };
 
             var parallelTasks2 =
@@ -231,7 +231,7 @@ exports.initSimulation = function (day, masterCallback)
             }
             if (err)
             {
-                console.log(err.message);
+                console.error(err.message);
                 if (log)
                 {
                     log.log('debug', {Error: err.message});
@@ -261,7 +261,7 @@ exports.initSimulation = function (day, masterCallback)
                     {
                         if (err)
                         {
-                            console.log(err.message);
+                            console.error(err.message);
                         }
                         else
                         {
@@ -274,7 +274,7 @@ exports.initSimulation = function (day, masterCallback)
  */         }
         };
 
-        db.collection('stats').updateOne({_id: 'stats'}, {$set: stats}, onUpdate);
+        database.collection('stats').updateOne({_id: 'stats'}, {$set: stats}, onUpdate);
     };
 
     var getAllMatches = function (err, callback)
@@ -290,14 +290,14 @@ exports.initSimulation = function (day, masterCallback)
                 break;
         }
 
-        db.collection(collection).find().toArray(callback)
+        database.collection(collection).find().toArray(callback)
     };
 
     var ForAllMatches = function (err, docs)
     {
         if (err)
         {
-            console.log(err.message);
+            console.error(err.message);
             if (log)
             {
                 log.log('debug', {Error: err.message});
@@ -314,7 +314,7 @@ exports.initSimulation = function (day, masterCallback)
     {
         if (err)
         {
-            console.log(err.message);
+            console.error(err.message);
         }
         else
         {
@@ -323,5 +323,5 @@ exports.initSimulation = function (day, masterCallback)
         }
     };
 
-    db.collection('stats').find().limit(1).next(onGetInfo);
+    database.collection('stats').find().limit(1).next(onGetInfo);
 };

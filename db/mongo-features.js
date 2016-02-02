@@ -100,7 +100,7 @@ exports.match = function (day, team, callback)
         {
             if (err)
             {
-                console.log(err.message);
+                console.error(err.message);
             }
             else
             {

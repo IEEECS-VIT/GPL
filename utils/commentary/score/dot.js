@@ -2253,7 +2253,7 @@ module.exports =
         "another slower delivery and again, it beats the batsman's attempted cut shot",
         "much slower this time, he leans forward and looks to push it to mid-on but gets a leading edge towards cover",
         "flatter and quicker, he defends it towards point this time", "slower and wider outside off, he waits and cuts " +
-    "it straight to point",
+        "it straight to point",
         "this was there for a hit! Full and wide outside off and he drives it firmly, but hits it straight to mid-off",
         "slower delivery again! He can only defend it back down the pitch",
         "he wanted it to send it to marine drive, but ends up getting an inside edge on to his pads",

@@ -116,7 +116,7 @@ router.get('/leaderboard', authenticated, function (req, res){
         {
             if (err)
             {
-                console.log(err.message);
+                console.error(err.message);
                 req.flash('Unable to process the leaderboard at this time, please re-try');
                 res.redirect('/home');
             }
@@ -148,7 +148,7 @@ router.get('/matches', authenticated, function (req, res){ // Deprecated
         {
             if (err)
             {
-                console.log(err.message);
+                console.error(err.message);
                 req.flash('Error fetching match details, please retry.');
                 res.redirect('/home');
             }
@@ -158,7 +158,7 @@ router.get('/matches', authenticated, function (req, res){ // Deprecated
                 {
                     if (err)
                     {
-                        console.log(err.message);
+                        console.error(err.message);
                         req.flash('Error fetching match details, please retry.');
                         res.redirect('/home');
                     }

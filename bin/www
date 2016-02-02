@@ -23,11 +23,10 @@ var exit = require('forever').stop;
 var debug = require('debug')('GPL');
 var mongo = require('mongodb').MongoClient.connect;
 var app = require(path.join(__dirname, '..', 'app'));
-var mongoUri = process.env.MONGO || 'mongodb://127.0.0.1:27017/GPL';
 
 if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 {
-    require('newrelic');
+    require(path.join(__dirname, '..', 'utils', 'newrelic'));
 }
 
 if (process.env.LOGENTRIES_TOKEN)
@@ -50,7 +49,7 @@ var onBind = function ()
     }
 
     debug('Node.js Express server listening on port ' + server.address().port);
-    debug('Using MongoDB: ' + mongoUri);
+    debug('Using MongoDB: ' + process.env.MONGO);
 
     if (process.env.HOSTNAME)
     {
@@ -58,7 +57,7 @@ var onBind = function ()
     }
 };
 
-mongo(mongoUri, function(err, database){
+mongo(process.env.MONGO, function(err, database){
     if(err)
     {
         throw process.env.NODE_ENV ? 'process.env.MONGO does not contain a valid connection URI.' : 'The mongod localhost server is not running on port 27017.';
@@ -71,9 +70,26 @@ mongo(mongoUri, function(err, database){
 process.on('SIGINT', function(err){
     if(err)
     {
-        console.log(err.message);
+        console.error(err);
     }
 
+    db.close();
+    exit();
+});
+
+process.on('SIGTERM', function(err){
+    if(err)
+    {
+        console.error(err);
+    }
+
+    db.close();
+    exit();
+});
+
+process.on('uncaughtException', function (err) {
+    console.error((new Date).toUTCString() + ' uncaughtException:', err.message);
+    console.error(err.stack);
     db.close();
     exit();
 });

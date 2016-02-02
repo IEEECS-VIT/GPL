@@ -601,6 +601,7 @@ exports.simulate = function (data, callback)
                             {
                                 delivery_score = 6;
                             }
+
                             switch (delivery_score)
                             {
                                 case 0:
@@ -612,16 +613,13 @@ exports.simulate = function (data, callback)
                                     control[strike[+strike_index]] *= parseFloat(((balls[strike[+strike_index]] - 1) / (balls[strike[+strike_index]])).toFixed(2));
                                     break;
 
-                                case 1:
-                                    data.match.commentary[data.match.commentary.length - 1] += ('1 run, ' + rand(one));
+                                case 1: data.match.commentary[data.match.commentary.length - 1] += ('1 run, ' + rand(one));
                                     break;
 
-                                case 2:
-                                    data.match.commentary[data.match.commentary.length - 1] += ('2 runs, ' + rand(two));
+                                case 2: data.match.commentary[data.match.commentary.length - 1] += ('2 runs, ' + rand(two));
                                     break;
 
-                                case 3:
-                                    data.match.commentary[data.match.commentary.length - 1] += ('3 runs, ' + rand(three));
+                                case 3: data.match.commentary[data.match.commentary.length - 1] += ('3 runs, ' + rand(three));
                                     break;
 
                                 case 4:
@@ -745,7 +743,7 @@ exports.simulate = function (data, callback)
                     data.match.commentary.push('And that brings an end to ' + team_object[+!toss_index].bowl_name[current_bowler] + '\'s spell.  ');
                 }
 
-                last_five_overs.unshift(previous_over);
+                last_five_overs.unshift(previous_over); // unshift adds a new element at the beginning of the array
 
                 if (i > 3)
                 {
@@ -1061,10 +1059,10 @@ exports.simulate = function (data, callback)
             data.team[+!winner].scores.push(Total[+!winner]);
             data.team[+winner].overs.push(Overs[+winner]);
             data.team[+!winner].overs.push(Overs[+!winner]);
-            data.team[+winner].wickets.push(wickets[+winner]);
-            data.team[+!winner].wickets.push(wickets[+!winner]);
             data.team[+!winner].runs_for += Total[+!winner];
             data.team[+!winner].balls_for += Overs[+!winner];
+            data.team[+winner].wickets.push(wickets[+winner]);
+            data.team[+!winner].wickets.push(wickets[+!winner]);
             data.team[+winner].runs_against += Total[+!winner];
             data.team[+!winner].runs_against += Total[+winner];
             data.team[+winner].balls_against += Overs[+!winner];

@@ -69,7 +69,6 @@ if (process.env.LOGENTRIES_TOKEN)
 }
 
 router.get('/', function (req, res){
-    console.log('router callback');
     if (req.signedCookies.name)
     {
         if (log)
@@ -125,7 +124,7 @@ router.post('/interest', function (req, res){
     {
         if (err)
         {
-            console.log(err.message);
+            console.error(err.message);
         }
         else
         {
@@ -380,7 +379,7 @@ router.post('/register', function (req, res){
                 newUser.phone = req.body.phone;
                 newUser.authStrategy = 'local';
                 newUser.team_no = parseInt(number) + 1;
-                newUser.manager_name = req.body.manager_name; // TODO: treat manager_name as _id, to make the creation of multiple teams for one manager possible
+                newUser.manager_name = req.body.manager_name; // TODO: treat manager_name / email address as _id, to make the creation of multiple teams for one manager possible
                 newUser._id = req.body.team.trim().toUpperCase();
 
                 bcrypt.hash(req.body.password, 10, function(err, hash){

@@ -7,8 +7,8 @@ graVITas Premier League
 The graVITas Premier League code repository
 
 This website is hosted [here](http://www.gravitaspremierleague.com)
-
-Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues) 
+For exhaustive documentation, check out the project [wiki](https://github.com/IEEECS-VIT/GPL/wiki)
+Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues)
 
 #### Instructions for Installation:
 ###### Install the latest edition of Node.js from [here] (https://nodejs.org/en/download/)
@@ -16,12 +16,12 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
 ###### Install all dependencies
 
     $ npm install --silent
-    
+
 ###### Install security dependency manually (Microsoft Windows only)
 
     $ npm install bcryptjs
-    
-###### Create a file .env in the main project directory, and add the process environment variables to it. For instance:
+
+###### Create a file `.env` in the main project directory, and add the process environment variables to it. For instance:
 
       KEY=value
       DAY=value
@@ -39,13 +39,14 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
       TWITTER_KEY=value
       FACEBOOK_ID=value
       FACEBOOK_KEY=value
+      MONGO=mongodb://127.0.0.1:27017/GPL
 
 ###### Run the server locally at port 3000 or "PORT" in process.env
 
     $ npm start
-    
+
 ###### View the website at localhost:3000 within your browser
-    
+
 #### External Requirements:
 * A MongoDB instance running locally or valid "MONGOLAB_URI"/"MONGOHQ_URI" string in process.env
 * A valid collection of social authentication tokens in process.env (Facebook, Twitter, and Google)

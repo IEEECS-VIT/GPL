@@ -62,14 +62,14 @@ var flash = function(req, res, next)
         {
             return this.session.flash.pop();
         }
-
-        next();
     };
+
+    next();
 };
 
 if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 {
-    app.locals.newrelic = require('newrelic');
+    app.locals.newrelic = require(path.join(__dirname, 'utils', 'newrelic'));
 }
 
 if (process.env.LOGENTRIES_TOKEN)
