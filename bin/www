@@ -40,7 +40,7 @@ var onBind = function ()
 {
     if (log)
     {
-        log.log('info', {MongoUri: mongoUri, Port: server.address().port});
+        log.log('info', {MongoUri: process.env.MONGO, Port: server.address().port});
 
         if (process.env.HOSTNAME)
         {
