@@ -36,10 +36,10 @@ var options =
     ]
 };
 var leaderboard;
-var path = require('path');
 var match = process.env.MATCH;
-var email = require(path.join(__dirname, '..', 'utils', 'email'));
-var mongoFeatures = require(path.join(__dirname, 'mongo-features.js'));
+var path = require('path').join;
+var email = require(path(__dirname, '..', 'utils', 'email'));
+var mongoFeatures = require(path(__dirname, 'mongo-features.js'));
 
 var ref =
 {

@@ -173,31 +173,31 @@ exports.simulate = function (data, callback)
             }
         };
 
-        var path = require('path');
-        var cnb = require(path.join(__dirname, '..', 'utils', '..', 'utils', 'commentary', 'out', 'cnb'));
-        var lbw = require(path.join(__dirname, '..', 'utils', 'commentary', 'out', 'lbw'));
-        var caught = require(path.join(__dirname, '..', 'utils', 'commentary', 'out', 'caught'));
-        var bowled = require(path.join(__dirname, '..', 'utils', 'commentary', 'out', 'bowled'));
-        var runout = require(path.join(__dirname, '..', 'utils', 'commentary', 'out', 'runout'));
-        var stumped = require(path.join(__dirname, '..', 'utils', 'commentary', 'out', 'stumped'));
-        var mom = require(path.join(__dirname, '..', 'utils', 'commentary', 'misc', 'mom'));
-        var mid = require(path.join(__dirname, '..', 'utils', 'commentary', 'misc', 'mid'));
-        var end = require(path.join(__dirname, '..', 'utils', 'commentary', 'misc', 'end'));
-        var half = require(path.join(__dirname, '..', 'utils', 'commentary', 'misc', 'half'));
-        var full = require(path.join(__dirname, '..', 'utils', 'commentary', 'misc', 'full'));
-        var miss = require(path.join(__dirname, '..', 'utils', 'commentary', 'misc', 'miss'));
-        var start = require(path.join(__dirname, '..', 'utils', 'commentary', 'misc', 'start'));
-        var hopeless = require(path.join(__dirname, '..', 'utils', 'commentary', 'misc', 'hopeless'));
-        var one = require(path.join(__dirname, '..', 'utils', 'commentary', 'score', 'one'));
-        var two = require(path.join(__dirname, '..', 'utils', 'commentary', 'score', 'two'));
-        var six = require(path.join(__dirname, '..', 'utils', 'commentary', 'score', 'six'));
-        var zero = require(path.join(__dirname, '..', 'utils', 'commentary', 'score', 'dot'));
-        zero = zero.concat(require(path.join(__dirname, '..', 'utils', 'commentary', 'score', 'dot2')));
-        var four = require(path.join(__dirname, '..', 'utils', 'commentary', 'score', 'four'));
-        var three = require(path.join(__dirname, '..', 'utils', 'commentary', 'score', 'three'));
-        one = one.concat(require(path.join(__dirname, '..', 'utils', 'commentary', 'score', 'one2')));
-        var wide = require(path.join(__dirname, '..', 'utils', 'commentary', 'extra', 'wide'));
-        var freehit = require(path.join(__dirname, '..', 'utils', 'commentary', 'extra', 'freehit'));
+        var path = require('path').join;
+        var cnb = require(path(__dirname, '..', 'utils', '..', 'utils', 'commentary', 'out', 'cnb'));
+        var lbw = require(path(__dirname, '..', 'utils', 'commentary', 'out', 'lbw'));
+        var caught = require(path(__dirname, '..', 'utils', 'commentary', 'out', 'caught'));
+        var bowled = require(path(__dirname, '..', 'utils', 'commentary', 'out', 'bowled'));
+        var runout = require(path(__dirname, '..', 'utils', 'commentary', 'out', 'runout'));
+        var stumped = require(path(__dirname, '..', 'utils', 'commentary', 'out', 'stumped'));
+        var mom = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'mom'));
+        var mid = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'mid'));
+        var end = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'end'));
+        var half = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'half'));
+        var full = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'full'));
+        var miss = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'miss'));
+        var start = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'start'));
+        var hopeless = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'hopeless'));
+        var one = require(path(__dirname, '..', 'utils', 'commentary', 'score', 'one'));
+        var two = require(path(__dirname, '..', 'utils', 'commentary', 'score', 'two'));
+        var six = require(path(__dirname, '..', 'utils', 'commentary', 'score', 'six'));
+        var zero = require(path(__dirname, '..', 'utils', 'commentary', 'score', 'dot'));
+        zero = zero.concat(require(path(__dirname, '..', 'utils', 'commentary', 'score', 'dot2')));
+        var four = require(path(__dirname, '..', 'utils', 'commentary', 'score', 'four'));
+        var three = require(path(__dirname, '..', 'utils', 'commentary', 'score', 'three'));
+        one = one.concat(require(path(__dirname, '..', 'utils', 'commentary', 'score', 'one2')));
+        var wide = require(path(__dirname, '..', 'utils', 'commentary', 'extra', 'wide'));
+        var freehit = require(path(__dirname, '..', 'utils', 'commentary', 'extra', 'freehit'));
         var dismiss =
         [
             caught,

@@ -40,6 +40,12 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
       FACEBOOK_ID=value
       FACEBOOK_KEY=value
       MONGO=mongodb://127.0.0.1:27017/GPL
+      
+###### Start the localhost mongod server via `mongod`
+
+###### Seed the local database by running: 
+    
+    npm run seed      
 
 ###### Run the server locally at port 3000 or "PORT" in process.env
 
@@ -48,10 +54,11 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
 ###### View the website at localhost:3000 within your browser
 
 #### External Requirements:
+
 * A MongoDB instance running locally or valid "MONGOLAB_URI"/"MONGOHQ_URI" string in process.env
 * A valid collection of social authentication tokens in process.env (Facebook, Twitter, and Google)
 * A valid "COOKIE_SECRET" string in process.env for better security (Optional)
 * A valid "LOGENTRIES_TOKEN" in process.env for Logentries support (Optional)
 * A valid "NEWRELIC_APP_NAME" and "NEWRELIC_LICENSE" in process.env for New Relic support (Optional)
 
-PS: Configure a file watcher with the public directory scope to incorporate auto-minification of public .css and .js files.
+*PS:* Configure a file watcher with the public directory scope to incorporate auto-minification of public .css and .js files.

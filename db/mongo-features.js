@@ -16,10 +16,10 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var path = require('path');
 var async = require('async');
-var mongoTeam = require(path.join(__dirname, 'mongo-team'));
-var simulator = require(path.join(__dirname, '..', 'worker', 'simulation-controller'));
+var path = require('path').join;
+var mongoTeam = require(path(__dirname, 'mongo-team'));
+var simulator = require(path(__dirname, '..', 'worker', 'simulation-controller'));
 
 exports.getStats = function (callback)
 {

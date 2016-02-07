@@ -34,20 +34,7 @@
         </script>
     </head>
     <body>
-        <div id="gplheader" class="page-title hidden-xs hidden-sm hidden-md">
-            <header class="banner" role="banner">
-                <span>
-                    <img src="http://res.cloudinary.com/gpl/general/header-left.jpg" height="60" class="pull-left"/>
-                    <a href="http://www.facebook.com/gravitaspremierleague" target="_blank">
-                        <img class="logo pull-left" src="http://res.cloudinary.com/gpl/general/gpllogo.png" height="50"/>
-                        <span class="h2 gplheadertext pull-left">graVITas Premier League 2.0</span>
-                    </a>
-                    <img src="http://res.cloudinary.com/gpl/general/header-right.jpg" height="60" class="pull-right"/></span>
-            </header>
-        </div>
-        <div id="navbar-wrapper">
-            <nav id="navbar"></nav>
-        </div>
+        <% include partials/headerNavbar.ejs %>
         <div class="container">
             <div class="page-header">
                 <h1 id="timeline"><b><span>Developers</span></b></h1>
@@ -89,7 +76,7 @@
                 </ul>
             </div>
         <%}%>
-        <footer id="footer" class="footer"></footer>
+        <% include partials/footer.ejs%>
         <!--[if lt IE 10]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
             your browser</a> to improve your experience.</p>

@@ -1,6 +1,6 @@
 {
   "name": "GPL",
-  "version": "0.2.0",
+  "version": "0.2.5",
   "description": "graVITas Premier League",
   "homepage": "http://www.gravitaspremierleague.com/",
   "bugs": {
@@ -10,6 +10,8 @@
   "private": true,
   "main": "./bin/www",
   "scripts": {
+    "sim": "node bin/simulate",
+    "seed": "node utils/seed.js",
     "start": "node node_modules/.bin/forever ./bin/www",
     "stop": "node node_modules/.bin/forever stop ./bin/www",
     "restart": "node node_modules/.bin/forever restart ./bin/www",
@@ -87,13 +89,13 @@
     "express-session": "^1.13.0",
     "forever": "^0.15.1",
     "helmet": "^1.1.0",
-    "mongodb": "^2.1.4",
+    "mongodb": "^2.1.6",
     "morgan": "^1.6.1",
     "newrelic": "^1.25.1",
     "node-logentries": "^0.1.4",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.0",
-    "passport-google-oauth": "^0.2.0",
+    "passport-google-oauth": "^1.0.0",
     "serve-favicon": "^2.3.0"
   },
   "optionalDependencies": {

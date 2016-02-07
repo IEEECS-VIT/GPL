@@ -38,14 +38,26 @@ var ref =
     ]
 };
 var credentials;
-var path = require('path');
 var crypto = require('crypto');
+var path = require('path').join;
 var router = require('express').Router();
-var record = require(path.join(__dirname, '..', 'db', 'mongo-record'));
-var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team'));
-var mongoUsers = require(path.join(__dirname, '..', 'db', 'mongo-users'));
-var developers = require(path.join(__dirname, '..', 'package.json')).contributors;
+var record = require(path(__dirname, '..', 'db', 'mongo-record'));
+var mongoTeam = require(path(__dirname, '..', 'db', 'mongo-team'));
+var mongoUsers = require(path(__dirname, '..', 'db', 'mongo-users'));
+var developers = require(path(__dirname, '..', 'package.json')).contributors;
 developers.map((arg) => arg.map((x) => x.img = x.name.split(' ')[0]));
+
+var cookieFilter = function(req, res, next)
+{
+    if(req.signedCookies.name)
+    {
+        res.redirect('/home');
+    }
+    else
+    {
+        next();
+    }
+};
 
 try
 {
@@ -135,25 +147,14 @@ router.post('/interest', function (req, res){
     mongoUsers.insert('interest', newUser, onInsert);
 });
 
-router.get('/login', function (req, res){
+router.get('/login', cookieFilter, function (req, res){
     res.clearCookie('team', {});
     res.clearCookie('phone', {});
 
-    if(req.signedCookies.name)
-    {
-        res.redirect('/home');
-    }
-    else if(req.signedCookies.admin)
-    {
-        res.redirect('/admin');
-    }
-    else
-    {
-        res.render('login', {csrfToken: req.csrfToken(), msg: req.flash()});
-    }
+    res.render('login', {csrfToken: req.csrfToken(), msg: req.flash()});
 });
 
-router.post('/login', function (req, res){
+router.post('/login', cookieFilter, function (req, res){
     credentials =
     {
         _id: req.body.team.trim().toUpperCase(),
@@ -168,10 +169,8 @@ router.post('/login', function (req, res){
         ]
     };
 
-    if (req.signedCookies.name)
-    {
-        res.clearCookie('name', {});
-    }
+    res.clearCookie('name', {});
+
     if (log)
     {
         log.log(user + "received");
@@ -215,7 +214,7 @@ router.post('/login', function (req, res){
 });
 
 router.get(/^\/forgot\/password|user$/, function (req, res){
-    res.render('forgot', {csrfToken: req.csrfToken(), mode: req.originalUrl.split('/')[2], msg: req.flash()});
+    res.render('forgot', {csrfToken: req.csrfToken(), mode: req.url.split('/')[2], msg: req.flash()});
 });
 
 router.post('/forgot/password', function (req, res){
@@ -329,14 +328,10 @@ router.post('/forgot/user', function (req, res){
     mongoUsers.forgotUser(credentials, onFetch);
 });
 
-router.get('/register', function (req, res){
+router.get('/register', cookieFilter, function (req, res){
     if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH == 'users' && process.env.LIVE === '1')) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
     {                                                                                                                  // the schedule has been constructed and the game engine is match ready.
         res.render('register', {msg: req.flash(), csrfToken: req.csrfToken()});
-    }
-    else if (req.signedCookies.name)
-    {
-        res.redirect('/home');
     }
     else
     {
@@ -344,66 +339,52 @@ router.get('/register', function (req, res){
     }
 });
 
-router.post('/register', function (req, res){
+router.post('/register', cookieFilter, function (req, res){
     res.clearCookie('name', {});
     res.clearCookie('admin', {});
 
-    var onGetCount = function (err, number)
+    if (req.body.confirm === req.body.password)
     {
-        if (err)
+        var onInsert = function (err)
         {
-            req.flash('Unknown error, please try again');
-            res.redirect('/register');
-        }
-        else
-        {
-            if (req.body.confirm === req.body.password)
+            if (err)
             {
-                var onInsert = function (err)
-                {
-                    if (err)
-                    {
-                        req.flash('This team name already exists.');
-                        res.redirect('/register');
-                    }
-                    else
-                    {
-                        res.cookie('name', newUser._id, {maxAge: 86400000, signed: true});
-                        res.redirect('/home/players');
-                    }
-                };
-
-                newUser = record;
-                newUser.dob = new Date();
-                newUser.email = req.body.email;
-                newUser.phone = req.body.phone;
-                newUser.authStrategy = 'local';
-                newUser.team_no = parseInt(number) + 1;
-                newUser.manager_name = req.body.manager_name; // TODO: treat manager_name / email address as _id, to make the creation of multiple teams for one manager possible
-                newUser._id = req.body.team.trim().toUpperCase();
-
-                bcrypt.hash(req.body.password, 10, function(err, hash){
-                    if(err)
-                    {
-                        req.flash('An unexpected error occurred and your details could not be saved. Please re-try.');
-                        res.redirect('/register');
-                    }
-                    else
-                    {
-                        newUser.password_hash = hash;
-                        mongoUsers.insert(process.env.MATCH, newUser, onInsert);
-                    }
-                });
+                req.flash('This team name already exists.');
+                res.redirect('/register');
             }
             else
             {
-                req.flash('Passwords do not match');
+                res.cookie('name', newUser._id, {maxAge: 86400000, signed: true});
+                res.redirect('/home/players');
+            }
+        };
+
+        newUser = record;
+        newUser.dob = new Date();
+        newUser.email = req.body.email;
+        newUser.phone = req.body.phone;
+        newUser.authStrategy = 'local';
+        newUser.manager_name = req.body.manager_name; // TODO: treat manager_name / email address as _id, to make the creation of multiple teams for one manager possible
+        newUser._id = req.body.team.trim().toUpperCase();
+
+        bcrypt.hash(req.body.password, 10, function(err, hash){
+            if(err)
+            {
+                req.flash('An unexpected error occurred and your details could not be saved. Please re-try.');
                 res.redirect('/register');
             }
-        }
-    };
-
-    mongoUsers.getCount({authStrategy : {$ne : 'admin'}}, onGetCount);
+            else
+            {
+                newUser.password_hash = hash;
+                mongoUsers.insert(process.env.MATCH, newUser, onInsert);
+            }
+        });
+    }
+    else
+    {
+        req.flash('Passwords do not match');
+        res.redirect('/register');
+    }
 });
 
 router.get('/logout', function (req, res){
@@ -444,7 +425,7 @@ router.get('/admin', function (req, res){
     }
 });
 
-router.get('/social/login', function (req, res){
+router.get('/social/login', cookieFilter, function (req, res){
     if (req.signedCookies.name)
     {
         res.redirect('/home');
@@ -455,12 +436,12 @@ router.get('/social/login', function (req, res){
     }
 });
 
-router.post('/social/login', function (req, res){
+router.post('/social/login', cookieFilter, function (req, res){
     res.cookie('team', req.body.team.trim().toUpperCase(), {maxAge : 300000, signed : true});
     res.redirect('/social/login');
 });
 
-router.get('/social/register', function (req, res){
+router.get('/social/register', cookieFilter, function (req, res){
     if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users' && process.env.LIVE === '1')) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
     {                                                                                                                   // the schedule has been constructed and the game engine is match ready
         res.render('social', {mode: +!req.signedCookies.team, type : 'register', csrfToken : req.csrfToken()});
@@ -475,7 +456,7 @@ router.get('/social/register', function (req, res){
     }
 });
 
-router.post('/social/register', function (req, res){
+router.post('/social/register', cookieFilter, function (req, res){
     res.cookie('team', req.body.team.trim().toUpperCase(), {maxAge: 300000, signed: true});
     res.cookie('phone', req.body.phone, {maxAge: 300000, signed: true});
     res.redirect('/social/register');
@@ -523,19 +504,6 @@ router.get('/trailer', function (req, res){ // trailer page
 
 router.get('/schedule', function (req, res){ // schedule page
     res.redirect('/');
-});
-
-router.get('/check/:name', function(req, res){
-    if(req.headers.referer && req.headers.referer.split('/')[2] === req.headers.host)
-    {
-        mongoUsers.fetchUser({_id: req.params.name.trim().toUpperCase()}, function(err, user){
-            res.send(!user);
-        });
-    }
-    else
-    {
-        res.redirect('/');
-    }
 });
 
 module.exports = router;

@@ -23,15 +23,15 @@ var daily = 0;
 var stats = {};
 var points = 0;
 var individual = 0;
-var path = require('path');
 var async = require('async');
+var path = require('path').join;
 var days = [1, 2, 3, 4, 5, 6, 7];
-var simulator = require(path.join(__dirname, 'simulation'));
-var email = require(path.join(__dirname, '..', 'utils', 'email'));
+var simulator = require(path(__dirname, 'simulation'));
+var email = require(path(__dirname, '..', 'utils', 'email'));
 
 if(!process.env.NODE_ENV)
 {
-    require('dotenv').load({path : path.join(__dirname, '..', '.env')});
+    require('dotenv').load({path : path(__dirname, '..', '.env')});
 }
 
 if (process.env.LOGENTRIES_TOKEN)

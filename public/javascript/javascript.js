@@ -15,6 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 var days = 100;
 var seconds = days * 24 * 60 * 60;
 function timePassed()

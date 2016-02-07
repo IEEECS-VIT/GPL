@@ -16,12 +16,12 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var path = require('path');
+var path = require('path').join;
 var passport = require('passport');
 var router = require('express').Router();
 var onRetrieve = function(req, res, next)
 {
-    passport.authenticate(req.originalUrl.split('/')[2], function(err, user){
+    passport.authenticate(req.url.split('/')[2], function(err, user){
         if(err)
         {
             return next(err);
@@ -41,7 +41,7 @@ var onRetrieve = function(req, res, next)
     })(req, res, next);
 };
 
-require(path.join(__dirname, '..', 'db', 'mongo-passport')); // pass passport for configuration
+require(path(__dirname, '..', 'db', 'mongo-passport')); // pass passport for configuration
 
 router.get('/facebook', passport.authenticate('facebook', {scope: 'email'}));
 

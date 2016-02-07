@@ -16,45 +16,38 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var i;
-var log;
-var cost;
-var team;
-var squad;
-var stats;
-var fields;
-var players;
-var ref =
-{
-    'users' : 1,
-    'round2' : 2,
-    'round3' : 3
-};
-var credentials;
 var async = require('async');
 var path = require('path').join;
 var router = require('express').Router();
-var authenticated = function(req, res, next)
+var mongoTeam = require(path(__dirname, '..', 'db', 'mongo-team'));
+var mongoUsers = require(path(__dirname, '..', 'db', 'mongo-users'));
+var mongoFeatures = require(path(__dirname, '..', 'db', 'mongo-features'));
+var apiFilter = function(req, res, next)
 {
-    if(req.signedCookies.name || req.signedCookies.admin)
+    if(req.headers.referer && req.signedCookies.name && req.headers.host === req.headers.referer.split('/')[2] && req.route.path === req.url)
     {
         next();
     }
     else
     {
-        res.redirect('/login');
+        res.redirect('/');
     }
 };
-var mongoTeam = require(path(__dirname, '..', 'db', 'mongo-team'));
-var mongoUsers = require(path(__dirname, '..', 'db', 'mongo-users'));
-var mongoFeatures = require(path(__dirname, '..', 'db', 'mongo-features'));
 
-if (process.env.LOGENTRIES_TOKEN)
-{
-    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
-}
+router.get('/check/:name', function(req, res){
+    if(req.headers.referer && !req.signedCookies.name && req.headers.host === req.headers.referer.split('/')[2] && req.url.match(/^\/(social\/)?register$/))
+    {
+        mongoUsers.fetchUser({_id: req.params.name.trim().toUpperCase()}, function(err, user){
+            res.send(!user);
+        });
+    }
+    else
+    {
+        res.redirect('/');
+    }
+});
 
-router.get('/', authenticated, function (req, res){
+router.get('/home', apiFilter, function(req, res){
     credentials =
     {
         '_id': req.signedCookies.name
@@ -88,7 +81,7 @@ router.get('/', authenticated, function (req, res){
                     {
                         doc.balls_for = parseInt(doc.balls_for / 6) + '.' + (doc.balls_for % 6);
                         doc.balls_against = parseInt(doc.balls_against / 6) + '.' + (doc.balls_against % 6);
-                        res.render('home', {results: {team: documents, user: doc, msg: req.flash()}});
+                        res.json({team: documents, user: doc});
                     }
                 };
 
@@ -105,12 +98,12 @@ router.get('/', authenticated, function (req, res){
     mongoUsers.fetchUser(credentials, onFetch);
 });
 
-router.get('/leaderboard', authenticated, function (req, res){
+router.get('/leaderboard', apiFilter, function(req, res){
     if(req.signedCookies.lead && req.signedCookies.day == process.env.DAY)
     {
         res.render("leaderboard", {leaderboard: JSON.parse(req.signedCookies.lead)});
     }
-    else if (process.env.DAY >= '1'|| !process.env.NODE_ENV)                           // if cookie exists then access the database
+    else if (process.env.DAY >= '1'|| !process.env.NODE_ENV) // if cookie exists then access the database
     {
         var onFetch = function (err, documents)
         {
@@ -124,7 +117,7 @@ router.get('/leaderboard', authenticated, function (req, res){
             {
                 res.cookie('day', process.env.DAY, {signed : true, maxAge : 86400000});
                 res.cookie('lead', JSON.stringify(documents), {signed : true, maxAge : 86400000});
-                res.render("leaderboard", {leaderboard: documents});
+                res.json(documents);
             }
         };
 
@@ -136,9 +129,9 @@ router.get('/leaderboard', authenticated, function (req, res){
     }
 });
 
-router.get('/matches', authenticated, function (req, res){ // Deprecated
-    if (process.env.DAY >= '0') // Initialize process.env.LIVE with -1, set to zero once the schedule has been constructed and
-    {                           // the game engine is match ready.
+router.get('/match/:day', apiFilter, function(req, res){
+    if(process.env.DAY >= '0' && req.params.day >= '1' && req.params.day <= '7')
+    {
         credentials =
         {
             '_id' : req.signedCookies.name
@@ -148,28 +141,26 @@ router.get('/matches', authenticated, function (req, res){ // Deprecated
         {
             if (err)
             {
-                console.error(err.message);
-                req.flash('Error fetching match details, please retry.');
+                req.flash('Error loading match ' + req.params.day + 'details.');
                 res.redirect('/home');
             }
             else
             {
-                var onMatches = function (err, matches)
+                var onMatch = function (err, match)
                 {
                     if (err)
                     {
-                        console.error(err.message);
-                        req.flash('Error fetching match details, please retry.');
+                        req.flash('Error loading match ' + req.params.day + 'details.');
                         res.redirect('/home');
                     }
                     else
                     {
                         res.cookie('day', process.env.DAY, {signed : true, maxAge : 86400000});
-                        res.render('matches', {match: matches || [], day : (process.env.DAY - 1) || 0, round : ref[process.env.MATCH]});
+                        res.json({match: match || {}, day : (process.env.DAY - 1) || 0, round : ref[process.env.MATCH]});
                     }
                 };
 
-                mongoTeam.fetchMatches(num, onMatches);
+                mongoFeatures.match(req.params.day, num, onMatch);
             }
         };
 
@@ -181,50 +172,7 @@ router.get('/matches', authenticated, function (req, res){ // Deprecated
     }
 });
 
-router.get('/match/:day', authenticated, function(req, res){
-      if(process.env.DAY >= '0' && req.params.day >= '1' && req.params.day <= '7')
-      {
-          credentials =
-          {
-              '_id' : req.signedCookies.name
-          };
-
-          var onMap = function (err, num)
-          {
-              if (err)
-              {
-                  req.flash('Error loading match ' + req.params.day + 'details.');
-                  res.redirect('/home');
-              }
-              else
-              {
-                  var onMatch = function (err, match)
-                  {
-                      if (err)
-                      {
-                          req.flash('Error loading match ' + req.params.day + 'details.');
-                          res.redirect('/home');
-                      }
-                      else
-                      {
-                          res.cookie('day', process.env.DAY, {signed : true, maxAge : 86400000});
-                          res.render('match', {match: match || {}, day : (process.env.DAY - 1) || 0, round : ref[process.env.MATCH]});
-                      }
-                  };
-
-                  mongoFeatures.match(req.params.day, num, onMatch);
-              }
-          };
-
-          mongoTeam.map(credentials, onMap);
-      }
-      else
-      {
-          res.redirect('/home');
-      }
-});
-
-router.post('/getsquad', authenticated, function (req, res) {
+router.post('/getsquad', apiFilter, function (req, res) {
     credentials =
     {
         '_id': req.signedCookies.name
@@ -249,128 +197,7 @@ router.post('/getsquad', authenticated, function (req, res) {
     mongoUsers.updateMatchSquad(credentials, squad, onFetch);
 });
 
-router.post('/players', function (req, res){
-    stats = {};
-    players = [];
-    fields =
-    {
-        Cost: 1
-    };
-    cost = 10000000;
-    credentials =
-    {
-        _id: req.signedCookies.name
-    };
-
-    for (i = 1; i < 17; ++i)
-    {
-        players.push(req.body['p' + i]);
-    }
-
-    var onUpdate = function (err)
-    {
-        if (err)
-        {
-            req.flash('Your squad was not updated, please re-try.');
-            res.redirect('/home/players');
-        }
-        else
-        {
-            res.redirect('/home/team');
-        }
-    };
-
-    var getCost = function (id, callback)
-    {
-        if (id < 'd')
-        {
-            stats[id]         = {};
-            stats[id].MoM     = 0;
-            stats[id].form    = 0;
-            stats[id].morale  = 0;
-            stats[id].points  = 0;
-            stats[id].fatigue = 0;
-            stats[id].matches = 0;
-            stats[id].catches = 0;
-
-            if (!(id > 'b' && id < 'c'))
-            {
-                stats[id].outs        = 0;
-                stats[id].balls       = 0;
-                stats[id].high        = -1;
-                stats[id].fours       = 0;
-                stats[id].sixes       = 0;
-                stats[id].recent      = [];
-                stats[id].notouts     = 0;
-                stats[id].average     = 0.0;
-                stats[id].runs_scored = 0;
-                stats[id].strike_rate = 0.0;
-                stats[id].low         = Number.MAX_VALUE;
-            }
-            if (id > 'b' && id < 'd')
-            {
-                stats[id].sr            = 0.0;
-                stats[id].overs         = 0;
-                stats[id].avg           = 0.0;
-                stats[id].economy       = 0.0;
-                stats[id].runs_given    = 0;
-                stats[id].wickets_taken = 0;
-            }
-        }
-
-        mongoFeatures.getPlayer(id, fields, callback);
-    };
-
-    var onFinish = function (err, documents)
-    {
-        if (err)
-        {
-            req.flash('Error creating team record.');
-            res.redirect('/home');
-        }
-        else
-        {
-            var reduction = function(arg, callback)
-            {
-                cost -= parseInt(arg.Cost);
-                callback();
-            };
-            var onReduce = function(err)
-            {
-                if(err)
-                {
-                    req.flash('An unexpected error occurred, please re-try.');
-                    res.redirect('/players');
-                }
-                else if(cost < 0)
-                {
-                    req.flash('Cost exceeded!');
-                    res.redirect('/home/players');
-                }
-                else
-                {
-                    mongoUsers.updateUserTeam(credentials, players, stats, cost, onUpdate);
-                }
-            };
-
-            async.each(documents, reduction, onReduce);
-        }
-    };
-
-    async.map(players, getCost, onFinish);
-});
-
-/*
-router.get('/sponsors', function (req, res){ // sponsors page TODO: Sponsor hunt ;)
-    res.render('sponsors');
-});
-*/
-
-router.get(/\/prizes?/, function (req, res){ // page to view prizes
-    res.render('prizes');
-});
-
-router.get('/players', authenticated, function (req, res){ // page for all players, only available if no squad has been chosen
+router.get('/players', apiFilter, function (req, res){ // page for all players, only available if no squad has been chosen
     credentials =
     {
         "_id": req.signedCookies.name
@@ -421,7 +248,7 @@ router.get('/players', authenticated, function (req, res){ // page for all playe
                             }
                             else
                             {
-                                res.render('players', {Players: result, csrfToken: req.csrfToken(), msg: req.flash()});
+                                res.json({Players: result, csrfToken: req.csrfToken()});
                             }
                         };
 
@@ -437,7 +264,7 @@ router.get('/players', authenticated, function (req, res){ // page for all playe
     mongoUsers.fetchUser(credentials, onFetchUser);
 });
 
-router.get('/team', authenticated, function (req, res){ // view the assigned playing 11 with options to change the playing 11
+router.get('/team', apiFilter, function (req, res){ // view the assigned playing 11 with options to change the playing 11
     credentials =
     {
         '_id': req.signedCookies.name
@@ -452,14 +279,14 @@ router.get('/team', authenticated, function (req, res){ // view the assigned pla
         }
         else
         {
-            res.render('team', {Squad: documents, csrfToken: req.csrfToken()});
+            res.json({Squad: documents, csrfToken: req.csrfToken()});
         }
     };
 
     mongoTeam.getTeam(credentials, getTeam);
 });
 
-router.get('/stats', authenticated, function (req, res){
+router.get('/stats', apiFilter, function(req, res){
     if(req.signedCookies.stats && req.signedCookies.day == process.env.DAY)
     {
         res.render('stats', {stats: JSON.parse(req.signedCookies.stats)});
@@ -478,7 +305,7 @@ router.get('/stats', authenticated, function (req, res){
                 doc.overs = parseInt(doc.overs / 6) + '.' + (doc.overs % 6);
                 res.cookie('day', process.env.DAY, {signed : true, maxAge : 86400000});
                 res.cookie('stats', JSON.stringify(doc), {signed : true, maxAge : 86400000});
-                res.render('stats', {stats: doc});
+                res.json(doc);
             }
         };
 
@@ -490,25 +317,7 @@ router.get('/stats', authenticated, function (req, res){
     }
 });
 
-router.get('/feature', authenticated, function (req, res){
-    res.render('feature', {csrfToken: req.csrfToken()});
-});
-
-router.post('/feature', authenticated, function (req, res){
-    var onInsert = function (err)
-    {
-        if (err)
-        {
-            console.log(err);
-        }
-
-        res.redirect('/home');
-    };
-
-    mongoUsers.insert('features', {user : req.signedCookies.name, features: req.body.feature}, onInsert);
-});
-
-router.get('/dashboard', authenticated, function (req, res){
+router.get('/dashboard', apiFilter, function(req, res){
     if(req.signedCookies.dash && req.signedCookies.day == process.env.DAY)
     {
         res.render('dashboard', {result : JSON.parse(req.signedCookies.dash)});
@@ -531,7 +340,7 @@ router.get('/dashboard', authenticated, function (req, res){
             {
                 res.cookie('day', process.env.DAY, {signed: true, maxAge: 86400000});
                 res.cookie('dash', JSON.stringify(doc), {signed: true, maxAge: 86400000});
-                res.render('dashboard', {result: doc});
+                res.json(doc);
             }
         };
 
@@ -541,10 +350,6 @@ router.get('/dashboard', authenticated, function (req, res){
     {
         res.redirect('/home');
     }
-});
-
-router.get('/settings', authenticated, function(req, res){
-    res.render('settings', {csrfToken : req.csrfToken()});
 });
 
 module.exports = router;

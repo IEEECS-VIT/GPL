@@ -27,7 +27,7 @@ var index;
 var data = '';
 var flag = false;
 var fs = require('fs');
-var path = require('path');
+var path = require('path').join;
 var http = require('http');
 var async = require('async');
 var scrape = require('cheerio').load;
@@ -53,11 +53,11 @@ var opts = ['batsman', 'batter', 'striker'];
 var fun = ['wide'];
 var files =
 {
-    wide: path.join(__dirname, 'extra', 'wide'), 'no ball': path.join(__dirname, 'extra', 'freehit'),
-    bowled: path.join(__dirname, 'out', 'bowled'), caught: path.join(__dirname, 'out', 'caught'), cnb: path.join(__dirname, 'out', 'cnb'),
-    lbw: path.join(__dirname, 'out', 'lbw'), runout: path.join(__dirname, 'out', 'runout'), stumped: path.join(__dirname, 'out', 'stumped'),
-    'no run': path.join(__dirname, 'score', 'dot2'), one: path.join(__dirname, 'score', 'one2'), two: path.join(__dirname, 'score', 'two'),
-    three: path.join(__dirname, 'score', 'three'), FOUR: path.join(__dirname, 'score', 'four'), SIX: path.join(__dirname, 'score', 'six')
+    wide: path(__dirname, 'extra', 'wide'), 'no ball': path(__dirname, 'extra', 'freehit'),
+    bowled: path(__dirname, 'out', 'bowled'), caught: path(__dirname, 'out', 'caught'), cnb: path(__dirname, 'out', 'cnb'),
+    lbw: path(__dirname, 'out', 'lbw'), runout: path(__dirname, 'out', 'runout'), stumped: path(__dirname, 'out', 'stumped'),
+    'no run': path(__dirname, 'score', 'dot2'), one: path(__dirname, 'score', 'one2'), two: path(__dirname, 'score', 'two'),
+    three: path(__dirname, 'score', 'three'), FOUR: path(__dirname, 'score', 'four'), SIX: path(__dirname, 'score', 'six')
 };
 
 var rand = function()

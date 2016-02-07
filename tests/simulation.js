@@ -20,32 +20,32 @@ var assert = require('assert');
 
 describe('Simulation tests', function(){
     describe('simulation trigger', function(){
-        /*
-            TODO: Check for database, match day and user collection parameter validity
-            TODO: Check for email worker status
-            TODO: Ensure that simulation trigger does not crash.
-        */
+    /*
+        TODO: Check for database, match day and user collection parameter validity
+        TODO: Check for email worker status
+        TODO: Ensure that simulation trigger does not crash.
+    */
     });
 
     describe('simulation completion', function(){
-        /*
-            TODO: Ensure that simulation terminates without exceptions
-            TODO: Parse data for update queries
-        */
+    /*
+        TODO: Ensure that simulation terminates without exceptions
+        TODO: Parse data for update queries
+    */
     });
 
     describe('simulation status update', function(){
-        /*
-            TODO: Collect data from slave simulation-controller callbacks
-            TODO: Check for successful completion of update queries
-            TODO: Pass to master callback
-        */
+    /*
+        TODO: Collect data from slave simulation-controller callbacks
+        TODO: Check for successful completion of update queries
+        TODO: Pass to master callback
+    */
     });
 
     describe('simulation emails', function(){
-        /*
-            TODO: Check for duplicate emails and invalid entries
-            TODO: Send emails, log failures.
-        */
+    /*
+        TODO: Check for duplicate emails and invalid entries
+        TODO: Send emails, log failures.
+    */
     });
 });

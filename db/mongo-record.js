@@ -16,7 +16,10 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-module.exports =
+var i;
+var temp;
+var teams = [];
+var schema =
 {
     _id: '',
     dob: '',
@@ -25,41 +28,44 @@ module.exports =
     password_hash: '',
     email: '',
     phone: '',
-    squad: [],
-    team: [],
+    toss: 0,
     win: 0,
     loss: 0,
+    form: 1,
     tied: 0,
-    played: 0,
-    points: 0,
-    ratio: 0.0,
     fours: 0,
     sixes: 0,
-    progression: [],
+    team: [],
+    squad: [],
+    played: 0,
+    stats: {},
+    points: 0,
+    streak: 0,
+    overs: [],
+    ratio: 0.0,
+    surplus: 0,
+    scores: [],
+    all_outs: 0,
+    morale: 0.0,
+    wickets: [],
     runs_for: 0,
-    runs_against: 0,
     balls_for: 0,
+    run_rates : [],
+    progression: [],
+    wickets_lost: 0,
+    runs_against: 0,
+    wickets_taken: 0,
+    authStrategy: '',
     balls_against: 0,
     net_run_rate: 0.0,
-    wickets_taken: 0,
-    wickets_lost: 0,
-    authStrategy: '',
-    scores: [],
-    overs: [],
-    wickets: [],
-    toss: 0,
-    form: 1,
-    morale: 0.0,
-    streak: 0,
-    all_outs: 0,
-    run_rates : [],
     avg_runs_for: 0.0,
+    highest_total: -1,
+    avg_overs_for: 0.0,
     avg_runs_against: 0.0,
     avg_wickets_lost: 0.0,
     avg_wickets_taken: 0.0,
-    avg_overs_for: 0.0,
     avg_overs_against: 0.0,
-    highest_total: -1,
+    lowest_total: Number.MAX_VALUE,
     avg_partnership_runs: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     avg_partnership_balls: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     best_partnership_runs: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -67,8 +73,19 @@ module.exports =
     best_partnership_balls: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     worst_partnership_balls: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     scored_per_over: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    conceded_per_over: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    lowest_total: Number.MAX_VALUE,
-    stats: {},
-    surplus: 0
+    conceded_per_over: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 };
+
+exports.seed = function(limit)
+{
+    for(i = 0; i < limit; ++i)
+    {
+        temp = schema;
+
+        teams.push(temp);
+    }
+
+    return 1;
+};
+
+module.exports = schema;

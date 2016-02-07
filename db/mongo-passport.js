@@ -17,7 +17,7 @@
  */
 
 var user;
-var path = require('path');
+var path = require('path').join;
 var passport = require('passport');
 var callback = function(req, token, refresh, profile, done)
 {
@@ -33,31 +33,18 @@ var callback = function(req, token, refresh, profile, done)
             }
             else if(req.signedCookies.phone && (!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users' && process.env.LIVE === '1'))) // if there is no user, create them
             {
-                var onGetCount = function (err, number)
-                {
-                    if (err)
-                    {
-                        return done(err);
-                    }
-                    else
-                    {
-                        user = record;
-                        user.token = token;
-                        user.dob = new Date();
-                        delete user.password_hash;
-                        user.profile = profile.id;
-                        user._id = req.signedCookies.team;
-                        user.team_no = parseInt(number) + 1;
-                        user.authStrategy = profile.provider;
-                        user.phone = req.signedCookies.phone;
-                        user.email = profile.emails[0].value;
-                        user.manager_name = profile.displayName; // TODO: Use manager_name as the primary key object, possibly have _id as a compound instance instead of a regular string.
+                user = record;
+                user.token = token;
+                user.dob = new Date();
+                delete user.password_hash;
+                user.profile = profile.id;
+                user._id = req.signedCookies.team;
+                user.authStrategy = profile.provider;
+                user.phone = req.signedCookies.phone;
+                user.email = profile.emails[0].value;
+                user.manager_name = profile.displayName; // TODO: Use email as the primary key, possibly have _id as a compound instance instead of a regular string.
 
-                        mongoUsers.insert(process.env.MATCH, user, done);
-                    }
-                };
-
-                mongoUsers.getCount({authStrategy : {$ne : 'admin'}}, onGetCount);
+                mongoUsers.insert(process.env.MATCH, user, done);
             }
             else
             {
@@ -75,8 +62,8 @@ var ref =
 //var twitter = require('passport-twitter').Strategy;
 var facebook = require('passport-facebook').Strategy;
 var google = require('passport-google-oauth').OAuth2Strategy;
-var record = require(path.join(__dirname, 'mongo-record.js'));
-var mongoUsers = require(path.join(__dirname, 'mongo-users.js'));
+var record = require(path(__dirname, 'mongo-record.js'));
+var mongoUsers = require(path(__dirname, 'mongo-users.js'));
 
 passport.use(new facebook({
         clientID: process.env.FACEBOOK_ID,

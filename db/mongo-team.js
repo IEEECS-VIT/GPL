@@ -16,11 +16,11 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var path = require('path');
 var async = require('async');
 var match = process.env.MATCH;
-var mongoUsers = require(path.join(__dirname, 'mongo-users'));
-var mongoFeatures = require(path.join(__dirname, 'mongo-features'));
+var path = require('path').join;
+var mongoUsers = require(path(__dirname, 'mongo-users'));
+var mongoFeatures = require(path(__dirname, 'mongo-features'));
 
 exports.getTeam = function (doc, callback)
 {

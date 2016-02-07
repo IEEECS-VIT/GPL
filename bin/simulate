@@ -17,10 +17,10 @@
  */
 
 var day;
-var path = require('path');
+var path = require('path').join;
 var mongo = require('mongodb').MongoClient.connect;
-var mongoTeam = require(path.join(__dirname, '..', 'db', 'mongo-team'));
-var simulationControl = require(path.join(__dirname, '..', 'worker', 'simulation-controller'));
+var mongoTeam = require(path(__dirname, '..', 'db', 'mongo-team'));
+var simulationControl = require(path(__dirname, '..', 'worker', 'simulation-controller'));
 
 if (process.argv.length < 3)
 {

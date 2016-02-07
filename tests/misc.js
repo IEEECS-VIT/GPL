@@ -20,72 +20,72 @@ var assert = require('assert');
 
 describe('Miscellaneous test suites', function(){
     describe('Commentary scraper', function(){
-        /*
-            TODO: Check for request data integrity
-            TODO: Validate internally constructed DOM
-            TODO: Extract commentary data
-            TODO: Parse consolidated commentary object
-            TODO: Write contents to file
-            TODO: try loading commentary from file to ensure integrity
-        */
+    /*
+        TODO: Check for request data integrity
+        TODO: Validate internally constructed DOM
+        TODO: Extract commentary data
+        TODO: Parse consolidated commentary object
+        TODO: Write contents to file
+        TODO: try loading commentary from file to ensure integrity
+    */
     });
 
     it('Countdown page checks', function(){
-        /*
-            TODO: check whether the countdown page updates correctly
-        */
+    /*
+        TODO: check whether the countdown page updates correctly
+    */
     });
 
     it('Rules page', function(){
-        /*
-            TODO: check if page renders correctly
-        */
+    /*
+        TODO: check if page renders correctly
+    */
     });
 
     it('Privacy page', function(){
-        /*
-            TODO: check if page renders correctly
-        */
+    /*
+        TODO: check if page renders correctly
+    */
     });
 
     it('Developers page', function(){
-        /*
-            TODO: verify developer object structure
-            TODO: check if page renders correctly
-        */
+    /*
+        TODO: verify developer object structure
+        TODO: check if page renders correctly
+    */
     });
 
     it('Rules page', function(){
-        /*
-            TODO: check if page renders correctly
-        */
+    /*
+        TODO: check if page renders correctly
+    */
     });
 
     it('Sponsors page', function(){
-        /*
-            TODO: verify developer object structure
-            TODO: check if page renders correctly
-        */
+    /*
+        TODO: verify developer object structure
+        TODO: check if page renders correctly
+    */
     });
 
     it('Schedule page', function(){
-        /*
-            TODO: check if page renders correctly
-        */
+    /*
+        TODO: check if page renders correctly
+    */
     });
 
 
     it('Prizes page', function(){
-        /*
-            TODO: check if page renders correctly
-        */
+    /*
+        TODO: check if page renders correctly
+    */
     });
 
     it('Team name api check', function(){
-        /*
-            TODO: Check that the request origin matches the host
-            TODO: fetch existence status
-            TODO: return data
-        */
+    /*
+        TODO: Check that the request origin matches the host
+        TODO: fetch existence status
+        TODO: return data
+    */
     });
 });

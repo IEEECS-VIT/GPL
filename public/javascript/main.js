@@ -15,20 +15,14 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-$("#navbar").load("/html/navbar.html");
-$("#footer").load("/html/footer.html");
 
 $(document).ready(function () {
-    sticky_nav = function ()
-    {
-        var calculated_offset =  $('#navbar').offset().top;
-        $('#navbar').affix({
-            offset: {top: calculated_offset}
-        });
-    };
-    sticky_nav();
+    var navbar = $('#navbar');
+    var top = navbar.offset().top;
+    navbar.affix({offset: {top: top}});
+
     $(window).on('resize', function () {
 
-        $('#navbar').data('bs.affix').options.offset = $('#navbar').offset().top;
+        navbar.data('bs.affix').options.offset = top;
     });
 });

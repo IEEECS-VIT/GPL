@@ -25,8 +25,8 @@ var log;
 var error;
 var status;
 var newrelic;
-var path = require('path');
 var csurf = require('csurf')();
+var path = require('path').join;
 var each = require('async').each;
 var helmet = require('helmet')();
 var express = require('express');
@@ -36,12 +36,13 @@ var json = bodyParser.json();
 var compression = require('compression')();
 var passport = require('passport').initialize();
 var url = bodyParser.urlencoded({extended: true});
-var home = require(path.join(__dirname, 'routes', 'home'));
-var index = require(path.join(__dirname, 'routes', 'index'));
-var social = require(path.join(__dirname, 'routes', 'social'));
+var api = require(path(__dirname, 'routes', 'api'));
+var home = require(path(__dirname, 'routes', 'home'));
+var index = require(path(__dirname, 'routes', 'index'));
+var social = require(path(__dirname, 'routes', 'social'));
 var logger = require('morgan')(process.env.LOGGER_LEVEL || 'dev');
-var stat = express.static(path.join(__dirname, '/public'), {maxAge: 86400000 * 30});
-var favicon = require('serve-favicon')(path.join(__dirname, 'public', 'images', 'favicon.ico'));
+var stat = express.static(path(__dirname, '/public'), {maxAge: 86400000 * 30});
+var favicon = require('serve-favicon')(path(__dirname, 'public', 'images', 'favicon.ico'));
 var session = require('express-session')({secret: 'session secret key', resave: '', saveUninitialized: ''});
 var cookieParser = require('cookie-parser')(process.env.COOKIE_SECRET || 'randomsecretstring', {signed: true});
 
@@ -69,7 +70,7 @@ var flash = function(req, res, next)
 
 if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 {
-    app.locals.newrelic = require(path.join(__dirname, 'utils', 'newrelic'));
+    app.locals.newrelic = require(path(__dirname, 'utils', 'newrelic'));
 }
 
 if (process.env.LOGENTRIES_TOKEN)
@@ -89,7 +90,7 @@ app.use(function(req, res, next){
 });
 app.set('title', 'GPL');
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.enable('trust proxy');
 app.use(function(req, res, next){
@@ -100,6 +101,7 @@ app.use(function(req, res, next){
 app.use('/', index);
 app.use('/auth', social);
 app.use('/home', home);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function (req, res) {

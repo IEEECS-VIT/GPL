@@ -15,6 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 $(document).ready(function () {
     $('.accordion-section-content').hide();
     $('.accordion-section-title').on("click", function () {

@@ -40,25 +40,9 @@
             your browser</a> to improve your experience.</p>
         <![endif]-->
         <div id="wrapper" class="container-fluid">
-            <div id="side-navigation">
-                <div id="sidenav" class="affix col-sm-2 col-xs-4 hidden-xs full-height">
-                    <div class="container-fluid">
-                        <ul class="nav nav-pills nav-stacked wrapper  ">
-                            <li>
-                                <img src="http://res.cloudinary.com/gpl/general/gpllogo.png" class="img-responsive"
-                                     style="margin: 5px;padding-right:10px;">
-                            </li>
-                            <li role="presentation"><a href="/home">Home</a></li>
-                            <li role="presentation" ><a href="/home/dashboard">Dashboard</a></li>
-                            <li role="presentation"><a href="/home/team">Team</a></li>
-                            <li class="active" role="presentation"><a href="/home/stats">Statistics</a></li>
-                            <li role="presentation"><a href="/home/matches">Matches</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <% include partials/playerSidebar.ejs %>
             <div id="main-content" class="col-xs-12 col-sm-10 col-sm-offset-2 full-width">
-                <div id="top-navigation"></div>
+                <% include partials/playerNavbar.ejs %>
                 <div class="container-fluid">
                     <div class="row">
                       <div class="col-md-10 col-md-offset-1">
