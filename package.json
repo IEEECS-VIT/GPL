@@ -12,10 +12,18 @@
   "scripts": {
     "sim": "node bin/simulate",
     "seed": "node utils/seed.js",
+    "schedule": "node utils/schedule.js",
+    "scrape": "node utils/commentary/scrape.js",
     "start": "node node_modules/.bin/forever ./bin/www",
+    "postinstall": "node node_modules/.bin/bower install",
     "stop": "node node_modules/.bin/forever stop ./bin/www",
-    "restart": "node node_modules/.bin/forever restart ./bin/www",
-    "postinstall": "node node_modules/.bin/bower install"
+    "test": "node node_modules/.bin/mocha tests --recursive",
+    "restart": "node node_modules/.bin/forever restart ./bin/www"
+  },
+  "precommit": {
+    "run": ["test"],
+    "silent": false,
+    "colors": true
   },
   "cacheDirectories": [
     "public/bower/",
@@ -105,6 +113,7 @@
     "cheerio": "^0.20.0",
     "dotenv": "^2.0.0",
     "mocha": "^2.4.5",
+    "pre-commit": "^1.1.2",
     "yuicompressor": "^2.4.8"
   },
   "repository": {
