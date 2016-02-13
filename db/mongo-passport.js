@@ -33,7 +33,7 @@ var callback = function(req, token, refresh, profile, done)
             }
             else if(req.signedCookies.phone && (!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users' && process.env.LIVE === '1'))) // if there is no user, create them
             {
-                user = record;
+                user = new record();
                 user.token = token;
                 user.dob = new Date();
                 delete user.password_hash;
@@ -61,9 +61,9 @@ var ref =
 };
 //var twitter = require('passport-twitter').Strategy;
 var facebook = require('passport-facebook').Strategy;
-var google = require('passport-google-oauth').OAuth2Strategy;
-var record = require(path(__dirname, 'mongo-record.js'));
 var mongoUsers = require(path(__dirname, 'mongo-users.js'));
+var google = require('passport-google-oauth').OAuth2Strategy;
+var record = require(path(__dirname, 'mongo-record.js')).schema;
 
 passport.use(new facebook({
         clientID: process.env.FACEBOOK_ID,

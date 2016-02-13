@@ -41,9 +41,9 @@ var credentials;
 var crypto = require('crypto');
 var path = require('path').join;
 var router = require('express').Router();
-var record = require(path(__dirname, '..', 'db', 'mongo-record'));
 var mongoTeam = require(path(__dirname, '..', 'db', 'mongo-team'));
 var mongoUsers = require(path(__dirname, '..', 'db', 'mongo-users'));
+var record = require(path(__dirname, '..', 'db', 'mongo-record')).schema;
 var developers = require(path(__dirname, '..', 'package.json')).contributors;
 developers.map((arg) => arg.map((x) => x.img = x.name.split(' ')[0]));
 
@@ -359,7 +359,7 @@ router.post('/register', cookieFilter, function (req, res){
             }
         };
 
-        newUser = record;
+        newUser = new record();
         newUser.dob = new Date();
         newUser.email = req.body.email;
         newUser.phone = req.body.phone;

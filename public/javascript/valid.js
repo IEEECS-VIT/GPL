@@ -20,11 +20,14 @@ var button = document.getElementById('submit');
 var elem = document.getElementsByName('team')[0];
 
 elem.addEventListener('blur', function(){
-    $.get('check/' + this.value, function(result){ // Switch to .load when custom error placeholder has been constructed
-        button.disabled = !result;
-        msg.style.display = result ? 'none' : 'block';
-        elem.style.borderColor = result ? '' : 'red';
-    });
+    if(this.value)
+    {
+        $.get('api/check/' + this.value, function(result){ // Switch to .load when custom error placeholder has been constructed
+            button.disabled = !result;
+            msg.style.display = result ? 'none' : 'block';
+            elem.style.borderColor = result ? '' : 'red';
+        });
+    }
 }, false);
 
 function validator()

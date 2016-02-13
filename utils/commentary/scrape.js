@@ -27,9 +27,9 @@ var index;
 var data = '';
 var flag = false;
 var fs = require('fs');
-var path = require('path').join;
 var http = require('http');
 var async = require('async');
+var path = require('path').join;
 var scrape = require('cheerio').load;
 var consolidated =
 {
@@ -59,7 +59,6 @@ var files =
     'no run': path(__dirname, 'score', 'dot2'), one: path(__dirname, 'score', 'one2'), two: path(__dirname, 'score', 'two'),
     three: path(__dirname, 'score', 'three'), FOUR: path(__dirname, 'score', 'four'), SIX: path(__dirname, 'score', 'six')
 };
-
 var rand = function()
 {
     return opts[parseInt((Math.random() * 1000000000000000) % 3)];

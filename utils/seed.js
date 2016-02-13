@@ -16,17 +16,22 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+console.time('Seeding operation took');
+if(process.env.NODE_ENV)
+{
+   throw 'Seed must be run on non-production environments only.';
+}
+
 var database;
 var async = require('async');
 var path = require('path').join;
 var record = require(path(__dirname, '..', 'db', 'mongo-record'));
+var users = record.users(8);
+var players = record.players();
 var admin = {_id: 'ADMIN', authStrategy: 'admin', password_hash: '$2a$10$ijmjpw3BJDNp5phIKmfdAeJ.ev/pbU6tXL78JgKejyjQ58OtUodtK'};  // admin@gpl
-var users = record.seed(8).push(admin);
-var players = [];
-if(!process.env.NODE_ENV)
-{
-    require('dotenv').load({path: path(__dirname, '..', '.env')});
-}
+
+users.push(admin);
+require('dotenv').load({path: path(__dirname, '..', '.env')});
 
 var onParallel = function(err)
 {
@@ -34,10 +39,15 @@ var onParallel = function(err)
     {
         console.error(err.message);
     }
-    else
-    {
-        database.close();
-    }
+
+    database.close(function(err){
+        if(err)
+        {
+            console.error(err.message);
+        }
+
+        console.timeEnd('Seeding operation took');
+    });
 };
 var mongo = require('mongodb').MongoClient.connect;
 var parallelTasks =
@@ -57,10 +67,6 @@ var parallelTasks =
     function(asyncCallback)
     {
         database.collection('players').insertMany(players, asyncCallback);
-    },
-    function(asyncCallback)
-    {
-        // generate schedule here
     }
 ];
 

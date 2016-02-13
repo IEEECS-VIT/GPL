@@ -24,18 +24,26 @@ var mongoUsers = require(path(__dirname, '..', 'db', 'mongo-users'));
 var mongoFeatures = require(path(__dirname, '..', 'db', 'mongo-features'));
 var apiFilter = function(req, res, next)
 {
-    if(req.headers.referer && req.signedCookies.name && req.headers.host === req.headers.referer.split('/')[2] && req.route.path === req.url)
+    if(!req.headers.referer)
+    {
+        res.redirect('/');
+    }
+    if(req.signedCookies.name && req.headers.host === req.headers.referer.split('/')[2] && req.route.path === req.url)
     {
         next();
     }
     else
     {
-        res.redirect('/');
+        res.end();
     }
 };
 
 router.get('/check/:name', function(req, res){
-    if(req.headers.referer && !req.signedCookies.name && req.headers.host === req.headers.referer.split('/')[2] && req.url.match(/^\/(social\/)?register$/))
+    if(!req.headers.referer)
+    {
+        res.redirect('/');
+    }
+    else if(!req.signedCookies.name && req.headers.host === req.headers.referer.split('/')[2] && req.url.match(/^\/(social\/)?register$/))
     {
         mongoUsers.fetchUser({_id: req.params.name.trim().toUpperCase()}, function(err, user){
             res.send(!user);
@@ -43,7 +51,7 @@ router.get('/check/:name', function(req, res){
     }
     else
     {
-        res.redirect('/');
+        res.end();
     }
 });
 
@@ -57,17 +65,20 @@ router.get('/home', apiFilter, function(req, res){
     {
         if (err)
         {
-            res.redirect('/home');
+            res.status(422);
+            res.send('Error fetching team details. Please re-try.');
         }
         else if (doc)
         {
             if (!doc.team.length)
             {
-                res.redirect('/home/players');
+                res.status(422);
+                res.send('Please pick your set of 16 players first.');
             }
             else if(!doc.squad.length)
             {
-                res.redirect('/home/team');
+                res.status(422);
+                res.send('Please set your playing XI first.');
             }
             else
             {
@@ -75,7 +86,8 @@ router.get('/home', apiFilter, function(req, res){
                 {
                     if (err)
                     {
-                        res.redirect('/home');
+                        res.status(422);
+                        res.send('An unexpected error has occured and your detials could not be fetched. Please re-try.');
                     }
                     else
                     {
@@ -90,8 +102,9 @@ router.get('/home', apiFilter, function(req, res){
         }
         else
         {
+            res.status(422);
             res.clearCookie('name', {});
-            res.redirect('/login');
+            res.send('That session had expired, please login.');
         }
     };
 
@@ -101,7 +114,7 @@ router.get('/home', apiFilter, function(req, res){
 router.get('/leaderboard', apiFilter, function(req, res){
     if(req.signedCookies.lead && req.signedCookies.day == process.env.DAY)
     {
-        res.render("leaderboard", {leaderboard: JSON.parse(req.signedCookies.lead)});
+        res.json(JSON.parse(req.signedCookies.lead));
     }
     else if (process.env.DAY >= '1'|| !process.env.NODE_ENV) // if cookie exists then access the database
     {
@@ -109,9 +122,8 @@ router.get('/leaderboard', apiFilter, function(req, res){
         {
             if (err)
             {
-                console.error(err.message);
-                req.flash('Unable to process the leaderboard at this time, please re-try');
-                res.redirect('/home');
+                res.status(422);
+                res.send('Unable to process the leaderboard at this time, please re-try');
             }
             else
             {
@@ -125,7 +137,8 @@ router.get('/leaderboard', apiFilter, function(req, res){
     }
     else
     {
-        res.redirect('/home');
+        res.status(422);
+        res.send('The leaderboard will become active when matches start.');
     }
 });
 
@@ -141,8 +154,8 @@ router.get('/match/:day', apiFilter, function(req, res){
         {
             if (err)
             {
-                req.flash('Error loading match ' + req.params.day + 'details.');
-                res.redirect('/home');
+                res.status(422);
+                res.send('Error loading match ' + req.params.day + 'details.');
             }
             else
             {
@@ -150,8 +163,8 @@ router.get('/match/:day', apiFilter, function(req, res){
                 {
                     if (err)
                     {
-                        req.flash('Error loading match ' + req.params.day + 'details.');
-                        res.redirect('/home');
+                        res.status(422);
+                        res.send('Error loading match ' + req.params.day + 'details.');
                     }
                     else
                     {
@@ -168,7 +181,8 @@ router.get('/match/:day', apiFilter, function(req, res){
     }
     else
     {
-        res.redirect('/home');
+        res.status(422);
+        res.send('Either registrations are still open, or the match day is invalid.');
     }
 });
 
@@ -188,7 +202,8 @@ router.post('/getsquad', apiFilter, function (req, res) {
     {
         if (err)
         {
-            req.flash('That request encountered an error, please re-try.');
+            res.status(422);
+            res.send('That request encountered an error, please re-try.');
         }
 
         res.redirect('/home');
@@ -207,8 +222,8 @@ router.get('/players', apiFilter, function (req, res){ // page for all players, 
     {
         if (err)
         {
-            req.flash('That request encountered an error, please re-try.');
-            res.redirect('/home');
+            res.status(422);
+            res.send('That request encountered an error, please re-try.');
         }
         else
         {
@@ -216,11 +231,13 @@ router.get('/players', apiFilter, function (req, res){ // page for all players, 
             {
                 if (!document.squad.length)
                 {
-                    res.redirect("/home/team");
+                    res.status(422);
+                    res.send('Your set of 16 players alreasy exists, pick your playing XI.');
                 }
                 else
                 {
-                    res.redirect("/home");
+                    res.status(422);
+                    res.send('Your squad and team are already set.');
                 }
             }
             else
@@ -229,8 +246,8 @@ router.get('/players', apiFilter, function (req, res){ // page for all players, 
                 {
                     if (err)
                     {
-                        req.flash('Error loading player data.');
-                        res.redirect('/home');
+                        res.status(422);
+                        res.send('Error loading player data. Please re-try.');
                     }
                     else
                     {
@@ -244,7 +261,8 @@ router.get('/players', apiFilter, function (req, res){ // page for all players, 
                         {
                             if(err)
                             {
-                                res.redirect('/players');
+                                res.status(422);
+                                res.send('Error processing player details, please re-try.');
                             }
                             else
                             {
@@ -274,8 +292,8 @@ router.get('/team', apiFilter, function (req, res){ // view the assigned playing
     {
         if (err)
         {
-            req.flash('Error loading team data.');
-            res.redirect('/home');
+            res.status(422);
+            res.send('Error loading team data.');
         }
         else
         {
@@ -297,8 +315,8 @@ router.get('/stats', apiFilter, function(req, res){
         {
             if (err)
             {
-                req.flash('Error loading stats');
-                res.redirect('/home');
+                res.status(422);
+                res.send('Error loading stats');
             }
             else
             {
@@ -313,6 +331,7 @@ router.get('/stats', apiFilter, function(req, res){
     }
     else
     {
+        res.status(422);
         res.redirect('/home');
     }
 });
@@ -320,7 +339,7 @@ router.get('/stats', apiFilter, function(req, res){
 router.get('/dashboard', apiFilter, function(req, res){
     if(req.signedCookies.dash && req.signedCookies.day == process.env.DAY)
     {
-        res.render('dashboard', {result : JSON.parse(req.signedCookies.dash)});
+        res.json(JSON.parse(req.signedCookies.dash));
     }
     else if (process.env.DAY >= '1')
     {
@@ -333,8 +352,8 @@ router.get('/dashboard', apiFilter, function(req, res){
         {
             if (err)
             {
+                res.status(422);
                 req.flash('Error loading dashboard.');
-                res.redirect('/home');
             }
             else
             {
@@ -348,7 +367,8 @@ router.get('/dashboard', apiFilter, function(req, res){
     }
     else
     {
-        res.redirect('/home');
+        res.status(422);
+        res.send('The dashboard will be populated when matches begin.');
     }
 });
 
