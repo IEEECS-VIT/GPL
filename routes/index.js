@@ -359,7 +359,7 @@ router.post('/register', cookieFilter, function (req, res){
             }
         };
 
-        newUser = new record();
+        newUser = record();
         newUser.dob = new Date();
         newUser.email = req.body.email;
         newUser.phone = req.body.phone;

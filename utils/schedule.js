@@ -70,6 +70,9 @@ var onFetch = function (err, count)
         var day;
         var temp;
         var schedule;
+        var excess = (8 - count % 8) % 8;
+
+        count += excess;
 
         for (day = 1; day < 8; ++day)
         {

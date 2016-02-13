@@ -76,20 +76,3 @@ process.on('SIGINT', function(err){
     db.close();
     exit();
 });
-
-process.on('SIGTERM', function(err){
-    if(err)
-    {
-        console.error(err);
-    }
-
-    db.close();
-    exit();
-});
-
-process.on('uncaughtException', function (err) {
-    console.error((new Date).toUTCString() + ' uncaughtException:', err.message);
-    console.error(err.stack);
-    db.close();
-    exit();
-});

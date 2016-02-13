@@ -33,7 +33,7 @@ var callback = function(req, token, refresh, profile, done)
             }
             else if(req.signedCookies.phone && (!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users' && process.env.LIVE === '1'))) // if there is no user, create them
             {
-                user = new record();
+                user = record();
                 user.token = token;
                 user.dob = new Date();
                 delete user.password_hash;
