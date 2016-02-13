@@ -31,7 +31,7 @@ var callback = function(req, token, refresh, profile, done)
             {
                 return done(null, doc); // user found, return that user
             }
-            else if(req.signedCookies.phone && (!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users' && process.env.LIVE === '1'))) // if there is no user, create them
+            else if(req.signedCookies.phone && (!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users'))) // if there is no user, create them
             {
                 user = record();
                 user.token = token;

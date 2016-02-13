@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 const d_hour = 24, h_min = 60, m_sec = 60;
 var m_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 function get_time()

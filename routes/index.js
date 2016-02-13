@@ -80,17 +80,8 @@ if (process.env.LOGENTRIES_TOKEN)
     log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
-router.get('/', function (req, res){
-    if (req.signedCookies.name)
-    {
-        if (log)
-        {
-            log.log(req.signedCookies.name + "logged in");
-        }
-
-        res.redirect('/home');
-    }
-    else if (process.env.NODE_ENV && process.env.LIVE === '0')
+router.get('/', cookieFilter, function (req, res){
+    if (process.env.NODE_ENV && process.env.DAY === '-1')
     {
         time = new Date;
         time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
@@ -113,7 +104,7 @@ router.get('/', function (req, res){
 });
 
 router.get('/interest', function (req, res){
-    if(process.env.LIVE === '0' || !process.env.NODE_ENV || req.signedCookies.admin)
+    if(process.env.DAY === '-1' || !process.env.NODE_ENV || req.signedCookies.admin)
     {
         res.render('interest', {csrfToken: req.csrfToken()});
     }
@@ -329,7 +320,7 @@ router.post('/forgot/user', function (req, res){
 });
 
 router.get('/register', cookieFilter, function (req, res){
-    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH == 'users' && process.env.LIVE === '1')) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
+    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH == 'users')) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
     {                                                                                                                  // the schedule has been constructed and the game engine is match ready.
         res.render('register', {msg: req.flash(), csrfToken: req.csrfToken()});
     }
@@ -442,7 +433,7 @@ router.post('/social/login', cookieFilter, function (req, res){
 });
 
 router.get('/social/register', cookieFilter, function (req, res){
-    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users' && process.env.LIVE === '1')) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
+    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users')) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
     {                                                                                                                   // the schedule has been constructed and the game engine is match ready
         res.render('social', {mode: +!req.signedCookies.team, type : 'register', csrfToken : req.csrfToken()});
     }

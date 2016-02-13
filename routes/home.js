@@ -110,7 +110,7 @@ router.get('/leaderboard', authenticated, function (req, res){
     {
         res.render("leaderboard", {leaderboard: JSON.parse(req.signedCookies.lead)});
     }
-    else if (process.env.DAY >= '1'|| !process.env.NODE_ENV)                           // if cookie exists then access the database
+    else if (process.env.DAY > '0'|| !process.env.NODE_ENV)                           // if cookie exists then access the database
     {
         var onFetch = function (err, documents)
         {
@@ -137,8 +137,8 @@ router.get('/leaderboard', authenticated, function (req, res){
 });
 
 router.get('/matches', authenticated, function (req, res){ // Deprecated
-    if (process.env.DAY >= '0') // Initialize process.env.LIVE with -1, set to zero once the schedule has been constructed and
-    {                           // the game engine is match ready.
+    if (process.env.DAY > '0') // Initialize process.env.DAY with -1, set to zero to open registrations.
+    {
         credentials =
         {
             '_id' : req.signedCookies.name
@@ -182,7 +182,7 @@ router.get('/matches', authenticated, function (req, res){ // Deprecated
 });
 
 router.get('/match/:day', authenticated, function(req, res){
-      if(process.env.DAY >= '0' && req.params.day >= '1' && req.params.day <= '7')
+      if(process.env.DAY > '0' && req.params.day > '0' && req.params.day < '8')
       {
           credentials =
           {
@@ -464,7 +464,7 @@ router.get('/stats', authenticated, function (req, res){
     {
         res.render('stats', {stats: JSON.parse(req.signedCookies.stats)});
     }
-    else if (process.env.DAY >= '1')
+    else if (process.env.DAY > '0')
     {
         var onGetStats = function (err, doc)
         {
@@ -513,7 +513,7 @@ router.get('/dashboard', authenticated, function (req, res){
     {
         res.render('dashboard', {result : JSON.parse(req.signedCookies.dash)});
     }
-    else if (process.env.DAY >= '1')
+    else if (process.env.DAY > '0')
     {
         credentials =
         {

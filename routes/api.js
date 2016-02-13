@@ -16,6 +16,13 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var i;
+var temp;
+var squad;
+var referer;
+var decider;
+var condition;
+var credentials;
 var async = require('async');
 var path = require('path').join;
 var router = require('express').Router();
@@ -28,7 +35,14 @@ var apiFilter = function(req, res, next)
     {
         res.redirect('/');
     }
-    if(req.signedCookies.name && req.headers.host === req.headers.referer.split('/')[2] && req.route.path === req.url)
+
+    temp = req.url.split('/')[1];
+    referer = req.headers.referer.split('/');
+    condition = (referer[2] === req.headers.host && referer.slice(-1)[0] === temp);
+    decider = (temp === 'register' && (!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH == 'users')));
+    condition &= (decider ? !req.signedCookies.name : req.signedCookies.name);
+
+    if(condition)
     {
         next();
     }
@@ -38,21 +52,10 @@ var apiFilter = function(req, res, next)
     }
 };
 
-router.get('/check/:name', function(req, res){
-    if(!req.headers.referer)
-    {
-        res.redirect('/');
-    }
-    else if(!req.signedCookies.name && req.headers.host === req.headers.referer.split('/')[2] && req.url.match(/^\/(social\/)?register$/))
-    {
-        mongoUsers.fetchUser({_id: req.params.name.trim().toUpperCase()}, function(err, user){
-            res.send(!user);
-        });
-    }
-    else
-    {
-        res.end();
-    }
+router.get('/register/:name', apiFilter, function(req, res){
+    mongoUsers.fetchUser({_id: req.params.name.trim().toUpperCase()}, function(err, user){
+        res.send(!user);
+    });
 });
 
 router.get('/home', apiFilter, function(req, res){
@@ -87,7 +90,7 @@ router.get('/home', apiFilter, function(req, res){
                     if (err)
                     {
                         res.status(422);
-                        res.send('An unexpected error has occured and your detials could not be fetched. Please re-try.');
+                        res.send('An unexpected error has occurred and your details could not be fetched. Please re-try.');
                     }
                     else
                     {
@@ -116,7 +119,7 @@ router.get('/leaderboard', apiFilter, function(req, res){
     {
         res.json(JSON.parse(req.signedCookies.lead));
     }
-    else if (process.env.DAY >= '1'|| !process.env.NODE_ENV) // if cookie exists then access the database
+    else if (process.env.DAY > '0'|| !process.env.NODE_ENV) // if cookie exists then access the database
     {
         var onFetch = function (err, documents)
         {
@@ -143,7 +146,7 @@ router.get('/leaderboard', apiFilter, function(req, res){
 });
 
 router.get('/match/:day', apiFilter, function(req, res){
-    if(process.env.DAY >= '0' && req.params.day >= '1' && req.params.day <= '7')
+    if(process.env.DAY > '0' && req.params.day > '0' && req.params.day < '8')
     {
         credentials =
         {
@@ -232,7 +235,7 @@ router.get('/players', apiFilter, function (req, res){ // page for all players, 
                 if (!document.squad.length)
                 {
                     res.status(422);
-                    res.send('Your set of 16 players alreasy exists, pick your playing XI.');
+                    res.send('Your set of 16 players already exists, pick your playing XI.');
                 }
                 else
                 {
@@ -309,7 +312,7 @@ router.get('/stats', apiFilter, function(req, res){
     {
         res.render('stats', {stats: JSON.parse(req.signedCookies.stats)});
     }
-    else if (process.env.DAY >= '1')
+    else if (process.env.DAY > '0')
     {
         var onGetStats = function (err, doc)
         {
@@ -341,7 +344,7 @@ router.get('/dashboard', apiFilter, function(req, res){
     {
         res.json(JSON.parse(req.signedCookies.dash));
     }
-    else if (process.env.DAY >= '1')
+    else if (process.env.DAY > '0')
     {
         credentials =
         {
