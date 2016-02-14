@@ -133,8 +133,16 @@ exports.players = function()
 
             if(j != 'd')
             {
-                temp.Bat = parseInt(faker.commerce.price()) % 501 + 400;
-                temp.Bowl = parseInt(faker.commerce.price()) % 501 + 400;
+                if(j != 'c')
+                {
+                    temp.Rating = parseInt(faker.commerce.price()) % 501 + 400;
+                }
+                else
+                {
+                    temp.Bat = parseInt(faker.commerce.price()) % 501 + 400;
+                    temp.Bowl = parseInt(faker.commerce.price()) % 501 + 400;
+                }
+
                 temp.Country = faker.address.country();
                 temp.Average = parseFloat((faker.commerce.price() % 41 + 10).toFixed(2));
                 temp['Strike Rate'] = parseFloat((faker.commerce.price() % 91 + 70).toFixed(2));

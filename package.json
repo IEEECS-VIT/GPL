@@ -112,6 +112,7 @@
   "devDependencies": {
     "cheerio": "^0.20.0",
     "dotenv": "^2.0.0",
+    "faker": "^3.0.1",
     "mocha": "^2.4.5",
     "pre-commit": "^1.1.2",
     "yuicompressor": "^2.4.8"
