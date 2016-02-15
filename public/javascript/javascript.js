@@ -47,7 +47,7 @@ function timePassed()
     document.getElementById('countdownminutes').innerHTML = remainingMinutes + "<br>Min";
     document.getElementById('countdownseconds').innerHTML = remainingSeconds + "<br>Sec";
 
-    if (seconds == 0)
+    if (!seconds)
     {
         clearInterval(countdownTimer);
         document.getElementById('countdowndays').innerHTML = "Buzz Buzz";
@@ -58,4 +58,4 @@ function timePassed()
     }
 }
 
-var countdownTimer = setInterval('timePassed()', 1000);
+var countdownTimer = setInterval(timePassed, 1000);

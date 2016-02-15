@@ -20,10 +20,6 @@ html {
     min-height: 100%;
 }
 
-h1 {
-    font-weight: 700;
-}
-
 * {
     font-family: 'Roboto';
     font-feature-settings: "liga", "kern";

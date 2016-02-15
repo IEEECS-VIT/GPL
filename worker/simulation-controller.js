@@ -98,6 +98,11 @@ exports.initSimulation = function (day, masterCallback)
 
         var updateData = function (err, newData)
         {
+            if(err)
+            {
+                console.error(err.message);
+            }
+
             var updateUser = function (newUserDoc, asyncCallback)
             {
                 if(newUserDoc.squad.length)
@@ -205,6 +210,11 @@ exports.initSimulation = function (day, masterCallback)
 
         var onTeamDetails = function (err, results)
         {
+            if(err)
+            {
+                console.error(err.message);
+            }
+
             var data =
             {
                 team:
@@ -284,7 +294,6 @@ exports.initSimulation = function (day, masterCallback)
         {
             case -1:
                 throw 'Invalid Day';
-                break;
             default:
                 collection = 'matchday' + day;
                 break;

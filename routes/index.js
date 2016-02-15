@@ -213,7 +213,15 @@ router.post('/forgot/password', function (req, res){
     {
         _id: req.body.team.trim().toUpperCase(),
         email: req.body.email,
-        authStrategy : 'local'
+        $or:
+        [
+            {
+                authStrategy : 'local'
+            },
+            {
+                authStrategy : 'admin'
+            }
+        ]
     };
 
     crypto.randomBytes(20, function (err, buf){
@@ -320,7 +328,7 @@ router.post('/forgot/user', function (req, res){
 });
 
 router.get('/register', cookieFilter, function (req, res){
-    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH == 'users')) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
+    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users')) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
     {                                                                                                                  // the schedule has been constructed and the game engine is match ready.
         res.render('register', {msg: req.flash(), csrfToken: req.csrfToken()});
     }

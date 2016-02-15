@@ -39,7 +39,7 @@ var apiFilter = function(req, res, next)
     temp = req.url.split('/')[1];
     referer = req.headers.referer.split('/');
     condition = (referer[2] === req.headers.host && referer.slice(-1)[0] === temp);
-    decider = (temp === 'register' && (!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH == 'users')));
+    decider = (temp === 'register' && (!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users')));
     condition &= (decider ? !req.signedCookies.name : req.signedCookies.name);
 
     if(condition)
@@ -54,7 +54,7 @@ var apiFilter = function(req, res, next)
 
 router.get('/register/:name', apiFilter, function(req, res){
     mongoUsers.fetchUser({_id: req.params.name.trim().toUpperCase()}, function(err, user){
-        res.send(!user);
+        res.send(!(user && err));
     });
 });
 
@@ -94,8 +94,8 @@ router.get('/home', apiFilter, function(req, res){
                     }
                     else
                     {
-                        doc.balls_for = parseInt(doc.balls_for / 6) + '.' + (doc.balls_for % 6);
-                        doc.balls_against = parseInt(doc.balls_against / 6) + '.' + (doc.balls_against % 6);
+                        doc.balls_for = parseInt(doc.balls_for / 6, 10) + '.' + (doc.balls_for % 6);
+                        doc.balls_against = parseInt(doc.balls_against / 6, 10) + '.' + (doc.balls_against % 6);
                         res.json({team: documents, user: doc});
                     }
                 };
@@ -115,7 +115,7 @@ router.get('/home', apiFilter, function(req, res){
 });
 
 router.get('/leaderboard', apiFilter, function(req, res){
-    if(req.signedCookies.lead && req.signedCookies.day == process.env.DAY)
+    if(req.signedCookies.lead && req.signedCookies.day === process.env.DAY)
     {
         res.json(JSON.parse(req.signedCookies.lead));
     }
@@ -308,7 +308,7 @@ router.get('/team', apiFilter, function (req, res){ // view the assigned playing
 });
 
 router.get('/stats', apiFilter, function(req, res){
-    if(req.signedCookies.stats && req.signedCookies.day == process.env.DAY)
+    if(req.signedCookies.stats && req.signedCookies.day === process.env.DAY)
     {
         res.render('stats', {stats: JSON.parse(req.signedCookies.stats)});
     }
@@ -323,7 +323,7 @@ router.get('/stats', apiFilter, function(req, res){
             }
             else
             {
-                doc.overs = parseInt(doc.overs / 6) + '.' + (doc.overs % 6);
+                doc.overs = parseInt(doc.overs / 6, 10) + '.' + (doc.overs % 6);
                 res.cookie('day', process.env.DAY, {signed : true, maxAge : 86400000});
                 res.cookie('stats', JSON.stringify(doc), {signed : true, maxAge : 86400000});
                 res.json(doc);
@@ -340,7 +340,7 @@ router.get('/stats', apiFilter, function(req, res){
 });
 
 router.get('/dashboard', apiFilter, function(req, res){
-    if(req.signedCookies.dash && req.signedCookies.day == process.env.DAY)
+    if(req.signedCookies.dash && req.signedCookies.day === process.env.DAY)
     {
         res.json(JSON.parse(req.signedCookies.dash));
     }

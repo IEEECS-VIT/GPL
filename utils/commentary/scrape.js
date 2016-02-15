@@ -61,7 +61,7 @@ var files =
 };
 var rand = function()
 {
-    return opts[parseInt((Math.random() * 1000000000000000) % 3)];
+    return opts[parseInt((Math.random() * 1000000000000000) % 3, 10)];
 };
 
 http.get('http://www.espncricinfo.com/australia-v-india-2015-16/engine/match/895817.html?innings=1;view=commentary', // needs work

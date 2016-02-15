@@ -54,13 +54,13 @@ var onInsert = function (err, doc)
 {
     if(err)
     {
-        throw err;
+        console.error(err.message);
     }
     else
     {
         console.log(doc.ops);
 
-        if(++done == 7)
+        if(++done === 7)
         {
             callback(null);
         }

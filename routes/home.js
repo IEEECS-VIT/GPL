@@ -86,8 +86,8 @@ router.get('/', authenticated, function (req, res){
                     }
                     else
                     {
-                        doc.balls_for = parseInt(doc.balls_for / 6) + '.' + (doc.balls_for % 6);
-                        doc.balls_against = parseInt(doc.balls_against / 6) + '.' + (doc.balls_against % 6);
+                        doc.balls_for = parseInt(doc.balls_for / 6, 10) + '.' + (doc.balls_for % 6);
+                        doc.balls_against = parseInt(doc.balls_against / 6, 10) + '.' + (doc.balls_against % 6);
                         res.render('home', {results: {team: documents, user: doc, msg: req.flash()}});
                     }
                 };
@@ -106,7 +106,7 @@ router.get('/', authenticated, function (req, res){
 });
 
 router.get('/leaderboard', authenticated, function (req, res){
-    if(req.signedCookies.lead && req.signedCookies.day == process.env.DAY)
+    if(req.signedCookies.lead && req.signedCookies.day === process.env.DAY)
     {
         res.render("leaderboard", {leaderboard: JSON.parse(req.signedCookies.lead)});
     }
@@ -332,7 +332,7 @@ router.post('/players', function (req, res){
         {
             var reduction = function(arg, callback)
             {
-                cost -= parseInt(arg.Cost);
+                cost -= parseInt(arg.Cost, 10);
                 callback();
             };
             var onReduce = function(err)
@@ -460,7 +460,7 @@ router.get('/team', authenticated, function (req, res){ // view the assigned pla
 });
 
 router.get('/stats', authenticated, function (req, res){
-    if(req.signedCookies.stats && req.signedCookies.day == process.env.DAY)
+    if(req.signedCookies.stats && req.signedCookies.day === process.env.DAY)
     {
         res.render('stats', {stats: JSON.parse(req.signedCookies.stats)});
     }
@@ -475,7 +475,7 @@ router.get('/stats', authenticated, function (req, res){
             }
             else
             {
-                doc.overs = parseInt(doc.overs / 6) + '.' + (doc.overs % 6);
+                doc.overs = parseInt(doc.overs / 6, 10) + '.' + (doc.overs % 6);
                 res.cookie('day', process.env.DAY, {signed : true, maxAge : 86400000});
                 res.cookie('stats', JSON.stringify(doc), {signed : true, maxAge : 86400000});
                 res.render('stats', {stats: doc});
@@ -509,7 +509,7 @@ router.post('/feature', authenticated, function (req, res){
 });
 
 router.get('/dashboard', authenticated, function (req, res){
-    if(req.signedCookies.dash && req.signedCookies.day == process.env.DAY)
+    if(req.signedCookies.dash && req.signedCookies.day === process.env.DAY)
     {
         res.render('dashboard', {result : JSON.parse(req.signedCookies.dash)});
     }

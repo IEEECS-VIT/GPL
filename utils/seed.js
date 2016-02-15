@@ -29,7 +29,13 @@ var path = require('path').join;
 var record = require(path(__dirname, '..', 'db', 'mongo-record'));
 var users = record.users(8);
 var players = record.players();
-var admin = {_id: 'ADMIN', authStrategy: 'admin', password_hash: '$2a$10$ijmjpw3BJDNp5phIKmfdAeJ.ev/pbU6tXL78JgKejyjQ58OtUodtK'};  // admin@gpl
+var admin =
+{
+    _id: 'ADMIN',
+    authStrategy: 'admin',
+    email: 'gravitaspremierleague@gmail.com',
+    password_hash: '$2a$10$ijmjpw3BJDNp5phIKmfdAeJ.ev/pbU6tXL78JgKejyjQ58OtUodtK'   // admin@gpl
+};
 
 users.push(admin);
 require('dotenv').load({path: path(__dirname, '..', '.env')});

@@ -114,7 +114,7 @@ exports.getLeader = function (user, callback)
 
             for (i = 0; i < documents.length; ++i)
             {
-                if (documents[i]._id == user)
+                if (documents[i]._id === user)
                 {
                     flag = true;
                     documents[i].rank = i + 1;

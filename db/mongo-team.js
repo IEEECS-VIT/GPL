@@ -318,7 +318,7 @@ exports.opponent = function (day, team, callback)
         }
         else
         {
-            callback(null, (team == doc.Team_1) ? doc.Team_2 : doc.Team_1);
+            callback(null, (team === doc.Team_1) ? doc.Team_2 : doc.Team_1);
         }
     };
 
