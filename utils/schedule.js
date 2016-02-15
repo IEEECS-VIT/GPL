@@ -16,17 +16,39 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+console.time('Schedule construction');
+
+var i;
+var j;
+var day;
+var num;
+var temp;
+var users;
+var excess;
+var size = 0;
 var done = 0;
 var database;
+var schedule;
+var callback;
+var count = 0;
+var unassigned;
+var async = require('async');
 var path = require('path').join;
 var mongo = require('mongodb').MongoClient.connect;
+var generate = require(path(__dirname, '..', 'db', 'mongo-record')).users;
 
 if(!process.env.NODE_ENV)
 {
     require('dotenv').load({path : path(__dirname, '..', '.env')});
 }
-
-var match = process.env.MATCH;
+if(process.env.DAY < '0')
+{
+    throw "Registrations have not been started yet, set process.env.DAY to '0' to allow schedule construction.";
+}
+else if(process.env.DAY > '0')
+{
+    throw 'Matches for this round have already started.';
+}
 
 var onInsert = function (err, doc)
 {
@@ -40,12 +62,12 @@ var onInsert = function (err, doc)
 
         if(++done == 7)
         {
-            database.close();
+            callback(null);
         }
     }
 };
 
-var onSlice = function(err, docs)
+var onParallel = function(err)
 {
     if(err)
     {
@@ -53,26 +75,27 @@ var onSlice = function(err, docs)
     }
     else
     {
-
+        database.close();
+        console.timeEnd('Schedule construction');
     }
 };
 
-var onFetch = function (err, count)
-{
-    if (err)
+var parallelTasks =
+[
+    function(asyncCallback)
     {
-        console.error(err.message);
-    }
-    else
+        if(users.length)
+        {
+            database.collection(process.env.MATCH).insertMany(users, asyncCallback);
+        }
+        else
+        {
+            asyncCallback(null);
+        }
+    },
+    function(asyncCallback)
     {
-        var i;
-        var j;
-        var day;
-        var temp;
-        var schedule;
-        var excess = (8 - count % 8) % 8;
-
-        count += excess;
+        callback = asyncCallback;
 
         for (day = 1; day < 8; ++day)
         {
@@ -100,7 +123,7 @@ var onFetch = function (err, count)
                     switch (day % 2)
                     {
                         case 1:
-                            var num = 0;
+                            num = 0;
                             temp = Math.pow(2, +(day < 7));
 
                             for (i = 0; i < 2; ++i)
@@ -143,6 +166,34 @@ var onFetch = function (err, count)
 
             database.collection("matchday" + day).insertMany(schedule, {w : 1}, onInsert);
         }
+    },
+    function(asyncCallback)
+    {
+        var forEach = function(arg, callback)
+        {
+            database.collection(process.env.MATCH).updateOne({_id: arg._id}, {$set: {team_no: ++size}}, callback)
+        };
+
+        async.map(unassigned, forEach, asyncCallback);
+    }
+];
+
+var onFetch = function (err, results)
+{
+    if (err)
+    {
+        console.error(err.message);
+    }
+    else
+    {
+        unassigned = results;
+        count = unassigned.length;
+        excess = (8 - count % 8) % 8;
+
+        users = generate(excess, count);
+        count += excess;
+
+        async.parallel(parallelTasks, onParallel);
     }
 };
 
@@ -155,8 +206,7 @@ var onConnect = function (err, db)
     else
     {
         database = db;
-
-        database.collection(match).count({authStrategy : {$ne : 'admin'}}, onFetch);
+        database.collection(process.env.MATCH).find({authStrategy: {$ne: 'admin'}}, {_id: 1}).toArray(onFetch);
     }
 };
 

@@ -17,6 +17,7 @@
  */
 
 console.time('Seeding operation took');
+
 if(process.env.NODE_ENV)
 {
    throw 'Seed must be run on non-production environments only.';

@@ -1,6 +1,6 @@
 {
   "name": "GPL",
-  "version": "0.2.5",
+  "version": "0.2.7",
   "description": "graVITas Premier League",
   "homepage": "http://www.gravitaspremierleague.com/",
   "bugs": {
@@ -12,6 +12,7 @@
   "scripts": {
     "sim": "node bin/simulate",
     "seed": "node utils/seed.js",
+    "purge": "node utils/purge.js",
     "schedule": "node utils/schedule.js",
     "scrape": "node utils/commentary/scrape.js",
     "start": "node node_modules/.bin/forever ./bin/www",
@@ -21,7 +22,9 @@
     "restart": "node node_modules/.bin/forever restart ./bin/www"
   },
   "precommit": {
-    "run": ["test"],
+    "run": [
+      "test"
+    ],
     "silent": false,
     "colors": true
   },
@@ -85,19 +88,19 @@
   ],
   "dependencies": {
     "async": "^1.5.2",
-    "body-parser": "^1.14.2",
+    "body-parser": "^1.15.0",
     "bower": "^1.7.7",
     "compression": "^1.6.1",
     "cookie-parser": "^1.4.1",
     "csurf": "^1.8.3",
     "debug": "^2.2.0",
     "ejs": "^2.4.1",
-    "emailjs": "^1.0.2",
+    "emailjs": "^1.0.4",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "forever": "^0.15.1",
     "helmet": "^1.1.0",
-    "mongodb": "^2.1.6",
+    "mongodb": "^2.1.7",
     "morgan": "^1.6.1",
     "newrelic": "^1.25.1",
     "node-logentries": "^0.1.4",

@@ -92,21 +92,23 @@ var user = function()
 
 exports.schema = user;
 
-exports.users = function(limit)
+exports.users = function(limit, index)
 {
     users = [];
+    index = index || 0;
 
     for(i = 1; i <= limit; ++i)
     {
         temp = user();
-        temp._id = 'TEAM' + i;
+        temp.team_no = index + i;
         temp.authStrategy = 'local';
+        temp._id = 'TEAM' + index + i;
         temp.dob = faker.date.recent();
         temp.manager_name = faker.name.findName();
         temp.phone = faker.phone.phoneNumberFormat().replace(/-/g, '');
-        temp.password_hash = '$2a$10$N7zcIGhNPPsW2rGLQWCDo.4XZb8Ket.MhxijAFbCueZbPFMn/P2Zu';
+        temp.password_hash = '$2a$10$N7zcIGhNPPsW2rGLQWCDo.4XZb8Ket.MhxijAFbCueZbPFMn/P2Zu'; // This hash is equivalent to 'gpl'
         temp.email = 'testgpluser' + (i % 8 + 1) + '@gmail.com'; // always specify a valid email address to test email functionality.
-        // The above hash is equivalent to 'gpl'
+
         users.push(temp);
     }
 
@@ -144,11 +146,15 @@ exports.players = function()
                 }
 
                 temp.Country = faker.address.country();
+                temp.SR = parseFloat((faker.commerce.price() % 53 + 8).toFixed(2));
+                temp.Avg = parseFloat((faker.commerce.price() % 36 + 9).toFixed(2));
+                temp.Economy = parseFloat((faker.commerce.price() % 8 + 4).toFixed(2));
                 temp.Average = parseFloat((faker.commerce.price() % 41 + 10).toFixed(2));
                 temp['Strike Rate'] = parseFloat((faker.commerce.price() % 91 + 70).toFixed(2));
-                temp.Avg = parseFloat((faker.commerce.price() % 36 + 9).toFixed(2));
-                temp.SR = parseFloat((faker.commerce.price() % 53 + 8).toFixed(2));
-                temp.Economy = parseFloat((faker.commerce.price() % 8 + 4).toFixed(2));
+            }
+            else
+            {
+                temp.Rating = faker.random.number() % 12 + 4;
             }
 
             players.push(temp);

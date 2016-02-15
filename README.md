@@ -1,13 +1,20 @@
 [![Stories in Ready](https://badge.waffle.io/IEEECS-VIT/GPL.png?label=ready&title=Ready)](https://waffle.io/IEEECS-VIT/GPL)
+[![Code Climate](https://codeclimate.com/github/IEEECS-VIT/GPL/badges/gpa.svg)](https://codeclimate.com/github/IEEECS-VIT/GPL)
+[![Test Coverage](https://codeclimate.com/github/IEEECS-VIT/GPL/badges/coverage.svg)](https://codeclimate.com/github/IEEECS-VIT/GPL/coverage)
+[![Issue Count](https://codeclimate.com/github/IEEECS-VIT/GPL/badges/issue_count.svg)](https://codeclimate.com/github/IEEECS-VIT/GPL)
+[![Dependency Status](https://david-dm.org/IEEECS-VIT/GPL.svg)](https://david-dm.org/IEEECS-VIT/GPL)
+[![Circle CI](https://circleci.com/gh/IEEECS-VIT/GPL.svg?style=svg)](https://circleci.com/gh/IEEECS-VIT/GPL)
+[![Join the chat at https://gitter.im/IEEECS-VIT/GPL](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/IEEECS-VIT/GPL?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 graVITas Premier League
 =======================
-
-[![Join the chat at https://gitter.im/IEEECS-VIT/GPL](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/IEEECS-VIT/GPL?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 The graVITas Premier League code repository
 
 This website is hosted [here](http://www.gravitaspremierleague.com)
+
 For exhaustive documentation, check out the project [wiki](https://github.com/IEEECS-VIT/GPL/wiki)
+
 Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues)
 
 #### Instructions for Installation:
@@ -40,12 +47,12 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
       FACEBOOK_ID=value
       FACEBOOK_KEY=value
       MONGO=mongodb://127.0.0.1:27017/GPL
-      
+
 ###### Start the localhost mongod server via `mongod`
 
-###### Seed the local database by running: 
-    
-    npm run seed      
+###### Seed the local database by running:
+
+    npm run seed
 
 ###### Run the server locally at port 3000 or "PORT" in process.env
 
