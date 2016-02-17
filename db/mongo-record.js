@@ -29,7 +29,14 @@ var ref =
     c: 'all',
     d: 'coach'
 };
-var faker = require('faker');
+try
+{
+    var faker = require('faker');
+}
+catch(err)
+{
+    console.error('Faker will not be loaded on production environment(s).');
+}
 
 var user = function()
 {
@@ -135,7 +142,7 @@ exports.players = function()
 
             if(j != 'd')
             {
-                if(j != 'c')
+                if(j !== 'c')
                 {
                     temp.Rating = parseInt(faker.commerce.price()) % 501 + 400;
                 }

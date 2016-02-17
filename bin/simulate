@@ -16,6 +16,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+console.time('sim-controller');
+
 var day;
 var path = require('path').join;
 var mongo = require('mongodb').MongoClient.connect;
@@ -62,6 +64,7 @@ mongo(process.env.MONGO, function(err, db){
                     }
 
                     database.close();
+                    console.timeEnd('sim-controller');
                     process.exit(0);
                 });
             }

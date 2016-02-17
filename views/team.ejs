@@ -75,7 +75,7 @@
                                             </li>
                                             <li class="list-group-item container-fluid selectedPlayer"
                                                 ng-repeat="selectedPlayer in selectedPlayers track by $index"
-                                                ng-if="selectedPlayer.Type != 'coach'">
+                                                ng-if="selectedPlayer.Type !== 'coach'">
                                             <span class="col-xs-2 pull-left no-padding-left clickable">
                                                 <i class="glyphicon glyphicon-remove pull-left"
                                                    ng-click="toggleActive(selectedPlayer)"></i>
@@ -145,7 +145,7 @@
                 {
                     if (s.active || $scope.selectedPlayers.length < 11)
                     {
-                        if (s.Type != "coach")
+                        if (s.Type !== "coach")
                         {
                             s.active = !s.active;
                             if (s.active)
