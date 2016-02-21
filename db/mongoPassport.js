@@ -36,13 +36,13 @@ var callback = function(req, token, refresh, profile, done)
                 user = record();
                 user.token = token;
                 user.dob = new Date();
-                delete user.password_hash;
+                delete user.passwordHash;
                 user.profile = profile.id;
                 user._id = req.signedCookies.team;
                 user.authStrategy = profile.provider;
                 user.phone = req.signedCookies.phone;
                 user.email = profile.emails[0].value;
-                user.manager_name = profile.displayName; // TODO: Use email as the primary key, possibly have _id as a compound instance instead of a regular string.
+                user.managerName = profile.displayName; // TODO: Use email as the primary key, possibly have _id as a compound instance instead of a regular string.
 
                 mongoUsers.insert(process.env.MATCH, user, done);
             }

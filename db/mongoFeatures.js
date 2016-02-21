@@ -104,7 +104,7 @@ exports.match = function (day, team, callback)
             }
             else
             {
-                mongoTeam.squad({team_no: doc}, callback);
+                mongoTeam.squad({teamNo: doc}, callback);
             }
         };
 

@@ -85,3 +85,13 @@ exports.getEachRating = function (elt, subCallback)
 {
     database.collection('players').find({_id: elt}).limit(1).next(subCallback);
 };
+
+exports.validateTeams = function(length1, length2)
+{
+
+};
+
+exports.checkMoM = function()
+{
+
+};

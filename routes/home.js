@@ -303,8 +303,8 @@ router.post('/players', function (req, res){
                 stats[id].recent      = [];
                 stats[id].notouts     = 0;
                 stats[id].average     = 0.0;
-                stats[id].runs_scored = 0;
-                stats[id].strike_rate = 0.0;
+                stats[id].runsScored = 0;
+                stats[id].strikeRate = 0.0;
                 stats[id].low         = Number.MAX_VALUE;
             }
             if (id > 'b' && id < 'd')
@@ -313,8 +313,8 @@ router.post('/players', function (req, res){
                 stats[id].overs         = 0;
                 stats[id].avg           = 0.0;
                 stats[id].economy       = 0.0;
-                stats[id].runs_given    = 0;
-                stats[id].wickets_taken = 0;
+                stats[id].runsGiven    = 0;
+                stats[id].wicketsTaken = 0;
             }
         }
 

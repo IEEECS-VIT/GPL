@@ -43,9 +43,9 @@ var user = function()
     return {
         _id: '',
         dob: '',
-        team_no: '', // TODO: change to an array, in order to make tracking matchday information for previous rounds simpler.
-        manager_name: '',
-        password_hash: '',
+        teamNo: '', // TODO: change to an array, in order to make tracking matchday information for previous rounds simpler.
+        managerName: '',
+        passwordHash: '',
         email: '',
         phone: '',
         toss: 0,
@@ -65,35 +65,35 @@ var user = function()
         ratio: 0.0,
         surplus: 0,
         scores: [],
-        all_outs: 0,
+        allOuts: 0,
         morale: 0.0,
         wickets: [],
-        runs_for: 0,
-        balls_for: 0,
-        run_rates : [],
+        runsFor: 0,
+        ballsFor: 0,
+        runRates : [],
         progression: [],
-        wickets_lost: 0,
-        runs_against: 0,
-        wickets_taken: 0,
+        wicketsLost: 0,
+        runsAgainst: 0,
+        wicketsTaken: 0,
         authStrategy: '',
-        balls_against: 0,
-        net_run_rate: 0.0,
-        avg_runs_for: 0.0,
-        highest_total: -1,
-        avg_overs_for: 0.0,
-        avg_runs_against: 0.0,
-        avg_wickets_lost: 0.0,
-        avg_wickets_taken: 0.0,
-        avg_overs_against: 0.0,
-        lowest_total: Number.MAX_VALUE,
-        avg_partnership_runs: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        avg_partnership_balls: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        best_partnership_runs: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        worst_partnership_runs: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        best_partnership_balls: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        worst_partnership_balls: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        scored_per_over: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        conceded_per_over: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        ballsAgainst: 0,
+        netRunRate: 0.0,
+        avgRunsFor: 0.0,
+        highestTotal: -1,
+        avgOversFor: 0.0,
+        avgRunsAgainst: 0.0,
+        avgWicketsLost: 0.0,
+        avgWicketsTaken: 0.0,
+        avgOversAgainst: 0.0,
+        lowestTotal: Number.MAX_VALUE,
+        avgPartnershipRuns: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        avgPartnershipBalls: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        bestPartnershipRuns: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        worstPartnershipRuns: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        bestPartnershipBalls: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        worstPartnershipBalls: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        scoredPerOver: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        concededPerOver: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     }
 };
 
@@ -107,13 +107,13 @@ exports.users = function(limit, index)
     for(i = 1; i <= limit; ++i)
     {
         temp = user();
-        temp.team_no = index + i;
+        temp.teamNo = index + i;
         temp.authStrategy = 'local';
         temp._id = 'TEAM' + index + i;
         temp.dob = faker.date.recent();
-        temp.manager_name = faker.name.findName();
+        temp.managerName = faker.name.findName();
         temp.phone = faker.phone.phoneNumberFormat().replace(/-/g, '');
-        temp.password_hash = '$2a$10$N7zcIGhNPPsW2rGLQWCDo.4XZb8Ket.MhxijAFbCueZbPFMn/P2Zu'; // This hash is equivalent to 'gpl'
+        temp.passwordHash = '$2a$10$N7zcIGhNPPsW2rGLQWCDo.4XZb8Ket.MhxijAFbCueZbPFMn/P2Zu'; // This hash is equivalent to 'gpl'
         temp.email = 'testgpluser' + (i % 8 + 1) + '@gmail.com'; // always specify a valid email address to test email functionality.
 
         users.push(temp);
@@ -130,13 +130,13 @@ exports.players = function()
     {
         for(j in ref)
         {
-            cost = Math.ceil(((parseInt(faker.finance.amount()) * faker.random.number()) % 1950001 + 50000) / 10000) * 10000;
+            cost = Math.ceil(((parseInt(faker.finance.amount()) * faker.random.number()) % 1950001 + 50000) / 10000) * 10;
             temp =
             {
                 _id: j + i,
                 Name: faker.name.findName(),
                 Type: ref[j],
-                Price: cost > 999999 ? cost / 1000000 + ' M' : cost / 1000 + ' K',
+                Price: cost > 999.999 ? cost / 1000 + ' M' : cost + ' K',
                 Cost: cost
             };
 

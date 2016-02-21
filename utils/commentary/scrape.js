@@ -22,6 +22,7 @@ console.time('DOM construction');
 console.time('Commentary compilation');
 console.time('File updation');
 
+var dump;
 var temp;
 var index;
 var data = '';
@@ -31,53 +32,97 @@ var http = require('http');
 var async = require('async');
 var path = require('path').join;
 var scrape = require('cheerio').load;
-var consolidated =
+var commentary =
 {
-    'no run': '',
-    '1 run': '',
-    '2 runs': '',
-    '3 runs': '',
-    'FOUR': '',
-    'SIX': '',
-    'wide': '',
-    'no ball': '',
-    'cnb': '',
-    'lbw': '',
-    'caught': '',
-    'bowled': '',
-    'stumped': '',
-    'runout': ''
+    'no run':
+    {
+        content: '',
+        file: path(__dirname, 'score', 'dot2')
+    },
+    '1 run':
+    {
+        content: '',
+        file: path(__dirname, 'score', 'one2')
+    },
+    '2 runs':
+    {
+        content: '',
+        file: path(__dirname, 'score', 'two')
+    },
+    '3 runs':
+    {
+        content: '',
+        file: path(__dirname, 'score', 'three')
+    },
+    'FOUR':
+    {
+        content: '',
+        file: path(__dirname, 'score', 'four')
+    },
+    'SIX':
+    {
+        content: '',
+        file: path(__dirname, 'score', 'six')
+    },
+    'wide':
+    {
+        content: '',
+        file: path(__dirname, 'extra', 'wide')
+    },
+    'no ball':
+    {
+        content: '',
+        file: path(__dirname, 'extra', 'freehit')
+    },
+    'cnb':
+    {
+        content: '',
+        file: path(__dirname, 'out', 'cnb')
+    },
+    'lbw':
+    {
+        content: '',
+        file: path(__dirname, 'out', 'lbw')
+    },
+    'caught':
+    {
+        content: '',
+        file: path(__dirname, 'out', 'caught')
+    },
+    'bowled':
+    {
+        content: '',
+        file: path(__dirname, 'out', 'bowled')
+    },
+    'stumped':
+    {
+        content: '',
+        file: path(__dirname, 'out', 'stumped')
+    },
+    'runout':
+    {
+        content: '',
+        file: path(__dirname, 'out', 'runout')
+    }
 };
 var ref = ['FOUR', 'SIX', 'OUT'];
 var opts = ['batsman', 'batter', 'striker'];
 var fun = ['wide'];
-var files =
-{
-    wide: path(__dirname, 'extra', 'wide'), 'no ball': path(__dirname, 'extra', 'freehit'),
-    bowled: path(__dirname, 'out', 'bowled'), caught: path(__dirname, 'out', 'caught'), cnb: path(__dirname, 'out', 'cnb'),
-    lbw: path(__dirname, 'out', 'lbw'), runout: path(__dirname, 'out', 'runout'), stumped: path(__dirname, 'out', 'stumped'),
-    'no run': path(__dirname, 'score', 'dot2'), one: path(__dirname, 'score', 'one2'), two: path(__dirname, 'score', 'two'),
-    three: path(__dirname, 'score', 'three'), FOUR: path(__dirname, 'score', 'four'), SIX: path(__dirname, 'score', 'six')
-};
 var rand = function()
 {
     return opts[parseInt((Math.random() * 1000000000000000) % 3, 10)];
 };
 
 http.get('http://www.espncricinfo.com/australia-v-india-2015-16/engine/match/895817.html?innings=1;view=commentary', // needs work
-function (res) {
+(res) => {
     console.timeEnd('Request');
     res.on('data',(chunk) => {data += chunk;});
 
     res.on('end', () => {
         console.timeEnd('Data stitching');
-/*
-        var commentary = require('cheerio').load(data, {ignoreWhitespace: true})
-        ('.commentary-text').children('p').toArray().map((arg) => ([arg.children[0].data, ((arg.children[0].next || {}).children || [{}])[0].data || '', ((arg.children[0].next || {}).next || {}).data || '']));
-*/
-        var commentary = scrape(data, {ignoreWhitespace: true})('.commentary-text').children('p').toArray();
+        dump = scrape(data, {ignoreWhitespace: true})('.commentary-text').children('p').toArray();
         console.timeEnd('DOM construction');
-        async.each(commentary, (arg, callback) => {
+        async.each(dump, (arg, callback) => {
             arg = arg.children;
 
             switch(arg.length)
@@ -160,7 +205,7 @@ function (res) {
             {
                 if(arg[0] !== 'OUT')
                 {
-                    consolidated[arg[0]] += ',\t\t"' + arg[1] + '"\n';
+                    commentary[arg[0]].content += '\t\t"' + arg[1] + '",\n';
                     flag = false;
                 }
                 else
@@ -168,9 +213,9 @@ function (res) {
                     temp = arg[1];
                 }
             }
-            else
+            else if(commentary[arg[0]])
             {
-                consolidated[arg[0]] += ',\t\t"' + arg[1] + '"\n';
+                commentary[arg[0]].content += '\t\t"' + arg[1] + '",\n';
             }
 
             callback(null);
@@ -182,11 +227,10 @@ function (res) {
             else
             {
                 console.timeEnd('Commentary compilation');
-                console.log(consolidated);
                 async.each(fun, (arg, callback) => {
-                        if(consolidated[arg])
+                        if(commentary[arg].content)
                         {
-                            fs.appendFile(files[arg] + '.js', '\r' + consolidated[arg] + '\t];', callback); // TODO: fix file append bug.
+                            fs.appendFile(commentary[arg].file + '.js', commentary[arg].content + '\t];', callback); // TODO: fix file append bug.
                         }
                     }, (err) => {
                     if(err)

@@ -50,11 +50,11 @@ exports.initSimulation = function (day, masterCallback)
         {
             team1: function (asyncCallback)
             {
-                getTeamDetails({team_no: matchDoc.Team_1}, asyncCallback);
+                getTeamDetails({teamNo: matchDoc.Team_1}, asyncCallback);
             },
             team2: function (asyncCallback)
             {
-                getTeamDetails({team_no: matchDoc.Team_2}, asyncCallback);
+                getTeamDetails({teamNo: matchDoc.Team_2}, asyncCallback);
             }
         };
 
@@ -307,10 +307,12 @@ exports.initSimulation = function (day, masterCallback)
         if (err)
         {
             console.error(err.message);
+
             if (log)
             {
                 log.log('debug', {Error: err.message});
             }
+
             throw err;
         }
         else

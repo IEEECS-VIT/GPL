@@ -174,7 +174,7 @@ var parallelTasks =
     {
         var forEach = function(arg, callback)
         {
-            database.collection(process.env.MATCH).updateOne({_id: arg._id}, {$set: {team_no: ++size}}, callback)
+            database.collection(process.env.MATCH).updateOne({_id: arg._id}, {$set: {teamNo: ++size}}, callback)
         };
 
         async.map(unassigned, forEach, asyncCallback);

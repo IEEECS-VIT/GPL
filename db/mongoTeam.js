@@ -126,11 +126,11 @@ exports.map = function (doc, callback)
         }
         else
         {
-            callback(null, doc.team_no);
+            callback(null, doc.teamNo);
         }
     };
 
-    db.collection(match).find(doc, {team_no: 1}).limit(1).next(onFind);
+    db.collection(match).find(doc, {teamNo: 1}).limit(1).next(onFind);
 };
 
 exports.shortList = function (callback) // TODO: add email notification for shortlisted team owners.
@@ -162,7 +162,7 @@ exports.shortList = function (callback) // TODO: add email notification for shor
         }
         else
         {
-            docs.map((arg, i) => arg.team_no = i + 1);
+            docs.map((arg, i) => arg.teamNo = i + 1);
 
             db.collection(ref[match].out).insertMany(docs, callback);
         }

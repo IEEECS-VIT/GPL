@@ -284,7 +284,7 @@ exports.resetPassword = function (token, hash, callback)
     {
         $set:
         {
-            password_hash: hash
+            passwordHash: hash
         },
         $unset:
         {
@@ -316,7 +316,7 @@ exports.resetPassword = function (token, hash, callback)
                 "<tr>" +
                     "<td style='color:#FFFFFF;' align='left' style='padding: 5px 30px 40px 30px;font-family: Arial; " +
                         "line-height:30px; font-size:x-large;'>" +
-                        "Hey there, " + doc.value.manager_name + "!<br>We\'re just writing in to let you know that " +
+                        "Hey there, " + doc.value.managerName + "!<br>We\'re just writing in to let you know that " +
                         "the recent password change for your team " + doc.value._id + " was successful.<br>Welcome " +
                         "Back to G.P.L!" +
                     "</td>" +

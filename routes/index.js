@@ -176,7 +176,7 @@ router.post('/login', cookieFilter, function (req, res){
         }
         else if (doc)
         {
-            bcrypt.compare(req.body.password, doc.password_hash, function(err, result){
+            bcrypt.compare(req.body.password, doc.passwordHash, function(err, result){
                 if(err)
                 {
                     req.flash('An unexpected error has occurred, please re-try.');
@@ -363,7 +363,7 @@ router.post('/register', cookieFilter, function (req, res){
         newUser.email = req.body.email;
         newUser.phone = req.body.phone;
         newUser.authStrategy = 'local';
-        newUser.manager_name = req.body.manager_name; // TODO: treat manager_name / email address as _id, to make the creation of multiple teams for one manager possible
+        newUser.managerName = req.body.managerName; // TODO: treat managerName / email address as _id, to make the creation of multiple teams for one manager possible
         newUser._id = req.body.team.trim().toUpperCase();
 
         bcrypt.hash(req.body.password, 10, function(err, hash){
@@ -374,7 +374,7 @@ router.post('/register', cookieFilter, function (req, res){
             }
             else
             {
-                newUser.password_hash = hash;
+                newUser.passwordHash = hash;
                 mongoUsers.insert(process.env.MATCH, newUser, onInsert);
             }
         });

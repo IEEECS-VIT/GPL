@@ -34,7 +34,7 @@ users.push({
     _id: 'ADMIN',
     authStrategy: 'admin',
     email: 'gravitaspremierleague@gmail.com',
-    password_hash: '$2a$10$ijmjpw3BJDNp5phIKmfdAeJ.ev/pbU6tXL78JgKejyjQ58OtUodtK'   // admin@gpl
+    passwordHash: '$2a$10$ijmjpw3BJDNp5phIKmfdAeJ.ev/pbU6tXL78JgKejyjQ58OtUodtK'   // admin@gpl
 });
 require('dotenv').load({path: path(__dirname, '..', '.env')});
 
