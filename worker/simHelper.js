@@ -16,6 +16,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var async = require('async');
+
 exports.rand = function (base, limit)
 {
     if (limit)
@@ -30,4 +32,56 @@ exports.rand = function (base, limit)
     {
         return Math.random();
     }
+};
+
+exports.getAllMatches = function (err, callback)
+{
+    var collection;
+    switch (days.indexOf(day))
+    {
+        case -1:
+            throw 'Invalid Day';
+        default:
+            collection = 'matchday' + day;
+            break;
+    }
+
+    database.collection(collection).find().toArray(callback)
+};
+
+exports.ForAllMatches = function (err, docs)
+{
+    if (err)
+    {
+        console.error(err.message);
+
+        if (log)
+        {
+            log.log('debug', {Error: err.message});
+        }
+
+        throw err;
+    }
+    else
+    {
+        async.map(docs, forEachMatch, onFinish);
+    }
+};
+
+exports.onGetInfo = function (err, doc)
+{
+    if (err)
+    {
+        console.error(err.message);
+    }
+    else
+    {
+        stats = doc;
+        getAllMatches(err, ForAllMatches);
+    }
+};
+
+exports.getEachRating = function (elt, subCallback)
+{
+    database.collection('players').find({_id: elt}).limit(1).next(subCallback);
 };

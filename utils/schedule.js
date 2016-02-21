@@ -35,7 +35,7 @@ var unassigned;
 var async = require('async');
 var path = require('path').join;
 var mongo = require('mongodb').MongoClient.connect;
-var generate = require(path(__dirname, '..', 'db', 'mongo-record')).users;
+var generate = require(path(__dirname, '..', 'db', 'mongoRecord')).users;
 
 if(!process.env.NODE_ENV)
 {

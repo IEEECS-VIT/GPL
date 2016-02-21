@@ -18,8 +18,8 @@
 
 var async = require('async');
 var path = require('path').join;
-var mongoTeam = require(path(__dirname, 'mongo-team'));
-var simulator = require(path(__dirname, '..', 'worker', 'simulation-controller'));
+var mongoTeam = require(path(__dirname, 'mongoTeam'));
+var simulator = require(path(__dirname, '..', 'worker', 'simController'));
 
 exports.getStats = function (callback)
 {

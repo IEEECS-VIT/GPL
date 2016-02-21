@@ -35,11 +35,14 @@ var bodyParser = require('body-parser');
 var json = bodyParser.json();
 var compression = require('compression')();
 var passport = require('passport').initialize();
+var raven = require('raven').middleware.express;
 var url = bodyParser.urlencoded({extended: true});
 var api = require(path(__dirname, 'routes', 'api'));
 var home = require(path(__dirname, 'routes', 'home'));
 var index = require(path(__dirname, 'routes', 'index'));
 var social = require(path(__dirname, 'routes', 'social'));
+var errorHandler = raven.errorHandler(process.env.SENTRY_DSN);
+var requestHandler = raven.requestHandler(process.env.SENTRY_DSN);
 var logger = require('morgan')(process.env.LOGGER_LEVEL || 'dev');
 var stat = express.static(path(__dirname, '/public'), {maxAge: 86400000 * 30});
 var favicon = require('serve-favicon')(path(__dirname, 'public', 'images', 'favicon.ico'));
@@ -84,9 +87,11 @@ if (newrelic)
 }
 
 app.use(function(req, res, next){
-    each([compression, helmet, logger, stat, favicon, json, url, session, passport], function(middleware, callback){
-        middleware(req, res, callback);
-    }, next);
+    each([compression, helmet, requestHandler, logger, stat, favicon, json, url, session, passport],
+        function(middleware, callback){
+            middleware(req, res, callback);
+        },
+    next);
 });
 app.set('title', 'GPL');
 // view engine setup
@@ -107,6 +112,8 @@ app.use('/api', api);
 app.use(function (req, res) {
     res.redirect('/');
 });
+
+app.use(errorHandler);
 
 // error handlers
 app.use(function (err, req, res, next) {

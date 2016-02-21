@@ -3,6 +3,7 @@
 [![Test Coverage](https://codeclimate.com/github/IEEECS-VIT/GPL/badges/coverage.svg)](https://codeclimate.com/github/IEEECS-VIT/GPL/coverage)
 [![Issue Count](https://codeclimate.com/github/IEEECS-VIT/GPL/badges/issue_count.svg)](https://codeclimate.com/github/IEEECS-VIT/GPL)
 [![Dependency Status](https://david-dm.org/IEEECS-VIT/GPL.svg)](https://david-dm.org/IEEECS-VIT/GPL)
+[![devDependency Status](https://david-dm.org/IEEECS-VIT/GPL/dev-status.svg)](https://david-dm.org/IEEECS-VIT/GPL#info=devDependencies)
 [![Circle CI](https://circleci.com/gh/IEEECS-VIT/GPL.svg?style=svg)](https://circleci.com/gh/IEEECS-VIT/GPL)
 [![Join the chat at https://gitter.im/IEEECS-VIT/GPL](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/IEEECS-VIT/GPL?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 

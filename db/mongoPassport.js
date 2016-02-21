@@ -61,9 +61,9 @@ var ref =
 };
 //var twitter = require('passport-twitter').Strategy;
 var facebook = require('passport-facebook').Strategy;
-var mongoUsers = require(path(__dirname, 'mongo-users.js'));
+var mongoUsers = require(path(__dirname, 'mongoUsers'));
 var google = require('passport-google-oauth').OAuth2Strategy;
-var record = require(path(__dirname, 'mongo-record.js')).schema;
+var record = require(path(__dirname, 'mongoRecord')).schema;
 
 passport.use(new facebook({
         clientID: process.env.FACEBOOK_ID,

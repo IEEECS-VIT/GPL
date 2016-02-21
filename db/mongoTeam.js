@@ -19,8 +19,8 @@
 var async = require('async');
 var match = process.env.MATCH;
 var path = require('path').join;
-var mongoUsers = require(path(__dirname, 'mongo-users'));
-var mongoFeatures = require(path(__dirname, 'mongo-features'));
+var mongoUsers = require(path(__dirname, 'mongoUsers'));
+var mongoFeatures = require(path(__dirname, 'mongoFeatures'));
 
 exports.getTeam = function (doc, callback)
 {

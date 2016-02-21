@@ -41,9 +41,9 @@ var credentials;
 var crypto = require('crypto');
 var path = require('path').join;
 var router = require('express').Router();
-var mongoTeam = require(path(__dirname, '..', 'db', 'mongo-team'));
-var mongoUsers = require(path(__dirname, '..', 'db', 'mongo-users'));
-var record = require(path(__dirname, '..', 'db', 'mongo-record')).schema;
+var mongoTeam = require(path(__dirname, '..', 'db', 'mongoTeam'));
+var mongoUsers = require(path(__dirname, '..', 'db', 'mongoUsers'));
+var record = require(path(__dirname, '..', 'db', 'mongoRecord')).schema;
 var developers = require(path(__dirname, '..', 'package.json')).contributors;
 developers.map((arg) => arg.map((x) => x.img = x.name.split(' ')[0]));
 
@@ -329,7 +329,7 @@ router.post('/forgot/user', function (req, res){
 
 router.get('/register', cookieFilter, function (req, res){
     if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users')) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
-    {                                                                                                                  // the schedule has been constructed and the game engine is match ready.
+    {                                                                                       // the schedule has been constructed and the game engine is match ready.
         res.render('register', {msg: req.flash(), csrfToken: req.csrfToken()});
     }
     else
