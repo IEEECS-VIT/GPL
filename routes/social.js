@@ -24,6 +24,7 @@ var onRetrieve = function(req, res, next)
     passport.authenticate(req.url.split('/')[2], function(err, user){
         if(err)
         {
+            res.status(422);
             return next(err);
         }
         if(!user)

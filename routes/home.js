@@ -380,8 +380,8 @@ router.get('/players', authenticated, function (req, res){ // page for all playe
     {
         if (err)
         {
-            req.flash('That request encountered an error, please re-try.');
-            res.redirect('/home');
+            res.status(422);
+            next(err);
         }
         else
         {
@@ -402,8 +402,8 @@ router.get('/players', authenticated, function (req, res){ // page for all playe
                 {
                     if (err)
                     {
-                        req.flash('Error loading player data.');
-                        res.redirect('/home');
+                        res.status(422);
+                        next(err);
                     }
                     else
                     {
@@ -417,7 +417,8 @@ router.get('/players', authenticated, function (req, res){ // page for all playe
                         {
                             if(err)
                             {
-                                res.redirect('/players');
+                                res.status(422);
+                                next(err);
                             }
                             else
                             {
@@ -447,8 +448,8 @@ router.get('/team', authenticated, function (req, res){ // view the assigned pla
     {
         if (err)
         {
-            req.flash('Error loading team data.');
-            res.redirect('/home');
+            res.status(422);
+            next(err);
         }
         else
         {
@@ -470,8 +471,8 @@ router.get('/stats', authenticated, function (req, res){
         {
             if (err)
             {
-                req.flash('Error loading stats');
-                res.redirect('/home');
+                res.status(422);
+                next(err);
             }
             else
             {
@@ -499,7 +500,8 @@ router.post('/feature', authenticated, function (req, res){
     {
         if (err)
         {
-            console.log(err);
+            res.status(422);
+            next(err);
         }
 
         res.redirect('/home');
@@ -524,8 +526,8 @@ router.get('/dashboard', authenticated, function (req, res){
         {
             if (err)
             {
-                req.flash('Error loading dashboard.');
-                res.redirect('/home');
+                res.status(422);
+                next(err);
             }
             else
             {

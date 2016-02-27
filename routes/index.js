@@ -127,7 +127,8 @@ router.post('/interest', function (req, res){
     {
         if (err)
         {
-            console.error(err.message);
+            res.status(422);
+            next(err);
         }
         else
         {

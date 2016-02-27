@@ -54,7 +54,13 @@ var apiFilter = function(req, res, next)
 
 router.get('/register/:name', apiFilter, function(req, res){
     mongoUsers.fetchUser({_id: req.params.name.trim().toUpperCase()}, function(err, user){
-        res.send(!(user && err));
+        if(err)
+        {
+            res.status(403);
+            next(err);
+        }
+
+        res.send(!user);
     });
 });
 
@@ -69,19 +75,19 @@ router.get('/home', apiFilter, function(req, res){
         if (err)
         {
             res.status(422);
-            res.send('Error fetching team details. Please re-try.');
+            next(err);
         }
         else if (doc)
         {
             if (!doc.team.length)
             {
                 res.status(422);
-                res.send('Please pick your set of 16 players first.');
+                next(err);
             }
             else if(!doc.squad.length)
             {
                 res.status(422);
-                res.send('Please set your playing XI first.');
+                next(err);
             }
             else
             {
@@ -90,7 +96,7 @@ router.get('/home', apiFilter, function(req, res){
                     if (err)
                     {
                         res.status(422);
-                        res.send('An unexpected error has occurred and your details could not be fetched. Please re-try.');
+                        next(err);
                     }
                     else
                     {
@@ -107,7 +113,7 @@ router.get('/home', apiFilter, function(req, res){
         {
             res.status(422);
             res.clearCookie('name', {});
-            res.send('That session had expired, please login.');
+            next(err);
         }
     };
 
@@ -126,7 +132,7 @@ router.get('/leaderboard', apiFilter, function(req, res){
             if (err)
             {
                 res.status(422);
-                res.send('Unable to process the leaderboard at this time, please re-try');
+                next(err);
             }
             else
             {
@@ -141,7 +147,7 @@ router.get('/leaderboard', apiFilter, function(req, res){
     else
     {
         res.status(422);
-        res.send('The leaderboard will become active when matches start.');
+        next(err);
     }
 });
 
@@ -158,7 +164,7 @@ router.get('/match/:day', apiFilter, function(req, res){
             if (err)
             {
                 res.status(422);
-                res.send('Error loading match ' + req.params.day + 'details.');
+                next(err);
             }
             else
             {
@@ -167,7 +173,7 @@ router.get('/match/:day', apiFilter, function(req, res){
                     if (err)
                     {
                         res.status(422);
-                        res.send('Error loading match ' + req.params.day + 'details.');
+                        next(err);
                     }
                     else
                     {
@@ -185,7 +191,7 @@ router.get('/match/:day', apiFilter, function(req, res){
     else
     {
         res.status(422);
-        res.send('Either registrations are still open, or the match day is invalid.');
+        next(err);
     }
 });
 
@@ -206,7 +212,7 @@ router.post('/getsquad', apiFilter, function (req, res) {
         if (err)
         {
             res.status(422);
-            res.send('That request encountered an error, please re-try.');
+            next(err);
         }
 
         res.redirect('/home');
@@ -226,7 +232,7 @@ router.get('/players', apiFilter, function (req, res){ // page for all players, 
         if (err)
         {
             res.status(422);
-            res.send('That request encountered an error, please re-try.');
+            next(err);
         }
         else
         {
@@ -235,12 +241,12 @@ router.get('/players', apiFilter, function (req, res){ // page for all players, 
                 if (!document.squad.length)
                 {
                     res.status(422);
-                    res.send('Your set of 16 players already exists, pick your playing XI.');
+                    next(err);
                 }
                 else
                 {
                     res.status(422);
-                    res.send('Your squad and team are already set.');
+                    next(err);
                 }
             }
             else
@@ -250,7 +256,7 @@ router.get('/players', apiFilter, function (req, res){ // page for all players, 
                     if (err)
                     {
                         res.status(422);
-                        res.send('Error loading player data. Please re-try.');
+                        next(err);
                     }
                     else
                     {
@@ -265,7 +271,7 @@ router.get('/players', apiFilter, function (req, res){ // page for all players, 
                             if(err)
                             {
                                 res.status(422);
-                                res.send('Error processing player details, please re-try.');
+                                next(err);
                             }
                             else
                             {
@@ -296,7 +302,7 @@ router.get('/team', apiFilter, function (req, res){ // view the assigned playing
         if (err)
         {
             res.status(422);
-            res.send('Error loading team data.');
+            next(err);
         }
         else
         {
@@ -319,7 +325,7 @@ router.get('/stats', apiFilter, function(req, res){
             if (err)
             {
                 res.status(422);
-                res.send('Error loading stats');
+                next(err);
             }
             else
             {
@@ -335,7 +341,7 @@ router.get('/stats', apiFilter, function(req, res){
     else
     {
         res.status(422);
-        res.redirect('/home');
+        next(err);
     }
 });
 
@@ -371,7 +377,7 @@ router.get('/dashboard', apiFilter, function(req, res){
     else
     {
         res.status(422);
-        res.send('The dashboard will be populated when matches begin.');
+        next(err);
     }
 });
 

@@ -166,7 +166,7 @@ http.get('http://www.espncricinfo.com/australia-v-india-2015-16/engine/match/895
                         temp = index[0].split(' to ');
                         index[1] = index[1].replace(/^\d?\s?wides?$/, 'wide');
                         index[1] = index[1].replace(/^\d?\s?no balls?$/, 'no ball');
-                        arg = [index[1], index.slice(2).join(', ').replace(temp[0], 'the bowler').replace(temp[1], 'the ' + rand())];
+                        arg = [index[1], index.slice(2).join(', ').replace(temp[0], 'the bowler').replace(temp[1], `the ${rand()}`)];
                     }
 
                     break;
