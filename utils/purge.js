@@ -37,7 +37,7 @@ mongo(process.env.MONGO, function(err, db){
     }
     else
     {
-        db.dropDatabase({}, {_id: 1}).toArray(function(err, result){
+        db.dropDatabase(function(err, result){
             if(err)
             {
                 console.error(err.message);

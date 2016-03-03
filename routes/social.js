@@ -21,7 +21,7 @@ var passport = require('passport');
 var router = require('express').Router();
 var onRetrieve = function(req, res, next)
 {
-    passport.authenticate(req.url.split('/')[2], function(err, user){
+    passport.authenticate(req.url.split('/')[2], function(err, user, next){
         if(err)
         {
             res.status(422);

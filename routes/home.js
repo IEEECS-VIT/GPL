@@ -370,7 +370,7 @@ router.get(/\/prizes?/, function (req, res){ // page to view prizes
     res.render('prizes');
 });
 
-router.get('/players', authenticated, function (req, res){ // page for all players, only available if no squad has been chosen
+router.get('/players', authenticated, function (req, res, next){ // page for all players, only available if no squad has been chosen
     credentials =
     {
         "_id": req.signedCookies.name
@@ -438,7 +438,7 @@ router.get('/players', authenticated, function (req, res){ // page for all playe
     mongoUsers.fetchUser(credentials, onFetchUser);
 });
 
-router.get('/team', authenticated, function (req, res){ // view the assigned playing 11 with options to change the playing 11
+router.get('/team', authenticated, function (req, res, next){ // view the assigned playing 11 with options to change the playing 11
     credentials =
     {
         '_id': req.signedCookies.name
@@ -460,7 +460,7 @@ router.get('/team', authenticated, function (req, res){ // view the assigned pla
     mongoTeam.getTeam(credentials, getTeam);
 });
 
-router.get('/stats', authenticated, function (req, res){
+router.get('/stats', authenticated, function (req, res, next){
     if(req.signedCookies.stats && req.signedCookies.day === process.env.DAY)
     {
         res.render('stats', {stats: JSON.parse(req.signedCookies.stats)});
@@ -495,7 +495,7 @@ router.get('/feature', authenticated, function (req, res){
     res.render('feature', {csrfToken: req.csrfToken()});
 });
 
-router.post('/feature', authenticated, function (req, res){
+router.post('/feature', authenticated, function (req, res, next){
     var onInsert = function (err)
     {
         if (err)
@@ -510,7 +510,7 @@ router.post('/feature', authenticated, function (req, res){
     mongoUsers.insert('features', {user : req.signedCookies.name, features: req.body.feature}, onInsert);
 });
 
-router.get('/dashboard', authenticated, function (req, res){
+router.get('/dashboard', authenticated, function (req, res, next){
     if(req.signedCookies.dash && req.signedCookies.day === process.env.DAY)
     {
         res.render('dashboard', {result : JSON.parse(req.signedCookies.dash)});

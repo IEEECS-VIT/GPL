@@ -16,6 +16,17 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var i;
+var slice =
+{
+    _id : 0,
+    fours : 1,
+    sixes : 1,
+    run_rates : 1,
+    progression : 1,
+    scored_per_over : 1,
+    conceded_per_over : 1
+};
 var async = require('async');
 var match = process.env.MATCH;
 var path = require('path').join;
@@ -102,17 +113,6 @@ exports.getSquad = function (doc, callback)
 
 exports.dashboard = function (doc, callback)
 {
-    var slice =
-    {
-        _id : 0,
-        fours : 1,
-        sixes : 1,
-        run_rates : 1,
-        progression : 1,
-        scored_per_over : 1,
-        conceded_per_over : 1
-    };
-
     db.collection(match).find(doc, slice).limit(1).next(callback);
 };
 
@@ -133,24 +133,24 @@ exports.map = function (doc, callback)
     db.collection(match).find(doc, {teamNo: 1}).limit(1).next(onFind);
 };
 
-exports.shortList = function (callback) // TODO: add email notification for shortlisted team owners.
+exports.shortlist = function (callback) // TODO: add email notification for shortlisted team owners.
 {
     var ref =
     {
         'users' :
         {
-            out : 'round2',
-            limit : parseInt(process.env.ONE)
+            out: 'round2',
+            limit: parseInt(process.env.ONE)
         },
-        'round2' :
+        'round2':
         {
-            out : 'round3',
-            limit : 8
+            out: 'round3',
+            limit: 8
         },
-        'round3' :
+        'round3':
         {
-            out : null,
-            limit : 8
+            out: null,
+            limit: 8
         }
     };
 
@@ -162,9 +162,20 @@ exports.shortList = function (callback) // TODO: add email notification for shor
         }
         else
         {
-            docs.map((arg, i) => arg.teamNo = i + 1);
+            i = 0;
 
-            db.collection(ref[match].out).insertMany(docs, callback);
+            async.map(docs, function(arg){
+                arg.teamNo = ++i;
+            }, function(err, result){
+                if(err)
+                {
+                    callback(err);
+                }
+                else
+                {
+                    db.collection(ref[match].out).insertMany(result, callback);
+                }
+            });
         }
     };
 
@@ -215,7 +226,7 @@ exports.adminInfo = function (callback)
         },
         total: function (asyncCallback)
         {
-            mongoUsers.getCount({authStrategy : {$ne : 'admin'}}, asyncCallback);
+            mongoUsers.getCount({authStrategy: {$ne : 'admin'}}, asyncCallback);
         },
         facebook: function (asyncCallback)
         {

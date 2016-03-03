@@ -1,6 +1,6 @@
 {
   "name": "GPL",
-  "version": "0.2.8",
+  "version": "0.3.0",
   "description": "graVITas Premier League",
   "homepage": "http://www.gravitaspremierleague.com/",
   "bugs": {
@@ -95,6 +95,7 @@
     "express-session": "^1.13.0",
     "forever": "^0.15.1",
     "helmet": "^1.1.0",
+    "heroku-client": "^2.4.1",
     "mongodb": "^2.1.7",
     "morgan": "^1.7.0",
     "newrelic": "^1.25.4",

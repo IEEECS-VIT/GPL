@@ -113,7 +113,10 @@ app.use(function (req, res) {
     res.redirect('/');
 });
 
-app.use(errorHandler);
+if(process.env.NODE_ENV)
+{
+    app.use(errorHandler);
+}
 
 // error handlers
 app.use(function (err, req, res, next) {

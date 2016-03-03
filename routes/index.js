@@ -114,7 +114,7 @@ router.get('/interest', function (req, res){
     }
 });
 
-router.post('/interest', function (req, res){
+router.post('/interest', function (req, res, next){
     newUser =
     {
         name: req.body.name,

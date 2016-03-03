@@ -12,7 +12,7 @@ graVITas Premier League
 
 The graVITas Premier League code repository
 
-This website is hosted [here](http://www.gravitaspremierleague.com)
+This website is hosted at http://gpl.ieeecsvit.com
 
 For exhaustive documentation, check out the project [wiki](https://github.com/IEEECS-VIT/GPL/wiki)
 
@@ -41,6 +41,7 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
       BOWL_AVG=value
       BOWL_STR=value
       BOWL_ECO=value
+      SENTRY_DSN=value
       GOOGLE_ID=value
       GOOGLE_KEY=value
       TWITTER_ID=value

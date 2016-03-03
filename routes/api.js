@@ -52,7 +52,7 @@ var apiFilter = function(req, res, next)
     }
 };
 
-router.get('/register/:name', apiFilter, function(req, res){
+router.get('/register/:name', apiFilter, function(req, res, next){
     mongoUsers.fetchUser({_id: req.params.name.trim().toUpperCase()}, function(err, user){
         if(err)
         {
@@ -64,7 +64,7 @@ router.get('/register/:name', apiFilter, function(req, res){
     });
 });
 
-router.get('/home', apiFilter, function(req, res){
+router.get('/home', apiFilter, function(req, res, next){
     credentials =
     {
         '_id': req.signedCookies.name
@@ -120,7 +120,7 @@ router.get('/home', apiFilter, function(req, res){
     mongoUsers.fetchUser(credentials, onFetch);
 });
 
-router.get('/leaderboard', apiFilter, function(req, res){
+router.get('/leaderboard', apiFilter, function(req, res, next){
     if(req.signedCookies.lead && req.signedCookies.day === process.env.DAY)
     {
         res.json(JSON.parse(req.signedCookies.lead));
@@ -151,7 +151,7 @@ router.get('/leaderboard', apiFilter, function(req, res){
     }
 });
 
-router.get('/match/:day', apiFilter, function(req, res){
+router.get('/match/:day', apiFilter, function(req, res, next){
     if(process.env.DAY > '0' && req.params.day > '0' && req.params.day < '8')
     {
         credentials =
@@ -195,7 +195,7 @@ router.get('/match/:day', apiFilter, function(req, res){
     }
 });
 
-router.post('/getsquad', apiFilter, function (req, res) {
+router.post('/getsquad', apiFilter, function (req, res, next) {
     credentials =
     {
         '_id': req.signedCookies.name
@@ -221,7 +221,7 @@ router.post('/getsquad', apiFilter, function (req, res) {
     mongoUsers.updateMatchSquad(credentials, squad, onFetch);
 });
 
-router.get('/players', apiFilter, function (req, res){ // page for all players, only available if no squad has been chosen
+router.get('/players', apiFilter, function (req, res, next){ // page for all players, only available if no squad has been chosen
     credentials =
     {
         "_id": req.signedCookies.name
@@ -291,7 +291,7 @@ router.get('/players', apiFilter, function (req, res){ // page for all players, 
     mongoUsers.fetchUser(credentials, onFetchUser);
 });
 
-router.get('/team', apiFilter, function (req, res){ // view the assigned playing 11 with options to change the playing 11
+router.get('/team', apiFilter, function (req, res, next){ // view the assigned playing 11 with options to change the playing 11
     credentials =
     {
         '_id': req.signedCookies.name
@@ -313,7 +313,7 @@ router.get('/team', apiFilter, function (req, res){ // view the assigned playing
     mongoTeam.getTeam(credentials, getTeam);
 });
 
-router.get('/stats', apiFilter, function(req, res){
+router.get('/stats', apiFilter, function(req, res, next){
     if(req.signedCookies.stats && req.signedCookies.day === process.env.DAY)
     {
         res.render('stats', {stats: JSON.parse(req.signedCookies.stats)});
@@ -345,7 +345,7 @@ router.get('/stats', apiFilter, function(req, res){
     }
 });
 
-router.get('/dashboard', apiFilter, function(req, res){
+router.get('/dashboard', apiFilter, function(req, res, next){
     if(req.signedCookies.dash && req.signedCookies.day === process.env.DAY)
     {
         res.json(JSON.parse(req.signedCookies.dash));
