@@ -37,7 +37,7 @@ mongo(process.env.MONGO, function(err, db){
     }
     else
     {
-        db.dropDatabase(function(err, result){
+        db.dropDatabase(function(err){
             if(err)
             {
                 console.error(err.message);
@@ -45,7 +45,6 @@ mongo(process.env.MONGO, function(err, db){
             else
             {
                 db.close();
-                console.log(result);
                 console.log('The database was successfully purged, you can reinstate it with `npm run seed`.');
                 console.timeEnd('Purge operation');
             }

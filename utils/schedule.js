@@ -41,6 +41,7 @@ if(!process.env.NODE_ENV)
 {
     require('dotenv').load({path : path(__dirname, '..', '.env')});
 }
+
 if(process.env.DAY < '0')
 {
     throw "Registrations have not been started yet, set process.env.DAY to '0' to allow schedule construction.";

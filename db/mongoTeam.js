@@ -164,8 +164,9 @@ exports.shortlist = function (callback) // TODO: add email notification for shor
         {
             i = 0;
 
-            async.map(docs, function(arg){
+            async.map(docs, function(arg, asyncCallback){
                 arg.teamNo = ++i;
+                asyncCallback();
             }, function(err, result){
                 if(err)
                 {

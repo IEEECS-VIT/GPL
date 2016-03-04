@@ -18,25 +18,12 @@
 
 console.time('Seeding operation took');
 
-if(process.env.NODE_ENV)
-{
-   throw 'Seed must be run on non-production environments only.';
-}
-
 var database;
 var async = require('async');
 var path = require('path').join;
 var record = require(path(__dirname, '..', 'db', 'mongoRecord'));
-var users = record.users(8);
-var players = record.players();
-
-users.push({
-    _id: 'ADMIN',
-    authStrategy: 'admin',
-    email: 'gravitaspremierleague@gmail.com',
-    passwordHash: '$2a$10$ijmjpw3BJDNp5phIKmfdAeJ.ev/pbU6tXL78JgKejyjQ58OtUodtK'   // admin@gpl
-});
-require('dotenv').load({path: path(__dirname, '..', '.env')});
+var info = record.info;
+var stats = record.stats;
 
 var onParallel = function(err)
 {
@@ -59,21 +46,43 @@ var parallelTasks =
 [
     function(asyncCallback)
     {
-        database.collection('users').insertMany(users, asyncCallback);
+        database.collection('info').insertOne(info, asyncCallback);
     },
     function(asyncCallback)
     {
-        database.collection('round2').insertMany(users, asyncCallback);
-    },
-    function(asyncCallback)
-    {
-        database.collection('round3').insertMany(users, asyncCallback);
-    },
-    function(asyncCallback)
-    {
-        database.collection('players').insertMany(players, asyncCallback);
+        database.collection('stats').insertOne(stats, asyncCallback);
     }
 ];
+
+if(process.env.NODE_ENV)
+{
+    console.warn('You are running the seed operation on a production environment. No new teams / users shall be made.');
+}
+else
+{
+    require('dotenv').load({path: path(__dirname, '..', '.env')});
+    var users = record.users(8);
+    var players = record.players();
+
+    parallelTasks.push(
+        function(asyncCallback)
+        {
+            database.collection('users').insertMany(users, asyncCallback);
+        },
+        function(asyncCallback)
+        {
+            database.collection('round2').insertMany(users, asyncCallback);
+        },
+        function(asyncCallback)
+        {
+            database.collection('round3').insertMany(users, asyncCallback);
+        },
+        function(asyncCallback)
+        {
+            database.collection('players').insertMany(players, asyncCallback);
+        }
+    );
+}
 
 var onConnect = function(err, db)
 {

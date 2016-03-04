@@ -119,6 +119,13 @@ exports.users = function(limit, index)
         users.push(temp);
     }
 
+    users.push({
+        _id: 'ADMIN',
+        authStrategy: 'admin',
+        email: 'gravitaspremierleague@gmail.com',
+        passwordHash: '$2a$10$ijmjpw3BJDNp5phIKmfdAeJ.ev/pbU6tXL78JgKejyjQ58OtUodtK'   // admin@gpl
+    });
+
     return users;
 };
 
@@ -170,4 +177,84 @@ exports.players = function()
     }
 
     return players;
+};
+
+exports.info =
+{
+    _id: 'info',
+    password: 0,
+    user: 0
+};
+
+exports.stats =
+{
+    "_id": "stats",
+    "runs": 0,
+    "overs": 0,
+    "wickets": 0,
+    "fours": 0,
+    "sixes": 0,
+    "high":
+    {
+        "total":
+        {
+            "team": "",
+            "value": 0
+        },
+        "individual":
+        {
+            "team": "",
+            "value": 0,
+            "player": ""
+        }
+    },
+    "low":
+    {
+        "value": 0,
+        "team": ""
+    },
+    "orange":
+    {
+        "player": "",
+        "runs": 0,
+        "balls": 0,
+        "avg": 0,
+        "sr": 0,
+        "team": ""
+    },
+    "purple":
+    {
+        "player": "",
+        "wickets": 0,
+        "balls": 0,
+        "avg": 0,
+        "sr": 0,
+        "economy": 0,
+        "team": ""
+    },
+    "daily":
+    {
+        "total":
+        {
+            "team": "",
+            "value": 0
+        },
+        "individual":
+        {
+            "team": "",
+            "value": 0,
+            "player": ""
+        },
+        "MoM":
+        {
+            "id": 0,
+            "points": 0,
+            "team": 0
+        }
+    },
+    "overall":
+    {
+        "id": "",
+        "team": ""
+    }
 };

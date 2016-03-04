@@ -107,8 +107,8 @@ exports.initSimulation = function (day, masterCallback)
             {
                 if(newUserDoc.squad.length)
                 {
-                    stats.six += (newUserDoc.s || 0);
-                    stats.four += (newUserDoc.f || 0);
+                    stats.sixes += newUserDoc.s || 0;
+                    stats.fours += newUserDoc.f || 0;
                     stats.runs += newUserDoc.scores[day - 1] || 0;
                     stats.overs += newUserDoc.overs[day - 1] || 0;
                     stats.wickets += newUserDoc.wickets[day - 1] || 0;

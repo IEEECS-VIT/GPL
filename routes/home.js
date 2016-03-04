@@ -307,7 +307,7 @@ router.post('/players', function (req, res){
                 stats[id].strikeRate = 0.0;
                 stats[id].low         = Number.MAX_VALUE;
             }
-            if (id > 'b' && id < 'd')
+            if (id > 'b')
             {
                 stats[id].sr            = 0.0;
                 stats[id].overs         = 0;
