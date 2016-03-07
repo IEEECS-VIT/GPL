@@ -71,7 +71,7 @@
                                                         'Wickets taken': results.user.wicketsTaken,
                                                         'Wickets lost': results.user.wicketsLost,
                                                         'Streak': results.user.streak, 
-                                                        'All outs': results.user.all_outs, 
+                                                        'All outs': results.user.allOuts,
                                                         'Average runs scored': results.user.avgRunsFor,
                                                         'Average runs conceded': results.user.avgRunsAgainst,
                                                         'Average wickets taken': results.user.avgWicketsTaken,
@@ -118,15 +118,15 @@
                                                         'Matches': results.user.stats[results.team[i]._id].matches,
                                                         'Catches': results.user.stats[results.team[i]._id].catches,
                                                         'Outs': results.user.stats[results.team[i]._id].outs,
-                                                        'Balls': results.user.stats[results.team[i]._id].balls,
+                                                        'Balls': results.user.stats[results.team[i]._id].ballsFaced,
                                                         'Highest Runs Scored': results.user.stats[results.team[i]._id].high === -1 ? 0 : results.user.stats[results.team[i]._id].high,
                                                         'Lowest Runs Scored': results.user.stats[results.team[i]._id].low === Number.MAX_VALUE ? 0 : results.user.stats[results.team[i]._id].low,
                                                         'Fours': results.user.stats[results.team[i]._id].fours,
                                                         'Sixes': results.user.stats[results.team[i]._id].sixes,
                                                         'Not Outs': results.user.stats[results.team[i]._id].notouts,
-                                                        'Average': results.user.stats[results.team[i]._id].average,
+                                                        'Average': results.user.stats[results.team[i]._id].batAverage,
                                                         'Runs Scored': results.user.stats[results.team[i]._id].runsScored,
-                                                        'Strike Rate': results.user.stats[results.team[i]._id].strikeRate
+                                                        'Strike Rate': results.user.stats[results.team[i]._id].batStrikeRate
                                                     }%>
                                                     <% for(i in ref) {%>
                                                         <tr><th><%= i + ':'%></th><td><%= ref[i] %></td></tr>
@@ -154,12 +154,12 @@
                                                         'Man of the Matches Won': results.user.stats[results.team[i]._id].MoM,
                                                         'Matches': results.user.stats[results.team[i]._id].matches,
                                                         'Catches': results.user.stats[results.team[i]._id].catches,
-                                                        'Strike Rate': results.user.stats[results.team[i]._id].sr,
-                                                        'Overs Bowled': results.user.stats[results.team[i]._id].overs,
-                                                        'Bowl Average': results.user.stats[results.team[i]._id].avg,
                                                         'Economy': results.user.stats[results.team[i]._id].economy,
-                                                        'Runs conceded': results.user.stats[results.team[i]._id].runsGiven,
-                                                        'Wickets taken': results.user.stats[results.team[i]._id].wicketsTaken
+                                                        'Wickets taken': results.user.stats[results.team[i]._id].wickets,
+                                                        'Overs Bowled': results.user.stats[results.team[i]._id].ballsBowled,
+                                                        'Bowl Average': results.user.stats[results.team[i]._id].bowlAverage,
+                                                        'Runs conceded': results.user.stats[results.team[i]._id].runsConceded,
+                                                        'Strike Rate': results.user.stats[results.team[i]._id].bowlStrikeRate
                                                     }%>
                                                     <% for(i in ref){ %>
                                                         <tr><th><%= i + ':'%></th><td><%= ref[i] %></td></tr>
@@ -190,21 +190,21 @@
                                                         'Matches': results.user.stats[results.team[i]._id].matches, 
                                                         'Catches': results.user.stats[results.team[i]._id].catches, 
                                                         'Outs': results.user.stats[results.team[i]._id].outs, 
-                                                        'Balls': results.user.stats[results.team[i]._id].balls, 
+                                                        'Balls': results.user.stats[results.team[i]._id].ballsFaced,
                                                         'Highest Runs Scored': results.user.stats[results.team[i]._id].high === -1 ? 0 : results.user.stats[results.team[i]._id].high,
                                                         'Lowest Runs Scored': results.user.stats[results.team[i]._id].low === Number.MAX_VALUE ? 0 : results.user.stats[results.team[i]._id].low,
                                                         'Fours': results.user.stats[results.team[i]._id].fours,
                                                         'Sixes': results.user.stats[results.team[i]._id].sixes, 
                                                         'Not Outs': results.user.stats[results.team[i]._id].notouts, 
-                                                        'Average': results.user.stats[results.team[i]._id].average, 
+                                                        'Average': results.user.stats[results.team[i]._id].batAverage,
                                                         'Runs Scored': results.user.stats[results.team[i]._id].runsScored,
-                                                        'Strike Rate': results.user.stats[results.team[i]._id].strikeRate,
-                                                        'Bowling SR': results.user.stats[results.team[i]._id].sr,
-                                                        'Overs bowled': results.user.stats[results.team[i]._id].overs,
-                                                        'Bowl avg': results.user.stats[results.team[i]._id].avg,
+                                                        'Strike Rate': results.user.stats[results.team[i]._id].batStrikeRate,
+                                                        'Bowling Stike rate': results.user.stats[results.team[i]._id].bowlStrikeRate,
+                                                        'Overs bowled': results.user.stats[results.team[i]._id].ballsBowled,
+                                                        'Bowl average': results.user.stats[results.team[i]._id].bowlAverage,
                                                         'Economy': results.user.stats[results.team[i]._id].economy,
-                                                        'Runs conceded': results.user.stats[results.team[i]._id].runsGiven,
-                                                        'Wickets taken': results.user.stats[results.team[i]._id].wicketsTaken
+                                                        'Runs conceded': results.user.stats[results.team[i]._id].runsConceded,
+                                                        'Wickets taken': results.user.stats[results.team[i]._id].wickets
                                                     }%>
                                                     <% for(i in ref) {%>
                                                         <tr><th><%= i + ':'%></th><td><%= ref[i]%></td></tr>

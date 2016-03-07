@@ -71,7 +71,7 @@ var onInsert = function (err, doc)
 {
     if(err)
     {
-        console.error('here', err.message);
+        console.error(err.message);
     }
     else
     {

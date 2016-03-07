@@ -25,7 +25,7 @@ var points = 0;
 var individual = 0;
 var async = require('async');
 var path = require('path').join;
-var days = [1, 2, 3, 4, 5, 6, 7];
+var helper = require(path(__dirname, 'simHelper'));
 var simulator = require(path(__dirname, 'simulation'));
 var email = require(path(__dirname, '..', 'utils', 'email'));
 
@@ -46,27 +46,10 @@ exports.initSimulation = function (day, masterCallback)
 {
     var forEachMatch = function (matchDoc, callback)
     {
-        var parallelTasks =
-        {
-            team1: function (asyncCallback)
-            {
-                getTeamDetails({teamNo: matchDoc.Team_1}, asyncCallback);
-            },
-            team2: function (asyncCallback)
-            {
-                getTeamDetails({teamNo: matchDoc.Team_2}, asyncCallback);
-            }
-        };
-
         var getTeamDetails = function (query, asyncCallback)
         {
             var getRating = function (err, userDoc)
             {
-                var getEachRating = function (elt, subCallback)
-                {
-                    database.collection('players').find({_id: elt}).limit(1).next(subCallback);
-                };
-
                 var onGetRating = function (err, results)
                 {
                     userDoc.ratings = results;
@@ -80,21 +63,15 @@ exports.initSimulation = function (day, masterCallback)
                 }
                 else
                 {
-                    var addCoach = function (elt)
-                    {
-                        if (elt > 'd')
-                        {
-                            userDoc.squad.push(elt);
-                        }
-                    };
-
-                    userDoc.team.forEach(addCoach);
-                    async.map(userDoc.squad, getEachRating, onGetRating);
+                    userDoc.squad.push(UserDoc.team.filter((elt) => {return elt > 'd';})[0]);
+                    async.map(userDoc.squad, helper.getEachRating, onGetRating);
                 }
             };
 
             database.collection(match).find(query).limit(1).next(getRating);
         };
+
+        var parallelTasks = helper.teamParallelTasks(getTeamDetails, matchDoc);
 
         var updateData = function (err, newData)
         {
@@ -122,12 +99,12 @@ exports.initSimulation = function (day, masterCallback)
                     if(newUserDoc.highest_total > stats.high.total.value)
                     {
                         stats.high.total.team = newUserDoc._id;
-                        stats.high.total.value = newUserDoc.highest_total;
+                        stats.high.total.value = newUserDoc.highestTotal;
                     }
                     if(newUserDoc.lowest_total < stats.low.value)
                     {
                         stats.low.team = newUserDoc._id;
-                        stats.low.value = newUserDoc.lowest_total;
+                        stats.low.value = newUserDoc.lowestTotal;
                     }
 
                     for (i = 0; i < newUserDoc.squad.length; ++i)
@@ -147,25 +124,14 @@ exports.initSimulation = function (day, masterCallback)
                                 stats.high.individual.player = newUserDoc.names[i] || '';
                                 stats.high.individual.value = newUserDoc.stats[newUserDoc.squad[i]].high;
                             }
-                            if(newUserDoc.stats[newUserDoc.squad[i]].runs_scored > stats.orange.runs)
+                            if(newUserDoc.stats[newUserDoc.squad[i]].runs > stats.orange.runs)
                             {
-                                stats.orange.team = newUserDoc._id;
-                                stats.orange.player = newUserDoc.names[i] || '';
-                                stats.orange.avg = newUserDoc.stats[newUserDoc.squad[i]].average;
-                                stats.orange.balls = newUserDoc.stats[newUserDoc.squad[i]].balls;
-                                stats.orange.runs = newUserDoc.stats[newUserDoc.squad[i]].runs_scored;
-                                stats.orange.sr = newUserDoc.stats[newUserDoc.squad[i]].strike_rate;
+                                stats.orange = helper.orangeCap(i, newUserDoc);
                             }
                         }
-                        if (newUserDoc.squad[i].match(/^[^a]/) && newUserDoc.stats[newUserDoc.squad[i]].wickets_taken > stats.purple.wickets)
+                        if (newUserDoc.squad[i].match(/^[^a]/) && newUserDoc.stats[newUserDoc.squad[i]].wickets > stats.purple.wickets)
                         {
-                            stats.purple.team = newUserDoc._id;
-                            stats.purple.player = newUserDoc.names[i] || '';
-                            stats.purple.sr = newUserDoc.stats[newUserDoc.squad[i]].sr;
-                            stats.purple.avg = newUserDoc.stats[newUserDoc.squad[i]].avg;
-                            stats.purple.balls = newUserDoc.stats[newUserDoc.squad[i]].overs;
-                            stats.purple.economy = newUserDoc.stats[newUserDoc.squad[i]].economy;
-                            stats.purple.wickets = newUserDoc.stats[newUserDoc.squad[i]].wickets_taken;
+                            stats.purple = helper.purpleCap(i, newUserDoc);
                         }
                     }
                 }
@@ -181,28 +147,14 @@ exports.initSimulation = function (day, masterCallback)
             {
                 if (points < (newMatchDoc.MoM.points || 0))
                 {
-                    stats.daily.MoM = newMatchDoc.MoM;
                     points = newMatchDoc.MoM.points;
+                    stats.daily.MoM = newMatchDoc.MoM;
                 }
 
                 database.collection('matchday' + day).updateOne({_id: newMatchDoc._id}, newMatchDoc, asyncCallback);
             };
 
-            var parallelTasks2 =
-            [
-                function (asyncCallback)
-                {
-                    updateUser(newData.team1, asyncCallback);
-                },
-                function (asyncCallback)
-                {
-                    updateUser(newData.team2, asyncCallback);
-                },
-                function (asyncCallback)
-                {
-                    updateMatch(newData.match, asyncCallback);
-                }
-            ];
+            var parallelTasks2 = helper.userParallelTasks(newData, updateUser, updateMatch);
 
             console.log(newData.team1._id + ' vs ' + newData.team2._id + ' (Match ' + newData.match._id + ') is now being updated');
             async.parallel(parallelTasks2, callback);
@@ -215,15 +167,7 @@ exports.initSimulation = function (day, masterCallback)
                 console.error(err.message);
             }
 
-            var data =
-            {
-                team:
-                [
-                    results.team1,
-                    results.team2
-                ],
-                match: matchDoc
-            };
+            var data = helper.makeData(results, matchDoc);
 
             simulator.simulate(data, updateData);
         };
@@ -242,6 +186,7 @@ exports.initSimulation = function (day, masterCallback)
             if (err)
             {
                 console.error(err.message);
+
                 if (log)
                 {
                     log.log('debug', {Error: err.message});
@@ -252,57 +197,13 @@ exports.initSimulation = function (day, masterCallback)
             else
             {
                 masterCallback(null, results);
-/*              if(message.header.bcc.length > 500)
-                {
-                    var temp = message.header.bcc;
-                    var parallelEmails = [];
-                    while(temp.length)
-                    {
-                        parallelEmails.push(function(asyncCallback){
-                            message.header.bcc = temp.splice(0, 500);
-                            email.send(message, asyncCallback);
-                        });
-                    }
-                    async.parallel(parallelEmails, masterCallback(err, results));
-                }
-                else
-                {
-                  email.send(email.match, function (err)
-                    {
-                        if (err)
-                        {
-                            console.error(err.message);
-                        }
-                        else
-                        {
-                            console.log(message.header.bcc.length + ' emails sent for round ' + ref[process.env.MATCH] + ', match ' + process.env.DAY);
-                        }
-
-                        masterCallback(err, results);
-                    });
-                }
- */         }
+            }
         };
 
         database.collection('stats').updateOne({_id: 'stats'}, {$set: stats}, onUpdate);
     };
 
-    var getAllMatches = function (err, callback)
-    {
-        var collection;
-        switch (days.indexOf(day))
-        {
-            case -1:
-                throw 'Invalid Day';
-            default:
-                collection = 'matchday' + day;
-                break;
-        }
-
-        database.collection(collection).find().toArray(callback)
-    };
-
-    var ForAllMatches = function (err, docs)
+    var forAllMatches = function (err, docs)
     {
         if (err)
         {
@@ -330,7 +231,7 @@ exports.initSimulation = function (day, masterCallback)
         else
         {
             stats = doc;
-            getAllMatches(err, ForAllMatches);
+            helper.getAllMatches(err, forAllMatches);
         }
     };
 

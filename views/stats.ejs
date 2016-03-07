@@ -47,10 +47,11 @@
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="page-header rules-header"><h1>Statistics</h1></div>
                                 <div class="col-sm-6">
-                                    <%var cap = {Orange: {'Player': 'player', 'Runs Scored': 'runs', 'Balls Faced': 'balls',
-                                        'Average': 'avg', 'Strike Rate': 'sr', 'Team': 'team'}, Purple: {'Player': 'player',
-                                        'Wickets Taken': 'wickets', 'Balls Bowled': 'balls', 'Economy': 'economy', 'Average': 'avg',
-                                        'Strike Rate': 'sr', 'Team': 'team'}};
+                                    <%var cap = {Orange: {'Player': 'player', 'Runs Scored': 'runsScored', 'Balls Faced': 'ballsFaced',
+                                        'Average': 'batAverage', 'Strike Rate': 'batStrikeRate', 'Highest score': 'high', 'Team': 'team'},
+                                        Purple: {'Player': 'player', 'Wickets Taken': 'wickets', 'Balls Bowled': 'ballsBowled',
+                                        'Economy': 'economy', 'Average': 'bowlAverage', 'Strike Rate': 'bowlStrikeRate', 'Team': 'team',
+                                        'Runs conceded': 'runsConceded'}};
                                       for(i in cap){%>
                                         <p class="lead"><%= i %> Cap Holder:</p>
                                         <table class="table table-bordered <%= i.toLowerCase()%>">

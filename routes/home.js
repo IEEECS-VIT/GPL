@@ -38,7 +38,7 @@ var authenticated = function(req, res, next)
 {
     if(req.signedCookies.name || req.signedCookies.admin)
     {
-        next();
+        return next();
     }
     else
     {
@@ -284,37 +284,37 @@ router.post('/players', function (req, res){
     {
         if (id < 'd')
         {
-            stats[id]         = {};
-            stats[id].MoM     = 0;
-            stats[id].form    = 0;
-            stats[id].morale  = 0;
-            stats[id].points  = 0;
+            stats[id] = {};
+            stats[id].MoM = 0;
+            stats[id].form = 0;
+            stats[id].morale = 0;
+            stats[id].points = 0;
             stats[id].fatigue = 0;
             stats[id].matches = 0;
             stats[id].catches = 0;
 
             if (!(id > 'b' && id < 'c'))
             {
-                stats[id].outs        = 0;
-                stats[id].balls       = 0;
-                stats[id].high        = -1;
-                stats[id].fours       = 0;
-                stats[id].sixes       = 0;
-                stats[id].recent      = [];
-                stats[id].notouts     = 0;
-                stats[id].average     = 0.0;
+                stats[id].outs = 0;
+                stats[id].high = -1;
+                stats[id].fours = 0;
+                stats[id].sixes = 0;
+                stats[id].recent = [];
+                stats[id].notouts = 0;
                 stats[id].runsScored = 0;
-                stats[id].strikeRate = 0.0;
-                stats[id].low         = Number.MAX_VALUE;
+                stats[id].ballsFaced = 0;
+                stats[id].batAverage = 0.0;
+                stats[id].batStrikeRate = 0.0;
+                stats[id].low = Number.MAX_VALUE;
             }
             if (id > 'b')
             {
-                stats[id].sr            = 0.0;
-                stats[id].overs         = 0;
-                stats[id].avg           = 0.0;
-                stats[id].economy       = 0.0;
-                stats[id].runsGiven    = 0;
-                stats[id].wicketsTaken = 0;
+                stats[id].wickets = 0;
+                stats[id].economy = 0.0;
+                stats[id].ballsBowled = 0;
+                stats[id].runsConceded = 0;
+                stats[id].bowlAverage = 0.0;
+                stats[id].bowlStrikeRate = 0.0;
             }
         }
 
@@ -381,7 +381,7 @@ router.get('/players', authenticated, function (req, res, next){ // page for all
         if (err)
         {
             res.status(422);
-            next(err);
+            return next(err);
         }
         else
         {
@@ -403,7 +403,7 @@ router.get('/players', authenticated, function (req, res, next){ // page for all
                     if (err)
                     {
                         res.status(422);
-                        next(err);
+                        return next(err);
                     }
                     else
                     {
@@ -418,7 +418,7 @@ router.get('/players', authenticated, function (req, res, next){ // page for all
                             if(err)
                             {
                                 res.status(422);
-                                next(err);
+                                return next(err);
                             }
                             else
                             {
@@ -449,7 +449,7 @@ router.get('/team', authenticated, function (req, res, next){ // view the assign
         if (err)
         {
             res.status(422);
-            next(err);
+            return next(err);
         }
         else
         {
@@ -472,7 +472,7 @@ router.get('/stats', authenticated, function (req, res, next){
             if (err)
             {
                 res.status(422);
-                next(err);
+                return next(err);
             }
             else
             {
@@ -501,7 +501,7 @@ router.post('/feature', authenticated, function (req, res, next){
         if (err)
         {
             res.status(422);
-            next(err);
+            return next(err);
         }
 
         res.redirect('/home');
@@ -527,7 +527,7 @@ router.get('/dashboard', authenticated, function (req, res, next){
             if (err)
             {
                 res.status(422);
-                next(err);
+                return next(err);
             }
             else
             {

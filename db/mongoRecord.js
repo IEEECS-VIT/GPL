@@ -218,22 +218,22 @@ exports.stats =
     },
     "orange":
     {
-        "player": "",
         "runs": 0,
-        "balls": 0,
-        "avg": 0,
-        "sr": 0,
-        "team": ""
+        "team": "",
+        "player": "",
+        "ballsFaced": 0,
+        "bowlAverage": 0,
+        "batStrikeRate": 0
     },
     "purple":
     {
+        "team": "",
         "player": "",
         "wickets": 0,
-        "balls": 0,
-        "avg": 0,
-        "sr": 0,
         "economy": 0,
-        "team": ""
+        "bowlAverage": 0,
+        "ballsBowled": 0,
+        "bowlStrikeRate": 0
     },
     "daily":
     {

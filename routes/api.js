@@ -44,7 +44,7 @@ var apiFilter = function(req, res, next)
 
     if(condition)
     {
-        next();
+        return next();
     }
     else
     {
@@ -57,7 +57,7 @@ router.get('/register/:name', apiFilter, function(req, res, next){
         if(err)
         {
             res.status(403);
-            next(err);
+            return next(err);
         }
 
         res.send(!user);
@@ -75,19 +75,19 @@ router.get('/home', apiFilter, function(req, res, next){
         if (err)
         {
             res.status(422);
-            next(err);
+            return next(err);
         }
         else if (doc)
         {
             if (!doc.team.length)
             {
                 res.status(422);
-                next(err);
+                return next(err);
             }
             else if(!doc.squad.length)
             {
                 res.status(422);
-                next(err);
+                return next(err);
             }
             else
             {
@@ -96,7 +96,7 @@ router.get('/home', apiFilter, function(req, res, next){
                     if (err)
                     {
                         res.status(422);
-                        next(err);
+                        return next(err);
                     }
                     else
                     {
@@ -113,7 +113,7 @@ router.get('/home', apiFilter, function(req, res, next){
         {
             res.status(422);
             res.clearCookie('name', {});
-            next(err);
+            return next(err);
         }
     };
 
@@ -132,7 +132,7 @@ router.get('/leaderboard', apiFilter, function(req, res, next){
             if (err)
             {
                 res.status(422);
-                next(err);
+                return next(err);
             }
             else
             {
@@ -147,7 +147,7 @@ router.get('/leaderboard', apiFilter, function(req, res, next){
     else
     {
         res.status(422);
-        next(err);
+        return next(err);
     }
 });
 
@@ -164,7 +164,7 @@ router.get('/match/:day', apiFilter, function(req, res, next){
             if (err)
             {
                 res.status(422);
-                next(err);
+                return next(err);
             }
             else
             {
@@ -173,7 +173,7 @@ router.get('/match/:day', apiFilter, function(req, res, next){
                     if (err)
                     {
                         res.status(422);
-                        next(err);
+                        return next(err);
                     }
                     else
                     {
@@ -191,7 +191,7 @@ router.get('/match/:day', apiFilter, function(req, res, next){
     else
     {
         res.status(422);
-        next(err);
+        return next(err);
     }
 });
 
@@ -212,7 +212,7 @@ router.post('/getsquad', apiFilter, function (req, res, next) {
         if (err)
         {
             res.status(422);
-            next(err);
+            return next(err);
         }
 
         res.redirect('/home');
@@ -232,7 +232,7 @@ router.get('/players', apiFilter, function (req, res, next){ // page for all pla
         if (err)
         {
             res.status(422);
-            next(err);
+            return next(err);
         }
         else
         {
@@ -241,12 +241,12 @@ router.get('/players', apiFilter, function (req, res, next){ // page for all pla
                 if (!document.squad.length)
                 {
                     res.status(422);
-                    next(err);
+                    return next(err);
                 }
                 else
                 {
                     res.status(422);
-                    next(err);
+                    return next(err);
                 }
             }
             else
@@ -256,7 +256,7 @@ router.get('/players', apiFilter, function (req, res, next){ // page for all pla
                     if (err)
                     {
                         res.status(422);
-                        next(err);
+                        return next(err);
                     }
                     else
                     {
@@ -271,7 +271,7 @@ router.get('/players', apiFilter, function (req, res, next){ // page for all pla
                             if(err)
                             {
                                 res.status(422);
-                                next(err);
+                                return next(err);
                             }
                             else
                             {
@@ -302,7 +302,7 @@ router.get('/team', apiFilter, function (req, res, next){ // view the assigned p
         if (err)
         {
             res.status(422);
-            next(err);
+            return next(err);
         }
         else
         {
@@ -325,7 +325,7 @@ router.get('/stats', apiFilter, function(req, res, next){
             if (err)
             {
                 res.status(422);
-                next(err);
+                return next(err);
             }
             else
             {
@@ -341,7 +341,7 @@ router.get('/stats', apiFilter, function(req, res, next){
     else
     {
         res.status(422);
-        next(err);
+        return next(err);
     }
 });
 
@@ -377,7 +377,7 @@ router.get('/dashboard', apiFilter, function(req, res, next){
     else
     {
         res.status(422);
-        next(err);
+        return next(err);
     }
 });
 

@@ -49,6 +49,7 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
       FACEBOOK_ID=value
       FACEBOOK_KEY=value
       MONGO=mongodb://127.0.0.1:27017/GPL
+      SENTRY_DSN=value_
 
 ###### Start the localhost mongod server via `mongod`
 
@@ -69,5 +70,6 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
 * A valid "COOKIE_SECRET" string in process.env for better security (Optional)
 * A valid "LOGENTRIES_TOKEN" in process.env for Logentries support (Optional)
 * A valid "NEWRELIC_APP_NAME" and "NEWRELIC_LICENSE" in process.env for New Relic support (Optional)
+* A valid "SENTRY_DSN" token in process.env for Sentry error alerts (optional)
 
 *PS:* Configure a file watcher with the public directory scope to incorporate auto-minification of public .css and .js files.

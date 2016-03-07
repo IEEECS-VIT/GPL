@@ -55,7 +55,7 @@ var cookieFilter = function(req, res, next)
     }
     else
     {
-        next();
+        return next();
     }
 };
 
@@ -128,7 +128,7 @@ router.post('/interest', function (req, res, next){
         if (err)
         {
             res.status(422);
-            next(err);
+            return next(err);
         }
         else
         {
@@ -226,11 +226,17 @@ router.post('/forgot/password', function (req, res){
     };
 
     crypto.randomBytes(20, function (err, buf){
+        if(err)
+        {
+            req.flash('An unexpected error has occurred, please re-try.');
+            res.redirect('/forgot/password');
+        }
+
         token = buf.toString('hex');
 
-        var onFetch = function (err, doc)
+        var onFetch = function (error, doc)
         {
-            if (err || !doc)
+            if (error || !doc)
             {
                 req.flash('Incorrect credentials!');
                 res.redirect('/forgot/password');

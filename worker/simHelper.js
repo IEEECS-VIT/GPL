@@ -17,6 +17,7 @@
  */
 
 var async = require('async');
+var days = [1, 2, 3, 4, 5, 6, 7];
 
 exports.rand = function (base, limit)
 {
@@ -37,6 +38,7 @@ exports.rand = function (base, limit)
 exports.getAllMatches = function (err, callback)
 {
     var collection;
+
     switch (days.indexOf(day))
     {
         case -1:
@@ -49,17 +51,10 @@ exports.getAllMatches = function (err, callback)
     database.collection(collection).find().toArray(callback)
 };
 
-exports.ForAllMatches = function (err, docs)
+exports.forAllMatches = function (err, docs)
 {
     if (err)
     {
-        console.error(err.message);
-
-        if (log)
-        {
-            log.log('debug', {Error: err.message});
-        }
-
         throw err;
     }
     else
@@ -68,17 +63,75 @@ exports.ForAllMatches = function (err, docs)
     }
 };
 
-exports.onGetInfo = function (err, doc)
+exports.teamParallelTasks = function(getTeamDetails, matchDoc)
 {
-    if (err)
-    {
-        console.error(err.message);
-    }
-    else
-    {
-        stats = doc;
-        getAllMatches(err, ForAllMatches);
-    }
+    return {
+        team1: function (asyncCallback)
+        {
+            getTeamDetails({teamNo: matchDoc.Team_1}, asyncCallback);
+        },
+        function(asyncCallback)
+        {
+            getTeamDetails({teamNo: matchDoc.Team_2}, asyncCallback);
+        }
+    };
+};
+
+exports.userParallelTasks = function(newData, updateUser, updateMatch)
+{
+    return [
+        function(asyncCallback)
+        {
+            updateUser(newData.team1, asyncCallback);
+        },
+        function(asyncCallback)
+        {
+            updateUser(newData.team2, asyncCallback);
+        },
+        function(asyncCallback)
+        {
+            updateMatch(newData.match, asyncCallback);
+        }
+    ];
+};
+
+exports.purpleCap = function(i, newUserDoc)
+{
+    return {
+        team: newUserDoc._id,
+        player: newUserDoc.names[i] || '',
+        balls: newUserDoc.stats[newUserDoc.squad[i]].ballsBowled,
+        runs: newUserDoc.stats[newUserDoc.squad[i]].runsConceded,
+        sr: newUserDoc.stats[newUserDoc.squad[i]].bowlStrikeRate,
+        average: newUserDoc.stats[newUserDoc.squad[i]].bowlAverage,
+        economy: newUserDoc.stats[newUserDoc.squad[i]].economy,
+        wickets: newUserDoc.stats[newUserDoc.squad[i]].wickets
+    };
+};
+
+exports.orangeCap = function(i, newUserDoc)
+{
+    return {
+        team: newUserDoc._id,
+        player: newUserDoc.names[i] || '',
+        high: newUserDoc.stats[newUserDoc.squad[i]].high,
+        runs: newUserDoc.stats[newUserDoc.squad[i]].runsScored,
+        balls: newUserDoc.stats[newUserDoc.squad[i]].ballsFaced,
+        average: newUserDoc.stats[newUserDoc.squad[i]].batAverage,
+        strikeRate: newUserDoc.stats[newUserDoc.squad[i]].batStrikeRate
+    };
+};
+
+exports.makeData = function(results, matchDoc)
+{
+    return {
+        team:
+        [
+            results.team1,
+            results.team2
+        ],
+        match: matchDoc
+    };
 };
 
 exports.getEachRating = function (elt, subCallback)

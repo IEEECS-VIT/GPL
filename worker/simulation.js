@@ -779,13 +779,12 @@ exports.simulate = function (data, callback)
                 }
 
                 ++data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].matches;
-                data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].catches += catches[i];
 
                 if ((data.team[+tossIndex].squad[i] < 'b') || (data.team[+tossIndex].squad[i] > 'c' && data.team[+tossIndex].squad[i] < 'd'))
                 {
                     data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].recent.push(score[j]);
+                    data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].ballsFaced += balls[j];
                     data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].runsScored += score[j];
-                    data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].balls += balls[j];
 
                     if (dismissed[j])
                     {
@@ -796,8 +795,8 @@ exports.simulate = function (data, callback)
                         ++data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].notouts;
                     }
 
-                    data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].strikeRate = parseFloat((data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].runsScored * 100 / (data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].balls || 1)).toFixed(2));
-                    data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].average = parseFloat((data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].runsScored / (data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].outs || 1)).toFixed(2));
+                    data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].batStrikeRate = parseFloat((data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].runsScored * 100 / (data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].ballsFaced || 1)).toFixed(2));
+                    data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].batAverage = parseFloat((data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].runsScored / (data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].outs || 1)).toFixed(2));
 
                     if (data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].high < score[j])
                     {
@@ -819,12 +818,13 @@ exports.simulate = function (data, callback)
             {
                 if (data.team[+!tossIndex].squad[i] > 'b' && data.team[+!tossIndex].squad[i] < 'd')
                 {
-                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].overs += deliveries[i];
-                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].runsGiven += runsConceded[i];
-                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].wicketsTaken += wicketsTaken[i];
-                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].sr = parseFloat((data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].overs / (data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].wicketsTaken || 1)).toFixed(2));
-                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].economy = parseFloat((data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].runsGiven * 6 / (data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].overs || 1)).toFixed(2));
-                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].avg = parseFloat((data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].runsGiven / (data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].wicketsTaken || 1)).toFixed(2));
+                    data.team[+!tossIndex].stats[data.team[+tossIndex].squad[i]].catches += catches[i];
+                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].ballsBowled += deliveries[i];
+                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].runsConceded += runsConceded[i];
+                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].wickets += wicketsTaken[i];
+                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].bowlAverage = parseFloat((data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].runsConceded / (data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].wickets || 1)).toFixed(2));
+                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].economy = parseFloat((data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].runsConceded * 6 / (data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].ballsBowled || 1)).toFixed(2));
+                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].bowlStrikeRate = parseFloat((data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].ballsBowled / (data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].wickets || 1)).toFixed(2));
                 }
             }
 
