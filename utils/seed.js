@@ -18,12 +18,23 @@
 
 console.time('Seeding operation took');
 
+var flag;
 var database;
+var mongoURI;
 var async = require('async');
 var path = require('path').join;
 var record = require(path(__dirname, '..', 'db', 'mongoRecord'));
 var info = record.info;
 var stats = record.stats;
+
+try
+{
+    flag = mode ? 'test' : '';
+}
+catch(err)
+{
+    flag = '';
+}
 
 var onParallel = function(err)
 {
@@ -32,14 +43,14 @@ var onParallel = function(err)
         console.error(err.message);
     }
 
-    database.close(function(err){
-        if(err)
-        {
-            console.error(err.message);
-        }
+    database.close();
 
-        console.timeEnd('Seeding operation took');
-    });
+    console.timeEnd('Seeding operation took');
+
+    if(flag)
+    {
+        require(path(__dirname, 'schedule'));
+    }
 };
 var mongo = require('mongodb').MongoClient.connect;
 var parallelTasks =
@@ -56,13 +67,14 @@ var parallelTasks =
 
 if(process.env.NODE_ENV)
 {
-    console.warn('You are running the seed operation on a production environment. No new teams / users shall be made.');
+    mongoURI = process.env.MONGO;
+    console.warn('You are running the seed operation in a production environment. No new teams / users shall be made.');
 }
 else
 {
-    require('dotenv').load({path: path(__dirname, '..', '.env')});
-    var users = record.users(8);
+    var users = record.users(true, 8);
     var players = record.players();
+    mongoURI = `mongodb://127.0.0.1:27017/${flag}GPL`;
 
     parallelTasks.push(
         function(asyncCallback)
@@ -97,4 +109,4 @@ var onConnect = function(err, db)
     }
 };
 
-mongo(process.env.MONGO, onConnect);
+mongo(mongoURI, onConnect);

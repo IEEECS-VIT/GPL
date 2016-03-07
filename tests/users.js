@@ -18,7 +18,7 @@
 
 var assert = require('assert');
 
-describe('User functionality tests', function(){
+describe('User functionality tests:', function(){
     // check for user authentication before tests
     before(function(){
 
@@ -95,7 +95,7 @@ describe('User functionality tests', function(){
 
     it('Match detail checks', function(){
     /*
-        TODO: parse request parameter day and validate if it falls [1, 7]
+        TODO: parse request parameter day and validate if it falls within [1, 7]
         TODO: fetch details for the corresponding day
         TODO: dump to view via callback
     */

@@ -21,8 +21,8 @@ var server;
 var path = require('path').join;
 var exit = require('forever').stop;
 var debug = require('debug')('GPL');
-var mongo = require('mongodb').MongoClient.connect;
 var app = require(path(__dirname, '..', 'app'));
+var mongo = require('mongodb').MongoClient.connect;
 
 if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 {

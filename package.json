@@ -15,11 +15,11 @@
     "purge": "node utils/purge.js",
     "schedule": "node utils/schedule.js",
     "scrape": "node utils/commentary/scrape.js",
-    "deploy": "heroku pipelines:promote -r dev",
+    "deploy": "heroku pipelines:promote -r heroku",
     "start": "node node_modules/.bin/forever ./bin/www",
     "stop": "node node_modules/.bin/forever stop ./bin/www",
-    "test": "node node_modules/.bin/mocha tests --recursive",
-    "restart": "node node_modules/.bin/forever restart ./bin/www"
+    "restart": "node node_modules/.bin/forever restart ./bin/www",
+    "test": "node node_modules/.bin/mocha tests --recursive -R dot"
   },
   "precommit": {
     "run": [

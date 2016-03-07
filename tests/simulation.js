@@ -18,8 +18,8 @@
 
 var assert = require('assert');
 
-describe('Simulation tests', function(){
-    describe('simulation trigger', function(){
+describe('Simulation tests:', function(){
+    describe('simulation trigger:', function(){
         it('Check for database, match day and user collection parameter validity', function(){
 
         });
@@ -33,7 +33,7 @@ describe('Simulation tests', function(){
         });
     });
 
-    describe('simulation completion', function(){
+    describe('simulation completion:', function(){
         it('Ensure that simulation terminates without exceptions', function(){
 
         });
@@ -43,7 +43,7 @@ describe('Simulation tests', function(){
         });
     });
 
-    describe('simulation status update', function(){
+    describe('simulation status update:', function(){
         it('Collect data from slave simulation-controller callbacks', function(){
 
         });
@@ -57,7 +57,7 @@ describe('Simulation tests', function(){
         });
     });
 
-    describe('simulation emails', function(){
+    describe('simulation emails:', function(){
         it('Check for duplicate emails and invalid entries', function(){
 
         });

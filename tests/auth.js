@@ -18,16 +18,16 @@
 
 var assert = require('assert');
 
-describe('Authentication tests', function(){
-    describe('Forget related actions', function(){
+describe('Authentication tests:', function(){
+    describe('Forget related actions:', function(){
         it('Forgot user', function(){
-        /*
-            TODO: forgot user request
-            TODO: forgot user request validation
-            TODO: details compilation
-            TODO: email send check
-            TODO: update request count in stats collection
-         */
+            /*
+                TODO: forgot user request
+                TODO: forgot user request validation
+                TODO: details compilation
+                TODO: email send check
+                TODO: update request count in stats collection
+             */
         });
 
         it('Forgot password', function(){
@@ -45,7 +45,7 @@ describe('Authentication tests', function(){
         });
     });
 
-    describe('Login actions', function(){
+    describe('Login actions:', function(){
         it('Social login checks', function(){
         /*
             TODO: login request
@@ -72,7 +72,7 @@ describe('Authentication tests', function(){
         });
     });
 
-    describe('Registration checks', function(){
+    describe('Registration checks:', function(){
         it('Social registration checks', function(){
         /*
             TODO: accepting user details
@@ -96,7 +96,7 @@ describe('Authentication tests', function(){
         });
     });
 
-    describe('Logout checks', function(){
+    describe('Logout checks:', function(){
         it('Admin logout', function(){
         /*
             TODO: Check if admin signedCookie exists and destroy it

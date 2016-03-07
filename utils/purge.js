@@ -18,19 +18,27 @@
 
 console.time('Purge operation');
 
+var flag;
+
+try
+{
+    flag = mode ? 'test': '';
+}
+catch(err)
+{
+    flag = ''
+}
+
 var path = require('path').join;
 var mongo = require('mongodb').MongoClient.connect;
+var mongoURI = `mongodb://127.0.0.1:27017/${flag}GPL`;
 
 if(process.env.NODE_ENV)
 {
     throw 'The database may not be purged on production environments.';
 }
-else
-{
-    require('dotenv').load({path: path(__dirname, '..', '.env')})
-}
 
-mongo(process.env.MONGO, function(err, db){
+mongo(mongoURI, function(err, db){
     if(err)
     {
         console.error(err.message);
@@ -47,6 +55,11 @@ mongo(process.env.MONGO, function(err, db){
                 db.close();
                 console.log('The database was successfully purged, you can reinstate it with `npm run seed`.');
                 console.timeEnd('Purge operation');
+
+                if(flag)
+                {
+                    require(path(__dirname, 'seed'));
+                }
             }
         });
     }

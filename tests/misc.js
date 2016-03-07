@@ -18,8 +18,8 @@
 
 var assert = require('assert');
 
-describe('Miscellaneous test suites', function(){
-    describe('Commentary scraper', function(){
+describe('Miscellaneous test suites:', function(){
+    describe('Commentary scraper:', function(){
     /*
         TODO: Check for request data integrity
         TODO: Validate internally constructed DOM

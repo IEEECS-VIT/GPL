@@ -219,7 +219,7 @@ exports.forgotUser = function (doc, callback)
         }
         else if (docs.length)
         {
-            result = docs.reduce((a, b) => a + '<li>' + b._id + ' (' + b.authStrategy + ')' + '</li>', "");
+            result = docs.reduce((a, b) => a + `<li>${b._id} (${b.authStrategy})</li>`, "");
 
             ref.other.header.to = doc.email;
             ref.other.header.subject = 'Time to get back in the game';

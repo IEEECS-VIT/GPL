@@ -99,7 +99,7 @@ var user = function()
 
 exports.schema = user;
 
-exports.users = function(limit, index)
+exports.users = function(flag, limit, index)
 {
     users = [];
     index = index || 0;
@@ -109,7 +109,7 @@ exports.users = function(limit, index)
         temp = user();
         temp.teamNo = index + i;
         temp.authStrategy = 'local';
-        temp._id = 'TEAM' + index + i;
+        temp._id = 'TEAM' + (index + i);
         temp.dob = faker.date.recent();
         temp.managerName = faker.name.findName();
         temp.phone = faker.phone.phoneNumberFormat().replace(/-/g, '');
@@ -119,12 +119,15 @@ exports.users = function(limit, index)
         users.push(temp);
     }
 
-    users.push({
-        _id: 'ADMIN',
-        authStrategy: 'admin',
-        email: 'gravitaspremierleague@gmail.com',
-        passwordHash: '$2a$10$ijmjpw3BJDNp5phIKmfdAeJ.ev/pbU6tXL78JgKejyjQ58OtUodtK'   // admin@gpl
-    });
+    if(flag)
+    {
+        users.push({
+            _id: 'ADMIN',
+            authStrategy: 'admin',
+            email: 'gravitaspremierleague@gmail.com',
+            passwordHash: '$2a$10$ijmjpw3BJDNp5phIKmfdAeJ.ev/pbU6tXL78JgKejyjQ58OtUodtK'   // admin@gpl
+        });
+    }
 
     return users;
 };
@@ -144,7 +147,7 @@ exports.players = function()
                 Name: faker.name.findName(),
                 Type: ref[j],
                 Price: cost > 999.999 ? cost / 1000 + ' M' : cost + ' K',
-                Cost: cost
+                Cost: cost * 1000
             };
 
             if(j != 'd')
