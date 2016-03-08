@@ -25,8 +25,7 @@ var points = 0;
 var individual = 0;
 var async = require('async');
 var path = require('path').join;
-var helper = require(path(__dirname, 'simHelper'));
-var simulator = require(path(__dirname, 'simulation'));
+var helper = require(path(__dirname, 'simControlHelper'));
 var email = require(path(__dirname, '..', 'utils', 'email'));
 
 if(!process.env.NODE_ENV)
@@ -40,7 +39,7 @@ if (process.env.LOGENTRIES_TOKEN)
 }
 
 match = process.env.MATCH;
-email.match.header.bcc = [];
+//email.match.header.bcc = [];
 
 exports.initSimulation = function (day, masterCallback)
 {
@@ -50,11 +49,7 @@ exports.initSimulation = function (day, masterCallback)
         {
             var getRating = function (err, userDoc)
             {
-                var onGetRating = function (err, results)
-                {
-                    userDoc.ratings = results;
-                    asyncCallback(err, userDoc);
-                };
+                var onGetRating = helper.onGetRating(userDoc, asyncCallback);
 
                 if (userDoc.squad.length < 11)
                 {
@@ -160,67 +155,24 @@ exports.initSimulation = function (day, masterCallback)
             async.parallel(parallelTasks2, callback);
         };
 
-        var onTeamDetails = function (err, results)
-        {
-            if(err)
-            {
-                console.error(err.message);
-            }
-
-            var data = helper.makeData(results, matchDoc);
-
-            simulator.simulate(data, updateData);
-        };
+        var onTeamDetails = helper.onTeamDetails(matchDoc, updateData);
 
         async.parallel(parallelTasks, onTeamDetails);
     };
 
     var onFinish = function (err, results)
     {
-        var onUpdate = function (error)
+        if(err)
         {
-            if (error)
-            {
-                console.log(error.message);
-            }
-            if (err)
-            {
-                console.error(err.message);
+            throw err;
+        }
 
-                if (log)
-                {
-                    log.log('debug', {Error: err.message});
-                }
-
-                throw err;
-            }
-            else
-            {
-                masterCallback(null, results);
-            }
-        };
+        var onUpdate = helper.onUpdate(results, masterCallback);
 
         database.collection('stats').updateOne({_id: 'stats'}, {$set: stats}, onUpdate);
     };
 
-    var forAllMatches = function (err, docs)
-    {
-        if (err)
-        {
-            console.error(err.message);
-
-            if (log)
-            {
-                log.log('debug', {Error: err.message});
-            }
-
-            throw err;
-        }
-        else
-        {
-            async.map(docs, forEachMatch, onFinish);
-        }
-    };
+    var forAllMatches = helper.forAllMatches(forEachMatch, onFinish);
 
     var onGetInfo = function (err, doc)
     {

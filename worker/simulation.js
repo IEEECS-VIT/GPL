@@ -18,40 +18,35 @@
 
 console.time('sim');
 
-var temp = 0;
 var path = require('path').join;
+var dir = [__dirname, '..', 'utils'];
 var helper = require(path(__dirname, 'simHelper'));
-var lbw = require(path(__dirname, '..', 'utils', 'commentary', 'out', 'lbw'));
-var caught = require(path(__dirname, '..', 'utils', 'commentary', 'out', 'caught'));
-var bowled = require(path(__dirname, '..', 'utils', 'commentary', 'out', 'bowled'));
-var runout = require(path(__dirname, '..', 'utils', 'commentary', 'out', 'runout'));
-var stumped = require(path(__dirname, '..', 'utils', 'commentary', 'out', 'stumped'));
-var cnb = require(path(__dirname, '..', 'utils', '..', 'utils', 'commentary', 'out', 'cnb'));
-var mom = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'mom'));
-var mid = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'mid'));
-var end = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'end'));
-var half = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'half'));
-var full = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'full'));
-var miss = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'miss'));
-var start = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'start'));
-var hopeless = require(path(__dirname, '..', 'utils', 'commentary', 'misc', 'hopeless'));
-var one = require(path(__dirname, '..', 'utils', 'commentary', 'score', 'one'));
-var two = require(path(__dirname, '..', 'utils', 'commentary', 'score', 'two'));
-var six = require(path(__dirname, '..', 'utils', 'commentary', 'score', 'six'));
-var zero = require(path(__dirname, '..', 'utils', 'commentary', 'score', 'dot'));
-zero = zero.concat(require(path(__dirname, '..', 'utils', 'commentary', 'score', 'dot2')));
-var four = require(path(__dirname, '..', 'utils', 'commentary', 'score', 'four'));
-var three = require(path(__dirname, '..', 'utils', 'commentary', 'score', 'three'));
-one = one.concat(require(path(__dirname, '..', 'utils', 'commentary', 'score', 'one2')));
-var wide = require(path(__dirname, '..', 'utils', 'commentary', 'extra', 'wide'));
-var freehit = require(path(__dirname, '..', 'utils', 'commentary', 'extra', 'freehit'));
+var lbw = require(path(...dir, 'out', 'lbw'));
+var caught = require(path(...dir, 'out', 'caught'));
+var bowled = require(path(...dir, 'out', 'bowled'));
+var runout = require(path(...dir, 'out', 'runout'));
+var stumped = require(path(...dir, 'out', 'stumped'));
+var cnb = require(path(...dir, 'out', 'cnb'));
+var mom = require(path(...dir, 'misc', 'mom'));
+var mid = require(path(...dir, 'misc', 'mid'));
+var end = require(path(...dir, 'misc', 'end'));
+var half = require(path(...dir, 'misc', 'half'));
+var full = require(path(...dir, 'misc', 'full'));
+var miss = require(path(...dir, 'misc', 'miss'));
+var start = require(path(...dir, 'misc', 'start'));
+var hopeless = require(path(...dir, 'misc', 'hopeless'));
+var one = require(path(...dir, 'score', 'one'));
+var two = require(path(...dir, 'score', 'two'));
+var six = require(path(...dir, 'score', 'six'));
+var zero = require(path(...dir, 'score', 'dot'));
+zero = zero.concat(require(path(...dir, 'score', 'dot2')));
+var four = require(path(...dir, 'score', 'four'));
+var three = require(path(...dir, 'score', 'three'));
+one = one.concat(require(path(...dir, 'score', 'one2')));
+var wide = require(path(...dir, 'extra', 'wide'));
+var freehit = require(path(...dir, 'extra', 'freehit'));
 var rand = helper.rand;
-var MoM =
-{
-    id : '',
-    team : '',
-    points : 0
-};
+var MoM;
 var dismiss =
 [
     caught,
@@ -66,7 +61,6 @@ var bat =    // decrease to strengthen batting
     process.env.BAT_STR
 ];
 var strike;
-var team = [];
 var count = [];
 var Total = [0, 0];
 var wickets = [0, 0];
@@ -76,11 +70,11 @@ var ref =
 [
     {
         points: 2,
-        prop: 'win'
+        state: 'win'
     },
     {
         points: 0,
-        prop: 'loss'
+        state: 'loss'
     }
 ];
 var bowl =      // increase to strengthen bowling
@@ -135,11 +129,14 @@ var continuousWickets = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var i;
 var j;
 var k;
+var toss;
 var loop;
+var team;
+var temp;
 var winner;
 var dot = 0;
-var extras = 0;
 var tossIndex;
+var extras = 0;
 var hope = true;
 var freeHit = 0;
 var strikeIndex;
@@ -153,7 +150,6 @@ var bowlPerfIndex;
 var deliveryScore;
 var currentBowler;
 var previousBowler;
-var toss = rand(2);
 var previousOver = 0;
 var continuousMaximums;
 var previousBatsman = -1;
@@ -165,119 +161,32 @@ var previousPartnership = -1;
 exports.simulate = function (data, callback)
 {
     console.log(`${data.team[0]._id} vs ${data.team[1]._id}`);
+    temp = [+(data.team[0].ratings.length < 12), +(data.team[1].ratings.length < 12)];
     data.team[0].names = data.team[1].names = ['', '', '', '', '', '', '', '', '', '', ''];
-    i = +(data.team[0].ratings.length < 12 );
-    j = +(data.team[1].ratings.length < 12 );
 
-    if (i && j)
+    if (temp[0] + temp[1])
     {
-        console.log('Both teams forfeit');
-        ++data.team[0].loss;
-        ++data.team[1].loss;
-    }
-    else if (i)
-    {
-        console.log(data.team[0]._id + ' forfeits');
-        ++data.team[1].win;
-        ++data.team[0].loss;
-        data.team[1].points += 2;
-    }
-    else if (j)
-    {
-        console.log(data.team[1]._id + ' forfeits');
-        ++data.team[0].win;
-        ++data.team[1].loss;
-        data.team[0].points += 2;
+        for(i = 0; i < 2; ++i)
+        {
+            data.team[i].points += ref[temp[i]].points;
+            ++data.team[i][ref[temp[i]].state];
+        }
     }
     else
     {
-        data.team[0].s = 0;
-        data.team[1].s = 0;
-        data.team[0].f = 0;
-        data.team[1].f = 0;
+        data.team[0].s = data.team[1].s = data.team[0].f = data.team[1].f = 0;
         data.match.overs = [];
         data.match.scorecard = [];
         data.match.commentary = [];
 
-        var Make = function (team, arg)
-        {
-            this.name = [];
-            this.type = [];
-            this.batAvg = [];
-            this.economy = [];
-            this.bowlAvg = [];
-            this.batRating = [];
-            this.meanRating = 0;
-            this.bowlRating = [];
-            this.avgBatRating = 0;
-            this.avgBowlRating = 0;
-            this.batStrikeRate = [];
-            this.bowlStrikeRate = [];
-            this.coachRating = team[11].Rating || -50;
-
-            for (i = 0; i < 11; ++i)
-            {
-                this.name.push(team[i].Name);
-                this.batAvg.push(team[i].Average);
-                this.type.push(` (${team[i].Type})`);
-                this.bowlAvg.push(team[i].Avg || 30);
-                this.economy.push(team[i].Economy || 10);
-                this.bowlStrikeRate.push(team[i].SR || 40);
-                this.batStrikeRate.push(team[i]['Strike Rate']);
-
-                if(team[i].Rating)
-                {
-                    this[`${team[i].Type}Rating`] = team[i].Rating;
-                    this[`${team[i].Type === 'bat' ? 'bowl' : 'bat'}Rating`] = 900 - team[i].Rating;
-
-                    if(team[i].Rating > temp)
-                    {
-                        MoM.team = arg;
-                        temp = team[i].Rating;
-                        MoM.id = team[i]._id;
-                    }
-                }
-                else
-                {
-                    this.batRating.push(team[i].Bat);
-                    this.bowlRating.push(team[i].Bowl);
-
-                    if(team[i].Bat > temp)
-                    {
-                        MoM.team = arg;
-                        temp = team[i].Bat;
-                        MoM.id = team[i]._id;
-                    }
-                    if(team[i].Bowl > temp)
-                    {
-                        MoM.team = arg;
-                        temp = team[i].Bowl;
-                        MoM.id = team[i]._id;
-                    }
-                }
-
-                this.avgBatRating += this.batRating[i];
-                this.avgBowlRating += this.bowlRating[i];
-            }
-
-            for (i = 0; i < 11; ++i)
-            {
-                this.batRating[i] += parseFloat(this.batRating[i]) / (10) - parseFloat(this.avgBatRating) / (110) + parseInt(this.coachRating, 10);
-                this.bowlRating[i] += parseFloat(this.bowlRating[i]) / (10) - parseFloat(this.avgBowlRating) / (110) + parseInt(this.coachRating, 10);
-                this.batRating[i] = (this.batRating[i] < 0) ? ((this.coachRating < 0) ? (0) : (this.coachRating)) : (this.batRating[i]);
-                this.bowlRating[i] = (this.bowlRating[i] < 0) ? ((this.coachRating < 0) ? (0) : (this.coachRating)) : (this.bowlRating[i]);
-                this.meanRating += this.bowlRating[i] + this.batRating[i];
-            }
-
-            this.meanRating /= 22;
-        };
-
+        toss = rand(2);
         ++data.team[toss].toss;
-        team[0].push(new Make(data.team[0].ratings, 0));
-        team[1].push(new Make(data.team[1].ratings, 1));
+        temp = Make([data.team[0].ratings, data.team[1].ratings]);
+        team = temp.teams;
+        MoM = temp.MoM;
 
-        data.match.commentary.push(`Match ${data.match._id}: ${data.team[0]._id} versus ${data.team[1]._id}`);
         temp = (team[0].meanRating * 100 / (team[0].meanRating + team[1].meanRating)); // TODO: make dynamic
+        data.match.commentary.push(`Match ${data.match._id}: ${data.team[0]._id} versus ${data.team[1]._id}`);
         data.match.commentary.push(`Winning chances: ${data.team[0]._id} : ${temp.toFixed(2)} % | % ${(100 - temp).toFixed(2)} : ${data.team[1]._id}`);
         data.match.commentary.push(`Toss: ${data.team[toss]._id} wins the toss and chooses to `);
 
@@ -346,8 +255,8 @@ exports.simulate = function (data, callback)
                 {
                     currentBall = [];
                     deliveryScore = team[+tossIndex].batRating[strike[+strikeIndex]] - team[+!tossIndex].bowlRating[currentBowler];
-                    bowlPerfIndex = (team[+!tossIndex].bowlRating[currentBowler]) / ((rand(team[+!tossIndex].bowlAvg[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / 1000 + 1) + team[+!tossIndex].bowlAvg[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / bowl[0]) * (rand(team[+!tossIndex].bowlStrikeRate[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / 1000 + 1) + team[+!tossIndex].bowlStrikeRate[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / bowl[1]) * (rand(team[+!tossIndex].economy[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / 1000 + 1) + team[+!tossIndex].economy[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / bowl[2]));
-                    batPerfIndex = (rand(team[+tossIndex].batAvg[strike[+strikeIndex]] * team[+tossIndex].batRating[strike[+strikeIndex]] / 1000 + 1) + team[+tossIndex].batAvg[strike[+strikeIndex]] * (team[+tossIndex].batRating[strike[+strikeIndex]]) / bat[0]) * (rand(team[+tossIndex].batStrikeRate[strike[+strikeIndex]] * team[+tossIndex].batRating[strike[+strikeIndex]] / 1000 + 1) + team[+tossIndex].batStrikeRate[strike[+strikeIndex]] * (team[+tossIndex].batRating[strike[+strikeIndex]]) / bat[1]) / team[+!tossIndex].bowlRating[currentBowler] - (Math.abs(frustration[+strikeIndex]) >= 3 ? Math.pow(-1, rand(2)) * frustration[+strikeIndex] : 0);
+                    bowlPerfIndex = (team[+!tossIndex].bowlRating[currentBowler]) / ((rand(team[+!tossIndex].bowlAverage[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / 1000 + 1) + team[+!tossIndex].bowlAverage[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / bowl[0]) * (rand(team[+!tossIndex].bowlStrikeRate[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / 1000 + 1) + team[+!tossIndex].bowlStrikeRate[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / bowl[1]) * (rand(team[+!tossIndex].economy[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / 1000 + 1) + team[+!tossIndex].economy[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / bowl[2]));
+                    batPerfIndex = (rand(team[+tossIndex].batAverage[strike[+strikeIndex]] * team[+tossIndex].batRating[strike[+strikeIndex]] / 1000 + 1) + team[+tossIndex].batAverage[strike[+strikeIndex]] * (team[+tossIndex].batRating[strike[+strikeIndex]]) / bat[0]) * (rand(team[+tossIndex].batStrikeRate[strike[+strikeIndex]] * team[+tossIndex].batRating[strike[+strikeIndex]] / 1000 + 1) + team[+tossIndex].batStrikeRate[strike[+strikeIndex]] * (team[+tossIndex].batRating[strike[+strikeIndex]]) / bat[1]) / team[+!tossIndex].bowlRating[currentBowler] - (Math.abs(frustration[+strikeIndex]) >= 3 ? Math.pow(-1, rand(2)) * frustration[+strikeIndex] : 0);
                     // TODO: Realism fix.
                     deliveryScore = deliveryScore || 1;
 
@@ -819,12 +728,12 @@ exports.simulate = function (data, callback)
                 if (data.team[+!tossIndex].squad[i] > 'b' && data.team[+!tossIndex].squad[i] < 'd')
                 {
                     data.team[+!tossIndex].stats[data.team[+tossIndex].squad[i]].catches += catches[i];
+                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].wickets += wicketsTaken[i];
                     data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].ballsBowled += deliveries[i];
                     data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].runsConceded += runsConceded[i];
-                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].wickets += wicketsTaken[i];
                     data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].bowlAverage = parseFloat((data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].runsConceded / (data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].wickets || 1)).toFixed(2));
-                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].economy = parseFloat((data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].runsConceded * 6 / (data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].ballsBowled || 1)).toFixed(2));
                     data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].bowlStrikeRate = parseFloat((data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].ballsBowled / (data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].wickets || 1)).toFixed(2));
+                    data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].economy = parseFloat((data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].runsConceded * 6 / (data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].ballsBowled || 1)).toFixed(2));
                 }
             }
 
@@ -852,7 +761,7 @@ exports.simulate = function (data, callback)
             }
 
             k = 0;
-            data.match.scorecard.push(' Scorecard:');
+            data.match.scorecard.push('Scorecard:');
             data.match.scorecard.push(['Runs', 'Balls', 'Strike Rate', 'Fours', 'Sixes', 'Dot balls', 'Control (%)']);
 
             for (i = 0; i < 11; ++i)
@@ -1019,7 +928,7 @@ exports.simulate = function (data, callback)
                 data.team[i].ballsAgainst += Overs[+!i];
                 data.team[i].wicketsLost += wickets[i];
                 data.team[i].wicketsTaken += wickets[+!i];
-                ++data.team[i][ref[+(i !== +winner)].prop];
+                ++data.team[i][ref[+(i !== +winner)].state];
                 data.team[i].points += ref[+(i !== +winner)].points;
                 data.team[i].runRates.push((Total[i] * 6 / Overs[i]));
                 data.team[i].form += Math.pow(-1, +(i !== +winner)) * temp;

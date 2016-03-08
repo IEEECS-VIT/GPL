@@ -13,6 +13,7 @@
     "sim": "node bin/simulate",
     "seed": "node utils/seed.js",
     "purge": "node utils/purge.js",
+    "postinstall": "npm i -g npm-check",
     "schedule": "node utils/schedule.js",
     "scrape": "node utils/commentary/scrape.js",
     "deploy": "heroku pipelines:promote -r heroku",
