@@ -1,3 +1,5 @@
 exclude_paths:
-- public/javascript/*.min.js
-- public/stylesheets/*.min.css
+- "**/*.min.js"
+- "**.min.js"
+- "**/*.min.css"
+- "**.min.css"
