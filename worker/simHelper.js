@@ -35,6 +35,8 @@ var path = require('path').join;
 var dir = [__dirname, '..', 'utils', 'commentary'];
 var lbw = require(path(...dir, 'out', 'lbw'));
 var cnb = require(path(...dir, 'out', 'cnb'));
+var mid = require(path(...dir, 'misc', 'mid'));
+var end = require(path(...dir, 'misc', 'end'));
 var caught = require(path(...dir, 'out', 'caught'));
 var bowled = require(path(...dir, 'out', 'bowled'));
 var stumped = require(path(...dir, 'out', 'stumped'));
@@ -44,6 +46,8 @@ var two = require(path(...dir, 'score', 'two'));
 var three = require(path(...dir, 'score', 'three'));
 var four = require(path(...dir, 'score', 'four'));
 var six = require(path(...dir, 'score', 'six'));
+var wide = require(path(...dir, 'extra', 'wide'));
+var noBall = require(path(...dir, 'extra', 'noBall'));
 
 var defaultMoM = function(id, rating)
 {
@@ -84,6 +88,20 @@ exports.scoreRef =
 };
 
 exports.wicketRef = ['c', 'b', 'lbw', 'cnb', 'st'];
+
+exports.extraRef =
+[
+    {
+        prefix: 'wide',
+        comm: wide
+    },
+    {
+        prefix: 'no ball',
+        comm: noBall
+    }
+];
+
+exports.inter = [mid, end];
 
 exports.rand = function (base, limit)
 {
