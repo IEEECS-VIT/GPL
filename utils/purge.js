@@ -22,7 +22,7 @@ var flag;
 
 try
 {
-    flag = mode ? 'test': '';
+    flag = mode ? 'test': ''; //  mode is a global variable from
 }
 catch(err)
 {

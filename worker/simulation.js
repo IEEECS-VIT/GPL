@@ -19,14 +19,9 @@
 console.time('sim');
 
 var path = require('path').join;
-var dir = [__dirname, '..', 'utils'];
+var dir = [__dirname, '..', 'utils', 'commentary'];
 var helper = require(path(__dirname, 'simHelper'));
-var lbw = require(path(...dir, 'out', 'lbw'));
-var caught = require(path(...dir, 'out', 'caught'));
-var bowled = require(path(...dir, 'out', 'bowled'));
 var runout = require(path(...dir, 'out', 'runout'));
-var stumped = require(path(...dir, 'out', 'stumped'));
-var cnb = require(path(...dir, 'out', 'cnb'));
 var mom = require(path(...dir, 'misc', 'mom'));
 var mid = require(path(...dir, 'misc', 'mid'));
 var end = require(path(...dir, 'misc', 'end'));
@@ -35,57 +30,23 @@ var full = require(path(...dir, 'misc', 'full'));
 var miss = require(path(...dir, 'misc', 'miss'));
 var start = require(path(...dir, 'misc', 'start'));
 var hopeless = require(path(...dir, 'misc', 'hopeless'));
-var one = require(path(...dir, 'score', 'one'));
-var two = require(path(...dir, 'score', 'two'));
-var six = require(path(...dir, 'score', 'six'));
-var zero = require(path(...dir, 'score', 'dot'));
-zero = zero.concat(require(path(...dir, 'score', 'dot2')));
-var four = require(path(...dir, 'score', 'four'));
-var three = require(path(...dir, 'score', 'three'));
-one = one.concat(require(path(...dir, 'score', 'one2')));
 var wide = require(path(...dir, 'extra', 'wide'));
 var freehit = require(path(...dir, 'extra', 'freehit'));
 var rand = helper.rand;
+var checkMoM = helper.checkMoM;
 var MoM;
-var dismiss =
-[
-    caught,
-    bowled,
-    lbw,
-    cnb,
-    stumped
-];
-var bat =    // decrease to strengthen batting
-[
-    process.env.BAT_AVG,
-    process.env.BAT_STR
-];
 var strike;
 var count = [];
 var Total = [0, 0];
 var wickets = [0, 0];
 var desperation = [];
+var bat = helper.bat; // decrease to strengthen batting
+var ref = helper.ref;
 var Overs = [120, 120];
-var ref =
-[
-    {
-        points: 2,
-        state: 'win'
-    },
-    {
-        points: 0,
-        state: 'loss'
-    }
-];
-var bowl =      // increase to strengthen bowling
-[
-    process.env.BOWL_AVG,
-    process.env.BOWL_STR,
-    process.env.BOWL_ECO
-];
-var frustration = [0, 0];
-var wicketSequence = [];
+var bowl = helper.bowl; // increase to strengthen bowling
 var lastFiveOvers = [];
+var wicketSequence = [];
+var frustration = [0, 0];
 var deliveriesBowled =
 [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -106,6 +67,9 @@ var ballsFaced =
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
+var dismiss = helper.dismiss;
+var scoreRef = helper.scoreRef;
+var wicketRef = helper.wicketRef;
 var score = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var fours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -120,7 +84,6 @@ var deliveries = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 //var form = ['poor', 'average', 'good', 'excellent'];
 var partnershipRuns = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var runsConceded = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var wicketReference = ['c', 'b', 'lbw', 'cnb', 'st'];
 var wicketsTaken = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var partnershipBalls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var dotDeliveries = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -373,7 +336,7 @@ exports.simulate = function (data, callback)
 
                         if (previousDismissal > -1)
                         {
-                            data.match.commentary[data.match.commentary.length - 1] += ` ${wicketReference[wicketIndex]} ${team[+!tossIndex].name[currentBowler]}`;
+                            data.match.commentary[data.match.commentary.length - 1] += ` ${wicketRef[wicketIndex]} ${team[+!tossIndex].name[currentBowler]}`;
 
                             if (temp > -1)
                             {
@@ -403,12 +366,7 @@ exports.simulate = function (data, callback)
                         temp = (score[strike[+strikeIndex]] + 1) * (1 - Math.exp((temp - (Math.pow(fours[strike[+strikeIndex]], 1 / (1 - control[strike[+strikeIndex]])) + Math.pow(maximums[strike[+strikeIndex]], 1 / (1 - control[strike[+strikeIndex]])))) / (balls[strike[+strikeIndex]] + team[+tossIndex].batRating[strike[+strikeIndex]])));
                         data.team[+tossIndex].stats[data.team[+tossIndex].squad[strike[+strikeIndex]]].points += temp;
 
-                        if (MoM.points < temp)
-                        {
-                            MoM.team = +tossIndex;
-                            MoM.points = Math.round(temp);
-                            MoM.id = strike[+strikeIndex];
-                        }
+                        checkMoM(MoM, temp, strike[+strikeIndex], +tossIndex);
 
                         data.team[+tossIndex].avgPartnershipRuns[currentPartnership] = parseFloat(((partnershipRuns[currentPartnership] + data.team[+tossIndex].avgPartnershipRuns[currentPartnership] * data.team[+tossIndex].played) / (data.team[+tossIndex].played + 1)).toFixed(2));
                         data.team[+tossIndex].avgPartnershipBalls[currentPartnership] = parseFloat(((partnershipBalls[currentPartnership] + data.team[+tossIndex].avgPartnershipBalls[currentPartnership] * data.team[+tossIndex].played) / (data.team[+tossIndex].played + 1)).toFixed(2));
@@ -495,35 +453,26 @@ exports.simulate = function (data, callback)
                                 deliveryScore = 6;
                             }
 
+                            temp = scoreRef[deliveryScore];
+                            data.match.commentary[data.match.commentary.length - 1] += `${temp.prefix}, ${rand(temp.comm)}`;
+
                             switch (deliveryScore)
                             {
                                 case 0:
                                     ++dot;
                                     ++dotDeliveries[currentBowler];
                                     ++dotBalls[strike[+strikeIndex]];
-                                    data.match.commentary[data.match.commentary.length - 1] += (`No run, ${rand(zero)}`);
                                     frustration[+strikeIndex] += 1 - team[+tossIndex].batRating[strike[+strikeIndex]] / 1000;
                                     control[strike[+strikeIndex]] *= parseFloat(((balls[strike[+strikeIndex]] - 1) / (balls[strike[+strikeIndex]])).toFixed(2));
                                     break;
 
-                                case 1: data.match.commentary[data.match.commentary.length - 1] += (`1 run, ${rand(one)}`);
-                                    break;
-
-                                case 2: data.match.commentary[data.match.commentary.length - 1] += (`2 runs, ${rand(two)}`);
-                                    break;
-
-                                case 3: data.match.commentary[data.match.commentary.length - 1] += (`3 runs, ${rand(three)}`);
-                                    break;
-
                                 case 4:
                                     ++fours[strike[+strikeIndex]];
-                                    data.match.commentary[data.match.commentary.length - 1] += (`FOUR, ${rand(four)}`);
                                     break;
 
                                 case 6:
                                     ++continuousMaximums;
                                     ++maximums[strike[+strikeIndex]];
-                                    data.match.commentary[data.match.commentary.length - 1] += (`SIX, ${rand(six)}`);
                                     break;
                             }
 
@@ -537,8 +486,8 @@ exports.simulate = function (data, callback)
                                 control[strike[+strikeIndex]] = parseFloat((control[strike[+strikeIndex]] * (balls[strike[+strikeIndex]] - 1) + 1) / (balls[strike[+strikeIndex]])).toFixed(2);
                             }
 
-                            continuousMaximums = ((deliveryScore !== 6) ? 0 : continuousMaximums);
-                            boundaryGap = (deliveryScore >= 4) ? 0 : (boundaryGap + 1);
+                            continuousMaximums = (deliveryScore === 6) && continuousMaximums;
+                            boundaryGap = +(deliveryScore < 4) && (boundaryGap + 1);
                         }
                         if ((Total[1] === Total[0]) && loop)
                         {
@@ -752,12 +701,7 @@ exports.simulate = function (data, callback)
                 temp = (score[strike[+strikeIndex]] + 1) * (1 - Math.exp((temp - (Math.pow(fours[strike[+strikeIndex]], 1 / (1 - control[strike[+strikeIndex]])) + Math.pow(maximums[strike[+strikeIndex]], 1 / (1 - control[strike[+strikeIndex]])))) / (balls[strike[+strikeIndex]] + team[+tossIndex].batRating[strike[+strikeIndex]])));
                 data.team[+tossIndex].stats[data.team[+tossIndex].squad[strike[+strikeIndex]]].points += temp;
 
-                if (MoM.points < temp)
-                {
-                    MoM.team = +tossIndex;
-                    MoM.points = Math.round(temp);
-                    MoM.id = strike[+strikeIndex];
-                }
+                checkMoM(MoM, temp, strike[+strikeIndex], +tossIndex);
             }
 
             k = 0;

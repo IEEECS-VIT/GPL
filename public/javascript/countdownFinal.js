@@ -75,7 +75,7 @@ function start()
     var a = setInterval(function () {
         counter(d, h, m, s);
     }, 1000);
-    if (clear == 0)
+    if (clear === 0)
     {
         clearInterval(a);
     }

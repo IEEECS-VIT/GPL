@@ -17,6 +17,7 @@
  */
 
 var simData;
+var collection;
 var async = require('async');
 var path = require('path').join;
 var days = [1, 2, 3, 4, 5, 6, 7];
@@ -32,7 +33,10 @@ exports.onGetRating = function(userDoc, asyncCallback)
 
 exports.getAllMatches = function (err, callback)
 {
-    var collection;
+    if(err)
+    {
+        throw err;
+    }
 
     switch (days.indexOf(day))
     {
@@ -46,16 +50,18 @@ exports.getAllMatches = function (err, callback)
     database.collection(collection).find().toArray(callback)
 };
 
-exports.forAllMatches = function (err, docs)
+exports.forAllMatches = function (forEachMatch, onFinish)
 {
-    if (err)
-    {
-        throw err;
-    }
-    else
-    {
-        async.map(docs, forEachMatch, onFinish);
-    }
+    return function(err, docs){
+        if(err)
+        {
+            throw err;
+        }
+        else
+        {
+            async.map(docs, forEachMatch, onFinish);
+        }
+    };
 };
 
 exports.teamParallelTasks = function(getTeamDetails, matchDoc)
@@ -88,6 +94,25 @@ exports.userParallelTasks = function(newData, updateUser, updateMatch)
             updateMatch(newData.match, asyncCallback);
         }
     ];
+};
+
+exports.generalStats = function(general, newUserDoc, day)
+{
+    return {
+        sixes: general.sixes + newUserDoc.s || 0,
+        fours: general.fours + newUserDoc.f || 0,
+        runs: general.runs + newUserDoc.scores[day - 1] || 0,
+        overs: general.overs + newUserDoc.overs[day - 1] || 0,
+        wickets: general.wickets + newUserDoc.wickets[day - 1] || 0
+    };
+};
+
+exports.total = function(newUserDoc, mode)
+{
+    return {
+        team: newUserDoc._id,
+        value: newUserDoc[`${mode}estTotal`]
+    };
 };
 
 exports.purpleCap = function(i, newUserDoc)

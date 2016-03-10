@@ -185,7 +185,7 @@ router.post('/login', cookieFilter, function (req, res){
                 }
                 else if(result)
                 {
-                    res.cookie(ref[doc.authStrategy][0], doc._id, {signed: true, maxAge: 86400000});
+                    res.cookie(ref[doc.authStrategy][0], doc._id, {signed: true, maxAge: 86400000, httpOnly: true});
                     res.redirect(ref[doc.authStrategy][1]);
                 }
                 else

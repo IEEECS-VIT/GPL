@@ -260,10 +260,11 @@ router.get('/players', apiFilter, function (req, res, next){ // page for all pla
                     }
                     else
                     {
-                        var map = function(arg)
+                        var map = function(arg, asyncCallback)
                         {
                             arg.active = false;
                             arg.image = ("https://res.cloudinary.com/gpl/players/" + arg.Type + "/" + arg._id + ".jpg");
+                            asyncCallback();
                         };
 
                         var onMap = function(err, result)
@@ -329,7 +330,7 @@ router.get('/stats', apiFilter, function(req, res, next){
             }
             else
             {
-                doc.overs = parseInt(doc.overs / 6, 10) + '.' + (doc.overs % 6);
+                doc.general.overs = parseInt(doc.overs / 6, 10) + '.' + (doc.general.overs % 6);
                 res.cookie('day', process.env.DAY, {signed : true, maxAge : 86400000});
                 res.cookie('stats', JSON.stringify(doc), {signed : true, maxAge : 86400000});
                 res.json(doc);

@@ -1,0 +1,3 @@
+exclude_paths:
+- public/javascript/*.min.js
+- public/stylesheets/*.min.css

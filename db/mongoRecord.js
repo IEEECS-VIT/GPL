@@ -191,73 +191,76 @@ exports.info =
 
 exports.stats =
 {
-    "_id": "stats",
-    "runs": 0,
-    "overs": 0,
-    "wickets": 0,
-    "fours": 0,
-    "sixes": 0,
-    "high":
+    _id: "stats",
+    general:
     {
-        "total":
+        runs: 0,
+        overs: 0,
+        wickets: 0,
+        fours: 0,
+        sixes: 0
+    },
+    high:
+    {
+        total:
         {
-            "team": "",
-            "value": 0
+            team: "",
+            value: 0
         },
-        "individual":
+        individual:
         {
-            "team": "",
-            "value": 0,
-            "player": ""
+            team: "",
+            value: 0,
+            player: ""
         }
     },
-    "low":
+    low:
     {
-        "value": 0,
-        "team": ""
+        value: 0,
+        team: ""
     },
-    "orange":
+    orange:
     {
-        "runs": 0,
-        "team": "",
-        "player": "",
-        "ballsFaced": 0,
-        "bowlAverage": 0,
-        "batStrikeRate": 0
+        runs: 0,
+        team: "",
+        player: "",
+        ballsFaced: 0,
+        bowlAverage: 0,
+        batStrikeRate: 0
     },
-    "purple":
+    purple:
     {
-        "team": "",
-        "player": "",
-        "wickets": 0,
-        "economy": 0,
-        "bowlAverage": 0,
-        "ballsBowled": 0,
-        "bowlStrikeRate": 0
+        team: "",
+        player: "",
+        wickets: 0,
+        economy: 0,
+        bowlAverage: 0,
+        ballsBowled: 0,
+        bowlStrikeRate: 0
     },
-    "daily":
+    daily:
     {
-        "total":
+        total:
         {
-            "team": "",
-            "value": 0
+            team: "",
+            value: 0
         },
-        "individual":
+        individual:
         {
-            "team": "",
-            "value": 0,
-            "player": ""
+            team: "",
+            value: 0,
+            player: ""
         },
-        "MoM":
+        MoM:
         {
-            "id": 0,
-            "points": 0,
-            "team": 0
+            id: 0,
+            points: 0,
+            team: 0
         }
     },
-    "overall":
+    overall:
     {
-        "id": "",
-        "team": ""
+        id: "",
+        team: ""
     }
 };

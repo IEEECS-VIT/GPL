@@ -27,6 +27,72 @@ var MoM =
     team: '',
     points: 0
 };
+var temp = 0;
+var teamArray = [{}, {}];
+var path = require('path').join;
+var dir = [__dirname, '..', 'utils', 'commentary'];
+
+exports.dismiss =
+[
+    require(path(...dir, 'out', 'caught')),
+    require(path(...dir, 'out', 'bowled')),
+    require(path(...dir, 'out', 'lbw')),
+    require(path(...dir, 'out', 'cnb')),
+    require(path(...dir, 'out', 'stumped'))
+];
+
+
+exports.bat = [process.env.BAT_AVG, process.env.BAT_STR];
+
+exports.bowl = [process.env.BOWL_AVG, process.env.BOWL_STR, process.env.BOWL_ECO]; // increase to strengthen bowling
+
+exports.ref =
+[
+    {
+        points: 2,
+        state: 'win'
+    },
+    {
+        points: 0,
+        state: 'loss'
+    }
+];
+
+exports.scoreRef =
+{
+    0:
+    {
+        prefix: 'no run',
+        comm: require(path(...dir, 'score', 'dot')).concat(require(path(...dir, 'score', 'dot2')))
+    },
+    1:
+    {
+        prefix: '1 run',
+        comm: require(path(...dir, 'score', 'one')).concat(require(path(...dir, 'score', 'one2')))
+    },
+    2:
+    {
+        prefix: '2 runs',
+        comm: require(path(...dir, 'score', 'two'))
+    },
+    3:
+    {
+        prefix: '3 runs',
+        comm: require(path(...dir, 'score', 'three'))
+    },
+    4:
+    {
+        prefix: 'FOUR',
+        comm: require(path(...dir, 'score', 'four'))
+    },
+    6:
+    {
+        prefix: 'SIX',
+        comm: require(path(...dir, 'score', 'six'))
+    }
+};
+
+exports.wicketRef = ['c', 'b', 'lbw', 'cnb', 'st'];
 
 exports.rand = function (base, limit)
 {
@@ -46,9 +112,6 @@ exports.rand = function (base, limit)
 
 exports.Make = function (team)
 {
-    var temp = 0;
-    var teamArray = [{}, {}];
-    
     for(i = 0; i < 2; ++i)
     {
         teamArray[i].name = [];
@@ -130,7 +193,15 @@ exports.Make = function (team)
     };
 };
 
-exports.checkMoM = function()
+exports.checkMoM = function(MoM, temp, strike, toss)
 {
-
+    if(MoM.points < temp)
+    {
+        MoM =
+        {
+            id: strike,
+            team: toss,
+            points: Math.round(temp)
+        };
+    }
 };

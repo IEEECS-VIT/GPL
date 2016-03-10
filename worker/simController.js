@@ -19,10 +19,8 @@
 var i;
 var log;
 var match;
-var daily = 0;
-var stats = {};
+var stats;
 var points = 0;
-var individual = 0;
 var async = require('async');
 var path = require('path').join;
 var helper = require(path(__dirname, 'simControlHelper'));
@@ -79,38 +77,30 @@ exports.initSimulation = function (day, masterCallback)
             {
                 if(newUserDoc.squad.length)
                 {
-                    stats.sixes += newUserDoc.s || 0;
-                    stats.fours += newUserDoc.f || 0;
-                    stats.runs += newUserDoc.scores[day - 1] || 0;
-                    stats.overs += newUserDoc.overs[day - 1] || 0;
-                    stats.wickets += newUserDoc.wickets[day - 1] || 0;
+                    stats.general = helper.generalStats(stats.general, newUserDoc, day);
 
-                    if(newUserDoc.scores[day - 1] > daily)
+                    if(newUserDoc.scores[day - 1] > stats.daily.total.value)
                     {
-                        daily = newUserDoc.scores[day - 1];
                         stats.daily.total.team = newUserDoc._id;
                         stats.daily.total.value = newUserDoc.scores[day - 1];
                     }
-                    if(newUserDoc.highest_total > stats.high.total.value)
+                    if(newUserDoc.highestTotal > stats.high.total.value)
                     {
-                        stats.high.total.team = newUserDoc._id;
-                        stats.high.total.value = newUserDoc.highestTotal;
+                        stats.high.total = helper.total(newUserDoc, 'high');
                     }
-                    if(newUserDoc.lowest_total < stats.low.value)
+                    if(newUserDoc.lowestTotal < stats.low.value)
                     {
-                        stats.low.team = newUserDoc._id;
-                        stats.low.value = newUserDoc.lowestTotal;
+                        stats.low = helper.total(newUserDoc, 'low');
                     }
 
                     for (i = 0; i < newUserDoc.squad.length; ++i)
                     {
                         if (!newUserDoc.squad[i].match(/^b/))
                         {
-                            if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > individual)
+                            if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > stats.daily.individual.value)
                             {
                                 stats.daily.individual.team = newUserDoc._id;
                                 stats.daily.individual.player = newUserDoc.names[i] || '';
-                                individual = newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1];
                                 stats.daily.individual.value = newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1];
                             }
                             if(newUserDoc.stats[newUserDoc.squad[i]].high > stats.high.individual.value)

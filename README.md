@@ -21,13 +21,9 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
 #### Instructions for Installation:
 ###### Install the latest edition of Node.js from [here] (https://nodejs.org/en/download/)
 ###### Install the latest version of MongoDB from [here] (https://www.mongodb.org/downloads#production)
-###### Install all dependencies
+###### Install all dependencies with `npm i --silent`
 
-    $ npm install --silent
-
-###### Install security dependency manually (Microsoft Windows only)
-
-    $ npm install bcryptjs
+###### Install security dependency manually (Microsoft Windows only) `npm install bcryptjs`
 
 ###### Create a file `.env` in the main project directory, and add the process environment variables to it. For instance:
 
@@ -52,13 +48,9 @@ Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues
 
 ###### Start the localhost mongod server via `mongod`
 
-###### Seed the local database by running:
+###### Seed the local database with `npm run seed`
 
-    npm run seed
-
-###### Run the server locally at port 3000 or "PORT" in process.env
-
-    $ npm start
+###### Run the server locally at port 3000 or "PORT" in process.env with `npm start`
 
 ###### View the website at localhost:3000 within your browser
 

@@ -67,11 +67,11 @@
                                 <div class="col-sm-6">
                                     <p class="lead">Cumulative Statistics </p>
                                     <table class="table table-bordered">
-                                        <%var ref = {Runs: 'runs', Overs: 'overs', Wickets: 'wickets', Fours: 'four', Sixes: 'six'};
+                                        <%var ref = {Runs: 'runs', Overs: 'overs', Wickets: 'wickets', Fours: 'fours', Sixes: 'sixes'};
                                           for(i in ref){%>
                                             <tr>
                                                 <th><%= i %></th>
-                                                <td><%= stats[ref[i]]%></td>
+                                                <td><%= stats.general[ref[i]]%></td>
                                             </tr>
                                         <%}%>
                                         <%if (stats.high.total.team !== ''){%>

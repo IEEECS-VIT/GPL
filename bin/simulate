@@ -37,7 +37,7 @@ else
     };
     var op = {};
     var Heroku = require('heroku-client');
-    var configure = new Heroku({token: process.env.HEROKU_API_TOKEN}).apps(process.env.APP).configVars().update;
+    var configure = new Heroku({token: process.env.HEROKU_API_TOKEN}).apps(process.env.HEROKU_APP_NAME).configVars().update;
 }
 
 day = parseInt(process.argv[2] || process.env.DAY);
