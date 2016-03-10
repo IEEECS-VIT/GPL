@@ -770,13 +770,7 @@ exports.simulate = function (data, callback)
                     temp /= 10;
                     temp = ((wicketsTaken[i] + 1) * 25) * (1 - Math.exp((temp - Math.pow((dotDeliveries[i] + 1) * 100, wicketsTaken[i])) / (team[+!tossIndex].bowlRating[i] + deliveries[i] + runsConceded[i])));
                     data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].points += temp;
-
-                    if (MoM.points < temp)
-                    {
-                        MoM.team = +!tossIndex;
-                        MoM.points = Math.round(temp);
-                        MoM.id = i;
-                    }
+                    checkMoM(MoM, temp, i, +!tossIndex);
 
                     data.match.scorecard.push([team[+!tossIndex].name[i], parseInt(deliveries[i] / 6, 10).toString() + '.' + (deliveries[i] % 6).toString(), maidens[i], wicketsTaken[i], runsConceded[i], (runsConceded[i] * 6 / (deliveries[i] || 1)).toFixed(2)]);
                     fiveWicketHaul[i] = continuousWickets[i] = deliveries[i] = maidens[i] = runsConceded[i] = wicketsTaken[i] = dotDeliveries[i] = 0;
@@ -789,10 +783,12 @@ exports.simulate = function (data, callback)
             lastFiveOvers = [];
             previousBatsman = previousPartnership = -1;
             ballsFaced = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+
             data.match.scorecard.push('Fall of wickets:');
             data.match.scorecard.push(wicketSequence);
             data.match.scorecard.push(`Dot ball percentage: ${(dot * 100 / Overs[+tossIndex]).toFixed(2)} %`);
             data.match.scorecard.push('   ');
+
             wicketSequence = [];
             tossIndex = !tossIndex;
             extras = strikeIndex = freeHit = currentPartnership = dot = previousBowler = 0;

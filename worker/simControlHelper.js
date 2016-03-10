@@ -50,20 +50,6 @@ exports.getAllMatches = function (err, callback)
     database.collection(collection).find().toArray(callback)
 };
 
-exports.forAllMatches = function (forEachMatch, onFinish)
-{
-    return function(err, docs){
-        if(err)
-        {
-            throw err;
-        }
-        else
-        {
-            async.map(docs, forEachMatch, onFinish);
-        }
-    };
-};
-
 exports.teamParallelTasks = function(getTeamDetails, matchDoc)
 {
     return {

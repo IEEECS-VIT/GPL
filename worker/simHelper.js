@@ -16,6 +16,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var i;
+var j;
 var ref =
 {
     bat: 'bowl',
@@ -31,16 +33,29 @@ var temp = 0;
 var teamArray = [{}, {}];
 var path = require('path').join;
 var dir = [__dirname, '..', 'utils', 'commentary'];
+var lbw = require(path(...dir, 'out', 'lbw'));
+var cnb = require(path(...dir, 'out', 'cnb'));
+var caught = require(path(...dir, 'out', 'caught'));
+var bowled = require(path(...dir, 'out', 'bowled'));
+var stumped = require(path(...dir, 'out', 'stumped'));
+var dot = require(path(...dir, 'score', 'dot')).concat(require(path(...dir, 'score', 'dot2')));
+var one = require(path(...dir, 'score', 'one')).concat(require(path(...dir, 'score', 'one2')));
+var two = require(path(...dir, 'score', 'two'));
+var three = require(path(...dir, 'score', 'three'));
+var four = require(path(...dir, 'score', 'four'));
+var six = require(path(...dir, 'score', 'six'));
 
-exports.dismiss =
-[
-    require(path(...dir, 'out', 'caught')),
-    require(path(...dir, 'out', 'bowled')),
-    require(path(...dir, 'out', 'lbw')),
-    require(path(...dir, 'out', 'cnb')),
-    require(path(...dir, 'out', 'stumped'))
-];
+var defaultMoM = function(id, rating)
+{
+    if(rating > temp)
+    {
+        MoM.id = id;
+        MoM.team = i;
+        temp = rating;
+    }
+};
 
+exports.dismiss = [caught, bowled, lbw, cnb, stumped];
 
 exports.bat = [process.env.BAT_AVG, process.env.BAT_STR];
 
@@ -60,36 +75,12 @@ exports.ref =
 
 exports.scoreRef =
 {
-    0:
-    {
-        prefix: 'no run',
-        comm: require(path(...dir, 'score', 'dot')).concat(require(path(...dir, 'score', 'dot2')))
-    },
-    1:
-    {
-        prefix: '1 run',
-        comm: require(path(...dir, 'score', 'one')).concat(require(path(...dir, 'score', 'one2')))
-    },
-    2:
-    {
-        prefix: '2 runs',
-        comm: require(path(...dir, 'score', 'two'))
-    },
-    3:
-    {
-        prefix: '3 runs',
-        comm: require(path(...dir, 'score', 'three'))
-    },
-    4:
-    {
-        prefix: 'FOUR',
-        comm: require(path(...dir, 'score', 'four'))
-    },
-    6:
-    {
-        prefix: 'SIX',
-        comm: require(path(...dir, 'score', 'six'))
-    }
+    0: {prefix: 'no run', comm: dot},
+    1: {prefix: '1 run', comm: one},
+    2: {prefix: '2 runs', comm: two},
+    3: {prefix: '3 runs', comm: three},
+    4: {prefix: 'FOUR', comm: four},
+    6: {prefix: 'SIX', comm: six}
 };
 
 exports.wicketRef = ['c', 'b', 'lbw', 'cnb', 'st'];
@@ -107,6 +98,19 @@ exports.rand = function (base, limit)
     else
     {
         return Math.random();
+    }
+};
+
+exports.checkMoM = function(MoM, temp, strike, toss)
+{
+    if(MoM.points < temp)
+    {
+        MoM =
+        {
+            id: strike,
+            team: toss,
+            points: Math.round(temp)
+        };
     }
 };
 
@@ -143,30 +147,15 @@ exports.Make = function (team)
                 teamArray[i][`${team[i][j].Type}Rating`] = team[i][j].Rating;
                 teamArray[i][`${ref[team[i][j].Type]}Rating`] = 900 - team[i][j].Rating;
 
-                if(team[i][j].Rating > temp)
-                {
-                    MoM.team = i;
-                    temp = team[i][j].Rating;
-                    MoM.id = team[i][j]._id;
-                }
+                defaultMoM(team[i][j]._id, team[i][j].Rating);
             }
             else
             {
                 teamArray[i].batRating.push(team[i][j].Bat);
                 teamArray[i].bowlRating.push(team[i][j].Bowl);
 
-                if(team[i][j].Bat > temp)
-                {
-                    MoM.team = i;
-                    temp = team[i][j].Bat;
-                    MoM.id = team[i][j]._id;
-                }
-                if(team[i][j].Bowl > temp)
-                {
-                    MoM.team = i;
-                    temp = team[i][j].Bowl;
-                    MoM.id = team[i][j]._id;
-                }
+                defaultMoM(team[i][j]._id, team[i][j].Bat);
+                defaultMoM(team[i][j]._id, team[i][j].Bowl);
             }
 
             teamArray[i].avgBatRating += teamArray[i].batRating[j];
@@ -191,17 +180,4 @@ exports.Make = function (team)
         teams: teamArray,
         MoM: MoM
     };
-};
-
-exports.checkMoM = function(MoM, temp, strike, toss)
-{
-    if(MoM.points < temp)
-    {
-        MoM =
-        {
-            id: strike,
-            team: toss,
-            points: Math.round(temp)
-        };
-    }
 };
