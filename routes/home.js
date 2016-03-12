@@ -45,9 +45,9 @@ var authenticated = function(req, res, next)
         res.redirect('/login');
     }
 };
-var mongoTeam = require(path(__dirname, '..', 'db', 'mongoTeam'));
-var mongoUsers = require(path(__dirname, '..', 'db', 'mongoUsers'));
-var mongoFeatures = require(path(__dirname, '..', 'db', 'mongoFeatures'));
+var mongoTeam = require(path(__dirname, '..', 'database', 'mongoTeam'));
+var mongoUsers = require(path(__dirname, '..', 'database', 'mongoUsers'));
+var mongoFeatures = require(path(__dirname, '..', 'database', 'mongoFeatures'));
 
 if (process.env.LOGENTRIES_TOKEN)
 {

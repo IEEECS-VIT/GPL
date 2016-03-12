@@ -21,7 +21,7 @@ console.time('sim-controller');
 var day;
 var path = require('path').join;
 var mongo = require('mongodb').MongoClient.connect;
-var mongoTeam = require(path(__dirname, '..', 'db', 'mongoTeam'));
+var mongoTeam = require(path(__dirname, '..', 'database', 'mongoTeam'));
 var simControl = require(path(__dirname, '..', 'worker', 'simController'));
 
 if(!process.env.NODE_ENV)

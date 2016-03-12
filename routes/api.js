@@ -26,9 +26,9 @@ var credentials;
 var async = require('async');
 var path = require('path').join;
 var router = require('express').Router();
-var mongoTeam = require(path(__dirname, '..', 'db', 'mongoTeam'));
-var mongoUsers = require(path(__dirname, '..', 'db', 'mongoUsers'));
-var mongoFeatures = require(path(__dirname, '..', 'db', 'mongoFeatures'));
+var mongoTeam = require(path(__dirname, '..', 'database', 'mongoTeam'));
+var mongoUsers = require(path(__dirname, '..', 'database', 'mongoUsers'));
+var mongoFeatures = require(path(__dirname, '..', 'database', 'mongoFeatures'));
 var apiFilter = function(req, res, next)
 {
     if(!req.headers.referer)

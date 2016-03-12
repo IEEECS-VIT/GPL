@@ -42,7 +42,7 @@ var onRetrieve = function(req, res, next)
     })(req, res, next);
 };
 
-require(path(__dirname, '..', 'db', 'mongoPassport')); // pass passport for configuration
+require(path(__dirname, '..', 'database', 'mongoPassport')); // pass passport for configuration
 
 router.get('/facebook', passport.authenticate('facebook', {scope: 'email'}));
 

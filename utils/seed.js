@@ -23,7 +23,7 @@ var mongoURI;
 var mode = '';
 var async = require('async');
 var path = require('path').join;
-var record = require(path(__dirname, '..', 'db', 'mongoRecord'));
+var record = require(path(__dirname, '..', 'database', 'mongoRecord'));
 var info = record.info;
 var stats = record.stats;
 

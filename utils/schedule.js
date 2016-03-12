@@ -37,7 +37,7 @@ var schedulerCallback;
 var path = require('path');
 var async = require('async');
 var mongo = require('mongodb').MongoClient.connect;
-var generate = require(path.join(__dirname, '..', 'db', 'mongoRecord')).users;
+var generate = require(path.join(__dirname, '..', 'database', 'mongoRecord')).users;
 
 try
 {

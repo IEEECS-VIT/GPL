@@ -41,9 +41,9 @@ var credentials;
 var crypto = require('crypto');
 var path = require('path').join;
 var router = require('express').Router();
-var mongoTeam = require(path(__dirname, '..', 'db', 'mongoTeam'));
-var mongoUsers = require(path(__dirname, '..', 'db', 'mongoUsers'));
-var record = require(path(__dirname, '..', 'db', 'mongoRecord')).schema;
+var mongoTeam = require(path(__dirname, '..', 'database', 'mongoTeam'));
+var mongoUsers = require(path(__dirname, '..', 'database', 'mongoUsers'));
+var record = require(path(__dirname, '..', 'database', 'mongoRecord')).schema;
 var developers = require(path(__dirname, '..', 'package.json')).contributors;
 developers.map((arg) => arg.map((x) => x.img = x.name.split(' ')[0]));
 
