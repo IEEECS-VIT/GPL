@@ -18,9 +18,9 @@
 
 console.time('Seeding operation took');
 
-var flag;
 var database;
 var mongoURI;
+var mode = '';
 var async = require('async');
 var path = require('path').join;
 var record = require(path(__dirname, '..', 'db', 'mongoRecord'));
@@ -29,11 +29,11 @@ var stats = record.stats;
 
 try
 {
-    flag = mode ? 'test' : '';
+    mode = testFlag ? 'test' : '';
 }
 catch(err)
 {
-    flag = '';
+    console.log('Running in test mode.');
 }
 
 var onParallel = function(err)
@@ -47,7 +47,7 @@ var onParallel = function(err)
 
     console.timeEnd('Seeding operation took');
 
-    if(flag)
+    if(testFlag)
     {
         require(path(__dirname, 'schedule'));
     }
@@ -72,9 +72,9 @@ if(process.env.NODE_ENV)
 }
 else
 {
-    var users = record.users(true, 8);
     var players = record.players();
-    mongoURI = `mongodb://127.0.0.1:27017/${flag}GPL`;
+    var users = record.users(true, 8);
+    mongoURI = `mongodb://127.0.0.1:27017/${mode}GPL`;
 
     parallelTasks.push(
         function(asyncCallback)

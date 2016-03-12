@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-mode = 'test';
+testFlag = true;
 var path = require('path').join;
 
 before(function(done){

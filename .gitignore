@@ -37,3 +37,7 @@ Thumbs.db
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+
+# Temporary files
+temp.js
+test.js

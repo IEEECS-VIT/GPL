@@ -30,9 +30,13 @@ var miss = require(path(...dir, 'miss'));
 var start = require(path(...dir, 'start'));
 var hopeless = require(path(...dir, 'hopeless'));
 var rand = helper.rand;
+var genArray = helper.genArray;
 var checkMoM = helper.checkMoM;
 var MoM;
 var strike;
+var dismiss = helper.dismiss;
+var scoreRef = helper.scoreRef;
+var wicketRef = helper.wicketRef;
 var count = [];
 var Total = [0, 0];
 var wickets = [0, 0];
@@ -44,48 +48,28 @@ var bowl = helper.bowl; // increase to strengthen bowling
 var lastFiveOvers = [];
 var wicketSequence = [];
 var frustration = [0, 0];
-var deliveriesBowled =
-[
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-];
-var ballsFaced =
-[
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-];
-var dismiss = helper.dismiss;
-var scoreRef = helper.scoreRef;
-var wicketRef = helper.wicketRef;
-var score = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var balls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var fours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var control = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var catches = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var maidens = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var maximums = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var dotBalls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var dismissed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var milestone = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var deliveries = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var score = genArray(11);
+var balls = genArray(11);
+var fours = genArray(11);
+var control = genArray(11);
+var catches = genArray(11);
+var maidens = genArray(11);
+var maximums = genArray(11);
+var dotBalls = genArray(11);
+var dismissed = genArray(11);
+var milestone = genArray(11);
+var deliveries = genArray(11);
+var runsConceded = genArray(11);
+var wicketsTaken = genArray(11);
+var dotDeliveries = genArray(11);
+var fiveWicketHaul = genArray(11);
+var ballsFaced = genArray(11, 11);
+var partnershipRuns = genArray(10);
+var partnershipBalls = genArray(10);
+var continuousWickets = genArray(11);
+var deliveriesBowled = genArray(11, 11);
+var projected = helper.projected;
 //var form = ['poor', 'average', 'good', 'excellent'];
-var partnershipRuns = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var runsConceded = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var wicketsTaken = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var partnershipBalls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var dotDeliveries = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var fiveWicketHaul = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var continuousWickets = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var i;
 var j;
 var k;
@@ -117,6 +101,8 @@ var out = process.env.OUT;
 var previousDismissal = -1;
 var currentPartnership = 0;
 var previousPartnership = -1;
+var bowlMoM = (prev, curr, index) => (prev + curr * team[+tossIndex].batRating[index]);
+var batMoM = (prev, curr, index) => (prev + curr * team[+!tossIndex].bowlRating[index]);
 
 exports.simulate = function (data, callback)
 {
@@ -230,8 +216,8 @@ exports.simulate = function (data, callback)
                     ++deliveries[currentBowler];
                     ++balls[strike[+strikeIndex]];
                     batPerfIndex -= bowlPerfIndex;
-                    ++ballsFaced[+strikeIndex][currentBowler];
                     ++partnershipBalls[currentPartnership];
+                    ++ballsFaced[strike[+strikeIndex]][currentBowler];
                     ++deliveriesBowled[currentBowler][strike[+strikeIndex]];
 
                     if (freeHit)
@@ -348,24 +334,14 @@ exports.simulate = function (data, callback)
                             control[strike[+strikeIndex]] *= ((balls[strike[+strikeIndex]] - 1) / (balls[strike[+strikeIndex]])).toFixed(2);
                         }
 
-                        temp = ballsFaced[+strikeIndex].reduce((prev, curr, index) => (prev + curr * team[+!tossIndex].bowlRating[index]));
-                        temp /= balls[strike[+strikeIndex]];
-                        temp -= team[+tossIndex].batRating[strike[+strikeIndex]];
-                        temp /= 10;
-                        temp = (score[strike[+strikeIndex]] + 1) * (1 - Math.exp((temp - (Math.pow(fours[strike[+strikeIndex]], 1 / (1 - control[strike[+strikeIndex]])) + Math.pow(maximums[strike[+strikeIndex]], 1 / (1 - control[strike[+strikeIndex]])))) / (balls[strike[+strikeIndex]] + team[+tossIndex].batRating[strike[+strikeIndex]])));
-                        data.team[+tossIndex].stats[data.team[+tossIndex].squad[strike[+strikeIndex]]].points += temp;
-
-                        checkMoM(MoM, temp, strike[+strikeIndex], +tossIndex);
-
                         data.team[+tossIndex].avgPartnershipRuns[currentPartnership] = parseFloat(((partnershipRuns[currentPartnership] + data.team[+tossIndex].avgPartnershipRuns[currentPartnership] * data.team[+tossIndex].played) / (data.team[+tossIndex].played + 1)).toFixed(2));
                         data.team[+tossIndex].avgPartnershipBalls[currentPartnership] = parseFloat(((partnershipBalls[currentPartnership] + data.team[+tossIndex].avgPartnershipBalls[currentPartnership] * data.team[+tossIndex].played) / (data.team[+tossIndex].played + 1)).toFixed(2));
-                        data.match.commentary.push(`${score[strike[+strikeIndex]]} (${balls[strike[+strikeIndex]]} balls ${fours[strike[+strikeIndex]]} X 4\'s ${maximums[strike[+strikeIndex]]} X 6\'s) SR: ${((score[strike[+strikeIndex]] * 100) / balls[strike[+strikeIndex]]).toFixed(2)} Control: ${(control[strike[+strikeIndex]] * 100).toFixed(2)} %`);
+                        data.match.commentary.push(`${score[strike[+strikeIndex]]} (${balls[strike[+strikeIndex]]} balls ${fours[strike[+strikeIndex]]} X 4's ${maximums[strike[+strikeIndex]]} X 6's) SR: ${((score[strike[+strikeIndex]] * 100) / balls[strike[+strikeIndex]]).toFixed(2)} Control: ${(control[strike[+strikeIndex]] * 100).toFixed(2)} %`);
                         data.match.commentary.push(`Partnership: ${partnershipRuns[currentPartnership]} (${partnershipBalls[currentPartnership]}), Run rate: ${(partnershipRuns[currentPartnership] * 6 / (partnershipBalls[currentPartnership] || 1)).toFixed(2)}`);
 
                         ++currentPartnership;
                         frustration[+strikeIndex] = 0;
                         control[strike[+strikeIndex]] = 0;
-                        ballsFaced[+strikeIndex] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                         strike[+strikeIndex] = Math.max(strike[+strikeIndex], strike[+!strikeIndex]) + 1;
                         desperation[+strikeIndex] = +(data.team[+tossIndex].streak < 0) * (1 - team[+tossIndex].batRating[strike[+strikeIndex]] / 1000) * data.team[+tossIndex].streak * ((Total[+!toss] - Total[+toss] + 1) / 5000) * team[+!tossIndex].meanRating / team[+tossIndex].batStrikeRate[strike[+strikeIndex]];
 
@@ -421,16 +397,7 @@ exports.simulate = function (data, callback)
                         else
                         {
                             freeHit = 0;
-
-                            if(deliveryScore > 4 && deliveryScore <= 6)
-                            {
-                                deliveryScore = 4;
-                            }
-                            else if(deliveryScore > 6 && deliveryScore < 10)
-                            {
-                                deliveryScore = 6;
-                            }
-
+                            deliveryScore = (deliveryScore > 6 ? 6 : deliveryScore > 4 ? 4 : deliveryScore);
                             temp = scoreRef[deliveryScore];
                             data.match.commentary[data.match.commentary.length - 1] += `${temp.prefix}, ${rand(temp.comm)}`;
 
@@ -523,7 +490,20 @@ exports.simulate = function (data, callback)
 
                 if(!loop)
                 {
-                    data.match.commentary.push(`Projected scores: `);
+                    if(i > 3 && i < 15)
+                    {
+                        temp = parseFloat((Total[+tossIndex] / (i + 1)).toFixed(2));
+                        data.match.commentary.push('Projected scores:');
+
+                        for(k = 1; k < 4; ++k)
+                        {
+                            projected.rates[k] = temp;
+                            projected.totals[k] = Total[+tossIndex] + (19 - i) * temp;
+                            temp = parseInt(temp + 2);
+                        }
+
+                        data.match.commentary.push(projected.rates, projected.totals);
+                    }
                 }
                 else
                 {
@@ -534,6 +514,7 @@ exports.simulate = function (data, callback)
                         break;
                     }
                 }
+
                 if (strike[+strikeIndex] < 11)
                 {
                     data.match.commentary.push(`${team[+tossIndex].name[strike[+strikeIndex]]} : ${score[strike[+strikeIndex]]} (${balls[strike[+strikeIndex]]}), Control: ${(control[strike[+strikeIndex]] * 100).toFixed(2)} %`);
@@ -569,7 +550,7 @@ exports.simulate = function (data, callback)
 
                 if (deliveries[currentBowler] === 24)
                 {
-                    data.match.commentary.push(`And that brings an end to ${team[+!tossIndex].name[currentBowler]}\'s spell.`);
+                    data.match.commentary.push(`And that brings an end to ${team[+!tossIndex].name[currentBowler]}'s spell.`);
                 }
 
                 lastFiveOvers.unshift(previousOver); // unshift adds a new element at the beginning of the array
@@ -655,23 +636,8 @@ exports.simulate = function (data, callback)
                 }
             }
 
-            temp = 0;
-
-            if(balls[strike[+strikeIndex]])
-            {
-                temp = ballsFaced[+strikeIndex].reduce((prev, curr, index) => (prev + curr * team[+!tossIndex].bowlRating[index]));
-                temp /= balls[strike[+strikeIndex]];
-                temp -= team[+tossIndex].batRating[strike[+strikeIndex]];
-                temp /= 10;
-                temp = (score[strike[+strikeIndex]] + 1) * (1 - Math.exp((temp - (Math.pow(fours[strike[+strikeIndex]], 1 / (1 - control[strike[+strikeIndex]])) + Math.pow(maximums[strike[+strikeIndex]], 1 / (1 - control[strike[+strikeIndex]])))) / (balls[strike[+strikeIndex]] + team[+tossIndex].batRating[strike[+strikeIndex]])));
-                data.team[+tossIndex].stats[data.team[+tossIndex].squad[strike[+strikeIndex]]].points += temp;
-
-                checkMoM(MoM, temp, strike[+strikeIndex], +tossIndex);
-            }
-
             k = 0;
-            data.match.scorecard.push('Scorecard:');
-            data.match.scorecard.push(['Runs', 'Balls', 'Strike Rate', 'Fours', 'Sixes', 'Dot balls', 'Control (%)']);
+            data.match.scorecard.push('Scorecard:', ['Runs', 'Balls', 'Strike Rate', 'Fours', 'Sixes', 'Dot balls', 'Control (%)']);
 
             for (i = 0; i < 11; ++i)
             {
@@ -681,6 +647,16 @@ exports.simulate = function (data, callback)
                 }
                 else
                 {
+                    if(balls[i])
+                    {
+                        temp = ballsFaced[i].reduce(batMoM) / balls[i];
+                        temp -= team[+tossIndex].batRating[i];
+                        temp /= 10;
+                        temp = (score[i] + 1) * (1 - Math.exp((temp - (Math.pow(fours[i], 1 / (1 - control[i])) + Math.pow(maximums[i], 1 / (1 - control[i])))) / (balls[i] + team[+tossIndex].batRating[i])));
+                        data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].points += temp;
+                        checkMoM(MoM, temp, i, +tossIndex);
+                    }
+
                     data.match.scorecard.push([team[+tossIndex].name[i], score[i], balls[i], (score[i] * 100 / balls[i]).toFixed(2), fours[i], maximums[i], dotBalls[i], (control[i] * 100).toFixed(2)]);
 
                     if (!dismissed[i])
@@ -714,8 +690,7 @@ exports.simulate = function (data, callback)
 
             data.match.scorecard.push(`Total: ${Total[+tossIndex]} / ${wickets[+tossIndex]} (${parseInt(Overs[+tossIndex] / 6, 10)}.${Overs[+tossIndex] % 6} overs)  Run rate: ${(Total[+tossIndex] * 6 / (Overs[+tossIndex] || 1)).toFixed(2)} Extras: ${extras}`);
             data.match.scorecard.push(`Runs scored in boundaries: ${k} of ${Total[+tossIndex]} (${(k * 100 / Total[+tossIndex]).toFixed(2)} %) `);
-            data.match.scorecard.push('Bowling Statistics:');
-            data.match.scorecard.push(['Bowler', 'Overs', 'Maidens', 'Wickets', 'Runs conceded', 'Economy']);
+            data.match.scorecard.push('Bowling Statistics:', ['Bowler', 'Overs', 'Maidens', 'Wickets', 'Runs conceded', 'Economy']);
             j = 0;
 
             for (i = 0; i < 11; ++i)
@@ -723,8 +698,7 @@ exports.simulate = function (data, callback)
                 if(deliveries[i])
                 {
                     ++j;
-                    temp = deliveriesBowled[i].reduce((prev, curr, index) => (prev + curr * team[+tossIndex].batRating[index]));
-                    temp /= deliveries[i];
+                    temp = deliveriesBowled[i].reduce(bowlMoM) / deliveries[i];
                     temp -= team[+!tossIndex].bowlRating[i];
                     temp /= 10;
                     temp = ((wicketsTaken[i] + 1) * 25) * (1 - Math.exp((temp - Math.pow((dotDeliveries[i] + 1) * 100, wicketsTaken[i])) / (team[+!tossIndex].bowlRating[i] + deliveries[i] + runsConceded[i])));
@@ -733,20 +707,18 @@ exports.simulate = function (data, callback)
 
                     data.match.scorecard.push([team[+!tossIndex].name[i], parseInt(deliveries[i] / 6, 10).toString() + '.' + (deliveries[i] % 6).toString(), maidens[i], wicketsTaken[i], runsConceded[i], (runsConceded[i] * 6 / (deliveries[i] || 1)).toFixed(2)]);
                     fiveWicketHaul[i] = continuousWickets[i] = deliveries[i] = maidens[i] = runsConceded[i] = wicketsTaken[i] = dotDeliveries[i] = 0;
-                    deliveriesBowled[i] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                    deliveriesBowled[i] = genArray(11);
                 }
             }
 
             count[loop] = j;
             lastFiveOvers = [];
             frustration = [0, 0];
+            ballsFaced = genArray(11, 11);
             previousBatsman = previousPartnership = -1;
-            ballsFaced = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
 
-            data.match.scorecard.push('Fall of wickets:');
-            data.match.scorecard.push(wicketSequence);
-            data.match.scorecard.push(`Dot ball percentage: ${(dot * 100 / Overs[+tossIndex]).toFixed(2)} %`);
-            data.match.scorecard.push('   ');
+            data.match.scorecard.push('Fall of wickets:', wicketSequence);
+            data.match.scorecard.push(`Dot ball percentage: ${(dot * 100 / Overs[+tossIndex]).toFixed(2)} %`, '   ');
 
             wicketSequence = [];
             tossIndex = !tossIndex;
@@ -845,8 +817,7 @@ exports.simulate = function (data, callback)
         data.match.MoM = MoM;
         ++data.team[MoM.team].stats[data.team[MoM.team].ratings[MoM.id]._id].MoM;
         data.match.commentary.push(`Man of the Match: ${data.team[MoM.team].ratings[MoM.id].Name} (${data.team[MoM.team]._id})`);
-        data.match.commentary.push(rand((mom[data.team[MoM.team].ratings[MoM.id].Type] || mom.all)));
-        data.match.commentary.push(rand(end));
+        data.match.commentary.push(rand((mom[data.team[MoM.team].ratings[MoM.id].Type] || mom.all)), rand(end));
     }
 
     for(i = 0; i < 2; ++i)

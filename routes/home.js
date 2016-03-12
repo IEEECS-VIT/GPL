@@ -86,8 +86,8 @@ router.get('/', authenticated, function (req, res){
                     }
                     else
                     {
-                        doc.balls_for = parseInt(doc.balls_for / 6, 10) + '.' + (doc.balls_for % 6);
-                        doc.balls_against = parseInt(doc.balls_against / 6, 10) + '.' + (doc.balls_against % 6);
+                        doc.ballsFor = parseInt(doc.ballsFor / 6, 10) + '.' + (doc.ballsFor % 6);
+                        doc.ballsAgainst = parseInt(doc.ballsAgainst / 6, 10) + '.' + (doc.ballsAgainst % 6);
                         res.render('home', {results: {team: documents, user: doc, msg: req.flash()}});
                     }
                 };

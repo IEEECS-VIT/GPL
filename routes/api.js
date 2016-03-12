@@ -100,8 +100,8 @@ router.get('/home', apiFilter, function(req, res, next){
                     }
                     else
                     {
-                        doc.balls_for = parseInt(doc.balls_for / 6, 10) + '.' + (doc.balls_for % 6);
-                        doc.balls_against = parseInt(doc.balls_against / 6, 10) + '.' + (doc.balls_against % 6);
+                        doc.ballsFor = parseInt(doc.ballsFor / 6, 10) + '.' + (doc.ballsFor % 6);
+                        doc.ballsAgainst = parseInt(doc.ballsAgainst / 6, 10) + '.' + (doc.ballsAgainst % 6);
                         res.json({team: documents, user: doc});
                     }
                 };

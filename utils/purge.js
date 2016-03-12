@@ -18,20 +18,20 @@
 
 console.time('Purge operation');
 
-var flag;
+var mode = '';
 
 try
 {
-    flag = mode ? 'test': ''; //  mode is a global variable from
+    mode = testFlag ? 'test' : ''; //  mode is a global variable from
 }
 catch(err)
 {
-    flag = ''
+    console.log('Running in test mode.');
 }
 
 var path = require('path').join;
 var mongo = require('mongodb').MongoClient.connect;
-var mongoURI = `mongodb://127.0.0.1:27017/${flag}GPL`;
+var mongoURI = `mongodb://127.0.0.1:27017/${mode}GPL`;
 
 if(process.env.NODE_ENV)
 {
@@ -56,7 +56,7 @@ mongo(mongoURI, function(err, db){
                 console.log('The database was successfully purged, you can reinstate it with `npm run seed`.');
                 console.timeEnd('Purge operation');
 
-                if(flag)
+                if(testFlag)
                 {
                     require(path(__dirname, 'seed'));
                 }

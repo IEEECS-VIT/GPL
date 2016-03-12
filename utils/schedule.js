@@ -22,7 +22,6 @@ var i;
 var j;
 var day;
 var num;
-var flag;
 var temp;
 var users;
 var excess;
@@ -31,6 +30,7 @@ var done = 0;
 var database;
 var schedule;
 var mongoURI;
+var mode = '';
 var count = 0;
 var unassigned;
 var schedulerCallback;
@@ -41,17 +41,17 @@ var generate = require(path.join(__dirname, '..', 'db', 'mongoRecord')).users;
 
 try
 {
-    flag = mode ? 'test' : '';
+    mode = testFlag ? 'test' : '';
 }
 catch(err)
 {
-    flag = '';
+    console.log('Running in test mode.');
 }
 
 if(!process.env.NODE_ENV)
 {
     require('dotenv').load({path : path.join(__dirname, '..', '.env')});
-    mongoURI = `mongodb://127.0.0.1:27017/${flag}GPL`;
+    mongoURI = `mongodb://127.0.0.1:27017/${mode}GPL`;
 }
 else
 {
@@ -75,7 +75,7 @@ var onInsert = function (err, doc)
     }
     else
     {
-        if(!flag)
+        if(!testFlag)
         {
             console.log(doc.ops);
         }
@@ -195,7 +195,7 @@ var onParallel = function(err)
     }
     else
     {
-        if(flag)
+        if(testFlag)
         {
             testDb = database;
             testHelperCallback(); // from tests/helper.js

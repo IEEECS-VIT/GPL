@@ -18,6 +18,8 @@
 
 var i;
 var j;
+var hor;
+var ver;
 var ref =
 {
     bat: 'bowl',
@@ -48,7 +50,6 @@ var four = require(path(...dir, 'score', 'four'));
 var six = require(path(...dir, 'score', 'six'));
 var wide = require(path(...dir, 'extra', 'wide'));
 var noBall = require(path(...dir, 'extra', 'noBall'));
-
 var defaultMoM = function(id, rating)
 {
     if(rating > temp)
@@ -57,6 +58,30 @@ var defaultMoM = function(id, rating)
         MoM.team = i;
         temp = rating;
     }
+};
+
+exports.projected =
+{
+    rates: ['Run rate', 0, 0, 0, 0],
+    totals: ['Total', 0, 0, 0, 0]
+};
+
+exports.genArray = function(row, col)
+{
+    hor = (col && new Array(col)) || 0;
+    ver = new Array(row);
+
+    for(i = 0; i < row; ++i)
+    {
+        for(j = 0; j < col; ++j)
+        {
+            hor[j] = 0;
+        }
+
+        ver[i] = hor;
+    }
+
+    return ver;
 };
 
 exports.dismiss = [caught, bowled, lbw, cnb, stumped];
