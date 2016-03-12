@@ -140,7 +140,7 @@ exports.players = function()
     {
         for(j in ref)
         {
-            cost = Math.ceil(((parseInt(faker.finance.amount()) * faker.random.number()) % 1950001 + 50000) / 10000) * 10;
+            cost = Math.ceil(((parseInt(faker.finance.amount(), 10) * faker.random.number()) % 1950001 + 50000) / 10000) * 10;
             temp =
             {
                 _id: j + i,
@@ -150,16 +150,16 @@ exports.players = function()
                 Cost: cost * 1000
             };
 
-            if(j != 'd')
+            if(j !== 'd')
             {
                 if(j !== 'c')
                 {
-                    temp.Rating = parseInt(faker.commerce.price()) % 501 + 400;
+                    temp.Rating = parseInt(faker.commerce.price(), 10) % 501 + 400;
                 }
                 else
                 {
-                    temp.Bat = parseInt(faker.commerce.price()) % 501 + 400;
-                    temp.Bowl = parseInt(faker.commerce.price()) % 501 + 400;
+                    temp.Bat = parseInt(faker.commerce.price(), 10) % 501 + 400;
+                    temp.Bowl = parseInt(faker.commerce.price(), 10) % 501 + 400;
                 }
 
                 temp.Country = faker.address.country();

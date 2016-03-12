@@ -39,11 +39,11 @@ exports.getTeam = function (doc, callback)
     {
         if (!document.team.length)
         {
-            callback(null, []);
+            return callback(null, []);
         }
         else if (err)
         {
-            callback(err, null);
+            return callback(err, null);
         }
         else
         {
@@ -64,12 +64,12 @@ exports.getSquad = function (doc, callback)
         {
             if (err)
             {
-                callback(err, null)
+                return callback(err, null)
             }
             else
             {
                 documents.push(doc);
-                callback(null, documents);
+                return callback(null, documents);
             }
         };
 
@@ -89,22 +89,22 @@ exports.getSquad = function (doc, callback)
         {
             if (err)
             {
-                callback(err, null);
+                return callback(err, null);
             }
             else if (document.team.length)
             {
-                coach = parseInt(document.team.filter((arg) => arg > 'd')[0]);
+                coach = document.team.find((arg) => arg > 'd');
 
                 async.map(document.squad, mongoFeatures.getPlayer, onFinish);
             }
             else
             {
-                callback(null, []);
+                return callback(null, []);
             }
         }
         else
         {
-            callback(null, []);
+            return callback(null, []);
         }
     };
 
@@ -122,11 +122,11 @@ exports.map = function (doc, callback)
     {
         if (err)
         {
-            callback(err);
+            return callback(err);
         }
         else
         {
-            callback(null, doc.teamNo);
+            return callback(null, doc.teamNo);
         }
     };
 
@@ -140,7 +140,7 @@ exports.shortlist = function (callback) // TODO: add email notification for shor
         'users' :
         {
             out: 'round2',
-            limit: parseInt(process.env.ONE)
+            limit: parseInt(process.env.ONE, 10)
         },
         'round2':
         {
@@ -158,7 +158,7 @@ exports.shortlist = function (callback) // TODO: add email notification for shor
     {
         if (err)
         {
-            callback(err);
+            return callback(err);
         }
         else
         {
@@ -170,7 +170,7 @@ exports.shortlist = function (callback) // TODO: add email notification for shor
             }, function(err, result){
                 if(err)
                 {
-                    callback(err);
+                    return callback(err);
                 }
                 else
                 {
@@ -201,7 +201,7 @@ exports.adminInfo = function (callback)
     {
         if (err)
         {
-            callback(err);
+            return callback(err);
         }
         else
         {
@@ -215,7 +215,7 @@ exports.adminInfo = function (callback)
             result.database.version = result.database.dataFileVersion.major + '.' + result.database.dataFileVersion.minor;
             delete result.database.dataFileVersion;
 
-            callback(null, result);
+            return callback(null, result);
         }
     };
 
@@ -272,37 +272,12 @@ exports.adminInfo = function (callback)
 
 exports.fetchMatches = function (team, callback)
 {
-    var parallelTasks =
-    [
-        function (asyncCallback)
-        {
-            mongoFeatures.match(1, team, asyncCallback);
-        },
-        function (asyncCallback)
-        {
-            mongoFeatures.match(2, team, asyncCallback);
-        },
-        function (asyncCallback)
-        {
-            mongoFeatures.match(3, team, asyncCallback);
-        },
-        function (asyncCallback)
-        {
-            mongoFeatures.match(4, team, asyncCallback);
-        },
-        function (asyncCallback)
-        {
-            mongoFeatures.match(5, team, asyncCallback);
-        },
-        function (asyncCallback)
-        {
-            mongoFeatures.match(6, team, asyncCallback);
-        },
-        function (asyncCallback)
-        {
-            mongoFeatures.match(7, team, asyncCallback);
-        }
-    ];
+    var parallelTasks = Array.apply(null, Aray(7))
+                             .map((_, i) => {
+                                 return (asyncCallback) => {
+                                     mongoFeatures.match(i + 1, team, asyncCallback);
+                                 }
+                             });
 
     async.parallel(parallelTasks, callback);
 };
@@ -326,11 +301,11 @@ exports.opponent = function (day, team, callback)
     {
         if (err)
         {
-            callback(err);
+            return callback(err);
         }
         else
         {
-            callback(null, (team === doc.Team_1) ? doc.Team_2 : doc.Team_1);
+            return callback(null, (team === doc.Team_1) ? doc.Team_2 : doc.Team_1);
         }
     };
 
@@ -345,7 +320,7 @@ exports.squad = function (doc, callback)
 
         if (err)
         {
-            callback(err);
+            return callback(err);
         }
         else
         {
@@ -353,7 +328,7 @@ exports.squad = function (doc, callback)
             {
                 doc.team = results;
 
-                callback(null, doc);
+                return callback(null, doc);
             };
 
             async.map(doc.team, mongoFeatures.getPlayer, onGet);

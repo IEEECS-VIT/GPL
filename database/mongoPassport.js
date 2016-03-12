@@ -16,6 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var key;
 var user;
 var path = require('path').join;
 var passport = require('passport');
@@ -59,37 +60,24 @@ var ref =
     'dev' : 'http://gpl-dev.herokuapp.com/auth/',
     'production' : 'http://gravitaspremierleague.com/auth/'
 };
-//var twitter = require('passport-twitter').Strategy;
 var facebook = require('passport-facebook').Strategy;
 var mongoUsers = require(path(__dirname, 'mongoUsers'));
 var google = require('passport-google-oauth').OAuth2Strategy;
 var record = require(path(__dirname, 'mongoRecord')).schema;
+var strategies =
+{
+    GOOGLE: google,
+    FACEBOOK: facebook
+};
 
-passport.use(new facebook({
-        clientID: process.env.FACEBOOK_ID,
-        clientSecret: process.env.FACEBOOK_KEY,
-        callbackURL: ref[process.env.NODE_ENV] + 'facebook/callback',
-        passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
-    },
-    callback
-));
-
-passport.use(new google({
-        clientID: process.env.GOOGLE_ID,
-        clientSecret: process.env.GOOGLE_KEY,
-        callbackURL: ref[process.env.NODE_ENV] + 'google/callback',
-        passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
-    },
-    callback
-));
-
-/*
-passport.use(new twitter({
-        consumerKey: process.env.TWITTER_ID,
-        consumerSecret: process.env.TWITTER_KEY,
-        callbackURL: ref[process.env.NODE_ENV] + 'twitter/callback',
-        passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
-    },
-    callback
-));
-*/
+for(key in strategies)
+{
+    passport.use(new strategies[key]({
+            clientID: process.env[`${key}_ID`],
+            clientSecret: process.env[`${key}_KEY`],
+            callbackURL: ref[process.env.NODE_ENV] + key.toLowerCase() + '/callback',
+            passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+        },
+        callback
+    ));
+}

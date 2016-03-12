@@ -80,7 +80,7 @@ exports.insert = function (col, doc, callback)
     {
         if(err)
         {
-            callback(err);
+            return callback(err);
         }
         else
         {
@@ -91,7 +91,7 @@ exports.insert = function (col, doc, callback)
             }
             else
             {
-                callback(null);
+                return callback(null);
             }
         }
     };
@@ -105,7 +105,7 @@ exports.getLeader = function (user, callback)
     {
         if (err)
         {
-            callback(err, null);
+            return callback(err, null);
         }
         else
         {
@@ -131,7 +131,7 @@ exports.getLeader = function (user, callback)
                 }
             }
 
-            callback(null, leaderboard);
+            return callback(null, leaderboard);
         }
     };
 
@@ -153,7 +153,7 @@ exports.forgotPassword = function (doc, token, host, callback)
     {
         if (err)
         {
-            callback(err, null);
+            return callback(err, null);
         }
         else if (document.value)
         {
@@ -190,7 +190,7 @@ exports.forgotPassword = function (doc, token, host, callback)
             {
                 if(err)
                 {
-                    callback(err);
+                    return callback(err);
                 }
                 else
                 {
@@ -202,7 +202,7 @@ exports.forgotPassword = function (doc, token, host, callback)
         }
         else
         {
-            callback(false, null);
+            return callback(false, null);
         }
     };
 
@@ -215,7 +215,7 @@ exports.forgotUser = function (doc, callback)
     {
         if (err)
         {
-            callback(err, null);
+            return callback(err, null);
         }
         else if (docs.length)
         {
@@ -230,7 +230,7 @@ exports.forgotUser = function (doc, callback)
             {
                 if(err)
                 {
-                    callback(err);
+                    return callback(err);
                 }
                 else
                 {
@@ -242,7 +242,7 @@ exports.forgotUser = function (doc, callback)
         }
         else
         {
-            callback(false, null);
+            return callback(false, null);
         }
     };
 
@@ -255,15 +255,15 @@ exports.getReset = function (doc, callback)
     {
         if (err)
         {
-            callback(err, null);
+            return callback(err, null);
         }
         else if (document)
         {
-            callback(null, document);
+            return callback(null, document);
         }
         else
         {
-            callback(false, null);
+            return callback(false, null);
         }
     };
 
@@ -297,7 +297,7 @@ exports.resetPassword = function (token, hash, callback)
     {
         if (err)
         {
-            callback(err, null);
+            return callback(err, null);
         }
         else if (doc)
         {
@@ -334,7 +334,7 @@ exports.resetPassword = function (token, hash, callback)
         }
         else
         {
-            callback(false, null);
+            return callback(false, null);
         }
     };
 

@@ -42,11 +42,11 @@ exports.forgotCount = function(option, callback)
     {
         if(err)
         {
-            callback(err);
+            return callback(err);
         }
         else
         {
-            callback(null, doc.value);
+            return callback(null, doc.value);
         }
     };
 
@@ -59,7 +59,7 @@ exports.warnEmptyTeams = function(callback)
     {
         if (err)
         {
-            callback(err);
+            return callback(err);
         }
         else
         {
@@ -139,15 +139,15 @@ exports.getPlayer = function (id, fields, callback)
     {
         if(err)
         {
-            callback(err);
+            return callback(err);
         }
         else if(player)
         {
-            callback(null, player);
+            return callback(null, player);
         }
         else
         {
-            callback(false, null);
+            return callback(false, null);
         }
     };
 
