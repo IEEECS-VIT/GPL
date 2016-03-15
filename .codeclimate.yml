@@ -18,4 +18,5 @@ ratings:
 exclude_paths:
 - public/stylesheets/min/**/*
 - public/javascript/min/**/*
+- views/**/*
 

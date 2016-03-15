@@ -131,29 +131,21 @@ var specialHandler = function(arg)
 
     return arg;
 };
+var processRef =
+{
+    1:
+    {
+        true: dismissalHandler,
+        false: genericHandler
+    },
+    3:
+    {
+        false: specialHandler
+    }
+};
 var processor = function(arg, callback)
 {
-    arg = arg.children;
-
-    switch(arg.length)
-    {
-        case 1:
-            if (flag)
-            {
-                arg = dismissalHandler(arg);
-            }
-            else
-            {
-                arg = genericHandler(arg);
-            }
-
-            break;
-
-        case 3:
-            arg = specialHandler(arg);
-
-            break;
-    }
+    arg = processRef[arg.children.length][flag](arg.children);
 
     if(flag)
     {

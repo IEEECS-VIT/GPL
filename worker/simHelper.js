@@ -31,7 +31,9 @@ var MoM =
     team: '',
     points: 0
 };
+var coach;
 var temp = 0;
+var avgRating;
 var teamArray = [{}, {}];
 var path = require('path').join;
 var dir = [__dirname, '..', 'utils', 'commentary'];
@@ -50,6 +52,31 @@ var four = require(path(...dir, 'score', 'four'));
 var six = require(path(...dir, 'score', 'six'));
 var wide = require(path(...dir, 'extra', 'wide'));
 var noBall = require(path(...dir, 'extra', 'noBall'));
+var setTeam = function()
+{
+    teamArray[i].name = [];
+    teamArray[i].type = [];
+    teamArray[i].batAvg = [];
+    teamArray[i].economy = [];
+    teamArray[i].bowlAvg = [];
+    teamArray[i].batRating = [];
+    teamArray[i].meanRating = 0;
+    teamArray[i].bowlRating = [];
+    teamArray[i].avgBatRating = 0;
+    teamArray[i].avgBowlRating = 0;
+    teamArray[i].batStrikeRate = [];
+    teamArray[i].bowlStrikeRate = [];
+};
+var setPlayer = function(player)
+{
+    teamArray[i].name.push(player.Name);
+    teamArray[i].batAvg.push(player.Average);
+    teamArray[i].type.push(` (${player.Type})`);
+    teamArray[i].bowlAvg.push(player.Avg || 30);
+    teamArray[i].economy.push(player.Economy || 10);
+    teamArray[i].bowlStrikeRate.push(player.SR || 40);
+    teamArray[i].batStrikeRate.push(player['Strike Rate']);
+};
 var defaultMoM = function(id, rating)
 {
     if(rating > temp)
@@ -57,6 +84,38 @@ var defaultMoM = function(id, rating)
         MoM.id = id;
         MoM.team = i;
         temp = rating;
+    }
+};
+var normalize = function(type)
+{
+    teamArray[i][`${type}Rating`][j] += teamArray[i][`${type}Rating`][j] / 10 - avgRating[type];
+    return (teamArray[i][`${type}Rating`][j] < 0) ? (+(coach > 0) && coach) : teamArray[i][`${type}Rating`][j];
+};
+var baseRate = function(player)
+{
+    if(player.Rating)
+    {
+        teamArray[i][`${player.Type}Rating`].push(player.Rating);
+        teamArray[i][`${ref[player.Type]}Rating`].push(900 - player.Rating);
+
+        defaultMoM(player._id, player.Rating);
+    }
+    else
+    {
+        teamArray[i].batRating.push(player.Bat);
+        teamArray[i].bowlRating.push(player.Bowl);
+
+        defaultMoM(player._id, player.Bat);
+        defaultMoM(player._id, player.Bowl);
+    }
+};
+var adjustRating = function()
+{
+    for (j = 0; j < 11; ++j)
+    {
+        teamArray[i].batRating[j] += normalize('bat');
+        teamArray[i].bowlRating[j] += normalize('bowl');
+        teamArray[i].meanRating += teamArray[i].bowlRating[j] + teamArray[i].batRating[j];
     }
 };
 
@@ -161,62 +220,31 @@ exports.Make = function (team)
 {
     for(i = 0; i < 2; ++i)
     {
-        teamArray[i].name = [];
-        teamArray[i].type = [];
-        teamArray[i].batAvg = [];
-        teamArray[i].economy = [];
-        teamArray[i].bowlAvg = [];
-        teamArray[i].batRating = [];
-        teamArray[i].meanRating = 0;
-        teamArray[i].bowlRating = [];
-        teamArray[i].avgBatRating = 0;
-        teamArray[i].avgBowlRating = 0;
-        teamArray[i].batStrikeRate = [];
-        teamArray[i].bowlStrikeRate = [];
-        teamArray[i].coachRating = team[11].Rating || -50;
+        avgRating =
+        {
+            bat: 0,
+            bowl: 0
+        };
+
+        setTeam();
+
+        coach = parseInt(team[i][11].Rating, 10) || -50;
 
         for (j = 0; j < 11; ++j)
         {
-            teamArray[i].name.push(team[i][j].Name);
-            teamArray[i].batAvg.push(team[i][j].Average);
-            teamArray[i].type.push(` (${team[i][j].Type})`);
-            teamArray[i].bowlAvg.push(team[i][j].Avg || 30);
-            teamArray[i].economy.push(team[i][j].Economy || 10);
-            teamArray[i].bowlStrikeRate.push(team[i][j].SR || 40);
-            teamArray[i].batStrikeRate.push(team[i][j]['Strike Rate']);
+            setPlayer(team[i][j]);
+            baseRate(team[i][j]);
 
-            if(team[i][j].Rating)
-            {
-                teamArray[i][`${team[i][j].Type}Rating`] = team[i][j].Rating;
-                teamArray[i][`${ref[team[i][j].Type]}Rating`] = 900 - team[i][j].Rating;
-
-                defaultMoM(team[i][j]._id, team[i][j].Rating);
-            }
-            else
-            {
-                teamArray[i].batRating.push(team[i][j].Bat);
-                teamArray[i].bowlRating.push(team[i][j].Bowl);
-
-                defaultMoM(team[i][j]._id, team[i][j].Bat);
-                defaultMoM(team[i][j]._id, team[i][j].Bowl);
-            }
-
-            teamArray[i].avgBatRating += teamArray[i].batRating[j];
-            teamArray[i].avgBowlRating += teamArray[i].bowlRating[j];
+            avgRating.bat += teamArray[i].batRating[j];
+            avgRating.bowl += teamArray[i].bowlRating[j];
         }
 
-        for (j = 0; j < 11; ++j)
-        {
-            teamArray[i].batRating[j] += parseFloat(teamArray[i].batRating[j]) / (10) - parseFloat(teamArray[i].avgBatRating) / (110) + parseInt(teamArray[i].coachRating, 10);
-            teamArray[i].bowlRating[j] += parseFloat(teamArray[i].bowlRating[j]) / (10) - parseFloat(teamArray[i].avgBowlRating) / (110) + parseInt(teamArray[i].coachRating, 10);
-            teamArray[i].batRating[j] = (teamArray[i].batRating[j] < 0) ? ((teamArray[i].coachRating < 0) ? (0) : (teamArray[i].coachRating)) : (teamArray[i].batRating[j]);
-            teamArray[i].bowlRating[j] = (teamArray[i].bowlRating[j] < 0) ? ((teamArray[i].coachRating < 0) ? (0) : (teamArray[i].coachRating)) : (teamArray[i].bowlRating[j]);
-            teamArray[i].meanRating += teamArray[i].bowlRating[j] + teamArray[i].batRating[j];
-        }
+        avgRating.bat = avgRating.bat / 110 + coach;
+        avgRating.bowl = avgRating.bowl / 110 + coach;
+
+        adjustRating();
 
         teamArray[i].meanRating /= 22;
-        delete teamArray[i].avgBatRating;
-        delete teamArray[i].avgBowlRating;
     }
 
     return {

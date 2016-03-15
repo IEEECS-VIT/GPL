@@ -17,7 +17,11 @@
  */
 
 (function ($) {
-
+    var i;
+    var x;
+    var y;
+    var key;
+    var color;
     var useWindow = window;
 
     // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
@@ -188,7 +192,7 @@
         var old_time = {};
 
         var greater_unit = null;
-        for (var i = 0; i < units.length; i++) {
+        for (i = 0; i < units.length; i++) {
             var unit = units[i];
             var maxUnits;
 
@@ -244,11 +248,11 @@
             useWindow.TC_Instance_List = TC_Instance_List;
         }
         initializeAnimationFrameHandler(useWindow);
-    };
+    }
 
     function initializeAnimationFrameHandler(w) {
         var vendors = ['webkit', 'moz'];
-        for (var x = 0; x < vendors.length && !w.requestAnimationFrame; ++x) {
+        for (x = 0; x < vendors.length && !w.requestAnimationFrame; ++x) {
             w.requestAnimationFrame = w[vendors[x] + 'RequestAnimationFrame'];
             w.cancelAnimationFrame = w[vendors[x] + 'CancelAnimationFrame'];
         }
@@ -269,7 +273,7 @@
                 clearTimeout(id);
             };
         }
-    };
+    }
 
 
     var TC_Instance = function (element, options) {
@@ -331,7 +335,7 @@
     TC_Instance.prototype.initialize = function (clear_listeners) {
         // Initialize drawn units
         this.data.drawn_units = [];
-        for (var i = 0; i < Object.keys(this.config.time).length; i++) {
+        for (i = 0; i < Object.keys(this.config.time).length; i++) {
             var unit = Object.keys(this.config.time)[i];
             if (this.config.time[unit].show) {
                 this.data.drawn_units.push(unit);
@@ -391,8 +395,8 @@
         this.data.attributes.outer_radius = this.data.attributes.radius + 0.5 * Math.max(this.data.attributes.line_width, this.data.attributes.line_width * this.config.bg_width);
 
         // Prepare Time Elements
-        var i = 0;
-        for (var key in this.data.text_elements) {
+        i = 0;
+        for (key in this.data.text_elements) {
             if (!this.config.time[key].show)
                 continue;
 
@@ -453,14 +457,14 @@
         // If not counting past zero, and time < 0, then simply draw the zero point once, and call stop
         if (!this.config.count_past_zero) {
             if (curDate > this.data.attributes.ref_date) {
-                for (var i = 0; i < this.data.drawn_units.length; i++) {
-                    var key = this.data.drawn_units[i];
+                for (i = 0; i < this.data.drawn_units.length; i++) {
+                    key = this.data.drawn_units[i];
 
                     // Set the text value
                     this.data.text_elements[key].text("0");
-                    var x = (i * this.data.attributes.item_size) + (this.data.attributes.item_size / 2);
-                    var y = this.data.attributes.item_size / 2;
-                    var color = this.config.time[key].color;
+                    x = (i * this.data.attributes.item_size) + (this.data.attributes.item_size / 2);
+                    y = this.data.attributes.item_size / 2;
+                    color = this.config.time[key].color;
                     this.drawArc(x, y, color, 0);
                 }
                 this.stop();
@@ -477,13 +481,17 @@
         var visible_times = parse_times(diff, old_diff, this.data.total_duration, this.data.drawn_units, floor);
         var all_times = parse_times(diff, old_diff, secondsIn["Years"], allUnits, floor);
 
-        var i = 0;
+        i = 0;
         var j = 0;
         var lastKey = null;
 
         var cur_shown = this.data.drawn_units.slice();
-        for (var i in allUnits) {
-            var key = allUnits[i];
+        for (i in allUnits) {
+            if(!allUnits.hasOwnProperty(i))
+            {
+                continue;
+            }
+            key = allUnits[i];
 
             // Notify (all) listeners
             if (Math.floor(all_times.raw_time[key]) !== Math.floor(all_times.raw_old_time[key])) {
@@ -502,9 +510,9 @@
                 // Set the text value
                 this.data.text_elements[key].text(Math.floor(Math.abs(visible_times.time[key])));
 
-                var x = (j * this.data.attributes.item_size) + (this.data.attributes.item_size / 2);
-                var y = this.data.attributes.item_size / 2;
-                var color = this.config.time[key].color;
+                x = (j * this.data.attributes.item_size) + (this.data.attributes.item_size / 2);
+                y = this.data.attributes.item_size / 2;
+                color = this.config.time[key].color;
 
                 if (this.config.animation === "smooth") {
                     if (lastKey !== null && !limited_mode) {
@@ -651,7 +659,7 @@
         var _this = this; // We have a few inner scopes here that will need access to our instance
 
         var step = 0.2 * ((from === 1) ? -1 : 1);
-        var i;
+        i;
         for (i = 0; from <= 1 && from >= 0; i++) {
             // Create inner scope so our variables are not changed by the time the Timeout triggers
             (function () {
@@ -770,7 +778,7 @@
             }
             else if (this.data.total_duration === "Auto") {
                 // If set to auto, total_duration is the size of 1 unit, of the unit type bigger than the largest shown
-                for (var i = 0; i < Object.keys(this.config.time).length; i++) {
+                for (i = 0; i < Object.keys(this.config.time).length; i++) {
                     var unit = Object.keys(this.config.time)[i];
                     if (this.config.time[unit].show) {
                         this.data.total_duration = secondsIn[nextUnits[unit]];
@@ -795,7 +803,7 @@
     };
 
     TC_Instance.prototype.notifyListeners = function (unit, value, total, type) {
-        for (var i = 0; i < this.listeners[type].length; i++) {
+        for (i = 0; i < this.listeners[type].length; i++) {
             var listener = this.listeners[type][i];
             listener.func.apply(listener.scope, [unit, value, total]);
         }
@@ -886,7 +894,7 @@
         this.elements.each(function () {
             var instance = _this.getInstance(this);
             if (typeof callback === "function") {
-                callback(instance);
+                return callback(instance);
             }
         });
         return this;

@@ -68,7 +68,7 @@ var parallelTasks =
 if(process.env.NODE_ENV)
 {
     mongoURI = process.env.MONGO;
-    console.warn('You are running the seed operation in a production environment. No new teams / users shall be made.');
+    console.warn('You are running the seed operation in a production environment. No new teams / players shall be made.');
 }
 else
 {

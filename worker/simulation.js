@@ -649,9 +649,7 @@ exports.simulate = function (data, callback)
                 {
                     if(balls[i])
                     {
-                        temp = ballsFaced[i].reduce(batMoM) / balls[i];
-                        temp -= team[+tossIndex].batRating[i];
-                        temp /= 10;
+                        temp = (ballsFaced[i].reduce(batMoM) / balls[i] - team[+tossIndex].batRating[i]) / 10;
                         temp = (score[i] + 1) * (1 - Math.exp((temp - (Math.pow(fours[i], 1 / (1 - control[i])) + Math.pow(maximums[i], 1 / (1 - control[i])))) / (balls[i] + team[+tossIndex].batRating[i])));
                         data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].points += temp;
                         checkMoM(MoM, temp, i, +tossIndex);
@@ -698,9 +696,7 @@ exports.simulate = function (data, callback)
                 if(deliveries[i])
                 {
                     ++j;
-                    temp = deliveriesBowled[i].reduce(bowlMoM) / deliveries[i];
-                    temp -= team[+!tossIndex].bowlRating[i];
-                    temp /= 10;
+                    temp = (deliveriesBowled[i].reduce(bowlMoM) / deliveries[i] - team[+!tossIndex].bowlRating[i]) / 10;
                     temp = ((wicketsTaken[i] + 1) * 25) * (1 - Math.exp((temp - Math.pow((dotDeliveries[i] + 1) * 100, wicketsTaken[i])) / (team[+!tossIndex].bowlRating[i] + deliveries[i] + runsConceded[i])));
                     data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].points += temp;
                     checkMoM(MoM, temp, i, +!tossIndex);

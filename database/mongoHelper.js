@@ -33,7 +33,10 @@ var forgotRef =
     }
 };
 var path = require('path').join;
-var value = require('faker').commerce.price;
+if(!process.env.NODE_ENV)
+{
+    var value = require('faker').commerce.price;
+}
 var mongoFeatures = require(path(__dirname, 'mongoFeatures'));
 
 exports.scale = function(value, level)
