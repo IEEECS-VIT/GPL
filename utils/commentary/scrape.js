@@ -178,7 +178,7 @@ var updateFile = function(arg, callback)
 {
     if(commentary[arg].content)
     {
-        fs.appendFile(commentary[arg].file + '.js', commentary[arg].content + '\t];', callback); // TODO: fix file append bug.
+        fs.appendFile(commentary[arg].file + '.js', commentary[arg].content + '\t];', callback); // fix file append bug.
     }
 };
 var onFinish = function(err)

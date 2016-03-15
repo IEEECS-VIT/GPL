@@ -26,6 +26,11 @@ var simulate = require(path(__dirname, 'simulation')).simulate;
 exports.onGetRating = function(userDoc, asyncCallback)
 {
     return function(err, results) {
+        if(err)
+        {
+            throw err;
+        }
+
         userDoc.ratings = results;
         asyncCallback(err, userDoc);
     };
@@ -169,10 +174,10 @@ exports.onTeamDetails = function(matchDoc, updateData)
 
 exports.onUpdate = function(results, masterCallback)
 {
-    return function(error) {
-        if(error)
+    return function(err) {
+        if(err)
         {
-            throw error;
+            throw err;
         }
 
         masterCallback(null, results);

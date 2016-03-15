@@ -43,7 +43,7 @@ var callback = function(req, token, refresh, profile, done)
                 user.authStrategy = profile.provider;
                 user.phone = req.signedCookies.phone;
                 user.email = profile.emails[0].value;
-                user.managerName = profile.displayName; // TODO: Use email as the primary key, possibly have _id as a compound instance instead of a regular string.
+                user.managerName = profile.displayName; // Use email as the primary key, possibly have _id as a compound instance instead of a regular string.
 
                 mongoUsers.insert(process.env.MATCH, user, done);
             }

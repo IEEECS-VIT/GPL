@@ -44,10 +44,8 @@ exports.forgotCount = function(option, callback)
         {
             return callback(err);
         }
-        else
-        {
-            return callback(null, doc.value);
-        }
+
+        return callback(null, doc.value);
     };
 
     db.collection('info').findOneAndUpdate({_id : 'info'}, {$inc : option}, onInc);
@@ -61,15 +59,13 @@ exports.warnEmptyTeams = function(callback)
         {
             return callback(err);
         }
-        else
-        {
-            var onMap = function(arg, mapCallback)
-            {
-                mapCallback(null, arg.email);
-            };
 
-            async.map(docs, onMap, callback);
-        }
+        var onMap = function(arg, mapCallback)
+        {
+            mapCallback(null, arg.email);
+        };
+
+        async.map(docs, onMap, callback);
     };
 
     db.collection('users').find({$or : [{team : []}, {squad : []}]}, {email : 1, _id : 0}).toArray(onFind);
@@ -100,12 +96,10 @@ exports.match = function (day, team, callback)
         {
             if (err)
             {
-                console.error(err.message);
+                return callback(err);
             }
-            else
-            {
-                mongoTeam.squad({teamNo: doc}, callback);
-            }
+
+            mongoTeam.squad({teamNo: doc}, callback);
         };
 
         mongoTeam.opponent(day, team, onOpponent);

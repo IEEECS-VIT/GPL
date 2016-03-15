@@ -361,7 +361,7 @@ router.post('/players', function (req, res){
 });
 
 /*
-router.get('/sponsors', function (req, res){ // sponsors page TODO: Sponsor hunt ;)
+router.get('/sponsors', function (req, res){ // sponsors page Sponsor hunt ;)
     res.render('sponsors');
 });
 */

@@ -61,6 +61,7 @@ var milestone = genArray(11);
 var deliveries = genArray(11);
 var runsConceded = genArray(11);
 var wicketsTaken = genArray(11);
+var projected = helper.projected;
 var dotDeliveries = genArray(11);
 var fiveWicketHaul = genArray(11);
 var ballsFaced = genArray(11, 11);
@@ -68,7 +69,6 @@ var partnershipRuns = genArray(10);
 var partnershipBalls = genArray(10);
 var continuousWickets = genArray(11);
 var deliveriesBowled = genArray(11, 11);
-var projected = helper.projected;
 //var form = ['poor', 'average', 'good', 'excellent'];
 var i;
 var j;
@@ -131,7 +131,7 @@ exports.simulate = function (data, callback)
         team = temp.teams;
         MoM = temp.MoM;
 
-        temp = (team[0].meanRating * 100 / (team[0].meanRating + team[1].meanRating)); // TODO: make dynamic
+        temp = (team[0].meanRating * 100 / (team[0].meanRating + team[1].meanRating)); // make dynamic
         data.match.commentary.push(`Match ${data.match._id}: ${data.team[0]._id} versus ${data.team[1]._id}`);
         data.match.commentary.push(`Winning chances: ${data.team[0]._id} : ${temp.toFixed(2)} % | % ${(100 - temp).toFixed(2)} : ${data.team[1]._id}`);
         data.match.commentary.push(`Toss: ${data.team[toss]._id} wins the toss and chooses to `);

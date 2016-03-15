@@ -29,6 +29,8 @@ var ref =
     c: 'all',
     d: 'coach'
 };
+var path = require('path').join;
+var helper = require(path(__dirname, 'mongoHelper'));
 try
 {
     var faker = require('faker');
@@ -43,7 +45,7 @@ var user = function()
     return {
         _id: '',
         dob: '',
-        teamNo: '', // TODO: change to an array, in order to make tracking matchday information for previous rounds simpler.
+        teamNo: '', // change to an array, in order to make tracking matchday information for previous rounds simpler.
         managerName: '',
         passwordHash: '',
         email: '',
@@ -140,6 +142,11 @@ exports.players = function()
     {
         for(j in ref)
         {
+            if(!ref.hasOwnProperty(j))
+            {
+                continue;
+            }
+
             cost = Math.ceil(((parseInt(faker.finance.amount(), 10) * faker.random.number()) % 1950001 + 50000) / 10000) * 10;
             temp =
             {
@@ -154,29 +161,28 @@ exports.players = function()
             {
                 if(j !== 'c')
                 {
-                    temp.Rating = parseInt(faker.commerce.price(), 10) % 501 + 400;
+                    temp.Rating = helper.parse('Int', 400, 900);
                 }
                 else
                 {
-                    temp.Bat = parseInt(faker.commerce.price(), 10) % 501 + 400;
-                    temp.Bowl = parseInt(faker.commerce.price(), 10) % 501 + 400;
+                    temp.Bat = helper.parse('Int', 400, 900);
+                    temp.Bowl = helper.parse('Int', 400, 900);
                 }
 
                 temp.Country = faker.address.country();
-                temp.SR = parseFloat((faker.commerce.price() % 53 + 8).toFixed(2));
-                temp.Avg = parseFloat((faker.commerce.price() % 36 + 9).toFixed(2));
-                temp.Economy = parseFloat((faker.commerce.price() % 8 + 4).toFixed(2));
-                temp.Average = parseFloat((faker.commerce.price() % 41 + 10).toFixed(2));
-                temp['Strike Rate'] = parseFloat((faker.commerce.price() % 91 + 70).toFixed(2));
+                temp.SR = helper.parse('Float', 8, 60);
+                temp.Avg = helper.parse('Float', 9, 45);
+                temp.Economy = helper.parse('Float', 4, 12);
+                temp.Average = helper.parse('Float', 10, 50);
+                temp['Strike Rate'] = helper.parse('Float', 70, 160);
             }
             else
             {
-                temp.Rating = faker.random.number() % 12 + 4;
+                temp.Rating = helper.parse('Int', 4, 15);
             }
 
             players.push(temp);
         }
-
     }
 
     return players;

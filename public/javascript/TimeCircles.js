@@ -646,7 +646,7 @@
     };
 
     TC_Instance.prototype.radialFade = function (x, y, color, from, key) {
-        // TODO: Make fade_time option
+        // Make fade_time option
         var rgb = hexToRgb(color);
         var _this = this; // We have a few inner scopes here that will need access to our instance
 

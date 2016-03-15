@@ -370,7 +370,7 @@ router.post('/register', cookieFilter, function (req, res){
         newUser.email = req.body.email;
         newUser.phone = req.body.phone;
         newUser.authStrategy = 'local';
-        newUser.managerName = req.body.managerName; // TODO: treat managerName / email address as _id, to make the creation of multiple teams for one manager possible
+        newUser.managerName = req.body.managerName; // treat managerName / email address as _id, to make the creation of multiple teams for one manager possible
         newUser._id = req.body.team.trim().toUpperCase();
 
         bcrypt.hash(req.body.password, 10, function(err, hash){

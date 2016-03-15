@@ -30,6 +30,7 @@ var slice =
 var async = require('async');
 var match = process.env.MATCH;
 var path = require('path').join;
+var helper = require(path(__dirname, 'mongoHelper'));
 var mongoUsers = require(path(__dirname, 'mongoUsers'));
 var mongoFeatures = require(path(__dirname, 'mongoFeatures'));
 
@@ -37,18 +38,16 @@ exports.getTeam = function (doc, callback)
 {
     var onFetch = function (err, document)
     {
-        if (!document.team.length)
-        {
-            return callback(null, []);
-        }
-        else if (err)
+        if (err)
         {
             return callback(err, null);
         }
-        else
+        else if (!document.team.length)
         {
-            async.map(document.team, mongoFeatures.getPlayer, callback);
+            return callback(null, []);
         }
+
+        async.map(document.team, mongoFeatures.getPlayer, callback);
     };
 
     db.collection(match).find(doc).limit(1).next(onFetch);
@@ -60,52 +59,42 @@ exports.getSquad = function (doc, callback)
 
     var onFinish = function (err, documents)
     {
-        var onGetCoach = function (err, doc)
-        {
-            if (err)
-            {
-                return callback(err, null)
-            }
-            else
-            {
-                documents.push(doc);
-                return callback(null, documents);
-            }
-        };
-
         if (err)
         {
             throw err;
         }
-        else
+
+        var onGetCoach = function (error, doc)
         {
-            mongoFeatures.getPlayer(coach, onGetCoach);
-        }
+            if (error)
+            {
+                return callback(error, null)
+            }
+
+            documents.push(doc);
+            return callback(null, documents);
+        };
+
+        mongoFeatures.getPlayer(coach, onGetCoach);
     };
 
     var onFetch = function (err, document)
     {
-        if (document)
+        if (err)
         {
-            if (err)
-            {
-                return callback(err, null);
-            }
-            else if (document.team.length)
-            {
-                coach = document.team.find((arg) => arg > 'd');
-
-                async.map(document.squad, mongoFeatures.getPlayer, onFinish);
-            }
-            else
-            {
-                return callback(null, []);
-            }
+            return callback(err, null);
         }
-        else
+        if(!document)
         {
             return callback(null, []);
         }
+        if(!document.team.length)
+        {
+            return callback(null, []);
+        }
+
+        coach = document.team.find((arg) => arg > 'd');
+        async.map(document.squad, mongoFeatures.getPlayer, onFinish);
     };
 
     db.collection(match).find(doc).limit(1).next(onFetch);
@@ -124,16 +113,14 @@ exports.map = function (doc, callback)
         {
             return callback(err);
         }
-        else
-        {
-            return callback(null, doc.teamNo);
-        }
+
+        return callback(null, doc.teamNo);
     };
 
     db.collection(match).find(doc, {teamNo: 1}).limit(1).next(onFind);
 };
 
-exports.shortlist = function (callback) // TODO: add email notification for shortlisted team owners.
+exports.shortlist = function (callback) // add email notification for shortlisted team owners.
 {
     var ref =
     {
@@ -160,24 +147,19 @@ exports.shortlist = function (callback) // TODO: add email notification for shor
         {
             return callback(err);
         }
-        else
-        {
-            i = 0;
 
-            async.map(docs, function(arg, asyncCallback){
-                arg.teamNo = ++i;
-                asyncCallback();
-            }, function(err, result){
-                if(err)
-                {
-                    return callback(err);
-                }
-                else
-                {
-                    db.collection(ref[match].out).insertMany(result, callback);
-                }
-            });
-        }
+        i = 0;
+        async.map(docs, function(arg, asyncCallback){
+            arg.teamNo = ++i;
+            asyncCallback();
+        }, function(err, result){
+            if(err)
+            {
+                return callback(err);
+            }
+
+            db.collection(ref[match].out).insertMany(result, callback);
+        });
     };
 
     db.collection(match).aggregate([{
@@ -203,20 +185,18 @@ exports.adminInfo = function (callback)
         {
             return callback(err);
         }
-        else
-        {
-            delete result.database.ok;
-            delete result.database.extentFreeList;
-            result.database.indexSize = (result.database.indexSize / 1024).toFixed(2) + ' KB';
-            result.database.avgObjSize = (result.database.avgObjSize / 1024).toFixed(2) + ' KB';
-            result.database.dataSize = (result.database.dataSize / 1024 / 1024).toFixed(2) + ' MB';
-            result.database.fileSize = (result.database.fileSize / 1024 / 1024).toFixed(2) + ' MB';
-            result.database.storageSize = (result.database.storageSize / 1024 / 1024).toFixed(2) + ' MB';
-            result.database.version = result.database.dataFileVersion.major + '.' + result.database.dataFileVersion.minor;
-            delete result.database.dataFileVersion;
 
-            return callback(null, result);
-        }
+        delete result.database.ok;
+        delete result.database.extentFreeList;
+        result.database.fileSize = helper(result.database.fileSize, 'MB');
+        result.database.dataSize = helper.scale(result.database.dataSize, 'MB');
+        result.database.storageSize = helper(result.database.storageSize, 'MB');
+        result.database.indexSize = helper.scale(result.database.indexSize, 'KB');
+        result.database.avgObjSize = helper.scale(result.database.avgObjSize, 'KB');
+        result.database.version = result.database.dataFileVersion.major + '.' + result.database.dataFileVersion.minor;
+        delete result.database.dataFileVersion;
+
+        return callback(null, result);
     };
 
     var parallelTasks =
@@ -303,10 +283,8 @@ exports.opponent = function (day, team, callback)
         {
             return callback(err);
         }
-        else
-        {
-            return callback(null, (team === doc.Team_1) ? doc.Team_2 : doc.Team_1);
-        }
+
+        return callback(null, (team === doc.Team_1) ? doc.Team_2 : doc.Team_1);
     };
 
     db.collection('matchday' + day).find(filter).limit(1).next(onFind);
@@ -316,23 +294,23 @@ exports.squad = function (doc, callback)
 {
     var onSquad = function (err, doc)
     {
-        doc.team.sort();
-
         if (err)
         {
             return callback(err);
         }
-        else
+
+        var onGet = function (error, results)
         {
-            var onGet = function (err, results)
+            if(error)
             {
-                doc.team = results;
+                throw error;
+            }
 
-                return callback(null, doc);
-            };
+            doc.team = results.sort();
+            return callback(null, doc);
+        };
 
-            async.map(doc.team, mongoFeatures.getPlayer, onGet);
-        }
+        async.map(doc.team, mongoFeatures.getPlayer, onGet);
     };
 
     db.collection(match).find(doc, {team: 1}).limit(1).next(onSquad);
