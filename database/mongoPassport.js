@@ -72,6 +72,11 @@ var strategies =
 
 for(key in strategies)
 {
+    if(!strategies.hasOwnProperty(key))
+    {
+        continue;
+    }
+
     passport.use(new strategies[key]({
             clientID: process.env[`${key}_ID`],
             clientSecret: process.env[`${key}_KEY`],
