@@ -166,6 +166,7 @@ exports.initSimulation = function (day, masterCallback)
         }
 
         stats = doc;
+        stats.daily.total.value = stats.daily.individual.value = stats.daily.MoM.points = 0;
         helper.getAllMatches(err, forAllMatches);
     };
 

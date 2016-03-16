@@ -41,6 +41,8 @@ var lbw = require(path(...dir, 'out', 'lbw'));
 var cnb = require(path(...dir, 'out', 'cnb'));
 var mid = require(path(...dir, 'misc', 'mid'));
 var end = require(path(...dir, 'misc', 'end'));
+var half = require(path(...dir, 'misc', 'half'));
+var full = require(path(...dir, 'misc', 'full'));
 var caught = require(path(...dir, 'out', 'caught'));
 var bowled = require(path(...dir, 'out', 'bowled'));
 var stumped = require(path(...dir, 'out', 'stumped'));
@@ -149,17 +151,11 @@ exports.bat = [process.env.BAT_AVG, process.env.BAT_STR];
 
 exports.bowl = [process.env.BOWL_AVG, process.env.BOWL_STR, process.env.BOWL_ECO]; // increase to strengthen bowling
 
-exports.ref =
-[
-    {
-        points: 2,
-        state: 'win'
-    },
-    {
-        points: 0,
-        state: 'loss'
-    }
-];
+exports.stateRef =
+{
+    true: {points: 2, state: 'win'},
+    false: {points: 0, state: 'loss'}
+};
 
 exports.scoreRef =
 {
@@ -175,15 +171,23 @@ exports.wicketRef = ['c', 'b', 'lbw', 'cnb', 'st'];
 
 exports.extraRef =
 [
-    {
-        prefix: 'wide',
-        comm: wide
-    },
-    {
-        prefix: 'no ball',
-        comm: noBall
-    }
+    {prefix: 'wide', comm: wide},
+    {prefix: 'no ball', comm: noBall}
 ];
+
+exports.milestoneRef = [half, full];
+
+exports.anticipateRef =
+{
+    false: 'one hit away from a well deserving fifty. Will he make it?',
+    true: 'knows there is a hundred for the taking if he can knuckle this one down....'
+};
+
+exports.statusRef =
+{
+    1: 'outs',
+    true: 'notouts'
+};
 
 exports.inter = [mid, end];
 
@@ -220,35 +224,23 @@ exports.Make = function (team)
 {
     for(i = 0; i < 2; ++i)
     {
-        avgRating =
-        {
-            bat: 0,
-            bowl: 0
-        };
-
+        avgRating = {bat: 0, bowl: 0};
         setTeam();
-
         coach = parseInt(team[i][11].Rating, 10) || -50;
 
         for (j = 0; j < 11; ++j)
         {
             setPlayer(team[i][j]);
             baseRate(team[i][j]);
-
             avgRating.bat += teamArray[i].batRating[j];
             avgRating.bowl += teamArray[i].bowlRating[j];
         }
 
         avgRating.bat = avgRating.bat / 110 + coach;
         avgRating.bowl = avgRating.bowl / 110 + coach;
-
         adjustRating();
-
         teamArray[i].meanRating /= 22;
     }
 
-    return {
-        teams: teamArray,
-        MoM: MoM
-    };
+    return {teams: teamArray, MoM: MoM};
 };

@@ -55,7 +55,7 @@
                 }
 
                 if (hasDontEnumBug) {
-                    for (i = 0; i < dontEnumsLength; i++) {
+                    for (i = 0; i < dontEnumsLength; ++i) {
                         if (hasOwnProperty.call(obj, dontEnums[i])) {
                             result.push(dontEnums[i]);
                         }
@@ -192,7 +192,7 @@
         var old_time = {};
 
         var greater_unit = null;
-        for (i = 0; i < units.length; i++) {
+        for (i = 0; i < units.length; ++i) {
             var unit = units[i];
             var maxUnits;
 
@@ -278,7 +278,6 @@
 
     var TC_Instance = function (element, options) {
         this.element = element;
-        this.container;
         this.listeners = null;
         this.data = {
             paused: false,
@@ -335,7 +334,7 @@
     TC_Instance.prototype.initialize = function (clear_listeners) {
         // Initialize drawn units
         this.data.drawn_units = [];
-        for (i = 0; i < Object.keys(this.config.time).length; i++) {
+        for (i = 0; i < Object.keys(this.config.time).length; ++i) {
             var unit = Object.keys(this.config.time)[i];
             if (this.config.time[unit].show) {
                 this.data.drawn_units.push(unit);
@@ -403,7 +402,7 @@
             var textElement = $("<div>");
             textElement.addClass('textDiv_' + key);
             textElement.css("top", Math.round(0.35 * this.data.attributes.item_size));
-            textElement.css("left", Math.round(i++ * this.data.attributes.item_size));
+            textElement.css("left", Math.round(++i * this.data.attributes.item_size));
             textElement.css("width", this.data.attributes.item_size);
             textElement.appendTo(this.container);
 
@@ -429,7 +428,7 @@
         // Set up interval fallback
         var _this = this;
         this.data.interval_fallback = useWindow.setInterval(function () {
-            _this.update.call(_this, true);
+            _this.update(true);
         }, 100);
     };
 
@@ -457,7 +456,7 @@
         // If not counting past zero, and time < 0, then simply draw the zero point once, and call stop
         if (!this.config.count_past_zero) {
             if (curDate > this.data.attributes.ref_date) {
-                for (i = 0; i < this.data.drawn_units.length; i++) {
+                for (i = 0; i < this.data.drawn_units.length; ++i) {
                     key = this.data.drawn_units[i];
 
                     // Set the text value
@@ -534,7 +533,7 @@
                 }
             }
             lastKey = key;
-            j++;
+            ++j;
         }
 
         // Dont request another update if we should be paused
@@ -659,8 +658,7 @@
         var _this = this; // We have a few inner scopes here that will need access to our instance
 
         var step = 0.2 * ((from === 1) ? -1 : 1);
-        i;
-        for (i = 0; from <= 1 && from >= 0; i++) {
+        for (i = 0; from <= 1 && from >= 0; ++i) {
             // Create inner scope so our variables are not changed by the time the Timeout triggers
             (function () {
                 var delay = 50 * i;
@@ -726,7 +724,7 @@
 
         // Start running
         this.data.paused = false;
-        this.update.call(this);
+        this.update();
     };
 
     TC_Instance.prototype.restart = function () {
@@ -778,7 +776,7 @@
             }
             else if (this.data.total_duration === "Auto") {
                 // If set to auto, total_duration is the size of 1 unit, of the unit type bigger than the largest shown
-                for (i = 0; i < Object.keys(this.config.time).length; i++) {
+                for (i = 0; i < Object.keys(this.config.time).length; ++i) {
                     var unit = Object.keys(this.config.time)[i];
                     if (this.config.time[unit].show) {
                         this.data.total_duration = secondsIn[nextUnits[unit]];
@@ -803,7 +801,7 @@
     };
 
     TC_Instance.prototype.notifyListeners = function (unit, value, total, type) {
-        for (i = 0; i < this.listeners[type].length; i++) {
+        for (i = 0; i < this.listeners[type].length; ++i) {
             var listener = this.listeners[type][i];
             listener.func.apply(listener.scope, [unit, value, total]);
         }
