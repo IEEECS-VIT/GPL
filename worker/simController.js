@@ -81,8 +81,7 @@ exports.initSimulation = function (day, masterCallback)
 
                     if(newUserDoc.scores[day - 1] > stats.daily.total.value)
                     {
-                        stats.daily.total.team = newUserDoc._id;
-                        stats.daily.total.value = newUserDoc.scores[day - 1];
+                        stats.daily.total = helper.dailyTotal(newUserDoc, day);
                     }
                     if(newUserDoc.highestTotal > stats.high.total.value)
                     {
@@ -99,15 +98,11 @@ exports.initSimulation = function (day, masterCallback)
                         {
                             if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > stats.daily.individual.value)
                             {
-                                stats.daily.individual.team = newUserDoc._id;
-                                stats.daily.individual.player = newUserDoc.names[i] || '';
-                                stats.daily.individual.value = newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1];
+                                stats.daily.individual = helper.dailyHigh(newUserDoc, i, day);
                             }
                             if(newUserDoc.stats[newUserDoc.squad[i]].high > stats.high.individual.value)
                             {
-                                stats.high.individual.team = newUserDoc._id;
-                                stats.high.individual.player = newUserDoc.names[i] || '';
-                                stats.high.individual.value = newUserDoc.stats[newUserDoc.squad[i]].high;
+                                stats.high.individual = helper.overallHigh(newUserDoc, i);
                             }
                             if(newUserDoc.stats[newUserDoc.squad[i]].runs > stats.orange.runs)
                             {
@@ -158,7 +153,6 @@ exports.initSimulation = function (day, masterCallback)
         }
 
         var onUpdate = helper.onUpdate(results, masterCallback);
-
         database.collection('stats').updateOne({_id: 'stats'}, {$set: stats}, onUpdate);
     };
 
@@ -168,13 +162,11 @@ exports.initSimulation = function (day, masterCallback)
     {
         if (err)
         {
-            console.error(err.message);
+            throw err;
         }
-        else
-        {
-            stats = doc;
-            helper.getAllMatches(err, forAllMatches);
-        }
+
+        stats = doc;
+        helper.getAllMatches(err, forAllMatches);
     };
 
     database.collection('stats').find().limit(1).next(onGetInfo);

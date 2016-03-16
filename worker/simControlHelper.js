@@ -106,6 +106,32 @@ exports.total = function(newUserDoc, mode)
     };
 };
 
+exports.dailyTotal = function(newUserDoc, day)
+{
+    return {
+        team: newUserDoc._id,
+        value: newUserDoc.scores[day - 1]
+    };
+};
+
+exports.dailyHigh = function(newUserDoc, i, day)
+{
+    return {
+        team: newUserDoc._id,
+        player: newUserDoc.names[i] || '',
+        value: newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1]
+    };
+};
+
+exports.overallHigh = function(newUserDoc, i)
+{
+    return {
+        team: newUserDoc._id,
+        player: newUserDoc.names[i] || '',
+        value: newUserDoc.stats[newUserDoc.squad[i]].high
+    };
+};
+
 exports.purpleCap = function(i, newUserDoc)
 {
     return {

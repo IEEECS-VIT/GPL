@@ -29,80 +29,77 @@ var full = require(path(...dir, 'full'));
 var miss = require(path(...dir, 'miss'));
 var start = require(path(...dir, 'start'));
 var hopeless = require(path(...dir, 'hopeless'));
-var rand = helper.rand;
-var genArray = helper.genArray;
-var checkMoM = helper.checkMoM;
-var MoM;
-var strike;
-var dismiss = helper.dismiss;
-var scoreRef = helper.scoreRef;
-var wicketRef = helper.wicketRef;
-var count = [];
-var Total = [0, 0];
-var wickets = [0, 0];
-var desperation = [];
-var bat = helper.bat; // decrease to strengthen batting
-var ref = helper.ref;
-var Overs = [120, 120];
-var bowl = helper.bowl; // increase to strengthen bowling
-var lastFiveOvers = [];
-var wicketSequence = [];
-var frustration = [0, 0];
-var score = genArray(11);
-var balls = genArray(11);
-var fours = genArray(11);
-var control = genArray(11);
-var catches = genArray(11);
-var maidens = genArray(11);
-var maximums = genArray(11);
-var dotBalls = genArray(11);
-var dismissed = genArray(11);
-var milestone = genArray(11);
-var deliveries = genArray(11);
-var runsConceded = genArray(11);
-var wicketsTaken = genArray(11);
-var projected = helper.projected;
-var dotDeliveries = genArray(11);
-var fiveWicketHaul = genArray(11);
-var ballsFaced = genArray(11, 11);
-var partnershipRuns = genArray(10);
-var partnershipBalls = genArray(10);
-var continuousWickets = genArray(11);
-var deliveriesBowled = genArray(11, 11);
+var rand = helper.rand; // random number generator
+var genArray = helper.genArray; // returns an array / matrix of zeroes with the specified dimension
+var checkMoM = helper.checkMoM; // checks for a man of the match condition
+var MoM; // the object to denote the man of the match
+var strike; // an arrray to denote the batting positions of the two playing batsman at the crease.
+var dismiss = helper.dismiss; // an array with the commentary instances of dismissal modes.
+var scoreRef = helper.scoreRef; // an object of scoring commentary.
+var wicketRef = helper.wicketRef; // ['c', 'b', 'lbw', 'st', 'cnb'].
+var count = []; // stores the count of bowlers with non zero deliveries bowled per team.
+var Total = [0, 0]; // the total runs scored by the team in it's innings.
+var wickets = [0, 0]; // the total wickets lost by the team in it's innings.
+var desperation = []; // the extent of playing desperation, tracked for the two current batsmen on strike.
+var bat = helper.bat; // decrease to strengthen batting.
+var ref = helper.ref; // a reference object to decide victory or loss.
+var Overs = [120, 120]; // the number of balls faced by each team. Is adjusted when an innings completes in less than 20 overs.
+var bowl = helper.bowl; // increase to strengthen bowling.
+var lastFiveOvers = []; // stores the runs scored in the last five overs.
+var wicketSequence = []; // stores the details of each dismissal.
+var frustration = [0, 0]; // stores the extent of frustration, which can change depending on the dot balls played by the current two batsmen.
+var score = genArray(11); // runs scored by each batsman. Reset after the innings is complete.
+var balls = genArray(11); // balls faced by each batsman. Reset after the innings is complete.
+var fours = genArray(11); // number of fours hit by each batsman. Reset after the innings is complete.
+var control = genArray(11); // the extent of innings control shown by each batsman. Reset after the innings is complete.
+var catches = genArray(11); // the number of catches taken by each bowler. Reset after the innings is complete.
+var maidens = genArray(11); // the number of maiden overs bowled by each bowler. Reset after the innings is complete.
+var maximums = genArray(11); // the number of sixes hit by each batsman. Reset after the innings is complete.
+var dotBalls = genArray(11); // the number of dot balls faced by each member of the batting side. Reset after the innings is complete.
+var dismissed = genArray(11); // an array of flags to denote whether a batsman was dismissed or not. Reset after the innings is complete.
+var milestone = genArray(11); // an array of flags to denote whether a batsman got to a 50 / 100. Reset after the innings is complete.
+var deliveries = genArray(11); // the number of balls bowled by each bowler. Reset after the innings is complete.
+var runsConceded = genArray(11); // the number of runs conceded by each bowler. Reset after the innings is complete.
+var wicketsTaken = genArray(11); // the number of wickets taken by each bowler. Reset after the innings is complete.
+var projected = helper.projected; // the array of projected scores for the first innings.
+var dotDeliveries = genArray(11); // the number of dot balls bowled by each bowler. Reset after the innings is complete.
+var fiveWicketHaul = genArray(11); // an array of flags to denote whether or not any bowler attained a 5 wicket haul. Reset after the innings is complete.
+var ballMatrix = genArray(11, 11); // a matrix that denotes the number of balls faced by each batsman, per bowler. Reset after the innings is complete.
+var partnershipRuns = genArray(10); // the number of runs score per wicket partnership. Reset after the innings is complete.
+var partnershipBalls = genArray(10); // the number of balls faced in each wicket partnership. Reset after the innings is complete.
+var continuousWickets = genArray(11); // the number of continuous wickets taken by each bowler. Reset after the innings is complete.
 //var form = ['poor', 'average', 'good', 'excellent'];
-var i;
-var j;
+var i; // loop control variable for overs in an innings.
+var j; // loop control variable for deliveries in an over.
 var k;
-var toss;
-var loop;
-var team;
-var temp;
-var winner;
-var dot = 0;
-var tossIndex;
-var extras = 0;
-var hope = true;
-var freeHit = 0;
-var strikeIndex;
-var currentOver;
-var wicketIndex;
-var boundaryGap;
-var currentBall;
-var fallOfWicket;
-var batPerfIndex;
-var bowlPerfIndex;
-var deliveryScore;
-var currentBowler;
-var previousBowler;
-var previousOver = 0;
-var continuousMaximums;
-var previousBatsman = -1;
-var out = process.env.OUT;
-var previousDismissal = -1;
-var currentPartnership = 0;
-var previousPartnership = -1;
-var bowlMoM = (prev, curr, index) => (prev + curr * team[+tossIndex].batRating[index]);
-var batMoM = (prev, curr, index) => (prev + curr * team[+!tossIndex].bowlRating[index]);
+var toss; // denotes which team won the toss.
+var loop; // loop control variable for each innings.
+var team; // the team object, contains adjusted player ratings.
+var temp; // dummy variable for holding temporary values in otherwise calculations.
+var winner; // denotes the index of the team that won the match. Set to -1 in a tie.
+var dot = 0; // the number of dot balls in each innings. Reset after the innings is complete.
+var tossIndex; // a copy of toss used to switch back and forth between bowling and batting teams, flipped after the first innings.
+var extras = 0; // the number of wides / no-balls bowled in the innings. Reset after the innings is complete.
+var hope = true; // a boolean flag to denote whether the required run rate is less than 36.
+var freeHit = 0; // used to denote whether the current delivery is a freehit or not. Reset after the innings is complete.
+var strikeIndex; // used as the index of the array strike, used to literally rotate strike between the two current batsmen at the crease. Reset after the innings is complete.
+var currentOver; // stores commentary for the current over. Unused presently.
+var wicketIndex; // denotes the mode of dismissal, as a reference for commentary. Reset after the innings is complete.
+var boundaryGap; // denotes the number of balls since the last 4 / 6 was hit. Reset after the innings is complete.
+var currentBall; // stored commentary for the current ball. unused presently.
+var fallOfWicket; // denotes the score and the ball at which the previous wicket fell. Reset after the innings is complete.
+var batPerfIndex; // denotes the batting stroke result for the current ball. Reset after the innings is complete.
+var bowlPerfIndex; // denotes the bowling delivery result for the current ball. Reset after the innings is complete.
+var deliveryScore; // used to decide the result of the current ball. Reset after the innings is complete.
+var currentBowler; // denotes the index of the current bowler. Reset after the innings is complete.
+var previousBowler; // denotes the index of the previous bowler. set to -1 by default. Reset after the innings is complete.
+var previousOver = 0; // denotes the number of runs scored in the previous over. Reset after the innings is complete.
+var continuousMaximums; // denotes the number of consecutive sixes hit in the current innings. Reset after the innings is complete.
+var previousBatsman = -1; // denotes the batting position of the previous batsman. Reset after the innings is complete.
+var previousDismissal = -1; // stores the index of the bowler who got the previous wicket. Set to -1 for runouts.
+var currentPartnership = 0; // denotes the index of the current partnership.
+var bowlMoM = (i) => {return (prev, curr, index) => (prev + curr[i] * team[+tossIndex].batRating[index]);}; // calculates weighted difficulty rating for the given bowler.
+var batMoM = (prev, curr, index) => (prev + curr * team[+!tossIndex].bowlRating[index]); // calculates the weighted difficulty rating for the given batsman.
 
 exports.simulate = function (data, callback)
 {
@@ -110,7 +107,7 @@ exports.simulate = function (data, callback)
     temp = [+(data.team[0].ratings.length < 12), +(data.team[1].ratings.length < 12)];
     data.team[0].names = data.team[1].names = ['', '', '', '', '', '', '', '', '', '', ''];
 
-    if (temp[0] + temp[1])
+    if (temp[0] + temp[1]) // simplified check to determine which team lost / won if both teams are short of 11 players.
     {
         for(i = 0; i < 2; ++i)
         {
@@ -127,7 +124,7 @@ exports.simulate = function (data, callback)
 
         toss = rand(2);
         ++data.team[toss].toss;
-        temp = Make([data.team[0].ratings, data.team[1].ratings]);
+        temp = Make([data.team[0].ratings, data.team[1].ratings]); // contruct teams.
         team = temp.teams;
         MoM = temp.MoM;
 
@@ -147,8 +144,7 @@ exports.simulate = function (data, callback)
         }
 
         data.match.commentary[data.match.commentary.length - 1] += 'first';
-        data.match.commentary.push('Batting orders:');
-        data.match.commentary.push([data.team[+!toss]._id,  data.team[+toss]._id]);
+        data.match.commentary.push('Batting orders:', [data.team[+!toss]._id,  data.team[+toss]._id]);
 
         for (i = 0; i < 11; ++i)
         {
@@ -217,8 +213,7 @@ exports.simulate = function (data, callback)
                     ++balls[strike[+strikeIndex]];
                     batPerfIndex -= bowlPerfIndex;
                     ++partnershipBalls[currentPartnership];
-                    ++ballsFaced[strike[+strikeIndex]][currentBowler];
-                    ++deliveriesBowled[currentBowler][strike[+strikeIndex]];
+                    ++ballMatrix[strike[+strikeIndex]][currentBowler];
 
                     if (freeHit)
                     {
@@ -229,7 +224,7 @@ exports.simulate = function (data, callback)
                         data.match.commentary.push(`${i} . ${j} ${team[+!tossIndex].name[currentBowler]} to ${team[+tossIndex].name[strike[+strikeIndex]]}, `);
                     }
 
-                    if (batPerfIndex <= -out && !freeHit)
+                    if (batPerfIndex <= -process.env.OUT && !freeHit)
                     {
                         temp = -1;
                         ++boundaryGap;
@@ -239,14 +234,13 @@ exports.simulate = function (data, callback)
                         ++continuousWickets[currentBowler];
                         dismissed[strike[+strikeIndex]] = 1;
                         previousBatsman = strike[+strikeIndex];
-                        previousPartnership = currentPartnership;
                         data.match.commentary[data.match.commentary.length - 1] += 'OUT, ';
 
-                        wicketIndex = -Math.ceil(batPerfIndex + out);
+                        wicketIndex = -Math.ceil(batPerfIndex + process.env.OUT);
 
                         if (wicketIndex < 5)
                         {
-                            temp = parseInt((batPerfIndex + 1 + out) * 11, 10);
+                            temp = parseInt((batPerfIndex + 1 + process.env.OUT) * 11, 10);
                             data.match.commentary[data.match.commentary.length - 1] += rand(dismiss[wicketIndex]);
                         }
                         else
@@ -392,7 +386,7 @@ exports.simulate = function (data, callback)
                             --balls[strike[+strikeIndex]];
                             ++partnershipRuns[currentPartnership];
                             --partnershipBalls[currentPartnership];
-                            --deliveriesBowled[currentBowler][strike[+strikeIndex]];
+                            --ballMatrix[strike[+strikeIndex]][currentBowler];
                         }
                         else
                         {
@@ -537,7 +531,7 @@ exports.simulate = function (data, callback)
                         data.match.commentary[data.match.commentary.length - 1] += '(run out)';
                     }
 
-                    data.match.commentary.push(`Partnership: ${partnershipRuns[previousPartnership]} (${partnershipBalls[previousPartnership]}), run rate: ${(partnershipRuns[previousPartnership] * 6 / (partnershipBalls[previousPartnership] || 1)).toFixed(2)} Fall of wicket: ${fallOfWicket} overs`);
+                    data.match.commentary.push(`Partnership: ${partnershipRuns[currentPartnership - 1]} (${partnershipBalls[currentPartnership - 1]}), run rate: ${(partnershipRuns[currentPartnership - 1] * 6 / (partnershipBalls[currentPartnership - 1] || 1)).toFixed(2)} Fall of wicket: ${fallOfWicket} overs`);
                 }
 
                 data.match.commentary.push(`${team[+!tossIndex].name[currentBowler]}: ${parseInt(deliveries[currentBowler] / 6, 10)}.${deliveries[currentBowler] % 6} - ${maidens[currentBowler]}-${wicketsTaken[currentBowler]} - ${runsConceded[currentBowler]} - ${(runsConceded[currentBowler] * 6 / deliveries[currentBowler]).toFixed(2)}`);
@@ -649,7 +643,7 @@ exports.simulate = function (data, callback)
                 {
                     if(balls[i])
                     {
-                        temp = (ballsFaced[i].reduce(batMoM) / balls[i] - team[+tossIndex].batRating[i]) / 10;
+                        temp = (ballMatrix[i].reduce(batMoM, 0) / balls[i] - team[+tossIndex].batRating[i]) / 10;
                         temp = (score[i] + 1) * (1 - Math.exp((temp - (Math.pow(fours[i], 1 / (1 - control[i])) + Math.pow(maximums[i], 1 / (1 - control[i])))) / (balls[i] + team[+tossIndex].batRating[i])));
                         data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].points += temp;
                         checkMoM(MoM, temp, i, +tossIndex);
@@ -696,22 +690,21 @@ exports.simulate = function (data, callback)
                 if(deliveries[i])
                 {
                     ++j;
-                    temp = (deliveriesBowled[i].reduce(bowlMoM) / deliveries[i] - team[+!tossIndex].bowlRating[i]) / 10;
+                    temp = (ballMatrix.reduce(bowlMoM(i), 0) / deliveries[i] - team[+!tossIndex].bowlRating[i]) / 10;
                     temp = ((wicketsTaken[i] + 1) * 25) * (1 - Math.exp((temp - Math.pow((dotDeliveries[i] + 1) * 100, wicketsTaken[i])) / (team[+!tossIndex].bowlRating[i] + deliveries[i] + runsConceded[i])));
                     data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].points += temp;
                     checkMoM(MoM, temp, i, +!tossIndex);
 
                     data.match.scorecard.push([team[+!tossIndex].name[i], parseInt(deliveries[i] / 6, 10).toString() + '.' + (deliveries[i] % 6).toString(), maidens[i], wicketsTaken[i], runsConceded[i], (runsConceded[i] * 6 / (deliveries[i] || 1)).toFixed(2)]);
                     fiveWicketHaul[i] = continuousWickets[i] = deliveries[i] = maidens[i] = runsConceded[i] = wicketsTaken[i] = dotDeliveries[i] = 0;
-                    deliveriesBowled[i] = genArray(11);
                 }
             }
 
             count[loop] = j;
             lastFiveOvers = [];
             frustration = [0, 0];
-            ballsFaced = genArray(11, 11);
-            previousBatsman = previousPartnership = -1;
+            previousBatsman = -1;
+            ballMatrix = genArray(11, 11);
 
             data.match.scorecard.push('Fall of wickets:', wicketSequence);
             data.match.scorecard.push(`Dot ball percentage: ${(dot * 100 / Overs[+tossIndex]).toFixed(2)} %`, '   ');

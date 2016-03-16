@@ -32,11 +32,11 @@ var forgotRef =
         password:1
     }
 };
-var path = require('path').join;
 if(!process.env.NODE_ENV)
 {
     var value = require('faker').commerce.price;
 }
+var path = require('path').join;
 var mongoFeatures = require(path(__dirname, 'mongoFeatures'));
 
 exports.scale = function(value, level)
