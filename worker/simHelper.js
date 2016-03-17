@@ -220,7 +220,7 @@ exports.checkMoM = function(MoM, temp, strike, toss)
     }
 };
 
-exports.Make = function (team)
+exports.make = function (team)
 {
     for(i = 0; i < 2; ++i)
     {

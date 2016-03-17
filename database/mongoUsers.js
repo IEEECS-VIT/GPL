@@ -223,14 +223,12 @@ exports.getReset = function (doc, callback)
         {
             return callback(err, null);
         }
-        else if (document)
+        if (document)
         {
             return callback(null, document);
         }
-        else
-        {
-            return callback(false, null);
-        }
+
+        return callback(false, null);
     };
 
     db.collection(match).find(doc).limit(1).next(onFetch);

@@ -122,25 +122,6 @@ exports.map = function (doc, callback)
 
 exports.shortlist = function (callback) // add email notification for shortlisted team owners.
 {
-    var ref =
-    {
-        'users' :
-        {
-            out: 'round2',
-            limit: parseInt(process.env.ONE, 10)
-        },
-        'round2':
-        {
-            out: 'round3',
-            limit: 8
-        },
-        'round3':
-        {
-            out: null,
-            limit: 8
-        }
-    };
-
     var onShortList = function (err, docs)
     {
         if (err)
@@ -158,7 +139,7 @@ exports.shortlist = function (callback) // add email notification for shortliste
                 return callback(err);
             }
 
-            db.collection(ref[match].out).insertMany(result, callback);
+            db.collection(helper.ref[match].out).insertMany(result, callback);
         });
     };
 

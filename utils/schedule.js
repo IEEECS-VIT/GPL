@@ -45,7 +45,7 @@ try
 }
 catch(err)
 {
-    console.log('Running in test mode.');
+    console.log('Running in non-test mode.');
 }
 
 if(!process.env.NODE_ENV)
@@ -75,7 +75,7 @@ var onInsert = function (err, doc)
     }
     else
     {
-        if(!testFlag)
+        if(!mode)
         {
             console.log(doc.ops);
         }
@@ -195,7 +195,7 @@ var onParallel = function(err)
     }
     else
     {
-        if(testFlag)
+        if(mode)
         {
             testDb = database;
             testHelperCallback(); // from tests/helper.js

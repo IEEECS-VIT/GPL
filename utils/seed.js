@@ -33,7 +33,7 @@ try
 }
 catch(err)
 {
-    console.log('Running in test mode.');
+    console.log('Running in non-test mode.');
 }
 
 var onParallel = function(err)
@@ -47,7 +47,7 @@ var onParallel = function(err)
 
     console.timeEnd('Seeding operation took');
 
-    if(testFlag)
+    if(mode)
     {
         require(path(__dirname, 'schedule'));
     }

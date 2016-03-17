@@ -135,14 +135,12 @@ exports.getPlayer = function (id, fields, callback)
         {
             return callback(err);
         }
-        else if(player)
+        if(player)
         {
             return callback(null, player);
         }
-        else
-        {
-            return callback(false, null);
-        }
+
+        return callback(false, null);
     };
 
     db.collection('players').find(query, fields).limit(1).next(onGetPlayer);

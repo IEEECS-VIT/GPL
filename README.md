@@ -1,7 +1,7 @@
 [![Stories in Ready](https://badge.waffle.io/IEEECS-VIT/GPL.png?label=ready&title=Ready)](https://waffle.io/IEEECS-VIT/GPL)
 [![Code Climate](https://codeclimate.com/github/IEEECS-VIT/GPL/badges/gpa.svg)](https://codeclimate.com/github/IEEECS-VIT/GPL)
 [![Test Coverage](https://codeclimate.com/github/IEEECS-VIT/GPL/badges/coverage.svg)](https://codeclimate.com/github/IEEECS-VIT/GPL/coverage)
-[![Issue Count](https://codeclimate.com/github/IEEECS-VIT/GPL/badges/issue_count.svg)](https://codeclimate.com/github/IEEECS-VIT/GPL)
+[![Issue Count](https://codeclimate.com/github/IEEECS-VIT/GPL/badges/issue_count.svg)](https://codeclimate.com/github/IEEECS-VIT/GPL/issues)
 [![Dependency Status](https://david-dm.org/IEEECS-VIT/GPL.svg)](https://david-dm.org/IEEECS-VIT/GPL)
 [![devDependency Status](https://david-dm.org/IEEECS-VIT/GPL/dev-status.svg)](https://david-dm.org/IEEECS-VIT/GPL#info=devDependencies)
 [![Circle CI](https://circleci.com/gh/IEEECS-VIT/GPL.svg?style=svg)](https://circleci.com/gh/IEEECS-VIT/GPL)

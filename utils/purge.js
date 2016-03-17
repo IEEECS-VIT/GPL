@@ -22,11 +22,11 @@ var mode = '';
 
 try
 {
-    mode = testFlag ? 'test' : ''; //  mode is a global variable from
+    mode = testFlag ? 'test' : ''; //  testFlag is a global variable from tests/helper.js
 }
 catch(err)
 {
-    console.log('Running in test mode.');
+    console.log('Running in non-test mode.');
 }
 
 var path = require('path').join;
@@ -56,7 +56,7 @@ mongo(mongoURI, function(err, db){
                 console.log('The database was successfully purged, you can reinstate it with `npm run seed`.');
                 console.timeEnd('Purge operation');
 
-                if(testFlag)
+                if(mode)
                 {
                     require(path(__dirname, 'seed'));
                 }

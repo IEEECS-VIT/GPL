@@ -61,3 +61,22 @@ exports.forgotCallback = function(mode, callback)
         mongoFeatures.forgotCount(forgotRef[mode], callback);
     }
 };
+
+exports.shortlistRef =
+{
+    'users' :
+    {
+        out: 'round2',
+        limit: parseInt(process.env.ONE, 10)
+    },
+    'round2':
+    {
+        out: 'round3',
+        limit: 8
+    },
+    'round3':
+    {
+        out: null,
+        limit: 8
+    }
+};

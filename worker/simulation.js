@@ -122,7 +122,7 @@ exports.simulate = function (data, callback)
 
         toss = rand(2);
         ++data.team[toss].toss;
-        temp = Make([data.team[0].ratings, data.team[1].ratings]); // construct teams.
+        temp = helper.make([data.team[0].ratings, data.team[1].ratings]); // construct teams.
         team = temp.teams;
         MoM = temp.MoM;
 
@@ -187,18 +187,10 @@ exports.simulate = function (data, callback)
                     currentBall = [];
                     deliveryScore = team[+tossIndex].batRating[strike[+strikeIndex]] - team[+!tossIndex].bowlRating[currentBowler];
                     bowlPerfIndex = (team[+!tossIndex].bowlRating[currentBowler]) / ((rand(team[+!tossIndex].bowlAverage[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / 1000 + 1) + team[+!tossIndex].bowlAverage[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / bowl[0]) * (rand(team[+!tossIndex].bowlStrikeRate[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / 1000 + 1) + team[+!tossIndex].bowlStrikeRate[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / bowl[1]) * (rand(team[+!tossIndex].economy[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / 1000 + 1) + team[+!tossIndex].economy[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / bowl[2]));
-                    batPerfIndex = (rand(team[+tossIndex].batAverage[strike[+strikeIndex]] * team[+tossIndex].batRating[strike[+strikeIndex]] / 1000 + 1) + team[+tossIndex].batAverage[strike[+strikeIndex]] * (team[+tossIndex].batRating[strike[+strikeIndex]]) / bat[0]) * (rand(team[+tossIndex].batStrikeRate[strike[+strikeIndex]] * team[+tossIndex].batRating[strike[+strikeIndex]] / 1000 + 1) + team[+tossIndex].batStrikeRate[strike[+strikeIndex]] * (team[+tossIndex].batRating[strike[+strikeIndex]]) / bat[1]) / team[+!tossIndex].bowlRating[currentBowler] - (Math.abs(frustration[+strikeIndex]) >= 3 ? Math.pow(-1, rand(2)) * frustration[+strikeIndex] : 0);
+                    batPerfIndex = (rand(team[+tossIndex].batAverage[strike[+strikeIndex]] * team[+tossIndex].batRating[strike[+strikeIndex]] / 1000 + 1) + team[+tossIndex].batAverage[strike[+strikeIndex]] * (team[+tossIndex].batRating[strike[+strikeIndex]]) / bat[0]) * (rand(team[+tossIndex].batStrikeRate[strike[+strikeIndex]] * team[+tossIndex].batRating[strike[+strikeIndex]] / 1000 + 1) + team[+tossIndex].batStrikeRate[strike[+strikeIndex]] * (team[+tossIndex].batRating[strike[+strikeIndex]]) / bat[1]) / team[+!tossIndex].bowlRating[currentBowler] - (+(Math.abs(frustration[+strikeIndex]) >= 3) && Math.pow(-1, rand(2)) * frustration[+strikeIndex]);
                     deliveryScore = deliveryScore || 1;
 
-                    if (batPerfIndex > bowlPerfIndex)
-                    {
-                        batPerfIndex += (rand(Math.log10(deliveryScore))) / 100;
-                    }
-                    else
-                    {
-                        batPerfIndex -= (rand(Math.log10(Math.abs(deliveryScore)))) / 100;
-                    }
-
+                    batPerfIndex += Math.pow(-1, (batPerfIndex < bowlPerfIndex)) * (rand(Math.log10(deliveryScore))) / 100;
                     ++deliveries[currentBowler];
                     ++balls[strike[+strikeIndex]];
                     batPerfIndex -= bowlPerfIndex;
@@ -293,7 +285,7 @@ exports.simulate = function (data, callback)
                             data.match.commentary.push(` And that is also a hattrick for ${team[+!tossIndex].name[currentBowler]} ! Fantastic bowling in the time of need.`);
                         }
 
-                        data.match.commentary.push('  ' + team[+tossIndex].name[strike[+strikeIndex]]);
+                        data.match.commentary.push(team[+tossIndex].name[strike[+strikeIndex]]);
 
                         if (previousDismissal > -1)
                         {
@@ -330,7 +322,7 @@ exports.simulate = function (data, callback)
                             strikeIndex = !strikeIndex;
                             data.match.commentary.push('The two batsmen crossed over while the catch was being taken.');
                         }
-                        if (wickets[+tossIndex]++ === 9)
+                        if (++wickets[+tossIndex] === 10)
                         {
                             Overs[+tossIndex] = 6 * i + j;
                             ++data.team[+tossIndex].allOuts;
