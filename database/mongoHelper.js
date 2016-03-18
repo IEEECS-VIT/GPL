@@ -51,8 +51,7 @@ exports.parse = function(mode, lower, upper)
 
 exports.forgotCallback = function(mode, callback)
 {
-    return function(err)
-    {
+    return (err) => {
         if(err)
         {
             return callback(err);

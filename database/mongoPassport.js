@@ -47,10 +47,8 @@ var callback = function(req, token, refresh, profile, done)
 
                 mongoUsers.insert(process.env.MATCH, user, done);
             }
-            else
-            {
-                return done(err);
-            }
+
+            return done(err);
         });
     });
 };

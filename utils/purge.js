@@ -41,26 +41,26 @@ if(process.env.NODE_ENV)
 mongo(mongoURI, function(err, db){
     if(err)
     {
-        console.error(err.message);
+        throw err;
     }
-    else
-    {
-        db.dropDatabase(function(err){
-            if(err)
-            {
-                console.error(err.message);
-            }
-            else
-            {
-                db.close();
-                console.log('The database was successfully purged, you can reinstate it with `npm run seed`.');
-                console.timeEnd('Purge operation');
 
-                if(mode)
-                {
-                    require(path(__dirname, 'seed'));
-                }
-            }
-        });
-    }
+    db.dropDatabase(function(error){
+        if(error)
+        {
+            throw error;
+        }
+
+        console.log('The database was successfully purged, you can reinstate it with `npm run seed`.');
+        console.timeEnd('Purge operation');
+
+        if(mode)
+        {
+            testDb = db; // to maintain a persistent test database connection
+            require(path(__dirname, 'seed'));
+        }
+        else
+        {
+            db.close();
+        }
+    });
 });

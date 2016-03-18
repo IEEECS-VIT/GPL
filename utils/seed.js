@@ -40,16 +40,18 @@ var onParallel = function(err)
 {
     if(err)
     {
-        console.error(err.message);
+        throw err;
     }
-
-    database.close();
 
     console.timeEnd('Seeding operation took');
 
     if(mode)
     {
         require(path(__dirname, 'schedule'));
+    }
+    else
+    {
+        database.close();
     }
 };
 var mongo = require('mongodb').MongoClient.connect;
@@ -96,17 +98,23 @@ else
     );
 }
 
-var onConnect = function(err, db)
+if(mode)
 {
-    if(err)
+    database = testDb; // from utils/purge.js
+    async.parallel(parallelTasks, onParallel);
+}
+else
+{
+    var onConnect = function(err, db)
     {
-        console.error(err.message);
-    }
-    else
-    {
+        if(err)
+        {
+            throw err;
+        }
+
         database = db;
         async.parallel(parallelTasks, onParallel);
-    }
-};
+    };
 
-mongo(mongoURI, onConnect);
+    mongo(mongoURI, onConnect);
+}

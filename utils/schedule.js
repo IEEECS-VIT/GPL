@@ -71,19 +71,15 @@ var onInsert = function (err, doc)
 {
     if(err)
     {
-        console.error(err.message);
+        throw err;
     }
-    else
+    if(!mode)
     {
-        if(!mode)
-        {
-            console.log(doc.ops);
-        }
-
-        if(++done === 7)
-        {
-            schedulerCallback(null);
-        }
+        console.log(doc.ops);
+    }
+    if(++done === 7)
+    {
+        schedulerCallback(null);
     }
 };
 
@@ -191,21 +187,18 @@ var onParallel = function(err)
 {
     if(err)
     {
-        console.error(err.message);
+        throw err;
+    }
+
+    console.timeEnd('Schedule construction');
+
+    if(mode)
+    {
+        testHelperCallback(); // from tests/helper.js
     }
     else
     {
-        if(mode)
-        {
-            testDb = database;
-            testHelperCallback(); // from tests/helper.js
-        }
-        else
-        {
-            database.close();
-        }
-
-        console.timeEnd('Schedule construction');
+        database.close();
     }
 };
 
@@ -215,32 +208,35 @@ var onFetch = function (err, results)
 {
     if (err)
     {
-        console.error('here', err.message);
+        throw err;
     }
-    else
-    {
-        unassigned = results;
-        count = unassigned.length;
-        excess = (8 - count % 8) % 8;
 
-        users = generate(false, excess, count);
-        count += excess;
+    unassigned = results;
+    count = unassigned.length;
+    excess = (8 - count % 8) % 8;
+    users = generate(false, excess, count);
+    count += excess;
 
-        async.parallel(parallelTasks, onParallel);
-    }
+    async.parallel(parallelTasks, onParallel);
 };
 
-var onConnect = function (err, db)
+if(mode)
 {
-    if (err)
+    database = testDb; // from utils/seed.js
+    database.collection(process.env.MATCH).find({authStrategy: {$ne: 'admin'}}, {_id: 1}).toArray(onFetch);
+}
+else
+{
+    var onConnect = function (err, db)
     {
-        console.error(err.message);
-    }
-    else
-    {
+        if (err)
+        {
+            throw err;
+        }
+
         database = db;
         database.collection(process.env.MATCH).find({authStrategy: {$ne: 'admin'}}, {_id: 1}).toArray(onFetch);
-    }
-};
+    };
 
-mongo(mongoURI, onConnect);
+    mongo(mongoURI, onConnect);
+}

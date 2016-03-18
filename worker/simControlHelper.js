@@ -25,7 +25,7 @@ var simulate = require(path(__dirname, 'simulation')).simulate;
 
 exports.onGetRating = function(userDoc, asyncCallback)
 {
-    return function(err, results) {
+    return (err, results) => {
         if(err)
         {
             throw err;
@@ -178,7 +178,7 @@ exports.getEachRating = function (elt, subCallback)
 
 exports.onTeamDetails = function(matchDoc, updateData)
 {
-    return function(err, results) {
+    return (err, results) => {
         if(err)
         {
             console.error(err.message);
@@ -200,7 +200,7 @@ exports.onTeamDetails = function(matchDoc, updateData)
 
 exports.onUpdate = function(results, masterCallback)
 {
-    return function(err) {
+    return (err) => {
         if(err)
         {
             throw err;
@@ -212,7 +212,7 @@ exports.onUpdate = function(results, masterCallback)
 
 exports.forAllMatches = function(forEachMatch, onFinish)
 {
-    return function(err, docs) {
+    return (err, docs) => {
         if (err)
         {
             throw err;
