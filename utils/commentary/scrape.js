@@ -177,24 +177,20 @@ var onFinish = function(err)
 {
     if(err)
     {
-        console.error(err.message);
+        throw err;
     }
-    else
-    {
-        console.timeEnd('File updation');
-    }
+
+    console.timeEnd('File updation');
 };
 var onCompile = function(err)
 {
     if(err)
     {
-        console.error(err.message);
+        throw err;
     }
-    else
-    {
-        console.timeEnd('Commentary compilation');
-        async.each(fun, updateFile, onFinish);
-    }
+
+    console.timeEnd('Commentary compilation');
+    async.each(fun, updateFile, onFinish);
 };
 var onStitch = function()
 {

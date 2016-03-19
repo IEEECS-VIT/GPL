@@ -17,7 +17,6 @@
  */
 
 var simData;
-var collection;
 var async = require('async');
 var path = require('path').join;
 var days = [1, 2, 3, 4, 5, 6, 7];
@@ -42,17 +41,12 @@ exports.getAllMatches = function (err, callback)
     {
         throw err;
     }
-
-    switch (days.indexOf(day))
+    if(days.indexOf(day) === -1)
     {
-        case -1:
-            throw 'Invalid Day';
-        default:
-            collection = 'matchday' + day;
-            break;
+        throw 'Invalid Day';
     }
 
-    database.collection(collection).find().toArray(callback)
+    database.collection('matchday' + day).find().toArray(callback)
 };
 
 exports.teamParallelTasks = function(getTeamDetails, matchDoc)
@@ -181,7 +175,7 @@ exports.onTeamDetails = function(matchDoc, updateData)
     return (err, results) => {
         if(err)
         {
-            console.error(err.message);
+            throw err;
         }
 
         simData =
@@ -217,9 +211,7 @@ exports.forAllMatches = function(forEachMatch, onFinish)
         {
             throw err;
         }
-        else
-        {
-            async.map(docs, forEachMatch, onFinish);
-        }
+
+        async.map(docs, forEachMatch, onFinish);
     };
 };

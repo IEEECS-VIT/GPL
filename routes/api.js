@@ -56,7 +56,7 @@ router.get('/register/:name', apiFilter, function(req, res, next){
     mongoUsers.fetchUser({_id: req.params.name.trim().toUpperCase()}, function(err, user){
         if(err)
         {
-            res.status(403);
+            res.status(422);
             return next(err);
         }
 
