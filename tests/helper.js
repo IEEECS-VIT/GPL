@@ -21,7 +21,7 @@ var path = require('path').join;
 
 before(function(done){
     testHelperCallback = done;
-    require(path(__dirname, '..', 'utils', 'purge'));
+    require(path(__dirname, '..', 'utils', 'database', 'purge'));
 });
 
 after(function(){

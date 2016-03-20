@@ -37,7 +37,7 @@ var schedulerCallback;
 var path = require('path');
 var async = require('async');
 var mongo = require('mongodb').MongoClient.connect;
-var generate = require(path.join(__dirname, '..', 'database', 'mongoRecord')).users;
+var generate = require(path.join(__dirname, '..', '..', 'database', 'mongoRecord')).users;
 
 try
 {
@@ -50,7 +50,7 @@ catch(err)
 
 if(!process.env.NODE_ENV)
 {
-    require('dotenv').load({path : path.join(__dirname, '..', '.env')});
+    require('dotenv').load({path : path.join(__dirname, '..', '..', '.env')});
     mongoURI = `mongodb://127.0.0.1:27017/${mode}GPL`;
 }
 else
