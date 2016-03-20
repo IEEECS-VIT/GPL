@@ -24,7 +24,7 @@ var points = 0;
 var async = require('async');
 var path = require('path').join;
 var helper = require(path(__dirname, 'simControlHelper'));
-var email = require(path(__dirname, '..', 'utils', 'email'));
+var email = require(path(__dirname, '..', 'utils', 'misc', 'email'));
 
 if(!process.env.NODE_ENV)
 {

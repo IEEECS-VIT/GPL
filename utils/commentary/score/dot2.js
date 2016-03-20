@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 module.exports =
     [
         "low full toss on middle, whipped to midwicket on the edge of the circle",
@@ -632,5 +633,38 @@ module.exports =
         "wide length ball, it shapes away to beat the drive",
         "another slower ball, he has no clue about it, and edges it to Patel on the bounce",
         "full and wide, angling away, beats the outside edge as he looks to steer this square",
-        "sharp bouncer, beats the attempted pull"
-    ];
+        "sharp bouncer, beats the attempted pull",
+		"and it's express right away. Short and wide, beats the cut with the extra bounce.",
+		"short at pace, just outside off, left alone to bounce away.",
+		"fast outswinger, left alone.",
+		"another lovely outswinger, he pushes at it, and is beaten.",
+		"on a length, outside off, defended with an open face to point.",
+		"lovely delivery. Short of a length, angling away, a bit of seam, and beats the batter's defence.",
+		"he misses out on a leg-side offering. The ball hits the pad. the batter wants a leg-bye but is sent back.",
+		"beautiful line there... Nice dip on the striker, he is not to the pitch of the ball is has his push beaten outside off.",
+		"legcutter, short of a length, beats the attempt to play the cut with that spongy bounce.",
+		"wide length ball, driven to cover.",
+		"absolutely smashed it with a cover-drive, but he has hit this straight to extra cover.",
+		"full outside off, pushed to mid-off. What an over from the bowler.",
+		"short of a length, no room, defended from the crease.",
+		"full outswinger defended from the crease.",
+		"short of a length, on off, defended with an open face.",
+		"short of a length, no room, pushed to mid-on.",
+		"the striker throws his bat at a shortish ball outside off, but is beaten. Doesn't quite get close to its line.",
+		"slower legcutter, squares up the striker, who gets a thick edge towards point.",
+		"the batter yorks himself by stepping out of the crease. Extra cover fields.",
+		"stays back to a length ball, the cut goes straight to point.",
+		"not to the pitch of the ball after jumping out of the crease, drives hard still, but the bowler makes a one-handed" +
+        " save to his left.",
+		"this legbreak doesn't turn, hits the inside half of the bat and goes back to the bowler.",
+		"skiddy short pull, hits the bottom edge on the pull. He is looking to drag this from outside off. Ends up playing" +
+        " it back to the bowler.",
+		"full, just outside off, a yorker. the striker looks to steer it. Beaten on the outside edge.",
+		"full toss outside off, the batter has left the crease, which means he gets too close to it. Sends this back to " +
+        "the bowler.",
+		"moves inside the line of a length ball, works it to leg, but sends it straight to square leg.",
+		"lovely slower bouncer, the batsman's hook is beaten, but he is not happy with the call to not wide it. Again touch" +
+        " and go as it was in the last over. Wided last over, fine this time.",
+		"nearly a yorker, dug out to extra cover. They decide against the single.",
+		"yorker, just outside off, the batter is moving all over the crease, and in the end he is beaten on the attempted steer."
+	];

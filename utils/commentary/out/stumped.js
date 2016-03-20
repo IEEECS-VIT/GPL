@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 module.exports =
     [
         "",
@@ -23,7 +24,7 @@ module.exports =
         "keeps coming out, the bowler pushes this straight and on a length outside off, the batsman misses it and is stumped" +
         "  by miles",
         "The ball moved away from the batsman, beating his booming hoick in to the covers. The keeper does well to collect " +
-        " the ball behind the stumps,   before ending this partnership. Smart keeping",
+        " the ball behind the stumps, before ending this partnership. Smart keeping",
         "That is some effort by the opposition ! The keeper was standing up to the stumps, the batsman took the bait and " +
         " charged out to an otherwise harmless delivery,   and has lost his wicket in the process. Strange cricket this...",
         "well that was the plan with him to hit the bowler, except that this delivery has gone in nowhere as expected. The " +

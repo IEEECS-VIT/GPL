@@ -49,7 +49,6 @@ var commentary =
     'stumped': {content: '', file: path(__dirname, 'out', 'stumped')},
     'runout': {content: '', file: path(__dirname, 'out', 'runout')}
 };
-var fun = ['wide'];
 var ref = ['FOUR', 'SIX', 'OUT'];
 var opts = ['batsman', 'batter', 'striker'];
 
@@ -106,12 +105,12 @@ var specialHandler = function(arg)
     temp = arg[0].data;
     temp = temp.slice(0, -2);
     temp = temp.split(' to ');
+    arg[2] = arg[2].data;
+    arg[1] = arg[1].children[0].data;
 
-    if(ref.indexOf(arg[1].children[0].data) < 0)
+    if(ref.indexOf(arg[1]) < 0)
     {
-        arg[2] = arg[2].data;
-        arg[2].replace(/\s$/, '.');
-        arg[1] = arg[1].children[0].data;
+        arg[2] = arg[2].replace(/\s$/, '.');
         temp.splice(1, 1, temp[1].split(', '));
         temp[0] = [temp[0], temp[1].shift()];
         arg[2] = arg[2].replace(temp[0][0], 'the bowler');
@@ -120,11 +119,10 @@ var specialHandler = function(arg)
     }
     else
     {
-        arg[1] = arg[1].children[0].data;
-        arg[2] = arg[2].data.slice(2);
-        arg[2].replace(/\s$/, '.');
-        arg[2].replace(temp[0], 'the bowler');
-        arg[2].replace(temp[1], 'the ' + rand());
+        arg[2] = arg[2].slice(2);
+        arg[2] = arg[2].replace(/\s$/, '.');
+        arg[2] = arg[2].replace(temp[0], 'the bowler');
+        arg[2] = arg[2].replace(temp[1], 'the ' + rand());
         arg = [arg[1], arg[2]];
         flag = (arg[0] === 'OUT');
     }
@@ -151,7 +149,7 @@ var processor = function(arg, callback)
     {
         if(arg[0] !== 'OUT')
         {
-            commentary[arg[0]].content += '\t\t"' + arg[1] + '",\n';
+            commentary[arg[0]].content += ',\n\t\t"' + arg[1] + '"';
             flag = false;
         }
         else
@@ -161,7 +159,7 @@ var processor = function(arg, callback)
     }
     else if(commentary[arg[0]])
     {
-        commentary[arg[0]].content += '\t\t"' + arg[1] + '",\n';
+        commentary[arg[0]].content += ',\n\t\t"' + arg[1] + '"';
     }
 
     callback(null);
@@ -170,7 +168,16 @@ var updateFile = function(arg, callback)
 {
     if(commentary[arg].content)
     {
-        fs.appendFile(commentary[arg].file + '.js', commentary[arg].content + '\t];', callback); // fix file append bug.
+        fs.stat(commentary[arg].file + '.js', function(err, result){
+            if(err)
+            {
+                throw err;
+            }
+
+            fs.createWriteStream(commentary[arg].file + '.js', {flags: 'r+', start: result.size - 7})
+              .end(commentary[arg].content + '\n\t];');
+            callback();
+        });
     }
 };
 var onFinish = function(err)
@@ -190,7 +197,7 @@ var onCompile = function(err)
     }
 
     console.timeEnd('Commentary compilation');
-    async.each(fun, updateFile, onFinish);
+    async.each(Object.keys(commentary), updateFile, onFinish);
 };
 var onStitch = function()
 {
@@ -204,6 +211,5 @@ http.get('http://www.espncricinfo.com/australia-v-india-2015-16/engine/match/895
 (res) => {
     console.timeEnd('Request');
     res.on('data',(chunk) => {data += chunk;});
-
     res.on('end', onStitch);
 });

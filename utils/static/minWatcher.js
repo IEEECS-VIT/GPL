@@ -41,6 +41,6 @@ fs.stat(path(...dir, 'workspace.xml'), function(err, res){
         throw err;
     }
 
-    fs.createWriteStream(path(__dirname,...dir, 'workspace.xml'), {flags: 'r+', start:res.size - 11}).end(scopeData);
+    fs.createWriteStream(path(__dirname,...dir, 'workspace.xml'), {flags: 'r+', start: res.size - 11}).end(scopeData);
     console.timeEnd('mark');
 });

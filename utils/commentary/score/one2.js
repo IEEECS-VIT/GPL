@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 module.exports =
     [
         "Banged in short and outside off, pulled to long-on.",
@@ -1135,5 +1136,58 @@ module.exports =
         "high full toss, flicked to fine leg for one",
         "backs away to punch this shortish delivery to deep cover",
         "dug in short, pulled away to deep midwicket for one",
-        "wide full toss, driven to deep cover"
-    ];
+        "wide full toss, driven to deep cover",
+		"short of a length, just outside off, the batsman gets a bottom edge on the cut... Takes the single.",
+		"short of a length, outside off, nicely glided away to third man for one.",
+		"this would have been a wide down the leg side, but he plays at it, and gets a leading edge towards mid-on for one.",
+		"short of a length, slower ball, played off the hip for a single towards midwicket.",
+		"wide half-volley, her is lucky he has a sweeper-cover to keep it to one.",
+		"short of a length, punched away off the hip to deep square leg.",
+		"short of a length, outside off, steered to third man for one.",
+		"short and wide, he is on his toes as he cuts this away to third man.",
+		"short of a length, on off, opens the face to third man for one.",
+		"full, outside off, pushed down to long-off for one.",
+		"shortish, the batter shapes up to pull, but the ball holds up a little. Raina adjusts well to punch it down to " +
+        "long-on.",
+		"short of a length, cut away, A misfield at point allows a single.",
+		"front of the hand... full, pushed to long-on for one.",
+		"flatter, punched into the leg side.",
+		"short and wide, cut away to deep cover.",
+		"slower ball, on off, steered away to third man.",
+		"down the wicket to drive this length ball to long-off for one.",
+		"slower full toss on the pads, helped away towards short fine leg where he comes down on it like London Bridge.",
+		"not in control of the pull from head high, but it doesn't go up in the air. Gets a single to long leg.",
+		"down the wicket, beaten in the flight, manages to play a drive to deep cover.",
+		"down the wicket to take it on the full and drive it to long-off.",
+		"down the wicket, too close to the pitch of the ball, hits it hard but doesn't get any elevation. A single to " +
+        "long-off.",
+		"slog-sweeps but along the ground, gets a single to deep midwicket.",
+		"on the pads, doesn't turn much, helped around the corner.",
+		"length ball, on the pads, worked to deep midwicket for one.",
+		"down the wicket, mis-hits a flat ball to long-on for one.",
+		"short of a length as the batter leaves the crease, pushed to deep midwicket.",
+		"a better cleaner hit, along the ground to long-off for one.",
+		"down the wicket to drag this to deep midwicket for one. Another mis-hit.",
+		"half-volley, on the pads, driven towards deep midwicket.",
+		"short, into the hip, punched away to long leg.",
+		"short of a length, quick, hits the inside edge on to the pad.",
+		"full outside off, driven to long-off for one.",
+		"slower length ball, pushed past point for one.",
+		"short of a length, slower ball, runs it to short third.",
+		"full and fast, beats the striker's slog, goes for a leg-bye.",
+		"driven to deep cover for one.",
+		"yorker this time, dug out for one.",
+		"slower full toss, driven to deep cover.",
+		"rapid short ball, pulled to long-on for one.",
+		"short of a length, outside off, punched to deep cover for a single.",
+		"yorker, on off, dug out for one to deep cover.",
+		"length ball on the pads, flicked away to deep square for one.",
+		"yorker, on off, dug out for one to point.",
+		"yorker, on the pads, goes off the front edge for one.",
+		"full, middle and leg, nearly a yorker, dug out to deep midwicket.",
+		"another low full toss, driven to deep cover.",
+		"down the wicket, yorks himself, hits this hard at the bowler, and takes a single off the ricochet. Could have " +
+        "gone for the second but decides against it.",
+		"full, into the pads, drilled away to deep midwicket for one.",
+		"yorker, middle and leg, dug out to deep midwicket. The non-striker wants the second, but is sent back."
+	];

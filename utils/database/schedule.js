@@ -222,7 +222,7 @@ var onFetch = function (err, results)
 
 if(mode)
 {
-    database = testDb; // from utils/seed.js
+    database = testDb; // from utils/database/seed.js
     database.collection(process.env.MATCH).find({authStrategy: {$ne: 'admin'}}, {_id: 1}).toArray(onFetch);
 }
 else

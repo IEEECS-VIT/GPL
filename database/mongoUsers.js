@@ -39,7 +39,7 @@ var leaderboard;
 var match = process.env.MATCH;
 var path = require('path').join;
 var helper = require(path(__dirname, 'mongoHelper'));
-var email = require(path(__dirname, '..', 'utils', 'email'));
+var email = require(path(__dirname, '..', 'utils', 'misc', 'email'));
 var mongoFeatures = require(path(__dirname, 'mongoFeatures'));
 
 var ref =

@@ -100,7 +100,7 @@ else
 
 if(mode)
 {
-    database = testDb; // from utils/purge.js
+    database = testDb; // from utils/database/purge.js
     async.parallel(parallelTasks, onParallel);
 }
 else

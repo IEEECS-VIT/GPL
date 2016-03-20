@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 module.exports =
     [
         "",
@@ -312,5 +313,7 @@ module.exports =
         "A lovely yorker! The batsman gets a bit too cheeky with it. Looks to open the face to run this fine, the yorker " +
         "squeezes past the bat, and kisses the outside of his off stump.",
         "slower-ball yorker. Gets under his bat, lands on the crease, hits the bat pad as he is on his knees trying to get " +
-        "under it. The ball ricochets off the pad, and hits the stumps. He has taken out the big one"
-    ];
+        "under it. The ball ricochets off the pad, and hits the stumps. He has taken out the big one",
+		"the batter moves too far across and is bowled by a straight full toss. He has premeditated the ramp, but as he " +
+        "is bringing his bat across it hits the ground and gets a bit stuck there. Too late on the ball then."
+	];

@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 module.exports =
     [
         "",
@@ -126,5 +127,8 @@ module.exports =
         "fuller and on off, gets under it but mis-hits it over mid-on. He sprints back, slides and hauls the ball into " +
         "the field of play. They take three",
         "pitched up and outside off, smears it over the covers. the bowler runs across from deep cover, dives and pulls" +
-        " the ball back to the batsman, who was giving the chase from long-off"
-    ];
+        " the ball back to the batsman, who was giving the chase from long-off",
+		"short ball, doesn't quite come on, the striker ends up pulling in in front of square. Gets three runs for it.",
+		"mis-hit, but a safe mis-hit. The batter knows mid-off is up, gets a ball in his swinging zone, and just lobs it" +
+        " over mid-off."
+	];
