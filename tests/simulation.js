@@ -43,12 +43,12 @@ describe('Simulation tests:', function(){
         });
     });
 
-    describe('simulation status update:', function(){
+    describe('Match status update:', function(){
         it('Collect data from slave simulation-controller callbacks', function(){
 
         });
 
-        it('Check for successful completion of update queries', function(){
+        it('Verify successful completion of update queries', function(){
 
         });
 

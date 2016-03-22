@@ -35,12 +35,8 @@ exports.onGetRating = function(userDoc, asyncCallback)
     };
 };
 
-exports.getAllMatches = function (err, callback)
+exports.getAllMatches = function (day, callback)
 {
-    if(err)
-    {
-        throw err;
-    }
     if(days.indexOf(day) === -1)
     {
         throw 'Invalid Day';

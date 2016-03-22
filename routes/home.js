@@ -383,56 +383,49 @@ router.get('/players', authenticated, function (req, res, next){ // page for all
             res.status(422);
             return next(err);
         }
-        else
+        if (document.team.length)
         {
-            if (document.team.length)
+            if (!document.squad.length)
             {
-                if (!document.squad.length)
-                {
-                    res.redirect("/home/team");
-                }
-                else
-                {
-                    res.redirect("/home");
-                }
+                res.redirect("/home/team");
             }
             else
             {
-                var onFetch = function (err, documents)
+                res.redirect("/home");
+            }
+        }
+        else
+        {
+            var onFetch = function (err, documents)
+            {
+                if (err)
                 {
-                    if (err)
+                    res.status(422);
+                    return next(err);
+                }
+
+                var map = function(arg, asyncCallback)
+                {
+                    arg.active = false;
+                    arg.image = ("https://res.cloudinary.com/gpl/players/" + arg.Type + "/" + arg._id + ".jpg");
+                    asyncCallback();
+                };
+
+                var onMap = function(err, result)
+                {
+                    if(err)
                     {
                         res.status(422);
                         return next(err);
                     }
-                    else
-                    {
-                        var map = function(arg, asyncCallback)
-                        {
-                            arg.active = false;
-                            arg.image = ("https://res.cloudinary.com/gpl/players/" + arg.Type + "/" + arg._id + ".jpg");
-                            asyncCallback();
-                        };
 
-                        var onMap = function(err, result)
-                        {
-                            if(err)
-                            {
-                                res.status(422);
-                                return next(err);
-                            }
-                            else
-                            {
-                                res.render('players', {Players: result, csrfToken: req.csrfToken(), msg: req.flash()});
-                            }
-                        };
-
-                        async.map(documents, map, onMap);
-                    }
+                    res.render('players', {Players: result, csrfToken: req.csrfToken(), msg: req.flash()});
                 };
 
-                mongoFeatures.fetchPlayers(onFetch);
-            }
+                async.map(documents, map, onMap);
+            };
+
+            mongoFeatures.fetchPlayers(onFetch);
         }
     };
 
@@ -452,10 +445,8 @@ router.get('/team', authenticated, function (req, res, next){ // view the assign
             res.status(422);
             return next(err);
         }
-        else
-        {
-            res.render('team', {Squad: documents, csrfToken: req.csrfToken()});
-        }
+
+        res.render('team', {Squad: documents, csrfToken: req.csrfToken()});
     };
 
     mongoTeam.getTeam(credentials, getTeam);
@@ -475,13 +466,11 @@ router.get('/stats', authenticated, function (req, res, next){
                 res.status(422);
                 return next(err);
             }
-            else
-            {
-                doc.general.overs = parseInt(doc.overs / 6, 10) + '.' + (doc.general.overs % 6);
-                res.cookie('day', process.env.DAY, {signed : true, maxAge : 86400000});
-                res.cookie('stats', JSON.stringify(doc), {signed : true, maxAge : 86400000});
-                res.render('stats', {stats: doc});
-            }
+
+            doc.general.overs = parseInt(doc.overs / 6, 10) + '.' + (doc.general.overs % 6);
+            res.cookie('day', process.env.DAY, {signed : true, maxAge : 86400000});
+            res.cookie('stats', JSON.stringify(doc), {signed : true, maxAge : 86400000});
+            res.render('stats', {stats: doc});
         };
 
         mongoFeatures.getStats(onGetStats);
@@ -530,12 +519,10 @@ router.get('/dashboard', authenticated, function (req, res, next){
                 res.status(422);
                 return next(err);
             }
-            else
-            {
-                res.cookie('day', process.env.DAY, {signed: true, maxAge: 86400000});
-                res.cookie('dash', JSON.stringify(doc), {signed: true, maxAge: 86400000});
-                res.render('dashboard', {result: doc});
-            }
+
+            res.cookie('day', process.env.DAY, {signed: true, maxAge: 86400000});
+            res.cookie('dash', JSON.stringify(doc), {signed: true, maxAge: 86400000});
+            res.render('dashboard', {result: doc});
         };
 
         mongoTeam.dashboard(credentials, onFind);

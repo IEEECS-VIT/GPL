@@ -26,21 +26,28 @@ if(process.env.NODE_ENV)
 var fs = require('fs');
 var dir = [__dirname, '..', '..', '.idea'];
 var path = require('path').join;
-var scopeData =
-    '  <component name="NameScopedManager">\n' +
-    '    <scope name="Public JS" pattern="file[GPL]:public/javascripts//*&amp;&amp;!file[GPL]:public/javascripts/min//*" />\n' +
-    '    <scope name="Public CSS" pattern="file[GPL]:public/stylesheets//*&amp;&amp;!file[GPL]:public/stylesheets/min//*" />\n' +
-    '  </component>\n' +
-    '</project>';
-
+var scopeData;
 fs.createReadStream('watcherTasks.xml').pipe(fs.createWriteStream(path(...dir, 'watcherTasks.xml')));
 
-fs.stat(path(...dir, 'workspace.xml'), function(err, res){
+fs.readFile(path(...dir, '.name'), function(err, data){
     if(err)
     {
         throw err;
     }
+    scopeData =
+    '  <component name="NameScopedManager">\n' +
+    `    <scope name="Public JS" pattern="file[${data}]:public/javascripts//*&amp;&amp;!file[${data}]:public/javascripts/min//*" />\n` +
+    `    <scope name="Public CSS" pattern="file[${data}]:public/stylesheets//*&amp;&amp;!file[${data}]:public/stylesheets/min//*" />\n` +
+    '  </component>\n' +
+    '</project>';
 
-    fs.createWriteStream(path(__dirname,...dir, 'workspace.xml'), {flags: 'r+', start: res.size - 11}).end(scopeData);
-    console.timeEnd('mark');
+    fs.stat(path(...dir, 'workspace.xml'), function(error, res){
+        if(error)
+        {
+            throw error;
+        }
+
+        fs.createWriteStream(path(__dirname,...dir, 'workspace.xml'), {flags: 'r+', start: res.size - 11}).end(scopeData);
+        console.timeEnd('mark');
+    });
 });

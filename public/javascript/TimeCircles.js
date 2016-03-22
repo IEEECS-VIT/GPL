@@ -544,7 +544,7 @@
         // We need this for our next frame either way
         var _this = this;
         var update = function () {
-            _this.update.call(_this);
+            _this.update();
         };
 
         // Either call next update immediately, or in a second

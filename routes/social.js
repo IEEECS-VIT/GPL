@@ -32,13 +32,11 @@ var onRetrieve = function(req, res, next)
             req.flash('That request failed, please re-try.');
             return res.redirect('/social/login'); // redirect to login or register based on the request origin.
         }
-        else
-        {
-            res.cookie('name', req.signedCookies.team.trim().toUpperCase(), {maxAge: 86400000, signed: true});
-            res.clearCookie('team', {});
-            res.clearCookie('phone', {});
-            return res.redirect('/home/players');
-        }
+
+        res.cookie('name', req.signedCookies.team.trim().toUpperCase(), {maxAge: 86400000, signed: true});
+        res.clearCookie('team', {});
+        res.clearCookie('phone', {});
+        return res.redirect('/home/players');
     })(req, res, next);
 };
 

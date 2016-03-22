@@ -41,7 +41,7 @@ var commentary =
     'FOUR': {content: '', file: path(__dirname, 'score', 'four')},
     'SIX': {content: '', file: path(__dirname, 'score', 'six')},
     'wide': {content: '', file: path(__dirname, 'extra', 'wide')},
-    'no ball': {content: '', file: path(__dirname, 'extra', 'freehit')},
+    'no ball': {content: '', file: path(__dirname, 'extra', 'noBall')},
     'cnb': {content: '', file: path(__dirname, 'out', 'cnb')},
     'lbw': {content: '', file: path(__dirname, 'out', 'lbw')},
     'caught': {content: '', file: path(__dirname, 'out', 'caught')},

@@ -43,6 +43,9 @@ var mid = require(path(...dir, 'misc', 'mid'));
 var end = require(path(...dir, 'misc', 'end'));
 var half = require(path(...dir, 'misc', 'half'));
 var full = require(path(...dir, 'misc', 'full'));
+var miss = require(path(...dir, 'misc', 'miss'));
+var start = require(path(...dir, 'misc', 'start'));
+var hopeless = require(path(...dir, 'misc', 'hopeless'));
 var caught = require(path(...dir, 'out', 'caught'));
 var bowled = require(path(...dir, 'out', 'bowled'));
 var stumped = require(path(...dir, 'out', 'stumped'));
@@ -176,6 +179,12 @@ exports.extraRef =
 ];
 
 exports.milestoneRef = [half, full];
+
+exports.miss = [miss.half, miss.full];
+
+exports.state = [start, end];
+
+exports.hopeless = hopeless;
 
 exports.anticipateRef =
 {

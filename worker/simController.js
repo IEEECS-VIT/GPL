@@ -21,6 +21,8 @@ var log;
 var match;
 var stats;
 var points = 0;
+var onGetRating;
+var parallelTasks;
 var async = require('async');
 var path = require('path').join;
 var helper = require(path(__dirname, 'simControlHelper'));
@@ -47,8 +49,10 @@ exports.initSimulation = function (day, masterCallback)
         {
             var getRating = function (err, userDoc)
             {
-                var onGetRating = helper.onGetRating(userDoc, asyncCallback);
-
+                if(err)
+                {
+                    throw err;
+                }
                 if (userDoc.squad.length < 11)
                 {
                     userDoc.ratings = [];
@@ -56,6 +60,7 @@ exports.initSimulation = function (day, masterCallback)
                 }
                 else
                 {
+                    onGetRating = helper.onGetRating(userDoc, asyncCallback);
                     userDoc.squad.push(UserDoc.team.filter((elt) => {return elt > 'd';})[0]);
                     async.map(userDoc.squad, helper.getEachRating, onGetRating);
                 }
@@ -64,13 +69,13 @@ exports.initSimulation = function (day, masterCallback)
             database.collection(match).find(query).limit(1).next(getRating);
         };
 
-        var parallelTasks = helper.teamParallelTasks(getTeamDetails, matchDoc);
+        parallelTasks = helper.teamParallelTasks(getTeamDetails, matchDoc);
 
         var updateData = function (err, newData)
         {
             if(err)
             {
-                console.error(err.message);
+                throw err;
             }
 
             var updateUser = function (newUserDoc, asyncCallback)
@@ -167,7 +172,7 @@ exports.initSimulation = function (day, masterCallback)
 
         stats = doc;
         stats.daily.total.value = stats.daily.individual.value = stats.daily.MoM.points = 0;
-        helper.getAllMatches(err, forAllMatches);
+        helper.getAllMatches(day, forAllMatches);
     };
 
     database.collection('stats').find().limit(1).next(onGetInfo);

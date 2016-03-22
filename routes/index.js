@@ -130,10 +130,8 @@ router.post('/interest', function (req, res, next){
             res.status(422);
             return next(err);
         }
-        else
-        {
-            res.redirect('/interest');
-        }
+
+        res.redirect('/interest');
     };
 
     mongoUsers.insert('interest', newUser, onInsert);
