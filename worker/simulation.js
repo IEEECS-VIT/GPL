@@ -656,18 +656,8 @@ exports.simulate = function (data, callback)
                     {
                         ++data.team[i].tied;
                         ++data.team[i].points;
-                        data.team[i].runsFor += Total[i];
-                        data.team[i].ballsFor += Overs[i];
-                        data.team[i].runsAgainst += Total[i];
-                        data.team[i].ballsAgainst += Overs[i];
-                        data.team[i].wicketsLost += wickets[i];
-                        data.team[i].wicketsTaken += wickets[i];
                         data.team[i].form += Math.pow(-1, i) * temp;
-                        data.team[i].lowestTotal = Math.min(data.team[i].lowestTotal, Total[i]);
-                        data.team[i].highestTotal = Math.max(data.team[i].highestTotal, Total[i]);
                         data.team[i].progression.push((data.team[i].progression.slice(-1)[0] || 0) + 1);
-                        data.team[i].netRunRate = (data.team[i].runsFor / data.team[i].ballsFor) - (data.team[i].runsAgainst / data.team[i].ballsAgainst);
-                        data.team[i].netRunRate = parseFloat((data.team[i].netRunRate * 6).toFixed(4));
                     }
                 }
                 else
@@ -694,25 +684,10 @@ exports.simulate = function (data, callback)
 
             for(i = 0; i < 2; ++i)
             {
-                data.team[i].runsFor += Total[i];
-                data.team[i].ballsFor += Overs[i];
-                data.team[i].overs.push(Overs[i]);
-                data.team[i].scores.push(Total[i]);
-                data.team[i].wickets.push(wickets[i]);
-                data.team[i].runsAgainst += Total[+!i];
-                data.team[i].wicketsLost += wickets[i];
-                data.team[i].ballsAgainst += Overs[+!i];
-                data.team[i].wicketsTaken += wickets[+!i];
-                ++data.team[i][stateRef[(i === +winner)].state];
-                data.team[i].runRates.push((Total[i] * 6 / Overs[i]));
-                data.team[i].points += stateRef[(i === +winner)].points;
-                data.team[i].form += Math.pow(-1, +(i !== +winner)) * temp;
-                data.team[i].ratio = data.team[i].win / (data.team[i].loss || 1);
-                data.team[i].lowestTotal = Math.min(data.team[i].lowestTotal, Total[i]);
-                data.team[i].highestTotal = Math.max(data.team[i].highestTotal, Total[i]);
-                data.team[i].netRunRate = (data.team[i].runsFor) / (data.team[i].ballsFor);
-                data.team[i].netRunRate -= (data.team[i].runsAgainst) / (data.team[i].ballsAgainst);
-                data.team[i].netRunRate = parseFloat((data.team[i].netRunRate * 6).toFixed(4));
+                ++data.team[i][stateRef[(i === +winner)].state]; // increment win /loss
+                data.team[i].points += stateRef[(i === +winner)].points; // increment points
+                data.team[i].form += Math.pow(-1, +(i !== +winner)) * temp; // adjust team form
+                data.team[i].ratio = data.team[i].win / (data.team[i].loss || 1); // update win ratio
                 data.team[i].progression.push((data.team[i].progression.slice(-1)[0] || 0) + stateRef[(i === +winner)].points);
                 data.team[i].streak = ((Math.pow(-1, (i === +winner)) * data.team[i].streak > 0) ? 1 : (data.team[i].streak - Math.pow(-1, (i === +winner))));
             }
@@ -730,6 +705,20 @@ exports.simulate = function (data, callback)
         data.team[i].squad.pop();
         delete data.team[i].ratings;
         data.team[i].names = team[i].name;
+        data.team[i].runsFor += Total[i];
+        data.team[i].ballsFor += Overs[i];
+        data.team[i].overs.push(Overs[i]);
+        data.team[i].scores.push(Total[i]);
+        data.team[i].wickets.push(wickets[i]);
+        data.team[i].runsAgainst += Total[+!i];
+        data.team[i].wicketsLost += wickets[i];
+        data.team[i].ballsAgainst += Overs[+!i];
+        data.team[i].wicketsTaken += wickets[+!i];
+        data.team[i].runRates.push((Total[i] * 6 / Overs[i]));
+        data.team[i].netRunRate = (data.team[i].runsFor / data.team[i].ballsFor) - (data.team[i].runsAgainst / data.team[i].ballsAgainst);
+        data.team[i].netRunRate = parseFloat((data.team[i].netRunRate * 6).toFixed(4));
+        data.team[i].lowestTotal = Math.min(data.team[i].lowestTotal, Total[i]);
+        data.team[i].highestTotal = Math.max(data.team[i].highestTotal, Total[i]);
         data.team[i].avgRunsFor = Math.round(data.team[i].runsFor / data.team[i].played);
         data.team[i].avgWicketsLost = Math.round(data.team[i].wicketsLost / data.team[i].played);
         data.team[i].avgRunsAgainst = Math.round(data.team[i].runsAgainst / data.team[i].played);
