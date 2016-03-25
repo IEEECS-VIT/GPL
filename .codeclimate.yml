@@ -11,11 +11,17 @@ engines:
     enabled: true
   fixme:
     enabled: true
+  markdownlint:
+    enabled: true
 ratings:
   paths:
   - "**.css"
   - "**.js"
+  - "**.md"
+  - bin/**/*
 exclude_paths:
 - public/stylesheets/min/**/*
 - public/javascript/min/**/*
 - views/**/*
+- LICENSE
+- Procfile

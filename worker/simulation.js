@@ -16,8 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var path = require('path').join;
-var helper = require(path(__dirname, 'simHelper')); // loads a collection of helper functions
+var helper = require(require('path').join(__dirname, 'simHelper')); // loads a collection of helper functions
 var rand = helper.rand; // random number generator
 var genArray = helper.genArray; // returns an array / matrix of zeroes with the specified dimension
 var MoM; // the object to denote the man of the match
@@ -97,8 +96,8 @@ exports.simulate = function (data, callback)
     {
         for(i = 0; i < 2; ++i)
         {
-            data.team[i].points += stateRef[temp[i]].points;
             ++data.team[i][stateRef[temp[i]].state];
+            data.team[i].points += stateRef[temp[i]].points;
         }
     }
     else // if both teams have a valid playing eleven and a coach set.
@@ -399,7 +398,7 @@ exports.simulate = function (data, callback)
                         if((!milestone[strike[+strikeIndex]] && score[strike[+strikeIndex]] >= 50) || (milestone[strike[+strikeIndex]] === 1 && score[strike[+strikeIndex]] >= 100))
                         {
                             ++milestone[strike[+strikeIndex]];
-                            data.match.commentary.push(rand(helper.milestoneRef[milestone[strike[+strikeIndex]]]));
+                            data.match.commentary.push(rand(helper.milestoneRef[score[strike[+strikeIndex]] > 99]));
                         }
 
                         strikeIndex ^= (deliveryScore % 2); // rotate strike if an odd no. of runs were scored.
@@ -622,7 +621,7 @@ exports.simulate = function (data, callback)
                     data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].points += temp;
                     helper.checkMoM(MoM, temp, i, +!tossIndex);
 
-                    data.match.scorecard.push([team[+!tossIndex].name[i], parseInt(deliveries[i] / 6, 10).toString() + '.' + (deliveries[i] % 6).toString(), maidens[i], wicketsTaken[i], runsConceded[i], (runsConceded[i] * 6 / (deliveries[i] || 1)).toFixed(2)]);
+                    data.match.scorecard.push([team[+!tossIndex].name[i], `${parseInt(deliveries[i] / 6, 10)} . ${deliveries[i] % 6}`, maidens[i], wicketsTaken[i], runsConceded[i], (runsConceded[i] * 6 / (deliveries[i] || 1)).toFixed(2)]);
                     fiveWicketHaul[i] = continuousWickets[i] = deliveries[i] = maidens[i] = runsConceded[i] = wicketsTaken[i] = dotDeliveries[i] = 0;
                 }
             }
@@ -704,8 +703,8 @@ exports.simulate = function (data, callback)
         ++data.team[i].played;
         data.team[i].squad.pop();
         delete data.team[i].ratings;
-        data.team[i].names = team[i].name;
         data.team[i].runsFor += Total[i];
+        data.team[i].names = team[i].name;
         data.team[i].ballsFor += Overs[i];
         data.team[i].overs.push(Overs[i]);
         data.team[i].scores.push(Total[i]);
@@ -715,8 +714,6 @@ exports.simulate = function (data, callback)
         data.team[i].ballsAgainst += Overs[+!i];
         data.team[i].wicketsTaken += wickets[+!i];
         data.team[i].runRates.push((Total[i] * 6 / Overs[i]));
-        data.team[i].netRunRate = (data.team[i].runsFor / data.team[i].ballsFor) - (data.team[i].runsAgainst / data.team[i].ballsAgainst);
-        data.team[i].netRunRate = parseFloat((data.team[i].netRunRate * 6).toFixed(4));
         data.team[i].lowestTotal = Math.min(data.team[i].lowestTotal, Total[i]);
         data.team[i].highestTotal = Math.max(data.team[i].highestTotal, Total[i]);
         data.team[i].avgRunsFor = Math.round(data.team[i].runsFor / data.team[i].played);
@@ -724,10 +721,11 @@ exports.simulate = function (data, callback)
         data.team[i].avgRunsAgainst = Math.round(data.team[i].runsAgainst / data.team[i].played);
         data.team[i].avgWicketsTaken = Math.round(data.team[i].wicketsTaken / data.team[i].played);
         data.team[i].avgOversFor = Math.floor(data.team[i].ballsFor / data.team[i].played / 6) + (Math.floor(data.team[i].ballsFor / data.team[i].played) % 6) / 10;
+        data.team[i].netRunRate = parseFloat((6 * ((data.team[i].runsFor / data.team[i].ballsFor) - (data.team[i].runsAgainst / data.team[i].ballsAgainst))).toFixed(4));
         data.team[i].avgOversAgainst = Math.ceil(data.team[i].ballsAgainst / data.team[i].played / 6) + (Math.floor(data.team[i].ballsAgainst / data.team[i].played) % 6) / 10;
     }
 
-    console.timeEnd('sim');
+    console.timeEnd('sim'); // for benchmarking simulations
 
     callback(null, {
         team1: data.team[0],

@@ -26,7 +26,7 @@ var mongo = require('mongodb').MongoClient.connect;
 
 if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 {
-    require(path(__dirname, '..', 'utils', 'newrelic'));
+    require(path(__dirname, '..', 'utils', 'misc', 'newrelic'));
 }
 
 if (process.env.LOGENTRIES_TOKEN)
