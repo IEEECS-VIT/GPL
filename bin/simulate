@@ -83,8 +83,6 @@ mongo(process.env.MONGO, function(err, db){
                         database.close();
                         console.timeEnd('sim-controller');
                     });
-
-                    process.exit(0);
                 });
             }
         });

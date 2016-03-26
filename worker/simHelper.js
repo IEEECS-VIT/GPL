@@ -45,6 +45,7 @@ var half = require(path(...dir, 'misc', 'half'));
 var full = require(path(...dir, 'misc', 'full'));
 var miss = require(path(...dir, 'misc', 'miss'));
 var start = require(path(...dir, 'misc', 'start'));
+var mom = require(path(...dir, 'misc', 'mom'));
 var hopeless = require(path(...dir, 'misc', 'hopeless'));
 var caught = require(path(...dir, 'out', 'caught'));
 var bowled = require(path(...dir, 'out', 'bowled'));
@@ -148,19 +149,21 @@ exports.genArray = function(row, col)
     return ver;
 };
 
+exports.form = ['poor', 'average', 'good', 'excellent'];
+
 exports.dismiss = [caught, bowled, lbw, cnb, stumped];
 
 exports.bat = [process.env.BAT_AVG, process.env.BAT_STR];
 
 exports.bowl = [process.env.BOWL_AVG, process.env.BOWL_STR, process.env.BOWL_ECO]; // increase to strengthen bowling
 
-exports.stateRef =
+exports.state =
 {
     true: {points: 2, state: 'win'},
     false: {points: 0, state: 'loss'}
 };
 
-exports.scoreRef =
+exports.score =
 {
     0: {prefix: 'no run', comm: dot},
     1: {prefix: '1 run', comm: one},
@@ -170,29 +173,41 @@ exports.scoreRef =
     6: {prefix: 'SIX', comm: six}
 };
 
-exports.wicketRef = ['c', 'b', 'lbw', 'cnb', 'st'];
+exports.wicket = ['c', 'b', 'lbw', 'cnb', 'st'];
 
-exports.extraRef =
+exports.duck =
+[
+    '',
+    ' First ball! ',
+    '',
+    ' For a duck! ',
+    ' For a first ball duck ',
+    ' without facing a ball!  '
+];
+
+exports.extra =
 [
     {prefix: 'wide', comm: wide},
     {prefix: 'no ball', comm: noBall}
 ];
 
-exports.milestoneRef = [half, full];
+exports.milestone = [half, full];
 
 exports.miss = [miss.half, miss.full];
 
 exports.state = [start, end];
 
+exports.mom = mom;
+
 exports.hopeless = hopeless;
 
-exports.anticipateRef =
+exports.anticipate =
 {
     false: 'one hit away from a well deserving fifty. Will he make it?',
     true: 'knows there is a hundred for the taking if he can knuckle this one down....'
 };
 
-exports.statusRef =
+exports.status =
 {
     1: 'outs',
     true: 'notouts'
@@ -220,7 +235,7 @@ exports.checkMoM = function(MoM, temp, strike, toss)
 {
     if(MoM.points < temp)
     {
-        MoM =
+        MoM = // this assignment is necessary to affect changes to the actual MoM object
         {
             id: strike,
             team: toss,

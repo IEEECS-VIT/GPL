@@ -11,13 +11,13 @@
 
 ## The graVITas Premier League code repository
 
-### This website is hosted at http://gpl.ieeecsvit.com
+### This website is hosted [here](http://gpl.ieeecsvit.com)
 
 #### For exhaustive documentation, check out the project [wiki](https://github.com/IEEECS-VIT/GPL/wiki)
 
 ##### Please report any bugs or issues [here](https://github.com/IEEECS-VIT/GPL/issues)
 
-##### Instructions for Installation:
+##### Instructions for Installation
 
 * Install the latest edition of Node.js from [here](https://nodejs.org/en/download/)
 * Install the latest version of MongoDB from [here](https://www.mongodb.org/downloads#production)

@@ -64,7 +64,7 @@ mongo(process.env.MONGO, function(err, database){
                                    : 'The mongod localhost server is not running on port 27017.';
     }
 
-    db = database;
+    db = database; // global db variable is for persistent database connections, without bloating request middleware
     server = app.listen(app.get('port'), onBind);
 });
 
