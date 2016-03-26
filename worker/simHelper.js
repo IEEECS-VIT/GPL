@@ -185,6 +185,18 @@ exports.duck =
     ' without facing a ball!  '
 ];
 
+exports.key =
+[
+    {
+        val: 'For',
+        index: [0, 1]
+    },
+    {
+        val: 'Against',
+        index: [1, 0]
+    }
+];
+
 exports.extra =
 [
     {prefix: 'wide', comm: wide},

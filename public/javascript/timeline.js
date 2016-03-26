@@ -16,14 +16,17 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var time = [];
+
 $(document).ready(function () {
     $(".timeline").hide();
+    time.push($("#timeline1"), $("#timeline2"));
     $("#head1").on("click", function () {
-        $("#timeline1").slideToggle(500);
-        $("#timeline2").hide(500);
+        time[0].slideToggle(500);
+        time[1].hide(500);
     });
     $("#head2").on("click", function () {
-        $("#timeline2").slideToggle(500);
-        $("#timeline1").hide(500);
+        time[1].slideToggle(500);
+        time[0].hide(500);
     })
 });

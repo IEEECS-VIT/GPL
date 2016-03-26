@@ -71,13 +71,8 @@ exports.initSimulation = function (day, masterCallback)
 
         parallelTasks = helper.teamParallelTasks(getTeamDetails, matchDoc);
 
-        var updateData = function (err, newData)
+        var updateData = function (newData)
         {
-            if(err)
-            {
-                throw err;
-            }
-
             var updateUser = function (newUserDoc, asyncCallback)
             {
                 if(newUserDoc.squad.length)
