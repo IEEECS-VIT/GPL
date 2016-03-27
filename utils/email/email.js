@@ -32,6 +32,9 @@ var server = email.server.connect({
 var path = require('path').join;
 var read = require('fs').readFileSync;
 var version = (new Date).getFullYear() - 2013;
+var user = read(path(__dirname, 'templates', 'user.html'), 'utf-8');
+var reset = read(path(__dirname, 'templates', 'reset.html'), 'utf-8');
+var password = read(path(__dirname, 'templates', 'password.html'), 'utf-8');
 
 exports.send = function (message, callback)
 {
@@ -47,7 +50,7 @@ exports.message = exports.wrap({from: 'gravitaspremierleague@gmail.com'});
 
 exports.match = exports.wrap({
     from: 'gravitaspremierleague@gmail.com',
-    subject: 'Round ' + ref[process.env.MATCH] + 'Match ' + process.env.DAY + ', results are out!'
+    subject: `Round ${ref[process.env.MATCH]}, Match ${process.env.DAY} results are out!`
 }).attach_alternative(read(path(__dirname, 'templates', 'match.html')));
 
 
@@ -60,3 +63,18 @@ exports.register = exports.wrap({
     'from': 'gravitaspremierleague@gmail.com',
     subject: 'Welcome to G.P.L ' + version + '.0!'
 }).attach_alternative(read(path(__dirname, 'templates', 'register.html')));
+
+exports.user = function(teams)
+{
+    return user.replace('TEAMS', teams);
+};
+
+exports.password = function(host, token)
+{
+    return password.replace('URL', `${host}/reset/${token}`);
+};
+
+exports.reset = function(manager, team)
+{
+    return reset.replace('MANAGER', manager).replace('TEAM', team);
+};

@@ -36,20 +36,20 @@ BAT_STR=value
 BOWL_AVG=value
 BOWL_STR=value
 BOWL_ECO=value
-SENTRY_DSN=value
 GOOGLE_ID=value
 GOOGLE_KEY=value
 TWITTER_ID=value
 TWITTER_KEY=value
 FACEBOOK_ID=value
 FACEBOOK_KEY=value
-MONGO=mongodb://127.0.0.1:27017/GPL
 COOKIE_SECRET=randomsecretstring
 SESSION_SECRET=randomsecretstring
+MONGO=mongodb://127.0.0.1:27017/GPL
 ```
 
 * Start the localhost mongod server via `mongod`
 * Seed the local database with `npm run seed`
+* Generate match schedules with `npm run schedule`
 * Run the server locally at port 3000 or "PORT" in process.env with `npm start`
 * View the website at localhost:3000 within your browser
 
@@ -62,4 +62,4 @@ External Requirements:
 * Valid NEWRELIC_APP_NAME, NEWRELIC_LICENSE in process.env (Optional)
 * A valid "SENTRY_DSN" token in process.env for Sentry error alerts (optional)
 
-*PS:* Configure a file watching to automate static asset minification
+*PS:* Configure automatic static asset compression with `npm run watch`

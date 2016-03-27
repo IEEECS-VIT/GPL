@@ -32,15 +32,15 @@ var options =
     "sort":
     [
         ['points', -1],
-        ['net_run_rate', -1]
+        ['netRunRate', -1]
     ]
 };
 var leaderboard;
 var match = process.env.MATCH;
 var path = require('path').join;
 var helper = require(path(__dirname, 'mongoHelper'));
-var email = require(path(__dirname, '..', 'utils', 'email', 'email'));
 var mongoFeatures = require(path(__dirname, 'mongoFeatures'));
+var email = require(path(__dirname, '..', 'utils', 'email', 'email'));
 
 var ref =
 {
@@ -156,32 +156,7 @@ exports.forgotPassword = function (doc, token, host, callback)
 
         ref.other.header.to = document.value.email;
         ref.other.header.subject = 'Time to get back in the game.';
-        ref.other.attach_alternative(
-        "<table background='http://res.cloudinary.com/gpl/general/img1.jpg' align='center' cellpadding='0' " +
-            "cellspacing='0' width='600' style ='box-shadow: 5px 5px 15px #888888; border-radius: 12px; " +
-            "background-position: center; border-collapse: collapse;'>" +
-            "<tr>" +
-                "<td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 " +
-                "40px 0;color: #ffd195;'>" +
-                "graVITas Premier League" +
-                "</td>" +
-            "</tr>" +
-            "<tr>" +
-                "<td style='color:#FFFFFF;' align=\'left\' style=\'padding: 2px 30px 40px 30px;font-family: Arial;" +
-                    " line-height:30px; font-size:large;\'>" +
-                    "Please click <a href='http://" + host + "/reset/" + token + "'>here</a> in " +
-                    "order to reset your password.<br>For the purposes of security, this link is valid for one " +
-                    "use only, and shall expire in sixty minutes. <br> In the event that this password reset was" +
-                    " not requested by you, please ignore this message and your password shall remain intact.<br>" +
-                "</td>" +
-            "</tr>" +
-            "<tr>" +
-                "<td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;" +
-                    "color: #ffd195; font-weight: bold;'>Regards,<br>Team GPL<br>IEEE Computer Society<br>VIT Student chapter" +
-                "</td>" +
-            "</tr>" +
-        "</table>"
-        );
+        ref.other.attach_alternative(email.password(host, token));
 
         email.send(ref.other, helper.forgotCallback('password', callback));
     };
@@ -206,8 +181,7 @@ exports.forgotUser = function (doc, callback)
 
         ref.other.header.to = doc.email;
         ref.other.header.subject = 'Time to get back in the game';
-        ref.other.attach_alternative("The following teams were found in association with your details:<br><br>" +
-            "<ol>" + result + "</ol><br><br>Regards, <br>Team G.P.L<br>IEEE Computer Society");
+        ref.other.attach_alternative(email.user(result));
 
         email.send(ref.other, helper.forgotCallback('user', callback));
     };
@@ -268,34 +242,10 @@ exports.resetPassword = function (token, hash, callback)
             return callback(false, null);
         }
 
-        ref.other.header.to = doc.value.email;
+        doc = doc.value;
+        ref.other.header.to = doc.email;
         ref.other.header.subject = 'Password change successful!';
-        ref.other.attach_alternative(
-        "<table background='http://res.cloudinary.com/gpl/general/img3.jpg' align='center' cellpadding='0' cellspacing='0'" +
-            " width='600' style='box-shadow: 5px 5px 15px #888888; border-radius: 12px; background-position: center;" +
-            " border-collapse: collapse;'>" +
-            "<tr>" +
-                "<td align='center' style='font-family:Lucida Sans Unicode; font-size:50px; padding: 40px 0 40px 0;" +
-                    "color: #ffd195;'>" +
-                    "graVITas Premier League" +
-                "</td>" +
-            "</tr>" +
-            "<tr>" +
-                "<td style='color:#FFFFFF;' align='left' style='padding: 5px 30px 40px 30px;font-family: Arial; " +
-                    "line-height:30px; font-size:x-large;'>" +
-                    "Hey there, " + doc.value.managerName + "!<br>We\'re just writing in to let you know that " +
-                    "the recent password change for your team " + doc.value._id + " was successful.<br>Welcome " +
-                    "back to G.P.L!" +
-                "</td>" +
-            "</tr>" +
-            "<tr>" +
-                "<td align='left' style='padding: 20px 20px 20px 20px; font-family: courier; font-size: large;color:" +
-                    " #ffd195; font-weight: bold;'>" +
-                    "Regards,<br>Team GPL<br>IEEE Computer Society<br>VIT Student chapter" +
-                "</td>" +
-            "</tr>" +
-        "</table>"
-        );
+        ref.other.attach_alternative(email.reset(doc.managerName, doc._id));
 
         email.send(ref.other, callback);
     };
