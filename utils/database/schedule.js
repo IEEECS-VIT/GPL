@@ -38,6 +38,7 @@ var path = require('path');
 var async = require('async');
 var mongo = require('mongodb').MongoClient.connect;
 var generate = require(path.join(__dirname, '..', '..', 'database', 'mongoRecord')).users;
+var init = () => {database.collection(process.env.MATCH).find({authStrategy: {$ne: 'admin'}}, {_id: 1}).toArray(onFetch);};
 
 try
 {
@@ -113,9 +114,12 @@ var genSchedule = function(asyncCallback)
     {
         schedule = [];
 
-        switch (day < 5)
+        switch (day)
         {
-            case true:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
                 for (i = 1; i <= count / 2; ++i)
                 {
                     temp = (i + day - 1 + count / 2) % (count + 1);
@@ -132,51 +136,50 @@ var genSchedule = function(asyncCallback)
                 }
 
                 break;
-            default:
-                switch (day % 2)
+
+            case 5:
+            case 7:
+                num = 0;
+                temp = Math.pow(2, +(day < 7));
+
+                for (i = 0; i < 2; ++i)
                 {
-                    case 1:
-                        num = 0;
-                        temp = Math.pow(2, +(day < 7));
-
-                        for (i = 0; i < 2; ++i)
-                        {
-                            for (j = 1; j <= count * temp / 4; j += temp)
-                            {
-                                schedule.push({
-                                    "_id": ++num,
-                                    "Team_1": (count / 2) * i + j,
-                                    "Team_2": (count / 2) * i + j + Math.pow((count / 4), +(day > 5)),
-                                    "MoM": {},
-                                    "overs": [],
-                                    "scorecard": [],
-                                    "commentary": []
-                                });
-                            }
-                        }
-
-                        break;
-                    default:
-                        for (i = 0; i < 2; ++i)
-                        {
-                            for (j = 1; j <= count / 4; ++j)
-                            {
-                                temp = 2 * ((count / 4) * i + j) - 1;
-
-                                schedule.push({
-                                    "_id": (count / 4) * i + j,
-                                    "Team_1": temp,
-                                    "Team_2": ((count * (2 * i + 1)) / 2 + 1 - temp),
-                                    "MoM": {},
-                                    "overs": [],
-                                    "scorecard": [],
-                                    "commentary": []
-                                });
-                            }
-                        }
-
-                        break;
+                    for (j = 1; j <= count * temp / 4; j += temp)
+                    {
+                        schedule.push({
+                            "_id": ++num,
+                            "Team_1": (count / 2) * i + j,
+                            "Team_2": (count / 2) * i + j + Math.pow((count / 4), +(day > 5)),
+                            "MoM": {},
+                            "overs": [],
+                            "scorecard": [],
+                            "commentary": []
+                        });
+                    }
                 }
+
+                break;
+
+            case 6:
+                for (i = 0; i < 2; ++i)
+                {
+                    for (j = 1; j <= count / 4; ++j)
+                    {
+                        temp = 2 * ((count / 4) * i + j) - 1;
+
+                        schedule.push({
+                            "_id": (count / 4) * i + j,
+                            "Team_1": temp,
+                            "Team_2": ((count * (2 * i + 1)) / 2 + 1 - temp),
+                            "MoM": {},
+                            "overs": [],
+                            "scorecard": [],
+                            "commentary": []
+                        });
+                    }
+                }
+
+                break;
         }
 
         database.collection("matchday" + day).insertMany(schedule, {w : 1}, onInsert);
@@ -223,7 +226,7 @@ var onFetch = function (err, results)
 if(mode)
 {
     database = testDb; // from utils/database/seed.js
-    database.collection(process.env.MATCH).find({authStrategy: {$ne: 'admin'}}, {_id: 1}).toArray(onFetch);
+    init();
 }
 else
 {
@@ -235,7 +238,7 @@ else
         }
 
         database = db;
-        database.collection(process.env.MATCH).find({authStrategy: {$ne: 'admin'}}, {_id: 1}).toArray(onFetch);
+        init();
     };
 
     mongo(mongoURI, onConnect);

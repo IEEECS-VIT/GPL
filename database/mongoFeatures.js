@@ -99,7 +99,7 @@ exports.match = function (day, team, callback)
                 return callback(err);
             }
 
-            mongoTeam.squad({teamNo: doc}, callback);
+            mongoTeam.team({teamNo: doc}, callback);
         };
 
         mongoTeam.opponent(day, team, onOpponent);

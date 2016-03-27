@@ -194,17 +194,9 @@
         var greater_unit = null;
         for (i = 0; i < units.length; ++i) {
             var unit = units[i];
-            var maxUnits;
+            var maxUnits = (secondsIn[greater_unit] || total_duration) / secondsIn[unit];
 
-            if (greater_unit === null) {
-                maxUnits = total_duration / secondsIn[unit];
-            }
-            else {
-                maxUnits = secondsIn[greater_unit] / secondsIn[unit];
-            }
-
-            var curUnits = (diff / secondsIn[unit]);
-            var oldUnits = (old_diff / secondsIn[unit]);
+            var curUnits = (diff / secondsIn[unit]), oldUnits = (old_diff / secondsIn[unit]);
 
             if (floor) {
                 if (curUnits > 0) curUnits = Math.floor(curUnits);
@@ -444,10 +436,7 @@
             //Per unit clearing doesn't work in IE8 using explorer canvas, so do it in one time. The downside is that radial fade cant be used
             this.data.attributes.context.clearRect(0, 0, this.data.attributes.canvas[0].width, this.data.attributes.canvas[0].hright);
         }
-        var diff, old_diff;
-
-        var prevDate = this.data.prev_time;
-        var curDate = new Date();
+        var diff, old_diff, prevDate = this.data.prev_time, curDate = new Date();
         this.data.prev_time = curDate;
 
         if (prevDate === null)
@@ -466,8 +455,8 @@
                     color = this.config.time[key].color;
                     this.drawArc(x, y, color, 0);
                 }
-                this.stop();
-                return;
+
+                return this.stop();
             }
         }
 
@@ -481,15 +470,14 @@
         var all_times = parse_times(diff, old_diff, secondsIn["Years"], allUnits, floor);
 
         i = 0;
-        var j = 0;
-        var lastKey = null;
+        var j = 0, lastKey = null;
 
         var cur_shown = this.data.drawn_units.slice();
         for (i in allUnits) {
-            if(!allUnits.hasOwnProperty(i))
-            {
+            if (!allUnits.hasOwnProperty(i)) {
                 continue;
             }
+
             key = allUnits[i];
 
             // Notify (all) listeners
@@ -532,6 +520,7 @@
                     this.animateArc(x, y, color, visible_times.pct[key], visible_times.old_pct[key], (new Date()).getTime() + tick_duration);
                 }
             }
+
             lastKey = key;
             ++j;
         }
@@ -556,7 +545,7 @@
             // Tick animation, Don't queue until very slightly after the next second happens
             var delay = (diff % 1) * 1000;
             if (delay < 0)
-                delay = 1000 + delay;
+                delay += 1000;
             delay += 50;
 
             _this.data.animation_frame = useWindow.setTimeout(function () {
@@ -621,11 +610,9 @@
         }
 
         // Direction
-        var startAngle, endAngle, counterClockwise;
-        var defaultOffset = (-0.5 * Math.PI);
-        var fullCircle = 2 * Math.PI;
+        var startAngle, endAngle, counterClockwise, defaultOffset = (-0.5 * Math.PI);
+        var fullCircle = 2 * Math.PI, offset = (2 * pct * Math.PI);
         startAngle = defaultOffset + (this.config.start_angle / 360 * fullCircle);
-        var offset = (2 * pct * Math.PI);
 
         if (this.config.direction === "Both") {
             counterClockwise = false;
@@ -654,8 +641,7 @@
 
     TC_Instance.prototype.radialFade = function (x, y, color, from, key) {
         // Make fade_time option
-        var rgb = hexToRgb(color);
-        var _this = this; // We have a few inner scopes here that will need access to our instance
+        var rgb = hexToRgb(color), _this = this; // We have a few inner scopes here that will need access to our instance
 
         var step = 0.2 * ((from === 1) ? -1 : 1);
         for (i = 0; from <= 1 && from >= 0; ++i) {
@@ -667,6 +653,7 @@
                     _this.drawArc(x, y, rgba, 1);
                 }, delay);
             }());
+
             from += step;
         }
         if (typeof key !== undefined) {
@@ -686,7 +673,7 @@
 
     TC_Instance.prototype.start = function () {
         useWindow.cancelAnimationFrame(this.data.animation_frame);
-        useWindow.clearTimeout(this.data.animation_frame)
+        useWindow.clearTimeout(this.data.animation_frame);
 
         // Check if a date was passed in html attribute or jquery data
         var attr_data_date = $(this.element).data('date');
@@ -757,15 +744,12 @@
             this.default_options.ref_date = new Date();
             this.config = $.extend(true, {}, this.default_options);
         }
+
         $.extend(true, this.config, options);
 
         // Use window.top if use_top_frame is true
-        if (this.config.use_top_frame) {
-            useWindow = window.top;
-        }
-        else {
-            useWindow = window;
-        }
+        useWindow = this.config.use_top_frame ? window.top : window;
+
         updateUsedWindow();
 
         this.data.total_duration = this.config.total_duration;
@@ -797,6 +781,7 @@
             return;
         if (typeof type === "undefined")
             type = "visible";
+
         this.listeners[type].push({func: f, scope: context});
     };
 
@@ -853,9 +838,7 @@
     };
 
     TC_Class.prototype.getInstance = function (element) {
-        var instance;
-
-        var cur_id = $(element).data("tc-id");
+        var instance, cur_id = $(element).data("tc-id");
         if (typeof cur_id === "undefined") {
             cur_id = guid();
             $(element).attr("data-tc-id", cur_id);
@@ -895,6 +878,7 @@
                 return callback(instance);
             }
         });
+
         return this;
     };
 

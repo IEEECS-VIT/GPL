@@ -36,6 +36,7 @@ if(!process.env.NODE_ENV)
 {
     var value = require('faker').commerce.price;
 }
+var match = process.env.MATCH;
 var path = require('path').join;
 var mongoFeatures = require(path(__dirname, 'mongoFeatures'));
 
@@ -78,4 +79,9 @@ exports.shortlistRef =
         out: null,
         limit: 8
     }
+};
+
+exports.getData = function(team, slice, callback)
+{
+    db.collection(match).find(team, slice).limit(1).next(callback);
 };

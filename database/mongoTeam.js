@@ -42,7 +42,7 @@ exports.getTeam = function (doc, callback)
         {
             return callback(err, null);
         }
-        else if (!document.team.length)
+        if (!document.team.length)
         {
             return callback(null, []);
         }
@@ -117,6 +117,7 @@ exports.map = function (doc, callback)
         return callback(null, doc.teamNo);
     };
 
+    helper.getData(doc, {teamNo: 1}, onFind);
     db.collection(match).find(doc, {teamNo: 1}).limit(1).next(onFind);
 };
 
@@ -271,9 +272,9 @@ exports.opponent = function (day, team, callback)
     db.collection('matchday' + day).find(filter).limit(1).next(onFind);
 };
 
-exports.squad = function (doc, callback)
+exports.team = function (doc, callback)
 {
-    var onSquad = function (err, doc)
+    var onTeam = function (err, doc)
     {
         if (err)
         {
@@ -294,5 +295,5 @@ exports.squad = function (doc, callback)
         async.map(doc.team, mongoFeatures.getPlayer, onGet);
     };
 
-    db.collection(match).find(doc, {team: 1}).limit(1).next(onSquad);
+    helper.getData(doc, {team: 1}, onTeam);
 };
