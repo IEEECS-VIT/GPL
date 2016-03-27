@@ -1,8 +1,8 @@
 {
   "name": "GPL",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "graVITas Premier League",
-  "homepage": "http://www.gravitaspremierleague.com/",
+  "homepage": "http://gpl.ieeecsvit.com/",
   "bugs": {
     "url": "https://github.com/IEEECS-VIT/GPL/issues",
     "email": "gravitaspremierleague@gmail.com"

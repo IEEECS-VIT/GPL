@@ -26,3 +26,4 @@ exclude_paths:
 - LICENSE
 - Procfile
 - public/images/**/*
+- utils/email/templates/**/*

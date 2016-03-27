@@ -71,6 +71,41 @@ exports.initSimulation = function (day, masterCallback)
 
         parallelTasks = helper.teamParallelTasks(getTeamDetails, matchDoc);
 
+        var totals = function(newUserDoc)
+        {
+            if(newUserDoc.scores[day - 1] > stats.daily.total.value)
+            {
+                stats.daily.total = helper.dailyTotal(newUserDoc, day);
+            }
+            if(newUserDoc.highestTotal > stats.high.total.value)
+            {
+                stats.high.total = helper.total(newUserDoc, 'high');
+            }
+            if(newUserDoc.lowestTotal < stats.low.value)
+            {
+                stats.low = helper.total(newUserDoc, 'low');
+            }
+        };
+
+        var nonBowler = function(newUserDoc)
+        {
+            if (!newUserDoc.squad[i].match(/^b/))
+            {
+                if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > stats.daily.individual.value)
+                {
+                    stats.daily.individual = helper.dailyHigh(newUserDoc, i, day);
+                }
+                if(newUserDoc.stats[newUserDoc.squad[i]].high > stats.high.individual.value)
+                {
+                    stats.high.individual = helper.overallHigh(newUserDoc, i);
+                }
+                if(newUserDoc.stats[newUserDoc.squad[i]].runs > stats.orange.runs)
+                {
+                    stats.orange = helper.orangeCap(i, newUserDoc);
+                }
+            }
+        };
+
         var updateData = function (newData)
         {
             var updateUser = function (newUserDoc, asyncCallback)
@@ -78,37 +113,12 @@ exports.initSimulation = function (day, masterCallback)
                 if(newUserDoc.squad.length)
                 {
                     stats.general = helper.generalStats(stats.general, newUserDoc, day);
-
-                    if(newUserDoc.scores[day - 1] > stats.daily.total.value)
-                    {
-                        stats.daily.total = helper.dailyTotal(newUserDoc, day);
-                    }
-                    if(newUserDoc.highestTotal > stats.high.total.value)
-                    {
-                        stats.high.total = helper.total(newUserDoc, 'high');
-                    }
-                    if(newUserDoc.lowestTotal < stats.low.value)
-                    {
-                        stats.low = helper.total(newUserDoc, 'low');
-                    }
+                    totals(newUserDoc);
 
                     for (i = 0; i < newUserDoc.squad.length; ++i)
                     {
-                        if (!newUserDoc.squad[i].match(/^b/))
-                        {
-                            if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > stats.daily.individual.value)
-                            {
-                                stats.daily.individual = helper.dailyHigh(newUserDoc, i, day);
-                            }
-                            if(newUserDoc.stats[newUserDoc.squad[i]].high > stats.high.individual.value)
-                            {
-                                stats.high.individual = helper.overallHigh(newUserDoc, i);
-                            }
-                            if(newUserDoc.stats[newUserDoc.squad[i]].runs > stats.orange.runs)
-                            {
-                                stats.orange = helper.orangeCap(i, newUserDoc);
-                            }
-                        }
+                        nonBowler(newUserDoc);
+
                         if (newUserDoc.squad[i].match(/^[^a]/) && newUserDoc.stats[newUserDoc.squad[i]].wickets > stats.purple.wickets)
                         {
                             stats.purple = helper.purpleCap(i, newUserDoc);
