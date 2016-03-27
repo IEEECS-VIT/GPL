@@ -408,7 +408,7 @@ router.get('/players', authenticated, function (req, res, next){ // page for all
                 {
                     arg.active = false;
                     arg.image = ("https://res.cloudinary.com/gpl/players/" + arg.Type + "/" + arg._id + ".jpg");
-                    asyncCallback();
+                    asyncCallback(null, arg);
                 };
 
                 var onMap = function(err, result)

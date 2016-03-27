@@ -21,7 +21,10 @@ var passport = require('passport');
 var router = require('express').Router();
 var onRetrieve = function(req, res, next)
 {
-    passport.authenticate(req.url.split('/')[2], function(err, user, next){
+    passport.authenticate(req.url.split('/')[1], function(err, user){
+        res.clearCookie('team', {});
+        res.clearCookie('phone', {});
+
         if(err)
         {
             res.status(422);
@@ -34,8 +37,6 @@ var onRetrieve = function(req, res, next)
         }
 
         res.cookie('name', req.signedCookies.team.trim().toUpperCase(), {maxAge: 86400000, signed: true});
-        res.clearCookie('team', {});
-        res.clearCookie('phone', {});
         return res.redirect('/home/players');
     })(req, res, next);
 };

@@ -23,7 +23,7 @@ var passport = require('passport');
 var callback = function(req, token, refresh, profile, done)
 {
     process.nextTick(function(){
-        mongoUsers.fetchUser({'_id': req.signedCookies.team}, function (err, doc) {
+        mongoUsers.fetchUser({_id: req.signedCookies.team}, function (err, doc) {
             if (err)
             {
                 return done(err);
@@ -32,7 +32,7 @@ var callback = function(req, token, refresh, profile, done)
             {
                 return done(null, doc); // user found, return that user
             }
-            else if(req.signedCookies.phone && (!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users'))) // if there is no user, create them
+            if(req.signedCookies.phone && (!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users'))) // if there is no user, create one
             {
                 user = record();
                 user.token = token;
@@ -43,20 +43,21 @@ var callback = function(req, token, refresh, profile, done)
                 user.authStrategy = profile.provider;
                 user.phone = req.signedCookies.phone;
                 user.email = profile.emails[0].value;
-                user.managerName = profile.displayName; // Use email as the primary key, possibly have _id as a compound instance instead of a regular string.
 
                 mongoUsers.insert(process.env.MATCH, user, done);
             }
-
-            return done(err);
+            else
+            {
+                done(err);
+            }
         });
     });
 };
 var ref =
 {
-    undefined : 'http://localhost:3000/auth/',
-    'dev' : 'http://gpl-dev.herokuapp.com/auth/',
-    'production' : 'http://gravitaspremierleague.com/auth/'
+    undefined: 'http://localhost:3000/auth/',
+    'dev': 'http://gpl-dev.herokuapp.com/auth/',
+    'production': 'http://gravitaspremierleague.com/auth/'
 };
 var facebook = require('passport-facebook').Strategy;
 var mongoUsers = require(path(__dirname, 'mongoUsers'));
@@ -76,10 +77,12 @@ for(key in strategies)
     }
 
     passport.use(new strategies[key]({
+            enableProof: true, // thwarts man in the middle attacks
+            passReqToCallback: true, // allows us to pass in the req from our route (lets us check if a user is logged in or not)
             clientID: process.env[`${key}_ID`],
             clientSecret: process.env[`${key}_KEY`],
-            callbackURL: ref[process.env.NODE_ENV] + key.toLowerCase() + '/callback',
-            passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+            profileFields: ['id', 'email', 'displayName'],
+            callbackURL: ref[process.env.NODE_ENV] + key.toLowerCase() + '/callback'
         },
         callback
     ));
