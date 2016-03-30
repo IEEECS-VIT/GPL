@@ -24,6 +24,7 @@ if(process.env.NODE_ENV)
 }
 
 var fs = require('fs');
+var line = require('os').EOL;
 var dir = [__dirname, '..', '..', '.idea'];
 var path = require('path').join;
 var scopeData;
@@ -35,10 +36,10 @@ fs.readFile(path(...dir, '.name'), function(err, data){
         throw err;
     }
     scopeData =
-    '  <component name="NameScopedManager">\n' +
-    `    <scope name="Public JS" pattern="file[${data}]:public/javascripts//*&amp;&amp;!file[${data}]:public/javascripts/min//*" />\n` +
-    `    <scope name="Public CSS" pattern="file[${data}]:public/stylesheets//*&amp;&amp;!file[${data}]:public/stylesheets/min//*" />\n` +
-    '  </component>\n' +
+    `  <component name="NameScopedManager">${line}` +
+    `    <scope name="Public JS" pattern="file[${data}]:public/javascripts//*&amp;&amp;!file[${data}]:public/javascripts/min//*" />${line}` +
+    `    <scope name="Public CSS" pattern="file[${data}]:public/stylesheets//*&amp;&amp;!file[${data}]:public/stylesheets/min//*" />${line}` +
+    `  </component>${line}` +
     '</project>';
 
     fs.stat(path(...dir, 'workspace.xml'), function(error, res){
@@ -47,7 +48,7 @@ fs.readFile(path(...dir, '.name'), function(err, data){
             throw error;
         }
 
-        fs.createWriteStream(path(__dirname, ...dir, 'workspace.xml'), {flags: 'r+', start: res.size - 11}).end(scopeData);
+        fs.createWriteStream(path(__dirname, ...dir, 'workspace.xml'), {flags: 'r+', start: res.size - 10 - line.length}).end(scopeData);
         console.timeEnd('mark');
     });
 });

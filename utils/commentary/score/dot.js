@@ -4457,4 +4457,4 @@ module.exports =
         "and again, this one's a bit wider and he swings across the line and only makes contact with air",
         "and another slower ball, and another swing and miss. He came down the track this time, but the lack of pace, " +
         "defeated his across-the-line swish."
-    ];
+	];

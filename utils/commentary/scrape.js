@@ -29,6 +29,7 @@ var data = '';
 var flag = false;
 var fs = require('fs');
 var http = require('http');
+var line = require('os').EOL;
 var async = require('async');
 var path = require('path').join;
 var scrape = require('cheerio').load;
@@ -180,8 +181,8 @@ var updateFile = function(arg, callback)
                 throw err;
             }
 
-            fs.createWriteStream(commentary[arg].file + '.js', {flags: 'r+', start: result.size - 4})
-              .end(commentary[arg].content + '\n\t];');
+            fs.createWriteStream(commentary[arg].file + '.js', {flags: 'r+', start: result.size - 3 - line.length})
+                .end(commentary[arg].content + `${line}\t];`);
             callback();
         });
     }

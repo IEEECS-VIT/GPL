@@ -230,4 +230,4 @@ module.exports =
         "he is out! Flicks this wristily towards mid-on. The ball is not hit well, which means they can think of a run. The" +
         " fielder charges in, dives in to save time, is off balance, the ball hasn't sat properly in his right hand, but he" +
         " flicks it underarm even as he comes down. The ball loops to the top of the stumps to catch the running batsman short"
-    ];
+	];

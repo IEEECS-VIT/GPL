@@ -52,4 +52,4 @@ module.exports =
         "widish ball, and out! Good riposte from the bowler, he snares the big wicket. This looked like a seam-up ball on " +
         "off, he sets up for a pull but can only top-edge it into the air. The bowler pedals back from his follow-through " +
         "and settles under it near the mid-on region. Excellent judgement."
-    ];
+	];

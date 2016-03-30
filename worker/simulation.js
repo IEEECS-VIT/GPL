@@ -428,7 +428,7 @@ exports.simulate = function (data, callback)
                 {
                     temp = parseFloat((Total[+tossIndex] / (i + 1)).toFixed(2));
 
-                    for(j = 0; j < 4; ++j)
+                    for(j = 1; j < 5; ++j)
                     {
                         helper.projected.rates[j] = temp;
                         helper.projected.totals[j] = Total[+tossIndex] + (19 - i) * temp;

@@ -233,14 +233,12 @@ exports.rand = function (base, limit)
     {
         return base + ((limit > base) ? rand(limit - base) : 0);
     }
-    else if (base)
+    if (base)
     {
-        return ((typeof(base) === 'object') ? base[rand(base.length)] : parseInt(Math.random() * 1000000000000000, 10) % base);
+        return ((typeof(base) === 'object') ? base[rand(base.length)] : parseInt(Math.random() * 1e15, 10) % base);
     }
-    else
-    {
-        return Math.random();
-    }
+
+    return Math.random();
 };
 
 exports.checkMoM = function(MoM, temp, strike, toss)

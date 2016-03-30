@@ -4849,4 +4849,4 @@ module.exports =
         "low full toss outside off, slapped past the covers",
         "length and outside off, he slogs and gets a top edge to short third man. The batsman completes a good over head catch",
         "he sinks to one knee, slog-sweeps and gets a toe-end to the off side"
-    ];
+	];
