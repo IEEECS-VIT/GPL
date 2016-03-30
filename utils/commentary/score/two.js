@@ -1604,5 +1604,8 @@ module.exports =
 		"yorker, dug out to long-on, and because it has gone off pace towards the fielder they steal the second. Had the" +
         " bowler been behind the stumps he could have run the striker out.",
 		"slower short ball but again too far down the leg side. Deflected past short fine leg for two.",
-		"full toss, on the pads, hit wide of long-on for a couple."
+		"full toss, on the pads, hit wide of long-on for a couple.",
+		"darted into his body, the batter goes deep in his crease and whips it away to the man at deep backward square leg.",
+		"that's well played. Good hands from the fielder there, he was waiting to read the ball off the pitch, and when " +
+        "it is quick and pitches so close to you, that leaves you very little time. Shovel driven through cover."
 	];

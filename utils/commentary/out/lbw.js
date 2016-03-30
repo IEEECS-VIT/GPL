@@ -118,5 +118,7 @@ module.exports =
         "is rapped on the back pad. He did not account for the movement here. This may have pitched outside leg.... Might " +
         "have been snaking down. Tight call. Yes, it pitched just outside leg",
         "the umpire has given him out lbw! This one is plumb. This is a top delivery, pitched just outside off, doesn't do " +
-        "as much as an ordinary ball should, beats the sweep and hits him in front of middle. This is straightforward"
+        "as much as an ordinary ball should, beats the sweep and hits him in front of middle. This is straightforward",
+		"the conventional sweep, and this time the bowler sends him on his way. the batter plants that front leg across " +
+        "and swishes at the ball, misses it and that did seem like it would go on to topple the stumps."
 	];

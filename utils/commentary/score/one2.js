@@ -1189,5 +1189,68 @@ module.exports =
 		"down the wicket, yorks himself, hits this hard at the bowler, and takes a single off the ricochet. Could have " +
         "gone for the second but decides against it.",
 		"full, into the pads, drilled away to deep midwicket for one.",
-		"yorker, middle and leg, dug out to deep midwicket. The non-striker wants the second, but is sent back."
+		"yorker, middle and leg, dug out to deep midwicket. The non-striker wants the second, but is sent back.",
+		"might be getting a bit carried away with the outward movement he got early in the over. Targeting the pads a bit too " +
+		"much and the batter whips it away to deep square leg. Uppish, but there was no one inside the circle.",
+		"looks for the yorker, finds it, and the striker, despite his front leg going away for a walk in the park, is " +
+		"kept to a single to mid-off.",
+		"back of a length and outside off, steered to deep third man.",
+		"shortish and angled in that off stump channel to cramp him, the batsman glides it to third man again.",
+		"third man was up inside the circle. The batter picked that up, loads of experience, lets the shortish ball run " +
+		"off his face and steals a single..",
+		"low full toss, patted down the ground. AB runs across from mid-on, gets his first touch on the ball and the " +
+		"ground chants his name.",
+		"plants his front leg across and works the angle into him. Neatly flicked to long leg. That's the shortest " +
+		"boundary there, and the man has been, wisely, placed fine..",
+		"drilled to long-off.",
+		"slogs across the line, but the batter backs himself against spin. Slog sweeps wildly to deep square leg.",
+		"starts with the odd ball, The striker picked it and pats it through the covers off the back " +
+		"foot. Too short there.",
+		"tossed up outside off, defended through point.",
+		"good length ball on off stump, just enough fizz again, the batsman opens the face and skips across to the other" +
+		" end. Point is not the most imposing figure, and he misfields as well.",
+		"flighted outside off, he wants to play it through the covers but he is beaten in flight. Inside edge down the ground.",
+		"opens the face and finds a way to get off strike. More unintentional, because he had been looking at a gap squarer" +
+		" than where the ball went.",
+		"leans towards a fuller ball and tucks it from outside off through midwicket. Runs on offer there every time you" +
+		" hit it with all the men in the deep.",
+		"he is a lovely timer of the ball, but seems a bit airy outside off. Pokes an angled bat away from his body again" +
+		" and gets a thick outside edge through point.",
+		"again, the batsman exploits the leg side field with great skill. the bowler isn't the fastest of this lot, so " +
+		"he can be confident of working him around. The batsman shuffles across and whips a back of a length ball from " +
+		"seventh stump behind square leg.",
+		"that's very gentle cricket. Offers a loopy old full toss. the batsman responds with a weak front foot pull.",
+		"worked away into the leg side.",
+		"swatted away to the man on the cover boundary.",
+		"works it off his pads towards short fine leg, they wanted another run, but there isn't one. At least until the misfield.",
+		"eased off the open face and finally they pick up on an opportunity for a proper single.",
+		"full and wide outside off with the keeper standing up, slashed away to the sweeper cover.",
+		"waits on a length ball on the pads and works it through square leg.",
+		"nudges it behind square leg. The middle stump, or even off stump line, has been the batsman's bread and butte rthis innings.",
+		"steered behind point.",
+		"steered behind point again as the batsman waits on the left-arm spin.",
+		"whips it off middle stump to short fine leg , the lesser the pace that is offered, the harder it is to hit. That's been the story of the tournament so far.",
+		"leg cutter, pitched well outside off, the batter premeditated a sweep and goes through with it. Inside edge to long leg.",
+		"goes back against a shortish legcutter, he was looking for a second run but Miller who was running in from " +
+		"midwicket was sufficiently swift.",
+		"and gets a friendly full toss to knock over to long-on.",
+		"moves back to the shortish ball on middle and pulls to deep square leg.",
+		"that's well bowled. Makes his pace work for him by digging it in short and cramping him up on leg stump. He makes" +
+		" room and dabs it towards third man, who misfields.",
+		"brings him forward with a good length ball, but the batsman is not quite well balanced behind it. Harried little" +
+		" glide to third man.",
+		"shortish and outside off, punched through the covers.",
+		"leans forward to the fuller ball outside off and turns it through midwicket.",
+		"driven through the off side.",
+		"gets forward to a good length ball and guides it towards point, who can be taken on. Even by the slightly portly.",
+		"the offcut almost gave him too much problems, but the batter adjusts and defends into the covers. Good single taken.",
+		"back of a length and outside off, pushed into the covers to retain strike.",
+		"looks for a wide yorker, the batter goes after it a bit too early and gets an inside edge towards long-on.",
+		"the last one had extra bounce, and this one, back of a length on off stump, does not bounce! Cross-seamed delivery" +
+        " dies on the batsman.",
+		"back of a length, and very little pace on it, the batter waits on it and dabs it through to deep midwicket.",
+		"back of a length and outside off, steered towards the sweeper on the off side.",
+		"wanders down to third man.",
+		"fast, short, on leg stump, ugly heave down towards long-on.",
+		"low full toss outside off, hammered to long-off."
 	];

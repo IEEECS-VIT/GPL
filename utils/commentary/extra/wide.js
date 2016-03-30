@@ -42,5 +42,8 @@ module.exports =
 		"another wide down the leg side. Short of a length, looks to tuck him up, but slides too far.",
 		"slower bouncer, 123ks, called wide for height. Has to be touch and go on that.",
 		"the batsman moves inside the line anticipating the bouncer. the bowler bowls one but well down the leg side.",
-		"the batsman moves inside the line again, the bowler bounces him down the leg side. Another wide."
+		"the batsman moves inside the line again, the bowler bounces him down the leg side. Another wide.",
+		"a little bit of a question there, but the umpire says it's touched nothing. There was a noise, I thought it was" +
+		" thigh pad, the Umpire has the final say. Back of a length ball skirts past the flick shot.",
+		"looks like it was the slower, wider yorker. Went away too far."
 	];

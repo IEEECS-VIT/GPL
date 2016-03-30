@@ -1432,5 +1432,10 @@ module.exports =
 		"the batsman targets the short square boundary, and he has absolutely smashed this. Slower ball, on a length, " +
         "and he has slogged this right out of the screws.",
 		"length ball on the pads, and the striker has gone deep into the crease to drill this over cow corner for a six." +
-        " Straight out of the screws."
+        " Straight out of the screws.",
+		"that's the shot of the night! Many clicks, heavy projectile heading for your head, and the batter was on the " +
+        "front foot, pushes his weight back, and hooks it for a six!.",
+		"more! down the track and his quick feet gets him in prime position to lift a length ball over long-on.",
+		"top shot! He's looking like he wants to stick around, but he is still good enough to put the bad ball away. " +
+		"Half-volley on off stump, drummed down the ground."
 	];

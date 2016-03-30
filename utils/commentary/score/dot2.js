@@ -666,5 +666,63 @@ module.exports =
 		"lovely slower bouncer, the batsman's hook is beaten, but he is not happy with the call to not wide it. Again touch" +
         " and go as it was in the last over. Wided last over, fine this time.",
 		"nearly a yorker, dug out to extra cover. They decide against the single.",
-		"yorker, just outside off, the batter is moving all over the crease, and in the end he is beaten on the attempted steer."
+		"yorker, just outside off, the batter is moving all over the crease, and in the end he is beaten on the attempted" +
+        " steer.",
+		"fires it in on leg and gets it to weave towards middle. The green pitch is worth exploring, to see if it would " +
+		"help the fuller ball move about..",
+		"the crowd are yelling already as the bowler runs in and bowls another one. Headhunts middle stump, but the " +
+		"striker plays party pooper.",
+		"pace and movement! the striker was late to move across to a length ball outside off and is left by in the dust..",
+		"steamy, gets behind this one on middle and off and the bowler hares after the ball towards the covers. He " +
+		"looks pumped out. Is this the game he finally pops a vein?.",
+		"oooh, another time that would have been crashed over extra cover. Here, a length ball with enough width simply" +
+		" beats the bat. the batter looking to be positive.",
+		"nice shot! Crisp drive to mid-off, where the man needed to put in the dive lest the over included a boundary.",
+		"good length ball outside off, pushed into the covers.",
+		"nails the off stump line yet again and the striker plays a more orthodox block into the leg side..",
+		"he just can't help himself with the pull! The short ball comes up at his nose, and he hits it off the splice " +
+		"and a dull clunk indicated he had not got it at all. The ball just about pops over the bowler. Oh, that could " +
+		"have been a very funny dismissal.",
+		"another rush down the track, but this time the bowler adjusted well. Fired it in quicker, and shorter and " +
+		"refused him any swinging room. Dabbed towards point.",
+		"quicker, flatter, on the pads. the striker goes for the sweep and doesn't connect well enough.",
+		"that keeps low as he skids a length ball straight though and the striker adjusts just about well enough.",
+		"leans forward, and then has to reach a bit as the ball dips on him outside off. Pushed to mid-on.",
+		"length ball outside off, pushed back at the bowler.",
+		"goes back to a shortish ball and chops it into the covers.",
+		"good length ball on middle and off, defended.",
+		"I guess he didn't bowl the googly - probably his best ball - to the free hit because it would allow the striker" +
+		" to hit with the turn. But here, he beats 'em with the dip, went for a sweep and the way he was looking to drag" +
+		" it from outside off makes me think he didn't read it.",
+		"the keeper went up, but then gave up the appeal. To the bowler, that is absolute madness. Belts it out as loud " +
+		"as he can when a ball goes straight on and beats the batter's flick down leg.",
+		"oh, the running is going haywire! the batsman this time wants a run after pushing the ball into the covers..",
+		"defended down the pitch.",
+		"fullish and just outside off, defended into the covers.",
+		"opens the face against a shortish ball outside off, moves across to his left to get behind that.",
+		"eased into the covers as the bowler prepares to bowl out.",
+		"tossed up on off stump, driven back at him.",
+		"beaten in flight! Beautifully bowled, the bowler. Did he preempt it. Held the ball back, and the striker's slog" +
+		" sweep was nowhere near it.",
+		"slows it down, the batsman minds it as he defends with soft hands into the covers and then he looks for a single.",
+		"bit too much.",
+		"offcutter on middle, tucked to midwicket.",
+		"zips in the flatter ball, non-turner too, on off stump. Goes back and late cuts it.",
+		"googly again, but this time he picks it and blocks it.",
+		"back of a length on middle and leg, nudged towards midwicket.",
+		"another short ball, outside off, and the batter is happy to sway away from it.",
+		"too quick for him. The straighter one, outside off, zips under his bat.",
+		"stays back to another straighter one - he didn't have too much idea about it though, reads it off the pitch and" +
+		" defends.",
+		"the line gave that one away. Tossed up outside leg, the striker tries to nudge it and misses.",
+		"opens the face looking for a single, but only finds point.",
+		"leg cutter, and that was a show of nerves. Plays a silly old slog sweep, for at best one run because there is " +
+		"protection in the deep, and is beaten.",
+		"shortish and outside off, with a slip in place, the batter pokes his bat at it and is beaten.",
+		"not when he bowls it like that though. Full, fast, and straight. the batter blocks it, and the ball pops back " +
+		"up at the bowler. Appeals for the catch off ricochet on the boot. But he was just being coy.",
+		"well bowled. Swaps the yorker for a slow bouncer and the batter, who had backed away for the upper cut, cannot " +
+		"time his stroke well enough.",
+		"that was tough work for the striker, but he's still standing. Fierce short ball looking for his badge, he plays" +
+		" a pull in self-defence and the top edge does not hang in the air long enough for the bat to get under it."
 	];

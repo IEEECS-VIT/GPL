@@ -1175,5 +1175,13 @@ module.exports =
         " he has got the big one. the striker, who had nine lives, doesn't get another. The slower offcutter has been " +
         "driven straight down the lap of mid-on.",
 		"Those celebrations are back, arms aloft! Slower bouncer, the batsman shapes up to pull, but the ball hasn't arrived." +
-        " He then looks to steer it, but is late on the attempt and the extra bounce takes the edge through to the keeper."
+        " He then looks to steer it, but is late on the attempt and the extra bounce takes the edge through to the keeper.",
+		"there's a party in the infield and the batsman are only too happy to wander in and be suckerpunched. A length " +
+        "ball outside off sticks in the pitch a bit and robs the batter of a pretty drive on the up. Shouldn't be playing" +
+		" those shots here.",
+		"looks at the heavens and wonders why me? It was a short ball, but with the bowler putting in so much effort to " +
+		"dig it into the pitch, it sticks in it and doesn't come on. He whacks it hard, but he cannot time it well. The " +
+		"ball slows up as it comes to him and he can only bunt it straight to the man at cover.",
+		"that almost seemed like it ran off the face! the batsman was on leg stump, and he was willing the ball to take " +
+		"enough of the bat to run away to third man. The ball, pesky thing, doesn't listen. Bet its going to get grounded."
 	];

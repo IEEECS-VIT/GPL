@@ -171,7 +171,7 @@ exports.simulate = function (data, callback)
                     batPerfIndex = (rand(team[+tossIndex].batAverage[strike[+strikeIndex]] * team[+tossIndex].batRating[strike[+strikeIndex]] / 1000 + 1) + team[+tossIndex].batAverage[strike[+strikeIndex]] * (team[+tossIndex].batRating[strike[+strikeIndex]]) / bat[0]) * (rand(team[+tossIndex].batStrikeRate[strike[+strikeIndex]] * team[+tossIndex].batRating[strike[+strikeIndex]] / 1000 + 1) + team[+tossIndex].batStrikeRate[strike[+strikeIndex]] * (team[+tossIndex].batRating[strike[+strikeIndex]]) / bat[1]) / team[+!tossIndex].bowlRating[currentBowler] - (+(Math.abs(frustration[+strikeIndex]) > 2) && Math.pow(-1, rand(2)) * frustration[+strikeIndex]);
                     deliveryScore = deliveryScore || 1;
 
-                    batPerfIndex += Math.pow(-1, (batPerfIndex < bowlPerfIndex)) * (rand(Math.log10(deliveryScore))) / 100;
+                    batPerfIndex += Math.pow(-1, +(batPerfIndex < bowlPerfIndex)) * (rand(Math.log10(deliveryScore))) / 100;
                     ++deliveries[currentBowler];
                     ++balls[strike[+strikeIndex]];
                     batPerfIndex -= bowlPerfIndex;
@@ -673,7 +673,7 @@ exports.simulate = function (data, callback)
                 data.team[i].form += Math.pow(-1, +(i !== +winner)) * temp; // adjust team form
                 data.team[i].ratio = data.team[i].win / (data.team[i].loss || 1); // update win ratio
                 data.team[i].progression.push((data.team[i].progression.slice(-1)[0] || 0) + state[(i === +winner)].points);
-                data.team[i].streak = ((Math.pow(-1, (i === +winner)) * data.team[i].streak > 0) ? 1 : (data.team[i].streak - Math.pow(-1, (i === +winner))));
+                data.team[i].streak = ((Math.pow(-1, +(i === +winner)) * data.team[i].streak > 0) ? 1 : (data.team[i].streak - Math.pow(-1, +(i === +winner))));
             }
         }
 

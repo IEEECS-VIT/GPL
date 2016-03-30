@@ -3276,5 +3276,26 @@ module.exports =
         " third man is stiff. Concedes the boundary.",
 		"short of a length, slower ball, but too straight with fine leg inside the circle. the batter just deflects this" +
         " square of that short fine leg.",
-		"Wide length ball, and he goes hard at it, and sends it over point for a four."
+		"Wide length ball, and he goes hard at it, and sends it over point for a four.",
+		"that's serene! Super serene. The rest of the team are looking at him to do the Mahela role and he gets off the " +
+        "mark by using the bowler's pace, just like Mahela does. Stray down leg dismissed to the long leg boundary.",
+		"simple as that! He's well, half-dilscooped the bowler. The guts need to be appreciated though, to go down face " +
+		"to face with the ball delivered from a speed demon. Didn't time it, and most of the impact was off the thigh " +
+		"pad. the bowler simply turned around and walked off.",
+		"and another! Gleefully presses forward at a length ball and bashes it over long-on. That's the equivalent of a " +
+		"bonk on the head.",
+		"and the wise man thumps him! The batter does not want an escape route. Not even a breather as he takes a simple" +
+		" length ball on off stump and slog sweeps it away.",
+		"superb batting! Lunged low and forward, his front leg moving across to provide leverage for a lap sweep over " +
+		"short fine leg. The man was inside the circle, deep square was back and he split them. Good game sense.",
+		"lovely again. Picked his spot, but before that he had picked the length. It was limp and short, moves back and " +
+		"short-arm pulls it to the long leg boundary.",
+		"heaved away into the gap between square leg and midwicket! Uses the quicker ball, but he's pitched it on a length." +
+		" And the batsman can get under it. Just about the perfect ball..",
+		"in the slot and even a big effort on the long-on boundary is not good enough. Cleared the front leg and brought" +
+		" his straight bat down with very little malice. That of course means he times the ball perfectly.",
+		"case in point. The striker plants his front leg forward and wallops the delivery. Only one place that was " +
+		"heading - long-off boundary.",
+		"The yorker goes wrong and at that pace, the batsman only had to get an inside edge on it. Gets a lot more than " +
+		"that. Lovely flick to the long leg boundary. The fielder was up inside the circle."
 	];

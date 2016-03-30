@@ -315,5 +315,18 @@ module.exports =
         "slower-ball yorker. Gets under his bat, lands on the crease, hits the bat pad as he is on his knees trying to get " +
         "under it. The ball ricochets off the pad, and hits the stumps. He has taken out the big one",
 		"the batter moves too far across and is bowled by a straight full toss. He has premeditated the ramp, but as he " +
-        "is bringing his bat across it hits the ground and gets a bit stuck there. Too late on the ball then."
+        "is bringing his bat across it hits the ground and gets a bit stuck there. Too late on the ball then.",
+		"played for the turn and looks up with horror in his eyes once he heard the rattle behind him. The bowler is not" +
+        " a demon deliverer. Speared it in flat, it sneaked through the gap between bat and pad as the batter went for " +
+		"an expansive cover drive without moving his front foot across...",
+		"and all he gets is a dismissal! What can you do? The last ball didn't do anything, this pitches wide outside " +
+		"off and hurtles into the stumps! No magic from the pitch, just the left-arm spinner deceiving a batsman in bad " +
+		"form with a beauty. Beautiful bowling from the bowler. Tossed it up to entice the cover drive and drove through" +
+		" the gap to derail the batsman.",
+		"and off he goes! Hands aloft, big smile on his face after a big googly skirts through the bat and pad gap. The" +
+		" striker was all at sea. He walks off feigning the googly's release, but he did not pick it. His front foot did" +
+		" not reach far enough across because in T20, hitters prefer room. This was the wrong ball to be doing such antics..",
+		"searching for the escape route via third man, but the bowler asks him to take the diversion all the way to the " +
+		"dressing room. Back of a length delivery comes screaming back in, cramps the batsman and before he can adjust, " +
+		"it's through him."
 	];

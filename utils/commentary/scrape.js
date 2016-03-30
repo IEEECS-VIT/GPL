@@ -83,7 +83,7 @@ var dismissalHandler = function(arg)
     {
         arg = ['lbw'];
     }
-    else if(arg.indexOf(' runout ') > -1)
+    else if(arg.indexOf(' run out ') > -1)
     {
         arg = ['runout'];
     }
@@ -217,7 +217,7 @@ var onStitch = function()
     async.each(dump, processor, onCompile);
 };
 
-http.get('http://www.espncricinfo.com/australia-v-india-2015-16/engine/match/895817.html?innings=1;view=commentary', // needs work
+http.get('http://www.espncricinfo.com/icc-world-twenty20-2016/engine/match/951367.html?innings=1;view=commentary', // needs work
 (res) => {
     console.timeEnd('Request');
     res.on('data', (chunk) => {data += chunk;});

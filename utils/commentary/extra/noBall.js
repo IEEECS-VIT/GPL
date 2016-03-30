@@ -29,5 +29,6 @@ module.exports =
         "part of his heel behind the crease. The batsman gets a lifeline. This was dug in short and climbs onto him, who " +
         "gets into an awkward tangle as he attempts a pull. He can only lob it into the air off a top-edge. A fielder moves " +
         "to his left and grasps it. The TV umpire examines from various angles and gives it NOT OUT. The fielding team can't" +
-        " believe it, and so can't we!"
+        " believe it, and so can't we!",
+		"and there's a slip of the front foot too! Lovely delivery, marred by such a silly mistake. And he's over by a large distance. Fuller ball, curling away, safely defended.."
 	];
