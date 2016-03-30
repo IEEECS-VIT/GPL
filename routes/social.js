@@ -16,12 +16,14 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var temp;
 var path = require('path').join;
 var passport = require('passport');
 var router = require('express').Router();
 var onRetrieve = function(req, res, next)
 {
     passport.authenticate(req.url.split('/')[1], function(err, user){
+        temp = req.signedCookies.team.trim().toUpperCase();
         res.clearCookie('team', {});
         res.clearCookie('phone', {});
 
@@ -36,7 +38,7 @@ var onRetrieve = function(req, res, next)
             return res.redirect('/social/login'); // redirect to login or register based on the request origin.
         }
 
-        res.cookie('name', req.signedCookies.team.trim().toUpperCase(), {maxAge: 86400000, signed: true});
+        res.cookie('name', temp, {maxAge: 86400000, signed: true});
         return res.redirect('/home/players');
     })(req, res, next);
 };

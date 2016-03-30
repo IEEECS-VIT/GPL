@@ -181,7 +181,7 @@ exports.adminInfo = function (callback)
         return callback(null, result);
     };
 
-    var parallelTasks =
+    var adminParallelTasks =
     {
         interest: function (asyncCallback)
         {
@@ -229,17 +229,19 @@ exports.adminInfo = function (callback)
         }
     };
 
-    async.parallel(parallelTasks, onParallel);
+    async.parallel(adminParallelTasks, onParallel);
 };
 
 exports.fetchMatches = function (team, callback)
 {
-    var parallelTasks = Array.apply(null, Aray(7))
-                             .map((_, i) => {
-                                 return (asyncCallback) => {
-                                     mongoFeatures.match(i + 1, team, asyncCallback);
-                                 }
-                             });
+    var parallelTasks = [];
+
+    for(i = 1; i < 8; ++i)
+    {
+        parallelTasks.push((asyncCallback) => {
+            mongoFeatures.match(i, team, asyncCallback);
+        });
+    }
 
     async.parallel(parallelTasks, callback);
 };

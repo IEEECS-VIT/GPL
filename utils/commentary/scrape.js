@@ -52,10 +52,10 @@ var commentary =
 var ref = ['FOUR', 'SIX', 'OUT'];
 var opts = ['batsman', 'batter', 'striker'];
 
-var rand = function()
-{
-    return opts[parseInt((Math.random() * 1000000000000000) % 3, 10)];
-};
+var append = (element) => { return `,\n\t\t"${element.replace(/"/g, "'")}"`};
+
+var rand = () => { return opts[parseInt((Math.random() * 1000000000000000) % 3, 10)]; };
+
 var genericHandler = function(arg)
 {
     arg = (arg[0].data || '').replace(/\s$/, '.');
@@ -63,11 +63,13 @@ var genericHandler = function(arg)
     temp = index[0].split(' to ');
     index[1] = index[1].replace(/^\d?\s?wides?$/, 'wide');
     index[1] = index[1].replace(/^\d?\s?no balls?$/, 'no ball');
+
     return [
         index[1],
         index.slice(2).join(', ').replace(temp[0], 'the bowler').replace(temp[1], `the ${rand()}`)
     ];
 };
+
 var dismissalHandler = function(arg)
 {
     arg = arg[0].children[0].data;
@@ -75,10 +77,6 @@ var dismissalHandler = function(arg)
     if(arg.indexOf(' c ') > -1)
     {
         arg = ['caught'];
-    }
-    else if(arg.indexOf(' b ') > -1)
-    {
-        arg = ['bowled'];
     }
     else if(arg.indexOf(' lbw ') > -1)
     {
@@ -92,6 +90,10 @@ var dismissalHandler = function(arg)
     {
         arg = ['stumped'];
     }
+    else if(arg.indexOf(' b ') > -1)
+    {
+        arg = ['bowled'];
+    }
     else if(arg.indexOf(' cnb ') > -1)
     {
         arg = ['cnb'];
@@ -100,6 +102,7 @@ var dismissalHandler = function(arg)
     arg.push(temp);
     return arg;
 };
+
 var specialHandler = function(arg)
 {
     temp = arg[0].data;
@@ -113,22 +116,23 @@ var specialHandler = function(arg)
         arg[2] = arg[2].replace(/\s$/, '.');
         temp.splice(1, 1, temp[1].split(', '));
         temp[0] = [temp[0], temp[1].shift()];
-        arg[2] = arg[2].replace(temp[0][0], 'the bowler');
-        arg[2] = arg[2].replace(temp[0][1], 'the ' + rand());
+        arg[2] = arg[2].replace(new RegExp(temp[0][0], 'g'), 'the bowler');
+        arg[2] = arg[2].replace(new RegExp(temp[0][1], 'g'), 'the ' + rand());
         arg = [temp[1][0], arg[1] + arg[2]];
     }
     else
     {
         arg[2] = arg[2].slice(2);
         arg[2] = arg[2].replace(/\s$/, '.');
-        arg[2] = arg[2].replace(temp[0], 'the bowler');
-        arg[2] = arg[2].replace(temp[1], 'the ' + rand());
+        arg[2] = arg[2].replace(new RegExp(temp[0], 'g'), 'the bowler');
+        arg[2] = arg[2].replace(new RegExp(temp[1], 'g'), 'the ' + rand());
         arg = [arg[1], arg[2]];
         flag = (arg[0] === 'OUT');
     }
 
     return arg;
 };
+
 var processRef =
 {
     1:
@@ -141,6 +145,7 @@ var processRef =
         false: specialHandler
     }
 };
+
 var processor = function(arg, callback)
 {
     arg = processRef[arg.children.length][flag](arg.children);
@@ -149,7 +154,7 @@ var processor = function(arg, callback)
     {
         if(arg[0] !== 'OUT')
         {
-            commentary[arg[0]].content += ',\n\t\t"' + arg[1] + '"';
+            commentary[arg[0]].content += append(arg[1]);
             flag = false;
         }
         else
@@ -159,11 +164,12 @@ var processor = function(arg, callback)
     }
     else if(commentary[arg[0]])
     {
-        commentary[arg[0]].content += ',\n\t\t"' + arg[1] + '"';
+        commentary[arg[0]].content += append(arg[1]);
     }
 
     callback(null);
 };
+
 var updateFile = function(arg, callback)
 {
     if(commentary[arg].content)
@@ -174,12 +180,13 @@ var updateFile = function(arg, callback)
                 throw err;
             }
 
-            fs.createWriteStream(commentary[arg].file + '.js', {flags: 'r+', start: result.size - 7})
+            fs.createWriteStream(commentary[arg].file + '.js', {flags: 'r+', start: result.size - 4})
               .end(commentary[arg].content + '\n\t];');
             callback();
         });
     }
 };
+
 var onFinish = function(err)
 {
     if(err)
@@ -189,6 +196,7 @@ var onFinish = function(err)
 
     console.timeEnd('File updation');
 };
+
 var onCompile = function(err)
 {
     if(err)
@@ -199,6 +207,7 @@ var onCompile = function(err)
     console.timeEnd('Commentary compilation');
     async.each(Object.keys(commentary), updateFile, onFinish);
 };
+
 var onStitch = function()
 {
     console.timeEnd('Data stitching');
@@ -210,6 +219,6 @@ var onStitch = function()
 http.get('http://www.espncricinfo.com/australia-v-india-2015-16/engine/match/895817.html?innings=1;view=commentary', // needs work
 (res) => {
     console.timeEnd('Request');
-    res.on('data',(chunk) => {data += chunk;});
+    res.on('data', (chunk) => {data += chunk;});
     res.on('end', onStitch);
 });

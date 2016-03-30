@@ -111,9 +111,12 @@ exports.getLeader = function (user, callback)
         {
             if (documents[i]._id === user)
             {
-                flag = true;
-                documents[i].rank = i + 1;
+                if(i > 9)
+                {
+                    documents[i].rank = i + 1;
+                }
 
+                flag = true;
                 leaderboard.push(documents[i]);
             }
             else if (leaderboard.length < 10)

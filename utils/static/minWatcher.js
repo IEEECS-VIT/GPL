@@ -47,7 +47,7 @@ fs.readFile(path(...dir, '.name'), function(err, data){
             throw error;
         }
 
-        fs.createWriteStream(path(__dirname,...dir, 'workspace.xml'), {flags: 'r+', start: res.size - 11}).end(scopeData);
+        fs.createWriteStream(path(__dirname, ...dir, 'workspace.xml'), {flags: 'r+', start: res.size - 11}).end(scopeData);
         console.timeEnd('mark');
     });
 });
