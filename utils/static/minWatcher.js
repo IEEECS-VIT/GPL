@@ -23,11 +23,12 @@ if(process.env.NODE_ENV)
     throw 'This task may not be performed on production environments.';
 }
 
+var scopeData;
 var fs = require('fs');
 var line = require('os').EOL;
-var dir = [__dirname, '..', '..', '.idea'];
 var path = require('path').join;
-var scopeData;
+var dir = [__dirname, '..', '..', '.idea'];
+
 fs.createReadStream('watcherTasks.xml').pipe(fs.createWriteStream(path(...dir, 'watcherTasks.xml')));
 
 fs.readFile(path(...dir, '.name'), function(err, data){

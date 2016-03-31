@@ -56,7 +56,7 @@ mongo(mongoURI, function(err, db){
         if(mode)
         {
             testDb = db; // to maintain a persistent test database connection
-            require(path(__dirname, 'seed'));
+            require(path(__dirname, 'seed')); // remote file execution
         }
         else
         {

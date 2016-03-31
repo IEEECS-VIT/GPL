@@ -53,7 +53,7 @@ var commentary =
 var ref = ['FOUR', 'SIX', 'OUT'];
 var opts = ['batsman', 'batter', 'striker'];
 
-var append = (element) => { return `,\n\t\t"${element.replace(/"/g, "'")}"`};
+var append = (element) => { return `,\n\t\t"${element.replace(/"/g, "'")}"`;};
 
 var rand = () => { return opts[parseInt((Math.random() * 1000000000000000) % 3, 10)]; };
 
@@ -182,7 +182,7 @@ var updateFile = function(arg, callback)
             }
 
             fs.createWriteStream(commentary[arg].file + '.js', {flags: 'r+', start: result.size - 3 - line.length})
-                .end(commentary[arg].content + `${line}\t];`);
+              .end(commentary[arg].content + `${line}\t];`);
             callback();
         });
     }

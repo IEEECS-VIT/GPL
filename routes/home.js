@@ -110,7 +110,7 @@ router.get('/leaderboard', authenticated, function (req, res){
     {
         res.render("leaderboard", {leaderboard: JSON.parse(req.signedCookies.lead)});
     }
-    else if (process.env.DAY > '0' || !process.env.NODE_ENV)                           // if cookie exists then access the database
+    else if (process.env.DAY > '0' || !process.env.NODE_ENV)  // if cookie exists then access the database
     {
         var onFetch = function (err, documents)
         {

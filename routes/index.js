@@ -446,8 +446,9 @@ router.post('/social/login', cookieFilter, function (req, res){
 });
 
 router.get('/social/register', cookieFilter, function (req, res){
-    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users')) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
-    {                                                                                                                   // the schedule has been constructed and the game engine is match ready
+    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users')) // Initialize process.env.DAY with -1, set to 0 when registrations are open,
+    {                                                                                       // will be updated to 1 when the schedule has been constructed and the game
+                                                                                            // engine is match ready.
         res.render('social', {mode: +!req.signedCookies.team, type : 'register', csrfToken : req.csrfToken()});
     }
     else if (req.signedCookies.name)

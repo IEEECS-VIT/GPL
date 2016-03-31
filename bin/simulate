@@ -48,10 +48,10 @@ if(day === undefined)
     process.exit(1);
 }
 
-mongo(process.env.MONGO, function(err, db){
-    if(err)
+mongo(process.env.MONGO, function(er, db){
+    if(er)
     {
-        throw err;
+        throw er;
     }
     else
     {
@@ -61,6 +61,7 @@ mongo(process.env.MONGO, function(err, db){
             console.log('Simulation of Matches for Day ' + day + ' is complete');
 
             op.MATCH = ref[process.env.MATCH] || 'round3';
+
             if(!process.argv[2] || process.env.DAY === process.argv[2])
             {
                 op.DAY = ((day + 1) % 8) || (process.env.DAY === 'round3' ? 7 : 0);
@@ -74,10 +75,10 @@ mongo(process.env.MONGO, function(err, db){
                         console.error(err.message);
                     }
 
-                    configure(op, function(err){
-                        if(err)
+                    configure(op, function(error){
+                        if(error)
                         {
-                            console.error(err.message);
+                            console.error(error.message);
                         }
 
                         database.close();

@@ -36,6 +36,7 @@ var unassigned;
 var schedulerCallback;
 var path = require('path');
 var async = require('async');
+var Heroku = require('heroku-client');
 var mongo = require('mongodb').MongoClient.connect;
 var generate = require(path.join(__dirname, '..', '..', 'database', 'mongoRecord')).users;
 var init = () => {database.collection(process.env.MATCH).find({authStrategy: {$ne: 'admin'}}, {_id: 1}).toArray(onFetch);};
@@ -57,6 +58,7 @@ if(!process.env.NODE_ENV)
 else
 {
     mongoURI = process.env.MONGO;
+	var configure = new Heroku({token: process.env.HEROKU_API_TOKEN}).apps(process.env.HEROKU_APP_NAME).configVars().update;
 }
 
 if(process.env.DAY < '0')
@@ -201,7 +203,21 @@ var onParallel = function(err)
     }
     else
     {
-        database.close();
+	    database.close();
+
+	    if(process.env.NODE_ENV)
+	    {
+		    configure({DAY: 1}, function(error){ // update process.env.DAY to 1, indicating that matches can start.
+			    if(error)
+			    {
+				    console.error(error.message);
+			    }
+			    else
+			    {
+				    console.log('process.env.DAY has been updated to 1.');
+			    }
+		    });
+	    }
     }
 };
 

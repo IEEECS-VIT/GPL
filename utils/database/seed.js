@@ -47,7 +47,7 @@ var onParallel = function(err)
 
     if(mode)
     {
-        require(path(__dirname, 'schedule'));
+        require(path(__dirname, 'schedule')); // remote file execution.
     }
     else
     {
