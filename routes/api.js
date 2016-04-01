@@ -38,7 +38,6 @@ var apiFilter = function(req, res, next)
 
     temp = req.url.split('/')[1];
     referer = req.headers.referer.split('/');
-    console.log(temp, referer);
     condition = (referer[2] === req.headers.host && referer.slice(-1)[0] === temp);
     decider = (temp === 'register' && (!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users')));
     condition &= (decider ? !req.signedCookies.name : req.signedCookies.name);

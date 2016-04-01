@@ -57,7 +57,7 @@ var j; // loop control variable for deliveries in an over.
 var toss; // denotes which team won the toss.
 var loop; // loop control variable for each innings.
 var team; // the team object, contains adjusted player ratings.
-var temp; // dummy variable for holding temporary values in otherwise calculations.
+var temp; // dummy variable for holding temporary values in otherwise complicated calculations.
 var winner; // denotes the index of the team that won the match. Set to -1 in a tie.
 var dot = 0; // the number of dot balls in each innings. Reset after the innings is complete.
 var tossIndex; // a copy of toss used to switch back and forth between bowling and batting teams, flipped after the first innings.
@@ -102,11 +102,12 @@ exports.simulate = function (data, callback)
     }
     else // if both teams have a valid playing eleven and a coach set.
     {
-	    toss = rand(2);
+	    toss = rand(2); // decide which team wins the toss.
 	    data.match.overs = [];
 	    ++data.team[toss].toss;
 	    data.match.scorecard = [];
 	    data.match.commentary = [];
+	    tossIndex = toss ^ rand(2); // decide whether to bat or bowl first.
 	    data.team[0].s = data.team[1].s = data.team[0].f = data.team[1].f = 0;
 	    temp = helper.make([data.team[0].ratings, data.team[1].ratings]); // construct teams.
 	    MoM = temp.MoM;
@@ -115,26 +116,13 @@ exports.simulate = function (data, callback)
 
         data.match.commentary.push(`Match ${data.match._id}: ${data.team[0]._id} versus ${data.team[1]._id}`);
         data.match.commentary.push(`Winning chances: ${data.team[0]._id} : ${temp.toFixed(2)} % | % ${(100 - temp).toFixed(2)} : ${data.team[1]._id}`);
-        data.match.commentary.push(rand(helper.state[0]), `Toss: ${data.team[toss]._id} wins the toss and chooses to `);
-
-        if (rand(2))
-        {
-            data.match.commentary[data.match.commentary.length - 1] += 'bowl.';
-        }
-        else
-        {
-            toss = !toss;
-            data.match.commentary[data.match.commentary.length - 1] += 'bat.';
-        }
-
-        data.match.commentary.push('Batting orders:', [data.team[+!toss]._id,  data.team[+toss]._id]);
+        data.match.commentary.push(rand(helper.state[0]), `Toss: ${data.team[toss]._id} wins the toss and chooses to ${helper.toss[tossIndex ^ toss]}`);
+        data.match.commentary.push('Batting orders:', [data.team[+tossIndex]._id,  data.team[+!tossIndex]._id]);
 
         for (i = 0; i < 11; ++i)
         {
-            data.match.commentary.push([team[+!toss].name[i] + team[+!toss].type[i], team[+toss].name[i] + team[+toss].type[i]]);
+            data.match.commentary.push([team[+tossIndex].name[i] + team[+tossIndex].type[i], team[+!tossIndex].name[i] + team[+!tossIndex].type[i]]);
         }
-
-        tossIndex = !toss;
 
         for (loop = 0; loop < 2; ++loop) // loop through for two innings
         {
@@ -241,7 +229,7 @@ exports.simulate = function (data, callback)
                         if (continuousWickets[currentBowler] === 3)
                         {
                             continuousWickets[currentBowler] = 0;
-                            data.match.commentary.push(` And that is also a hattrick for ${team[+!tossIndex].name[currentBowler]} ! Fantastic bowling in the time of need.`);
+                            data.match.commentary.push(`And that is also a hattrick for ${team[+!tossIndex].name[currentBowler]} ! Fantastic bowling in the time of need.`);
                         }
 
                         data.match.commentary.push(team[+tossIndex].name[strike[+strikeIndex]]);
@@ -367,23 +355,22 @@ exports.simulate = function (data, callback)
                         strikeIndex ^= (deliveryScore % 2); // rotate strike if an odd no. of runs were scored.
                     }
                 }
+
+                strikeIndex = !strikeIndex;
+
                 if (continuousMaximums === 6)
                 {
                     data.match.commentary.push(`Six G.P.L maximums in the previous over! What an effort by ${team[+tossIndex].name[strike[+strikeIndex]]}!. The crowd is ecstatic, ${team[+!tossIndex].name[currentBowler]} is absolutely flabbergasted.`);
                 }
-
-                strikeIndex = !strikeIndex;
-                data.match.commentary.push('Last over:');
-                runsConceded[currentBowler] += previousOver;
-
-                if (previousOver)
+                else if (previousOver)
                 {
-                    data.match.commentary[data.match.commentary.length - 1] += `${previousOver} run${(previousOver > 1) ? 's' : ''}`;
+                    runsConceded[currentBowler] += previousOver;
+                    data.match.commentary.push(`Last Over: ${previousOver} run${(previousOver > 1) ? 's' : ''}`);
                 }
                 else if (j === 7)
                 {
                     maidens[currentBowler] += 1;
-                    data.match.commentary[data.match.commentary.length - 1] += 'maiden';
+                    data.match.commentary.push('Last over: maiden');
                 }
 
                 data.team[+tossIndex].scoredPerOver[i] = (data.team[+tossIndex].scoredPerOver[i] * data.team[+tossIndex].played + previousOver) / (data.team[+tossIndex].played + 1);
@@ -394,7 +381,6 @@ exports.simulate = function (data, callback)
                 {
                     data.match.commentary.push(`Balls since last boundary: ${boundaryGap}`);
                 }
-
                 if(loop)
                 {
                     data.match.commentary.push(`RRR: ${parseFloat(((Total[+!toss] + 1 - Total[+toss]) / (19 - i))).toFixed(2)}  Equation: ${data.team[+tossIndex]._id} needs ${Total[+!toss] + 1 - Total[+toss]} runs from ${114 - 6 * i} balls with ${10 - wickets[+toss]} wickets remaining`);
@@ -417,7 +403,6 @@ exports.simulate = function (data, callback)
 
                     data.match.commentary.push('Projected scores', helper.projected.rates, helper.projected.totals);
                 }
-
                 if (strike[+strikeIndex] < 11)
                 {
                     data.match.commentary.push(`${team[+tossIndex].name[strike[+strikeIndex]]} : ${score[strike[+strikeIndex]]} (${balls[strike[+strikeIndex]]}), Control: ${(control[strike[+strikeIndex]] * 100).toFixed(2)} %`);
@@ -492,18 +477,17 @@ exports.simulate = function (data, callback)
                 if ((data.team[+tossIndex].squad[i] < 'b') || (data.team[+tossIndex].squad[i] > 'c' && data.team[+tossIndex].squad[i] < 'd'))
                 {
                     data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].fours += fours[j];
+                    data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].sixes += maximums[j];
                     data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].recent.push(score[j]);
                     data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].ballsFaced += balls[j];
                     data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].runsScored += score[j];
-                    data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].sixes += maximums[j++];
                     ++data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]][helper.status[dismissed[j] || (strike.indexOf(j) > -1)]];
                     data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].low = Math.min(data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].low, score[j]);
-                    data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].high = Math.max(data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].high, score[j]);
-                    data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].batStrikeRate = parseFloat((data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].runsScored * 100 / (data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].ballsFaced || 1)).toFixed(2));
+                    data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].high = Math.max(data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].high, score[j++]);
                     data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].batAverage = parseFloat((data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].runsScored / (data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].outs || 1)).toFixed(2));
+	                data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].batStrikeRate = parseFloat((data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].runsScored * 100 / (data.team[+tossIndex].stats[data.team[+tossIndex].squad[i]].ballsFaced || 1)).toFixed(2));
                 }
             }
-
             for (i = 0; i < data.team[+!tossIndex].squad.length; ++i)
             {
                 if (data.team[+!tossIndex].squad[i] > 'b' && data.team[+!tossIndex].squad[i] < 'd')
@@ -519,7 +503,7 @@ exports.simulate = function (data, callback)
             }
 
             j = 0;
-            data.match.scorecard.push('Scorecard:', ['Runs', 'Balls', 'Strike Rate', 'Fours', 'Sixes', 'Dot balls', 'Control (%)']);
+            data.match.scorecard.push('Scorecard:', helper.batHeader);
 
             for (i = 0; i < 11; ++i)
             {
@@ -569,7 +553,7 @@ exports.simulate = function (data, callback)
 
             data.match.scorecard.push(`Total: ${Total[+tossIndex]} / ${wickets[+tossIndex]} (${parseInt(Overs[+tossIndex] / 6, 10)}.${Overs[+tossIndex] % 6} overs)  Run rate: ${(Total[+tossIndex] * 6 / (Overs[+tossIndex] || 1)).toFixed(2)} Extras: ${extras}`);
             data.match.scorecard.push(`Runs scored in boundaries: ${j} of ${Total[+tossIndex]} (${(j * 100 / Total[+tossIndex]).toFixed(2)} %) `);
-            data.match.scorecard.push('Bowling Statistics:', ['Bowler', 'Overs', 'Maidens', 'Wickets', 'Runs conceded', 'Economy']);
+            data.match.scorecard.push('Bowling Statistics:', helper.bowlHeader);
             j = 0;
 
             for (i = 0; i < 11; ++i)

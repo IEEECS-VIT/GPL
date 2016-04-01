@@ -56,15 +56,15 @@ var flash = function(req, res, next)
         req.session.flash = [];
     }
 
-    req.flash = function(content)
+    res.flash = function(content)
     {
         if(content)
         {
-            this.session.flash.push(content);
+            req.session.flash.push(content);
         }
         else
         {
-            return this.session.flash.pop();
+            return req.session.flash.pop();
         }
     };
 
@@ -113,14 +113,14 @@ app.use(function (req, res) {
     res.redirect('/');
 });
 
-if(process.env.NODE_ENV)
+if(process.env.NODE_ENV) // use Sentry only on production environments
 {
     app.use(errorHandler);
 }
 
 // error handlers
-app.use(function (err, req, res, next) {
-    if (log)
+app.use(function (err, req, res, next) { // the last argument is necessary to distinguish this callback as the
+    if (log)                             // application's error handler.
     {
         log.log('debug', {Error: err, Message: err.message});
     }

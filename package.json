@@ -1,6 +1,6 @@
 {
   "name": "GPL",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "graVITas Premier League",
   "homepage": "http://gpl.ieeecsvit.com/",
   "bugs": {
@@ -99,7 +99,7 @@
     "heroku-client": "^2.4.3",
     "mongodb": "^2.1.14",
     "morgan": "^1.7.0",
-    "newrelic": "^1.26.0",
+    "newrelic": "^1.26.1",
     "node-logentries": "^0.1.4",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.0",

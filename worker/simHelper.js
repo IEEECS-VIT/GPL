@@ -125,6 +125,8 @@ var adjustRating = function()
     }
 };
 
+exports.toss = ['bat.', 'bowl.'];
+
 exports.projected =
 {
     rates: ['Run rate', 0, 0, 0, 0],
@@ -226,6 +228,10 @@ exports.status =
 };
 
 exports.inter = [mid, end];
+
+exports.bowlHeader = ['Bowler', 'Overs', 'Maidens', 'Wickets', 'Runs conceded', 'Economy'];
+
+exports.batHeader = ['Runs', 'Balls', 'Strike Rate', 'Fours', 'Sixes', 'Dot balls', 'Control (%)'];
 
 exports.rand = function (base, limit)
 {
