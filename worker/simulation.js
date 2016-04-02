@@ -23,12 +23,11 @@ var MoM; // the object to denote the man of the match
 var strike; // an array to denote the batting positions of the two playing batsman at the crease.
 var key = helper.key; // a reference object for team property updation.
 var state = helper.state; // a reference object to decide victory or loss.
-var count = []; // stores the count of bowlers with non zero deliveries bowled per team.
 var Total = [0, 0]; // the total runs scored by the team in it's innings.
 var wickets = [0, 0]; // the total wickets lost by the team in it's innings.
 var desperation = []; // the extent of playing desperation, tracked for the two current batsmen on strike.
 var bat = helper.bat; // decrease to strengthen batting.
-var Overs = [120, 120]; // the number of balls faced by each team. Is adjusted when an innings completes in less than 20 overs.
+var Balls = [120, 120]; // the number of balls faced by each team. Is adjusted when an innings completes in less than 20 overs.
 var bowl = helper.bowl; // increase to strengthen bowling.
 var lastFiveOvers = []; // stores the runs scored in the last five overs.
 var wicketSequence = []; // stores the details of each dismissal.
@@ -86,7 +85,7 @@ var batMoM = (prev, curr, index) => (prev + curr * team[+!tossIndex].bowlRating[
 
 exports.simulate = function (data, callback)
 {
-    console.time('sim');
+    console.time('sim'); // begin simulation benchmarking
     console.log(`${data.team[0]._id} vs ${data.team[1]._id}`);
 	data.team[0].names = ['', '', '', '', '', '', '', '', '', '', ''];
 	data.team[1].names = ['', '', '', '', '', '', '', '', '', '', ''];
@@ -96,19 +95,20 @@ exports.simulate = function (data, callback)
     {
         for(i = 0; i < 2; ++i)
         {
-            ++data.team[i][state[temp[i]].state];
-            data.team[i].points += state[temp[i]].points;
+            ++data.team[i][state[temp[i]].state]; // increment win / loss
+            data.team[i].points += state[temp[i]].points; // adjust points in accordance with above
         }
     }
     else // if both teams have a valid playing eleven and a coach set.
     {
 	    toss = rand(2); // decide which team wins the toss.
-	    data.match.overs = [];
-	    ++data.team[toss].toss;
+	    data.match.overs = []; // temprary array to hold over wise commentary objects
+	    ++data.team[toss].toss; // updates the number of successful tosses for the team
+        data.match.count = [0, 0];
 	    data.match.scorecard = [];
 	    data.match.commentary = [];
 	    tossIndex = toss ^ rand(2); // decide whether to bat or bowl first.
-	    data.team[0].s = data.team[1].s = data.team[0].f = data.team[1].f = 0;
+	    data.team[0].s = data.team[1].s = data.team[0].f = data.team[1].f = 0; // sets no. of fours and sixes in the match per team to 0
 	    temp = helper.make([data.team[0].ratings, data.team[1].ratings]); // construct teams.
 	    MoM = temp.MoM;
         team = temp.teams;
@@ -126,7 +126,7 @@ exports.simulate = function (data, callback)
 
         for (loop = 0; loop < 2; ++loop) // loop through for two innings
         {
-            strike = [0, 1];
+            strike = [0, 1]; // bring the openers to the crease
             strikeIndex = boundaryGap = 0;
             temp = Math.pow(-1, +(data.team[+tossIndex].streak < 0)) * ((Total[+!toss] + 1) / 5000) * data.team[+tossIndex].streak * team[+!tossIndex].meanRating;
 
@@ -135,7 +135,7 @@ exports.simulate = function (data, callback)
                 desperation[i] = temp * (1 - team[+tossIndex].batRating[strike[i]] / 1000) / team[+tossIndex].batStrikeRate[strike[i]];
             }
 
-            currentBowler = previousBowler = team[+!tossIndex].bowlRating.reduce((a, b, i, arr) => b > arr[a] ? i : a, 0);
+            currentBowler = previousBowler = team[+!tossIndex].bowlRating.reduce((a, b, i, arr) => b > arr[a] ? i : a, 0); // select bowler to start the innings
 
             data.match.commentary.push(`${team[+!tossIndex].name[previousBowler]} to start proceedings from the pavilion end.....`);
 
@@ -145,17 +145,17 @@ exports.simulate = function (data, callback)
                 previousOver = continuousMaximums = 0;
 
                 if(hope && ((score[strike[+strikeIndex]] > 43 && score[strike[+strikeIndex]] < 50) || ((score[strike[+strikeIndex]] > 93 && score[strike[+strikeIndex]] < 100))))
-                {
+                {   // display special commentary if the current striker is close to a 50 / 100.
                     data.match.commentary.push(`${team[+tossIndex].name[strike[+strikeIndex]]} ${helper.anticipate[score[strike[+strikeIndex]] > 50]}`);
                 }
 
                 for (j = 1; j < 7; ++j) // loop through for 6 deliveries.
                 {
-                    currentBall = [];
-	                ++deliveries[currentBowler];
-	                ++balls[strike[+strikeIndex]];
-	                ++partnershipBalls[currentPartnership];
-	                ++ballMatrix[strike[+strikeIndex]][currentBowler];
+                    currentBall = []; // temporary array to hold commentary for the current over
+	                ++deliveries[currentBowler]; // increase the number of balls bowled by the current bowler
+	                ++balls[strike[+strikeIndex]]; // increase the number of balls faced by the current batsman
+	                ++partnershipBalls[currentPartnership]; // increase the number of balls in the partnership
+	                ++ballMatrix[strike[+strikeIndex]][currentBowler]; // increase the number of balls bowled by the current bowler to the current batsman
                     deliveryScore = (team[+tossIndex].batRating[strike[+strikeIndex]] - team[+!tossIndex].bowlRating[currentBowler]) || 1;
                     bowlPerfIndex = (team[+!tossIndex].bowlRating[currentBowler]) / ((rand(team[+!tossIndex].bowlAverage[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / 1000 + 1) + team[+!tossIndex].bowlAverage[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / bowl[0]) * (rand(team[+!tossIndex].bowlStrikeRate[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / 1000 + 1) + team[+!tossIndex].bowlStrikeRate[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / bowl[1]) * (rand(team[+!tossIndex].economy[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / 1000 + 1) + team[+!tossIndex].economy[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / bowl[2]));
                     batPerfIndex = (rand(team[+tossIndex].batAverage[strike[+strikeIndex]] * team[+tossIndex].batRating[strike[+strikeIndex]] / 1000 + 1) + team[+tossIndex].batAverage[strike[+strikeIndex]] * (team[+tossIndex].batRating[strike[+strikeIndex]]) / bat[0]) * (rand(team[+tossIndex].batStrikeRate[strike[+strikeIndex]] * team[+tossIndex].batRating[strike[+strikeIndex]] / 1000 + 1) + team[+tossIndex].batStrikeRate[strike[+strikeIndex]] * (team[+tossIndex].batRating[strike[+strikeIndex]]) / bat[1]) / team[+!tossIndex].bowlRating[currentBowler] - (+(Math.abs(frustration[+strikeIndex]) > 2) && Math.pow(-1, rand(2)) * frustration[+strikeIndex]);
@@ -166,14 +166,12 @@ exports.simulate = function (data, callback)
                     if (batPerfIndex <= -process.env.OUT && !freeHit) // if the batsman was dismissed off a regular ball
                     {
                         temp = -1;
-                        ++boundaryGap;
-                        ++wicketsTaken[currentBowler];
-                        ++dotDeliveries[currentBowler];
-                        previousDismissal = currentBowler;
-                        ++continuousWickets[currentBowler];
-                        dismissed[strike[+strikeIndex]] = 1;
-                        previousBatsman = strike[+strikeIndex];
-                        wicketIndex = -Math.ceil(batPerfIndex + process.env.OUT);
+                        ++boundaryGap; // increase the number of balls since the last boundary was hit
+                        ++wicketsTaken[currentBowler]; // increase the number of wickets taken by the current bowler
+                        ++dotDeliveries[currentBowler]; // increase the number of dot balls bowled by the current bowler
+                        previousDismissal = currentBowler; // mark the current bowler as the one who effected the current dismissal
+                        ++continuousWickets[currentBowler]; // increment the number of consecutive wickets taken by the current bowler
+                        wicketIndex = -Math.ceil(batPerfIndex + process.env.OUT); // gauge mode of dismissal
                         data.match.commentary[data.match.commentary.length - 1] += 'OUT, ';
 
                         if (wicketIndex < 5)
@@ -196,14 +194,16 @@ exports.simulate = function (data, callback)
                             }
 
                             strikeIndex ^= rand(2); // in a run out, either the striker or non-striker can be dismissed.
-                            previousDismissal = -1;
-                            --wicketsTaken[currentBowler];
-                            continuousWickets[currentBowler] = 0;
+                            previousDismissal = -1; // indicates the previous dismissal was a run out.
+                            --wicketsTaken[currentBowler]; // adjust wickets taken, see reason below.
+                            continuousWickets[currentBowler] = 0; // run outs do not contribute to a bowler's wicket tally
+	                        dismissed[strike[+strikeIndex]] = 1; // set the dismissed flag for the current batsman to true
+	                        previousBatsman = strike[+strikeIndex]; // set the previous batsman as the one who was just dismissed
                             data.match.commentary[data.match.commentary.length - 1] += rand(helper.runout);
 
                             if ((Total[+toss] > Total[+!toss]) && loop)
                             {
-                                Overs[+tossIndex] = i * 6 + j;
+                                Balls[+tossIndex] = i * 6 + j;
                                 data.match.commentary.push(' What an emphatic victory ! ');
                                 break;
                             }
@@ -217,7 +217,7 @@ exports.simulate = function (data, callback)
                         temp = (balls[strike[+strikeIndex]] === 1) + !balls[strike[+strikeIndex]] * 2 + !score[strike[+strikeIndex]] * 3;
                         data.match.commentary[data.match.commentary.length - 1] += helper.duck[temp]; // for special duck commentary
 
-                        if (wicketsTaken[currentBowler] === 5 && !fiveWicketHaul[currentBowler])
+                        if (wicketsTaken[currentBowler] === 5 && !fiveWicketHaul[currentBowler]) // five wicket haul
                         {
                             fiveWicketHaul[currentBowler] = 1;
                             data.match.commentary.push(', that brings up his five wicket haul, yet another tick in a list of accomplishments.');
@@ -226,7 +226,7 @@ exports.simulate = function (data, callback)
                         {
                             data.match.commentary.push(rand(helper.miss[+(score[strike[+strikeIndex]] > 50)]));
                         }
-                        if (continuousWickets[currentBowler] === 3)
+                        if (continuousWickets[currentBowler] === 3) // hattrick
                         {
                             continuousWickets[currentBowler] = 0;
                             data.match.commentary.push(`And that is also a hattrick for ${team[+!tossIndex].name[currentBowler]} ! Fantastic bowling in the time of need.`);
@@ -269,9 +269,9 @@ exports.simulate = function (data, callback)
                             strikeIndex = !strikeIndex;
                             data.match.commentary.push('The two batsmen crossed over while the catch was being taken.');
                         }
-                        if (++wickets[+tossIndex] === 10)
+                        if (++wickets[+tossIndex] === 10) // all out
                         {
-                            Overs[+tossIndex] = temp;
+                            Balls[+tossIndex] = temp;
                             ++data.team[+tossIndex].allOuts;
                             data.match.commentary.push('And that wraps up the innings.');
                             break;
@@ -287,24 +287,24 @@ exports.simulate = function (data, callback)
 
                         if (deliveryScore > 9)
                         {
-	                        --j;
+	                        --j; // since this is a non legal delivery, the over counter will have to be reduced by one
 	                        ++extras;
-	                        freeHit = rand(2);
+	                        freeHit = rand(2); // determine if the extra is a no-ball or a wide
 	                        deliveryScore = 0;
-	                        ++Total[+tossIndex];
-	                        --deliveries[currentBowler];
-	                        --balls[strike[+strikeIndex]];
-	                        ++partnershipRuns[currentPartnership];
-	                        --partnershipBalls[currentPartnership];
-	                        --ballMatrix[strike[+strikeIndex]][currentBowler];
+	                        ++Total[+tossIndex]; // extra run
+	                        --deliveries[currentBowler]; // non-legal delivery
+	                        --balls[strike[+strikeIndex]]; // doesn't count in the final tally of balls faced by the batsman
+	                        ++partnershipRuns[currentPartnership]; // extras are counted in partnership runs
+	                        --partnershipBalls[currentPartnership]; // the same doesn't apply to the partnership balls
+	                        --ballMatrix[strike[+strikeIndex]][currentBowler]; // adjust bowler - batsman ball matrix
 	                        data.match.commentary[data.match.commentary.length - 1] += `${helper.extra[freeHit].prefix}, ${rand(helper.extra[freeHit].comm)}`;
                         }
                         else
                         {
                             freeHit = 0; // legal delivery
-                            deliveryScore = (deliveryScore > 6 ? 6 : deliveryScore > 4 ? 4 : deliveryScore);
+                            deliveryScore = (deliveryScore > 6 ? 6 : deliveryScore > 4 ? 4 : deliveryScore); // scale score down to a real level
                             temp = helper.score[deliveryScore]; // commentary selection for the current delivery
-                            data.match.commentary[data.match.commentary.length - 1] += `${temp.prefix}, ${rand(temp.comm)}`;
+                            data.match.commentary[data.match.commentary.length - 1] += `${temp.prefix}, ${rand(temp.comm)}`; // score commentary for the current ball
 
                             switch (deliveryScore) // additional actions for special cases.
                             {
@@ -323,7 +323,7 @@ exports.simulate = function (data, callback)
                                     ++maximums[strike[+strikeIndex]];
                             }
 
-                            if (deliveryScore)
+                            if (deliveryScore) // non dot ball
                             {
                                 previousOver += deliveryScore;
                                 Total[+tossIndex] += deliveryScore;
@@ -333,8 +333,8 @@ exports.simulate = function (data, callback)
                                 control[strike[+strikeIndex]] = parseFloat((control[strike[+strikeIndex]] * (balls[strike[+strikeIndex]] - 1) + 1) / (balls[strike[+strikeIndex]])).toFixed(2);
                             }
 
-	                        boundaryGap = +(deliveryScore < 4) && (boundaryGap + 1);
-	                        continuousMaximums = +(deliveryScore === 6) && continuousMaximums;
+	                        boundaryGap = +(deliveryScore < 4) && (boundaryGap + 1); // increment or nullify the boundary gap
+	                        continuousMaximums = +(deliveryScore === 6) && continuousMaximums; // nullify or set the continuous sixes counter
                         }
                         if ((Total[1] === Total[0]) && loop)
                         {
@@ -342,32 +342,32 @@ exports.simulate = function (data, callback)
                         }
                         else if ((Total[+toss] > Total[+!toss]) && loop)
                         {
-                            Overs[+toss] = i * 6 + j;
+                            Balls[+toss] = i * 6 + j; // the target was chased down before the allocated 20 overs, hence the adjustments.
                             data.match.commentary.push('And they have done it! What an emphatic victory !');
                             break;
                         }
                         if((!milestone[strike[+strikeIndex]] && score[strike[+strikeIndex]] > 49) || (milestone[strike[+strikeIndex]] === 1 && score[strike[+strikeIndex]] > 99))
                         {
-                            ++milestone[strike[+strikeIndex]];
-                            data.match.commentary.push(rand(helper.milestone[score[strike[+strikeIndex]] > 99]));
+                            ++milestone[strike[+strikeIndex]]; // mark an accomplished milestone, to avoid repeating commentary
+                            data.match.commentary.push(rand(helper.milestone[score[strike[+strikeIndex]] > 99])); // commentary for 50 / 100
                         }
 
                         strikeIndex ^= (deliveryScore % 2); // rotate strike if an odd no. of runs were scored.
                     }
                 }
 
-                strikeIndex = !strikeIndex;
+                strikeIndex = !strikeIndex; // rotate strike unconditionally at the end of the over.
 
-                if (continuousMaximums === 6)
+                if (continuousMaximums === 6) // six sixes in the previous over
                 {
                     data.match.commentary.push(`Six G.P.L maximums in the previous over! What an effort by ${team[+tossIndex].name[strike[+strikeIndex]]}!. The crowd is ecstatic, ${team[+!tossIndex].name[currentBowler]} is absolutely flabbergasted.`);
                 }
-                else if (previousOver)
+                if (previousOver) // non maiden over
                 {
                     runsConceded[currentBowler] += previousOver;
-                    data.match.commentary.push(`Last Over: ${previousOver} run${(previousOver > 1) ? 's' : ''}`);
+                    data.match.commentary.push(`Last Over: ${previousOver} run${(previousOver > 1) ? 's' : ''}`); // plural / singular run adjustment
                 }
-                else if (j === 7)
+                else if (j === 7) // maiden over
                 {
                     maidens[currentBowler] += 1;
                     data.match.commentary.push('Last over: maiden');
@@ -441,7 +441,7 @@ exports.simulate = function (data, callback)
                 }
 
                 lastFiveOvers.unshift(previousOver); // unshift adds a new element at the beginning of the array
-	            currentBowler = temp = deliveries.findIndex(pickBowler);
+	            currentBowler = temp = deliveries.findIndex(pickBowler); // find the first bowler without 4 overs bowled.
 
                 if (i > 3)
                 {
@@ -463,7 +463,7 @@ exports.simulate = function (data, callback)
 
             j = 0;
             hope = true;
-            data.match.commentary.push(rand(helper.inter[loop]));
+            data.match.commentary.push(rand(helper.inter[loop])); // add mid-innings or post-match commentary
 
             for (i = 0; i < data.team[+tossIndex].squad.length; ++i)
             {
@@ -503,11 +503,11 @@ exports.simulate = function (data, callback)
             }
 
             j = 0;
-            data.match.scorecard.push('Scorecard:', helper.batHeader);
+            data.match.scorecard.push('Scorecard:', helper.batHeader); // table header for bating scorecard
 
             for (i = 0; i < 11; ++i)
             {
-                if (!balls[i] && !dismissed[i])
+                if (!balls[i] && !dismissed[i]) // the batsman wasn't dismissed, and did not face a single ball.
                 {
                     data.match.scorecard.push([team[+tossIndex].name[i], ' DNB ']);
                 }
@@ -528,56 +528,51 @@ exports.simulate = function (data, callback)
                         data.match.scorecard[data.match.scorecard.length - 1].push('  (not out)');
                     }
                 }
-                if (i < 10)
+                if (i < 10) // a maximum of 10 partnerships can happen in one innings
                 {
-                    if (partnershipRuns[i] > data.team[+tossIndex].bestPartnershipRuns[i])
-                    {
-                        data.team[+tossIndex].bestPartnershipRuns[i] = partnershipRuns[i];
-                        data.team[+tossIndex].bestPartnershipBalls[i] = partnershipBalls[i];
-                    }
-                    if (partnershipRuns[i] < data.team[+tossIndex].worstPartnershipRuns[i])
-                    {
-                        data.team[+tossIndex].worstPartnershipRuns[i] = partnershipRuns[i];
-                        data.team[+tossIndex].worstPartnershipBalls[i] = partnershipBalls[i];
-                    }
+					for(temp = 0; temp < 2; ++temp)
+					{
+						if (partnershipRuns[i] * Math.pow(-1, temp) > Math.pow(-1, temp) * data.team[+tossIndex][`${helper.extremes[temp]}PartnershipRuns`][i])
+						{
+							data.team[+tossIndex][`${helper.extremes[temp]}PartnershipRuns`][i] = partnershipRuns[i];
+							data.team[+tossIndex][`${helper.extremes[temp]}PartnershipBalls`][i] = partnershipBalls[i];
+						}
+					}
 
                     partnershipRuns[i] = partnershipBalls[i] = 0;
                 }
 
                 j += fours[i] * 4 + maximums[i] * 6;
-                data.team[+tossIndex].f += fours[i];
-                data.team[+tossIndex].s += maximums[i];
-                data.team[+tossIndex].fours += fours[i];
-                data.team[+tossIndex].sixes += maximums[i];
+                data.team[+tossIndex].f += fours[i]; // team fours for this match
+                data.team[+tossIndex].s += maximums[i]; // team sixes for this match
+                data.team[+tossIndex].fours += fours[i]; // overall team fours
+                data.team[+tossIndex].sixes += maximums[i]; // overall team sixes
             }
 
-            data.match.scorecard.push(`Total: ${Total[+tossIndex]} / ${wickets[+tossIndex]} (${parseInt(Overs[+tossIndex] / 6, 10)}.${Overs[+tossIndex] % 6} overs)  Run rate: ${(Total[+tossIndex] * 6 / (Overs[+tossIndex] || 1)).toFixed(2)} Extras: ${extras}`);
+            data.match.scorecard.push(`Total: ${Total[+tossIndex]} / ${wickets[+tossIndex]} (${parseInt(Balls[+tossIndex] / 6, 10)}.${Balls[+tossIndex] % 6} overs)  Run rate: ${(Total[+tossIndex] * 6 / (Balls[+tossIndex] || 1)).toFixed(2)} Extras: ${extras}`);
             data.match.scorecard.push(`Runs scored in boundaries: ${j} of ${Total[+tossIndex]} (${(j * 100 / Total[+tossIndex]).toFixed(2)} %) `);
             data.match.scorecard.push('Bowling Statistics:', helper.bowlHeader);
-            j = 0;
 
             for (i = 0; i < 11; ++i)
             {
                 if(deliveries[i])
                 {
-                    ++j;
+                    ++data.match.count[loop];
                     temp = (ballMatrix.reduce(bowlMoM(i), 0) / deliveries[i] - team[+!tossIndex].bowlRating[i]) / 10;
                     temp = ((wicketsTaken[i] + 1) * 25) * (1 - Math.exp((temp - Math.pow((dotDeliveries[i] + 1) * 100, wicketsTaken[i])) / (team[+!tossIndex].bowlRating[i] + deliveries[i] + runsConceded[i])));
                     data.team[+!tossIndex].stats[data.team[+!tossIndex].squad[i]].points += temp;
-                    helper.checkMoM(MoM, temp, i, +!tossIndex);
+                    helper.checkMoM(MoM, temp, i, +!tossIndex); // check for MoM condition
 
                     data.match.scorecard.push([team[+!tossIndex].name[i], `${parseInt(deliveries[i] / 6, 10)} . ${deliveries[i] % 6}`, maidens[i], wicketsTaken[i], runsConceded[i], (runsConceded[i] * 6 / (deliveries[i] || 1)).toFixed(2)]);
                 }
 
-                fiveWicketHaul[i] = continuousWickets[i] = deliveries[i] = maidens[i] = runsConceded[i] =
-                wicketsTaken[i] = dotDeliveries[i] = balls[i] = fours[i] = maximums[i] = dismissed[i] = milestone[i] =
-                score[i] = balls[i] = fours[i] = maximums[i] = control[i] = catches[i] = dotBalls[i] = 0;
+                fiveWicketHaul[i] = continuousWickets[i] = deliveries[i] = maidens[i] = runsConceded[i] = maximums[i] =
+                wicketsTaken[i] = dotDeliveries[i] = balls[i] = fours[i] = dismissed[i] = milestone[i] = maximums[i] =
+                score[i] = balls[i] = fours[i] = control[i] = catches[i] = dotBalls[i] = 0;
             }
 
-            data.match.scorecard.push('Fall of wickets:', wicketSequence);
-            data.match.scorecard.push(`Dot ball percentage: ${(dot * 100 / Overs[+tossIndex]).toFixed(2)} %`, '   ');
+            data.match.scorecard.push('Fall of wickets:', wicketSequence, `Dot ball percentage: ${(dot * 100 / Balls[+tossIndex]).toFixed(2)} %`, '   ');
 
-            count[loop] = j;
             lastFiveOvers = [];
             wicketSequence = [];
             frustration = [0, 0];
@@ -591,11 +586,11 @@ exports.simulate = function (data, callback)
         {
             if (wickets[0] === wickets[1])
             {
-                if (Overs[0] === Overs[1])
+                if (Balls[0] === Balls[1])
                 {
                     winner = -1;
                     data.match.commentary.push('TIE !');
-                    temp =  Overs[0] * (team[1].meanRating - team[0].meanRating) / Total[0] / 600;
+                    temp =  Balls[0] * (team[1].meanRating - team[0].meanRating) / Total[0] / 600;
 
                     for(i = 0; i < 2; ++i)
                     {
@@ -607,7 +602,7 @@ exports.simulate = function (data, callback)
                 }
                 else
                 {
-                    winner = ((Overs[+!toss] > Overs[+toss]) ? (+toss) : (+!toss));
+                    winner = ((Balls[+!toss] > Balls[+toss]) ? (+toss) : (+!toss));
                     data.match.commentary[data.match.commentary.length - 1] += `${data.team[+winner]._id} wins! (higher run rate)  `;
                 }
             }
@@ -624,7 +619,7 @@ exports.simulate = function (data, callback)
         }
         if (parseInt(winner, 10) !== -1)
         {
-            temp = ((((Overs[+winner] * team[+!winner].meanRating) / (Total[+winner] || 1))) - ((Overs[+!winner] * team[+winner].meanRating) / (Total[+!winner] || 1))) / 2000;
+            temp = ((((Balls[+winner] * team[+!winner].meanRating) / (Total[+winner] || 1))) - ((Balls[+!winner] * team[+winner].meanRating) / (Total[+!winner] || 1))) / 2000;
 
             for(i = 0; i < 2; ++i)
             {
@@ -633,13 +628,12 @@ exports.simulate = function (data, callback)
                 data.team[i].form += Math.pow(-1, +(i !== +winner)) * temp; // adjust team form
                 data.team[i].ratio = data.team[i].win / (data.team[i].loss || 1); // update win ratio
                 data.team[i].progression.push((data.team[i].progression.slice(-1)[0] || 0) + state[(i === +winner)].points);
-                data.team[i].streak = ((Math.pow(-1, +(i === +winner)) * data.team[i].streak > 0) ? 1 : (data.team[i].streak - Math.pow(-1, +(i === +winner))));
+                data.team[i].streak = ((Math.pow(-1, +(i === +winner)) * data.team[i].streak > 0) ? Math.pow(-1, +(i !== +winner)) : (data.team[i].streak - Math.pow(-1, +(i === +winner))));
             }
         }
 
 	    data.match.MoM = MoM;
-	    data.match.count = count;
-	    ++data.team[MoM.team].stats[data.team[MoM.team].ratings[MoM.id]._id].MoM;
+	    ++data.team[MoM.team].stats[data.team[MoM.team].ratings[MoM.id]._id].MoM; // increase MoM award count
         data.match.commentary.push(`Man of the Match: ${data.team[MoM.team].ratings[MoM.id].Name} (${data.team[MoM.team]._id})`);
         data.match.commentary.push(rand((helper.mom[data.team[MoM.team].ratings[MoM.id].Type])), rand(helper.state[1]));
     }
@@ -650,10 +644,10 @@ exports.simulate = function (data, callback)
         data.team[i].squad.pop();
         delete data.team[i].ratings;
         data.team[i].names = team[i].name;
-        data.team[i].overs.push(Overs[i]);
+        data.team[i].overs.push(Balls[i]);
         data.team[i].scores.push(Total[i]);
         data.team[i].wickets.push(wickets[i]);
-        data.team[i].runRates.push((Total[i] * 6 / Overs[i]));
+        data.team[i].runRates.push((Total[i] * 6 / Balls[i])); // array of run rates per match
         data.team[i].lowestTotal = Math.min(data.team[i].lowestTotal, Total[i]);
         data.team[i].highestTotal = Math.max(data.team[i].highestTotal, Total[i]);
         data.team[i].netRunRate = parseFloat((6 * ((data.team[i].runsFor / data.team[i].ballsFor) - (data.team[i].runsAgainst / data.team[i].ballsAgainst))).toFixed(4));
@@ -661,7 +655,7 @@ exports.simulate = function (data, callback)
         for(j = 0; j < 2; ++j)
         {
             data.team[i][`runs${key[j].val}`] += Total[key[j].index[i]];
-            data.team[i][`balls${key[j].val}`] += Overs[key[j].index[i]];
+            data.team[i][`balls${key[j].val}`] += Balls[key[j].index[i]];
             data.team[i][`wickets${key[j].val}`] += wickets[key[j].index[i]];
             data.team[i][`avgRuns${key[j].val}`] = Math.round(data.team[i][`runs${key[j].val}`] / data.team[i].played);
             data.team[i][`avgWickets${key[j].val}`] = Math.round(data.team[i][`wickets${key[j].val}`] / data.team[i].played);
@@ -670,5 +664,5 @@ exports.simulate = function (data, callback)
     }
 
     console.timeEnd('sim'); // for benchmarking simulations
-    callback({team1: data.team[0], team2: data.team[1], match: data.match});
+    callback({team1: data.team[0], team2: data.team[1], match: data.match}); // pass updated data to post-match handler
 };

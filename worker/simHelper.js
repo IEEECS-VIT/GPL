@@ -20,7 +20,7 @@ var i;
 var j;
 var hor;
 var ver;
-var ref =
+var ref = // property inversion helper object
 {
     bat: 'bowl',
     bowl: 'bat'
@@ -58,7 +58,7 @@ var four = require(path(...dir, 'score', 'four'));
 var six = require(path(...dir, 'score', 'six'));
 var wide = require(path(...dir, 'extra', 'wide'));
 var noBall = require(path(...dir, 'extra', 'noBall'));
-var setTeam = function()
+var setTeam = function() // sets blank templates for team-wise properties.
 {
     teamArray[i].name = [];
     teamArray[i].type = [];
@@ -73,7 +73,7 @@ var setTeam = function()
     teamArray[i].batStrikeRate = [];
     teamArray[i].bowlStrikeRate = [];
 };
-var setPlayer = function(player)
+var setPlayer = function(player) // method to set generic properties for each player in the squad
 {
     teamArray[i].name.push(player.Name);
     teamArray[i].batAvg.push(player.Average);
@@ -83,7 +83,7 @@ var setPlayer = function(player)
     teamArray[i].bowlStrikeRate.push(player.SR || 40);
     teamArray[i].batStrikeRate.push(player['Strike Rate']);
 };
-var defaultMoM = function(id, rating)
+var defaultMoM = function(id, rating) // method to identify the highest rated player among both squads, to be used as a default man of the match.
 {
     if(rating > temp)
     {
@@ -97,7 +97,7 @@ var normalize = function(type)
     teamArray[i][`${type}Rating`][j] += teamArray[i][`${type}Rating`][j] / 10 - avgRating[type];
     return (teamArray[i][`${type}Rating`][j] < 0) ? (+(coach > 0) && coach) : teamArray[i][`${type}Rating`][j];
 };
-var baseRate = function(player)
+var baseRate = function(player) // method to allot a base rating to each non-coach player
 {
     if(player.Rating)
     {
@@ -115,7 +115,7 @@ var baseRate = function(player)
         defaultMoM(player._id, player.Bowl);
     }
 };
-var adjustRating = function()
+var adjustRating = function() // rating adjustment routine, so that players perform differently under different squads
 {
     for (j = 0; j < 11; ++j)
     {
@@ -125,15 +125,15 @@ var adjustRating = function()
     }
 };
 
-exports.toss = ['bat.', 'bowl.'];
+exports.toss = ['bat.', 'bowl.']; // toss helper strings
 
-exports.projected =
+exports.projected = // skeletal object for projected score structure
 {
     rates: ['Run rate', 0, 0, 0, 0],
     totals: ['Total', 0, 0, 0, 0]
 };
 
-exports.genArray = function(row, col)
+exports.genArray = function(row, col) // method to return an array / matrix of zeros, of the specified dimension(s)
 {
     hor = (col && new Array(col)) || 0;
     ver = new Array(row);
@@ -151,21 +151,23 @@ exports.genArray = function(row, col)
     return ver;
 };
 
-exports.form = ['poor', 'average', 'good', 'excellent'];
+exports.extremes = ['best', 'worst']; // partnership characteristic updation keys
 
-exports.dismiss = [caught, bowled, lbw, cnb, stumped];
+exports.form = ['poor', 'average', 'good', 'excellent']; // unused presently
 
-exports.bat = [process.env.BAT_AVG, process.env.BAT_STR];
+exports.dismiss = [caught, bowled, lbw, cnb, stumped]; // dismissal mode commentary
+
+exports.bat = [process.env.BAT_AVG, process.env.BAT_STR]; // batting performance constriction parameters, decrease to strengthen batting
 
 exports.bowl = [process.env.BOWL_AVG, process.env.BOWL_STR, process.env.BOWL_ECO]; // increase to strengthen bowling
 
-exports.state =
+exports.state = // reference object for determining actions to be performed in case of a win / loss.
 {
     true: {points: 2, state: 'win'},
     false: {points: 0, state: 'loss'}
 };
 
-exports.score =
+exports.score = // scoring commentary
 {
     0: {prefix: 'no run', comm: dot},
     1: {prefix: '1 run', comm: one},
@@ -175,9 +177,9 @@ exports.score =
     6: {prefix: 'SIX', comm: six}
 };
 
-exports.wicket = ['c', 'b', 'lbw', 'cnb', 'st'];
+exports.wicket = ['c', 'b', 'lbw', 'cnb', 'st']; // commentary prefixes for dismissal scenarios.
 
-exports.duck =
+exports.duck = // different kinds of possible ducks
 [
     '',
     ' First ball! ',
@@ -187,7 +189,7 @@ exports.duck =
     ' without facing a ball!  '
 ];
 
-exports.key =
+exports.key = // reference object to determine the updation of for / against team statistics
 [
     {
         val: 'For',
@@ -199,41 +201,41 @@ exports.key =
     }
 ];
 
-exports.extra =
+exports.extra = // reference object for extra commentary handles
 [
     {prefix: 'wide', comm: wide},
     {prefix: 'no ball', comm: noBall}
 ];
 
-exports.milestone = [half, full];
+exports.milestone = [half, full]; // commentary to acknowledge a batsman's fifty / century
 
-exports.miss = [miss.half, miss.full];
+exports.miss = [miss.half, miss.full]; // commentary for situations where a batsman misses out on a fifty / century.
 
-exports.state = [start, end];
+exports.state = [start, end]; // special pre-match and post-match commentary
 
-exports.mom = mom;
+exports.mom = mom; // man of the match commentary
 
-exports.hopeless = hopeless;
+exports.hopeless = hopeless; // commentary for situations where the required run rate exceeds 36
 
-exports.anticipate =
+exports.anticipate = // commentary for batsman milestone anticipation
 {
     false: 'one hit away from a well deserving fifty. Will he make it?',
     true: 'knows there is a hundred for the taking if he can knuckle this one down....'
 };
 
-exports.status =
+exports.status = // reference object to help determine whether a batsman was dismissed or not.
 {
     1: 'outs',
     true: 'notouts'
 };
 
-exports.inter = [mid, end];
+exports.inter = [mid, end]; // inter-innings commentary
 
 exports.bowlHeader = ['Bowler', 'Overs', 'Maidens', 'Wickets', 'Runs conceded', 'Economy'];
 
 exports.batHeader = ['Runs', 'Balls', 'Strike Rate', 'Fours', 'Sixes', 'Dot balls', 'Control (%)'];
 
-exports.rand = function (base, limit)
+exports.rand = function (base, limit) // pseudo random generator
 {
     if (limit)
     {
@@ -247,7 +249,7 @@ exports.rand = function (base, limit)
     return Math.random();
 };
 
-exports.checkMoM = function(MoM, temp, strike, toss)
+exports.checkMoM = function(MoM, temp, strike, toss) // check for man of the match conditions
 {
     if(MoM.points < temp)
     {
@@ -260,7 +262,7 @@ exports.checkMoM = function(MoM, temp, strike, toss)
     }
 };
 
-exports.make = function (team)
+exports.make = function (team) // team object constructor
 {
     for(i = 0; i < 2; ++i)
     {
