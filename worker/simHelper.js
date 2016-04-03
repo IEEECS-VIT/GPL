@@ -20,6 +20,7 @@ var i;
 var j;
 var hor;
 var ver;
+var coach;
 var ref = // property inversion helper object
 {
     bat: 'bowl',
@@ -31,7 +32,10 @@ var MoM =
     team: '',
     points: 0
 };
-var coach;
+var scaleRef =
+{
+
+};
 var temp = 0;
 var avgRating;
 var teamArray = [{}, {}];
@@ -285,4 +289,9 @@ exports.make = function (team) // team object constructor
     }
 
     return {teams: teamArray, MoM: MoM};
+};
+
+exports.scale = function(a, b, factor, pre)
+{
+	return parseFloat((a * (factor || 1) / (b || 1)).toFixed(pre || 2));
 };

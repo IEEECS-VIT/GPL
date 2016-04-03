@@ -34,7 +34,7 @@ var onRetrieve = function(req, res, next)
         }
         if(!user)
         {
-            req.flash('That request failed, please re-try.');
+            res.flash('That request failed, please re-try.');
             return res.redirect('/social/login'); // redirect to login or register based on the request origin.
         }
 

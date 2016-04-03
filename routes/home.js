@@ -149,7 +149,7 @@ router.get('/matches', authenticated, function (req, res){ // Deprecated
             if (err)
             {
                 console.error(err.message);
-                req.flash('Error fetching match details, please retry.');
+                res.flash('Error fetching match details, please retry.');
                 res.redirect('/home');
             }
             else
@@ -159,7 +159,7 @@ router.get('/matches', authenticated, function (req, res){ // Deprecated
                     if (err)
                     {
                         console.error(err.message);
-                        req.flash('Error fetching match details, please retry.');
+                        res.flash('Error fetching match details, please retry.');
                         res.redirect('/home');
                     }
                     else
@@ -193,7 +193,7 @@ router.get('/match/:day', authenticated, function(req, res){
           {
               if (err)
               {
-                  req.flash('Error loading match ' + req.params.day + 'details.');
+                  res.flash('Error loading match ' + req.params.day + 'details.');
                   res.redirect('/home');
               }
               else
@@ -202,7 +202,7 @@ router.get('/match/:day', authenticated, function(req, res){
                   {
                       if (err)
                       {
-                          req.flash('Error loading match ' + req.params.day + 'details.');
+                          res.flash('Error loading match ' + req.params.day + 'details.');
                           res.redirect('/home');
                       }
                       else
@@ -240,7 +240,7 @@ router.post('/getsquad', authenticated, function (req, res) {
     {
         if (err)
         {
-            req.flash('That request encountered an error, please re-try.');
+            res.flash('That request encountered an error, please re-try.');
         }
 
         res.redirect('/home');
@@ -271,7 +271,7 @@ router.post('/players', function (req, res){
     {
         if (err)
         {
-            req.flash('Your squad was not updated, please re-try.');
+            res.flash('Your squad was not updated, please re-try.');
             res.redirect('/home/players');
         }
         else
@@ -325,7 +325,7 @@ router.post('/players', function (req, res){
     {
         if (err)
         {
-            req.flash('Error creating team record.');
+            res.flash('Error creating team record.');
             res.redirect('/home');
         }
         else
@@ -339,12 +339,12 @@ router.post('/players', function (req, res){
             {
                 if(err)
                 {
-                    req.flash('An unexpected error occurred, please re-try.');
+                    res.flash('An unexpected error occurred, please re-try.');
                     res.redirect('/players');
                 }
                 else if(cost < 0)
                 {
-                    req.flash('Cost exceeded!');
+                    res.flash('Cost exceeded!');
                     res.redirect('/home/players');
                 }
                 else
@@ -419,7 +419,7 @@ router.get('/players', authenticated, function (req, res, next){ // page for all
                         return next(err);
                     }
 
-                    res.render('players', {Players: result, csrfToken: req.csrfToken(), msg: req.flash()});
+                    res.render('players', {Players: result, csrfToken: req.csrfToken(), msg: res.flash()});
                 };
 
                 async.map(documents, map, onMap);

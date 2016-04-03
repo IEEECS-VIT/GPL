@@ -111,7 +111,7 @@ exports.getLeader = function (user, callback)
         {
             if (documents[i]._id === user)
             {
-                if(i > 9)
+                if(leaderboard.length > 9)
                 {
                     documents[i].rank = i + 1;
                 }

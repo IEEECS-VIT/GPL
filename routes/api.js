@@ -65,7 +65,7 @@ router.get('/register/:name', apiFilter, function(req, res, next){
 router.get('/home', apiFilter, function(req, res, next){
     credentials =
     {
-        '_id': req.signedCookies.name
+        _id: req.signedCookies.name
     };
 
     var onFetch = function (err, doc)

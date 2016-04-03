@@ -141,7 +141,7 @@ router.get('/login', cookieFilter, function (req, res){
     res.clearCookie('team', {});
     res.clearCookie('phone', {});
 
-    res.render('login', {csrfToken: req.csrfToken(), msg: req.flash()});
+    res.render('login', {csrfToken: req.csrfToken(), msg: res.flash()});
 });
 
 router.post('/login', cookieFilter, function (req, res){
@@ -170,7 +170,7 @@ router.post('/login', cookieFilter, function (req, res){
     {
         if (err)
         {
-            req.flash('Incorrect credentials!');
+            res.flash('Incorrect credentials!');
             res.redirect('/login');
         }
         else if (doc)
@@ -178,7 +178,7 @@ router.post('/login', cookieFilter, function (req, res){
             bcrypt.compare(req.body.password, doc.passwordHash, function(err, result){
                 if(err)
                 {
-                    req.flash('An unexpected error has occurred, please re-try.');
+                    res.flash('An unexpected error has occurred, please re-try.');
                     res.redirect('/login');
                 }
                 else if(result)
@@ -188,14 +188,14 @@ router.post('/login', cookieFilter, function (req, res){
                 }
                 else
                 {
-                    req.flash('Incorrect credentials!');
+                    res.flash('Incorrect credentials!');
                     res.redirect('/login');
                 }
             });
         }
         else
         {
-            req.flash('Incorrect credentials!');
+            res.flash('Incorrect credentials!');
             res.redirect('/login');
         }
     };
@@ -204,7 +204,7 @@ router.post('/login', cookieFilter, function (req, res){
 });
 
 router.get(/^\/forgot\/password|user$/, function (req, res){
-    res.render('forgot', {csrfToken: req.csrfToken(), mode: req.url.split('/')[2], msg: req.flash()});
+    res.render('forgot', {csrfToken: req.csrfToken(), mode: req.url.split('/')[2], msg: res.flash()});
 });
 
 router.post('/forgot/password', function (req, res){
@@ -226,7 +226,7 @@ router.post('/forgot/password', function (req, res){
     crypto.randomBytes(20, function (err, buf){
         if(err)
         {
-            req.flash('An unexpected error has occurred, please re-try.');
+            res.flash('An unexpected error has occurred, please re-try.');
             res.redirect('/forgot/password');
         }
 
@@ -236,7 +236,7 @@ router.post('/forgot/password', function (req, res){
         {
             if (error || !doc)
             {
-                req.flash('Incorrect credentials!');
+                res.flash('Incorrect credentials!');
                 res.redirect('/forgot/password');
             }
             else
@@ -254,7 +254,7 @@ router.get('/reset/:token', function (req, res){
     {
         if (err)
         {
-            req.flash('That password reset link had expired, or is invalid.');
+            res.flash('That password reset link had expired, or is invalid.');
             res.redirect('/forgot/password');
         }
         else if (!doc)
@@ -263,7 +263,7 @@ router.get('/reset/:token', function (req, res){
         }
         else
         {
-            res.render('reset', {csrfToken: req.csrfToken(), msg: req.flash()});
+            res.render('reset', {csrfToken: req.csrfToken(), msg: res.flash()});
         }
     };
 
@@ -277,7 +277,7 @@ router.post('/reset/:token', function (req, res){
         {
             if (err)
             {
-                req.flash('That request failed, please re-try.');
+                res.flash('That request failed, please re-try.');
                 res.redirect('/reset/' + req.params.token);
             }
             else if (!doc)
@@ -293,7 +293,7 @@ router.post('/reset/:token', function (req, res){
         bcrypt.hash(req.body.password, 10, function(err, hash){
             if(err)
             {
-                req.flash('An unexpected error has occurred, and your password could not be rest. Please re-try.');
+                res.flash('An unexpected error has occurred, and your password could not be rest. Please re-try.');
                 res.redirect('/reset/' + req.params.token);
             }
             else
@@ -304,7 +304,7 @@ router.post('/reset/:token', function (req, res){
     }
     else // passwords do not match
     {
-        req.flash('Passwords do not match.');
+        res.flash('Passwords do not match.');
         res.redirect('/reset/' + req.params.token);
     }
 });
@@ -320,7 +320,7 @@ router.post('/forgot/user', function (req, res){
     {
         if (err || !docs)
         {
-            req.flash('Invalid credentials!');
+            res.flash('Invalid credentials!');
             res.redirect('/forgot/user');
         }
         else
@@ -335,7 +335,7 @@ router.post('/forgot/user', function (req, res){
 router.get('/register', cookieFilter, function (req, res){
     if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users')) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
     {                                                                                       // the schedule has been constructed and the game engine is match ready.
-        res.render('register', {msg: req.flash(), csrfToken: req.csrfToken()});
+        res.render('register', {msg: res.flash(), csrfToken: req.csrfToken()});
     }
     else
     {
@@ -353,7 +353,7 @@ router.post('/register', cookieFilter, function (req, res){
         {
             if (err)
             {
-                req.flash('This team name already exists.');
+                res.flash('This team name already exists.');
                 res.redirect('/register');
             }
             else
@@ -374,7 +374,7 @@ router.post('/register', cookieFilter, function (req, res){
         bcrypt.hash(req.body.password, 10, function(err, hash){
             if(err)
             {
-                req.flash('An unexpected error occurred and your details could not be saved. Please re-try.');
+                res.flash('An unexpected error occurred and your details could not be saved. Please re-try.');
                 res.redirect('/register');
             }
             else
@@ -386,7 +386,7 @@ router.post('/register', cookieFilter, function (req, res){
     }
     else
     {
-        req.flash('Passwords do not match');
+        res.flash('Passwords do not match');
         res.redirect('/register');
     }
 });
