@@ -110,7 +110,8 @@ app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function (req, res) {
-    res.redirect('/');
+    res.flash('That page does not exist... yet.');
+    res.redirect('/' + req.signedCookies.name ? 'home' : ''); // session context based handling
 });
 
 if(process.env.NODE_ENV) // use Sentry only on production environments
