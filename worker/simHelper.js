@@ -32,10 +32,6 @@ var MoM =
     team: '',
     points: 0
 };
-var scaleRef =
-{
-
-};
 var temp = 0;
 var avgRating;
 var teamArray = [{}, {}];

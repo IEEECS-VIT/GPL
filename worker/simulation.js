@@ -194,8 +194,8 @@ exports.simulate = function (data, callback)
                             strikeIndex ^= rand(2); // in a run out, either the striker or non-striker can be dismissed.
                             previousDismissal = -1; // indicates the previous dismissal was a run out.
                             --wicketsTaken[currentBowler]; // adjust wickets taken, see reason below.
+                            dismissed[strike[+strikeIndex]] = 1; // set the dismissed flag for the current batsman to true
                             continuousWickets[currentBowler] = 0; // run outs do not contribute to a bowler's wicket tally
-	                        dismissed[strike[+strikeIndex]] = 1; // set the dismissed flag for the current batsman to true
 	                        previousBatsman = strike[+strikeIndex]; // set the previous batsman as the one who was just dismissed
                             data.match.commentary[data.match.commentary.length - 1] += rand(helper.runout);
 
@@ -248,12 +248,12 @@ exports.simulate = function (data, callback)
                         }
                         if (balls[strike[+strikeIndex]])
                         {
-                            control[strike[+strikeIndex]] *= ((balls[strike[+strikeIndex]] - 1) / (balls[strike[+strikeIndex]])).toFixed(2);
+                            control[strike[+strikeIndex]] *= scale(balls[strike[+strikeIndex]] - 1, balls[strike[+strikeIndex]]);
                         }
 
-                        data.team[+tossIndex].avgPartnershipRuns[currentPartnership] = parseFloat(((partnershipRuns[currentPartnership] + data.team[+tossIndex].avgPartnershipRuns[currentPartnership] * data.team[+tossIndex].played) / (data.team[+tossIndex].played + 1)).toFixed(2));
-                        data.team[+tossIndex].avgPartnershipBalls[currentPartnership] = parseFloat(((partnershipBalls[currentPartnership] + data.team[+tossIndex].avgPartnershipBalls[currentPartnership] * data.team[+tossIndex].played) / (data.team[+tossIndex].played + 1)).toFixed(2));
-                        data.match.commentary.push(`${score[strike[+strikeIndex]]} (${balls[strike[+strikeIndex]]} balls ${fours[strike[+strikeIndex]]} X 4's ${maximums[strike[+strikeIndex]]} X 6's) SR: ${((score[strike[+strikeIndex]] * 100) / balls[strike[+strikeIndex]]).toFixed(2)} Control: ${scale(control[strike[+strikeIndex]], 0, 100)} %`);
+                        data.team[+tossIndex].avgPartnershipRuns[currentPartnership] = scale(partnershipRuns[currentPartnership] + data.team[+tossIndex].avgPartnershipRuns[currentPartnership] * data.team[+tossIndex].played, data.team[+tossIndex].played + 1);
+                        data.team[+tossIndex].avgPartnershipBalls[currentPartnership] = scale(partnershipBalls[currentPartnership] + data.team[+tossIndex].avgPartnershipBalls[currentPartnership] * data.team[+tossIndex].played, data.team[+tossIndex].played + 1);
+                        data.match.commentary.push(`${score[strike[+strikeIndex]]} (${balls[strike[+strikeIndex]]} balls ${fours[strike[+strikeIndex]]} X 4's ${maximums[strike[+strikeIndex]]} X 6's) SR: ${scale(score[strike[+strikeIndex]], balls[strike[+strikeIndex]], 100)} Control: ${scale(control[strike[+strikeIndex]], 0, 100)} %`);
                         data.match.commentary.push(`Partnership: ${partnershipRuns[currentPartnership]} (${partnershipBalls[currentPartnership]}), Run rate: ${scale(partnershipRuns[currentPartnership], partnershipBalls[currentPartnership], 6)}`);
 	                    temp = 6 * i + j;
 	                    ++currentPartnership;
@@ -516,7 +516,7 @@ exports.simulate = function (data, callback)
                         helper.checkMoM(MoM, temp, i, +tossIndex);
                     }
 
-                    data.match.scorecard.push([team[+tossIndex].name[i], score[i], balls[i], scale(score[i], balls[i], 100), fours[i], maximums[i], dotBalls[i], (control[i] * 100).toFixed(2)]);
+                    data.match.scorecard.push([team[+tossIndex].name[i], score[i], balls[i], scale(score[i], balls[i], 100), fours[i], maximums[i], dotBalls[i], scale(control[i], 0, 100)]);
 
                     if (!dismissed[i])
                     {
@@ -616,9 +616,9 @@ exports.simulate = function (data, callback)
                 data.team[i].points += state[(i === +winner)].points; // increment points
                 data.team[i].form += Math.pow(-1, +(i !== +winner)) * temp; // adjust team form
                 data.team[i].ratio = scale(data.team[i].win, data.team[i].loss); // update win ratio
-                data.team[i].progression.push((data.team[i].progression.slice(-1)[0] || 0) + state[(i === +winner)].points);
+                data.team[i].progression.push((data.team[i].progression.slice(-1)[0] || 0) + state[(i === +winner)].points); // a cumulative sum array of points till date
                 data.team[i].streak = ((Math.pow(-1, +(i === +winner)) * data.team[i].streak > 0) ? Math.pow(-1, +(i !== +winner)) : (data.team[i].streak - Math.pow(-1, +(i === +winner))));
-            }
+            } // the above line updates the team's winning streak: incrementing / decrementing for wins / losses respectively
         }
 
 	    data.match.MoM = MoM;

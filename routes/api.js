@@ -235,7 +235,7 @@ router.get('/players', apiFilter, function (req, res, next){ // page for all pla
             {
                 arg.active = false;
                 arg.image = `https://res.cloudinary.com/gpl/players/${arg.Type}/${arg._id}.jpg`;
-                asyncCallback();
+                asyncCallback(null, arg);
             };
 
             var onMap = function(err, result)
@@ -246,7 +246,7 @@ router.get('/players', apiFilter, function (req, res, next){ // page for all pla
                     return next(err);
                 }
 
-                res.json({Players: result, csrfToken: req.csrfToken()});
+                res.json({Players: result()});
             };
 
             async.map(documents, map, onMap);
@@ -272,7 +272,7 @@ router.get('/team', apiFilter, function (req, res, next){ // view the assigned p
             return next(err);
         }
 
-        res.json({Squad: documents, csrfToken: req.csrfToken()});
+        res.json({Squad: documents()});
     };
 
     mongoTeam.getTeam(credentials, getTeam);
