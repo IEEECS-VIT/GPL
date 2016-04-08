@@ -27,10 +27,6 @@ describe('Simulation tests:', function(){
         it('Check for email worker status', function(){
 
         });
-
-        it('Ensure that simulation trigger does not crash', function(){
-
-        });
     });
 
     describe('simulation completion:', function(){
@@ -44,10 +40,6 @@ describe('Simulation tests:', function(){
     });
 
     describe('Match status update:', function(){
-        it('Collect data from slave simulation-controller callbacks', function(){
-
-        });
-
         it('Verify successful completion of update queries', function(){
 
         });
