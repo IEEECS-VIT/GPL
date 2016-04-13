@@ -51,12 +51,10 @@ var cookieFilter = function(req, res, next)
 {
     if(req.signedCookies.name)
     {
-        res.redirect('/home');
+        return res.redirect('/home');
     }
-    else
-    {
-        return next();
-    }
+
+    next();
 };
 
 try
@@ -171,19 +169,19 @@ router.post('/login', cookieFilter, function (req, res){
         if (err)
         {
             res.flash('Incorrect credentials!');
-            res.redirect('/login');
+            return res.redirect('/login');
         }
-        else if (doc)
+        if (doc)
         {
             bcrypt.compare(req.body.password, doc.passwordHash, function(err, result){
                 if(err)
                 {
                     res.flash('An unexpected error has occurred, please re-try.');
-                    res.redirect('/login');
+                    return res.redirect('/login');
                 }
-                else if(result)
+                if(result)
                 {
-                    res.cookie(ref[doc.authStrategy][0], doc._id, {signed: true, maxAge: 86400000, httpOnly: true});
+                    res.cookie(ref[doc.authStrategy][0], doc._id, {signed: true, maxAge: 86400000});
                     res.redirect(ref[doc.authStrategy][1]);
                 }
                 else
@@ -215,10 +213,10 @@ router.post('/forgot/password', function (req, res){
         $or:
         [
             {
-                authStrategy : 'local'
+                authStrategy: 'local'
             },
             {
-                authStrategy : 'admin'
+                authStrategy: 'admin'
             }
         ]
     };
@@ -441,7 +439,7 @@ router.get('/social/login', cookieFilter, function (req, res){
 });
 
 router.post('/social/login', cookieFilter, function (req, res){
-    res.cookie('team', req.body.team.trim().toUpperCase(), {maxAge : 300000, signed : true});
+    res.cookie('team', req.body.team.trim().toUpperCase(), {maxAge: 300000, signed: true});
     res.redirect('/social/login');
 });
 
@@ -449,7 +447,7 @@ router.get('/social/register', cookieFilter, function (req, res){
     if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users')) // Initialize process.env.DAY with -1, set to 0 when registrations are open,
     {                                                                                       // will be updated to 1 when the schedule has been constructed and the game
                                                                                             // engine is match ready.
-        res.render('social', {mode: +!req.signedCookies.team, type : 'register', csrfToken : req.csrfToken()});
+        res.render('social', {mode: +!req.signedCookies.team, type: 'register', csrfToken: req.csrfToken()});
     }
     else if (req.signedCookies.name)
     {
@@ -496,11 +494,11 @@ router.get('/simulate', function (req, res){
 });
 
 router.get('/rules', function (req, res){
-    res.render('rules', {session : +!req.signedCookies.name});
+    res.render('rules', {session: +!req.signedCookies.name});
 });
 
 router.get('/privacy', function (req, res){
-    res.render('privacy', {session : +!req.signedCookies.name});
+    res.render('privacy', {session: +!req.signedCookies.name});
 });
 
 router.get('/trailer', function (req, res){ // trailer page

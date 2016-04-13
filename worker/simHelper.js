@@ -235,11 +235,13 @@ exports.bowlHeader = ['Bowler', 'Overs', 'Maidens', 'Wickets', 'Runs conceded', 
 
 exports.batHeader = ['Runs', 'Balls', 'Strike Rate', 'Fours', 'Sixes', 'Dot balls', 'Control (%)'];
 
+exports.winMode = { false: 'higher run rate', true: 'fewer wickets lost' };
+
 exports.rand = function (base, limit) // pseudo random generator
 {
     if (limit)
     {
-        return base + ((limit > base) ? rand(limit - base) : 0);
+        return base + (limit > base) * rand(limit - base);
     }
     if (base)
     {
@@ -287,7 +289,12 @@ exports.make = function (team) // team object constructor
     return {teams: teamArray, MoM: MoM};
 };
 
-exports.scale = function(a, b, factor, pre)
+exports.scale = function(a, b, factor, pre) // helps avoid parseFloat((a/b).toFixed(2)) type repetition
 {
 	return parseFloat((a * (factor || 1) / (b || 1)).toFixed(pre || 2));
+};
+
+exports.decide = function(arg, mode) // finds the index of the smallest element in two element arrays, largest if mode is set to 1
+{
+    return +((arg[1] < arg[0]) ^ mode);
 };

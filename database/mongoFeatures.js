@@ -48,7 +48,7 @@ exports.forgotCount = function(option, callback)
         return callback(null, doc.value);
     };
 
-    db.collection('info').findOneAndUpdate({_id : 'info'}, {$inc : option}, onInc);
+    db.collection('info').findOneAndUpdate({_id: 'info'}, {$inc: option}, onInc);
 };
 
 exports.warnEmptyTeams = function(callback)
@@ -88,7 +88,7 @@ exports.match = function (day, team, callback)
 
     if (day <= process.env.DAY)
     {
-        db.collection('matchday' + day).find(filter, {commentary : 1, scorecard : 1, count : 1}).limit(1).next(callback);
+        db.collection('matchday' + day).find(filter, {commentary: 1, scorecard: 1, count: 1}).limit(1).next(callback);
     }
     else
     {
@@ -108,14 +108,14 @@ exports.match = function (day, team, callback)
 
 exports.fetchPlayers = function (callback)
 {
-    db.collection('players').find({}, {_id : 1, Name : 1, Type : 1, Country : 1, Price : 1, Cost : 1}).toArray(callback);
+    db.collection('players').find({}, {_id: 1, Name: 1, Type: 1, Country: 1, Price: 1, Cost: 1}).toArray(callback);
 };
 
 exports.getPlayer = function (id, fields, callback)
 {
     var query =
     {
-        "_id" : id
+        _id: id
     };
 
     if(typeof fields === 'function')

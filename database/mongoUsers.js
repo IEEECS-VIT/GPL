@@ -25,7 +25,7 @@ var slice =
     win: 1,
     points: 1,
     played: 1,
-    net_run_rate: 1
+    netRunRate: 1
 };
 var options =
 {
@@ -262,16 +262,16 @@ exports.updateUserTeam = function (doc, team, stats, cost, callback)
     {
         $set:
         {
-            'team': team,
-            'stats': stats,
-            'surplus': cost
+            team: team,
+            stats: stats,
+            surplus: cost
         }
     }, {}, callback)
 };
 
 exports.updateMatchSquad = function (doc, arr, callback)
 {
-    db.collection(match).findOneAndUpdate(doc, {$set: {'squad': arr}}, {}, callback);
+    db.collection(match).findOneAndUpdate(doc, {$set: {squad: arr}}, {}, callback);
 };
 
 exports.fetchUser = function (query, callback)

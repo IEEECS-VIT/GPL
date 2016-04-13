@@ -19,13 +19,13 @@
 var i;
 var slice =
 {
-    _id : 0,
-    fours : 1,
-    sixes : 1,
-    run_rates : 1,
-    progression : 1,
-    scored_per_over : 1,
-    conceded_per_over : 1
+    _id: 0,
+    fours: 1,
+    sixes: 1,
+    runRates: 1,
+    progression: 1,
+    scoredPerOver: 1,
+    concededPerOver: 1
 };
 var async = require('async');
 var match = process.env.MATCH;
@@ -84,11 +84,7 @@ exports.getSquad = function (doc, callback)
         {
             return callback(err, null);
         }
-        if(!document)
-        {
-            return callback(null, []);
-        }
-        if(!document.team.length)
+        if(!document || !document.team.length)
         {
             return callback(null, []);
         }
@@ -145,16 +141,16 @@ exports.shortlist = function (callback) // add email notification for shortliste
     };
 
     db.collection(match).aggregate([{
-        $sort :
+        $sort:
         {
-            points : -1,
-            net_run_rate : -1,
-            win : -1,
-            loss : 1
+            points: -1,
+            netRunRate: -1,
+            win: -1,
+            loss: 1
         }
     },
         {
-            $limit : ref[match].limit
+            $limit: ref[match].limit
         }
     ], onShortList);
 };
@@ -189,7 +185,7 @@ exports.adminInfo = function (callback)
         },
         total: function (asyncCallback)
         {
-            mongoUsers.getCount({authStrategy: {$ne : 'admin'}}, asyncCallback);
+            mongoUsers.getCount({authStrategy: {$ne: 'admin'}}, asyncCallback);
         },
         facebook: function (asyncCallback)
         {
@@ -232,7 +228,7 @@ exports.adminInfo = function (callback)
     async.parallel(adminParallelTasks, onParallel);
 };
 
-exports.fetchMatches = function (team, callback)
+exports.fetchMatches = function (team, callback) // deprecated, as match details are to be fetched one at a time
 {
     var parallelTasks = [];
 
@@ -268,7 +264,7 @@ exports.opponent = function (day, team, callback)
             return callback(err);
         }
 
-        return callback(null, (team === doc.Team_1) ? doc.Team_2 : doc.Team_1);
+        return callback(null, (team === doc.Team_1) ? doc.Team_2: doc.Team_1);
     };
 
     db.collection('matchday' + day).find(filter).limit(1).next(onFind);
@@ -287,7 +283,7 @@ exports.team = function (doc, callback)
         {
             if(error)
             {
-                throw error;
+                return callback(error);
             }
 
             doc.team = results.sort();

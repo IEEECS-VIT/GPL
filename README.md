@@ -51,15 +51,15 @@ MONGO=mongodb://127.0.0.1:27017/GPL
 * Seed the local database with `npm run seed`
 * Generate match schedules with `npm run schedule`
 * Run the server locally at port 3000 or "PORT" in process.env with `npm start`
-* View the website at localhost:3000 within your browser
+* View the website at `localhost:3000` within your browser
 
 External Requirements:
 
-* A MongoDB instance running locally or valid "MONGO" string in process.env
+* A MongoDB instance running locally or valid `MONGO` string in process.env
 * Valid social authentication tokens in process.env
-* A valid COOKIE_SECRET string in process.env for better security (Optional)
-* A valid LOGENTRIES_TOKEN in process.env for Logentries support (Optional)
-* Valid NEWRELIC_APP_NAME, NEWRELIC_LICENSE in process.env (Optional)
-* A valid "SENTRY_DSN" token in process.env for Sentry error alerts (optional)
+* A valid `COOKIE_SECRET` string in process.env for better security (Optional)
+* A valid `LOGENTRIES_TOKEN` in process.env for Logentries support (Optional)
+* Valid `NEWRELIC_APP_NAME`, `NEWRELIC_LICENSE` in process.env (Optional)
+* A valid `SENTRY_DSN` token in process.env for Sentry error alerts (optional)
 
 *PS:* Configure automatic static asset compression with `npm run watch`

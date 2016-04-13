@@ -18,8 +18,8 @@
 
 var scaleRef =
 {
-    'KB': 1024,
-    'MB': 1048576
+    KB: 1024,
+    MB: 1048576
 };
 var forgotRef =
 {
@@ -29,7 +29,7 @@ var forgotRef =
     },
     password:
     {
-        password:1
+        password: 1
     }
 };
 if(!process.env.NODE_ENV)
@@ -64,17 +64,17 @@ exports.forgotCallback = function(mode, callback)
 
 exports.shortlistRef =
 {
-    'users' :
+    users:
     {
         out: 'round2',
         limit: parseInt(process.env.ONE, 10)
     },
-    'round2':
+    round2:
     {
         out: 'round3',
         limit: 8
     },
-    'round3':
+    round3:
     {
         out: null,
         limit: 8

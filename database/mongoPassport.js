@@ -56,8 +56,8 @@ var callback = function(req, token, refresh, profile, done)
 var ref =
 {
     undefined: 'http://localhost:3000/auth/',
-    'dev': 'http://gpl-dev.herokuapp.com/auth/',
-    'production': 'http://gravitaspremierleague.com/auth/'
+    dev: 'http://gpl-dev.herokuapp.com/auth/',
+    production: 'http://gpl.ieeecsvit.com/auth/'
 };
 var facebook = require('passport-facebook').Strategy;
 var mongoUsers = require(path(__dirname, 'mongoUsers'));

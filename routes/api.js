@@ -181,7 +181,7 @@ router.get('/match/:day', apiFilter, function(req, res, next){
 router.post('/getsquad', apiFilter, function (req, res, next) {
     credentials =
     {
-        '_id': req.signedCookies.name
+        _id: req.signedCookies.name
     };
     squad = [];
 
@@ -207,7 +207,7 @@ router.post('/getsquad', apiFilter, function (req, res, next) {
 router.get('/players', apiFilter, function (req, res, next){ // page for all players, only available if no squad has been chosen
     credentials =
     {
-        "_id": req.signedCookies.name
+        _id: req.signedCookies.name
     };
 
     var onFetchUser = function (err, document)
@@ -219,8 +219,7 @@ router.get('/players', apiFilter, function (req, res, next){ // page for all pla
         }
         if (document.team.length)
         {
-            res.status(422);
-            return next(err);
+            res.status(422).end();
         }
 
         var onFetch = function (err, documents)
@@ -261,7 +260,7 @@ router.get('/players', apiFilter, function (req, res, next){ // page for all pla
 router.get('/team', apiFilter, function (req, res, next){ // view the assigned playing 11 with options to change the playing 11
     credentials =
     {
-        '_id': req.signedCookies.name
+        _id: req.signedCookies.name
     };
 
     var getTeam = function (err, documents)

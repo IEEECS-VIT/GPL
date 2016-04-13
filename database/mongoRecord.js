@@ -126,7 +126,7 @@ exports.users = function(flag, limit, index)
         users.push({
             _id: 'ADMIN',
             authStrategy: 'admin',
-            email: 'gravitaspremierleague@gmail.com',
+            email: 'gravitaspremierleague@gmail.com', // needed for admin password resets
             passwordHash: '$2a$10$ijmjpw3BJDNp5phIKmfdAeJ.ev/pbU6tXL78JgKejyjQ58OtUodtK'   // admin@gpl
         });
     }
