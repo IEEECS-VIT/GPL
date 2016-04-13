@@ -256,7 +256,6 @@ exports.simulate = function (data, callback)
                         data.team[+tossIndex].avgPartnershipBalls[currentPartnership] = scale(partnershipBalls[currentPartnership] + data.team[+tossIndex].avgPartnershipBalls[currentPartnership] * data.team[+tossIndex].played, data.team[+tossIndex].played + 1);
                         data.match.commentary.push(`${score[strike[+strikeIndex]]} (${balls[strike[+strikeIndex]]} balls ${fours[strike[+strikeIndex]]} X 4's ${maximums[strike[+strikeIndex]]} X 6's) SR: ${scale(score[strike[+strikeIndex]], balls[strike[+strikeIndex]], 100)} Control: ${scale(control[strike[+strikeIndex]], 0, 100)} %`);
                         data.match.commentary.push(`Partnership: ${partnershipRuns[currentPartnership]} (${partnershipBalls[currentPartnership]}), Run rate: ${scale(partnershipRuns[currentPartnership], partnershipBalls[currentPartnership], 6)}`);
-	                    temp = 6 * i + j;
 	                    ++currentPartnership;
                         frustration[+strikeIndex] = control[strike[+strikeIndex]] = 0;
                         strike[+strikeIndex] = Math.max(...strike) + 1; // bring the next batsman to the crease
@@ -267,6 +266,9 @@ exports.simulate = function (data, callback)
                             strikeIndex = !strikeIndex;
                             data.match.commentary.push('The two batsmen crossed over while the catch was being taken.');
                         }
+
+                        temp = 6 * i + j;
+
                         if (++wickets[+tossIndex] === 10) // all out
                         {
                             overs[+tossIndex] = temp;
@@ -577,6 +579,7 @@ exports.simulate = function (data, callback)
         }
 
         temp = +(total[0] === total[1]) + (wickets[0] === wickets[1]) * 2 + (overs[0] === overs[1]) * 4;
+
 	    switch(temp) // determining win / TIE conditions
 	    {
 			case 0:

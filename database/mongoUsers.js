@@ -109,22 +109,15 @@ exports.getLeader = function (user, callback)
 
         for (i = 0; i < documents.length; ++i)
         {
-            if (documents[i]._id === user)
-            {
-                if(leaderboard.length > 9)
-                {
-                    documents[i].rank = i + 1;
-                }
+            flag |= documents[i]._id === user;
 
-                flag = true;
-                leaderboard.push(documents[i]);
-            }
-            else if (leaderboard.length < 10)
+	        if (i < 10 || flag)
+	        {
+		        leaderboard.push(documents[i]);
+	        }
+            if (flag && leaderboard.length > 9)
             {
-                leaderboard.push(documents[i]);
-            }
-            else if (flag)
-            {
+				leaderboard[leaderboard.length - 1].rank = i + 1;
                 break;
             }
         }

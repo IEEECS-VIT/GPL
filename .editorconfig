@@ -17,6 +17,6 @@ indent_size = tab
 indent_style = tab
 
 # package.json specific settings
-indent_size = 2
 [{package.json}]
+indent_size = 2
 indent_style = space
