@@ -157,8 +157,13 @@
         var pct = {};
         var old_pct = {};
         var old_time = {};
-
+		var temp =
+		{
+			false: "ceil",
+			true: "floor"
+		};
         var greater_unit = null;
+
         for (i = 0; i < units.length; ++i) {
             var unit = units[i];
             var maxUnits = (secondsIn[greater_unit] || total_duration) / secondsIn[unit];
@@ -166,10 +171,8 @@
             var curUnits = (diff / secondsIn[unit]), oldUnits = (old_diff / secondsIn[unit]);
 
             if (floor) {
-                if (curUnits > 0) curUnits = Math.floor(curUnits);
-                else curUnits = Math.ceil(curUnits);
-                if (oldUnits > 0) oldUnits = Math.floor(oldUnits);
-                else oldUnits = Math.ceil(oldUnits);
+                curUnits = Math[temp[curUnits > 0]](curUnits);
+                oldUnits = Math[temp[oldUnits > 0]](oldUnits);
             }
 
             if (unit !== "Days") {
@@ -313,12 +316,8 @@
         this.container.appendTo(this.element);
 
         // Determine the needed width and height of TimeCircles
-        var height = this.element.offsetHeight;
-        var width = this.element.offsetWidth;
-        if (height === 0)
-            height = $(this.element).height();
-        if (width === 0)
-            width = $(this.element).width();
+        var height = this.element.offsetHeight || $(this.element).height();
+        var width = this.element.offsetWidth || $(this.element).width();
 
         if (height === 0 && width > 0)
             height = width / this.data.drawn_units.length;
@@ -354,10 +353,14 @@
 
         // Prepare Time Elements
         i = 0;
-        for (key in this.data.text_elements) {
-            if (!this.data.text_elements.hasOwnProperty(key))
-                continue;
-	        if (!this.config.time[key].show)
+	    var temp;
+	    var setCSS = function(obj, val)
+	    {
+		    obj.css("line-height", val);
+	    };
+
+	    for (key in this.data.text_elements) {
+	        if (!this.data.text_elements.hasOwnProperty(key) || !this.config.time[key].show)
                 continue;
 
             var textElement = $("<div>");
@@ -367,21 +370,17 @@
             textElement.css("width", this.data.attributes.item_size);
             textElement.appendTo(this.container);
 
-	        var temp = Math.round(this.config.text_size * this.data.attributes.item_size) + "px";
-            var setCSS = function(obj)
-            {
-	            obj.css("line-height", temp);
-            };
+			temp = Math.round(this.config.text_size * this.data.attributes.item_size) + "px";
 
 	        var headerElement = $("<h4>");
             headerElement.text(this.config.time[key].text); // Options
             headerElement.css("font-size", Math.round(this.config.text_size * this.data.attributes.item_size));
-            setCSS(headerElement);
+            setCSS(headerElement, temp);
             headerElement.appendTo(textElement);
 
             var numberElement = $("<span>");
             numberElement.css("font-size", Math.round(3 * this.config.text_size * this.data.attributes.item_size));
-            setCSS(numberElement);
+            setCSS(numberElement, temp);
             numberElement.appendTo(textElement);
 
             this.data.text_elements[key] = numberElement;
@@ -413,9 +412,7 @@
         }
         var diff, old_diff, prevDate = this.data.prev_time, curDate = new Date();
         this.data.prev_time = curDate;
-
-        if (prevDate === null)
-            prevDate = curDate;
+        prevDate |= curDate;
 
 	    var setX = function(val, size)
 	    {
@@ -445,12 +442,19 @@
         old_diff = (this.data.attributes.ref_date - prevDate) / 1000;
 
         var floor = this.config.animation !== "smooth";
-
         var visible_times = parse_times(diff, old_diff, this.data.total_duration, this.data.drawn_units, floor);
         var all_times = parse_times(diff, old_diff, secondsIn["Years"], allUnits, floor);
         var j = 0, lastKey = null;
-
         var cur_shown = this.data.drawn_units.slice();
+	    var notify = function(mode, obj, key)
+	    {
+		    var temp = {"all": all_times, "visible": visible_times};
+
+		    if (Math.floor(temp[mode].raw_time[key]) !== Math.floor(temp[mode].raw_old_time[key])) {
+			    obj.notifyListeners(key, Math.floor(temp[mode].time[key]), Math.floor(diff), mode);
+		    }
+	    };
+
         for (i in allUnits) {
             if (!allUnits.hasOwnProperty(i)) {
                 continue;
@@ -458,21 +462,12 @@
 
             key = allUnits[i];
 
-	        var notify = function(mode, obj)
-	        {
-		        temp = {"all": all_times, "visible": visible_times};
-
-		        if (Math.floor(temp[mode].raw_time[key]) !== Math.floor(temp[mode].raw_old_time[key])) {
-			        obj.notifyListeners(key, Math.floor(temp[mode].time[key]), Math.floor(diff), mode);
-		        }
-	        };
-
-            notify("all", this); // Notify (all) listeners
+            notify("all", this, key); // Notify (all) listeners
 
 	        if (cur_shown.indexOf(key) < 0)
                 continue;
 
-	        notify("visible", this); // Notify (visible) listeners
+	        notify("visible", this, key); // Notify (visible) listeners
 
             if (!nodraw) {
                 // Set the text value
