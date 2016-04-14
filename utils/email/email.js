@@ -24,13 +24,13 @@ var ref =
 };
 var email = require("emailjs");
 var server = email.server.connect({
-    user: "gravitaspremierleague@gmail.com",
-    password: process.env.KEY,
-    host: "smtp.gmail.com",
-    ssl: true
+    "user": "gravitaspremierleague@gmail.com",
+    "password": process.env.KEY,
+    "host": "smtp.gmail.com",
+    "ssl": true
 });
 var path = require('path').join;
-var read = require('fs').readFileSync;
+var read = require('fs').readFileSync; // the synchronous version has been used here as email template creation happens only once, during application startup.
 var version = (new Date).getFullYear() - 2013;
 var user = read(path(__dirname, 'templates', 'user.html'), 'utf-8');
 var reset = read(path(__dirname, 'templates', 'reset.html'), 'utf-8');
@@ -49,19 +49,19 @@ exports.wrap = function (content)
 exports.message = exports.wrap({from: 'gravitaspremierleague@gmail.com'});
 
 exports.match = exports.wrap({
-    from: 'gravitaspremierleague@gmail.com',
-    subject: `Round ${ref[process.env.MATCH]}, Match ${process.env.DAY} results are out!`
+    "from": 'gravitaspremierleague@gmail.com',
+    "subject": `Round ${ref[process.env.MATCH]}, Match ${process.env.DAY} results are out!`
 }).attach_alternative(read(path(__dirname, 'templates', 'match.html')));
 
 
 exports.interest = exports.wrap({
-    from: 'gravitaspremierleague@gmail.com',
-    subject: 'graVITas Premier League v' + version + '.0, graVITas ' + (version + 2013)
+    "from": 'gravitaspremierleague@gmail.com',
+    "subject": 'graVITas Premier League v' + version + '.0, graVITas ' + (version + 2013)
 }).attach_alternative(read(path(__dirname, 'templates', 'interest.html')));
 
 exports.register = exports.wrap({
-    'from': 'gravitaspremierleague@gmail.com',
-    subject: 'Welcome to G.P.L ' + version + '.0!'
+    "from": 'gravitaspremierleague@gmail.com',
+    "subject": 'Welcome to G.P.L ' + version + '.0!'
 }).attach_alternative(read(path(__dirname, 'templates', 'register.html')));
 
 exports.user = function(teams)

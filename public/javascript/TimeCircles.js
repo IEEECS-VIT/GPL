@@ -27,23 +27,23 @@
     // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
     if (!Object.keys) {
         Object.keys = (function () {
-            'use strict';
+            "use strict";
             var hasOwnProperty = Object.prototype.hasOwnProperty,
-                hasDontEnumBug = !({toString: null}).propertyIsEnumerable('toString'),
+                hasDontEnumBug = !({toString: null}).propertyIsEnumerable("toString"),
                 dontEnums = [
-                    'toString',
-                    'toLocaleString',
-                    'valueOf',
-                    'hasOwnProperty',
-                    'isPrototypeOf',
-                    'propertyIsEnumerable',
-                    'constructor'
+                    "toString",
+                    "toLocaleString",
+                    "valueOf",
+                    "hasOwnProperty",
+                    "isPrototypeOf",
+                    "propertyIsEnumerable",
+                    "constructor"
                 ],
                 dontEnumsLength = dontEnums.length;
 
             return function (obj) {
-                if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) {
-                    throw new TypeError('Object.keys called on non-object');
+                if (typeof obj !== "object" && (typeof obj !== "function" || obj === null)) {
+                    throw new TypeError("Object.keys called on non-object");
                 }
 
                 var result = [], prop, i;
@@ -116,8 +116,8 @@
     }
 
     function isCanvasSupported() {
-        var elem = document.createElement('canvas');
-        return !!(elem.getContext && elem.getContext('2d'));
+        var elem = document.createElement("canvas");
+        return !!(elem.getContext && elem.getContext("2d"));
     }
 
     /**
@@ -135,8 +135,8 @@
      * @returns {String}
      */
     function guid() {
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-            s4() + '-' + s4() + s4() + s4();
+        return s4() + s4() + "-" + s4() + "-" + s4() + "-" +
+            s4() + "-" + s4() + s4() + s4();
     }
 
     /**
@@ -176,7 +176,7 @@
         var d = Date.parse(str);
         if (!isNaN(d))
             return d;
-        d = Date.parse(str.replace(/-/g, '/').replace('T', ' '));
+        d = Date.parse(str.replace(/-/g, "/").replace("T", " "));
         if (!isNaN(d))
             return d;
         // Cant find anything
@@ -243,10 +243,10 @@
     }
 
     function initializeAnimationFrameHandler(w) {
-        var vendors = ['webkit', 'moz'];
+        var vendors = ["webkit", "moz"];
         for (x = 0; x < vendors.length && !w.requestAnimationFrame; ++x) {
-            w.requestAnimationFrame = w[vendors[x] + 'RequestAnimationFrame'];
-            w.cancelAnimationFrame = w[vendors[x] + 'CancelAnimationFrame'];
+            w.requestAnimationFrame = w[vendors[x] + "RequestAnimationFrame"];
+            w.cancelAnimationFrame = w[vendors[x] + "CancelAnimationFrame"];
         }
 
         if (!w.requestAnimationFrame || !w.cancelAnimationFrame) {
@@ -334,7 +334,7 @@
         }
 
         // Avoid stacking
-        $(this.element).children('div.time_circles').remove();
+        $(this.element).children("div.time_circles").remove();
 
         if (typeof clear_listeners === "undefined")
             clear_listeners = true;
@@ -342,7 +342,7 @@
             this.clearListeners();
         }
         this.container = $("<div>");
-        this.container.addClass('time_circles');
+        this.container.addClass("time_circles");
         this.container.appendTo(this.element);
 
         // Determine the needed width and height of TimeCircles
@@ -359,7 +359,7 @@
             width = height * this.data.drawn_units.length;
 
         // Create our canvas and set it to the appropriate size
-        var canvasElement = document.createElement('canvas');
+        var canvasElement = document.createElement("canvas");
         canvasElement.width = width;
         canvasElement.height = height;
 
@@ -377,7 +377,7 @@
             canvasSupported = true;
         }
         if (canvasSupported) {
-            this.data.attributes.context = canvasElement.getContext('2d');
+            this.data.attributes.context = canvasElement.getContext("2d");
         }
 
         this.data.attributes.item_size = Math.min(width / this.data.drawn_units.length, height);
@@ -392,7 +392,7 @@
                 continue;
 
             var textElement = $("<div>");
-            textElement.addClass('textDiv_' + key);
+            textElement.addClass("textDiv_" + key);
             textElement.css("top", Math.round(0.35 * this.data.attributes.item_size));
             textElement.css("left", Math.round(++i * this.data.attributes.item_size));
             textElement.css("width", this.data.attributes.item_size);
@@ -676,9 +676,9 @@
         useWindow.clearTimeout(this.data.animation_frame);
 
         // Check if a date was passed in html attribute or jquery data
-        var attr_data_date = $(this.element).data('date');
+        var attr_data_date = $(this.element).data("date");
         if (typeof attr_data_date === "undefined") {
-            attr_data_date = $(this.element).attr('data-date');
+            attr_data_date = $(this.element).attr("data-date");
         }
         if (typeof attr_data_date === "string") {
             this.data.attributes.ref_date = parse_date(attr_data_date);
@@ -691,9 +691,9 @@
         }
         else {
             // Try to get data-timer
-            var attr_data_timer = $(this.element).data('timer');
+            var attr_data_timer = $(this.element).data("timer");
             if (typeof attr_data_timer === "undefined") {
-                attr_data_timer = $(this.element).attr('data-timer');
+                attr_data_timer = $(this.element).attr("data-timer");
             }
             if (typeof attr_data_timer === "string") {
                 attr_data_timer = parseFloat(attr_data_timer);
@@ -735,8 +735,8 @@
         this.data.interval_fallback = null;
 
         this.container.remove();
-        $(this.element).removeAttr('data-tc-id');
-        $(this.element).removeData('tc-id');
+        $(this.element).removeAttr("data-tc-id");
+        $(this.element).removeData("tc-id");
     };
 
     TC_Instance.prototype.setOptions = function (options) {
@@ -845,7 +845,7 @@
         }
         if (typeof TC_Instance_List[cur_id] === "undefined") {
             var options = this.options;
-            var element_options = $(element).data('options');
+            var element_options = $(element).data("options");
             if (typeof element_options === "string") {
                 element_options = JSON.parse(element_options);
             }

@@ -42,15 +42,15 @@ function timePassed()
         remainingHours = "0" + remainingHours;
     }
 
-    document.getElementById('countdowndays').innerHTML = days + "<br>Days";
-    document.getElementById('countdownhours').innerHTML = remainingHours + "<br>Hours";
-    document.getElementById('countdownminutes').innerHTML = remainingMinutes + "<br>Min";
-    document.getElementById('countdownseconds').innerHTML = remainingSeconds + "<br>Sec";
+    document.getElementById("countdowndays").innerHTML = days + "<br>Days";
+    document.getElementById("countdownhours").innerHTML = remainingHours + "<br>Hours";
+    document.getElementById("countdownminutes").innerHTML = remainingMinutes + "<br>Min";
+    document.getElementById("countdownseconds").innerHTML = remainingSeconds + "<br>Sec";
 
     if (!seconds)
     {
         clearInterval(countdownTimer);
-        document.getElementById('countdowndays').innerHTML = "Buzz Buzz";
+        document.getElementById("countdowndays").innerHTML = "Buzz Buzz";
     }
     else
     {

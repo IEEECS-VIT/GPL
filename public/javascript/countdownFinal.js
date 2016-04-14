@@ -72,10 +72,10 @@ function countdown()
 function start()
 {
     var clear = countdown.deadline;
-    var d = document.getElementById('countdowndays'),
-        h = document.getElementById('countdownhours'),
-        m = document.getElementById('countdownminutes'),
-        s = document.getElementById('countdownseconds');
+    var d = document.getElementById("countdowndays"),
+        h = document.getElementById("countdownhours"),
+        m = document.getElementById("countdownminutes"),
+        s = document.getElementById("countdownseconds");
     counter(d, h, m, s);
     var a = setInterval(function () {
         counter(d, h, m, s);

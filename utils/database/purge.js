@@ -16,26 +16,26 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-console.time('Purge operation');
+console.time("Purge operation");
 
-var mode = '';
+var mode = "";
 
 try
 {
-    mode = testFlag ? 'test' : ''; //  testFlag is a global variable from tests/helper.js
+    mode = testFlag ? "test" : ""; //  testFlag is a global variable from tests/helper.js
 }
 catch(err)
 {
-    console.log('Running in non-test mode.');
+    console.log("Running in non-test mode.");
 }
 
-var path = require('path').join;
-var mongo = require('mongodb').MongoClient.connect;
+var path = require("path").join;
+var mongo = require("mongodb").MongoClient.connect;
 var mongoURI = `mongodb://127.0.0.1:27017/${mode}GPL`;
 
 if(process.env.NODE_ENV)
 {
-    throw 'The database may not be purged on production environments.';
+    throw "The database may not be purged on production environments.";
 }
 
 mongo(mongoURI, function(err, db){
@@ -50,13 +50,13 @@ mongo(mongoURI, function(err, db){
             throw error;
         }
 
-        console.log('The database was successfully purged, you can reinstate it with `npm run seed`.');
-        console.timeEnd('Purge operation');
+        console.log("The database was successfully purged, you can reinstate it with `npm run seed`.");
+        console.timeEnd("Purge operation");
 
         if(mode)
         {
             testDb = db; // to maintain a persistent test database connection
-            require(path(__dirname, 'seed')); // remote file execution
+            require(path(__dirname, "seed")); // remote file execution
         }
         else
         {

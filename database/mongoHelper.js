@@ -18,27 +18,27 @@
 
 var scaleRef =
 {
-    KB: 1024,
-    MB: 1048576
+    "KB": 1024,
+    "MB": 1048576
 };
 var forgotRef =
 {
-    user:
+    "user":
     {
-        user: 1
+        "user": 1
     },
-    password:
+    "password":
     {
-        password: 1
+        "password": 1
     }
 };
 if(!process.env.NODE_ENV)
 {
-    var value = require('faker').commerce.price;
+    var value = require("faker").commerce.price;
 }
 var match = process.env.MATCH;
-var path = require('path').join;
-var mongoFeatures = require(path(__dirname, 'mongoFeatures'));
+var path = require("path").join;
+var mongoFeatures = require(path(__dirname, "mongoFeatures"));
 
 exports.scale = function(value, level)
 {
@@ -64,20 +64,20 @@ exports.forgotCallback = function(mode, callback)
 
 exports.shortlistRef =
 {
-    users:
+    "users":
     {
-        out: 'round2',
-        limit: parseInt(process.env.ONE, 10)
+        "out": "round2",
+        "limit": parseInt(process.env.ONE, 10)
     },
-    round2:
+    "round2":
     {
-        out: 'round3',
-        limit: 8
+        "out": "round3",
+        "limit": 8
     },
-    round3:
+    "round3":
     {
-        out: null,
-        limit: 8
+        "out": null,
+        "limit": 8
     }
 };
 

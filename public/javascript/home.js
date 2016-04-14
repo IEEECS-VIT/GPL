@@ -17,9 +17,9 @@
  */
 
 $(document).ready(function () {
-    $('.accordion-section-content').hide();
-    $('.accordion-section-title').on("click", function () {
-        var current = $(this).attr('href');
+    $(".accordion-section-content").hide();
+    $(".accordion-section-title").on("click", function () {
+        var current = $(this).attr("href");
         $(current).slideToggle();
         /*
         var h = $("#box" + player_id).css("min-height");

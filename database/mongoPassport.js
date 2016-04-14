@@ -18,12 +18,12 @@
 
 var key;
 var user;
-var path = require('path').join;
-var passport = require('passport');
+var path = require("path").join;
+var passport = require("passport");
 var callback = function(req, token, refresh, profile, done)
 {
     process.nextTick(function(){
-        mongoUsers.fetchUser({_id: req.signedCookies.team}, function (err, doc) {
+        mongoUsers.fetchUser({"_id": req.signedCookies.team}, function (err, doc) {
             if (err)
             {
                 return done(err);
@@ -32,7 +32,7 @@ var callback = function(req, token, refresh, profile, done)
             {
                 return done(null, doc); // user found, return that user
             }
-            if(req.signedCookies.phone && (!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users'))) // if there is no user, create one
+            if(req.signedCookies.phone && (!process.env.NODE_ENV || (process.env.DAY === "0" && process.env.MATCH === "users"))) // if there is no user, create one
             {
                 user = record();
                 user.token = token;
@@ -55,18 +55,18 @@ var callback = function(req, token, refresh, profile, done)
 };
 var ref =
 {
-    undefined: 'http://localhost:3000/auth/',
-    dev: 'http://gpl-dev.herokuapp.com/auth/',
-    production: 'http://gpl.ieeecsvit.com/auth/'
+    "undefined": "http://localhost:3000/auth/",
+    "dev": "http://gpl-dev.herokuapp.com/auth/",
+    "production": "http://gpl.ieeecsvit.com/auth/"
 };
-var facebook = require('passport-facebook').Strategy;
-var mongoUsers = require(path(__dirname, 'mongoUsers'));
-var google = require('passport-google-oauth').OAuth2Strategy;
-var record = require(path(__dirname, 'mongoRecord')).schema;
+var facebook = require("passport-facebook").Strategy;
+var mongoUsers = require(path(__dirname, "mongoUsers"));
+var google = require("passport-google-oauth").OAuth2Strategy;
+var record = require(path(__dirname, "mongoRecord")).schema;
 var strategies =
 {
-    GOOGLE: google,
-    FACEBOOK: facebook
+    "GOOGLE": google,
+    "FACEBOOK": facebook
 };
 
 for(key in strategies)
@@ -77,12 +77,12 @@ for(key in strategies)
     }
 
     passport.use(new strategies[key]({
-            enableProof: true, // thwarts man in the middle attacks
-            passReqToCallback: true, // allows us to pass in the req from our route (lets us check if a user is logged in or not)
-            clientID: process.env[`${key}_ID`],
-            clientSecret: process.env[`${key}_KEY`],
-            profileFields: ['id', 'email', 'displayName'],
-            callbackURL: ref[process.env.NODE_ENV] + key.toLowerCase() + '/callback'
+            "enableProof": true, // thwarts man in the middle attacks
+            "passReqToCallback": true, // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+            "clientID": process.env[`${key}_ID`],
+            "clientSecret": process.env[`${key}_KEY`],
+            "profileFields": ["id", "email", "displayName"],
+            "callbackURL": ref[process.env.NODE_ENV] + key.toLowerCase() + "/callback"
         },
         callback
     ));

@@ -16,11 +16,11 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var assert = require('assert');
+var assert = require("assert");
 
-describe('Authentication tests:', function(){
-    describe('Forget related actions:', function(){
-        it('Forgot user', function(){
+describe("Authentication tests:", function(){
+    describe("Forget related actions:", function(){
+        it("Forgot user", function(){
             /*
                 forgot user request
                 forgot user request validation
@@ -30,7 +30,7 @@ describe('Authentication tests:', function(){
              */
         });
 
-        it('Forgot password', function(){
+        it("Forgot password", function(){
         /*
             forgot password request
             request validation: Check for accidental requests by social users
@@ -45,8 +45,8 @@ describe('Authentication tests:', function(){
         });
     });
 
-    describe('Login actions:', function(){
-        it('Social login checks', function(){
+    describe("Login actions:", function(){
+        it("Social login checks", function(){
         /*
             login request
             accepting team detail(s)
@@ -56,7 +56,7 @@ describe('Authentication tests:', function(){
         */
         });
 
-        it('Local login checks', function(){
+        it("Local login checks", function(){
         /*
             login request
             accepting team detail(s)
@@ -64,7 +64,7 @@ describe('Authentication tests:', function(){
         */
         });
 
-        it('Admin login checks', function(){
+        it("Admin login checks", function(){
         /*
             login request
             record confirmation and cookie instantiation
@@ -72,8 +72,8 @@ describe('Authentication tests:', function(){
         });
     });
 
-    describe('Registration checks:', function(){
-        it('Social registration checks', function(){
+    describe("Registration checks:", function(){
+        it("Social registration checks", function(){
         /*
             accepting user details
             Selecting platform
@@ -85,7 +85,7 @@ describe('Authentication tests:', function(){
         */
         });
 
-        it('Local registration checks', function(){
+        it("Local registration checks", function(){
         /*
             accepting user details
             Team existence check
@@ -96,15 +96,15 @@ describe('Authentication tests:', function(){
         });
     });
 
-    describe('Logout checks:', function(){
-        it('Admin logout', function(){
+    describe("Logout checks:", function(){
+        it("Admin logout", function(){
         /*
             Check if admin signedCookie exists and destroy it
             Redirect to login page.
         */
         });
 
-        it('User logout', function(){
+        it("User logout", function(){
         /*
             Check if name signedCookie exists and destroy it.
             Redirect to login page.

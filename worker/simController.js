@@ -23,19 +23,19 @@ var stats;
 var points = 0;
 var onGetRating;
 var parallelTasks;
-var async = require('async');
-var path = require('path').join;
-var helper = require(path(__dirname, 'simControlHelper'));
-var email = require(path(__dirname, '..', 'utils', 'email', 'email'));
+var async = require("async");
+var path = require("path").join;
+var helper = require(path(__dirname, "simControlHelper"));
+var email = require(path(__dirname, "..", "utils", "email", "email"));
 
 if(!process.env.NODE_ENV)
 {
-    require('dotenv').load({path : path(__dirname, '..', '.env')});
+    require("dotenv").load({path : path(__dirname, "..", ".env")});
 }
 
 if (process.env.LOGENTRIES_TOKEN)
 {
-    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
+    log = require("node-logentries").logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
 match = process.env.MATCH;
@@ -61,7 +61,7 @@ exports.initSimulation = function (day, masterCallback)
                 else
                 {
                     onGetRating = helper.onGetRating(userDoc, asyncCallback);
-                    userDoc.squad.push(UserDoc.team.filter((elt) => {return elt > 'd';})[0]);
+                    userDoc.squad.push(UserDoc.team.filter((elt) => {return elt > "d";})[0]);
                     async.map(userDoc.squad, helper.getEachRating, onGetRating);
                 }
             };
@@ -79,11 +79,11 @@ exports.initSimulation = function (day, masterCallback)
             }
             if(newUserDoc.highestTotal > stats.high.total.value)
             {
-                stats.high.total = helper.total(newUserDoc, 'high');
+                stats.high.total = helper.total(newUserDoc, "high");
             }
             if(newUserDoc.lowestTotal < stats.low.value)
             {
-                stats.low = helper.total(newUserDoc, 'low');
+                stats.low = helper.total(newUserDoc, "low");
             }
         };
 
@@ -141,12 +141,12 @@ exports.initSimulation = function (day, masterCallback)
                     stats.daily.MoM = newMatchDoc.MoM;
                 }
 
-                database.collection('matchday' + day).updateOne({_id: newMatchDoc._id}, newMatchDoc, asyncCallback);
+                database.collection("matchday" + day).updateOne({_id: newMatchDoc._id}, newMatchDoc, asyncCallback);
             };
 
             var parallelTasks2 = helper.userParallelTasks(newData, updateUser, updateMatch);
 
-            console.log(newData.team1._id + ' vs ' + newData.team2._id + ' (Match ' + newData.match._id + ') is now being updated');
+            console.log(newData.team1._id + " vs " + newData.team2._id + " (Match " + newData.match._id + ") is now being updated");
             async.parallel(parallelTasks2, callback);
         };
 
@@ -163,7 +163,7 @@ exports.initSimulation = function (day, masterCallback)
         }
 
         var onUpdate = helper.onUpdate(results, masterCallback);
-        database.collection('stats').updateOne({_id: 'stats'}, {$set: stats}, onUpdate);
+        database.collection("stats").updateOne({_id: "stats"}, {$set: stats}, onUpdate);
     };
 
     var forAllMatches = helper.forAllMatches(forEachMatch, onFinish);
@@ -180,5 +180,5 @@ exports.initSimulation = function (day, masterCallback)
         helper.getAllMatches(day, forAllMatches);
     };
 
-    database.collection('stats').find().limit(1).next(onGetInfo);
+    database.collection("stats").find().limit(1).next(onGetInfo);
 };

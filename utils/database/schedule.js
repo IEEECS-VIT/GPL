@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-console.time('Schedule construction');
+console.time("Schedule construction");
 
 var i;
 var j;
@@ -30,29 +30,29 @@ var done = 0;
 var database;
 var schedule;
 var mongoURI;
-var mode = '';
+var mode = "";
 var count = 0;
 var unassigned;
 var schedulerCallback;
-var path = require('path');
-var async = require('async');
-var Heroku = require('heroku-client');
-var mongo = require('mongodb').MongoClient.connect;
-var generate = require(path.join(__dirname, '..', '..', 'database', 'mongoRecord')).users;
-var init = () => {database.collection(process.env.MATCH).find({authStrategy: {$ne: 'admin'}}, {_id: 1}).toArray(onFetch);};
+var path = require("path");
+var async = require("async");
+var Heroku = require("heroku-client");
+var mongo = require("mongodb").MongoClient.connect;
+var generate = require(path.join(__dirname, "..", "..", "database", "mongoRecord")).users;
+var init = () => {database.collection(process.env.MATCH).find({authStrategy: {$ne: "admin"}}, {_id: 1}).toArray(onFetch);};
 
 try
 {
-    mode = testFlag ? 'test' : '';
+    mode = testFlag ? "test" : "";
 }
 catch(err)
 {
-    console.log('Running in non-test mode.');
+    console.log("Running in non-test mode.");
 }
 
 if(!process.env.NODE_ENV)
 {
-    require('dotenv').load({path : path.join(__dirname, '..', '..', '.env')});
+    require("dotenv").load({path : path.join(__dirname, "..", "..", ".env")});
     mongoURI = `mongodb://127.0.0.1:27017/${mode}GPL`;
 }
 else
@@ -61,13 +61,13 @@ else
 	var configure = new Heroku({token: process.env.HEROKU_API_TOKEN}).apps(process.env.HEROKU_APP_NAME).configVars().update;
 }
 
-if(process.env.DAY < '0')
+if(process.env.DAY < "0")
 {
     throw "Registrations have not been started yet, set process.env.DAY to 0 to allow schedule construction.";
 }
-else if(process.env.DAY > '0')
+else if(process.env.DAY > "0")
 {
-    throw 'Matches for this round have already started.';
+    throw "Matches for this round have already started.";
 }
 
 var onInsert = function (err, doc)
@@ -195,7 +195,7 @@ var onParallel = function(err)
         throw err;
     }
 
-    console.timeEnd('Schedule construction');
+    console.timeEnd("Schedule construction");
 
     if(mode)
     {
@@ -214,7 +214,7 @@ var onParallel = function(err)
 			    }
 			    else
 			    {
-				    console.log('process.env.DAY has been updated to 1.');
+				    console.log("process.env.DAY has been updated to 1.");
 			    }
 		    });
 	    }

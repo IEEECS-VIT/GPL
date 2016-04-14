@@ -16,42 +16,98 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-console.time('Request');
-console.time('Data stitching');
-console.time('DOM construction');
-console.time('Commentary compilation');
-console.time('File updation');
+console.time("Request");
+console.time("Data stitching");
+console.time("DOM construction");
+console.time("Commentary compilation");
+console.time("File update");
 
 var dump;
 var temp;
 var index;
-var data = '';
+var data = "";
 var flag = false;
-var fs = require('fs');
-var http = require('http');
-var line = require('os').EOL;
-var async = require('async');
-var path = require('path').join;
-var scrape = require('cheerio').load;
+var fs = require("fs");
+var http = require("http");
+var line = require("os").EOL;
+var async = require("async");
+var path = require("path").join;
+var scrape = require("cheerio").load;
 var commentary =
 {
-    'no run': {content: '', file: path(__dirname, 'score', 'dot2')},
-    '1 run': {content: '', file: path(__dirname, 'score', 'one2')},
-    '2 runs': {content: '', file: path(__dirname, 'score', 'two')},
-    '3 runs': {content: '', file: path(__dirname, 'score', 'three')},
-    'FOUR': {content: '', file: path(__dirname, 'score', 'four')},
-    'SIX': {content: '', file: path(__dirname, 'score', 'six')},
-    'wide': {content: '', file: path(__dirname, 'extra', 'wide')},
-    'no ball': {content: '', file: path(__dirname, 'extra', 'noBall')},
-    'cnb': {content: '', file: path(__dirname, 'out', 'cnb')},
-    'lbw': {content: '', file: path(__dirname, 'out', 'lbw')},
-    'caught': {content: '', file: path(__dirname, 'out', 'caught')},
-    'bowled': {content: '', file: path(__dirname, 'out', 'bowled')},
-    'stumped': {content: '', file: path(__dirname, 'out', 'stumped')},
-    'runout': {content: '', file: path(__dirname, 'out', 'runout')}
+    "no run":
+    {
+	    "content": "",
+	    "file": path(__dirname, "score", "dot2")
+    },
+    "1 run":
+    {
+	    "content": "",
+	    "file": path(__dirname, "score", "one2")
+    },
+    "2 runs":
+    {
+	    "content": "",
+	    "file": path(__dirname, "score", "two")
+    },
+    "3 runs":
+    {
+	    "content": "",
+	    "file": path(__dirname, "score", "three")
+    },
+    "FOUR":
+    {
+	    "content": "",
+	    "file": path(__dirname, "score", "four")
+    },
+    "SIX":
+    {
+	    "content": "",
+	    "file": path(__dirname, "score", "six")
+    },
+    "wide":
+    {
+	    "content": "",
+	    "file": path(__dirname, "extra", "wide")
+    },
+    "no ball":
+    {
+	    "content": "",
+	    "file": path(__dirname, "extra", "noBall")
+    },
+    "cnb":
+    {
+	    "content": "",
+	    "file": path(__dirname, "out", "cnb")
+    },
+    "lbw":
+    {
+	    "content": "",
+	    "file": path(__dirname, "out", "lbw")
+    },
+    "caught":
+    {
+	    "content": "",
+	    "file": path(__dirname, "out", "caught")
+    },
+    "bowled":
+    {
+	    "content": "",
+	    "file": path(__dirname, "out", "bowled")
+    },
+    "stumped":
+    {
+	    "content": "",
+	    "file": path(__dirname, "out", "stumped")
+    },
+    "runout":
+    {
+	    "content": "",
+	    "file": path(__dirname, "out", "runout")
+    }
 };
-var ref = ['FOUR', 'SIX', 'OUT'];
-var opts = ['batsman', 'batter', 'striker'];
+var ref = ["FOUR", "SIX", "OUT"];
+var opts = ["batsman", "batter", "striker"];
 
 var append = (element) => { return `,\n\t\t"${element.replace(/"/g, "'")}"`;};
 
@@ -59,15 +115,15 @@ var rand = () => { return opts[parseInt((Math.random() * 1000000000000000) % 3, 
 
 var genericHandler = function(arg)
 {
-    arg = (arg[0].data || '').replace(/\s$/, '.');
-    index = arg.split(', ');
-    temp = index[0].split(' to ');
-    index[1] = index[1].replace(/^\d?\s?wides?$/, 'wide');
-    index[1] = index[1].replace(/^\d?\s?no balls?$/, 'no ball');
+    arg = (arg[0].data || "").replace(/\s$/, ".");
+    index = arg.split(", ");
+    temp = index[0].split(" to ");
+    index[1] = index[1].replace(/^\d?\s?wides?$/, "wide");
+    index[1] = index[1].replace(/^\d?\s?no balls?$/, "no ball");
 
     return [
         index[1],
-        index.slice(2).join(', ').replace(temp[0], 'the bowler').replace(temp[1], `the ${rand()}`)
+        index.slice(2).join(", ").replace(temp[0], "the bowler").replace(temp[1], `the ${rand()}`)
     ];
 };
 
@@ -75,29 +131,29 @@ var dismissalHandler = function(arg)
 {
     arg = arg[0].children[0].data;
 
-    if(arg.indexOf(' c ') > -1)
+    if(arg.indexOf(" c ") > -1)
     {
-        arg = ['caught'];
+        arg = ["caught"];
     }
-    else if(arg.indexOf(' lbw ') > -1)
+    else if(arg.indexOf(" lbw ") > -1)
     {
-        arg = ['lbw'];
+        arg = ["lbw"];
     }
-    else if(arg.indexOf(' run out ') > -1)
+    else if(arg.indexOf(" run out ") > -1)
     {
-        arg = ['runout'];
+        arg = ["runout"];
     }
-    else if(arg.indexOf(' st ') > -1)
+    else if(arg.indexOf(" st ") > -1)
     {
-        arg = ['stumped'];
+        arg = ["stumped"];
     }
-    else if(arg.indexOf(' b ') > -1)
+    else if(arg.indexOf(" b ") > -1)
     {
-        arg = ['bowled'];
+        arg = ["bowled"];
     }
-    else if(arg.indexOf(' cnb ') > -1)
+    else if(arg.indexOf(" cnb ") > -1)
     {
-        arg = ['cnb'];
+        arg = ["cnb"];
     }
 
     arg.push(temp);
@@ -108,27 +164,27 @@ var specialHandler = function(arg)
 {
     temp = arg[0].data;
     temp = temp.slice(0, -2);
-    temp = temp.split(' to ');
+    temp = temp.split(" to ");
     arg[2] = arg[2].data;
     arg[1] = arg[1].children[0].data;
 
     if(ref.indexOf(arg[1]) < 0)
     {
-        arg[2] = arg[2].replace(/\s$/, '.');
-        temp.splice(1, 1, temp[1].split(', '));
+        arg[2] = arg[2].replace(/\s$/, ".");
+        temp.splice(1, 1, temp[1].split(", "));
         temp[0] = [temp[0], temp[1].shift()];
-        arg[2] = arg[2].replace(new RegExp(temp[0][0], 'g'), 'the bowler');
-        arg[2] = arg[2].replace(new RegExp(temp[0][1], 'g'), 'the ' + rand());
+        arg[2] = arg[2].replace(new RegExp(temp[0][0], "g"), "the bowler");
+        arg[2] = arg[2].replace(new RegExp(temp[0][1], "g"), "the " + rand());
         arg = [temp[1][0], arg[1] + arg[2]];
     }
     else
     {
         arg[2] = arg[2].slice(2);
-        arg[2] = arg[2].replace(/\s$/, '.');
-        arg[2] = arg[2].replace(new RegExp(temp[0], 'g'), 'the bowler');
-        arg[2] = arg[2].replace(new RegExp(temp[1], 'g'), 'the ' + rand());
+        arg[2] = arg[2].replace(/\s$/, ".");
+        arg[2] = arg[2].replace(new RegExp(temp[0], "g"), "the bowler");
+        arg[2] = arg[2].replace(new RegExp(temp[1], "g"), "the " + rand());
         arg = [arg[1], arg[2]];
-        flag = (arg[0] === 'OUT');
+        flag = (arg[0] === "OUT");
     }
 
     return arg;
@@ -136,14 +192,14 @@ var specialHandler = function(arg)
 
 var processRef =
 {
-    1:
+    "1":
     {
-        true: dismissalHandler,
-        false: genericHandler
+        "true": dismissalHandler,
+        "false": genericHandler
     },
-    3:
+    "3":
     {
-        false: specialHandler
+        "false": specialHandler
     }
 };
 
@@ -153,7 +209,7 @@ var processor = function(arg, callback)
 
     if(flag)
     {
-        if(arg[0] !== 'OUT')
+        if(arg[0] !== "OUT")
         {
             commentary[arg[0]].content += append(arg[1]);
             flag = false;
@@ -175,13 +231,13 @@ var updateFile = function(arg, callback)
 {
     if(commentary[arg].content)
     {
-        fs.stat(commentary[arg].file + '.js', function(err, result){
+        fs.stat(commentary[arg].file + ".js", function(err, result){
             if(err)
             {
                 throw err;
             }
 
-            fs.createWriteStream(commentary[arg].file + '.js', {flags: 'r+', start: result.size - 3 - line.length})
+            fs.createWriteStream(commentary[arg].file + ".js", {flags: "r+", start: result.size - 3 - line.length})
               .end(commentary[arg].content + `${line}\t];`);
             callback();
         });
@@ -195,7 +251,7 @@ var onFinish = function(err)
         throw err;
     }
 
-    console.timeEnd('File updation');
+    console.timeEnd("File update");
 };
 
 var onCompile = function(err)
@@ -205,21 +261,21 @@ var onCompile = function(err)
         throw err;
     }
 
-    console.timeEnd('Commentary compilation');
+    console.timeEnd("Commentary compilation");
     async.each(Object.keys(commentary), updateFile, onFinish);
 };
 
 var onStitch = function()
 {
-    console.timeEnd('Data stitching');
-    dump = scrape(data, {ignoreWhitespace: true})('.commentary-text').children('p').toArray();
-    console.timeEnd('DOM construction');
+    console.timeEnd("Data stitching");
+    dump = scrape(data, {ignoreWhitespace: true})(".commentary-text").children("p").toArray();
+    console.timeEnd("DOM construction");
     async.each(dump, processor, onCompile);
 };
 
-http.get('http://www.espncricinfo.com/icc-world-twenty20-2016/engine/match/951367.html?innings=1;view=commentary', // needs work
+http.get("http://www.espncricinfo.com/icc-world-twenty20-2016/engine/match/951367.html?innings=1;view=commentary", // needs work
 (res) => {
-    console.timeEnd('Request');
-    res.on('data', (chunk) => {data += chunk;});
-    res.on('end', onStitch);
+    console.timeEnd("Request");
+    res.on("data", (chunk) => {data += chunk;});
+    res.on("end", onStitch);
 });

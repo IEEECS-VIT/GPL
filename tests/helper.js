@@ -17,11 +17,11 @@
  */
 
 testFlag = true;
-var path = require('path').join;
+var path = require("path").join;
 
 before(function(done){
     testHelperCallback = done;
-    require(path(__dirname, '..', 'utils', 'database', 'purge'));
+    require(path(__dirname, "..", "utils", "database", "purge"));
 });
 
 after(function(){

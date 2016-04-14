@@ -18,38 +18,38 @@
 
 var log;
 var server;
-var path = require('path').join;
-var exit = require('forever').stop;
-var debug = require('debug')('GPL');
-var app = require(path(__dirname, '..', 'app'));
-var mongo = require('mongodb').MongoClient.connect;
+var path = require("path").join;
+var exit = require("forever").stop;
+var debug = require("debug")("GPL");
+var app = require(path(__dirname, "..", "app"));
+var mongo = require("mongodb").MongoClient.connect;
 
 if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 {
-    require(path(__dirname, '..', 'utils', 'misc', 'newrelic'));
+    require(path(__dirname, "..", "utils", "misc", "newrelic"));
 }
 
 if (process.env.LOGENTRIES_TOKEN)
 {
-    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
+    log = require("node-logentries").logger({"token": process.env.LOGENTRIES_TOKEN});
 }
 
-app.set('port', process.env.PORT || 3000);
+app.set("port", process.env.PORT || 3000);
 
 var onBind = function ()
 {
     if (log)
     {
-        log.log('info', {MongoUri: process.env.MONGO, Port: server.address().port});
+        log.log("info", {"MongoUri": process.env.MONGO, "Port": server.address().port});
 
         if (process.env.HOSTNAME)
         {
-            log.log('info', {Application: process.env.HOSTNAME});
+            log.log("info", {"Application": process.env.HOSTNAME});
         }
     }
 
-    debug('Node.js Express server listening on port ' + server.address().port);
-    debug('Using MongoDB: ' + process.env.MONGO);
+    debug("Node.js Express server listening on port " + server.address().port);
+    debug("Using MongoDB: " + process.env.MONGO);
 
     if (process.env.HOSTNAME)
     {
@@ -60,15 +60,15 @@ var onBind = function ()
 mongo(process.env.MONGO, function(err, database){
     if(err)
     {
-        throw process.env.NODE_ENV ? 'process.env.MONGO does not contain a valid connection URI.'
-                                   : 'The mongod localhost server is not running on port 27017.';
+        throw process.env.NODE_ENV ? "process.env.MONGO does not contain a valid connection URI."
+                                   : "The mongod localhost server is not running on port 27017.";
     }
 
     db = database; // global db variable is for persistent database connections, without bloating request middleware
-    server = app.listen(app.get('port'), onBind);
+    server = app.listen(app.get("port"), onBind);
 });
 
-process.on('SIGINT', function(err){
+process.on("SIGINT", function(err){
     if(err)
     {
         console.error(err);

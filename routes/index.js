@@ -26,32 +26,26 @@ var bcrypt;
 var newUser;
 var ref =
 {
-    'admin':
-    [
-        'admin',
-        '/admin'
-    ],
-    'local':
-    [
-        'name',
-        '/home'
-    ]
+    "admin": ["admin", "/admin"],
+    "local": ["name", "/home"]
 };
 var credentials;
-var crypto = require('crypto');
-var path = require('path').join;
-var router = require('express').Router();
-var mongoTeam = require(path(__dirname, '..', 'database', 'mongoTeam'));
-var mongoUsers = require(path(__dirname, '..', 'database', 'mongoUsers'));
-var record = require(path(__dirname, '..', 'database', 'mongoRecord')).schema;
-var developers = require(path(__dirname, '..', 'package.json')).contributors;
-developers.map((arg) => arg.map((x) => x.img = x.name.split(' ')[0]));
+var crypto = require("crypto");
+var path = require("path").join;
+var router = require("express").Router();
+var mongoTeam = require(path(__dirname, "..", "database", "mongoTeam"));
+var mongoUsers = require(path(__dirname, "..", "database", "mongoUsers"));
+var record = require(path(__dirname, "..", "database", "mongoRecord")).schema;
+var developers = require(path(__dirname, "..", "package.json")).contributors;
+var options = {"signed": true, "maxAge": 86400000}; // all cookies are signed by default and have a lifespan of one day
+
+developers.map((arg) => arg.map((x) => x.img = x.name.split(" ")[0]));
 
 var cookieFilter = function(req, res, next)
 {
     if(req.signedCookies.name)
     {
-        return res.redirect('/home');
+        return res.redirect("/home");
     }
 
     next();
@@ -59,15 +53,15 @@ var cookieFilter = function(req, res, next)
 
 try
 {
-    bcrypt = require('bcrypt');
+    bcrypt = require("bcrypt");
 }
 catch (err)
 {
     try
     {
-        bcrypt = require('bcryptjs');
+        bcrypt = require("bcryptjs");
     }
-    catch (err)
+    catch (error)
     {
         throw "Failure to compile run time requirement: bcrypt(js)";
     }
@@ -75,50 +69,50 @@ catch (err)
 
 if (process.env.LOGENTRIES_TOKEN)
 {
-    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
+    log = require("node-logentries").logger({"token": process.env.LOGENTRIES_TOKEN});
 }
 
-router.get('/', cookieFilter, function (req, res){
-    if (process.env.NODE_ENV && process.env.DAY === '-1')
+router.get("/", cookieFilter, function (req, res){
+    if (process.env.NODE_ENV && process.env.DAY === "-1")
     {
         time = new Date;
         time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
         date =
         {
-            seconds: time.getSeconds(),
-            minutes: time.getMinutes(),
-            hour: time.getHours(),
-            day: time.getDate(),
-            month: time.getMonth() + 1,
-            year: time.getFullYear()
+            "seconds": time.getSeconds(),
+            "minutes": time.getMinutes(),
+            "hour": time.getHours(),
+            "day": time.getDate(),
+            "month": time.getMonth() + 1,
+            "year": time.getFullYear()
         };
 
-        res.render('static', {date: date});
+        res.render("static", {date: date});
     }
     else
     {
-        res.render('index');
+        res.render("index");
     }
 });
 
-router.get('/interest', function (req, res){
-    if(process.env.DAY === '-1' || !process.env.NODE_ENV || req.signedCookies.admin)
+router.get("/interest", function (req, res){
+    if(process.env.DAY === "-1" || !process.env.NODE_ENV || req.signedCookies.admin)
     {
-        res.render('interest', {csrfToken: req.csrfToken()});
+        res.render("interest", {"csrfToken": req.csrfToken()});
     }
     else
     {
-        res.redirect('/register');
+        res.redirect("/register");
     }
 });
 
-router.post('/interest', function (req, res, next){
+router.post("/interest", function (req, res, next){
     newUser =
     {
-        name: req.body.name,
-        regno: req.body.regno,
-        email: req.body.email,
-        phone: req.body.phone
+        "name": req.body.name,
+        "regno": req.body.regno,
+        "email": req.body.email,
+        "phone": req.body.phone
     };
 
     var onInsert = function (err)
@@ -129,35 +123,30 @@ router.post('/interest', function (req, res, next){
             return next(err);
         }
 
-        res.redirect('/interest');
+        res.redirect("/interest");
     };
 
-    mongoUsers.insert('interest', newUser, onInsert);
+    mongoUsers.insert("interest", newUser, onInsert);
 });
 
-router.get('/login', cookieFilter, function (req, res){
-    res.clearCookie('team', {});
-    res.clearCookie('phone', {});
+router.get("/login", cookieFilter, function (req, res){
+    res.clearCookie("team", {});
+    res.clearCookie("phone", {});
 
-    res.render('login', {csrfToken: req.csrfToken(), msg: res.flash()});
+    res.render("login", {"csrfToken": req.csrfToken(), "msg": res.flash()});
 });
 
-router.post('/login', cookieFilter, function (req, res){
+router.post("/login", cookieFilter, function (req, res){
     credentials =
     {
-        _id: req.body.team.trim().toUpperCase(),
-        $or:
-        [
-            {
-                authStrategy: 'admin'
-            },
-            {
-                authStrategy: 'local'
-            }
-        ]
+        "_id": req.body.team.trim().toUpperCase(),
+        "authStrategy":
+        {
+	        "$in": ["local", "admin"]
+        }
     };
 
-    res.clearCookie('name', {});
+    res.clearCookie("name", {});
 
     if (log)
     {
@@ -168,33 +157,33 @@ router.post('/login', cookieFilter, function (req, res){
     {
         if (err)
         {
-            res.flash('Incorrect credentials!');
-            return res.redirect('/login');
+            res.flash("Incorrect credentials!");
+            return res.redirect("/login");
         }
         if (doc)
         {
             bcrypt.compare(req.body.password, doc.passwordHash, function(err, result){
                 if(err)
                 {
-                    res.flash('An unexpected error has occurred, please re-try.');
-                    return res.redirect('/login');
+                    res.flash("An unexpected error has occurred, please re-try.");
+                    return res.redirect("/login");
                 }
                 if(result)
                 {
-                    res.cookie(ref[doc.authStrategy][0], doc._id, {signed: true, maxAge: 86400000});
+                    res.cookie(ref[doc.authStrategy][0], doc._id, options);
                     res.redirect(ref[doc.authStrategy][1]);
                 }
                 else
                 {
-                    res.flash('Incorrect credentials!');
-                    res.redirect('/login');
+                    res.flash("Incorrect credentials!");
+                    res.redirect("/login");
                 }
             });
         }
         else
         {
-            res.flash('Incorrect credentials!');
-            res.redirect('/login');
+            res.flash("Incorrect credentials!");
+            res.redirect("/login");
         }
     };
 
@@ -202,44 +191,39 @@ router.post('/login', cookieFilter, function (req, res){
 });
 
 router.get(/^\/forgot\/password|user$/, function (req, res){
-    res.render('forgot', {csrfToken: req.csrfToken(), mode: req.url.split('/')[2], msg: res.flash()});
+    res.render("forgot", {"csrfToken": req.csrfToken(), "mode": req.url.split("/")[2], "msg": res.flash()});
 });
 
-router.post('/forgot/password', function (req, res){
+router.post("/forgot/password", function (req, res){
     credentials =
     {
-        _id: req.body.team.trim().toUpperCase(),
-        email: req.body.email,
-        $or:
-        [
-            {
-                authStrategy: 'local'
-            },
-            {
-                authStrategy: 'admin'
-            }
-        ]
+        "_id": req.body.team.trim().toUpperCase(),
+        "email": req.body.email,
+        "authStrategy":
+        {
+	        "$in": ["local", "admin"]
+        }
     };
 
     crypto.randomBytes(20, function (err, buf){
         if(err)
         {
-            res.flash('An unexpected error has occurred, please re-try.');
-            res.redirect('/forgot/password');
+            res.flash("An unexpected error has occurred, please re-try.");
+            res.redirect("/forgot/password");
         }
 
-        token = buf.toString('hex');
+        token = buf.toString("hex");
 
         var onFetch = function (error, doc)
         {
             if (error || !doc)
             {
-                res.flash('Incorrect credentials!');
-                res.redirect('/forgot/password');
+                res.flash("Incorrect credentials!");
+                res.redirect("/forgot/password");
             }
             else
             {
-                res.redirect('/login');
+                res.redirect("/login");
             }
         };
 
@@ -247,52 +231,52 @@ router.post('/forgot/password', function (req, res){
     });
 });
 
-router.get('/reset/:token', function (req, res){
+router.get("/reset/:token", function (req, res){
     var onGetReset = function (err, doc)
     {
         if (err)
         {
-            res.flash('That password reset link had expired, or is invalid.');
-            res.redirect('/forgot/password');
+            res.flash("That password reset link had expired, or is invalid.");
+            res.redirect("/forgot/password");
         }
         else if (!doc)
         {
-            res.redirect('/forgot/password');
+            res.redirect("/forgot/password");
         }
         else
         {
-            res.render('reset', {csrfToken: req.csrfToken(), msg: res.flash()});
+            res.render("reset", {"csrfToken": req.csrfToken(), "msg": res.flash()});
         }
     };
 
-    mongoUsers.getReset({resetToken: req.params.token, expire: {$gt: Date.now()}}, onGetReset);
+    mongoUsers.getReset({"resetToken": req.params.token, "expire": {"$gt": Date.now()}}, onGetReset);
 });
 
-router.post('/reset/:token', function (req, res){
+router.post("/reset/:token", function (req, res){
     if (req.body.password === req.body.confirm)
     {
         var onReset = function (err, doc)
         {
             if (err)
             {
-                res.flash('That request failed, please re-try.');
-                res.redirect('/reset/' + req.params.token);
+                res.flash("That request failed, please re-try.");
+                res.redirect("/reset/" + req.params.token);
             }
             else if (!doc)
             {
-                res.redirect('/forgot/password');
+                res.redirect("/forgot/password");
             }
             else
             {
-                res.redirect('/login');
+                res.redirect("/login");
             }
         };
 
         bcrypt.hash(req.body.password, 10, function(err, hash){
             if(err)
             {
-                res.flash('An unexpected error has occurred, and your password could not be rest. Please re-try.');
-                res.redirect('/reset/' + req.params.token);
+                res.flash("An unexpected error has occurred, and your password could not be rest. Please re-try.");
+                res.redirect("/reset/" + req.params.token);
             }
             else
             {
@@ -302,48 +286,48 @@ router.post('/reset/:token', function (req, res){
     }
     else // passwords do not match
     {
-        res.flash('Passwords do not match.');
-        res.redirect('/reset/' + req.params.token);
+        res.flash("Passwords do not match.");
+        res.redirect("/reset/" + req.params.token);
     }
 });
 
-router.post('/forgot/user', function (req, res){
+router.post("/forgot/user", function (req, res){
     credentials =
     {
-        phone: req.body.phone,
-        email: req.body.email
+        "phone": req.body.phone,
+        "email": req.body.email
     };
 
     var onFetch = function (err, docs)
     {
         if (err || !docs)
         {
-            res.flash('Invalid credentials!');
-            res.redirect('/forgot/user');
+            res.flash("Invalid credentials!");
+            res.redirect("/forgot/user");
         }
         else
         {
-            res.redirect('/login');
+            res.redirect("/login");
         }
     };
 
     mongoUsers.forgotUser(credentials, onFetch);
 });
 
-router.get('/register', cookieFilter, function (req, res){
-    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users')) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
+router.get("/register", cookieFilter, function (req, res){
+    if(!process.env.NODE_ENV || (process.env.DAY === "0" && process.env.MATCH === "users")) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
     {                                                                                       // the schedule has been constructed and the game engine is match ready.
-        res.render('register', {msg: res.flash(), csrfToken: req.csrfToken()});
+        res.render("register", {"msg": res.flash(), "csrfToken": req.csrfToken()});
     }
     else
     {
-        res.redirect('/login');
+        res.redirect("/login");
     }
 });
 
-router.post('/register', cookieFilter, function (req, res){
-    res.clearCookie('name', {});
-    res.clearCookie('admin', {});
+router.post("/register", cookieFilter, function (req, res){
+    res.clearCookie("name", {});
+    res.clearCookie("admin", {});
 
     if (req.body.confirm === req.body.password)
     {
@@ -351,13 +335,13 @@ router.post('/register', cookieFilter, function (req, res){
         {
             if (err)
             {
-                res.flash('This team name already exists.');
-                res.redirect('/register');
+                res.flash("This team name already exists.");
+                res.redirect("/register");
             }
             else
             {
-                res.cookie('name', newUser._id, {maxAge: 86400000, signed: true});
-                res.redirect('/home/players');
+                res.cookie("name", newUser._id, options);
+                res.redirect("/home/players");
             }
         };
 
@@ -365,15 +349,15 @@ router.post('/register', cookieFilter, function (req, res){
         newUser.dob = new Date();
         newUser.email = req.body.email;
         newUser.phone = req.body.phone;
-        newUser.authStrategy = 'local';
+        newUser.authStrategy = "local";
         newUser.managerName = req.body.managerName; // treat managerName / email address as _id, to make the creation of multiple teams for one manager possible
         newUser._id = req.body.team.trim().toUpperCase();
 
         bcrypt.hash(req.body.password, 10, function(err, hash){
             if(err)
             {
-                res.flash('An unexpected error occurred and your details could not be saved. Please re-try.');
-                res.redirect('/register');
+                res.flash("An unexpected error occurred and your details could not be saved. Please re-try.");
+                res.redirect("/register");
             }
             else
             {
@@ -384,38 +368,38 @@ router.post('/register', cookieFilter, function (req, res){
     }
     else
     {
-        res.flash('Passwords do not match');
-        res.redirect('/register');
+        res.flash("Passwords do not match");
+        res.redirect("/register");
     }
 });
 
-router.get('/logout', function (req, res){
-    res.clearCookie('team', {});
-    res.clearCookie('phone', {});
-    res.clearCookie('admin', {});
-    res.clearCookie('name', {});
-    res.clearCookie('lead', {});
-    res.clearCookie('dash', {});
-    res.clearCookie('stats', {});
-    res.redirect('/login');
+router.get("/logout", function (req, res){
+    res.clearCookie("team", {});
+    res.clearCookie("phone", {});
+    res.clearCookie("admin", {});
+    res.clearCookie("name", {});
+    res.clearCookie("lead", {});
+    res.clearCookie("dash", {});
+    res.clearCookie("stats", {});
+    res.redirect("/login");
 });
 
-router.get('/admin', function (req, res){
+router.get("/admin", function (req, res){
     if (req.signedCookies.admin || !process.env.NODE_ENV)
     {
         var onGetInfo = function (err, doc)
         {
             if (err)
             {
-                res.redirect('/');
+                res.redirect("/");
             }
             else if (doc)
             {
-                res.render('admin', {info: doc});
+                res.render("admin", {info: doc});
             }
             else
             {
-                res.redirect('/login');
+                res.redirect("/login");
             }
         };
 
@@ -423,53 +407,41 @@ router.get('/admin', function (req, res){
     }
     else
     {
-        res.redirect('/login');
+        res.redirect("/login");
     }
 });
 
-router.get('/social/login', cookieFilter, function (req, res){
-    if (req.signedCookies.name)
-    {
-        res.redirect('/home');
-    }
-    else
-    {
-        res.render('social', {mode: +!req.signedCookies.team, type: 'login', csrfToken: req.csrfToken()});
-    }
+router.get("/social/login", cookieFilter, function (req, res){
+    res.render("social", {"mode": +!req.signedCookies.team, "type": "login", "csrfToken": req.csrfToken()});
 });
 
-router.post('/social/login', cookieFilter, function (req, res){
-    res.cookie('team', req.body.team.trim().toUpperCase(), {maxAge: 300000, signed: true});
-    res.redirect('/social/login');
+router.post("/social/login", cookieFilter, function (req, res){
+    res.cookie("team", req.body.team.trim().toUpperCase(), {maxAge: 300000, signed: true});
+    res.redirect("/social/login");
 });
 
-router.get('/social/register', cookieFilter, function (req, res){
-    if(!process.env.NODE_ENV || (process.env.DAY === '0' && process.env.MATCH === 'users')) // Initialize process.env.DAY with -1, set to 0 when registrations are open,
-    {                                                                                       // will be updated to 1 when the schedule has been constructed and the game
-                                                                                            // engine is match ready.
-        res.render('social', {mode: +!req.signedCookies.team, type: 'register', csrfToken: req.csrfToken()});
-    }
-    else if (req.signedCookies.name)
-    {
-        res.redirect('/home');
+router.get("/social/register", cookieFilter, function (req, res){
+    if(!process.env.NODE_ENV || (process.env.DAY === "0" && process.env.MATCH === "users")) // Initialize process.env.DAY with -1, set to 0 when registrations are open,
+    {                                                                                       // will be updated to 1 when the schedule has been constructed.
+        res.render("social", {"mode": +!req.signedCookies.team, "type": "register", "csrfToken": req.csrfToken()});
     }
     else
     {
-        res.redirect('/login');
+        res.redirect("/login");
     }
 });
 
-router.post('/social/register', cookieFilter, function (req, res){
-    res.cookie('team', req.body.team.trim().toUpperCase(), {maxAge: 300000, signed: true});
-    res.cookie('phone', req.body.phone, {maxAge: 300000, signed: true});
-    res.redirect('/social/register');
+router.post("/social/register", cookieFilter, function (req, res){
+    res.cookie("team", req.body.team.trim().toUpperCase(), {maxAge: 300000, signed: true});
+    res.cookie("phone", req.body.phone, {maxAge: 300000, signed: true});
+    res.redirect("/social/register");
 });
 
-router.get('/developers', function (req, res){
-    res.render('developers', {obj: developers});
+router.get("/developers", function (req, res){
+    res.render("developers", {obj: developers});
 });
 
-router.get('/simulate', function (req, res){
+router.get("/simulate", function (req, res){
     if (req.signedCookies.admin)
     {
 /*        var onSimulate = function (err, docs)
@@ -485,28 +457,24 @@ router.get('/simulate', function (req, res){
             }
         };
         mongoFeatures.simulate(onSimulate);*/
-        res.redirect('/admin');
+        res.redirect("/admin");
     }
     else
     {
-        res.redirect('/login');
+        res.redirect("/login");
     }
 });
 
-router.get('/rules', function (req, res){
-    res.render('rules', {session: +!req.signedCookies.name});
+router.get("/rules", function (req, res){
+    res.render("rules", {session: +!req.signedCookies.name});
 });
 
-router.get('/privacy', function (req, res){
-    res.render('privacy', {session: +!req.signedCookies.name});
+router.get("/privacy", function (req, res){
+    res.render("privacy", {session: +!req.signedCookies.name});
 });
 
-router.get('/trailer', function (req, res){ // trailer page
-    res.render('trailer');
-});
-
-router.get('/schedule', function (req, res){ // schedule page
-    res.redirect('/');
+router.get("/trailer", function (req, res){ // trailer page
+    res.render("trailer");
 });
 
 module.exports = router;

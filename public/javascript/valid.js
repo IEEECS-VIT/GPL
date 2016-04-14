@@ -16,22 +16,22 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var msg = document.getElementById('msg');
-var button = document.getElementById('submit');
-var elem = document.getElementsByName('team')[0];
+var msg = document.getElementById("msg");
+var button = document.getElementById("submit");
+var elem = document.getElementsByName("team")[0];
 
-elem.addEventListener('blur', function(){
+elem.addEventListener("blur", function(){
     if(this.value)
     {
-        $.get('api/register/' + this.value, function(result){ // Switch to .load when custom error placeholder has been constructed
+        $.get("api/register/" + this.value, function(result){ // Switch to .load when custom error placeholder has been constructed
             button.disabled = !result;
-            msg.style.display = result ? 'none' : 'block';
-            elem.style.borderColor = result ? '' : 'red';
+            msg.style.display = result ? "none" : "block";
+            elem.style.borderColor = result ? '' : "red";
         });
     }
 }, false);
 
 function validator()
 {
-    return document.getElementById('pass').value === document.getElementById('cpass').value;
+    return document.getElementById("pass").value === document.getElementById("cpass").value;
 }

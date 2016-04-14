@@ -16,10 +16,10 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var assert = require('assert');
+var assert = require("assert");
 
-describe('Miscellaneous test suites:', function(){
-    describe('Commentary scraper:', function(){
+describe("Miscellaneous test suites:", function(){
+    describe("Commentary scraper:", function(){
     /*
         Check for request data integrity
         Validate internally constructed DOM
@@ -30,58 +30,58 @@ describe('Miscellaneous test suites:', function(){
     */
     });
 
-    it('Countdown page checks', function(){
+    it("Countdown page checks", function(){
     /*
         check whether the countdown page updates correctly
     */
     });
 
-    it('Rules page', function(){
+    it("Rules page", function(){
     /*
         check if page renders correctly
     */
     });
 
-    it('Privacy page', function(){
+    it("Privacy page", function(){
     /*
         check if page renders correctly
     */
     });
 
-    it('Developers page', function(){
-    /*
-        verify developer object structure
-        check if page renders correctly
-    */
-    });
-
-    it('Rules page', function(){
-    /*
-        check if page renders correctly
-    */
-    });
-
-    it('Sponsors page', function(){
+    it("Developers page", function(){
     /*
         verify developer object structure
         check if page renders correctly
     */
     });
 
-    it('Schedule page', function(){
+    it("Rules page", function(){
+    /*
+        check if page renders correctly
+    */
+    });
+
+    it("Sponsors page", function(){
+    /*
+        verify developer object structure
+        check if page renders correctly
+    */
+    });
+
+    it("Schedule page", function(){
     /*
         check if page renders correctly
     */
     });
 
 
-    it('Prizes page', function(){
+    it("Prizes page", function(){
     /*
         check if page renders correctly
     */
     });
 
-    it('Team name api check', function(){
+    it("Team name api check", function(){
     /*
         Check that the request origin matches the host
         fetch existence status

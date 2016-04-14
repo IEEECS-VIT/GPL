@@ -21,11 +21,11 @@ var b = "";
 var x = 1;
 function tab(a)
 {
-    document.getElementById('act' + x).className = "tab-title";
-    document.getElementById('act' + x).id = 'noact' + x;
-    document.getElementById('panel' + x).className = 'content';
-    document.getElementById('noact' + b).id = 'act' + b;
-    document.getElementById('act' + b).className = "tab-title active";
-    document.getElementById('panel' + b).className = "content active";
+    document.getElementById("act" + x).className = "tab-title";
+    document.getElementById("act" + x).id = "noact" + x;
+    document.getElementById("panel" + x).className = "content";
+    document.getElementById("noact" + b).id = "act" + b;
+    document.getElementById("act" + b).className = "tab-title active";
+    document.getElementById("panel" + b).className = "content active";
     x = a;
 }

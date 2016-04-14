@@ -16,22 +16,22 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var assert = require('assert');
+var assert = require("assert");
 
-describe('User functionality tests:', function(){
+describe("User functionality tests:", function(){
     // check for user authentication before tests
     before(function(){
 
     });
 
-    it('Admin tasks', function(){
+    it("Admin tasks", function(){
     /*
         team stats: team count, authentication patterns
         database status report
     */
     });
 
-    it('Home page checks', function(){
+    it("Home page checks", function(){
     /*
         Team details check
         Squad details check
@@ -41,34 +41,34 @@ describe('User functionality tests:', function(){
     */
     });
 
-    it('Player selection checks', function(){
+    it("Player selection checks", function(){
     /*
         check for user authentication
         check for player information structure
     */
     });
 
-    it('Squad update checks', function(){
+    it("Squad update checks", function(){
     /*
         Evaluate squad status
         update user records
     */
     });
 
-    it('Feature suggestion checks', function(){
+    it("Feature suggestion checks", function(){
     /*
         update feature collection
     */
     });
 
-    it('User interest check', function(){
+    it("User interest check", function(){
     /*
         check for successful user interest record creation
     */
     });
 
 
-    it('Game stats checks', function(){
+    it("Game stats checks", function(){
     /*
         ensure that the collective game stats are fetched correctly
         convert balls to overs -> 119 ~ 19.5
@@ -76,7 +76,7 @@ describe('User functionality tests:', function(){
     */
     });
 
-    it('Leaderboard checks', function(){
+    it("Leaderboard checks", function(){
     /*
         fetch leaderboard from user collection
         identify location index of the current user
@@ -85,7 +85,7 @@ describe('User functionality tests:', function(){
     */
     });
 
-    it('Dashboard checks', function(){
+    it("Dashboard checks", function(){
     /*
         fetch dashboard from user collection
         Process object to retain useful data
@@ -93,7 +93,7 @@ describe('User functionality tests:', function(){
     */
     });
 
-    it('Match detail checks', function(){
+    it("Match detail checks", function(){
     /*
         parse request parameter day and validate if it falls within [1, 7]
         fetch details for the corresponding day
@@ -101,7 +101,7 @@ describe('User functionality tests:', function(){
     */
     });
 
-    it('Setting checks', function(){
+    it("Setting checks", function(){
     /*
         check that page renders correctly
         mock requests with valid and bogus origin headers, act accordingly

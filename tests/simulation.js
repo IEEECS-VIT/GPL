@@ -16,45 +16,45 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var assert = require('assert');
+var assert = require("assert");
 
-describe('Simulation tests:', function(){
-    describe('simulation trigger:', function(){
-        it('Check for database, match day and user collection parameter validity', function(){
-
-        });
-
-        it('Check for email worker status', function(){
-
-        });
-    });
-
-    describe('simulation completion:', function(){
-        it('Ensure that simulation terminates without exceptions', function(){
+describe("Simulation tests:", function(){
+    describe("simulation trigger:", function(){
+        it("Check for database, match day and user collection parameter validity", function(){
 
         });
 
-        it('Parse data for update queries', function(){
+        it("Check for email worker status", function(){
 
         });
     });
 
-    describe('Match status update:', function(){
-        it('Verify successful completion of update queries', function(){
+    describe("simulation completion:", function(){
+        it("Ensure that simulation terminates without exceptions", function(){
 
         });
 
-        it('Pass to master callback', function(){
+        it("Parse data for update queries", function(){
 
         });
     });
 
-    describe('simulation emails:', function(){
-        it('Check for duplicate emails and invalid entries', function(){
+    describe("Match status update:", function(){
+        it("Verify successful completion of update queries", function(){
 
         });
 
-        it('Send emails, log failures.', function(){
+        it("Pass to master callback", function(){
+
+        });
+    });
+
+    describe("simulation emails:", function(){
+        it("Check for duplicate emails and invalid entries", function(){
+
+        });
+
+        it("Send emails, log failures.", function(){
 
         });
     });

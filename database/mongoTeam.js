@@ -19,20 +19,20 @@
 var i;
 var slice =
 {
-    _id: 0,
-    fours: 1,
-    sixes: 1,
-    runRates: 1,
-    progression: 1,
-    scoredPerOver: 1,
-    concededPerOver: 1
+    "_id": 0,
+    "fours": 1,
+    "sixes": 1,
+    "runRates": 1,
+    "progression": 1,
+    "scoredPerOver": 1,
+    "concededPerOver": 1
 };
-var async = require('async');
+var async = require("async");
 var match = process.env.MATCH;
-var path = require('path').join;
-var helper = require(path(__dirname, 'mongoHelper'));
-var mongoUsers = require(path(__dirname, 'mongoUsers'));
-var mongoFeatures = require(path(__dirname, 'mongoFeatures'));
+var path = require("path").join;
+var helper = require(path(__dirname, "mongoHelper"));
+var mongoUsers = require(path(__dirname, "mongoUsers"));
+var mongoFeatures = require(path(__dirname, "mongoFeatures"));
 
 exports.getTeam = function (doc, callback)
 {
@@ -89,7 +89,7 @@ exports.getSquad = function (doc, callback)
             return callback(null, []);
         }
 
-        coach = document.team.find((arg) => arg > 'd');
+        coach = document.team.find((arg) => arg > "d");
         async.map(document.squad, mongoFeatures.getPlayer, onFinish);
     };
 
@@ -141,12 +141,12 @@ exports.shortlist = function (callback) // add email notification for shortliste
     };
 
     db.collection(match).aggregate([{
-        $sort:
+        "$sort":
         {
-            points: -1,
-            netRunRate: -1,
-            win: -1,
-            loss: 1
+            "points": -1,
+            "netRunRate": -1,
+            "win": -1,
+            "loss": 1
         }
     },
         {
@@ -166,12 +166,12 @@ exports.adminInfo = function (callback)
 
         delete result.database.ok;
         delete result.database.extentFreeList;
-        result.database.fileSize = helper(result.database.fileSize, 'MB');
-        result.database.dataSize = helper.scale(result.database.dataSize, 'MB');
-        result.database.storageSize = helper(result.database.storageSize, 'MB');
-        result.database.indexSize = helper.scale(result.database.indexSize, 'KB');
-        result.database.avgObjSize = helper.scale(result.database.avgObjSize, 'KB');
-        result.database.version = result.database.dataFileVersion.major + '.' + result.database.dataFileVersion.minor;
+        result.database.fileSize = helper(result.database.fileSize, "MB");
+        result.database.dataSize = helper.scale(result.database.dataSize, "MB");
+        result.database.storageSize = helper(result.database.storageSize, "MB");
+        result.database.indexSize = helper.scale(result.database.indexSize, "KB");
+        result.database.avgObjSize = helper.scale(result.database.avgObjSize, "KB");
+        result.database.version = result.database.dataFileVersion.major + "." + result.database.dataFileVersion.minor;
         delete result.database.dataFileVersion;
 
         return callback(null, result);
@@ -181,27 +181,27 @@ exports.adminInfo = function (callback)
     {
         interest: function (asyncCallback)
         {
-            mongoUsers.getCount('interest', {}, asyncCallback);
+            mongoUsers.getCount("interest", {}, asyncCallback);
         },
         total: function (asyncCallback)
         {
-            mongoUsers.getCount({authStrategy: {$ne: 'admin'}}, asyncCallback);
+            mongoUsers.getCount({authStrategy: {$ne: "admin"}}, asyncCallback);
         },
         facebook: function (asyncCallback)
         {
-            mongoUsers.getCount({authStrategy: 'facebook'}, asyncCallback);
+            mongoUsers.getCount({authStrategy: "facebook"}, asyncCallback);
         },
         google: function (asyncCallback)
         {
-            mongoUsers.getCount({authStrategy: 'google'}, asyncCallback);
+            mongoUsers.getCount({authStrategy: "google"}, asyncCallback);
         },
         twitter: function (asyncCallback)
         {
-            mongoUsers.getCount({authStrategy: 'twitter'}, asyncCallback);
+            mongoUsers.getCount({authStrategy: "twitter"}, asyncCallback);
         },
         local: function (asyncCallback)
         {
-            mongoUsers.getCount({authStrategy: 'local'}, asyncCallback);
+            mongoUsers.getCount({authStrategy: "local"}, asyncCallback);
         },
         emptySquad: function (asyncCallback)
         {
@@ -246,13 +246,13 @@ exports.opponent = function (day, team, callback)
 {
     var filter =
     {
-        $or:
+        "$or":
         [
             {
-                Team_1: team
+                "Team_1": team
             },
             {
-                Team_2: team
+                "Team_2": team
             }
         ]
     };
@@ -267,7 +267,7 @@ exports.opponent = function (day, team, callback)
         return callback(null, (team === doc.Team_1) ? doc.Team_2: doc.Team_1);
     };
 
-    db.collection('matchday' + day).find(filter).limit(1).next(onFind);
+    db.collection("matchday" + day).find(filter).limit(1).next(onFind);
 };
 
 exports.team = function (doc, callback)

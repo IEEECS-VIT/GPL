@@ -22,50 +22,50 @@ var flag;
 var result;
 var slice =
 {
-    win: 1,
-    points: 1,
-    played: 1,
-    netRunRate: 1
+    "win": 1,
+    "points": 1,
+    "played": 1,
+    "netRunRate": 1
 };
 var options =
 {
     "sort":
     [
-        ['points', -1],
-        ['netRunRate', -1]
+        ["points", -1],
+        ["netRunRate", -1]
     ]
 };
 var leaderboard;
 var match = process.env.MATCH;
-var path = require('path').join;
-var helper = require(path(__dirname, 'mongoHelper'));
-var mongoFeatures = require(path(__dirname, 'mongoFeatures'));
-var email = require(path(__dirname, '..', 'utils', 'email', 'email'));
+var path = require("path").join;
+var helper = require(path(__dirname, "mongoHelper"));
+var mongoFeatures = require(path(__dirname, "mongoFeatures"));
+var email = require(path(__dirname, "..", "utils", "email", "email"));
 
 var ref =
 {
-    other: email.message,
-    interest: email.interest
+    "other": email.message,
+    "interest": email.interest
 };
 
 ref[match] = email.register;
 
 if (process.env.LOGENTRIES_TOKEN)
 {
-    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
+    log = require("node-logentries").logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
 exports.getCount = function (col, query, callback)
 {
     switch(typeof col)
     {
-        case 'object':
+        case "object":
             callback = query;
             query = col;
             col = match;
             break;
 
-        case 'function':
+        case "function":
             callback = col;
             query = {};
             col = match;
@@ -83,7 +83,7 @@ exports.insert = function (col, doc, callback)
         {
             return callback(err);
         }
-        if(col === 'features')
+        if(col === "features")
         {
             return callback(null);
         }
@@ -92,7 +92,7 @@ exports.insert = function (col, doc, callback)
         email.send(ref[col], callback);
     };
 
-    db.collection(col).insertOne(doc, {w: 1}, onInsert);
+    db.collection(col).insertOne(doc, {"w": 1}, onInsert);
 };
 
 exports.getLeader = function (user, callback)
@@ -132,10 +132,10 @@ exports.forgotPassword = function (doc, token, host, callback)
 {
     var op =
     {
-        $set:
+        "$set":
         {
-            resetToken : token,
-            expire : Date.now() + 3600000
+            "resetToken": token,
+            "expire": Date.now() + 3600000
         }
     };
 
@@ -151,10 +151,10 @@ exports.forgotPassword = function (doc, token, host, callback)
         }
 
         ref.other.header.to = document.value.email;
-        ref.other.header.subject = 'Time to get back in the game.';
+        ref.other.header.subject = "Time to get back in the game.";
         ref.other.attach_alternative(email.password(host, token));
 
-        email.send(ref.other, helper.forgotCallback('password', callback));
+        email.send(ref.other, helper.forgotCallback("password", callback));
     };
 
     db.collection(match).findOneAndUpdate(doc, op, onFetch);
@@ -176,10 +176,10 @@ exports.forgotUser = function (doc, callback)
         result = docs.reduce((a, b) => a + `<li>${b._id} (${b.authStrategy})</li>`, "");
 
         ref.other.header.to = doc.email;
-        ref.other.header.subject = 'Time to get back in the game';
+        ref.other.header.subject = "Time to get back in the game";
         ref.other.attach_alternative(email.user(result));
 
-        email.send(ref.other, helper.forgotCallback('user', callback));
+        email.send(ref.other, helper.forgotCallback("user", callback));
     };
 
     db.collection(match).find(doc, {authStrategy : 1}).toArray(onFetch);
@@ -208,22 +208,22 @@ exports.resetPassword = function (token, hash, callback)
 {
     var query =
     {
-        resetToken: token,
-        expire:
+        "resetToken": token,
+        "expire":
         {
-            $gt: Date.now()
+            "$gt": Date.now()
         }
     };
     var op =
     {
-        $set:
+        "$set":
         {
-            passwordHash: hash
+            "passwordHash": hash
         },
-        $unset:
+        "$unset":
         {
-            resetToken: '',
-            expire: ''
+            "resetToken": "",
+            "expire": ""
         }
     };
 
@@ -240,7 +240,7 @@ exports.resetPassword = function (token, hash, callback)
 
         doc = doc.value;
         ref.other.header.to = doc.email;
-        ref.other.header.subject = 'Password change successful!';
+        ref.other.header.subject = "Password change successful!";
         ref.other.attach_alternative(email.reset(doc.managerName, doc._id));
 
         email.send(ref.other, callback);
@@ -253,11 +253,11 @@ exports.updateUserTeam = function (doc, team, stats, cost, callback)
 {
     db.collection(match).findOneAndUpdate(doc,
     {
-        $set:
+        "$set":
         {
-            team: team,
-            stats: stats,
-            surplus: cost
+            "team": team,
+            "stats": stats,
+            "surplus": cost
         }
     }, {}, callback)
 };
