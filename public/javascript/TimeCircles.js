@@ -69,15 +69,7 @@
     // Used to disable some features on IE8
     var limited_mode = false;
     var tick_duration = 200; // in ms
-
     var debug = (location.hash === "#debug");
-
-    function debug_log(msg) {
-        if (debug) {
-            console.log(msg);
-        }
-    }
-
     var allUnits = ["Days", "Hours", "Minutes", "Seconds"];
     var nextUnits = {
         Seconds: "Minutes",
@@ -137,31 +129,6 @@
     function guid() {
         return s4() + s4() + "-" + s4() + "-" + s4() + "-" +
             s4() + "-" + s4() + s4() + s4();
-    }
-
-    /**
-     * Array.prototype.indexOf fallback for IE8
-     * @param {Mixed} mixed
-     * @returns {Number}
-     */
-    if (!Array.prototype.indexOf) {
-        Array.prototype.indexOf = function (elt /*, from*/) {
-            var len = this.length >>> 0;
-
-            var from = Number(arguments[1]) || 0;
-            from = (from < 0)
-                ? Math.ceil(from)
-                : Math.floor(from);
-            if (from < 0)
-                from += len;
-
-            for (; from < len; from++) {
-                if (from in this &&
-                    this[from] === elt)
-                    return from;
-            }
-            return -1;
-        };
     }
 
     function parse_date(str) {
@@ -388,7 +355,9 @@
         // Prepare Time Elements
         i = 0;
         for (key in this.data.text_elements) {
-            if (!this.config.time[key].show)
+            if (!this.data.text_elements.hasOwnProperty(key))
+                continue;
+	        if (!this.config.time[key].show)
                 continue;
 
             var textElement = $("<div>");
@@ -398,15 +367,21 @@
             textElement.css("width", this.data.attributes.item_size);
             textElement.appendTo(this.container);
 
-            var headerElement = $("<h4>");
+	        var temp = Math.round(this.config.text_size * this.data.attributes.item_size) + "px";
+            var setCSS = function(obj)
+            {
+	            obj.css("line-height", temp);
+            };
+
+	        var headerElement = $("<h4>");
             headerElement.text(this.config.time[key].text); // Options
             headerElement.css("font-size", Math.round(this.config.text_size * this.data.attributes.item_size));
-            headerElement.css("line-height", Math.round(this.config.text_size * this.data.attributes.item_size) + "px");
+            setCSS(headerElement);
             headerElement.appendTo(textElement);
 
             var numberElement = $("<span>");
             numberElement.css("font-size", Math.round(3 * this.config.text_size * this.data.attributes.item_size));
-            numberElement.css("line-height", Math.round(this.config.text_size * this.data.attributes.item_size) + "px");
+            setCSS(numberElement);
             numberElement.appendTo(textElement);
 
             this.data.text_elements[key] = numberElement;
@@ -442,6 +417,11 @@
         if (prevDate === null)
             prevDate = curDate;
 
+	    var setX = function(val, size)
+	    {
+		    return (val * size) + (size / 2);
+	    };
+
         // If not counting past zero, and time < 0, then simply draw the zero point once, and call stop
         if (!this.config.count_past_zero) {
             if (curDate > this.data.attributes.ref_date) {
@@ -450,7 +430,7 @@
 
                     // Set the text value
                     this.data.text_elements[key].text("0");
-                    x = (i * this.data.attributes.item_size) + (this.data.attributes.item_size / 2);
+                    x = setX(i, this.data.attributes.item_size);
                     y = this.data.attributes.item_size / 2;
                     color = this.config.time[key].color;
                     this.drawArc(x, y, color, 0);
@@ -468,8 +448,6 @@
 
         var visible_times = parse_times(diff, old_diff, this.data.total_duration, this.data.drawn_units, floor);
         var all_times = parse_times(diff, old_diff, secondsIn["Years"], allUnits, floor);
-
-        i = 0;
         var j = 0, lastKey = null;
 
         var cur_shown = this.data.drawn_units.slice();
@@ -480,37 +458,36 @@
 
             key = allUnits[i];
 
-            // Notify (all) listeners
-            if (Math.floor(all_times.raw_time[key]) !== Math.floor(all_times.raw_old_time[key])) {
-                this.notifyListeners(key, Math.floor(all_times.time[key]), Math.floor(diff), "all");
-            }
+	        var notify = function(mode, obj)
+	        {
+		        temp = {"all": all_times, "visible": visible_times};
 
-            if (cur_shown.indexOf(key) < 0)
+		        if (Math.floor(temp[mode].raw_time[key]) !== Math.floor(temp[mode].raw_old_time[key])) {
+			        obj.notifyListeners(key, Math.floor(temp[mode].time[key]), Math.floor(diff), mode);
+		        }
+	        };
+
+            notify("all", this); // Notify (all) listeners
+
+	        if (cur_shown.indexOf(key) < 0)
                 continue;
 
-            // Notify (visible) listeners
-            if (Math.floor(visible_times.raw_time[key]) !== Math.floor(visible_times.raw_old_time[key])) {
-                this.notifyListeners(key, Math.floor(visible_times.time[key]), Math.floor(diff), "visible");
-            }
+	        notify("visible", this); // Notify (visible) listeners
 
             if (!nodraw) {
                 // Set the text value
                 this.data.text_elements[key].text(Math.floor(Math.abs(visible_times.time[key])));
 
-                x = (j * this.data.attributes.item_size) + (this.data.attributes.item_size / 2);
+                x = setX(j, this.data.attributes.item_size);
                 y = this.data.attributes.item_size / 2;
                 color = this.config.time[key].color;
 
                 if (this.config.animation === "smooth") {
                     if (lastKey !== null && !limited_mode) {
-                        if (Math.floor(visible_times.time[lastKey]) > Math.floor(visible_times.old_time[lastKey])) {
-                            this.radialFade(x, y, color, 1, key);
-                            this.data.state.fading[key] = true;
-                        }
-                        else if (Math.floor(visible_times.time[lastKey]) < Math.floor(visible_times.old_time[lastKey])) {
-                            this.radialFade(x, y, color, 0, key);
-                            this.data.state.fading[key] = true;
-                        }
+	                    if (Math.floor(visible_times.time[lastKey]) !== Math.floor(visible_times.old_time[lastKey])) {
+		                    this.radialFade(x, y, color, +(Math.floor(visible_times.time[lastKey]) < Math.floor(visible_times.old_time[lastKey])), key);
+		                    this.data.state.fading[key] = true;
+	                    }
                     }
                     if (!this.data.state.fading[key]) {
                         this.drawArc(x, y, color, visible_times.pct[key]);
@@ -882,26 +859,21 @@
         return this;
     };
 
-    TC_Class.prototype.start = function () {
-        this.foreach(function (instance) {
-            instance.start();
-        });
-        return this;
-    };
+	var action = function(mode, parent)
+	{
+		return function () {
+			parent.foreach(function (instance) {
+				instance[mode]();
+			});
+			return parent;
+		};
+	};
 
-    TC_Class.prototype.stop = function () {
-        this.foreach(function (instance) {
-            instance.stop();
-        });
-        return this;
-    };
+    TC_Class.prototype.start = action("start");
 
-    TC_Class.prototype.restart = function () {
-        this.foreach(function (instance) {
-            instance.restart();
-        });
-        return this;
-    };
+    TC_Class.prototype.stop = action("stop");
+
+    TC_Class.prototype.restart = action("restart");
 
     TC_Class.prototype.rebuild = function () {
         this.foreach(function (instance) {
@@ -924,12 +896,7 @@
         return this;
     };
 
-    TC_Class.prototype.destroy = function () {
-        this.foreach(function (instance) {
-            instance.destroy();
-        });
-        return this;
-    };
+    TC_Class.prototype.destroy = action("destroy");
 
     TC_Class.prototype.end = function () {
         return this.elements;

@@ -35,6 +35,20 @@ var clean = function(arg)
 {
 	return parseInt(arg / 6, 10) + "." + (arg % 6);
 };
+var onUnit = function(mode, res, next)
+{
+	return (err, doc) => {
+		if (err)
+		{
+			res.status(422);
+			return next(err);
+		}
+
+		temp = {};
+		temp[mode] = doc;
+		res.json(temp);
+	};
+};
 var apiFilter = function(req, res, next)
 {
     if(!req.headers.referer)
@@ -243,18 +257,7 @@ router.get("/players", apiFilter, function (req, res, next){ // page for all pla
                 asyncCallback(null, arg);
             };
 
-            var onMap = function(err, result)
-            {
-                if(err)
-                {
-                    res.status(422);
-                    return next(err);
-                }
-
-                res.json({"Players": result()});
-            };
-
-            async.map(documents, map, onMap);
+            async.map(documents, map, onUnit("Players", res, next));
         };
 
         mongoFeatures.fetchPlayers(onFetch);
@@ -269,18 +272,7 @@ router.get("/team", apiFilter, function (req, res, next){ // view the assigned p
         "_id": req.signedCookies.name
     };
 
-    var getTeam = function (err, documents)
-    {
-        if (err)
-        {
-            res.status(422);
-            return next(err);
-        }
-
-        res.json({"Squad": documents()});
-    };
-
-    mongoTeam.getTeam(credentials, getTeam);
+    mongoTeam.getTeam(credentials, onUnit("Squad", res, next));
 });
 
 router.get("/stats", apiFilter, function(req, res, next){
@@ -298,9 +290,9 @@ router.get("/stats", apiFilter, function(req, res, next){
                 return next(err);
             }
 
-            doc.general.overs = clean(doc.general.overs);
             res.cookie("day", process.env.DAY, options);
-            res.cookie("stats", JSON.stringify(doc), options);
+	        doc.general.overs = clean(doc.general.overs);
+	        res.cookie("stats", JSON.stringify(doc), options);
             res.json(doc);
         };
 

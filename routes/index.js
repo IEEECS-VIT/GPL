@@ -36,11 +36,23 @@ var router = require("express").Router();
 var mongoTeam = require(path(__dirname, "..", "database", "mongoTeam"));
 var mongoUsers = require(path(__dirname, "..", "database", "mongoUsers"));
 var record = require(path(__dirname, "..", "database", "mongoRecord")).schema;
-var developers = require(path(__dirname, "..", "package.json")).contributors;
 var options = {"signed": true, "maxAge": 86400000}; // all cookies are signed by default and have a lifespan of one day
+var developers = require(path(__dirname, "..", "package.json")).contributors
+															   .map((arg) => {
+																   arg.map((x) => x.img = x.name.split(" ")[0]);
+																   return arg;
+															   });
+var onForgot = function(mode, res)
+{
+	return (error, doc) => {
+		if (error || !doc)
+		{
+			res.flash("Incorrect credentials!");
+		}
 
-developers.map((arg) => arg.map((x) => x.img = x.name.split(" ")[0]));
-
+		res.redirect(`/forgot/${mode}`);
+	};
+};
 var cookieFilter = function(req, res, next)
 {
     if(req.signedCookies.name)
@@ -60,7 +72,7 @@ router.get("/", cookieFilter, function (req, res){
     if (process.env.NODE_ENV && process.env.DAY === "-1")
     {
         time = new Date;
-        time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000); // to display similar countdowns across different timezones
+        time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000); // to display identical countdowns across different timezones
         date =
         {
             "seconds": time.getSeconds(),
@@ -197,21 +209,7 @@ router.post("/forgot/password", function (req, res){
         }
 
         token = buf.toString("hex");
-
-        var onFetch = function (error, doc)
-        {
-            if (error || !doc)
-            {
-                res.flash("Incorrect credentials!");
-                res.redirect("/forgot/password");
-            }
-            else
-            {
-                res.redirect("/login");
-            }
-        };
-
-        mongoUsers.forgotPassword(credentials, token, req.headers.host, onFetch);
+        mongoUsers.forgotPassword(credentials, token, req.headers.host, onForgot("password", res));
     });
 });
 
@@ -282,20 +280,7 @@ router.post("/forgot/user", function (req, res){
         "email": req.body.email
     };
 
-    var onFetch = function (err, docs)
-    {
-        if (err || !docs)
-        {
-            res.flash("Invalid credentials!");
-            res.redirect("/forgot/user");
-        }
-        else
-        {
-            res.redirect("/login");
-        }
-    };
-
-    mongoUsers.forgotUser(credentials, onFetch);
+    mongoUsers.forgotUser(credentials, onForgot("user", res));
 });
 
 router.get("/register", cookieFilter, function (req, res){

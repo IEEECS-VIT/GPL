@@ -148,27 +148,28 @@ router.get("/matches", authenticated, function (req, res){ // Deprecated
             "_id" : req.signedCookies.name
         };
 
+	    var onErr = (err) => {
+		    console.error(err.message);
+		    res.flash("Error fetching match details, please retry.");
+		    res.redirect("/home");
+	    };
         var onMap = function (err, num)
         {
             if (err)
             {
-                console.error(err.message);
-                res.flash("Error fetching match details, please retry.");
-                res.redirect("/home");
+				onErr(err);
             }
             else
             {
-                var onMatches = function (err, matches)
+                var onMatches = function (error, matches)
                 {
-                    if (err)
+                    if (error)
                     {
-                        console.error(err.message);
-                        res.flash("Error fetching match details, please retry.");
-                        res.redirect("/home");
+                        onErr(error);
                     }
                     else
                     {
-                        res.cookie("day", process.env.DAY, {signed : true, maxAge : 86400000});
+                        res.cookie("day", process.env.DAY, options);
                         res.render("matches", {"match": matches || [], "day": (process.env.DAY - 1) || 0, "round": ref[process.env.MATCH]});
                     }
                 };
@@ -186,46 +187,48 @@ router.get("/matches", authenticated, function (req, res){ // Deprecated
 });
 
 router.get("/match/:day", authenticated, function(req, res){
-      if(process.env.DAY > "0" && req.params.day > "0" && req.params.day < "8")
-      {
-          credentials =
-          {
-              "_id": req.signedCookies.name
-          };
+	if(process.env.DAY > "0" && req.params.day > "0" && req.params.day < "8")
+	{
+		credentials =
+		{
+		  "_id": req.signedCookies.name
+		};
 
-          var onMap = function (err, num)
-          {
-              if (err)
-              {
-                  res.flash("Error loading match " + req.params.day + "details.");
-                  res.redirect("/home");
-              }
-              else
-              {
-                  var onMatch = function (err, match)
-                  {
-                      if (err)
-                      {
-                          res.flash("Error loading match " + req.params.day + "details.");
-                          res.redirect("/home");
-                      }
-                      else
-                      {
-                          res.cookie("day", process.env.DAY, options);
-                          res.render("match", {"match": match || {}, "day": (process.env.DAY - 1) || 0, "round": ref[process.env.MATCH]});
-                      }
-                  };
+		var onErr = () => {
+			res.flash("Error loading match " + req.params.day + "details.");
+			res.redirect("/home");
+		};
+		var onMap = function (err, num)
+		{
+			if (err)
+			{
+				onErr();
+			}
+			else
+			{
+				var onMatch = function (error, match)
+				{
+					if (error)
+					{
+						onErr();
+					}
+					else
+					{
+						res.cookie("day", process.env.DAY, options);
+						res.render("match", {"match": match || {}, "day": (process.env.DAY - 1) || 0, "round": ref[process.env.MATCH]});
+					}
+				};
 
-                  mongoFeatures.match(req.params.day, num, onMatch);
-              }
-          };
+				mongoFeatures.match(req.params.day, num, onMatch);
+			}
+		};
 
-          mongoTeam.map(credentials, onMap);
-      }
-      else
-      {
-          res.redirect("/home");
-      }
+		mongoTeam.map(credentials, onMap);
+	}
+	else
+	{
+	  res.redirect("/home");
+	}
 });
 
 router.post("/getsquad", authenticated, function (req, res) {

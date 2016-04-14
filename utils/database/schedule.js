@@ -102,7 +102,7 @@ var setTeamNumber = function(asyncCallback)
 {
     var forEach = function(arg, schedulerCallback)
     {
-        database.collection(process.env.MATCH).updateOne({_id: arg._id}, {$set: {teamNo: ++size}}, schedulerCallback);
+        database.collection(process.env.MATCH).updateOne({"_id": arg._id}, {"$set": {"teamNo": ++size}}, schedulerCallback);
     };
 
     async.map(unassigned, forEach, asyncCallback);

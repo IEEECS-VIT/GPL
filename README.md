@@ -22,7 +22,6 @@
 * Install the latest edition of Node.js from [here](https://nodejs.org/en/download/)
 * Install the latest version of MongoDB from [here](https://www.mongodb.org/downloads#production)
 * Install all dependencies with `npm i --silent`
-* On Microsoft Windows, run `npm install bcryptjs`
 * Create a file `.env` in the root directory with the following contents:
 
 ```
