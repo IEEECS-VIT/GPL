@@ -43,13 +43,13 @@ catch(err)
 var user = function()
 {
     return {
-        "_id": '',
-        "dob": '',
-        "teamNo": '', // change to an array, in order to make tracking matchday information for previous rounds simpler.
-        "managerName": '',
-        "passwordHash": '',
-        "email": '',
-        "phone": '',
+        "_id": "",
+        "dob": "",
+        "teamNo": "", // change to an array, in order to make tracking matchday information for previous rounds simpler.
+        "managerName": "",
+        "passwordHash": "",
+        "email": "",
+        "phone": "",
         "toss": 0,
         "win": 0,
         "loss": 0,
@@ -79,7 +79,7 @@ var user = function()
         "ballsAgainst": 0,
         "netRunRate": 0.0,
         "avgRunsFor": 0.0,
-        "authStrategy": '',
+        "authStrategy": "",
         "highestTotal": -1,
         "avgOversFor": 0.0,
         "wicketsAgainst": 0,
@@ -114,7 +114,7 @@ exports.users = function(flag, limit, index)
         temp._id = "TEAM" + (index + i);
         temp.dob = faker.date.recent();
         temp.managerName = faker.name.findName();
-        temp.phone = faker.phone.phoneNumberFormat().replace(/-/g, '');
+        temp.phone = faker.phone.phoneNumberFormat().replace(/-/g, "");
         temp.passwordHash = "$2a$10$N7zcIGhNPPsW2rGLQWCDo.4XZb8Ket.MhxijAFbCueZbPFMn/P2Zu"; // This hash is equivalent to 'gpl'
         temp.email = "testgpluser" + (i % 8 + 1) + "@gmail.com"; // always specify a valid email address to test email functionality.
 

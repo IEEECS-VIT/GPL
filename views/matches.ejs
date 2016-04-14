@@ -234,7 +234,7 @@
                                         <%}%>
                                         <% for (j = 38 + match[i].count[0]; j < 38 + match[i].count[0] + match[i].count[1]; ++j) {%>
                                             + "<tr>"
-                                        <% for (k = 0;k < (match[i].scorecard[j] || '').length; ++k){%>
+                                        <% for (k = 0;k < (match[i].scorecard[j] || "").length; ++k){%>
                                             + "<td><%= match[i].scorecard[j][k]%></td>"
                                         <%}%>
                                         + "</tr>"

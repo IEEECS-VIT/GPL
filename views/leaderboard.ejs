@@ -71,7 +71,7 @@
                                             </thead>
                                             <tbody>
                                                 <% for(var i = 0; i < leaderboard.length ; ++i) { %>
-                                                    <tr id=<%=leaderboard[i].rank ? 'current' : ''%>>
+                                                    <tr id=<%=leaderboard[i].rank ? 'current' : ""%>>
                                                         <td> <%= leaderboard[i].rank || (i + 1) %> </td>
                                                         <td> <%= leaderboard[i]._id %>             </td>
                                                         <td> <%= leaderboard[i].points %>          </td>

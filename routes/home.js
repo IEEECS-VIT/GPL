@@ -387,7 +387,7 @@ router.get("/players", authenticated, function (req, res, next){ // page for all
         }
         if (document.team.length)
         {
-            res.redirect("/home" + document.squad.length ? '' : "/team");
+            res.redirect("/home" + document.squad.length ? "" : "/team");
         }
         else
         {

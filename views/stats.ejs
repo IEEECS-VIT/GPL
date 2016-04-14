@@ -74,12 +74,12 @@
                                                 <td><%= stats.general[ref[i]]%></td>
                                             </tr>
                                         <%}%>
-                                        <%if (stats.high.total.team !== ''){%>
+                                        <%if (stats.high.total.team !== ""){%>
                                             <tr>
                                                 <th>Highest Runs Scored</th>
                                                 <td><%= stats.high.total.value %> by <%= stats.high.total.team %></td>
                                             </tr>
-                                        <%}if (stats.low.team !== ''){%>
+                                        <%}if (stats.low.team !== ""){%>
                                             <tr>
                                                 <th>Lowest Runs Scored</th>
                                                 <td><%= stats.low.value %> by <%= stats.low.team %></td>

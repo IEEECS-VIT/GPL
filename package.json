@@ -17,6 +17,7 @@
     "scrape": "node utils/commentary/scrape.js",
     "schedule": "node utils/database/schedule.js",
     "deploy": "heroku pipelines:promote -r heroku",
+    "postinstall": "node utils/misc/postinstall.js",
     "start": "node node_modules/.bin/forever ./bin/www",
     "stop": "node node_modules/.bin/forever stop ./bin/www",
     "restart": "node node_modules/.bin/forever restart ./bin/www",

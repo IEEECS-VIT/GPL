@@ -16,22 +16,11 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var msg = document.getElementById("msg");
-var button = document.getElementById("submit");
-var elem = document.getElementsByName("team")[0];
-
-elem.addEventListener("blur", function(){
-    if(this.value)
-    {
-        $.get("api/register/" + this.value, function(result){ // Switch to .load when custom error placeholder has been constructed
-            button.disabled = !result;
-            msg.style.display = result ? "none" : "block";
-            elem.style.borderColor = result ? "" : "red";
-        });
-    }
-}, false);
-
-function validator()
+if(process.platform === 'win32') // the bcrypt issue is only prevalent on Microsoft Windows
 {
-    return document.getElementById("pass").value === document.getElementById("cpass").value;
+	var join = require('path').join;
+	var dir = [__dirname, 'node_modules'];
+	require('child_process').exec('npm i bcryptjs', () => {
+		require('fs').renameSync(join(...dir, 'bcryptjs'), join(...dir, 'bcrypt'));
+	});
 }

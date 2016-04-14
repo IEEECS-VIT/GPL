@@ -22,7 +22,6 @@ var date;
 var user;
 var reset;
 var token;
-var bcrypt;
 var newUser;
 var ref =
 {
@@ -30,6 +29,7 @@ var ref =
     "local": ["name", "/home"]
 };
 var credentials;
+var bcrypt = require('bcrypt'); // ensure that the postinstall script has completed before starting the application on Windows
 var crypto = require("crypto");
 var path = require("path").join;
 var router = require("express").Router();
@@ -51,22 +51,6 @@ var cookieFilter = function(req, res, next)
     next();
 };
 
-try
-{
-    bcrypt = require("bcrypt");
-}
-catch (err)
-{
-    try
-    {
-        bcrypt = require("bcryptjs");
-    }
-    catch (error)
-    {
-        throw "Failure to compile run time requirement: bcrypt(js)";
-    }
-}
-
 if (process.env.LOGENTRIES_TOKEN)
 {
     log = require("node-logentries").logger({"token": process.env.LOGENTRIES_TOKEN});
@@ -76,7 +60,7 @@ router.get("/", cookieFilter, function (req, res){
     if (process.env.NODE_ENV && process.env.DAY === "-1")
     {
         time = new Date;
-        time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000);
+        time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + 19800000); // to display similar countdowns across different timezones
         date =
         {
             "seconds": time.getSeconds(),
