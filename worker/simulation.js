@@ -229,7 +229,7 @@ exports.simulate = function (data, callback)
                         if (continuousWickets[currentBowler] === 3) // hat-trick
                         {
                             continuousWickets[currentBowler] = 0;
-                            data.match.commentary.push(`A wonderful hat-trick by ${team[+!tossIndex].name[currentBowler]}! Fantastic bowling in the time of need.`);
+                            data.match.commentary.push(`${team[+!tossIndex].name[currentBowler]} gets his hat-trick! You don't get to see them a whole lot these days, the rest of his mates have mobbed him...`);
                         }
 
                         data.match.commentary.push(team[+tossIndex].name[strike[+strikeIndex]]);
@@ -654,13 +654,20 @@ exports.simulate = function (data, callback)
         data.team[i].highestTotal = Math.max(data.team[i].highestTotal, total[i]);
         data.team[i].netRunRate = scale((data.team[i].runsFor / data.team[i].ballsFor) - (data.team[i].runsAgainst / data.team[i].ballsAgainst), 0, 6, 4);
 
+	    temp = {"runs": total, "balls": overs, "wickets": wickets};
+
 	    for(j = 0; j < 2; ++j)
         {
-            data.team[i][`runs${key[j].val}`] += total[key[j].index[i]];
-            data.team[i][`balls${key[j].val}`] += overs[key[j].index[i]];
-            data.team[i][`wickets${key[j].val}`] += wickets[key[j].index[i]];
-            data.team[i][`avgRuns${key[j].val}`] = parseInt(scale(data.team[i][`runs${key[j].val}`], data.team[i].played));
-            data.team[i][`avgWickets${key[j].val}`] = parseInt(scale(data.team[i][`wickets${key[j].val}`], data.team[i].played));
+            for(loop in temp)
+            {
+	            if(temp.hasOwnProperty(loop))
+	            {
+		            data.team[i][`${loop}${key[j].val}`] += temp[loop][key[j].index[i]]; // increments runs, balls, and wickets per team (for and against)
+	            }
+            }
+
+            data.team[i][`avgRuns${key[j].val}`] = parseInt(scale(data.team[i][`runs${key[j].val}`], data.team[i].played), 10);
+            data.team[i][`avgWickets${key[j].val}`] = parseInt(scale(data.team[i][`wickets${key[j].val}`], data.team[i].played), 10);
             data.team[i][`avgOvers${key[j].val}`] = Math.floor(data.team[i][`balls${key[j].val}`] / data.team[i].played / 6) + (Math.floor(data.team[i][`balls${key[j].val}`] / data.team[i].played) % 6) / 10;
         }
     }

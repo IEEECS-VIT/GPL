@@ -230,14 +230,12 @@ exports.adminInfo = function (callback)
 
 exports.fetchMatches = function (team, callback) // deprecated, as match details are to be fetched one at a time
 {
-    var parallelTasks = [];
-
-    for(i = 1; i < 8; ++i)
-    {
-        parallelTasks.push((asyncCallback) => {
-            mongoFeatures.match(i, team, asyncCallback);
-        });
-    }
+    var parallelTasks = Array.apply(null, Aray(7))
+						     .map((_, i) => {
+							     return (asyncCallback) => {
+							 	     mongoFeatures.match(i + 1, team, asyncCallback);
+							     }
+						     });
 
     async.parallel(parallelTasks, callback);
 };
