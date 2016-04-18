@@ -404,7 +404,7 @@ router.get("/players", authenticated, function (req, res, next){ // page for all
 
                 var map = function(arg, asyncCallback)
                 {
-                    arg.active = false;
+                    arg.active = false; // on the team formation page, all players are not selected by default
                     arg.image = ("https://res.cloudinary.com/gpl/players/" + arg.Type + "/" + arg._id + ".jpg");
                     asyncCallback(null, arg);
                 };

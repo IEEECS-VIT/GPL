@@ -32,17 +32,19 @@ var credentials;
 var bcrypt = require('bcrypt'); // ensure that the postinstall script has completed before starting the application on Windows
 var crypto = require("crypto");
 var path = require("path").join;
+var dir = [__dirname, "..", "database"];
 var router = require("express").Router();
-var mongoTeam = require(path(__dirname, "..", "database", "mongoTeam"));
-var mongoUsers = require(path(__dirname, "..", "database", "mongoUsers"));
-var record = require(path(__dirname, "..", "database", "mongoRecord")).schema;
+var mongoTeam = require(path(...dir, "mongoTeam"));
+var mongoUsers = require(path(...dir, "mongoUsers"));
+var socialCookie = {"signed": true, "maxAge": 300000};
+var record = require(path(...dir, "mongoRecord")).schema;
 var options = {"signed": true, "maxAge": 86400000}; // all cookies are signed by default and have a lifespan of one day
 var developers = require(path(__dirname, "..", "package.json")).contributors
 															   .map((arg) => {
 																   arg.map((x) => x.img = x.name.split(" ")[0]);
 																   return arg;
 															   });
-var onForgot = function(mode, res)
+var onForgot = function (mode, res)
 {
 	return (error, doc) => {
 		if (error || !doc)
@@ -53,14 +55,23 @@ var onForgot = function(mode, res)
 		res.redirect(`/forgot/${mode}`);
 	};
 };
-var cookieFilter = function(req, res, next)
+var cookieFilter = function (req, res, next)
 {
-    if(req.signedCookies.name)
+    if (req.signedCookies.name)
     {
         return res.redirect("/home");
     }
 
     next();
+};
+var canRegister = function (req, res, next)
+{
+	if (!process.env.NODE_ENV || (process.env.DAY === "0" && process.env.MATCH === "users"))
+	{
+		return next(); // registrations always open on localhost, and on production for the first round, when process.env.DAY is "0"
+	}
+
+	res.redirect("/login");
 };
 
 if (process.env.LOGENTRIES_TOKEN)
@@ -159,12 +170,12 @@ router.post("/login", cookieFilter, function (req, res){
         if (doc)
         {
             bcrypt.compare(req.body.password, doc.passwordHash, function(err, result){
-                if(err)
+                if (err)
                 {
                     res.flash("An unexpected error has occurred, please re-try.");
                     return res.redirect("/login");
                 }
-                if(result)
+                if (result)
                 {
                     res.cookie(ref[doc.authStrategy][0], doc._id, options);
                     res.redirect(ref[doc.authStrategy][1]);
@@ -202,7 +213,7 @@ router.post("/forgot/password", function (req, res){
     };
 
     crypto.randomBytes(20, function (err, buf){
-        if(err)
+        if (err)
         {
             res.flash("An unexpected error has occurred, please re-try.");
             res.redirect("/forgot/password");
@@ -283,15 +294,8 @@ router.post("/forgot/user", function (req, res){
     mongoUsers.forgotUser(credentials, onForgot("user", res));
 });
 
-router.get("/register", cookieFilter, function (req, res){
-    if(!process.env.NODE_ENV || (process.env.DAY === "0" && process.env.MATCH === "users")) // Initialize process.env.DAY with -1, set to 0 when registrations are open, set to 1 once
-    {                                                                                       // the schedule has been constructed and the game engine is match ready.
-        res.render("register", {"msg": res.flash(), "csrfToken": req.csrfToken()});
-    }
-    else
-    {
-        res.redirect("/login");
-    }
+router.get("/register", cookieFilter, canRegister, function (req, res){
+    res.render("register", {"msg": res.flash(), "csrfToken": req.csrfToken()});
 });
 
 router.post("/register", cookieFilter, function (req, res){
@@ -385,24 +389,17 @@ router.get("/social/login", cookieFilter, function (req, res){
 });
 
 router.post("/social/login", cookieFilter, function (req, res){
-    res.cookie("team", req.body.team.trim().toUpperCase(), {maxAge: 300000, signed: true});
+    res.cookie("team", req.body.team.trim().toUpperCase(), socialCookie);
     res.redirect("/social/login");
 });
 
-router.get("/social/register", cookieFilter, function (req, res){
-    if(!process.env.NODE_ENV || (process.env.DAY === "0" && process.env.MATCH === "users")) // Initialize process.env.DAY with -1, set to 0 when registrations are open,
-    {                                                                                       // will be updated to 1 when the schedule has been constructed.
-        res.render("social", {"mode": +!req.signedCookies.team, "type": "register", "csrfToken": req.csrfToken()});
-    }
-    else
-    {
-        res.redirect("/login");
-    }
+router.get("/social/register", cookieFilter, canRegister, function (req, res){
+	res.render("social", {"mode": +!req.signedCookies.team, "type": "register", "csrfToken": req.csrfToken()});
 });
 
 router.post("/social/register", cookieFilter, function (req, res){
-    res.cookie("team", req.body.team.trim().toUpperCase(), {maxAge: 300000, signed: true});
-    res.cookie("phone", req.body.phone, {maxAge: 300000, signed: true});
+    res.cookie("team", req.body.team.trim().toUpperCase(), socialCookie);
+    res.cookie("phone", req.body.phone, socialCookie);
     res.redirect("/social/register");
 });
 
