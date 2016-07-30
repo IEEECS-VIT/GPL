@@ -16,51 +16,51 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-console.time('Purge operation');
+console.time("Purge operation");
 
-var flag;
+var mode = "";
 
 try
 {
-    flag = mode ? 'test': ''; //  mode is a global variable from
+    mode = testFlag ? "test" : ""; //  testFlag is a global variable from tests/helper.js
 }
 catch(err)
 {
-    flag = ''
+    console.log("Running in non-test mode.");
 }
 
-var path = require('path').join;
-var mongo = require('mongodb').MongoClient.connect;
-var mongoURI = `mongodb://127.0.0.1:27017/${flag}GPL`;
+var path = require("path").join;
+var mongo = require("mongodb").MongoClient.connect;
+var mongoURI = `mongodb://127.0.0.1:27017/${mode}GPL`;
 
 if(process.env.NODE_ENV)
 {
-    throw 'The database may not be purged on production environments.';
+    throw "The database may not be purged on production environments.";
 }
 
 mongo(mongoURI, function(err, db){
     if(err)
     {
-        console.error(err.message);
+        throw err;
     }
-    else
-    {
-        db.dropDatabase(function(err){
-            if(err)
-            {
-                console.error(err.message);
-            }
-            else
-            {
-                db.close();
-                console.log('The database was successfully purged, you can reinstate it with `npm run seed`.');
-                console.timeEnd('Purge operation');
 
-                if(flag)
-                {
-                    require(path(__dirname, 'seed'));
-                }
-            }
-        });
-    }
+    db.dropDatabase(function(error){
+        if(error)
+        {
+            throw error;
+        }
+
+        console.log("The database was successfully purged, you can reinstate it with `npm run seed`.");
+        console.timeEnd("Purge operation");
+
+        if(mode)
+        {
+            testDb = db; // to maintain a persistent test database connection
+            require(path(__dirname, "seed")); // remote file execution
+        }
+        else
+        {
+            db.close();
+        }
+    });
 });

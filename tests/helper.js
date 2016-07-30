@@ -16,12 +16,12 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-mode = 'test';
-var path = require('path').join;
+testFlag = true;
+var path = require("path").join;
 
 before(function(done){
     testHelperCallback = done;
-    require(path(__dirname, '..', 'utils', 'purge'));
+    require(path(__dirname, "..", "utils", "database", "purge"));
 });
 
 after(function(){

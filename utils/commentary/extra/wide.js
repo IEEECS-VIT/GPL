@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 module.exports =
     [
         "",
@@ -34,5 +35,15 @@ module.exports =
         "terrible delivery as he bowls it well down the leg side. The batsman looks to help it away, but doesn't succeed",
         "short delivery that is just a shade down the leg side. That's rather harsh as the ball sailed over his hips as he " +
         "was a little cramped up while attempting a shot",
-        "slanted in too much this time and it slips down the leg side"
-    ];
+        "slanted in too much this time and it slips down the leg side",
+		"full and wide at 148ks, the batsman's drive is beaten by the outswing.",
+		"short and wide, very wide, called a wide.",
+		"line goes wrong again. Wide down the leg side.",
+		"another wide down the leg side. Short of a length, looks to tuck him up, but slides too far.",
+		"slower bouncer, 123ks, called wide for height. Has to be touch and go on that.",
+		"the batsman moves inside the line anticipating the bouncer. the bowler bowls one but well down the leg side.",
+		"the batsman moves inside the line again, the bowler bounces him down the leg side. Another wide.",
+		"a little bit of a question there, but the umpire says it's touched nothing. There was a noise, I thought it was" +
+		" thigh pad, the Umpire has the final say. Back of a length ball skirts past the flick shot.",
+		"looks like it was the slower, wider yorker. Went away too far."
+	];

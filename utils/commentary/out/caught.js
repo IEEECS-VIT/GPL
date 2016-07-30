@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 module.exports =
     [
         "",
@@ -1169,5 +1170,18 @@ module.exports =
         "he is down the wicket to drive at this wide and full ball, and can't clear extra cover. Another wicket falls.",
         "slower ball again. This is short of a length, on the pads, gets the leading edge, and lobs for an easy catch to " +
         "point",
-        "another wicket goes down. Looks for a big hit, gets too under a length ball and is caught at wide long-on"
-    ];
+        "another wicket goes down. Looks for a big hit, gets too under a length ball and is caught at wide long-on",
+		"Welcome back! He is celebrating again. He got a big wicket for Sydney Thunder in the BBL final not long ago, and" +
+        " he has got the big one. the striker, who had nine lives, doesn't get another. The slower offcutter has been " +
+        "driven straight down the lap of mid-on.",
+		"Those celebrations are back, arms aloft! Slower bouncer, the batsman shapes up to pull, but the ball hasn't arrived." +
+        " He then looks to steer it, but is late on the attempt and the extra bounce takes the edge through to the keeper.",
+		"there's a party in the infield and the batsman are only too happy to wander in and be suckerpunched. A length " +
+        "ball outside off sticks in the pitch a bit and robs the batter of a pretty drive on the up. Shouldn't be playing" +
+		" those shots here.",
+		"looks at the heavens and wonders why me? It was a short ball, but with the bowler putting in so much effort to " +
+		"dig it into the pitch, it sticks in it and doesn't come on. He whacks it hard, but he cannot time it well. The " +
+		"ball slows up as it comes to him and he can only bunt it straight to the man at cover.",
+		"that almost seemed like it ran off the face! the batsman was on leg stump, and he was willing the ball to take " +
+		"enough of the bat to run away to third man. The ball, pesky thing, doesn't listen. Bet its going to get grounded."
+	];

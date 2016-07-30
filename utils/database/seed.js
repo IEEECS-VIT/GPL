@@ -16,97 +16,105 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-console.time('Seeding operation took');
+console.time("Seeding operation took");
 
-var flag;
 var database;
 var mongoURI;
-var async = require('async');
-var path = require('path').join;
-var record = require(path(__dirname, '..', 'db', 'mongoRecord'));
+var mode = "";
+var async = require("async");
+var path = require("path").join;
+var record = require(path(__dirname, "..", "..", "database", "mongoRecord"));
 var info = record.info;
 var stats = record.stats;
 
 try
 {
-    flag = mode ? 'test' : '';
+    mode = testFlag ? "test" : "";
 }
 catch(err)
 {
-    flag = '';
+    console.log("Running in non-test mode.");
 }
 
 var onParallel = function(err)
 {
     if(err)
     {
-        console.error(err.message);
+        throw err;
     }
 
-    database.close();
+    console.timeEnd("Seeding operation took");
 
-    console.timeEnd('Seeding operation took');
-
-    if(flag)
+    if(mode)
     {
-        require(path(__dirname, 'schedule'));
+        require(path(__dirname, "schedule")); // remote file execution.
+    }
+    else
+    {
+        database.close();
     }
 };
-var mongo = require('mongodb').MongoClient.connect;
+var mongo = require("mongodb").MongoClient.connect;
 var parallelTasks =
 [
     function(asyncCallback)
     {
-        database.collection('info').insertOne(info, asyncCallback);
+        database.collection("info").insertOne(info, asyncCallback);
     },
     function(asyncCallback)
     {
-        database.collection('stats').insertOne(stats, asyncCallback);
+        database.collection("stats").insertOne(stats, asyncCallback);
     }
 ];
 
 if(process.env.NODE_ENV)
 {
     mongoURI = process.env.MONGO;
-    console.warn('You are running the seed operation in a production environment. No new teams / users shall be made.');
+    console.warn("You are running the seed operation in a production environment. No new teams / players shall be made.");
 }
 else
 {
-    var users = record.users(true, 8);
     var players = record.players();
-    mongoURI = `mongodb://127.0.0.1:27017/${flag}GPL`;
+    var users = record.users(true, 8);
+    mongoURI = `mongodb://127.0.0.1:27017/${mode}GPL`;
 
     parallelTasks.push(
         function(asyncCallback)
         {
-            database.collection('users').insertMany(users, asyncCallback);
+            database.collection("users").insertMany(users, asyncCallback);
         },
         function(asyncCallback)
         {
-            database.collection('round2').insertMany(users, asyncCallback);
+            database.collection("round2").insertMany(users, asyncCallback);
         },
         function(asyncCallback)
         {
-            database.collection('round3').insertMany(users, asyncCallback);
+            database.collection("round3").insertMany(users, asyncCallback);
         },
         function(asyncCallback)
         {
-            database.collection('players').insertMany(players, asyncCallback);
+            database.collection("players").insertMany(players, asyncCallback);
         }
     );
 }
 
-var onConnect = function(err, db)
+if(mode)
 {
-    if(err)
+    database = testDb; // from utils/database/purge.js
+    async.parallel(parallelTasks, onParallel);
+}
+else
+{
+    var onConnect = function(err, db)
     {
-        console.error(err.message);
-    }
-    else
-    {
+        if(err)
+        {
+            throw err;
+        }
+
         database = db;
         async.parallel(parallelTasks, onParallel);
-    }
-};
+    };
 
-mongo(mongoURI, onConnect);
+    mongo(mongoURI, onConnect);
+}

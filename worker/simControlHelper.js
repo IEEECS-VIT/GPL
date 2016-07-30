@@ -17,63 +17,44 @@
  */
 
 var simData;
-var collection;
-var async = require('async');
-var path = require('path').join;
+var async = require("async");
+var path = require("path").join;
 var days = [1, 2, 3, 4, 5, 6, 7];
-var simulate = require(path(__dirname, 'simulation')).simulate;
+var simulate = require(path(__dirname, "simulation")).simulate;
 
 exports.onGetRating = function(userDoc, asyncCallback)
 {
-    return function(err, results) {
+    return (err, results) => {
+        if(err)
+        {
+            throw err;
+        }
+
         userDoc.ratings = results;
         asyncCallback(err, userDoc);
     };
 };
 
-exports.getAllMatches = function (err, callback)
+exports.getAllMatches = function (day, callback)
 {
-    if(err)
+    if(days.indexOf(day) === -1)
     {
-        throw err;
+        throw "Invalid Day";
     }
 
-    switch (days.indexOf(day))
-    {
-        case -1:
-            throw 'Invalid Day';
-        default:
-            collection = 'matchday' + day;
-            break;
-    }
-
-    database.collection(collection).find().toArray(callback)
-};
-
-exports.forAllMatches = function (forEachMatch, onFinish)
-{
-    return function(err, docs){
-        if(err)
-        {
-            throw err;
-        }
-        else
-        {
-            async.map(docs, forEachMatch, onFinish);
-        }
-    };
+    database.collection("matchday" + day).find().toArray(callback)
 };
 
 exports.teamParallelTasks = function(getTeamDetails, matchDoc)
 {
     return {
-        team1: function (asyncCallback)
+        "team1": function (asyncCallback)
         {
-            getTeamDetails({teamNo: matchDoc.Team_1}, asyncCallback);
+            getTeamDetails({"teamNo": matchDoc.Team_1}, asyncCallback);
         },
-        function(asyncCallback)
+        "team2": function(asyncCallback)
         {
-            getTeamDetails({teamNo: matchDoc.Team_2}, asyncCallback);
+            getTeamDetails({"teamNo": matchDoc.Team_2}, asyncCallback);
         }
     };
 };
@@ -99,82 +80,100 @@ exports.userParallelTasks = function(newData, updateUser, updateMatch)
 exports.generalStats = function(general, newUserDoc, day)
 {
     return {
-        sixes: general.sixes + newUserDoc.s || 0,
-        fours: general.fours + newUserDoc.f || 0,
-        runs: general.runs + newUserDoc.scores[day - 1] || 0,
-        overs: general.overs + newUserDoc.overs[day - 1] || 0,
-        wickets: general.wickets + newUserDoc.wickets[day - 1] || 0
+        "sixes": general.sixes + newUserDoc.s || 0,
+        "fours": general.fours + newUserDoc.f || 0,
+        "runs": general.runs + newUserDoc.scores[day - 1] || 0,
+        "overs": general.overs + newUserDoc.overs[day - 1] || 0,
+        "wickets": general.wickets + newUserDoc.wickets[day - 1] || 0
     };
 };
 
 exports.total = function(newUserDoc, mode)
 {
     return {
-        team: newUserDoc._id,
-        value: newUserDoc[`${mode}estTotal`]
+        "team": newUserDoc._id,
+        "value": newUserDoc[`${mode}estTotal`]
+    };
+};
+
+exports.dailyTotal = function(newUserDoc, day)
+{
+    return {
+        "team": newUserDoc._id,
+        "value": newUserDoc.scores[day - 1]
+    };
+};
+
+exports.dailyHigh = function(newUserDoc, i, day)
+{
+    return {
+        "team": newUserDoc._id,
+        "player": newUserDoc.names[i] || "",
+        "value": newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1]
+    };
+};
+
+exports.overallHigh = function(newUserDoc, i)
+{
+    return {
+        "team": newUserDoc._id,
+        "player": newUserDoc.names[i] || "",
+        "value": newUserDoc.stats[newUserDoc.squad[i]].high
     };
 };
 
 exports.purpleCap = function(i, newUserDoc)
 {
     return {
-        team: newUserDoc._id,
-        player: newUserDoc.names[i] || '',
-        economy: newUserDoc.stats[newUserDoc.squad[i]].economy,
-        wickets: newUserDoc.stats[newUserDoc.squad[i]].wickets,
-        bowlAverage: newUserDoc.stats[newUserDoc.squad[i]].bowlAverage,
-        ballsBowled: newUserDoc.stats[newUserDoc.squad[i]].ballsBowled,
-        runsConceded: newUserDoc.stats[newUserDoc.squad[i]].runsConceded,
-        bowlStrikeRate: newUserDoc.stats[newUserDoc.squad[i]].bowlStrikeRate
+        "team": newUserDoc._id,
+        "player": newUserDoc.names[i] || "",
+        "economy": newUserDoc.stats[newUserDoc.squad[i]].economy,
+        "wickets": newUserDoc.stats[newUserDoc.squad[i]].wickets,
+        "bowlAverage": newUserDoc.stats[newUserDoc.squad[i]].bowlAverage,
+        "ballsBowled": newUserDoc.stats[newUserDoc.squad[i]].ballsBowled,
+        "runsConceded": newUserDoc.stats[newUserDoc.squad[i]].runsConceded,
+        "bowlStrikeRate": newUserDoc.stats[newUserDoc.squad[i]].bowlStrikeRate
     };
 };
 
 exports.orangeCap = function(i, newUserDoc)
 {
     return {
-        team: newUserDoc._id,
-        player: newUserDoc.names[i] || '',
-        high: newUserDoc.stats[newUserDoc.squad[i]].high,
-        runsScored: newUserDoc.stats[newUserDoc.squad[i]].runsScored,
-        ballsFaced: newUserDoc.stats[newUserDoc.squad[i]].ballsFaced,
-        batAverage: newUserDoc.stats[newUserDoc.squad[i]].batAverage,
-        batStrikeRate: newUserDoc.stats[newUserDoc.squad[i]].batStrikeRate
+        "team": newUserDoc._id,
+        "player": newUserDoc.names[i] || "",
+        "high": newUserDoc.stats[newUserDoc.squad[i]].high,
+        "runsScored": newUserDoc.stats[newUserDoc.squad[i]].runsScored,
+        "ballsFaced": newUserDoc.stats[newUserDoc.squad[i]].ballsFaced,
+        "batAverage": newUserDoc.stats[newUserDoc.squad[i]].batAverage,
+        "batStrikeRate": newUserDoc.stats[newUserDoc.squad[i]].batStrikeRate
     };
 };
 
 exports.makeData = function(results, matchDoc)
 {
     return {
-        team:
-        [
-            results.team1,
-            results.team2
-        ],
-        match: matchDoc
+        "team": [results.team1, results.team2],
+        "match": matchDoc
     };
 };
 
 exports.getEachRating = function (elt, subCallback)
 {
-    database.collection('players').find({_id: elt}).limit(1).next(subCallback);
+    database.collection("players").find({"_id": elt}).limit(1).next(subCallback);
 };
 
 exports.onTeamDetails = function(matchDoc, updateData)
 {
-    return function(err, results) {
+    return (err, results) => {
         if(err)
         {
-            console.error(err.message);
+            throw err;
         }
 
         simData =
         {
-            team:
-            [
-                results.team1,
-                results.team2
-            ],
-            match: matchDoc
+            "team": [results.team1, results.team2],
+            "match": matchDoc
         };
 
         simulate(simData, updateData);
@@ -183,10 +182,10 @@ exports.onTeamDetails = function(matchDoc, updateData)
 
 exports.onUpdate = function(results, masterCallback)
 {
-    return function(error) {
-        if(error)
+    return (err) => {
+        if(err)
         {
-            throw error;
+            throw err;
         }
 
         masterCallback(null, results);
@@ -195,14 +194,12 @@ exports.onUpdate = function(results, masterCallback)
 
 exports.forAllMatches = function(forEachMatch, onFinish)
 {
-    return function(err, docs) {
+    return (err, docs) => {
         if (err)
         {
             throw err;
         }
-        else
-        {
-            async.map(docs, forEachMatch, onFinish);
-        }
+
+        async.map(docs, forEachMatch, onFinish);
     };
 };

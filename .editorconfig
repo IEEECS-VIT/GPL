@@ -1,0 +1,22 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Trailing blank lines
+[*]
+tab_width = 4
+insert_final_newline = false
+trim_trailing_whitespace = true
+
+# Matches multiple files with brace expansion notation
+# Set default charset
+[*.{js, css, ejs}]
+charset = utf-8
+indent_size = tab
+indent_style = tab
+
+# package.json specific settings
+[{package.json}]
+indent_size = 2
+indent_style = space

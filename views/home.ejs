@@ -23,8 +23,8 @@
         <title>Home | GPL</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/stylesheets/dashboard.min.css">
-        <link rel="stylesheet" href="/stylesheets/home.min.css"/>
+        <link rel="stylesheet" href="/stylesheets/min/dashboard.min.css">
+        <link rel="stylesheet" href="/stylesheets/min/home.min.css"/>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -59,29 +59,29 @@
                                             <table>
                                                 <tbody>
                                                     <% var ref = {
-                                                        'Matches Played': results.user.played, 
+                                                        'Matches Played': results.user.played,
                                                         'Matches Won': results.user.win,
-                                                        'Matches Lost': results.user.loss, 
+                                                        'Matches Lost': results.user.loss,
                                                         'Matches Tied': results.user.tied,
-                                                        'Points': results.user.points, 
+                                                        'Points': results.user.points,
                                                         'Runs for': results.user.runsFor,
                                                         'Runs against': results.user.runsAgainst,
                                                         'Overs batted': results.user.ballsFor,
                                                         'Overs bowled': results.user.ballsAgainst,
-                                                        'Wickets taken': results.user.wicketsTaken,
-                                                        'Wickets lost': results.user.wicketsLost,
-                                                        'Streak': results.user.streak, 
+                                                        'Wickets taken': results.user.wicketsFor,
+                                                        'Wickets lost': results.user.wicketsAgainst,
+                                                        'Streak': results.user.streak,
                                                         'All outs': results.user.allOuts,
                                                         'Average runs scored': results.user.avgRunsFor,
                                                         'Average runs conceded': results.user.avgRunsAgainst,
-                                                        'Average wickets taken': results.user.avgWicketsTaken,
-                                                        'Average wickets lost': results.user.avgWicketsLost,
+                                                        'Average wickets taken': results.user.avgWicketsFor,
+                                                        'Average wickets lost': results.user.avgWicketsAgainst,
                                                         'Average overs batted': results.user.avgOversFor,
                                                         'Average overs bowled': results.user.avgOversAgainst,
                                                         'Highest total': results.user.highestTotal || 0,
                                                         'Lowest total': results.user.lowestTotal || 0,
                                                         'Net Run Rate': results.user.netRunRate,
-                                                        'Win - loss ratio': results.user.ratio 
+                                                        'Win - loss ratio': results.user.ratio
                                                     }%>
                                                     <% for(i in ref) {%>
                                                         <tr><th><%= i + ':'%></th><td><%= ref[i] %></td></tr>
@@ -187,15 +187,15 @@
                                                 <tbody>
                                                     <% ref = {
                                                         'Man of the Matches Won': results.user.stats[results.team[i]._id].MoM,
-                                                        'Matches': results.user.stats[results.team[i]._id].matches, 
-                                                        'Catches': results.user.stats[results.team[i]._id].catches, 
-                                                        'Outs': results.user.stats[results.team[i]._id].outs, 
+                                                        'Matches': results.user.stats[results.team[i]._id].matches,
+                                                        'Catches': results.user.stats[results.team[i]._id].catches,
+                                                        'Outs': results.user.stats[results.team[i]._id].outs,
                                                         'Balls': results.user.stats[results.team[i]._id].ballsFaced,
                                                         'Highest Runs Scored': results.user.stats[results.team[i]._id].high === -1 ? 0 : results.user.stats[results.team[i]._id].high,
                                                         'Lowest Runs Scored': results.user.stats[results.team[i]._id].low === Number.MAX_VALUE ? 0 : results.user.stats[results.team[i]._id].low,
                                                         'Fours': results.user.stats[results.team[i]._id].fours,
-                                                        'Sixes': results.user.stats[results.team[i]._id].sixes, 
-                                                        'Not Outs': results.user.stats[results.team[i]._id].notouts, 
+                                                        'Sixes': results.user.stats[results.team[i]._id].sixes,
+                                                        'Not Outs': results.user.stats[results.team[i]._id].notouts,
                                                         'Average': results.user.stats[results.team[i]._id].batAverage,
                                                         'Runs Scored': results.user.stats[results.team[i]._id].runsScored,
                                                         'Strike Rate': results.user.stats[results.team[i]._id].batStrikeRate,
@@ -236,8 +236,8 @@
         <![endif]-->
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script async src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <script async src="/javascript/playerCommon.min.js"></script>
-        <script type="text/javascript" src="/javascript/home.min.js"></script>
+        <script async src="/javascript/min/playerCommon.min.js"></script>
+        <script type="text/javascript" src="/javascript/min/home.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
                 <%for( i=0 ; i<results.user.squad.length ; ++i){%>

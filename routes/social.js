@@ -16,12 +16,17 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var path = require('path').join;
-var passport = require('passport');
-var router = require('express').Router();
+var temp;
+var path = require("path").join;
+var passport = require("passport");
+var router = require("express").Router();
 var onRetrieve = function(req, res, next)
 {
-    passport.authenticate(req.url.split('/')[2], function(err, user, next){
+    passport.authenticate(req.url.split("/")[1], function(err, user){
+        temp = req.signedCookies.team.trim().toUpperCase();
+        res.clearCookie("team", {});
+        res.clearCookie("phone", {});
+
         if(err)
         {
             res.status(422);
@@ -29,22 +34,18 @@ var onRetrieve = function(req, res, next)
         }
         if(!user)
         {
-            req.flash('That request failed, please re-try.');
-            return res.redirect('/social/login'); // TODO: redirect to login or register based on the request origin.
+            res.flash("That request failed, please re-try.");
+            return res.redirect("/social/login"); // redirect to login or register based on the request origin.
         }
-        else
-        {
-            res.cookie('name', req.signedCookies.team.trim().toUpperCase(), {maxAge: 86400000, signed: true});
-            res.clearCookie('team', {});
-            res.clearCookie('phone', {});
-            return res.redirect('/home/players');
-        }
+
+        res.cookie("name", temp, {"maxAge": 86400000, "signed": true});
+        return res.redirect("/home/players");
     })(req, res, next);
 };
 
-require(path(__dirname, '..', 'db', 'mongoPassport')); // pass passport for configuration
+require(path(__dirname, "..", "database", "mongoPassport")); // pass passport for configuration
 
-router.get('/facebook', passport.authenticate('facebook', {scope: 'email'}));
+router.get("/facebook", passport.authenticate("facebook", {"scope": "email"}));
 
 /*
 router.get('/twitter', passport.authenticate('twitter', {scope: 'email'}));
@@ -52,11 +53,11 @@ router.get('/twitter', passport.authenticate('twitter', {scope: 'email'}));
 router.get('/twitter/callback', onRetrieve);
 */
 
-router.get('/google', passport.authenticate('google', {
-        scope:
+router.get("/google", passport.authenticate("google", {
+        "scope":
         [
-            'https://www.googleapis.com/auth/userinfo.profile',
-            'https://www.googleapis.com/auth/userinfo.email'
+            "https://www.googleapis.com/auth/userinfo.profile",
+            "https://www.googleapis.com/auth/userinfo.email"
         ]
     }
 ));

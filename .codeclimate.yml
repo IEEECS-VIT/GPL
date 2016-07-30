@@ -1,5 +1,31 @@
+---
+engines:
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+  markdownlint:
+    enabled: true
+  nodesecurity:
+    enabled: true
+ratings:
+  paths:
+  - "**.css"
+  - "**.js"
+  - "**.md"
+  - bin/**/*
 exclude_paths:
-- "**/*.min.js"
-- "**.min.js"
-- "**/*.min.css"
-- "**.min.css"
+- public/stylesheets/min/**/*
+- public/javascript/min/**/*
+- views/**/*
+- LICENSE
+- Procfile
+- public/images/**/*
+- utils/email/templates/**/*

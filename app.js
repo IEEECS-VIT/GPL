@@ -18,36 +18,36 @@
 
 if(!process.env.NODE_ENV)
 {
-    require('dotenv').load();
+    require("dotenv").load();
 }
 
 var log;
 var error;
 var status;
 var newrelic;
-var csurf = require('csurf')();
-var path = require('path').join;
-var each = require('async').each;
-var helmet = require('helmet')();
-var express = require('express');
+var csurf = require("csurf")();
+var path = require("path").join;
+var each = require("async").each;
+var helmet = require("helmet")();
+var express = require("express");
 var app = express();
-var bodyParser = require('body-parser');
+var bodyParser = require("body-parser");
 var json = bodyParser.json();
-var compression = require('compression')();
-var passport = require('passport').initialize();
-var raven = require('raven').middleware.express;
-var url = bodyParser.urlencoded({extended: true});
-var api = require(path(__dirname, 'routes', 'api'));
-var home = require(path(__dirname, 'routes', 'home'));
-var index = require(path(__dirname, 'routes', 'index'));
-var social = require(path(__dirname, 'routes', 'social'));
+var compression = require("compression")();
+var passport = require("passport").initialize();
+var raven = require("raven").middleware.express;
+var url = bodyParser.urlencoded({"extended": true});
+var api = require(path(__dirname, "routes", "api"));
+var home = require(path(__dirname, "routes", "home"));
+var index = require(path(__dirname, "routes", "index"));
+var social = require(path(__dirname, "routes", "social"));
 var errorHandler = raven.errorHandler(process.env.SENTRY_DSN);
 var requestHandler = raven.requestHandler(process.env.SENTRY_DSN);
-var logger = require('morgan')(process.env.LOGGER_LEVEL || 'dev');
-var stat = express.static(path(__dirname, '/public'), {maxAge: 86400000 * 30});
-var favicon = require('serve-favicon')(path(__dirname, 'public', 'images', 'favicon.ico'));
-var session = require('express-session')({secret: 'session secret key', resave: '', saveUninitialized: ''});
-var cookieParser = require('cookie-parser')(process.env.COOKIE_SECRET || 'randomsecretstring', {signed: true});
+var logger = require("morgan")(process.env.LOGGER_LEVEL || "dev");
+var stat = express.static(path(__dirname, "/public"), {"maxAge": 86400000 * 30});
+var favicon = require("serve-favicon")(path(__dirname, "public", "images", "favicon.ico"));
+var cookieParser = require("cookie-parser")(process.env.COOKIE_SECRET || "randomsecretstring", {"signed": true});
+var session = require("express-session")({"secret": process.env.SESSION_SECRET || "session secret key", "resave": "", "saveUninitialized": ""});
 
 var flash = function(req, res, next)
 {
@@ -56,15 +56,15 @@ var flash = function(req, res, next)
         req.session.flash = [];
     }
 
-    req.flash = function(content)
+    res.flash = function(content)
     {
         if(content)
         {
-            this.session.flash.push(content);
+            req.session.flash.push(content);
         }
         else
         {
-            return this.session.flash.pop();
+            return req.session.flash.pop();
         }
     };
 
@@ -73,12 +73,12 @@ var flash = function(req, res, next)
 
 if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 {
-    app.locals.newrelic = require(path(__dirname, 'utils', 'newrelic'));
+    app.locals.newrelic = require(path(__dirname, "utils", "misc", "newrelic"));
 }
 
 if (process.env.LOGENTRIES_TOKEN)
 {
-    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
+    log = require("node-logentries").logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
 if (newrelic)
@@ -93,45 +93,46 @@ app.use(function(req, res, next){
         },
     next);
 });
-app.set('title', 'GPL');
+app.set("title", "GPL");
 // view engine setup
-app.set('views', path(__dirname, 'views'));
-app.set('view engine', 'ejs');
-app.enable('trust proxy');
+app.set("views", path(__dirname, "views"));
+app.set("view engine", "ejs");
+app.enable("trust proxy");
 app.use(function(req, res, next){
     each([cookieParser, flash, csurf], function(middleware, callback){
         middleware(req, res, callback);
     }, next);
 });
-app.use('/', index);
-app.use('/auth', social);
-app.use('/home', home);
-app.use('/api', api);
+app.use("/", index);
+app.use("/auth", social);
+app.use("/home", home);
+app.use("/api", api);
 
 // catch 404 and forward to error handler
 app.use(function (req, res) {
-    res.redirect('/');
+    res.flash("That page does not exist... yet.");
+    res.redirect("/" + req.signedCookies.name ? "home" : ""); // session context based handling
 });
 
-if(process.env.NODE_ENV)
+if(process.env.NODE_ENV) // use Sentry only on production environments
 {
     app.use(errorHandler);
 }
 
 // error handlers
-app.use(function (err, req, res, next) {
-    if (log)
+app.use(function (err, req, res, next) { // the last argument is necessary to distinguish this callback as the
+    if (log)                             // application"s error handler.
     {
-        log.log('debug', {Error: err, Message: err.message});
+        log.log("debug", {Error: err, Message: err.message});
     }
 
     status = err.status || 500;
 
     res.status(status);
-    res.clearCookie('team', {});
-    res.clearCookie('phone', {});
+    res.clearCookie("team", {});
+    res.clearCookie("phone", {});
 
-    if(err.code === 'EBADCSRFTOKEN')
+    if(err.code === "EBADCSRFTOKEN")
     {
         res.redirect(req.headers.referer);
     }
@@ -139,13 +140,13 @@ app.use(function (err, req, res, next) {
     {
         error =
         {
-            status: status
+            "status": status
         };
 
         if(process.env.NODE_ENV)
         {
-            error.message = '';
-            error.stack =  '';
+            error.message = "";
+            error.stack =  "";
         }
         else
         {
@@ -153,7 +154,7 @@ app.use(function (err, req, res, next) {
             error.stack =  err.stack;
         }
 
-        res.render('error', error);
+        res.render("error", error);
     }
 });
 

@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 module.exports =
     [
         "",
@@ -1584,5 +1585,27 @@ module.exports =
         "low full toss, he has placed it square of deep midwicket for two",
         "he gives him the charge, yorks himself, gets a single to mid-off, and then an overthrow.",
         "slows away at a full ball, gets a thick edge over point, and the fielder there puts in an excellent save still." +
-        " He could have taken it easy but hasn't"
-    ];
+        " He could have taken it easy but hasn't",
+		"the fielder has dropped a sitter! The casino is just a walk from the stadium. the batsman should walk straight " +
+        "into the casino after the match. The head falls away as he slogs, and the top edge field towards third man where" +
+        " a man gets under it, but doesn't even get a hand to it. Total misjudgement.",
+		"tucked away off the hip, fine of long leg, who runs around and puts a dive in to keep them down to two.",
+		"the striker mis-hits the hook, but he has opened up and deliberately tried to play it over midwicket where there" +
+        " are no fielders. Gets a couple.",
+		"worked towards deep midwicket, and he steals the second. Seems the throw has come to the wrong end. It is the " +
+        "batter who is a little slow in setting off for the second.",
+		"full and low, pushed towards long-on with soft hands. Rushes back for the second.",
+		"slower ball, on a length, middle and leg, played with soft hands to long-on. Comes back for the second.",
+		"full toss on the pads with the fine leg inside the circle. The fielder denies the bowler the death wish by diving" +
+        " and making a save at short fine leg.",
+		"the batter down the wicket, beaten by a slower ball, but he manages to chip it over extra cover for two. Has " +
+        "recovered well again.",
+		"full, middle and leg, driven wide of long-off.",
+		"yorker, dug out to long-on, and because it has gone off pace towards the fielder they steal the second. Had the" +
+        " bowler been behind the stumps he could have run the striker out.",
+		"slower short ball but again too far down the leg side. Deflected past short fine leg for two.",
+		"full toss, on the pads, hit wide of long-on for a couple.",
+		"darted into his body, the batter goes deep in his crease and whips it away to the man at deep backward square leg.",
+		"that's well played. Good hands from the fielder there, he was waiting to read the ball off the pitch, and when " +
+        "it is quick and pitches so close to you, that leaves you very little time. Shovel driven through cover."
+	];

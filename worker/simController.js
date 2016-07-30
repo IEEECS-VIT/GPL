@@ -21,19 +21,21 @@ var log;
 var match;
 var stats;
 var points = 0;
-var async = require('async');
-var path = require('path').join;
-var helper = require(path(__dirname, 'simControlHelper'));
-var email = require(path(__dirname, '..', 'utils', 'email'));
+var onGetRating;
+var parallelTasks;
+var async = require("async");
+var path = require("path").join;
+var helper = require(path(__dirname, "simControlHelper"));
+var email = require(path(__dirname, "..", "utils", "email", "email"));
 
 if(!process.env.NODE_ENV)
 {
-    require('dotenv').load({path : path(__dirname, '..', '.env')});
+    require("dotenv").load({path : path(__dirname, "..", ".env")});
 }
 
 if (process.env.LOGENTRIES_TOKEN)
 {
-    log = require('node-logentries').logger({token: process.env.LOGENTRIES_TOKEN});
+    log = require("node-logentries").logger({token: process.env.LOGENTRIES_TOKEN});
 }
 
 match = process.env.MATCH;
@@ -47,8 +49,10 @@ exports.initSimulation = function (day, masterCallback)
         {
             var getRating = function (err, userDoc)
             {
-                var onGetRating = helper.onGetRating(userDoc, asyncCallback);
-
+                if(err)
+                {
+                    throw err;
+                }
                 if (userDoc.squad.length < 11)
                 {
                     userDoc.ratings = [];
@@ -56,7 +60,8 @@ exports.initSimulation = function (day, masterCallback)
                 }
                 else
                 {
-                    userDoc.squad.push(UserDoc.team.filter((elt) => {return elt > 'd';})[0]);
+                    onGetRating = helper.onGetRating(userDoc, asyncCallback);
+                    userDoc.squad.push(UserDoc.team.filter((elt) => {return elt > "d";})[0]);
                     async.map(userDoc.squad, helper.getEachRating, onGetRating);
                 }
             };
@@ -64,56 +69,56 @@ exports.initSimulation = function (day, masterCallback)
             database.collection(match).find(query).limit(1).next(getRating);
         };
 
-        var parallelTasks = helper.teamParallelTasks(getTeamDetails, matchDoc);
+        parallelTasks = helper.teamParallelTasks(getTeamDetails, matchDoc);
 
-        var updateData = function (err, newData)
+        var totals = function(newUserDoc)
         {
-            if(err)
+            if(newUserDoc.scores[day - 1] > stats.daily.total.value)
             {
-                console.error(err.message);
+                stats.daily.total = helper.dailyTotal(newUserDoc, day);
             }
+            if(newUserDoc.highestTotal > stats.high.total.value)
+            {
+                stats.high.total = helper.total(newUserDoc, "high");
+            }
+            if(newUserDoc.lowestTotal < stats.low.value)
+            {
+                stats.low = helper.total(newUserDoc, "low");
+            }
+        };
 
+        var nonBowler = function(newUserDoc)
+        {
+            if (!newUserDoc.squad[i].match(/^b/))
+            {
+                if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > stats.daily.individual.value)
+                {
+                    stats.daily.individual = helper.dailyHigh(newUserDoc, i, day);
+                }
+                if(newUserDoc.stats[newUserDoc.squad[i]].high > stats.high.individual.value)
+                {
+                    stats.high.individual = helper.overallHigh(newUserDoc, i);
+                }
+                if(newUserDoc.stats[newUserDoc.squad[i]].runs > stats.orange.runs)
+                {
+                    stats.orange = helper.orangeCap(i, newUserDoc);
+                }
+            }
+        };
+
+        var updateData = function (newData)
+        {
             var updateUser = function (newUserDoc, asyncCallback)
             {
                 if(newUserDoc.squad.length)
                 {
                     stats.general = helper.generalStats(stats.general, newUserDoc, day);
-
-                    if(newUserDoc.scores[day - 1] > stats.daily.total.value)
-                    {
-                        stats.daily.total.team = newUserDoc._id;
-                        stats.daily.total.value = newUserDoc.scores[day - 1];
-                    }
-                    if(newUserDoc.highestTotal > stats.high.total.value)
-                    {
-                        stats.high.total = helper.total(newUserDoc, 'high');
-                    }
-                    if(newUserDoc.lowestTotal < stats.low.value)
-                    {
-                        stats.low = helper.total(newUserDoc, 'low');
-                    }
+                    totals(newUserDoc);
 
                     for (i = 0; i < newUserDoc.squad.length; ++i)
                     {
-                        if (!newUserDoc.squad[i].match(/^b/))
-                        {
-                            if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > stats.daily.individual.value)
-                            {
-                                stats.daily.individual.team = newUserDoc._id;
-                                stats.daily.individual.player = newUserDoc.names[i] || '';
-                                stats.daily.individual.value = newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1];
-                            }
-                            if(newUserDoc.stats[newUserDoc.squad[i]].high > stats.high.individual.value)
-                            {
-                                stats.high.individual.team = newUserDoc._id;
-                                stats.high.individual.player = newUserDoc.names[i] || '';
-                                stats.high.individual.value = newUserDoc.stats[newUserDoc.squad[i]].high;
-                            }
-                            if(newUserDoc.stats[newUserDoc.squad[i]].runs > stats.orange.runs)
-                            {
-                                stats.orange = helper.orangeCap(i, newUserDoc);
-                            }
-                        }
+                        nonBowler(newUserDoc);
+
                         if (newUserDoc.squad[i].match(/^[^a]/) && newUserDoc.stats[newUserDoc.squad[i]].wickets > stats.purple.wickets)
                         {
                             stats.purple = helper.purpleCap(i, newUserDoc);
@@ -136,12 +141,12 @@ exports.initSimulation = function (day, masterCallback)
                     stats.daily.MoM = newMatchDoc.MoM;
                 }
 
-                database.collection('matchday' + day).updateOne({_id: newMatchDoc._id}, newMatchDoc, asyncCallback);
+                database.collection("matchday" + day).updateOne({_id: newMatchDoc._id}, newMatchDoc, asyncCallback);
             };
 
             var parallelTasks2 = helper.userParallelTasks(newData, updateUser, updateMatch);
 
-            console.log(newData.team1._id + ' vs ' + newData.team2._id + ' (Match ' + newData.match._id + ') is now being updated');
+            console.log(newData.team1._id + " vs " + newData.team2._id + " (Match " + newData.match._id + ") is now being updated");
             async.parallel(parallelTasks2, callback);
         };
 
@@ -158,8 +163,7 @@ exports.initSimulation = function (day, masterCallback)
         }
 
         var onUpdate = helper.onUpdate(results, masterCallback);
-
-        database.collection('stats').updateOne({_id: 'stats'}, {$set: stats}, onUpdate);
+        database.collection("stats").updateOne({_id: "stats"}, {$set: stats}, onUpdate);
     };
 
     var forAllMatches = helper.forAllMatches(forEachMatch, onFinish);
@@ -168,14 +172,13 @@ exports.initSimulation = function (day, masterCallback)
     {
         if (err)
         {
-            console.error(err.message);
+            throw err;
         }
-        else
-        {
-            stats = doc;
-            helper.getAllMatches(err, forAllMatches);
-        }
+
+        stats = doc;
+        stats.daily.total.value = stats.daily.individual.value = stats.daily.MoM.points = 0;
+        helper.getAllMatches(day, forAllMatches);
     };
 
-    database.collection('stats').find().limit(1).next(onGetInfo);
+    database.collection("stats").find().limit(1).next(onGetInfo);
 };

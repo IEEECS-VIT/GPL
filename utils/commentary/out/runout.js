@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 module.exports =
     [
         "",
@@ -228,5 +229,12 @@ module.exports =
         "ball and effects an over-arm direct hit..",
         "he is out! Flicks this wristily towards mid-on. The ball is not hit well, which means they can think of a run. The" +
         " fielder charges in, dives in to save time, is off balance, the ball hasn't sat properly in his right hand, but he" +
-        " flicks it underarm even as he comes down. The ball loops to the top of the stumps to catch the running batsman short"
-    ];
+        " flicks it underarm even as he comes down. The ball loops to the top of the stumps to catch the running batsman short",
+		"madness! They were taking on the arm of the rocket man! The batter was halfway down and he had nowhere to go. " +
+        "He always wanted a run, after ticking the ball into the midwicket region. He wanted to play with soft hands, " +
+		"but the ball travelled quickly enough. The fieldsman swooped down on the ball - such speed - and an equally " +
+		"rapid throw does him.",
+		"cuts the ball back in, the batter was looking for a flick and is dragged through for a risky single and a good" +
+		" throw hits the target. The ball had wandered away behind point, so it was the non-striker's call, and he is " +
+		"the specialist batsman anyway. So reasoning was sound, the fielders were just better."
+	];

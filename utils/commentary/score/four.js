@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 module.exports =
     [
         "",
@@ -3245,5 +3246,56 @@ module.exports =
         "places it straight of the fielder",
         "this is proper short ball, and he has cleared the front leg to pull this to deep square for four",
         "gets a freebie first up. A leg-stump half-volley that he glances away for four.",
-        "top edge over the keeper's head"
-    ];
+        "top edge over the keeper's head",
+		"pace is your best friend, and pace is your best enemy... picked away off the pads for four through square leg..." +
+        " Just using the the bowler pace.",
+		"short of a length, wide, the batsman uses the pace of the ball and punches it through point. Between point and " +
+        "cover-point it goes.",
+		"the fielders are being tested left, right and centre at long leg. the striker cramped on the pull, he goes ahead" +
+        " with it, and just manages to place it fine of long leg.",
+		"and here the striker rubs salt into the wound. Plays a pick-up to a full ball over midwicket.",
+		"short of a length again, but provides the striker that slightest bit of width. He has square-driven this on the" +
+        " up. Between point and cover-point.",
+		"the striker nearly walks into the trap. Moving away from the ball before it is let go, trying to get inside the" +
+        " line, expecting the bouncer, and then he fends it with a leg gully in place for just that. But he is lucky it " +
+        "has cleared the man there.",
+		"the striker is down the wicket, seems like he is half-beaten in the flight, but he manages to place the lifted " +
+        "drive over extra cover for four.",
+		"and the striker goes after him right away. This is a special. Down the wicket, and drives him inside-out," +
+        " just out of the reach of the leaping Boyce at extra cover.",
+		"short of a length, outside off, no turn, punched powerfully past extra cover for four.",
+		"short of a length, the batsman is done in a little after having left this crease, but he recovers well t run " +
+        "this legcutter fine of short third leg.",
+		"short of a length, wide, and the batter plays a superb back-foot drive over cover for four. Really powerful.",
+		"this is even shorter, lets the striker rocks back and cuts it past point for four.",
+		"makes room to drive this full ball all along the carpet for a four. To the right of extra cover and to the left" +
+        " of long-off. That is a small gap. Really small gap. the striker has pierced it.",
+		"another superb shot. This is a length ball, around off, and the batter has wristed it wide of long-on. Again " +
+        "there is a small gap between long-on and cow corner, but he has found it.",
+		"goes for the wide yorker, gives him a low full toss, which the batter has steered past point. Tait's effort from" +
+        " third man is stiff. Concedes the boundary.",
+		"short of a length, slower ball, but too straight with fine leg inside the circle. the batter just deflects this" +
+        " square of that short fine leg.",
+		"Wide length ball, and he goes hard at it, and sends it over point for a four.",
+		"that's serene! Super serene. The rest of the team are looking at him to do the Mahela role and he gets off the " +
+        "mark by using the bowler's pace, just like Mahela does. Stray down leg dismissed to the long leg boundary.",
+		"simple as that! He's well, half-dilscooped the bowler. The guts need to be appreciated though, to go down face " +
+		"to face with the ball delivered from a speed demon. Didn't time it, and most of the impact was off the thigh " +
+		"pad. the bowler simply turned around and walked off.",
+		"and another! Gleefully presses forward at a length ball and bashes it over long-on. That's the equivalent of a " +
+		"bonk on the head.",
+		"and the wise man thumps him! The batter does not want an escape route. Not even a breather as he takes a simple" +
+		" length ball on off stump and slog sweeps it away.",
+		"superb batting! Lunged low and forward, his front leg moving across to provide leverage for a lap sweep over " +
+		"short fine leg. The man was inside the circle, deep square was back and he split them. Good game sense.",
+		"lovely again. Picked his spot, but before that he had picked the length. It was limp and short, moves back and " +
+		"short-arm pulls it to the long leg boundary.",
+		"heaved away into the gap between square leg and midwicket! Uses the quicker ball, but he's pitched it on a length." +
+		" And the batsman can get under it. Just about the perfect ball..",
+		"in the slot and even a big effort on the long-on boundary is not good enough. Cleared the front leg and brought" +
+		" his straight bat down with very little malice. That of course means he times the ball perfectly.",
+		"case in point. The striker plants his front leg forward and wallops the delivery. Only one place that was " +
+		"heading - long-off boundary.",
+		"The yorker goes wrong and at that pace, the batsman only had to get an inside edge on it. Gets a lot more than " +
+		"that. Lovely flick to the long leg boundary. The fielder was up inside the circle."
+	];

@@ -19,6 +19,11 @@
 
 const d_hour = 24, h_min = 60, m_sec = 60;
 var m_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+var timeLeft = function(days, date, hour, mins, sec)
+{
+    return days * d_hour * h_min * m_sec + date * d_hour * h_min * m_sec + hour * h_min * m_sec + mins * m_sec + sec;
+};
+
 function get_time()
 {
     var current = new Date;
@@ -32,7 +37,7 @@ function get_time()
     {
         days += m_days[i];
     }
-    return days * d_hour * h_min * m_sec + date * d_hour * h_min * m_sec + hour * h_min * m_sec + mins * m_sec + sec;
+    return timeLeft(days, date, hour, mins, sec);
 }
 
 function countdown()
@@ -49,7 +54,7 @@ function countdown()
     {
         days += m_days[i];
     }
-    var time_deadline = days * d_hour * h_min * m_sec + date * d_hour * h_min * m_sec + hour * h_min * m_sec + mins * m_sec + sec;
+    var time_deadline = timeLeft(days, date, hour, mins, sec);
     var deadline = time_deadline - get_time();
     time.deadline = deadline;
     temp = ((deadline / (d_hour * h_min * m_sec)) * 10) % 10;
@@ -67,10 +72,10 @@ function countdown()
 function start()
 {
     var clear = countdown.deadline;
-    var d = document.getElementById('countdowndays'),
-        h = document.getElementById('countdownhours'),
-        m = document.getElementById('countdownminutes'),
-        s = document.getElementById('countdownseconds');
+    var d = document.getElementById("countdowndays"),
+        h = document.getElementById("countdownhours"),
+        m = document.getElementById("countdownminutes"),
+        s = document.getElementById("countdownseconds");
     counter(d, h, m, s);
     var a = setInterval(function () {
         counter(d, h, m, s);

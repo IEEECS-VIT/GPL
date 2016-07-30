@@ -17,12 +17,12 @@
  */
 
 $(document).ready(function () {
-    var navbar = $('#navbar');
+    var navbar = $("#navbar");
     var top = navbar.offset().top;
     navbar.affix({offset: {top: top}});
 
-    $(window).on('resize', function () {
+    $(window).on("resize", function () {
 
-        navbar.data('bs.affix').options.offset = top;
+        navbar.data("bs.affix").options.offset = top;
     });
 });

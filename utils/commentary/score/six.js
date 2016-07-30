@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 module.exports =
     [
         "",
@@ -115,9 +116,9 @@ module.exports =
         "a full toss outside off, the batsman walks across and laps it miles over short fine leg, and over the rope too",
         "that's been swiped over deep square leg for six, short of a length, just above waist height for the him, and he" +
         "  attacks it eagerly, as if he was waiting for the length", "gets one away, jumps out, reaches this widish one " +
-    "and smashes it high over long off",
+        "and smashes it high over long off",
         "swiped this with a massive top edge off his pad, the tall fielder is there at fine leg, but this is too big a " +
-        "task  for him as well",
+        "task for him as well",
         "clears front leg and lofts this length delivery cleanly over mid off",
         "shortish, the batsman bends, gets under it and hits it high in the air, clears the deep square leg boundary",
         "lashed over wide long off, the batsman gets a length ball, steps forward, bends a knee and hammers it high",
@@ -1420,5 +1421,21 @@ module.exports =
         "misses the yorker by inches. Goes back deep into the crease, takes this on the half-volley and lofts this over" +
         " long-on. A semi helicopter",
         "that's the flicker of the dying flame. He backs away to smoke this short ball over extra cover for a big six",
-        "full length ball on off, he makes room and smashes this over extra cover for six"
-    ];
+        "full length ball on off, he makes room and smashes this over extra cover for six",
+		"top edged for a six. Legendary short square boundaries of Adelaide Oval. Richardson at long leg gets under it, " +
+        "and even though it is going over he should have at least thrown back in before going over the rope. He just " +
+        "stepped on the rope, which did him in there.",
+		"the batter is not quite to pitch f this legbreak, he has not got this clean out of the screws, but he has backed" +
+        " his bat to send this over long-off. It just about evades that fielder.",
+		"and the striker picks on the short square boundary. This is a small six, a parallel six. Picks it up off the " +
+        "toes. A length ball really. Uses all the pace of the bowler to flick it over square leg.",
+		"the batsman targets the short square boundary, and he has absolutely smashed this. Slower ball, on a length, " +
+        "and he has slogged this right out of the screws.",
+		"length ball on the pads, and the striker has gone deep into the crease to drill this over cow corner for a six." +
+        " Straight out of the screws.",
+		"that's the shot of the night! Many clicks, heavy projectile heading for your head, and the batter was on the " +
+        "front foot, pushes his weight back, and hooks it for a six!.",
+		"more! down the track and his quick feet gets him in prime position to lift a length ball over long-on.",
+		"top shot! He's looking like he wants to stick around, but he is still good enough to put the bad ball away. " +
+		"Half-volley on off stump, drummed down the ground."
+	];
