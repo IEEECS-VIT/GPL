@@ -17,108 +17,112 @@
 -->
 
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>graVITas Premier League</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link type="text/css" rel="stylesheet" href="/stylesheets/min/countdownbackground.min.css">
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <script>
+<html>
+  <head>
+    <!--CSS-->
+    <link rel="stylesheet" href="/stylesheets/countdown.css">
+    <link rel="stylesheet" href="/stylesheets/materialize.min.css">
+    <link rel="stylesheet" href="/stylesheets/flipclock.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--JS-->
+    <script src="/javascript/jquery.js"></script>
+    <script src="/javascript/materialize.min.js"></script>
+    <script src="/javascript/flipclock.min.js"></script>
+    <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
                     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
             ga('create', 'UA-72985649-1', 'auto');ga('send', 'pageview');
-        </script>
-    </head>
-    <body>
-        <div class="social">
-            <div class="fb-like"
+    </script>
+    <style>
+      footer{
+        left: 50vw;
+      }
+      @media only screen and (min-device-width: 300px) and (max-device-width: 767px){
+        body{
+          background: white!important;
+        }
+      }
+      @media only screen and (min-device-width: 1024px){
+        .brand-logo img{
+          width: 3%!important;
+        }
+      }
+    </style>
+  </head>
+  <script>
+    $(document).ready(function(){
+       $(".button-collapse").sideNav();
+       var seconds = $('.date-data .seconds').val();
+       var minutes = $('.date-data .minutes').val();
+       var hour = $('.date-data .hour').val();
+       var day = $('.date-data .day').val();
+       var month = $('.date-data .month').val();
+       var year = $('.date-data .year').val();
+       var today = new Date(year, month-1, day, hour, minutes, seconds, 0);
+       var todayNum = today.getTime();
+       var target = new Date(2016, 7, 29, 0, 0, 0, 0).getTime();
+      var clock = $('.countdown-clock').FlipClock({
+        clockFace: 'DailyCounter',
+        countdown: true
+      });
+      clock.setTime((target - todayNum) / 1000);
+      clock.start();
+    });
+  </script>
+  <body style="background :url('http://res.cloudinary.com/gpl/image/upload/general/img6.jpg')  no-repeat center center fixed; background-repeat: no-repeat;">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo"><img src="http://res.cloudinary.com/gpl/general/gpllogo2.png" style="width: 10%;valign: middle">graVITas Premier League 3.0</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Rules</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Trailer</a></li>
+        <li><a href="#">Developers</a></li>
+        <li><a href="/interest">Interested?</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Rules</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Privacy&nbspPolicy</a></li>
+        <li><a href="#">Trailer</a></li>
+        <li><a href="#">Developers</a></li>
+        <li><a href="/interest">Interested?</a></li>
+      </ul>
+    </div>
+  </nav>
+    <div class="row">
+      <div class="col s12 m10 l10">
+        <div class="countdown-clock"></div>
+      </div>
+    </div>
+    <footer style="position: absolute; bottom: 0px;">
+      <div class="social center" style="">
+            <div class="fb-like center"
                  data-href="https://www.facebook.com/gravitaspremierleague"
                  data-layout="button"
                  data-action="like"
                  data-show-faces="false"
-                 data-share="false">
+                 data-share="false" style="margin-bottom: 5%!important;">
             </div>
             <a class="twitter-follow-button" href="https://www.twitter.com/graVITasgpl" data-show-count="false"></a>
         </div>
-        <div class="overlay">
-            <div class="overlay-text">
-                <p class="lead">Interested ? <a href="/interest">Let us know</a></p>
-            </div>
-            <br /><br /><br /><br /><br /><br /><br /><br />
-            <div class="overlay-text">
-                <p class="lead"><a href="/rules">Know More About The Event!</a></p>
-            </div>
-            <br /><br /><br /><br /><br /><br /><br /><br />
-            <div class="overlay-text">
-                <p class="lead"><a href="/schedule">Schedule</a></p>
-            </div>
-        </div>
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="">
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="fill back-0"></div>
-                    <div class="carousel-caption">
-                        <p class="lead">- where passion for the sport breeds excellence!</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="fill back-1"></div>
-                    <div class="carousel-caption">
-                        <p class="lead">
-                            - play like a winner! #cricket
-                        </p>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="fill back-2"></div>
-                    <div class="carousel-caption">
-                        <p class="lead">
-                            - support the change, play the change, be the change!
-                        </p>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="fill back-3"></div>
-                    <div class="carousel-caption">
-                        <p class="lead">
-                            - redefining cricket!
-                        </p>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="fill back-4"></div>
-                    <div class="carousel-caption">
-                        <p class="lead">
-                            - challenge yourself to see where you're at!
-                        </p>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="fill back-5"></div>
-                    <div class="carousel-caption">
-                        <p class="lead">
-                            - crick, crick, cricket; don't throw your wicket!
-                        </p>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="fill back-6"></div>
-                    <div class="carousel-caption">
-                        <p class="lead">
-                            - out run, out hit, out play, out hustle, out WIN!
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="fb-root"></div>
-        <script async>
+    </footer>
+    <div class="date-data">
+      <input type="text" style="display: none;" class="seconds" value="<%=date.seconds%>">
+      <input type="text" style="display: none;" class="minutes" value="<%=date.minutes%>">
+      <input type="text" style="display: none;" class="hour" value="<%=date.hour%>">
+      <input type="text" style="display: none;" class="day" value="<%=date.day%>">
+      <input type="text" style="display: none;" class="month" value="<%=date.month%>">
+      <input type="text" style="display: none;" class="year" value="<%=date.year%>">
+    </div>
+    <script async>
             (function (d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
@@ -137,7 +141,6 @@
                 js.id = id;
                 js.src = "https://platform.twitter.com/widgets.js";
                 fjs.parentNode.insertBefore(js, fjs);
-
                 t._e = [];
                 t.ready = function (f) {
                     t._e.push(f);
@@ -145,7 +148,5 @@
                 return t;
             }(document, "script", "twitter-wjs"));
         </script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script async type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    </body>
+  </body>
 </html>
