@@ -1,0 +1,187 @@
+*{
+  font-family: 'Lato' sans-serif;
+}
+#interest{
+  background: url('../images/interest.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.interest-images img:nth-child(odd){
+  width: 30%;
+  margin-top: 2%;
+}
+.interest-form-holder{
+  position: relative!important;
+  margin-left: 3%!important;
+}
+.interest-form-holder h5{
+  font-weight: 500;
+}
+.interest-form-holder form input{
+  max-width: 30vw;
+}
+.interest-form-holder .input-field{
+  margin-left: 15%!important;
+}
+.custom-submit{
+  width: 104.5%!important;
+  background: #00ff99;
+  outline: none;
+  border: none;
+  color: white;
+  min-height: 3vw!important;
+}
+.custom-submit:focus{
+  background: #00ff99;
+  outline: none;
+  border: none;
+}
+.custom-submit{
+  position: relative!important;
+  right: 0.85vw!important;
+}
+.input-field input:focus{
+  border-bottom: 1px #008888 solid!important;
+}
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:active, input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px white inset!important;
+}
+@media only screen and (min-device-width: 300px) and (max-device-width: 400px){
+  #interest{
+    background: url('../images/interest.jpg') no-repeat center center fixed;
+    background-repeat: no-repeat;
+  }
+  .interest-images img:nth-child(odd){
+    width: 60%;
+    margin-top: 2%;
+  }
+  .interest-form-holder form input{
+    max-width: 60vw;
+  }
+  .interest-form-holder .input-field{
+    position: relative!important;
+    margin-right: 10%!important;
+  }
+  .interest-form-holder .input-field:nth-child(3) label{
+    font-size: 10px;
+  }
+  .custom-submit{
+    width: 108.6%!important;
+    position: relative!important;
+    right: 3.3vw!important;
+    min-height: 8vh!important;
+  }
+}
+
+
+@media only screen and (min-device-width: 425px) and (max-device-width: 600px){
+  #interest{
+    background: url('../images/interest.jpg') no-repeat center center fixed;
+    background-repeat: no-repeat;
+  }
+  .interest-images img:nth-child(odd){
+    width: 60%;
+    margin-top: 2%;
+  }
+  .interest-form-holder form input{
+    max-width: 60vw;
+  }
+  .interest-form-holder .input-field{
+    position: relative!important;
+    margin-right: 10%!important;
+  }
+  .interest-form-holder .input-field:nth-child(3) label{
+    font-size: 10px;
+  }
+  .custom-submit{
+    width: 106.7%!important;
+    position: relative!important;
+    right: 2.4vw!important;
+    min-height: 8vh!important;
+  }
+}
+
+@media only screen and (min-device-width: 767px) and (max-device-width: 1023px){
+  #interest{
+    background: url('../images/interest.jpg') no-repeat center center fixed;
+    background-repeat: no-repeat;
+  }
+  .interest-images img:nth-child(odd){
+    width: 60%;
+    margin-top: 2%;
+  }
+  .interest-form-holder form input{
+    max-width: 60vw;
+  }
+  .interest-form-holder .input-field{
+    position: relative!important;
+    margin-right: 10%!important;
+  }
+  .interest-form-holder .input-field:nth-child(3) label{
+    font-size: 11px;
+  }
+  .custom-submit{
+    width: 107.3%!important;
+    position: relative!important;
+    right: 1.4vw!important;
+    min-height: 8vh!important;
+  }
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1350px){
+  #interest{
+    background: url('../images/interest.jpg') no-repeat center center fixed;
+    background-repeat: no-repeat;
+  }
+  .interest-images img:nth-child(odd){
+    width: 60%;
+    margin-top: 2%;
+  }
+  .interest-form-holder form input{
+    max-width: 60vw;
+  }
+  .interest-form-holder .input-field{
+    position: relative!important;
+    margin-right: 10%!important;
+  }
+  .interest-form-holder .input-field:nth-child(3) label{
+    font-size: 13px;
+  }
+  .custom-submit{
+    width: 106%!important;
+    position: relative!important;
+    right: 1.2vw!important;
+    min-height: 8vh!important;
+  }
+}
+
+@media only screen and (min-device-width: 1919px) and (max-device-width: 2000px){
+  *{
+    font-size: 32px;
+  }
+  #interest{
+    background: url('../images/interest.jpg') no-repeat center center fixed;
+    background-repeat: no-repeat;
+  }
+  .interest-images img:nth-child(odd){
+    width: 60%;
+    margin-top: 2%;
+  }
+  .interest-form-holder form input{
+    max-width: 60vw;
+    font-size: 20px;
+  }
+  .interest-form-holder .input-field{
+    position: relative!important;
+    margin-right: 10%!important;
+  }
+  .interest-form-holder .input-field label{
+    font-size: 20px;
+  }
+  .custom-submit{
+    width: 103%!important;
+    position: relative!important;
+    right: 0.6vw!important;
+    min-height: 8vh!important;
+  }
+}

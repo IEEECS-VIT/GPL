@@ -25,9 +25,12 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-        <link type="text/css" rel="stylesheet" href="/stylesheets/min/main.min.css"/>
-        <link type="text/css" rel="stylesheet" href="/stylesheets/min/interest.min.css"/>
+        <link type="text/css" rel="stylesheet" href="/stylesheets/materialize.min.css"/>
+        <link type="text/css" rel="stylesheet" href="/stylesheets/interest_new.css"/>
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
+
+        <script src="/javascript/jquery.js"></script>
+        <script src="/javascript/materialize.min.js"></script>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -37,64 +40,51 @@
         </script>
     </head>
     <body id="interest">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2 shadow-effect" id="form-container">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <a href="http://www.facebook.com/ieeecsvit" target="_blank">
-                                <img src="http://res.cloudinary.com/gpl/general/logo_nbg.png" class="img-responsive pull-left padding-2 centered margin-top-4">
-                            </a>
-                        </div>
-                        <div class="col-xs-4">
-                            <a href="http://www.facebook.com/gravitaspremierleague" target="_blank">
-                                <img src="http://res.cloudinary.com/gpl/general/gpllogo.png" class="img-responsive img-60 padding-2 centered">
-                            </a>
-                        </div>
-                        <div class="col-xs-4">
-                            <a href="http://www.vitgravitas.com" target="_blank">
-                                <img src="http://res.cloudinary.com/gpl/general/gravitas_15.png" class="img-responsive padding-2 pull-right margin-top-4">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="centered">
-                            <h1>graVITas Premier League 3.0</h1>
-                            <p class="text-center"><span class="lead">Coming Soon!</span><br> To keep yourself updated fill in
-                                the form!</p>
-                        </div>
-                        <form name="int" action="/interest" method="post">
-                            <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
-                            <div class="form-group">
-                                <label for="team">Name:<i style="color:red;">*</i> </label>
-                                <input type="text" class="form-control" placeholder="Name" name="name" required autofocus/>
-                            </div>
-                            <div class="form-group">
-                                <label for="team">Registration Number: (VIT Students Only)</label>
-                                <input type="text" id="team" class="form-control" value="NA" name="regno"
-                                       pattern="1[2-6]\w{3}\d{4}|NA|"/>
-                            </div>
-                            <!--Username/Team Name -->
-                            <div class="form-group">
-                                <label for="mob">Mobile:<i style="color:red;">*</i> </label>
-                                <input type="tel" id="mob" class="form-control" placeholder="9876543210" name="phone"
-                                       required pattern="\d{10}"/>
-                            </div>
-                            <!-- password-->
-                            <div class="form-group">
-                                <label for="email">Email:<i style="color:red;">*</i> </label>
-                                <input type="email" id="email" class="form-control" placeholder="example@domain.com"
-                                       name="email" required/>
-                            </div>
-                            <input type="submit" id="button" class="btn btn-primary btn-lg centered" name="button"
-                                   value="Submit"/>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <div class="row interest-images">
+          <div class="col s4 push-s2">
+              <a href="http://www.facebook.com/ieeecsvit" target="_blank">
+                  <img src="http://res.cloudinary.com/gpl/general/logo_nbg.png" class="">
+              </a>
+          </div>
+          <div class="col s4 push-s1">
+              <a href="http://www.facebook.com/gravitaspremierleague" target="_blank">
+                  <img src="http://res.cloudinary.com/gpl/general/gpllogo.png" style="width: 15%;margin-left: 5%">
+              </a>
+          </div>
+          <div class="col s3 pull-s1 offset-s1">
+              <a href="http://www.vitgravitas.com" target="_blank">
+                  <img src="http://res.cloudinary.com/gpl/general/gravitas_15.png" class="">
+              </a>
+          </div>
         </div>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script async src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <script async src="/javascript/min/main.min.js"></script>
+        <div class="row interest-form-holder">
+          <div class="card col s10 m5 l5 push-s1 push-m3 push-l3 z-depth-3">
+            <h5 style="font-size: 150%" class="center">graVITas Premier League 2K16</h5>
+            <p class="center" style="font-size: 80%">Coming Soon! To keep yourself updated, fill the form!</p>
+            <form name="int" action="/interest" method="post">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
+              <div class="input-field">
+                <label for="team">Name:</label>
+                <input type="text" class="validate"name="name" required autofocus/>
+              </div>
+              <div class="input-field">
+                <label for="team">Registration Number:(VIT Students Only)</label>
+                <input type="text" id="team" class="validate" name="regno"
+                       pattern="1[2-6]\w{3}\d{4}|NA|"/>
+              </div>
+              <div class="input-field">
+                <label for="mob">Mobile:</label>
+                <input type="tel" id="mob" class="validate"name="phone"
+                       required pattern="\d{10}"/>
+              </div>
+              <div class="input-field">
+                <label for="email">Email:</label>
+                <input type="email" id="email" class="validate"
+                       name="email" required/>
+              </div>
+              <button type="submit" class="custom-submit">Submit!</button>
+            </form>
+          </div>
+        </div>
     </body>
 </html>
