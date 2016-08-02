@@ -155,6 +155,12 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:act
   }
 }
 
+@media only screen and (device-width: 1366px) and (device-height: 768px){
+  .custom-submit{
+    min-height: 3vw!important;
+  }
+}
+
 @media only screen and (min-device-width: 1919px) and (max-device-width: 2000px){
   *{
     font-size: 32px;
