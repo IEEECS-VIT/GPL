@@ -20,10 +20,13 @@ testFlag = true;
 var path = require("path").join;
 
 before(function(done){
-    testHelperCallback = done;
-    require(path(__dirname, "..", "utils", "database", "purge"));
+    // TODO: Enable after writing tests.
+    // testHelperCallback = done;
+    // require(path(__dirname, "..", "utils", "database", "purge"));
+    done();
 });
 
 after(function(){
-    testDb.close(); // from utils/schedule.js
+    // TODO: Enable after writing tests.
+    // testDb.close(); // from utils/schedule.js
 });
