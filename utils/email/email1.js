@@ -1,16 +1,16 @@
-var nodemailer = require('nodemailer');
-var sgTransport = require('nodemailer-sendgrid-transport');
-var fs = require('fs');
+const nodemailer = require('nodemailer');
+const sgTransport = require('nodemailer-sendgrid-transport');
+const fs = require('fs');
 
-var options = {
+let options = {
   auth: {
     api_key: process.env.SENDGRID_KEY
   }
-}
+};
 
-var client = nodemailer.createTransport(sgTransport(options));
-var template = fs.readFileSync(__dirname+'/templates/interest.html','utf-8');
-var email = {
+let client = nodemailer.createTransport(sgTransport(options));
+let template = fs.readFileSync(__dirname+'/templates/interest.html','utf-8');
+let email = {
   from: 'gpl@ieeecsvit.com',
   to: 'vishwajeetsinhjadeja4@gmail.com',
   subject: 'Thank You For Showing Interest in GPL!',

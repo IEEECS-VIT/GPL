@@ -92,7 +92,7 @@ router.get("/", authenticated, function (req, res){
                     {
                         doc.ballsFor = clean(doc.ballsFor);
                         doc.ballsAgainst = clean(doc.ballsAgainst);
-                        res.render("home", {"results": {"team": documents, "user": doc, "msg": req.flash()}});
+                        res.render("home", {"results": {"team": documents, "user": doc, "msg": res.flash()}});
                     }
                 };
 
@@ -121,7 +121,7 @@ router.get("/leaderboard", authenticated, function (req, res){
             if (err)
             {
                 console.error(err.message);
-                req.flash("Unable to process the leaderboard at this time, please re-try");
+                res.flash																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																					("Unable to process the leaderboard at this time, please re-try");																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																															
                 res.redirect("/home");
             }
             else
