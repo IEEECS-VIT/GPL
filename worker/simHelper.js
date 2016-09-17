@@ -62,9 +62,9 @@ var setTeam = function() // sets blank templates for team-wise properties.
 {
     teamArray[i].name = [];
     teamArray[i].type = [];
-    teamArray[i].batAvg = [];
+    teamArray[i].batAverage = [];
     teamArray[i].economy = [];
-    teamArray[i].bowlAvg = [];
+    teamArray[i].bowlAverage = [];
     teamArray[i].batRating = [];
     teamArray[i].meanRating = 0;
     teamArray[i].bowlRating = [];
@@ -76,9 +76,9 @@ var setTeam = function() // sets blank templates for team-wise properties.
 var setPlayer = function(player) // method to set generic properties for each player in the squad
 {
     teamArray[i].name.push(player.Name);
-    teamArray[i].batAvg.push(player.Average);
+    teamArray[i].batAverage.push(player.Average);
     teamArray[i].type.push(` (${player.Type})`);
-    teamArray[i].bowlAvg.push(player.Avg || 30);
+    teamArray[i].bowlAverage.push(player.Avg || 30);
     teamArray[i].economy.push(player.Economy || 10);
     teamArray[i].bowlStrikeRate.push(player.SR || 40);
     teamArray[i].batStrikeRate.push(player["Strike Rate"]);
@@ -134,7 +134,7 @@ var pseudoRandom = function (base, limit) {
     {
         return ((typeof(base) === "object") ? base[pseudoRandom(base.length)] : parseInt(Math.random() * 1e15, 10) % base);
     }
-    
+
     return Math.random();
 };
 
