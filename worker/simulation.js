@@ -15,14 +15,14 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+'use strict';
 var helper = require(require("path").join(__dirname, "simHelper")); // loads a collection of helper functions
 var rand = helper.rand; // random number generator
 var genArray = helper.genArray; // returns an array / matrix of zeroes with the specified dimension
 var MoM; // the object to denote the man of the match
 var strike; // an array to denote the batting positions of the two playing batsman at the crease.
 var key = helper.key; // a reference object for team property updates.
-var state = helper.state; // a reference object to decide victory or loss.
+var result = helper.result; // a reference object to decide victory or loss.
 var scale = helper.scale; // processes values to appropriate floating point precision
 var total = [0, 0]; // the total runs scored by the team in it's innings.
 var wickets = [0, 0]; // the total wickets lost by the team in it's innings.
@@ -98,8 +98,8 @@ exports.simulate = function (data, callback)
     {
         for(i = 0; i < 2; ++i)
         {
-            ++data.team[i][state[temp[i]].state]; // increment win / loss
-            data.team[i].points += state[temp[i]].points; // adjust points in accordance with above
+            ++data.team[i][result[temp[i]].state]; // increment win / loss
+            data.team[i].points += result[temp[i]].points; // adjust points in accordance with above
         }
     }
     else // if both teams have a valid playing eleven and a coach set.
@@ -160,7 +160,7 @@ exports.simulate = function (data, callback)
                     deliveryScore = (team[+tossIndex].batRating[strike[+strikeIndex]] - team[+!tossIndex].bowlRating[currentBowler]) || 1; // base value for delivery outcome
                     bowlIndex = team[+!tossIndex].bowlRating[currentBowler] / ((rand(team[+!tossIndex].bowlAverage[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / 1000 + 1) + team[+!tossIndex].bowlAverage[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / bowl[0]) * (rand(team[+!tossIndex].bowlStrikeRate[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / 1000 + 1) + team[+!tossIndex].bowlStrikeRate[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / bowl[1]) * (rand(team[+!tossIndex].economy[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / 1000 + 1) + team[+!tossIndex].economy[currentBowler] * team[+!tossIndex].bowlRating[currentBowler] / bowl[2]));
                     batIndex = (rand(team[+tossIndex].batAverage[strike[+strikeIndex]] * team[+tossIndex].batRating[strike[+strikeIndex]] / 1000 + 1) + team[+tossIndex].batAverage[strike[+strikeIndex]] * (team[+tossIndex].batRating[strike[+strikeIndex]]) / bat[0]) * (rand(team[+tossIndex].batStrikeRate[strike[+strikeIndex]] * team[+tossIndex].batRating[strike[+strikeIndex]] / 1000 + 1) + team[+tossIndex].batStrikeRate[strike[+strikeIndex]] * (team[+tossIndex].batRating[strike[+strikeIndex]]) / bat[1]) / team[+!tossIndex].bowlRating[currentBowler] - ((Math.abs(frustration[+strikeIndex]) > 2) * Math.pow(-1, rand(2)) * frustration[+strikeIndex]);
-                    batIndex += Math.pow(-1, +(batIndex < bowlIndex)) * (rand(Math.log10(deliveryScore))) / 100 - bowlIndex;
+                    batIndex += (Math.pow(-1, +(batIndex < bowlIndex)) * (rand(Math.log10(deliveryScore))) / 100 - bowlIndex);
                     data.match.commentary.push(freeHit * "Free Hit: " || `${i} . ${j} ${team[+!tossIndex].name[currentBowler]} to ${team[+tossIndex].name[strike[+strikeIndex]]}, `);
 
                     if (batIndex <= -process.env.OUT && !freeHit) // if the batsman was dismissed off a regular ball
@@ -606,19 +606,31 @@ exports.simulate = function (data, callback)
 
             for(i = 0; i < 2; ++i)
             {
-                ++data.team[i][state[(i === +winner)].state]; // increment win / loss
-                data.team[i].points += state[(i === +winner)].points; // increment points
+                ++data.team[i][result[(i === +winner)].state]; // increment win / loss
+                data.team[i].points += result[(i === +winner)].points; // increment points
                 data.team[i].form += Math.pow(-1, +(i !== +winner)) * temp; // adjust team form
                 data.team[i].ratio = scale(data.team[i].win, data.team[i].loss); // update win ratio
-                data.team[i].progression.push((data.team[i].progression.slice(-1)[0] || 0) + state[(i === +winner)].points); // a cumulative sum array of points till date
+                data.team[i].progression.push((data.team[i].progression.slice(-1)[0] || 0) + result[(i === +winner)].points); // a cumulative sum array of points till date
                 data.team[i].streak = ((Math.pow(-1, +(i === +winner)) * data.team[i].streak > 0) ? Math.pow(-1, +(i !== +winner)) : (data.team[i].streak - Math.pow(-1, +(i === +winner))));
             } // the above line updates the team's winning streak: incrementing / decrementing for wins / losses respectively
         }
 
 	    data.match.MoM = MoM;
-	    ++data.team[MoM.team].stats[data.team[MoM.team].ratings[MoM.id]._id].MoM; // increase MoM award count
-        data.match.commentary.push(`Man of the Match: ${data.team[MoM.team].ratings[MoM.id].Name} (${data.team[MoM.team]._id})`); // display man of the match
-        data.match.commentary.push(rand((helper.mom[data.team[MoM.team].ratings[MoM.id].Type])), rand(helper.state[1])); // additional man of the match commentary
+	    ++data.team[MoM.team].stats[MoM.id].MoM; // increase MoM award count
+        var findById = function (id, array) {
+            var result = array.filter(function (e) {
+                return e._id === id;
+            });
+            if (result.length === 0) {
+                console.log('name errors!');
+                return null;
+            }
+            else {
+                return result[0];
+            }
+        };
+        data.match.commentary.push(`Man of the Match: ${findById (MoM.id, data.team[MoM.team].ratings).Name} (${data.team[MoM.team]._id})`); // display man of the match
+        data.match.commentary.push(rand((helper.mom[findById(MoM.id, data.team[MoM.team].ratings).Type])), rand(helper.state[1])); // additional man of the match commentary
     }
 
     for(i = 0; i < 2; ++i)

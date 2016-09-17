@@ -16,6 +16,11 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+if(!process.env.NODE_ENV)
+{
+    require("dotenv").load();
+}
+
 var i;
 var j;
 var hor;
@@ -174,7 +179,7 @@ exports.bat = [process.env.BAT_AVG, process.env.BAT_STR]; // batting performance
 
 exports.bowl = [process.env.BOWL_AVG, process.env.BOWL_STR, process.env.BOWL_ECO]; // increase to strengthen bowling
 
-exports.state = // reference object for determining actions to be performed in case of a win / loss.
+exports.result = // reference object for determining actions to be performed in case of a win / loss.
 {
     "true":
     {
@@ -324,6 +329,8 @@ exports.make = function (team) // team object constructor
 
         avgRating.bat = avgRating.bat / 110 + coach;
         avgRating.bowl = avgRating.bowl / 110 + coach;
+        teamArray[i].avgBatRating = avgRating.bat;
+        teamArray[i].avgBowlRating = avgRating.bowl;
         adjustRating();
         teamArray[i].meanRating /= 22;
     }
