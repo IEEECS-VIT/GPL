@@ -49,7 +49,6 @@ exports.send = function (message, callback)
         to: message.header.to,
         subject: message.header.subject,
     };
-    delete message.header;
     mail.html = message.alternative.data;
     client.sendMail(mail, callback);
 };
