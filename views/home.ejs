@@ -93,11 +93,11 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <ul class="list-group">
-                                        <% k = 4; var z = 1;for(i = 0;i < results.team.length;i++) { %>
-                                        <% if(k < 3){ %>
-                                        <% if(results.team[i]._id < 'd'){ %>
+                                        <% for (i = 0;i < results.team.length;i++) { %>
+                                          <% var stat = {} %>
+                                        <% if(results.team[i]._id < 'd') { %>
                                         <div id="box<%= results.team[i]._id %>" class="list-group-item player accordion-section">
-                                        <% if (results.team[i]._id < 'b'){ %>
+                                        <% if (results.team[i]._id < 'b') { %>
                                         <a class="player-name accordion-section-title" href="#<%= results.team[i]._id %>"
                                         aria-controls="<%= results.team[i]._id %>" data-toggle="collapse">
                                             <div class="col-xs-2">
@@ -113,7 +113,7 @@
                                         aria-labelledby="<%= results.team[i]._id %>">
                                             <table>
                                                 <tbody>
-                                                    <% ref = {
+                                                    <% stat = {
                                                         'Man of the Matches Won': results.user.stats[results.team[i]._id].MoM,
                                                         'Matches': results.user.stats[results.team[i]._id].matches,
                                                         'Catches': results.user.stats[results.team[i]._id].catches,
@@ -128,8 +128,8 @@
                                                         'Runs Scored': results.user.stats[results.team[i]._id].runsScored,
                                                         'Strike Rate': results.user.stats[results.team[i]._id].batStrikeRate
                                                     }%>
-                                                    <% for(i in ref) {%>
-                                                        <tr><th><%= i + ':'%></th><td><%= ref[i] %></td></tr>
+                                                    <% for(j in stat) {%>
+                                                        <tr><th><%= j + ':'%></th><td><%= stat[j] %></td></tr>
                                                     <% } %>
                                                 </tbody>
                                             </table>
@@ -150,7 +150,7 @@
                                         aria-labelledby="<%= results.team[i]._id %>">
                                             <table>
                                                 <tbody>
-                                                    <% ref = {
+                                                    <% stat = {
                                                         'Man of the Matches Won': results.user.stats[results.team[i]._id].MoM,
                                                         'Matches': results.user.stats[results.team[i]._id].matches,
                                                         'Catches': results.user.stats[results.team[i]._id].catches,
@@ -161,8 +161,8 @@
                                                         'Runs conceded': results.user.stats[results.team[i]._id].runsConceded,
                                                         'Strike Rate': results.user.stats[results.team[i]._id].bowlStrikeRate
                                                     }%>
-                                                    <% for(i in ref){ %>
-                                                        <tr><th><%= i + ':'%></th><td><%= ref[i] %></td></tr>
+                                                    <% for(j in stat){ %>
+                                                        <tr><th><%= j + ':'%></th><td><%= stat[j] %></td></tr>
                                                     <% } %>
                                                 </tbody>
                                             </table>
@@ -185,7 +185,7 @@
                                         aria-labelledby="<%= results.team[i]._id %>">
                                             <table>
                                                 <tbody>
-                                                    <% ref = {
+                                                    <% stat = {
                                                         'Man of the Matches Won': results.user.stats[results.team[i]._id].MoM,
                                                         'Matches': results.user.stats[results.team[i]._id].matches,
                                                         'Catches': results.user.stats[results.team[i]._id].catches,
@@ -206,21 +206,18 @@
                                                         'Runs conceded': results.user.stats[results.team[i]._id].runsConceded,
                                                         'Wickets taken': results.user.stats[results.team[i]._id].wickets
                                                     }%>
-                                                    <% for(i in ref) {%>
-                                                        <tr><th><%= i + ':'%></th><td><%= ref[i]%></td></tr>
+                                                    <% for(j in stat) {%>
+                                                        <tr><th><%= j + ':'%></th><td><%= stat[j]%></td></tr>
                                                     <% } %>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <% } %>
                                         </div>
-                                        <% k++; } else {
+                                        <% } else {
                                             continue;
                                         } %>
-                                        <% } else { if(z == 1) { %>
-                                        <% z = 0;k = 0;i--;} else { %>
-                                        <% k = 0;i--; %>
-                                        <% } } } %>
+                                       <% } %>
                                     </ul>
                                 </div>
                             </div>
