@@ -39,8 +39,10 @@
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
             your browser</a> to improve your experience.</p>
         <![endif]-->
-        <% include partials/headerNavbar.ejs %>
+        <% include partials/playerNavbar.ejs %>
+        <div class="col-md-1"><% include partials/playerSidebar.ejs%></div>
         <div class="container" ng-controller="PlayerController" ng-hide="">
+
             <div class="col-md-8 col-md-offset-2 shadow-effect " id="main">
                 <div class="col-md-10 col-md-offset-1">
                     <div class=" page-header row">
@@ -137,7 +139,6 @@
                 </div>
             </div>
         </div>
-        <% include partials/footer.ejs %>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <script type="text/javascript">
             var a;
