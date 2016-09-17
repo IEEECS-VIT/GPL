@@ -61,7 +61,7 @@ exports.initSimulation = function (day, masterCallback)
                 else
                 {
                     onGetRating = helper.onGetRating(userDoc, asyncCallback);
-                    userDoc.squad.push(UserDoc.team.filter((elt) => {return elt > "d";})[0]);
+                    userDoc.squad.push(userDoc.team.filter((elt) => {return elt > "d";})[0]);
                     async.map(userDoc.squad, helper.getEachRating, onGetRating);
                 }
             };

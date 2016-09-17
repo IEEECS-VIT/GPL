@@ -125,6 +125,19 @@ var adjustRating = function() // rating adjustment routine, so that players perf
     }
 };
 
+var pseudoRandom = function (base, limit) {
+    if (limit)
+    {
+        return base + (limit > base) * pseudoRandom(limit - base);
+    }
+    if (base)
+    {
+        return ((typeof(base) === "object") ? base[pseudoRandom(base.length)] : parseInt(Math.random() * 1e15, 10) % base);
+    }
+    
+    return Math.random();
+};
+
 exports.toss = ["bat.", "bowl."]; // toss helper strings
 
 exports.projected = // skeletal object for projected score structure
@@ -277,16 +290,7 @@ exports.winMode = { "false": "higher run rate", "true": "fewer wickets lost" };
 
 exports.rand = function (base, limit) // pseudo random generator
 {
-    if (limit)
-    {
-        return base + (limit > base) * rand(limit - base);
-    }
-    if (base)
-    {
-        return ((typeof(base) === "object") ? base[rand(base.length)] : parseInt(Math.random() * 1e15, 10) % base);
-    }
-
-    return Math.random();
+    return pseudoRandom(base, limit);
 };
 
 exports.checkMoM = function(MoM, temp, strike, toss) // check for man of the match conditions
