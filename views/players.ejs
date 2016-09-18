@@ -153,6 +153,11 @@
                 $scope.limitExceeded = false;
                 $scope.displayPlayersList = "Batsmen";
                 $scope.players = <%- JSON.stringify(Players) %>;
+                $scope.nSelectedPlayers =
+                    {
+                        total: 0,
+                        coaches: 0
+                    }
 
                 $scope.computeSelectedPlayers = function ()
                 {
