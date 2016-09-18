@@ -110,7 +110,7 @@
     "csurf": "^1.9.0",
     "debug": "^2.2.0",
     "ejs": "^2.5.2",
-    "emailjs": "^1.0.5",
+    "emailjs": "^1.0.6",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "forever": "^0.15.2",
