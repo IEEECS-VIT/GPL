@@ -1,0 +1,339 @@
+{"_id":"","Name":"","Country":"","Average":"","Strike Rate":"","Avg":"","SR":"","Economy":"","Bat":"","Bowl":"","Price":"","Cost":"","Type":""}
+{"_id":"a1","Name":"CH Gayle","Country":"West Indies","Average":40.91,"Strike Rate":147.44,"Rating":840,"Price":"2.0 M","Cost":2000000,"Type":"bat"}
+{"_id":"a10","Name":"SN Khan","Country":"India","Average":27.75,"Strike Rate":156.33,"Rating":810,"Price":"500 K","Cost":500000,"Type":"bat"}
+{"_id":"a100","Name":"Chris Lynn","Country":"Australia","Average":27.62,"Strike Rate":136.38,"Rating":737,"Price":"1.0 M","Cost":1000000,"Type":"bat"}
+{"_id":"a101","Name":"Lokesh Rahul","Country":"India","Average":28.4,"Strike Rate":112.69,"Rating":780,"Price":"600 K","Cost":600000,"Type":"bat"}
+{"_id":"a102","Name":"Srikanth Anirudha","Country":"India","Average":24.75,"Strike Rate":126.55,"Rating":787,"Price":"750 K","Cost":750000,"Type":"bat"}
+{"_id":"a103","Name":"Nic Maddinson","Country":"Australia","Average":23.85,"Strike Rate":127.72,"Rating":773,"Price":"300 K","Cost":300000,"Type":"bat"}
+{"_id":"a104","Name":"Rilee Rossouw","Country":"South Africa","Average":25.94,"Strike Rate":125.65,"Rating":853,"Price":"750 K","Cost":750000,"Type":"bat"}
+{"_id":"a105","Name":"Yogesh Takawale","Country":"India","Average":27.25,"Strike Rate":109.65,"Rating":752,"Price":"250 K","Cost":250000,"Type":"bat"}
+{"_id":"a106","Name":"Corey Anderson","Country":"New Zeland","Average":38,"Strike Rate":117.52,"Rating":804,"Price":"1.7 M","Cost":1700000,"Type":"bat"}
+{"_id":"a107","Name":"CM Gautam","Country":"India","Average":17.8,"Strike Rate":107.87,"Rating":748,"Price":"200 K","Cost":200000,"Type":"bat"}
+{"_id":"a108","Name":"Ben Dunk","Country":"Australia","Average":27.2,"Strike Rate":129.56,"Rating":866,"Price":"600 K","Cost":600000,"Type":"bat"}
+{"_id":"a109","Name":"Cheteshwar Pujara","Country":"India","Average":20.64,"Strike Rate":102.56,"Rating":796,"Price":"600 K","Cost":600000,"Type":"bat"}
+{"_id":"a11","Name":"JC Buttler","Country":"England","Average":25.58,"Strike Rate":141.9,"Rating":863,"Price":"1.3 M","Cost":1300000,"Type":"bat"}
+{"_id":"a110","Name":"Karun Nair","Country":"India","Average":26.28,"Strike Rate":130.49,"Rating":862,"Price":"400 K","Cost":400000,"Type":"bat"}
+{"_id":"a111","Name":"Brad Hodge","Country":"Australia","Average":36.65,"Strike Rate":130.71,"Rating":860,"Price":"1.0 M","Cost":1000000,"Type":"bat"}
+{"_id":"a112","Name":"Unmukt Chand","Country":"India","Average":20.4,"Strike Rate":122.89,"Rating":776,"Price":"500 K","Cost":500000,"Type":"bat"}
+{"_id":"a113","Name":"Dishant Yagnik","Country":"India","Average":18.4,"Strike Rate":18.4,"Rating":776,"Price":"50 K","Cost":50000,"Type":"bat"}
+{"_id":"a12","Name":"Suresh Raina","Country":"India","Average":24.93,"Strike Rate":122.62,"Rating":800,"Price":"1.5 M","Cost":1500000,"Type":"bat"}
+{"_id":"a13","Name":"Faf du Plessis","Country":"South Africa","Average":29.23,"Strike Rate":125,"Rating":865,"Price":"1.4 M","Cost":1400000,"Type":"bat"}
+{"_id":"a14","Name":"S Badrinath","Country":"India","Average":28.59,"Strike Rate":112.37,"Rating":860,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a15","Name":"Ahmed Shehzad","Country":"Pakistan","Average":30.02,"Strike Rate":128.18,"Rating":860,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a16","Name":"Lendl Simmons","Country":"West Indies","Average":45,"Strike Rate":122.44,"Rating":860,"Price":"1.1 M","Cost":1100000,"Type":"bat"}
+{"_id":"a17","Name":"Richard Levi","Country":"South Africa","Average":25.82,"Strike Rate":141.26,"Rating":853,"Price":"1.1 M","Cost":1100000,"Type":"bat"}
+{"_id":"a18","Name":"Shaun Marsh","Country":"Australia","Average":30.25,"Strike Rate":139.65,"Rating":822,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a19","Name":"Ajinkya Rahane","Country":"India","Average":49.09,"Strike Rate":130.75,"Rating":865,"Price":"1.3 M","Cost":1300000,"Type":"bat"}
+{"_id":"a2","Name":"AB de Villiers","Country":"South Africa","Average":46.63,"Strike Rate":175.08,"Rating":890,"Price":"2.2 M","Cost":2200000,"Type":"bat"}
+{"_id":"a20","Name":"MS Dhoni","Country":"India","Average":31,"Strike Rate":121.96,"Rating":800,"Price":"1.7 M","Cost":1700000,"Type":"bat"}
+{"_id":"a21","Name":"Tamim Iqbal","Country":"Bangladesh","Average":28.24,"Strike Rate":118.58,"Rating":847,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a22","Name":"Eoin Morgan","Country":"England","Average":23.37,"Strike Rate":123.84,"Rating":826,"Price":"1.1 M","Cost":1100000,"Type":"bat"}
+{"_id":"a23","Name":"LE Bosman","Country":"South Africa","Average":25.42,"Strike Rate":132.46,"Rating":845,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a24","Name":"JM How","Country":"New Zeland","Average":26.87,"Strike Rate":134.35,"Rating":845,"Price":"1.1 M","Cost":1100000,"Type":"bat"}
+{"_id":"a25","Name":"Virat Kohli","Country":"India","Average":45.9,"Strike Rate":130.82,"Rating":849,"Price":"1.8 M","Cost":1800000,"Type":"bat"}
+{"_id":"a26","Name":"Shreyas Iyer","Country":"India","Average":33.76,"Strike Rate":128.36,"Rating":780,"Price":"600 K","Cost":600000,"Type":"bat"}
+{"_id":"a27","Name":"Hardik Pandya","Country":"India","Average":22.4,"Strike Rate":180.64,"Rating":790,"Price":"800 K","Cost":800000,"Type":"bat"}
+{"_id":"a28","Name":"Tanmay Mishra","Country":"Kenya","Average":30.28,"Strike Rate":98.91,"Rating":739,"Price":"800 K","Cost":800000,"Type":"bat"}
+{"_id":"a29","Name":"GJ Bailey","Country":"Australia","Average":23.54,"Strike Rate":136.31,"Rating":828,"Price":"1.5 M","Cost":1500000,"Type":"bat"}
+{"_id":"a3","Name":"KP Pietersen","Country":"England","Average":34.31,"Strike Rate":137.1,"Rating":860,"Price":"1.5 M","Cost":1500000,"Type":"bat"}
+{"_id":"a30","Name":"CL White","Country":"Australia","Average":31.09,"Strike Rate":130.56,"Rating":838,"Price":"1.3 M","Cost":1300000,"Type":"bat"}
+{"_id":"a31","Name":"DA Miller","Country":"South Africa","Average":32.45,"Strike Rate":134.21,"Rating":850,"Price":"1.6 M","Cost":1600000,"Type":"bat"}
+{"_id":"a32","Name":"AC Voges","Country":"Australia","Average":30.78,"Strike Rate":130.43,"Rating":837,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a33","Name":"TR Birt","Country":"Australia","Average":23.44,"Strike Rate":132.47,"Rating":829,"Price":"1.1 M","Cost":1100000,"Type":"bat"}
+{"_id":"a34","Name":"OA Shah","Country":"England","Average":33.77,"Strike Rate":126.37,"Rating":825,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a35","Name":"KJ O'Brien","Country":"Ireland","Average":21.37,"Strike Rate":129.87,"Rating":824,"Price":"1.4 M","Cost":1400000,"Type":"bat"}
+{"_id":"a36","Name":"MJ Lumb","Country":"England","Average":24.82,"Strike Rate":141.45,"Rating":820,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a37","Name":"Eklavya Dwivedi","Country":"India","Average":36.21,"Strike Rate":127.38,"Rating":820,"Price":"1.4 M","Cost":1400000,"Type":"bat"}
+{"_id":"a38","Name":"TM Dilshan","Country":"Sri Lanka","Average":26.55,"Strike Rate":119.58,"Rating":819,"Price":"1.6 M","Cost":1600000,"Type":"bat"}
+{"_id":"a39","Name":"Nasir Jamshed","Country":"Pakistan","Average":26.3,"Strike Rate":123.87,"Rating":819,"Price":"1.1 M","Cost":1100000,"Type":"bat"}
+{"_id":"a4","Name":"BB McCullum","Country":"New Zeland","Average":33.53,"Strike Rate":155.71,"Rating":880,"Price":"2.0 M","Cost":2000000,"Type":"bat"}
+{"_id":"a40","Name":"Umar Akmal","Country":"Pakistan","Average":26.77,"Strike Rate":126.2,"Rating":817,"Price":"1.3 M","Cost":1300000,"Type":"bat"}
+{"_id":"a41","Name":"AJ Finch","Country":"Australia","Average":38.31,"Strike Rate":138.08,"Rating":800,"Price":"1.3 M","Cost":1300000,"Type":"bat"}
+{"_id":"a42","Name":"LRPL Taylor","Country":"New Zeland","Average":29.81,"Strike Rate":137.91,"Rating":814,"Price":"1.6 M","Cost":1600000,"Type":"bat"}
+{"_id":"a43","Name":"CA Ingram","Country":"South Africa","Average":25.3,"Strike Rate":123.79,"Rating":814,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a44","Name":"LD Chandimal","Country":"Sri Lanka","Average":29.3,"Strike Rate":119.2,"Rating":813,"Price":"1.3 M","Cost":1300000,"Type":"bat"}
+{"_id":"a45","Name":"MJ Guptill","Country":"New Zeland","Average":34.5,"Strike Rate":127.03,"Rating":812,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a46","Name":"MN van Wyk","Country":"South Africa","Average":32.34,"Strike Rate":123.58,"Rating":811,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a47","Name":"G Gambhir","Country":"India","Average":25.25,"Strike Rate":117.62,"Rating":795,"Price":"1.0 M","Cost":1000000,"Type":"bat"}
+{"_id":"a48","Name":"RV Uthappa","Country":"India","Average":30.33,"Strike Rate":131.4,"Rating":810,"Price":"1.0 M","Cost":1000000,"Type":"bat"}
+{"_id":"a49","Name":"KD Karthik","Country":"India","Average":12.81,"Strike Rate":120.51,"Rating":785,"Price":"1.6 M","Cost":1600000,"Type":"bat"}
+{"_id":"a5","Name":"Q de Kock","Country":"South Africa","Average":40.66,"Strike Rate":158.44,"Rating":850,"Price":"1.4 M","Cost":1400000,"Type":"bat"}
+{"_id":"a50","Name":"SM Katich","Country":"Australia","Average":30.28,"Strike Rate":126.61,"Rating":798,"Price":"1.0 M","Cost":1000000,"Type":"bat"}
+{"_id":"a51","Name":"PA Patel","Country":"India","Average":26.07,"Strike Rate":137.8,"Rating":807,"Price":"1.1 M","Cost":1100000,"Type":"bat"}
+{"_id":"a52","Name":"CK Kapugedera","Country":"Sri Lanka","Average":21,"Strike Rate":129.33,"Rating":796,"Price":"900 K","Cost":900000,"Type":"bat"}
+{"_id":"a53","Name":"J Mubarak","Country":"Sri Lanka","Average":25.87,"Strike Rate":114.09,"Rating":794,"Price":"900 K","Cost":900000,"Type":"bat"}
+{"_id":"a54","Name":"Marlon Samuels","Country":"West Indies","Average":28.76,"Strike Rate":115.83,"Rating":793,"Price":"1.1 M","Cost":1100000,"Type":"bat"}
+{"_id":"a55","Name":"ADS Fletcher","Country":"West Indies","Average":25.88,"Strike Rate":107.87,"Rating":792,"Price":"900 K","Cost":900000,"Type":"bat"}
+{"_id":"a56","Name":"Rohit Sharma","Country":"India","Average":34.42,"Strike Rate":144.74,"Rating":830,"Price":"1.5 M","Cost":1500000,"Type":"bat"}
+{"_id":"a57","Name":"Kamran Akmal","Country":"Pakistan","Average":25.74,"Strike Rate":128.41,"Rating":788,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a58","Name":"MDKJ Perera","Country":"Sri Lanka","Average":21.02,"Strike Rate":119.41,"Rating":782,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a59","Name":"MS Wade","Country":"Australia","Average":22.64,"Strike Rate":121.8,"Rating":781,"Price":"1.3 M","Cost":1300000,"Type":"bat"}
+{"_id":"a6","Name":"S Dhawan","Country":"India","Average":27.15,"Strike Rate":123.42,"Rating":830,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a60","Name":"L Ronchi","Country":"New Zeland","Average":19.05,"Strike Rate":141.97,"Rating":778,"Price":"800 K","Cost":800000,"Type":"bat"}
+{"_id":"a61","Name":"JD Ryder","Country":"New Zeland","Average":27.8,"Strike Rate":145.12,"Rating":777,"Price":"1.1 M","Cost":1100000,"Type":"bat"}
+{"_id":"a62","Name":"WU Tharanga","Country":"Sri Lanka","Average":25.91,"Strike Rate":118.96,"Rating":776,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a63","Name":"RR Sarwan","Country":"West Indies","Average":19.18,"Strike Rate":104.54,"Rating":772,"Price":"900 K","Cost":900000,"Type":"bat"}
+{"_id":"a64","Name":"PD McGlashan","Country":"New Zeland","Average":21.27,"Strike Rate":135.35,"Rating":765,"Price":"900 K","Cost":900000,"Type":"bat"}
+{"_id":"a65","Name":"JE Taylor","Country":"West Indies","Average":26.42,"Strike Rate":129.82,"Rating":759,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a66","Name":"BJ Haddin","Country":"Australia","Average":21.36,"Strike Rate":119.79,"Rating":757,"Price":"1.3 M","Cost":1300000,"Type":"bat"}
+{"_id":"a67","Name":"BA Stokes","Country":"England","Average":26.42,"Strike Rate":129.82,"Rating":756,"Price":"900 K","Cost":900000,"Type":"bat"}
+{"_id":"a68","Name":"HM Amla","Country":"South Africa","Average":26.65,"Strike Rate":123.63,"Rating":756,"Price":"1.4 M","Cost":1400000,"Type":"bat"}
+{"_id":"a69","Name":"Umar Amin","Country":"Pakistan","Average":26.56,"Strike Rate":122.11,"Rating":754,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a7","Name":"Murali Vijay","Country":"India","Average":22.81,"Strike Rate":110.08,"Rating":800,"Price":"1.5 M","Cost":1500000,"Type":"bat"}
+{"_id":"a70","Name":"Mohammad Ashraful","Country":"Bangladesh","Average":23.21,"Strike Rate":117.54,"Rating":749,"Price":"1.3 M","Cost":1300000,"Type":"bat"}
+{"_id":"a71","Name":"AN Cook","Country":"England","Average":33.15,"Strike Rate":128.84,"Rating":731,"Price":"1.2 M","Cost":1200000,"Type":"bat"}
+{"_id":"a72","Name":"J Charles","Country":"West Indies","Average":21.86,"Strike Rate":115.78,"Rating":723,"Price":"1.1 M","Cost":1100000,"Type":"bat"}
+{"_id":"a73","Name":"JM Bairstow","Country":"England","Average":17.87,"Strike Rate":114.53,"Rating":717,"Price":"1.1 M","Cost":1100000,"Type":"bat"}
+{"_id":"a74","Name":"KS Williamson","Country":"New Zeland","Average":31,"Strike Rate":114.81,"Rating":688,"Price":"1.3 M","Cost":1300000,"Type":"bat"}
+{"_id":"a75","Name":"HDRL Thirimanne","Country":"Sri Lanka","Average":22.31,"Strike Rate":116.85,"Rating":681,"Price":"900 K","Cost":900000,"Type":"bat"}
+{"_id":"a76","Name":"N Deonarine","Country":"West Indies","Average":20.5,"Strike Rate":110.06,"Rating":680,"Price":"900 K","Cost":900000,"Type":"bat"}
+{"_id":"a77","Name":"JE Root","Country":"England","Average":25.54,"Strike Rate":119.82,"Rating":664,"Price":"750 K","Cost":750000,"Type":"bat"}
+{"_id":"a78","Name":"Asad Shafiq","Country":"Pakistan","Average":19.71,"Strike Rate":107.85,"Rating":659,"Price":"750 K","Cost":750000,"Type":"bat"}
+{"_id":"a79","Name":"MJ Clarke","Country":"Australia","Average":21.05,"Strike Rate":108.22,"Rating":645,"Price":"1.0 M","Cost":1000000,"Type":"bat"}
+{"_id":"a8","Name":"David Warner","Country":"Australia","Average":43.23,"Strike Rate":156.54,"Rating":870,"Price":"1.5 M","Cost":1500000,"Type":"bat"}
+{"_id":"a80","Name":"DS Smith","Country":"West Indies","Average":20.06,"Strike Rate":104.9,"Rating":608,"Price":"850 K","Cost":850000,"Type":"bat"}
+{"_id":"a81","Name":"Aftab Ahmed","Country":"Bangladesh","Average":14.29,"Strike Rate":109.58,"Rating":600,"Price":"750 K","Cost":750000,"Type":"bat"}
+{"_id":"a82","Name":"Ambati Rayudu","Country":"India","Average":31.22,"Strike Rate":145.59,"Rating":820,"Price":"1.0 M","Cost":1000000,"Type":"bat"}
+{"_id":"a83","Name":"Aditya Tare","Country":"India","Average":23.81,"Strike Rate":127,"Rating":680,"Price":"500 K","Cost":500000,"Type":"bat"}
+{"_id":"a84","Name":"Debabrata Das","Country":"India","Average":28.22,"Strike Rate":122.4,"Rating":632,"Price":"100 K","Cost":100000,"Type":"bat"}
+{"_id":"a85","Name":"Kedhar Jadhav","Country":"India","Average":23.33,"Strike Rate":140.7,"Rating":700,"Price":"200 K","Cost":200000,"Type":"bat"}
+{"_id":"a86","Name":"Manan Vohra","Country":"India","Average":16.9,"Strike Rate":101.23,"Rating":750,"Price":"800 K","Cost":800000,"Type":"bat"}
+{"_id":"a87","Name":"Mandeep Singh","Country":"India","Average":22.42,"Strike Rate":157,"Rating":787,"Price":"200 K","Cost":200000,"Type":"bat"}
+{"_id":"a88","Name":"Manish Pandey","Country":"India","Average":20.45,"Strike Rate":122.28,"Rating":783,"Price":"500 K","Cost":500000,"Type":"bat"}
+{"_id":"a89","Name":"Manoj Tiwary","Country":"India","Average":29,"Strike Rate":110.08,"Rating":790,"Price":"700 K","Cost":700000,"Type":"bat"}
+{"_id":"a9","Name":"Deepak Hooda","Country":"India","Average":16.77,"Strike Rate":158.94,"Rating":780,"Price":"400 K","Cost":400000,"Type":"bat"}
+{"_id":"a90","Name":"Manwinder Bisla","Country":"India","Average":22.42,"Strike Rate":123.33,"Rating":704,"Price":"400 K","Cost":400000,"Type":"bat"}
+{"_id":"a91","Name":"Mayank Agarwal","Country":"India","Average":23.66,"Strike Rate":130.33,"Rating":715,"Price":"150 K","Cost":150000,"Type":"bat"}
+{"_id":"a92","Name":"Naman Ojha","Country":"India","Average":20,"Strike Rate":113.22,"Rating":793,"Price":"450 K","Cost":450000,"Type":"bat"}
+{"_id":"a93","Name":"Mithun Manhas","Country":"India","Average":22.95,"Strike Rate":104.66,"Rating":640,"Price":"50 K","Cost":50000,"Type":"bat"}
+{"_id":"a94","Name":"Sanju Samson","Country":"India","Average":20.4,"Strike Rate":125.15,"Rating":750,"Price":"500 K","Cost":500000,"Type":"bat"}
+{"_id":"a95","Name":"Saurabh Tiwary","Country":"India","Average":26.85,"Strike Rate":117.41,"Rating":772,"Price":"50 K","Cost":50000,"Type":"bat"}
+{"_id":"a96","Name":"Suryakumar Yadav","Country":"India","Average":17.44,"Strike Rate":138.93,"Rating":704,"Price":"500 K","Cost":500000,"Type":"bat"}
+{"_id":"a97","Name":"Venugopal Rao","Country":"India","Average":23.55,"Strike Rate":121.71,"Rating":719,"Price":"700 K","Cost":700000,"Type":"bat"}
+{"_id":"a98","Name":"Vijay Zol","Country":"India","Average":28,"Strike Rate":127.85,"Rating":705,"Price":"200 K","Cost":200000,"Type":"bat"}
+{"_id":"a99","Name":"Wridhiman Saha","Country":"India","Average":24.62,"Strike Rate":126.59,"Rating":760,"Price":"900 K","Cost":900000,"Type":"bat"}
+{"_id":"b1","Name":"Sunil Narine","Country":"West Indies","Average":12.6,"Strike Rate":128.57,"Avg":33.42,"SR":27.4,"Economy":7.31,"Rating":817,"Price":"1.5 M","Cost":1500000,"Type":"bowl"}
+{"_id":"b10","Name":"Umar Gul","Country":"Pakistan","Average":9.68,"Strike Rate":108.13,"Avg":23.88,"SR":16.7,"Economy":7.26,"Rating":846,"Price":"1.6 M","Cost":1600000,"Type":"bowl"}
+{"_id":"b100","Name":"Mansoor Amjad","Country":"Pakistan","Average":13.94,"Strike Rate":102.31,"Avg":14.71,"SR":11.5,"Economy":7.62,"Rating":723,"Price":"750 K","Cost":750000,"Type":"bowl"}
+{"_id":"b101","Name":"Mohammad Sami","Country":"Pakistan","Average":9.31,"Strike Rate":115.81,"Avg":26.51,"SR":21.5,"Economy":7.39,"Rating":721,"Price":"1.0 M","Cost":1000000,"Type":"bowl"}
+{"_id":"b102","Name":"Pawan Suyal","Country":"India","Average":3.77,"Strike Rate":40.47,"Avg":30,"SR":21.7,"Economy":8.27,"Rating":719,"Price":"50 K","Cost":50000,"Type":"bowl"}
+{"_id":"b103","Name":"Junaid Khan","Country":"Pakistan","Average":10,"Strike Rate":100,"Avg":21,"SR":19.4,"Economy":6.47,"Rating":718,"Price":"1.1 M","Cost":1100000,"Type":"bowl"}
+{"_id":"b104","Name":"D Bishoo","Country":"West Indies","Average":8.66,"Strike Rate":104,"Avg":17.65,"SR":16,"Economy":6.6,"Rating":716,"Price":"750 K","Cost":750000,"Type":"bowl"}
+{"_id":"b105","Name":"Rahul Tewatia","Country":"India","Average":16,"Strike Rate":123.07,"Avg":29.5,"SR":27,"Economy":6.55,"Rating":716,"Price":"300 K","Cost":300000,"Type":"bowl"}
+{"_id":"b106","Name":"T Thushara","Country":"Sri Lanka","Average":8.64,"Strike Rate":97.35,"Avg":22.27,"SR":17.8,"Economy":7.5,"Rating":715,"Price":"800 K","Cost":800000,"Type":"bowl"}
+{"_id":"b107","Name":"MD Bates","Country":"New Zeland","Average":6.28,"Strike Rate":130,"Avg":23.84,"SR":17.3,"Economy":8.25,"Rating":714,"Price":"1.0 M","Cost":1000000,"Type":"bowl"}
+{"_id":"b108","Name":"L Balaji","Country":"India","Average":4.81,"Strike Rate":86.88,"Avg":21.91,"SR":17.1,"Economy":7.65,"Rating":714,"Price":"900 K","Cost":900000,"Type":"bowl"}
+{"_id":"b109","Name":"Raza Hasan","Country":"Pakistan","Average":9.5,"Strike Rate":77.55,"Avg":16.4,"SR":16.4,"Economy":5.97,"Rating":712,"Price":"850 K","Cost":850000,"Type":"bowl"}
+{"_id":"b11","Name":"Vernon Philander","Country":"South Africa","Average":26.13,"Strike Rate":132.51,"Avg":18.06,"SR":14.9,"Economy":7.77,"Rating":825,"Price":"1.1 M","Cost":1100000,"Type":"bowl"}
+{"_id":"b110","Name":"Wahab Riaz","Country":"Pakistan","Average":27,"Strike Rate":135,"Avg":19.66,"SR":17.5,"Economy":6.71,"Rating":711,"Price":"850 K","Cost":850000,"Type":"bowl"}
+{"_id":"b111","Name":"Pravin Tambe","Country":"India","Average":11,"Strike Rate":70.96,"Avg":28.06,"SR":29.1,"Economy":7.82,"Rating":700,"Price":"600 K","Cost":600000,"Type":"bowl"}
+{"_id":"b112","Name":"Abu Nechim","Country":"India","Average":9.7,"Strike Rate":106.59,"Avg":25.89,"SR":21.3,"Economy":7.28,"Rating":705,"Price":"500 K","Cost":500000,"Type":"bowl"}
+{"_id":"b113","Name":"Shadab Jakati","Country":"India","Average":12.9,"Strike Rate":22.8,"Avg":28.77,"SR":22.8,"Economy":7.56,"Rating":703,"Price":"300 K","Cost":300000,"Type":"bowl"}
+{"_id":"b114","Name":"Zulfiqar Babar","Country":"Pakistan","Average":9.87,"Strike Rate":100,"Avg":14.45,"SR":15.2,"Economy":5.68,"Rating":697,"Price":"850 K","Cost":850000,"Type":"bowl"}
+{"_id":"b115","Name":"RM Hira","Country":"New Zeland","Average":18.5,"Strike Rate":123.34,"Avg":24.76,"SR":20.4,"Economy":7.27,"Rating":671,"Price":"650 K","Cost":650000,"Type":"bowl"}
+{"_id":"b116","Name":"JO Holder","Country":"West Indies","Average":9.33,"Strike Rate":114.28,"Avg":27.78,"SR":22.2,"Economy":7.5,"Rating":670,"Price":"650 K","Cost":650000,"Type":"bowl"}
+{"_id":"b117","Name":"Pawan Negi","Country":"India","Average":14.5,"Strike Rate":158.9,"Avg":30,"SR":22.6,"Economy":7,"Rating":668,"Price":"100 K","Cost":100000,"Type":"bowl"}
+{"_id":"b118","Name":"Jaydev Unadkat","Country":"India","Average":4,"Strike Rate":62.5,"Avg":22.15,"SR":17.2,"Economy":7.69,"Rating":663,"Price":"50 K","Cost":50000,"Type":"bowl"}
+{"_id":"b119","Name":"Veer Pratap Singh","Country":"India","Average":9.2,"Strike Rate":47.82,"Avg":34.2,"SR":24,"Economy":8.55,"Rating":657,"Price":"100 K","Cost":100000,"Type":"bowl"}
+{"_id":"b12","Name":"Pat Cummins","Country":"Australia","Average":7.5,"Strike Rate":100,"Avg":28.34,"SR":21.8,"Economy":7.54,"Rating":805,"Price":"1.0 M","Cost":1000000,"Type":"bowl"}
+{"_id":"b120","Name":"Rahul Shukla","Country":"India","Average":8.4,"Strike Rate":93.33,"Avg":26.29,"SR":19.2,"Economy":8.17,"Rating":656,"Price":"100 K","Cost":100000,"Type":"bowl"}
+{"_id":"b121","Name":"Parvinder Awana","Country":"India","Average":3.5,"Strike Rate":48.27,"Avg":23.8,"SR":19,"Economy":7.48,"Rating":653,"Price":"50 K","Cost":50000,"Type":"bowl"}
+{"_id":"b122","Name":"Ishwar Pandey","Country":"India","Average":13,"Strike Rate":148.57,"Avg":20.27,"SR":23.4,"Economy":7.19,"Rating":700,"Price":"500 K","Cost":500000,"Type":"bowl"}
+{"_id":"b123","Name":"A Dananjaya","Country":"Sri Lanka","Average":2.5,"Strike Rate":25,"Avg":16.68,"SR":16.1,"Economy":6.21,"Rating":647,"Price":"650 K","Cost":650000,"Type":"bowl"}
+{"_id":"b124","Name":"XJ Doherty","Country":"Australia","Average":18.71,"Strike Rate":120.18,"Avg":33.22,"SR":26.1,"Economy":7.62,"Rating":642,"Price":"600 K","Cost":600000,"Type":"bowl"}
+{"_id":"b125","Name":"Sandeep Warrier","Country":"India","Average":12,"Strike Rate":44.44,"Avg":30.55,"SR":24.6,"Economy":7.43,"Rating":635,"Price":"100 K","Cost":100000,"Type":"bowl"}
+{"_id":"b126","Name":"Joginder Sharma","Country":"India","Average":15.18,"Strike Rate":127.72,"Avg":25.97,"SR":20.8,"Economy":7.48,"Rating":622,"Price":"1.0 M","Cost":1000000,"Type":"bowl"}
+{"_id":"b127","Name":"NO Miller","Country":"West Indies","Average":43,"Strike Rate":91.48,"Avg":28.69,"SR":26.8,"Economy":6.41,"Rating":581,"Price":"650 K","Cost":650000,"Type":"bowl"}
+{"_id":"b128","Name":"Mashrafe Mortaza","Country":"Bangladesh","Average":18.71,"Strike Rate":137.17,"Avg":30.53,"SR":22.27,"Economy":8.03,"Rating":572,"Price":"650 K","Cost":650000,"Type":"bowl"}
+{"_id":"b129","Name":"WB Rankin","Country":"England","Average":13,"Strike Rate":81.25,"Avg":17.15,"SR":18.3,"Economy":5.6,"Rating":569,"Price":"650 K","Cost":650000,"Type":"bowl"}
+{"_id":"b13","Name":"S Aravind","Country":"India","Average":19,"Strike Rate":121.27,"Avg":16.5,"SR":13.5,"Economy":7.33,"Rating":830,"Price":"750 K","Cost":750000,"Type":"bowl"}
+{"_id":"b130","Name":"Anureet Singh","Country":"India","Average":6,"Strike Rate":58.06,"Avg":31,"SR":20.6,"Economy":9,"Rating":785,"Price":"450 K","Cost":450000,"Type":"bowl"}
+{"_id":"b14","Name":"Ravi Ashwin","Country":"India","Average":17.3,"Strike Rate":162.5,"Avg":22.8,"SR":21.6,"Economy":5.84,"Rating":870,"Price":"1.8 M","Cost":1800000,"Type":"bowl"}
+{"_id":"b15","Name":"Mohammad Irfan","Country":"Pakistan","Average":8.5,"Strike Rate":100,"Avg":32.32,"SR":25.5,"Economy":6.78,"Rating":861,"Price":"1.6 M","Cost":1600000,"Type":"bowl"}
+{"_id":"b16","Name":"Amit Mishra","Country":"India","Average":14.76,"Strike Rate":100.17,"Avg":21.21,"SR":18.7,"Economy":7.71,"Rating":860,"Price":"1.3 M","Cost":1300000,"Type":"bowl"}
+{"_id":"b17","Name":"Abdur Razzak","Country":"Bangladesh","Average":8.75,"Strike Rate":91.14,"Avg":19.95,"SR":17.2,"Economy":6.92,"Rating":819,"Price":"1.7 M","Cost":1700000,"Type":"bowl"}
+{"_id":"b18","Name":"DT Johnston","Country":"Ireland","Average":20.75,"Strike Rate":140.12,"Avg":20.65,"SR":19.6,"Economy":6.31,"Rating":813,"Price":"1.1 M","Cost":1100000,"Type":"bowl"}
+{"_id":"b19","Name":"PM Siddle","Country":"Australia","Average":16,"Strike Rate":100,"Avg":26.72,"SR":21.2,"Economy":7.53,"Rating":852,"Price":"1.5 M","Cost":1500000,"Type":"bowl"}
+{"_id":"b2","Name":"Saeed Ajmal","Country":"Pakistan","Average":8.27,"Strike Rate":105.81,"Avg":15.82,"SR":15.2,"Economy":6.22,"Rating":822,"Price":"1.7 M","Cost":1700000,"Type":"bowl"}
+{"_id":"b20","Name":"Mitchell Johnson","Country":"Australia","Average":7.75,"Strike Rate":86.11,"Avg":37.33,"SR":23.8,"Economy":8.37,"Rating":816,"Price":"1.5 M","Cost":1500000,"Type":"bowl"}
+{"_id":"b21","Name":"Shaun Tait","Country":"Australia","Average":6.57,"Strike Rate":83.33,"Avg":21.7,"SR":16.6,"Economy":7.83,"Rating":844,"Price":"1.6 M","Cost":1600000,"Type":"bowl"}
+{"_id":"b22","Name":"Mohammad Amir","Country":"Pakistan","Average":13.4,"Strike Rate":108.33,"Avg":20.68,"SR":17.9,"Economy":6.9,"Rating":844,"Price":"1.6 M","Cost":1600000,"Type":"bowl"}
+{"_id":"b23","Name":"DP Nannes","Country":"Australia","Average":8.14,"Strike Rate":87.69,"Avg":22.24,"SR":18.4,"Economy":7.22,"Rating":842,"Price":"1.7 M","Cost":1700000,"Type":"bowl"}
+{"_id":"b24","Name":"JM Anderson","Country":"England","Average":7.66,"Strike Rate":92,"Avg":32.16,"SR":23.1,"Economy":8.35,"Rating":841,"Price":"1.9 M","Cost":1900000,"Type":"bowl"}
+{"_id":"b25","Name":"Z Khan","Country":"India","Average":9.47,"Strike Rate":130,"Avg":27.41,"SR":21.4,"Economy":7.67,"Rating":840,"Price":"1.5 M","Cost":1500000,"Type":"bowl"}
+{"_id":"b26","Name":"MA Starc","Country":"Australia","Average":11,"Strike Rate":78.57,"Avg":14.55,"SR":12.9,"Economy":6.76,"Rating":855,"Price":"1.7 M","Cost":1700000,"Type":"bowl"}
+{"_id":"b27","Name":"CJ McKay","Country":"Australia","Average":12.92,"Strike Rate":126.31,"Avg":25.18,"SR":18.3,"Economy":8.24,"Rating":839,"Price":"1.4 M","Cost":1400000,"Type":"bowl"}
+{"_id":"b28","Name":"TT Bresnan","Country":"England","Average":17.45,"Strike Rate":127.05,"Avg":27.44,"SR":22.22,"Economy":7.41,"Rating":838,"Price":"1.7 M","Cost":1700000,"Type":"bowl"}
+{"_id":"b29","Name":"DT Christian","Country":"Australia","Average":20.55,"Strike Rate":126.75,"Avg":27.26,"SR":20,"Economy":8.16,"Rating":838,"Price":"1.4 M","Cost":1400000,"Type":"bowl"}
+{"_id":"b3","Name":"Yuz Chahal","Country":"India","Average":9.96,"Strike Rate":85.29,"Avg":18.04,"SR":12.2,"Economy":8.86,"Rating":820,"Price":"600 K","Cost":600000,"Type":"bowl"}
+{"_id":"b30","Name":"ST Finn","Country":"England","Average":16,"Strike Rate":82.05,"Avg":24.45,"SR":19.7,"Economy":7.41,"Rating":836,"Price":"1.1 M","Cost":1100000,"Type":"bowl"}
+{"_id":"b31","Name":"Karn Sharma","Country":"India","Average":17.33,"Strike Rate":122.35,"Avg":27.2,"SR":20.1,"Economy":8.33,"Rating":781,"Price":"800 K","Cost":800000,"Type":"bowl"}
+{"_id":"b32","Name":"B Kumar","Country":"India","Average":17,"Strike Rate":170,"Avg":22.61,"SR":17.2,"Economy":7.87,"Rating":830,"Price":"1.3 M","Cost":1300000,"Type":"bowl"}
+{"_id":"b33","Name":"Mohit Sharma","Country":"India","Average":9.33,"Strike Rate":155.55,"Avg":30.35,"SR":24.4,"Economy":8,"Rating":833,"Price":"900 K","Cost":900000,"Type":"bowl"}
+{"_id":"b34","Name":"Umesh Yadav","Country":"India","Average":29,"Strike Rate":207.14,"Avg":32.09,"SR":25.2,"Economy":8.09,"Rating":812,"Price":"1.0 M","Cost":1000000,"Type":"bowl"}
+{"_id":"b35","Name":"DE Bollinger","Country":"Australia","Average":12.5,"Strike Rate":113.63,"Avg":26.01,"SR":20.4,"Economy":7.61,"Rating":821,"Price":"1.7 M","Cost":1700000,"Type":"bowl"}
+{"_id":"b36","Name":"Mohammad Shami","Country":"India","Average":8.83,"Strike Rate":77.94,"Avg":21.97,"SR":18.1,"Economy":7.25,"Rating":821,"Price":"850 K","Cost":850000,"Type":"bowl"}
+{"_id":"b37","Name":"Sachin Rana","Country":"India","Average":21.83,"Strike Rate":108.93,"Avg":20.33,"SR":17.8,"Economy":6.84,"Rating":821,"Price":"1.6 M","Cost":1600000,"Type":"bowl"}
+{"_id":"b38","Name":"Krishmar Santokie","Country":"West Indies","Average":7.44,"Strike Rate":101.01,"Avg":12.57,"SR":12,"Economy":6.26,"Rating":821,"Price":"50 K","Cost":50000,"Type":"bowl"}
+{"_id":"b39","Name":"Harbhajan Singh","Country":"India","Average":16.71,"Strike Rate":160.27,"Avg":24.77,"SR":19,"Economy":7.82,"Rating":820,"Price":"1.3 M","Cost":1300000,"Type":"bowl"}
+{"_id":"b4","Name":"Ben Hilfenhaus","Country":"Australia","Average":7.87,"Strike Rate":82.89,"Avg":21.71,"SR":20.5,"Economy":7.03,"Rating":806,"Price":"1.0 M","Cost":1000000,"Type":"bowl"}
+{"_id":"b40","Name":"KAJ Roach","Country":"West Indies","Average":7.5,"Strike Rate":150,"Avg":40.47,"SR":32,"Economy":7.56,"Rating":817,"Price":"1.5 M","Cost":1500000,"Type":"bowl"}
+{"_id":"b41","Name":"Sandeep Sharma","Country":"India","Average":9,"Strike Rate":64.28,"Avg":26.92,"SR":23,"Economy":7,"Rating":826,"Price":"300 K","Cost":300000,"Type":"bowl"}
+{"_id":"b42","Name":"MM Patel","Country":"India","Average":7.66,"Strike Rate":90.19,"Avg":26.5,"SR":21,"Economy":7.26,"Rating":815,"Price":"900 K","Cost":900000,"Type":"bowl"}
+{"_id":"b43","Name":"Shivam Sharma","Country":"India","Average":5,"Strike Rate":166.66,"Avg":40.33,"SR":32,"Economy":7.56,"Rating":815,"Price":"350 K","Cost":350000,"Type":"bowl"}
+{"_id":"b44","Name":"RJ Harris","Country":"Australia","Average":10.86,"Strike Rate":200,"Avg":21.54,"SR":17.4,"Economy":7.4,"Rating":814,"Price":"1.2 M","Cost":1200000,"Type":"bowl"}
+{"_id":"b45","Name":"RAS Lakmal","Country":"Sri Lanka","Average":7,"Strike Rate":75,"Avg":20.64,"SR":17.5,"Economy":7.05,"Rating":812,"Price":"1.1 M","Cost":1100000,"Type":"bowl"}
+{"_id":"b46","Name":"R Sharma","Country":"India","Average":5.03,"Strike Rate":98.49,"Avg":24.09,"SR":20.5,"Economy":7.02,"Rating":812,"Price":"1.3 M","Cost":1300000,"Type":"bowl"}
+{"_id":"b47","Name":"SMSM Senanayake","Country":"Sri Lanka","Average":10.66,"Strike Rate":106.66,"Avg":16.37,"SR":16.8,"Economy":5.84,"Rating":811,"Price":"1.0 M","Cost":1000000,"Type":"bowl"}
+{"_id":"b48","Name":"Varun Aaron","Country":"India","Average":4,"Strike Rate":72.72,"Avg":33.81,"SR":27,"Economy":7.51,"Rating":810,"Price":"850 K","Cost":850000,"Type":"bowl"}
+{"_id":"b49","Name":"RP Singh","Country":"India","Average":4.56,"Strike Rate":100,"Avg":25.58,"SR":20.1,"Economy":7.6,"Rating":809,"Price":"800 K","Cost":800000,"Type":"bowl"}
+{"_id":"b5","Name":"Dale Steyn","Country":"South Africa","Average":20,"Strike Rate":153.84,"Avg":27.91,"SR":26.2,"Economy":7.4,"Rating":860,"Price":"1.5 M","Cost":1500000,"Type":"bowl"}
+{"_id":"b50","Name":"PP Ojha","Country":"India","Average":4.85,"Strike Rate":166.66,"Avg":20.46,"SR":17.5,"Economy":7,"Rating":808,"Price":"900 K","Cost":900000,"Type":"bowl"}
+{"_id":"b51","Name":"Piyush Chawla","Country":"India","Average":13.5,"Strike Rate":114.89,"Avg":24.45,"SR":19,"Economy":7.68,"Rating":805,"Price":"1.1 M","Cost":1100000,"Type":"bowl"}
+{"_id":"b52","Name":"Praveen Kumar","Country":"India","Average":13.3,"Strike Rate":121.46,"Avg":31.32,"SR":25.7,"Economy":7.3,"Rating":785,"Price":"1.0 M","Cost":1000000,"Type":"bowl"}
+{"_id":"b53","Name":"Bueran Hendricks","Country":"South Africa","Average":15,"Strike Rate":100,"Avg":18.64,"SR":13.9,"Economy":8.03,"Rating":805,"Price":"50 K","Cost":50000,"Type":"bowl"}
+{"_id":"b54","Name":"Charles Langeveldt","Country":"South Africa","Average":10.25,"Strike Rate":85.41,"Avg":21.52,"SR":16.9,"Economy":7.6,"Rating":804,"Price":"800 K","Cost":800000,"Type":"bowl"}
+{"_id":"b55","Name":"Fidel Edwards","Country":"West Indies","Average":5,"Strike Rate":111.11,"Avg":24.7,"SR":20,"Economy":7.38,"Rating":804,"Price":"750 K","Cost":750000,"Type":"bowl"}
+{"_id":"b56","Name":"Kyle Mills","Country":"New Zeland","Average":10.91,"Strike Rate":109.16,"Avg":27.47,"SR":20.2,"Economy":8.15,"Rating":801,"Price":"650 K","Cost":650000,"Type":"bowl"}
+{"_id":"b57","Name":"MJ McClenaghan","Country":"New Zeland","Average":13,"Strike Rate":216.66,"Avg":21.44,"SR":15.6,"Economy":8.21,"Rating":829,"Price":"850 K","Cost":850000,"Type":"bowl"}
+{"_id":"b58","Name":"Ishant Sharma","Country":"India","Average":9,"Strike Rate":88.88,"Avg":35.31,"SR":27.5,"Economy":7.68,"Rating":770,"Price":"1.0 M","Cost":1000000,"Type":"bowl"}
+{"_id":"b59","Name":"Suraj Randiv","Country":"Sri Lanka","Average":11.1,"Strike Rate":133.33,"Avg":25,"SR":20,"Economy":7.47,"Rating":798,"Price":"900 K","Cost":900000,"Type":"bowl"}
+{"_id":"b6","Name":"Lasith Malinga","Country":"Sri Lanka","Average":6.91,"Strike Rate":96.96,"Avg":18.5,"SR":15,"Economy":7.4,"Rating":885,"Price":"2.2 M","Cost":2200000,"Type":"bowl"}
+{"_id":"b60","Name":"HMRKB Herath","Country":"Sri Lanka","Average":4.6,"Strike Rate":100,"Avg":17.08,"SR":17.4,"Economy":5.86,"Rating":798,"Price":"1.0 M","Cost":1000000,"Type":"bowl"}
+{"_id":"b61","Name":"Stuart Meaker","Country":"England","Average":13.5,"Strike Rate":150,"Avg":33.68,"SR":21.9,"Economy":9.21,"Rating":798,"Price":"900 K","Cost":900000,"Type":"bowl"}
+{"_id":"b62","Name":"LL Tsotsobe","Country":"South Africa","Average":3,"Strike Rate":40,"Avg":24.97,"SR":22.4,"Economy":6.68,"Rating":796,"Price":"1.2 M","Cost":1200000,"Type":"bowl"}
+{"_id":"b63","Name":"M de Lange","Country":"South Africa","Average":15.33,"Strike Rate":139.39,"Avg":25.76,"SR":17.3,"Economy":8.93,"Rating":796,"Price":"900 K","Cost":900000,"Type":"bowl"}
+{"_id":"b64","Name":"Murali Kartik","Country":"India","Average":12.8,"Strike Rate":110.84,"Avg":31.36,"SR":27.9,"Economy":6.74,"Rating":791,"Price":"50 K","Cost":50000,"Type":"bowl"}
+{"_id":"b65","Name":"Abdur Rehman","Country":"Pakistan","Average":11,"Strike Rate":98.21,"Avg":20.62,"SR":19.9,"Economy":6.21,"Rating":788,"Price":"1.0 M","Cost":1000000,"Type":"bowl"}
+{"_id":"b66","Name":"Ashish Nehra","Country":"India","Average":1,"Strike Rate":14.28,"Avg":20.4,"SR":16.9,"Economy":7.24,"Rating":806,"Price":"500 K","Cost":500000,"Type":"bowl"}
+{"_id":"b67","Name":"JR Hazlewood","Country":"Australia","Average":5.5,"Strike Rate":47.82,"Avg":21.86,"SR":17.3,"Economy":7.57,"Rating":786,"Price":"1.0 M","Cost":1000000,"Type":"bowl"}
+{"_id":"b68","Name":"Harshal Patel","Country":"India","Average":10.8,"Strike Rate":158.33,"Avg":19.29,"SR":15.4,"Economy":7.48,"Rating":796,"Price":"300 K","Cost":300000,"Type":"bowl"}
+{"_id":"b69","Name":"R Vinay Kumar","Country":"India","Average":12.52,"Strike Rate":123.22,"Avg":34.74,"SR":37.2,"Economy":8.45,"Rating":755,"Price":"900 K","Cost":900000,"Type":"bowl"}
+{"_id":"b7","Name":"Morne Morkel","Country":"South Africa","Average":9.47,"Strike Rate":133.33,"Avg":23.49,"SR":19.4,"Economy":7.23,"Rating":870,"Price":"1.8 M","Cost":1800000,"Type":"bowl"}
+{"_id":"b70","Name":"Karanveer Singh","Country":"India","Average":11,"Strike Rate":68.75,"Avg":16.09,"SR":11.4,"Economy":8.42,"Rating":775,"Price":"50 K","Cost":50000,"Type":"bowl"}
+{"_id":"b71","Name":"NM Hauritz","Country":"Australia","Average":12.85,"Strike Rate":104.65,"Avg":30.06,"SR":24.9,"Economy":7.22,"Rating":783,"Price":"900 K","Cost":900000,"Type":"bowl"}
+{"_id":"b72","Name":"SCJ Broad","Country":"England","Average":7.47,"Strike Rate":100,"Avg":19.94,"SR":17.1,"Economy":6.98,"Rating":782,"Price":"1.1 M","Cost":1100000,"Type":"bowl"}
+{"_id":"b73","Name":"TL Best","Country":"West Indies","Average":5.57,"Strike Rate":86.66,"Avg":22.17,"SR":19.5,"Economy":6.8,"Rating":781,"Price":"900 K","Cost":900000,"Type":"bowl"}
+{"_id":"b74","Name":"JE Taylor","Country":"West Indies","Average":11.75,"Strike Rate":129.09,"Avg":19.58,"SR":15.5,"Economy":7.55,"Rating":780,"Price":"1.1 M","Cost":1100000,"Type":"bowl"}
+{"_id":"b75","Name":"BMAJ Mendis","Country":"Sri Lanka","Average":23.16,"Strike Rate":124.68,"Avg":24.64,"SR":21.2,"Economy":6.96,"Rating":778,"Price":"1.2 M","Cost":1200000,"Type":"bowl"}
+{"_id":"b76","Name":"Kane Richardson","Country":"Australia","Average":10,"Strike Rate":101.85,"Avg":25.6,"SR":20,"Economy":7.67,"Rating":777,"Price":"1.0 M","Cost":1000000,"Type":"bowl"}
+{"_id":"b77","Name":"Gurkeerat Singh","Country":"India","Average":8,"Strike Rate":89.74,"Avg":22,"SR":18,"Economy":7.33,"Rating":810,"Price":"500 K","Cost":500000,"Type":"bowl"}
+{"_id":"b78","Name":"Dhawal Kulkarni","Country":"India","Average":2,"Strike Rate":36.36,"Avg":21.3,"SR":16.1,"Economy":7.91,"Rating":795,"Price":"200 K","Cost":200000,"Type":"bowl"}
+{"_id":"b79","Name":"TA Boult","Country":"New Zeland","Average":5.75,"Strike Rate":65.71,"Avg":32.91,"SR":24.3,"Economy":8.09,"Rating":774,"Price":"1.4 M","Cost":1400000,"Type":"bowl"}
+{"_id":"b8","Name":"James Pattinson","Country":"Australia","Average":8.66,"Strike Rate":166.66,"Avg":19.44,"SR":17.1,"Economy":8.09,"Rating":820,"Price":"1.2 M","Cost":1200000,"Type":"bowl"}
+{"_id":"b80","Name":"Shafiul Islam","Country":"Bangladesh","Average":14.8,"Strike Rate":94.87,"Avg":33.38,"SR":25.4,"Economy":7.86,"Rating":773,"Price":"1.1 M","Cost":1100000,"Type":"bowl"}
+{"_id":"b81","Name":"GH Dockrell","Country":"Ireland","Average":2,"Strike Rate":25,"Avg":17.93,"SR":16.6,"Economy":6.48,"Rating":772,"Price":"800 K","Cost":800000,"Type":"bowl"}
+{"_id":"b82","Name":"LHD Dilhara","Country":"Sri Lanka","Average":14.9,"Strike Rate":200,"Avg":28.18,"SR":21.6,"Economy":7.79,"Rating":770,"Price":"600 K","Cost":600000,"Type":"bowl"}
+{"_id":"b83","Name":"Siddharth Kaul","Country":"India","Average":14.68,"Strike Rate":103.33,"Avg":23.53,"SR":20.5,"Economy":6.86,"Rating":770,"Price":"350 K","Cost":350000,"Type":"bowl"}
+{"_id":"b84","Name":"Aizaz Cheema","Country":"Pakistan","Average":18,"Strike Rate":64.28,"Avg":19.55,"SR":16.8,"Economy":6.97,"Rating":769,"Price":"500 K","Cost":500000,"Type":"bowl"}
+{"_id":"b85","Name":"IG Butler","Country":"New Zeland","Average":17.75,"Strike Rate":139.6,"Avg":20.1,"SR":17.2,"Economy":7,"Rating":762,"Price":"900 K","Cost":900000,"Type":"bowl"}
+{"_id":"b86","Name":"Mohammad Ashraful","Country":"Bangladesh","Average":23.21,"Strike Rate":126.4,"Avg":20.1,"SR":17.2,"Economy":7.95,"Rating":761,"Price":"1.1 M","Cost":1100000,"Type":"bowl"}
+{"_id":"b87","Name":"Ankit Sharma","Country":"India","Average":7,"Strike Rate":116.66,"Avg":38,"SR":28,"Economy":8.14,"Rating":760,"Price":"100 K","Cost":100000,"Type":"bowl"}
+{"_id":"b88","Name":"S Badree","Country":"West Indies","Average":12,"Strike Rate":79,"Avg":19.34,"SR":22.7,"Economy":5.09,"Rating":753,"Price":"900 K","Cost":900000,"Type":"bowl"}
+{"_id":"b89","Name":"AB Dinda","Country":"India","Average":22,"Strike Rate":91.66,"Avg":22.23,"SR":17.8,"Economy":7.45,"Rating":750,"Price":"350 K","Cost":350000,"Type":"bowl"}
+{"_id":"b9","Name":"Ravi Rampaul","Country":"West Indies","Average":12,"Strike Rate":100,"Avg":22.17,"SR":16.4,"Economy":8.56,"Rating":839,"Price":"1.2 M","Cost":1200000,"Type":"bowl"}
+{"_id":"b90","Name":"Jasprit Bumrah","Country":"India","Average":25,"Strike Rate":96.15,"Avg":29.72,"SR":25.8,"Economy":6.9,"Rating":750,"Price":"300 K","Cost":300000,"Type":"bowl"}
+{"_id":"b91","Name":"Shahbaz Nadeem","Country":"India","Average":9.62,"Strike Rate":96.25,"Avg":28.32,"SR":26.4,"Economy":6.14,"Rating":750,"Price":"600 K","Cost":600000,"Type":"bowl"}
+{"_id":"b92","Name":"BAW Mendis","Country":"Sri Lanka","Average":5.26,"Strike Rate":75.96,"Avg":18.1,"SR":16.5,"Economy":6.55,"Rating":743,"Price":"900 K","Cost":900000,"Type":"bowl"}
+{"_id":"b93","Name":"RMS Eranga","Country":"Sri Lanka","Average":6.5,"Strike Rate":94.54,"Avg":17.72,"SR":16.1,"Economy":6.58,"Rating":741,"Price":"900 K","Cost":900000,"Type":"bowl"}
+{"_id":"b94","Name":"Vikramjeet Malik","Country":"India","Average":12.6,"Strike Rate":113.17,"Avg":23,"SR":18.7,"Economy":7.34,"Rating":741,"Price":"50 K","Cost":50000,"Type":"bowl"}
+{"_id":"b95","Name":"ST Gabriel","Country":"West Indies","Average":7.5,"Strike Rate":33.33,"Avg":19.66,"SR":16.8,"Economy":6.98,"Rating":737,"Price":"750 K","Cost":750000,"Type":"bowl"}
+{"_id":"b96","Name":"Imran Tahir","Country":"South Africa","Average":11.11,"Strike Rate":154.54,"Avg":20.93,"SR":14.2,"Economy":7.84,"Rating":785,"Price":"1.3 M","Cost":1300000,"Type":"bowl"}
+{"_id":"b97","Name":"CRD Fernando","Country":"Sri Lanka","Average":6,"Strike Rate":114.28,"Avg":20.5,"SR":16.2,"Economy":7.56,"Rating":732,"Price":"1.0 M","Cost":1000000,"Type":"bowl"}
+{"_id":"b98","Name":"AU Rashid","Country":"England","Average":12.05,"Strike Rate":99.29,"Avg":23.5,"SR":18.4,"Economy":7.65,"Rating":729,"Price":"750 K","Cost":750000,"Type":"bowl"}
+{"_id":"b99","Name":"B Geeves","Country":"Australia","Average":22.16,"Strike Rate":135.71,"Avg":24.26,"SR":15.8,"Economy":9.15,"Rating":729,"Price":"600 K","Cost":600000,"Type":"bowl"}
+{"_id":"c1","Name":"Glen Maxwell","Country":"Australia","Average":17.18,"Strike Rate":129.46,"Avg":39.75,"SR":30,"Economy":9.7,"Bat":841,"Bowl":683,"Price":"1.5 M","Cost":1500000,"Type":"all"}
+{"_id":"c10","Name":"Yuvraj Singh","Country":"India","Average":23.45,"Strike Rate":125.09,"Avg":22.98,"SR":17.9,"Economy":7.02,"Bat":800,"Bowl":765,"Price":"1.6 M","Cost":1600000,"Type":"all"}
+{"_id":"c11","Name":"JP Faulkner","Country":"Australia","Average":18,"Strike Rate":132.11,"Avg":32.07,"SR":27.8,"Economy":8.46,"Bat":793,"Bowl":700,"Price":"1.6 M","Cost":1600000,"Type":"all"}
+{"_id":"c12","Name":"Tim Southee","Country":"New Zeland","Average":13,"Strike Rate":144.44,"Avg":31.16,"SR":28,"Economy":8.82,"Bat":678,"Bowl":775,"Price":"1.7 M","Cost":1700000,"Type":"all"}
+{"_id":"c13","Name":"Abdul Razzaq","Country":"Pakistan","Average":26.85,"Strike Rate":131.59,"Avg":32.6,"SR":18.1,"Economy":7.63,"Bat":622,"Bowl":698,"Price":"1.6 M","Cost":1600000,"Type":"all"}
+{"_id":"c14","Name":"JA Morkel","Country":"South Africa","Average":36,"Strike Rate":132.3,"Avg":26.14,"SR":24,"Economy":8.08,"Bat":783,"Bowl":773,"Price":"1.5 M","Cost":1400000,"Type":"all"}
+{"_id":"c15","Name":"JW Hastings","Country":"Australia","Average":32,"Strike Rate":177,"Avg":22.25,"SR":20.6,"Economy":7.37,"Bat":743,"Bowl":666,"Price":"1.5 M","Cost":1500000,"Type":"all"}
+{"_id":"c16","Name":"R Klienveldt","Country":"South Africa","Average":14.12,"Strike Rate":142.5,"Avg":20.14,"SR":23.6,"Economy":7.73,"Bat":715,"Bowl":709,"Price":"1.4 M","Cost":1400000,"Type":"all"}
+{"_id":"c17","Name":"MC Henriques","Country":"Australia","Average":41,"Strike Rate":136.01,"Avg":14.36,"SR":13.6,"Economy":6.32,"Bat":760,"Bowl":680,"Price":"1.5 M","Cost":1500000,"Type":"all"}
+{"_id":"c18","Name":"Dilruwan Perera","Country":"Sri Lanka","Average":13.24,"Strike Rate":104.25,"Avg":25.31,"SR":20.8,"Economy":6.39,"Bat":620,"Bowl":683,"Price":"1.4 M","Cost":1400000,"Type":"all"}
+{"_id":"c19","Name":"David Wiese","Country":"South Africa","Average":30.5,"Strike Rate":141.86,"Avg":22.06,"SR":15.8,"Economy":8.33,"Bat":834,"Bowl":821,"Price":"1.0 M","Cost":1000000,"Type":"all"}
+{"_id":"c2","Name":"RN ten Doeschate","Country":"Netherlands","Average":20.33,"Strike Rate":207.14,"Avg":28,"SR":18.9,"Economy":4,"Bat":850,"Bowl":750,"Price":"2.0 M","Cost":2000000,"Type":"all"}
+{"_id":"c20","Name":"SR Watson","Country":"Australia","Average":43.37,"Strike Rate":135.01,"Avg":30,"SR":29,"Economy":9,"Bat":845,"Bowl":733,"Price":"1.3 M","Cost":1300000,"Type":"all"}
+{"_id":"c21","Name":"Shoaib Malik","Country":"Pakistan","Average":37.5,"Strike Rate":120.69,"Avg":23.32,"SR":20,"Economy":6.87,"Bat":805,"Bowl":689,"Price":"1.3 M","Cost":1300000,"Type":"all"}
+{"_id":"c22","Name":"DJ Bravo","Country":"West Indies","Average":21.66,"Strike Rate":131.75,"Avg":16.38,"SR":18.4,"Economy":8.14,"Bat":795,"Bowl":758,"Price":"1.3 M","Cost":1300000,"Type":"all"}
+{"_id":"c23","Name":"Shahid Afridi","Country":"Pakistan","Average":19.71,"Strike Rate":153.11,"Avg":23.96,"SR":18.4,"Economy":6.55,"Bat":715,"Bowl":763,"Price":"1.3 M","Cost":1300000,"Type":"all"}
+{"_id":"c24","Name":"AD Mathews","Country":"Sri Lanka","Average":20.57,"Strike Rate":138.46,"Avg":35.14,"SR":25.7,"Economy":8.2,"Bat":700,"Bowl":694,"Price":"1.2 M","Cost":1100000,"Type":"all"}
+{"_id":"c25","Name":"Jacob Oram","Country":"New Zeland","Average":20.6,"Strike Rate":139.82,"Avg":19.45,"SR":22.7,"Economy":7.84,"Bat":683,"Bowl":621,"Price":"1.3 M","Cost":1300000,"Type":"all"}
+{"_id":"c26","Name":"WD Parnell","Country":"South Africa","Average":28.33,"Strike Rate":115.16,"Avg":32.41,"SR":19.7,"Economy":7.46,"Bat":640,"Bowl":670,"Price":"1.3 M","Cost":1300000,"Type":"all"}
+{"_id":"c27","Name":"Dwayne Smith","Country":"West Indies","Average":24.93,"Strike Rate":119.1,"Avg":17,"SR":19.8,"Economy":8.5,"Bat":809,"Bowl":807,"Price":"1.2 M","Cost":1200000,"Type":"all"}
+{"_id":"c28","Name":"DAJ Bracewel","Country":"New Zeland","Average":28.06,"Strike Rate":143.45,"Avg":22.56,"SR":15.2,"Economy":8.86,"Bat":754,"Bowl":724,"Price":"1.2 M","Cost":1200000,"Type":"all"}
+{"_id":"c29","Name":"J Botha","Country":"South Africa","Average":15.33,"Strike Rate":206.66,"Avg":32.6,"SR":24.7,"Economy":8.1,"Bat":710,"Bowl":702,"Price":"1.0 M","Cost":1000000,"Type":"all"}
+{"_id":"c3","Name":"JP Duminy","Country":"South Africa","Average":41.4,"Strike Rate":131.42,"Avg":20.75,"SR":16.7,"Economy":7.41,"Bat":851,"Bowl":750,"Price":"1.9 M","Cost":1900000,"Type":"all"}
+{"_id":"c30","Name":"Mohammad Hafeez","Country":"Pakistan","Average":28.02,"Strike Rate":129.23,"Avg":26.64,"SR":20.6,"Economy":6.26,"Bat":726,"Bowl":630,"Price":"1.2 M","Cost":1200000,"Type":"all"}
+{"_id":"c31","Name":"DJ Hussey","Country":"Australia","Average":31.26,"Strike Rate":133.92,"Avg":31.77,"SR":21.7,"Economy":7.39,"Bat":725,"Bowl":629,"Price":"1.2 M","Cost":1200000,"Type":"all"}
+{"_id":"c32","Name":"Farveez Maharoof","Country":"Sri Lanka","Average":16.26,"Strike Rate":114.21,"Avg":20.28,"SR":18.8,"Economy":7.32,"Bat":765,"Bowl":719,"Price":"1.1 M","Cost":1100000,"Type":"all"}
+{"_id":"c33","Name":"NLTC Perera","Country":"Sri Lanka","Average":32.07,"Strike Rate":149.46,"Avg":31.86,"SR":19,"Economy":8.18,"Bat":741,"Bowl":754,"Price":"900 K","Cost":900000,"Type":"all"}
+{"_id":"c34","Name":"JEC Franklin","Country":"New Zeland","Average":31.12,"Strike Rate":126.21,"Avg":18.81,"SR":23.4,"Economy":8.27,"Bat":664,"Bowl":765,"Price":"1.1 M","Cost":1100000,"Type":"all"}
+{"_id":"c35","Name":"IK Pathan","Country":"India","Average":24.57,"Strike Rate":123.02,"Avg":22.24,"SR":20.6,"Economy":7.52,"Bat":640,"Bowl":680,"Price":"1.1 M","Cost":1100000,"Type":"all"}
+{"_id":"c36","Name":"James Hopes","Country":"Australia","Average":23.74,"Strike Rate":124.05,"Avg":20.93,"SR":23.5,"Economy":8.04,"Bat":714,"Bowl":614,"Price":"1.0 M","Cost":1000000,"Type":"all"}
+{"_id":"c37","Name":"RS Bopara","Country":"England","Average":29,"Strike Rate":120.83,"Avg":26.66,"SR":20,"Economy":8,"Bat":713,"Bowl":717,"Price":"1.0 M","Cost":1000000,"Type":"all"}
+{"_id":"c38","Name":"J Van der Wath","Country":"South Africa","Average":16.57,"Strike Rate":127.51,"Avg":20.85,"SR":20.2,"Economy":7.58,"Bat":720,"Bowl":636,"Price":"900 K","Cost":900000,"Type":"all"}
+{"_id":"c39","Name":"RJ Nicol","Country":"New Zeland","Average":26.01,"Strike Rate":124.16,"Avg":23.95,"SR":24.3,"Economy":7.93,"Bat":717,"Bowl":711,"Price":"800 K","Cost":800000,"Type":"all"}
+{"_id":"c4","Name":"LJ Wright","Country":"England","Average":25.71,"Strike Rate":145.11,"Avg":29.7,"SR":22.7,"Economy":8.54,"Bat":831,"Bowl":672,"Price":"1.8 M","Cost":1800000,"Type":"all"}
+{"_id":"c40","Name":"Shakib Al Hasan","Country":"Bangladesh","Average":12,"Strike Rate":133.33,"Avg":30.75,"SR":21,"Economy":7.78,"Bat":650,"Bowl":740,"Price":"700 K","Cost":700000,"Type":"all"}
+{"_id":"c41","Name":"Nathan Mcullum","Country":"New Zeland","Average":18.91,"Strike Rate":129.38,"Avg":24.83,"SR":19.7,"Economy":7.32,"Bat":633,"Bowl":669,"Price":"500 K","Cost":500000,"Type":"all"}
+{"_id":"c42","Name":"NM Coulter-Nile","Country":"Australia","Average":20.45,"Strike Rate":123.62,"Avg":21.4,"SR":17,"Economy":7.55,"Bat":623,"Bowl":783,"Price":"400 K","Cost":400000,"Type":"all"}
+{"_id":"c43","Name":"Sohail Tanvir","Country":"Pakistan","Average":14.63,"Strike Rate":115.95,"Avg":25.66,"SR":19.3,"Economy":7.28,"Bat":561,"Bowl":740,"Price":"300 K","Cost":300000,"Type":"all"}
+{"_id":"c44","Name":"Abhishek Nayar","Country":"India","Average":19.7,"Strike Rate":119.64,"Avg":38.64,"SR":26.6,"Economy":8.7,"Bat":660,"Bowl":734,"Price":"150 K","Cost":150000,"Type":"all"}
+{"_id":"c45","Name":"Jimmy Neesham","Country":"New Zeland","Average":30.87,"Strike Rate":150.15,"Avg":20.5,"SR":24.5,"Economy":5.83,"Bat":747,"Bowl":803,"Price":"300 K","Cost":300000,"Type":"all"}
+{"_id":"c46","Name":"Laxmi Shukla","Country":"India","Average":20.1,"Strike Rate":120.91,"Avg":24.9,"SR":20.6,"Economy":7.25,"Bat":687,"Bowl":794,"Price":"150 K","Cost":150000,"Type":"all"}
+{"_id":"c47","Name":"Rajat Bhatia","Country":"India","Average":22.24,"Strike Rate":119.88,"Avg":25.8,"SR":21.4,"Economy":7.22,"Bat":667,"Bowl":751,"Price":"300 K","Cost":300000,"Type":"all"}
+{"_id":"c48","Name":"Stuart Binny","Country":"India","Average":18.5,"Strike Rate":112.12,"Avg":27.02,"SR":25.5,"Economy":7.36,"Bat":710,"Bowl":654,"Price":"600 K","Cost":600000,"Type":"all"}
+{"_id":"c49","Name":"Ravindra Jadeja","Country":"India","Average":18.85,"Strike Rate":104.76,"Avg":30,"SR":22.9,"Economy":7.73,"Bat":708,"Bowl":809,"Price":"1.4 M","Cost":1400000,"Type":"all"}
+{"_id":"c5","Name":"KA Pollard","Country":"West Indies","Average":38.09,"Strike Rate":163.67,"Avg":30.8,"SR":25.3,"Economy":8.47,"Bat":825,"Bowl":745,"Price":"1.8 M","Cost":1800000,"Type":"all"}
+{"_id":"c50","Name":"Vijay Shankar","Country":"India","Average":16.6,"Strike Rate":123.88,"Avg":35.25,"SR":24,"Economy":8.81,"Bat":743,"Bowl":685,"Price":"50 K","Cost":50000,"Type":"all"}
+{"_id":"c51","Name":"Andre Russell","Country":"West Indies","Average":36.22,"Strike Rate":192.89,"Avg":23.14,"SR":17.4,"Economy":7.96,"Bat":772,"Bowl":750,"Price":"750 K","Cost":750000,"Type":"all"}
+{"_id":"c52","Name":"Yusuf Pathan","Country":"India","Average":44.57,"Strike Rate":135.06,"Avg":38.45,"SR":30,"Economy":8.7,"Bat":815,"Bowl":719,"Price":"1.0 M","Cost":1000000,"Type":"all"}
+{"_id":"c53","Name":"Darren Sammy","Country":"West Indies","Average":44.57,"Strike Rate":137.36,"Avg":24.43,"SR":20.2,"Economy":7.24,"Bat":750,"Bowl":780,"Price":"1.2 M","Cost":1200000,"Type":"all"}
+{"_id":"c54","Name":"Parvez Rasool","Country":"India","Average":21.13,"Strike Rate":94.06,"Avg":34.76,"SR":33.2,"Economy":6.27,"Bat":685,"Bowl":734,"Price":"800 K","Cost":800000,"Type":"all"}
+{"_id":"c55","Name":"Shreyas Gopal","Country":"India","Average":11,"Strike Rate":110,"Avg":18.83,"SR":14,"Economy":8.07,"Bat":758,"Bowl":635,"Price":"150 K","Cost":150000,"Type":"all"}
+{"_id":"c56","Name":"Rishi Dhawan","Country":"India","Average":25.45,"Strike Rate":109.9,"Avg":25.45,"SR":25.5,"Economy":7.31,"Bat":808,"Bowl":750,"Price":"500 K","Cost":200000,"Type":"all"}
+{"_id":"c57","Name":"Akshar Patel","Country":"India","Average":22.88,"Strike Rate":118.39,"Avg":30.15,"SR":21.5,"Economy":7.4,"Bat":765,"Bowl":752,"Price":"250 K","Cost":250000,"Type":"all"}
+{"_id":"c58","Name":"Kevon Cooper","Country":"West Indies","Average":11.81,"Strike Rate":142.85,"Avg":20.55,"SR":18,"Economy":6.82,"Bat":600,"Bowl":816,"Price":"750 K","Cost":750000,"Type":"all"}
+{"_id":"c59","Name":"Steven Smith","Country":"Australia","Average":26.63,"Strike Rate":132.57,"Avg":19.37,"SR":15.2,"Economy":7.6,"Bat":806,"Bowl":705,"Price":"850 K","Cost":850000,"Type":"all"}
+{"_id":"c6","Name":"RE Van der Merve","Country":"South Africa","Average":20.64,"Strike Rate":125.72,"Avg":25.94,"SR":19.8,"Economy":7,"Bat":678,"Bowl":607,"Price":"1.0 M","Cost":1000000,"Type":"all"}
+{"_id":"c60","Name":"Ben Cutting","Country":"Australia","Average":25.53,"Strike Rate":158.92,"Avg":27.83,"SR":19.9,"Economy":8.37,"Bat":742,"Bowl":848,"Price":"600 K","Cost":600000,"Type":"all"}
+{"_id":"c61","Name":"Iqbal Abdulla","Country":"India","Average":10,"Strike Rate":111.11,"Avg":27.5,"SR":28.5,"Economy":7.89,"Bat":662,"Bowl":704,"Price":"300 K","Cost":300000,"Type":"all"}
+{"_id":"c62","Name":"Ashish Reddy","Country":"India","Average":24.33,"Strike Rate":158.69,"Avg":16.66,"SR":12,"Economy":8.33,"Bat":750,"Bowl":805,"Price":"500 K","Cost":500000,"Type":"all"}
+{"_id":"c63","Name":"J Suchith","Country":"India","Average":48,"Strike Rate":150,"Avg":33.7,"SR":23.4,"Economy":8.64,"Bat":800,"Bowl":700,"Price":"600 K","Cost":600000,"Type":"all"}
+{"_id":"c7","Name":"Chris Morris","Country":"South Africa","Average":38,"Strike Rate":165.21,"Avg":23.92,"SR":19.3,"Economy":7.4,"Bat":815,"Bowl":802,"Price":"500 K","Cost":500000,"Type":"all"}
+{"_id":"c8","Name":"RJ Peterson","Country":"South Africa","Average":16.77,"Strike Rate":111.73,"Avg":32.17,"SR":20.8,"Economy":7.06,"Bat":764,"Bowl":754,"Price":"1.5 M","Cost":1500000,"Type":"all"}
+{"_id":"c9","Name":"Ryan Mc Laren","Country":"South Africa","Average":19.46,"Strike Rate":107.7,"Avg":29.4,"SR":22.4,"Economy":7.87,"Bat":739,"Bowl":661,"Price":"1.6 M","Cost":1600000,"Type":"all"}
+{"_id":"d1","Name":"Gary Kirsten","Rating":14,"Price":"1.4 M","Cost":1400000,"Type":"coach"}
+{"_id":"d10","Name":"Duncan Fletcher","Rating":10,"Price":"1.2 M","Cost":1200000,"Type":"coach"}
+{"_id":"d11","Name":"Stephen Fleming","Rating":10,"Price":"1.0 M","Cost":1000000,"Type":"coach"}
+{"_id":"d12","Name":"Wasim Akram","Rating":9,"Price":"800 K","Cost":800000,"Type":"coach"}
+{"_id":"d13","Name":"Tom Moody","Rating":9,"Price":"1.0 M","Cost":1000000,"Type":"coach"}
+{"_id":"d14","Name":"Jhonty Rhodes","Rating":9,"Price":"1.0 M","Cost":1000000,"Type":"coach"}
+{"_id":"d15","Name":"Robin Singh","Rating":8,"Price":"750 K","Cost":750000,"Type":"coach"}
+{"_id":"d16","Name":"Ricky Ponting","Rating":9,"Price":"950 K","Cost":950000,"Type":"coach"}
+{"_id":"d17","Name":"Eric Simmons","Rating":8,"Price":"900 K","Cost":900000,"Type":"coach"}
+{"_id":"d18","Name":"Glenn McGrath","Rating":6,"Price":"750 K","Cost":750000,"Type":"coach"}
+{"_id":"d19","Name":"Darren Lehmann","Rating":7,"Price":"300 K","Cost":300000,"Type":"coach"}
+{"_id":"d2","Name":"Sachin Tendulkar","Rating":15,"Price":"1.0 M","Cost":1000000,"Type":"coach"}
+{"_id":"d20","Name":"Ray Jennings","Rating":5,"Price":"300 K","Cost":300000,"Type":"coach"}
+{"_id":"d21","Name":"Sourav Ganguly","Rating":10,"Price":"1.5 M","Cost":1500000,"Type":"coach"}
+{"_id":"d22","Name":"Jacques Kallis","Rating":9.0,"Price":"1.0 M","Cost":1e+06,"Type":"coach"}
+{"_id":"d23","Name":"Muttiah Muralitharan","Rating":7.0,"Price":"500 K","Cost":500000.0,"Type":"coach"}
+{"_id":"d24","Name":"Mike Hussey","Rating":13.0,"Price":"1.2 M","Cost":1.2e+06,"Type":"coach"}
+{"_id":"d25","Name":"Kumar Sangakkara","Rating":12.0,"Price":"1.0 M","Cost":1e+06,"Type":"coach"}
+{"_id":"d26","Name":"Mahela Jayawardene","Rating":10.0,"Price":"700 K","Cost":700000.0,"Type":"coach"}
+{"_id":"d27","Name":"Graeme Smith","Rating":11.0,"Price":"650 K","Cost":650000.0,"Type":"coach"}
+{"_id":"d28","Name":"Mark Boucher","Rating":10.0,"Price":"500 K","Cost":500000.0,"Type":"coach"}
+{"_id":"d29","Name":"Chris Martin","Rating":8.0,"Price":"900 K","Cost":900000.0,"Type":"coach"}
+{"_id":"d3","Name":"John Wright","Rating":13,"Price":"1.5 M","Cost":1500000,"Type":"coach"}
+{"_id":"d30","Name":"Graeme Swann","Rating":6.0,"Price":"800 K","Cost":800000.0,"Type":"coach"}
+{"_id":"d31","Name":"Virendar Sehwag","Rating":5.0,"Price":"200 K","Cost":200000.0,"Type":"coach"}
+{"_id":"d32","Name":"Daniel Vettori","Rating":9.0,"Price":"500 K","Cost":500000.0,"Type":"coach"}
+{"_id":"d4","Name":"Andy Flower","Rating":11,"Price":"1.5 M","Cost":1500000,"Type":"coach"}
+{"_id":"d5","Name":"Shane Warne","Rating":13,"Price":"1.5 M","Cost":1500000,"Type":"coach"}
+{"_id":"d6","Name":"Anil Kumble","Rating":12,"Price":"1.0 M","Cost":1000000,"Type":"coach"}
+{"_id":"d7","Name":"Rahul Dravid","Rating":14,"Price":"1.1 M","Cost":1100000,"Type":"coach"}
+{"_id":"d8","Name":"John Buchannan","Rating":11,"Price":"1.3 M","Cost":1300000,"Type":"coach"}
+{"_id":"d9","Name":"Dav Whatmore","Rating":14,"Price":"900 K","Cost":900000,"Type":"coach"}
