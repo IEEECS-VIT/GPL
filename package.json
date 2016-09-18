@@ -109,7 +109,7 @@
     "cookie-parser": "^1.4.3",
     "csurf": "^1.9.0",
     "debug": "^2.2.0",
-    "ejs": "^2.4.2",
+    "ejs": "^2.5.2",
     "emailjs": "^1.0.5",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
