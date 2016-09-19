@@ -22,8 +22,8 @@ ratings:
   - "**.md"
   - bin/**/*
 exclude_paths:
-- public/stylesheets/min/**/*
-- public/javascript/min/**/*
+- public/min/**/*
+- public/min/**/*
 - views/**/*
 - LICENSE
 - Procfile
