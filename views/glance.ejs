@@ -1,0 +1,205 @@
+<!doctype html>
+
+<html>
+
+
+<head>
+    <meta charset="utf-8" />
+
+    <title> GPL | At a glance </title>
+
+     <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Loader -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.css" />
+
+    <!-- Custom Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+
+    <!-- Vendor CSS  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.1.0/milligram.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.10.1/metricsgraphics.css" />
+
+    <!-- Odometer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/odometer/0.4.7/themes/odometer-theme-default.css">
+    <script src="https://cdn.jsdelivr.net/odometer/0.4.7/odometer.min.js"></script>
+
+    <style>
+        .number {
+            line-height: 0.7;
+            color: #333;
+            font-size: 52px;
+            font-weight: bold;
+            font-stretch: condensed;
+            -webkit-font-smoothing: antialiased;
+        }
+        .number-label {
+            margin-top: 50px;
+            line-height: 1.1;
+            text-transform: uppercase;
+            font-size: 15px;
+            color: #999;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div class="container">
+        
+        <h1 class="float-left"><b> graVITas Premier League 2.0 </b><br> <small> At a glance </small>  </h1> 
+        
+        <div class="row">
+            <div class="column"> <h3  class="number-label" > sixes hit </h3> <span class="number odometer" id="sixes-total"> 10,000 </span>  </div>
+            <div class="column"> <div id="sixes" > </div> </div>
+        </div>
+
+        <div class="row">
+            <div class="column"> <h3  class="number-label" > fours hit </h3> <span class="number odometer" id="fours-total"> 23,000  </span> </div>
+            <div class="column"> <div id="fours" > </div> </div>
+        </div>
+         
+        <div class="row">
+            <div class="column"> <h3  class="number-label" > wickets taken </h3> <span class="number odometer" id="wickets-total"> 1,000 </span> </div>
+            <div class="column" id="wickets_taken" > </div>
+        </div>
+
+        <div class="row">
+            <div class="column"> <h3 class="number-label"> overs bowled </h3> <span class="number odometer" id="overs-bowled-total"> 50,000 </span> </div>
+            <div class="column"  > <span id="overs_bowled"> </span> </div>
+        </div>
+
+        <div class="row">
+            <div class="column"> <h3 class="number-label"> Overs Faced </h3> <span class="number odometer" id="overs-faced-total"> 50,000 </span> </div> 
+            <div class="column"  > <span id="overs_faced"> </span> </div>
+        </div>
+    </div>
+    
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.10.1/metricsgraphics.js"></script>
+    <script>
+
+        var graphDetails = [{
+            title: "",
+            description: "Number of Wickets taken faced by bowlers in GPL 2.0",
+            url: "/data/wickets_taken.json",
+            x_accessor: "Wickets",
+            y_accessor: "Players",
+            x_label: "Wickets Taken",
+            y_label: "",
+            target: "#wickets_taken"
+        }, 
+        {
+            title: "",
+            description: "Number of sixes hit by batsmen in GPL 2.0",
+            url: "/data/sixes.json",
+            x_accessor: "Sixes",
+            y_accessor: "Players",
+            x_label: "Sixes Hit",
+            y_label: "",
+            target: "#sixes"
+        },
+        {
+            title: "",
+            description: "Number of fours hit by batsmen in GPL 2.0",
+            url: "/data/fours.json",
+            x_accessor: "Fours",
+            y_accessor: "Players",
+            x_label: "Fours Hit",
+            y_label: "",
+            target: "#fours"
+        },
+        {
+            title: "",
+            description: "Number of overs bowler hit by bowlers in GPL 2.0",
+            url: "/data/overs_bowled.json",
+            x_accessor: "Overs",
+            y_accessor: "Players",
+            x_label: "Overs Bowled",
+            y_label: "",
+            target: "#overs_bowled"
+        },
+        {
+            title: "",
+            description: "Number of overs faced hit by batsman in GPL 2.0",
+            url: "/data/overs_faced.json",
+            x_accessor: "Overs",
+            y_accessor: "Players",
+            x_label: "Overs Faced",
+            y_label: "",
+            target: "#overs_faced"
+        }];
+
+        var getMaxOfArray = function (numArray) {
+            return Math.max.apply(null, numArray);
+        }
+        var getMax = function (data, accessor) {
+            return getMaxOfArray(data.map(function (e) {
+                return parseInt(e[accessor])
+            }));
+        }
+
+        var numbers = [{
+                id: "sixes-total",
+                value: "10,596"
+            },
+            {
+                id: "fours-total",
+                value: "23,143"
+            },
+            {
+                id: "wickets-total",
+                value: "1,506"
+            },
+            {
+                id: "overs-bowled-total",
+                value: "50,844"
+            },
+            {
+                id: "overs-faced-total",
+                value: "50,844"
+            }];
+        var main = function () {
+            
+             numbers.forEach(function (n) {
+                 console.log(document.getElementById(n.id))
+                 document.getElementById(n.id).innerHTML = n.value;
+             })
+             
+
+            
+        }
+
+        graphDetails.forEach(function (graphDetail) {
+                var options = Object.create(graphDetail);
+                options.axes_not_compact = false;
+                options.area = false;
+                
+                options.height = 250;
+                $.ajax({
+                    method: "GET",
+                    url: graphDetail.url,
+                    success: function (data) {
+                        options.data = data;
+                        options.max_x = getMax(data, options.x_accessor);
+                        MG.data_graphic(options);
+                    }
+                })
+
+            });
+        
+       window.onload = main;
+            
+
+    </script>
+    
+</body>
+
+</html>
