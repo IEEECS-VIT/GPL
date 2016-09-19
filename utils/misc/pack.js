@@ -12,10 +12,10 @@ var fs = require('fs'),
 	SCRIPTS = path.join(ASSET_PATH, 'javascript'),
 	STYLES = path.relative(process.cwd(), path.join('public', 'stylesheets')),
 	JS_OPTIONS = {
-		mangle: true,
-		mangleProperties: true,
+		mangle: false,
+		mangleProperties: false,
 		compress: {
-			properties: true,
+			properties: false,
 			dead_code: true,
 			drop_debugger: true,
 			conditionals: true,
@@ -27,10 +27,10 @@ var fs = require('fs'),
 			if_return: true,
 			join_vars: true,
 			cascade: true,
-			collapse_vars: true,
+			collapse_vars: false,
 			pure_getters: true,
 			drop_console: true,
-			unsafe: true
+			unsafe: false
 		}
 	};
 
