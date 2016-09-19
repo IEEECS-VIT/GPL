@@ -313,6 +313,9 @@ exports.checkMoM = function(MoM, temp, strike, toss) // check for man of the mat
 
 exports.make = function (team) // team object constructor
 {
+    // ensure points of MoM are zero initially
+    // so that MoM checks are not affected by previous matches
+    temp = 0; 
     for(i = 0; i < 2; ++i)
     {
         avgRating = {"bat": 0, "bowl": 0};

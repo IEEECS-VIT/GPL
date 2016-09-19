@@ -24,6 +24,12 @@ var path = require("path").join;
 var mongo = require("mongodb").MongoClient.connect;
 var mongoTeam = require(path(__dirname, "..", "database", "mongoTeam"));
 var simControl = require(path(__dirname, "..", "worker", "simController"));
+var ref =
+    {
+        "users": "round2",
+        "round2": "round3"
+    };
+var op = {};
 
 if(!process.env.NODE_ENV)
 {
@@ -31,12 +37,6 @@ if(!process.env.NODE_ENV)
 }
 else
 {
-    var ref =
-    {
-        "users": "round2",
-        "round2": "round3"
-    };
-    var op = {};
     var Heroku = require("heroku-client");
     var configure = new Heroku({"token": process.env.HEROKU_API_TOKEN}).apps(process.env.HEROKU_APP_NAME).configVars().update;
 }
@@ -75,7 +75,6 @@ mongo(process.env.MONGO, function(er, db){
                     {
                         console.error(err.message);
                     }
-
                     configure(op, function(error){
                         if(error)
                         {
@@ -86,6 +85,11 @@ mongo(process.env.MONGO, function(er, db){
                         console.timeEnd("sim-controller");
                     });
                 });
+            }
+            else
+            {
+                database.close();
+                console.timeEnd("sim-controller");
             }
         });
     }

@@ -44,3 +44,14 @@ __pycache__/
 # Temporary files
 temp.js
 test.js
+
+# VS Code
+.vscode/
+jsconfig.json
+typings/
+
+# Directory for generated documentation
+out
+
+# Minified static assets
+public/min

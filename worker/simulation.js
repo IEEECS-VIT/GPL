@@ -93,7 +93,6 @@ exports.simulate = function (data, callback)
 	data.team[0].names = ["", "", "", "", "", "", "", "", "", "", ""];
 	data.team[1].names = ["", "", "", "", "", "", "", "", "", "", ""];
     temp = [data.team[0].ratings.length > 11, data.team[1].ratings.length > 11];
-
     if (!(temp[0] && temp[1])) // simplified check to determine which team lost / won if at least 1 team is short of 11 players and one coach.
     {
         for(i = 0; i < 2; ++i)

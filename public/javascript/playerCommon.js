@@ -17,8 +17,16 @@
  */
 
 function toggleSidenav() {
-    $("#sidenav").toggleClass("hidden-xs");
-    //$("#main-content").toggleClass("col-xs-12");
-    //$("#main-content").toggleClass("col-xs-7");
-    $("#main-content").toggleClass("col-xs-offset-4");
+
+    if ($("#main-content").hasClass("col-xs-offset-4")) {
+        $("#main-content").removeClass("col-xs-offset-4", 800, function () {
+            $("#sidenav").addClass("hidden-xs", 0);
+        });
+        
+    } else {
+        $("#sidenav").removeClass("hidden-xs", 0);
+        $("#main-content").addClass("col-xs-offset-4", 800);
+        
+        
+    }
 }

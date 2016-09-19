@@ -40,7 +40,7 @@ fs.readFile(path(...dir, ".name"), function(err, data){ // this step is necessar
     scopeData =
     `  <component name="NameScopedManager">${line}` +
     `    <scope name="Public JS" pattern="file[${data}]:public/javascripts//*&amp;&amp;!file[${data}]:public/javascripts/min//*" />${line}` +
-    `    <scope name="Public CSS" pattern="file[${data}]:public/stylesheets//*&amp;&amp;!file[${data}]:public/stylesheets/min//*" />${line}` +
+    `    <scope name="Public CSS" pattern="file[${data}]:public/stylesheets//*&amp;&amp;!file[${data}]:public/min//*" />${line}` +
     `  </component>${line}` +
     "</project>";
 
