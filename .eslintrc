@@ -172,7 +172,7 @@ rules:
   max-nested-callbacks: 2
   max-params: [2, 5]
   max-statements: [2, 30]
-  new-cap: 2
+  new-cap: 1
   new-parens: 2
   newline-after-var: [2, always]
   newline-before-return: 2
@@ -282,7 +282,7 @@ rules:
   lodash/prefer-includes: 2
   lodash/prefer-is-nil: 2
   lodash/prefer-lodash-chain: 2
-  lodash/prefer-lodash-method: 2
+  lodash/prefer-lodash-method: 0
   lodash/prefer-lodash-typecheck: 2
   lodash/prefer-matches: 2
   lodash/prefer-noop: 2
