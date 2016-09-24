@@ -89,8 +89,9 @@ exports.initSimulation = function (day, masterCallback)
 
         var nonBowler = function(newUserDoc)
         {
-            if (!newUserDoc.squad[i].match(/^b/))
+            if (!newUserDoc.squad[i].match(/^b/) && !newUserDoc.squad[i].match(/^d/))
             {
+                
                 if(newUserDoc.stats[newUserDoc.squad[i]].recent[day - 1] > stats.daily.individual.value)
                 {
                     stats.daily.individual = helper.dailyHigh(newUserDoc, i, day);
@@ -118,8 +119,9 @@ exports.initSimulation = function (day, masterCallback)
                     for (i = 0; i < newUserDoc.squad.length; ++i)
                     {
                         nonBowler(newUserDoc);
-
-                        if (newUserDoc.squad[i].match(/^[^a]/) && newUserDoc.stats[newUserDoc.squad[i]].wickets > stats.purple.wickets)
+                        
+                        
+                        if (newUserDoc.squad[i].match(/^[^a]/) && !newUserDoc.squad[i].match(/^d/) && newUserDoc.stats[newUserDoc.squad[i]].wickets > stats.purple.wickets)
                         {
                             stats.purple = helper.purpleCap(i, newUserDoc);
                         }

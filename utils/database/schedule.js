@@ -57,7 +57,12 @@ if(!process.env.NODE_ENV)
 }
 else
 {
-	var configure = new Heroku({token: process.env.HEROKU_API_TOKEN}).apps(process.env.HEROKU_APP_NAME).configVars().update;
+
+    mongoURI = process.env.MONGO;
+	// var configure = new Heroku({token: process.env.HEROKU_API_TOKEN}).apps(process.env.HEROKU_APP_NAME).configVars().update;
+
+	// var configure = new Heroku({token: process.env.HEROKU_API_TOKEN}).apps(process.env.HEROKU_APP_NAME).configVars().update;
+
 }
 
 mongoURI = process.env.MONGO;
@@ -206,7 +211,7 @@ var onParallel = function(err)
     {
 	    database.close();
 
-	    if(process.env.NODE_ENV)
+	    /*if(process.env.NODE_ENV)
 	    {
 		    configure({DAY: 1}, function(error){ // update process.env.DAY to 1, indicating that matches can start.
 			    if(error)
@@ -218,7 +223,7 @@ var onParallel = function(err)
 				    console.log("process.env.DAY has been updated to 1.");
 			    }
 		    });
-	    }
+	    }*/
     }
 };
 
