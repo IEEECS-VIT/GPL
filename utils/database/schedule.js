@@ -63,7 +63,7 @@ else {
 mongoURI = process.env.MONGO;
 
 if (process.env.DAY < "0") {
-	throw new Error("Registrations have not ended yet, set process.env.DAY to 0 to allow schedule construction.");
+	throw new Error("Registrations have not started yet, set process.env.DAY to 0 to allow registration.");
 }
 else if (process.env.DAY > "0") {
 	throw new Error("Matches for this round have already started.");

@@ -18,7 +18,6 @@
 
 var i,
 	cost,
-	team,
 	squad,
 	stats,
 	fields,
