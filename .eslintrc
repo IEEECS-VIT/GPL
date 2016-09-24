@@ -4,9 +4,22 @@ ecmaFeatures:
 
 plugins:
   - jsdoc
+  - lodash
   - mocha
   - mongodb
   - security
+
+globals:
+  it: true
+  db: true
+  before: true
+  after: true
+  global: true
+  afterEach: true
+  beforeEach: true
+  testFlag: true
+  testDb: true
+  describe: true
 
 env:
   amd: true
@@ -63,7 +76,6 @@ rules:
   no-case-declarations: 2
   no-div-regex: 2
   no-else-return: 2
-  no-empty-label: 2
   no-empty-pattern: 2
   no-eq-null: 2
   no-eval: 2
@@ -144,7 +156,7 @@ rules:
   eol-last: 2
   func-names: 2
   func-style: 2
-  id-length: 2
+  id-length: 0
   id-match: 2
   indent: 2
   jsx-quotes: 0
@@ -180,20 +192,18 @@ rules:
   one-var: 0
   operator-assignment: 2
   operator-linebreak: 2
-  padded-blocks: 2
+  padded-blocks: [2, never]
   quote-props: 0
   quotes: [2, double]
   require-jsdoc: 0
   semi-spacing: 2
   semi: 2
   sort-vars: 0
-  space-after-keywords: 2
+  keyword-spacing: 2
   space-before-blocks: 2
   space-before-function-paren: 0
-  space-before-keywords: 2
   space-in-parens: 2
   space-infix-ops: 2
-  space-return-throw-case: 2
   space-unary-ops: 0
   spaced-comment: 0
   wrap-regex: 0
@@ -204,7 +214,7 @@ rules:
   arrow-spacing: 2
   constructor-super: 2
   generator-star-spacing: 2
-  no-arrow-condition: 2
+  no-confusing-arrow: 2
   no-class-assign: 2
   no-const-assign: 2
   no-dupe-class-members: 2
@@ -230,6 +240,34 @@ rules:
   jsdoc/require-param-type: 2
   jsdoc/require-returns-description: 2
   jsdoc/require-returns-type: 2
+
+  # Lodash
+  lodash/collection-method-value: 2
+  lodash/no-extra-args: 2
+  lodash/chain-style: 2
+  lodash/path-style: 2
+  lodash/prefer-chain: 2
+  lodash/prefer-compact: 2
+  lodash/prefer-filter: 2
+  lodash/prefer-flat-map: 2
+  lodash/prefer-invoke-map: 2
+  lodash/prefer-map: 2
+  lodash/prefer-reject: 2
+  lodash/prefer-thru: 2
+  lodash/preferred-alias: 2
+  lodash/prop-shorthand: 2
+  lodash/prefer-constant: 2
+  lodash/prefer-get: 2
+  lodash/prefer-includes: 2
+  lodash/prefer-is-nil: 2
+  lodash/prefer-lodash-chain: 2
+  lodash/prefer-lodash-method: 2
+  lodash/prefer-lodash-typecheck: 2
+  lodash/prefer-matches: 2
+  lodash/prefer-noop: 2
+  lodash/prefer-over-quantifier: 2
+  lodash/prefer-startswith: 2
+  lodash/prefer-times: 2
 
   # Mocha
   mocha/handle-done-callback: 2
