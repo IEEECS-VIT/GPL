@@ -51,7 +51,7 @@ jsconfig.json
 typings/
 
 # Directory for generated documentation
-out
+./out
 
 # Minified static assets
 public/min

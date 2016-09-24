@@ -18,49 +18,42 @@
 
 console.time("Purge operation");
 
-var mode = "";
+var mode = "",
+	path = require("path").join,
+	mongo = require("mongodb").MongoClient.connect,
+	mongoURI = `mongodb://127.0.0.1:27017/${mode}GPL`;
 
-try
-{
-    mode = testFlag ? "test" : ""; //  testFlag is a global variable from tests/helper.js
+try {
+	mode = testFlag ? "test" : ""; //  testFlag is a global variable from tests/helper.js
 }
-catch(err)
-{
-    console.log("Running in non-test mode.");
-}
-
-var path = require("path").join;
-var mongo = require("mongodb").MongoClient.connect;
-var mongoURI = `mongodb://127.0.0.1:27017/${mode}GPL`;
-
-if(process.env.NODE_ENV)
-{
-    throw "The database may not be purged on production environments.";
+catch (err) {
+	console.log("Running in non-test mode.");
 }
 
-mongo(mongoURI, function(err, db){
-    if(err)
-    {
-        throw err;
-    }
+if (process.env.NODE_ENV) {
+	throw new Error("The database may not be purged on production environments.");
+}
 
-    db.dropDatabase(function(error){
-        if(error)
-        {
-            throw error;
-        }
+mongo(mongoURI, function (err, db) {
+	if (err) {
+		throw err;
+	}
 
-        console.log("The database was successfully purged, you can reinstate it with `npm run seed`.");
-        console.timeEnd("Purge operation");
+	db.dropDatabase(function (error) {
+		if (error) {
+			throw error;
+		}
 
-        if(mode)
-        {
-            testDb = db; // to maintain a persistent test database connection
-            require(path(__dirname, "seed")); // remote file execution
-        }
-        else
-        {
-            db.close();
-        }
-    });
+		console.log("The database was successfully purged, you can reinstate it with `npm run seed`.");
+		console.timeEnd("Purge operation");
+
+		if (mode) {
+			testDb = db; // to maintain a persistent test database connection
+			// eslint-disable-next-line global-require
+			require(path(__dirname, "seed")); // remote file execution
+		}
+		else {
+			db.close();
+		}
+	});
 });

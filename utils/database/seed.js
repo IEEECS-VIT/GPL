@@ -18,103 +18,78 @@
 
 console.time("Seeding operation took");
 
-var database;
-var mongoURI;
-var mode = "";
-var async = require("async");
-var path = require("path").join;
-var record = require(path(__dirname, "..", "..", "database", "mongoRecord"));
-var info = record.info;
-var stats = record.stats;
+var database,
+	mongoURI,
+	mode = "",
+	async = require("async"),
+	path = require("path").join,
+	record = require(path(__dirname, "..", "..", "database", "mongoRecord")),
+	info = record.info,
+	stats = record.stats;
 
-try
-{
-    mode = testFlag ? "test" : "";
+try {
+	mode = testFlag ? "test" : "";
 }
-catch(err)
-{
-    console.log("Running in non-test mode.");
+catch (err) {
+	console.log("Running in non-test mode.");
 }
 
-var onParallel = function(err)
-{
-    if(err)
-    {
-        throw err;
-    }
+var onParallel = function (err) {
+		if (err) {
+			throw err;
+		}
 
-    console.timeEnd("Seeding operation took");
+		console.timeEnd("Seeding operation took");
 
-    if(mode)
-    {
-        require(path(__dirname, "schedule")); // remote file execution.
-    }
-    else
-    {
-        database.close();
-    }
-};
-var mongo = require("mongodb").MongoClient.connect;
-var parallelTasks =
-[
-    function(asyncCallback)
-    {
-        database.collection("info").insertOne(info, asyncCallback);
-    },
-    function(asyncCallback)
-    {
-        database.collection("stats").insertOne(stats, asyncCallback);
-    }
-];
+		if (mode) {
+            // eslint-disable-next-line global-require
+			require(path(__dirname, "schedule")); // remote file execution.
+		}
+		else {
+			database.close();
+		}
+	},
+	mongo = require("mongodb").MongoClient.connect,
+	parallelTasks = [
+		function (asyncCallback) {
+			database.collection("info").insertOne(info, asyncCallback);
+		},
+		function (asyncCallback) {
+			database.collection("stats").insertOne(stats, asyncCallback);
+		}
+	];
 
-if(process.env.NODE_ENV)
-{
-    mongoURI = process.env.MONGO;
-    console.warn("You are running the seed operation in a production environment. No new teams / players shall be made.");
+if (process.env.NODE_ENV) {
+	mongoURI = process.env.MONGO;
+	console.warn("Running the seed operation in a production environment. No new teams / players shall be made.");
 }
-else
-{
-    var players = record.players();
-    var users = record.users(true, 8);
-    mongoURI = `mongodb://127.0.0.1:27017/${mode}GPL`;
+else {
+	var players = record.players(),
+		users = record.users(true, 8);
 
-    parallelTasks.push(
-        function(asyncCallback)
-        {
-            database.collection("users").insertMany(users, asyncCallback);
-        },
-        function(asyncCallback)
-        {
-            database.collection("round2").insertMany(users, asyncCallback);
-        },
-        function(asyncCallback)
-        {
-            database.collection("round3").insertMany(users, asyncCallback);
-        },
-        function(asyncCallback)
-        {
-            database.collection("players").insertMany(players, asyncCallback);
-        }
+	mongoURI = `mongodb://127.0.0.1:27017/${mode}GPL`;
+
+	parallelTasks.push(
+        function (asyncCallback) { database.collection("users").insertMany(users, asyncCallback); },
+        function (asyncCallback) { database.collection("round2").insertMany(users, asyncCallback); },
+        function (asyncCallback) { database.collection("round3").insertMany(users, asyncCallback); },
+        function (asyncCallback) { database.collection("players").insertMany(players, asyncCallback); }
     );
 }
 
-if(mode)
-{
-    database = testDb; // from utils/database/purge.js
-    async.parallel(parallelTasks, onParallel);
+if (mode) {
+	database = testDb; // from utils/database/purge.js
+	async.parallel(parallelTasks, onParallel);
 }
-else
-{
-    var onConnect = function(err, db)
-    {
-        if(err)
-        {
-            throw err;
-        }
+else {
+	var onConnect = function (err, db) {
+		if (err) {
+			throw err;
+		}
 
-        database = db;
-        async.parallel(parallelTasks, onParallel);
-    };
+		database = db;
+		async.parallel(parallelTasks, onParallel);
+	};
 
-    mongo(mongoURI, onConnect);
+	mongo(mongoURI, onConnect);
 }

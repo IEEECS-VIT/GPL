@@ -16,11 +16,13 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if(process.platform === 'win32') // the bcrypt issue is only prevalent on Microsoft Windows
-{
-	var join = require('path').join;
-	var dir = [__dirname, 'node_modules'];
-	require('child_process').exec('npm i bcryptjs', () => {
-		require('fs').renameSync(join(...dir, 'bcryptjs'), join(...dir, 'bcrypt'));
+if (process.platform === "win32") { // the bcrypt issue is only prevalent on Microsoft Windows
+	var join = require("path").join, // eslint-disable-line global-require
+		bcryptPath = join(__dirname, "..", "..", "node_modules", "bcrypt");
+
+	// eslint-disable-next-line
+	require("child_process").exec("npm i bcryptjs", () => {
+		// eslint-disable-next-line global-require
+		require("fs").rename(`${bcryptPath}s`, bcryptPath, function () { console.log(""); });
 	});
 }
