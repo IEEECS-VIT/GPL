@@ -16,258 +16,206 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var i;
-var log;
-var flag;
-var result;
-var slice =
-{
-    "win": 1,
-    "points": 1,
-    "played": 1,
-    "netRunRate": 1
-};
-var options =
-{
-    "sort":
-    [
-        ["points", -1],
-        ["netRunRate", -1]
-    ]
-};
-var leaderboard;
-var match = process.env.MATCH;
-var path = require("path").join;
-var helper = require(path(__dirname, "mongoHelper"));
-var mongoFeatures = require(path(__dirname, "mongoFeatures"));
-var email = require(path(__dirname, "..", "utils", "email", "email"));
-
-var ref =
-{
-    "other": email.message,
-    "interest": email.interest
-};
+var i,
+	flag,
+	result,
+	slice = {
+		win: 1,
+		points: 1,
+		played: 1,
+		netRunRate: 1
+	},
+	options = {
+		sort:
+		[
+            ["points", -1],
+            ["netRunRate", -1]
+		]
+	},
+	leaderboard,
+	match = process.env.MATCH,
+	path = require("path").join,
+	helper = require(path(__dirname, "mongoHelper")),
+	email = require(path(__dirname, "..", "utils", "email", "email")),
+	ref = {
+		other: email.message,
+		interest: email.interest
+	};
 
 ref[match] = email.register;
 
-if (process.env.LOGENTRIES_TOKEN)
-{
-    log = require("node-logentries").logger({token: process.env.LOGENTRIES_TOKEN});
-}
+exports.getCount = function (col, query, callback) {
+	switch (typeof col) {
+	case "object":
+		callback = query;
+		query = col;
+		col = match;
+		break;
 
-exports.getCount = function (col, query, callback)
-{
-    switch(typeof col)
-    {
-        case "object":
-            callback = query;
-            query = col;
-            col = match;
-            break;
+	case "function":
+		callback = col;
+		query = {};
+		col = match;
+		break;
+	default: break;
+	}
 
-        case "function":
-            callback = col;
-            query = {};
-            col = match;
-            break;
-    }
-
-    db.collection(col).count(query, callback);
+	db.collection(col).count(query, callback);
 };
 
-exports.insert = function (col, doc, callback)
-{
-    var onInsert = function(err)
-    {
-        if(err)
-        {
-            return callback(err);
-        }
-        if(col === "features")
-        {
-            return callback(null);
-        }
+exports.insert = function (col, doc, callback) {
+	var onInsert = function (err) {
+		if (err) {
+			return callback(err);
+		}
+		if (col === "features") {
+			return callback(null);
+		}
 
-        ref[col].header.to = doc.email;
-        email.send(ref[col], callback);
-    };
+		ref[col].header.to = doc.email;
+		email.send(ref[col], callback);
+	};
 
-    db.collection(col).insertOne(doc, {"w": 1}, onInsert);
+	db.collection(col).insertOne(doc, { w: 1 }, onInsert);
 };
 
-exports.getLeader = function (user, callback)
-{
-    var onFetch = function (err, documents)
-    {
-        if (err)
-        {
-            return callback(err, null);
-        }
+exports.getLeader = function (user, callback) {
+	var onFetch = function (err, documents) {
+		if (err) {
+			return callback(err, null);
+		}
 
-        flag = false;
-        leaderboard = [];
+		flag = false;
+		leaderboard = [];
 
-        for (i = 0; i < documents.length; ++i)
-        {
-            flag |= documents[i]._id === user;
+		for (i = 0; i < documents.length; ++i) {
+			flag |= documents[i]._id === user;
 
-	        if (i < 10 || flag)
-	        {
-		        leaderboard.push(documents[i]);
-	        }
-            if (flag && leaderboard.length > 9)
-            {
+			if (i < 10 || flag) {
+				leaderboard.push(documents[i]);
+			}
+			if (flag && leaderboard.length > 9) {
 				leaderboard[leaderboard.length - 1].rank = i + 1;
-                break;
-            }
-        }
+				break;
+			}
+		}
 
-        return callback(null, leaderboard);
-    };
+		return callback(null, leaderboard);
+	};
 
-    db.collection(match).find({}, slice, options).toArray(onFetch);
+	db.collection(match).find({}, slice, options).toArray(onFetch);
 };
 
-exports.forgotPassword = function (doc, token, host, callback)
-{
-    var op =
-    {
-        "$set":
-        {
-            "resetToken": token,
-            "expire": Date.now() + 3600000
-        }
-    };
+exports.forgotPassword = function (doc, token, host, callback) {
+	var op = {
+			$set: {
+				resetToken: token,
+				expire: Date.now() + 3600000
+			}
+		},
+		onFetch = function (err, document) {
+			if (err) {
+				return callback(err, null);
+			}
+			if (!document.value) {
+				return callback(false, null);
+			}
 
-    var onFetch = function (err, document)
-    {
-        if (err)
-        {
-            return callback(err, null);
-        }
-        if(!document.value)
-        {
-            return callback(false, null);
-        }
+			ref.other.header.to = document.value.email;
+			ref.other.header.subject = "Time to get back in the game.";
+			ref.other.attach_alternative(email.password(host, token));
 
-        ref.other.header.to = document.value.email;
-        ref.other.header.subject = "Time to get back in the game.";
-        ref.other.attach_alternative(email.password(host, token));
+			email.send(ref.other, helper.forgotCallback("password", callback));
+		};
 
-        email.send(ref.other, helper.forgotCallback("password", callback));
-    };
-
-    db.collection(match).findOneAndUpdate(doc, op, onFetch);
+	db.collection(match).findOneAndUpdate(doc, op, onFetch);
 };
 
-exports.forgotUser = function (doc, callback)
-{
-    var onFetch = function (err, docs)
-    {
-        if (err)
-        {
-            return callback(err, null);
-        }
-        if(!docs.length)
-        {
-            return callback(false, null);
-        }
+exports.forgotUser = function (doc, callback) {
+	var onFetch = function (err, docs) {
+		if (err) {
+			return callback(err, null);
+		}
+		if (!docs.length) {
+			return callback(false, null);
+		}
 
-        result = docs.reduce((a, b) => a + `<li>${b._id} (${b.authStrategy})</li>`, "");
+		result = docs.reduce((a, b) => `${a}<li>${b._id} (${b.authStrategy})</li>`, "");
 
-        ref.other.header.to = doc.email;
-        ref.other.header.subject = "Time to get back in the game";
-        ref.other.attach_alternative(email.user(result));
+		ref.other.header.to = doc.email;
+		ref.other.header.subject = "Time to get back in the game";
+		ref.other.attach_alternative(email.user(result));
 
-        email.send(ref.other, helper.forgotCallback("user", callback));
-    };
+		email.send(ref.other, helper.forgotCallback("user", callback));
+	};
 
-    db.collection(match).find(doc, {authStrategy : 1}).toArray(onFetch);
+	db.collection(match).find(doc, { authStrategy: 1 }).toArray(onFetch);
 };
 
-exports.getReset = function (doc, callback)
-{
-    var onFetch = function (err, document)
-    {
-        if (err)
-        {
-            return callback(err, null);
-        }
-        if (document)
-        {
-            return callback(null, document);
-        }
+exports.getReset = function (doc, callback) {
+	var onFetch = function (err, document) {
+		if (err) {
+			return callback(err, null);
+		}
+		if (document) {
+			return callback(null, document);
+		}
 
-        return callback(false, null);
-    };
+		return callback(false, null);
+	};
 
-    db.collection(match).find(doc).limit(1).next(onFetch);
+	db.collection(match).find(doc).limit(1).next(onFetch);
 };
 
-exports.resetPassword = function (token, hash, callback)
-{
-    var query =
-    {
-        "resetToken": token,
-        "expire":
-        {
-            "$gt": Date.now()
-        }
-    };
-    var op =
-    {
-        "$set":
-        {
-            "passwordHash": hash
-        },
-        "$unset":
-        {
-            "resetToken": "",
-            "expire": ""
-        }
-    };
+exports.resetPassword = function (token, hash, callback) {
+	var query = {
+			resetToken: token,
+			expire: {
+				$gt: Date.now()
+			}
+		},
+		op = {
+			$set: {
+				passwordHash: hash
+			},
+			$unset: {
+				resetToken: "",
+				expire: ""
+			}
+		},
+		onFetch = function (err, doc) {
+			if (err) {
+				return callback(err, null);
+			}
+			if (!doc) {
+				return callback(false, null);
+			}
 
-    var onFetch = function (err, doc)
-    {
-        if (err)
-        {
-            return callback(err, null);
-        }
-        if(!doc)
-        {
-            return callback(false, null);
-        }
+			doc = doc.value;
+			ref.other.header.to = doc.email;
+			ref.other.header.subject = "Password change successful!";
+			ref.other.attach_alternative(email.reset(doc.managerName, doc._id));
 
-        doc = doc.value;
-        ref.other.header.to = doc.email;
-        ref.other.header.subject = "Password change successful!";
-        ref.other.attach_alternative(email.reset(doc.managerName, doc._id));
+			email.send(ref.other, callback);
+		};
 
-        email.send(ref.other, callback);
-    };
-
-    db.collection(match).findOneAndUpdate(query, op, onFetch);
+	db.collection(match).findOneAndUpdate(query, op, onFetch);
 };
 
-exports.updateUserTeam = function (doc, team, stats, cost, callback)
-{
-    db.collection(match).findOneAndUpdate(doc,
-    {
-        "$set":
-        {
-            "team": team,
-            "stats": stats,
-            "surplus": cost
-        }
-    }, {}, callback)
+exports.updateUserTeam = function (doc, team, stats, cost, callback) {
+	db.collection(match).findOneAndUpdate(doc, {
+		$set: {
+			team: team,
+			stats: stats,
+			surplus: cost
+		}
+	}, {}, callback);
 };
 
-exports.updateMatchSquad = function (doc, arr, callback)
-{
-    db.collection(match).findOneAndUpdate(doc, {$set: {squad: arr}}, {}, callback);
+exports.updateMatchSquad = function (doc, arr, callback) {
+	db.collection(match).findOneAndUpdate(doc, { $set: { squad: arr } }, {}, callback);
 };
 
-exports.fetchUser = function (query, callback)
-{
-    db.collection(match).find(query).limit(1).next(callback);
+exports.fetchUser = function (query, callback) {
+	db.collection(match).find(query).limit(1).next(callback);
 };
