@@ -209,8 +209,8 @@ var dump,
 					throw err;
 				}
 
-				fs.createWriteStream(`${commentary[arg].file}.js`, { flags: "r+", start: result.size - 3 - line.length })
-                  .end(`${commentary[arg].content}${line}\t];`);
+				fs.createWriteStream(`${commentary[arg].file}.js`, { flags: "r+", start: result.size - 1 - line.length })
+                  .end(`${commentary[arg].content}${line}\t}`);
 				callback();
 			});
 		}
