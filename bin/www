@@ -17,64 +17,66 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var log;
-var server;
-var path = require("path").join;
-var exit = require("forever").stop;
-var debug = require("debug")("GPL");
-var app = require(path(__dirname, "..", "app"));
-var mongo = require("mongodb").MongoClient.connect;
+var log,
+	server,
+
+	path = require("path").join,
+	exit = require("forever").stop,
+	debug = require("debug")("GPL"),
+	app = require(path(__dirname, "..", "app")),
+	mongo = require("mongodb").MongoClient.connect;
 
 if (process.env.NEWRELIC_APP_NAME && process.env.NEWRELIC_LICENSE)
 {
-    require(path(__dirname, "..", "utils", "misc", "newrelic"));
+	require(path(__dirname, "..", "utils", "misc", "newrelic")); // eslint-disable-line global-require
 }
 
 if (process.env.LOGENTRIES_TOKEN)
 {
-    log = require("node-logentries").logger({"token": process.env.LOGENTRIES_TOKEN});
+	// eslint-disable-next-line global-require
+	log = require("node-logentries").logger({ token: process.env.LOGENTRIES_TOKEN });
 }
 
 app.set("port", process.env.PORT || 3000);
 
 var onBind = function ()
 {
-    if (log)
+	if (log)
     {
-        log.log("info", {"MongoUri": process.env.MONGO, "Port": server.address().port});
+		log.log("info", { MongoUri: process.env.MONGO, Port: server.address().port });
 
-        if (process.env.HOSTNAME)
+		if (process.env.HOSTNAME)
         {
-            log.log("info", {"Application": process.env.HOSTNAME});
-        }
-    }
+			log.log("info", { Application: process.env.HOSTNAME });
+		}
+	}
 
-    debug("Node.js Express server listening on port " + server.address().port);
-    debug("Using MongoDB: " + process.env.MONGO);
+	debug(`Node.js Express server listening on port ${server.address().port}`);
+	debug(`Using MongoDB: ${process.env.MONGO}`);
 
-    if (process.env.HOSTNAME)
+	if (process.env.HOSTNAME)
     {
-        debug(process.env.HOSTNAME);
-    }
+		debug(process.env.HOSTNAME);
+	}
 };
 
-mongo(process.env.MONGO, function(err, database){
-    if(err)
+mongo(process.env.MONGO, function (err, database) {
+	if (err)
     {
-        throw process.env.NODE_ENV ? "process.env.MONGO does not contain a valid connection URI."
-                                   : "The mongod localhost server is not running on port 27017.";
-    }
+		throw new Error(process.env.NODE_ENV ? "process.env.MONGO does not contain a valid connection URI."
+                                   : "The mongod localhost server is not running on port 27017.");
+	}
 
-    db = database; // global db variable is for persistent database connections, without bloating request middleware
-    server = app.listen(app.get("port"), onBind);
+	db = database; // global db variable is for persistent database connections, without bloating request middleware
+	server = app.listen(app.get("port"), onBind);
 });
 
-process.on("SIGINT", function(err){
-    if(err)
+process.on("SIGINT", function (err) {
+	if (err)
     {
-        console.error(err);
-    }
+		console.error(err);
+	}
 
-    db.close();
-    exit();
+	db.close();
+	exit();
 });

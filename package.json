@@ -26,7 +26,7 @@
     "start": "npm run pack && node node_modules/.bin/forever ./bin/www",
     "stop": "node node_modules/.bin/forever stop ./bin/www",
     "restart": "node node_modules/.bin/forever restart ./bin/www",
-    "test-unit": "node node_modules/.bin/mocha test/unit",
+    "test-unit": "node node_modules/.bin/istanbul cover node_modules/.bin/_mocha test/unit",
     "test-structure": "node node_modules/.bin/mocha test/structure",
     "test": "node node_modules/.bin/mocha test"
   },
@@ -37,74 +37,26 @@
   },
   "contributors": [
     [
-      {
-        "name": "Aneesh Neelam",
-        "email": "neelam.aneesh@gmail.com"
-      },
-      {
-        "name": "Kashish Singhal",
-        "email": "singhal2.kashish@gmail.com"
-      },
-      {
-        "name": "Kunal Nagpal",
-        "email": "kunagpal@gmail.com"
-      },
-      {
-        "name": "Ayush Agarwal",
-        "email": "agarwalayush161@gmail.com"
-      },
-      {
-        "name": "Shivam Mathur",
-        "email": "burnualive@hotmail.com"
-      },
-      {
-        "name": "Karan Pittie",
-        "email": "karan.pittie@yahoo.com"
-      },
-      {
-        "name": "Vikhyati Singh",
-        "email": "vikhyati.singh2012@vit.ac.in"
-      }
+      {"name": "Aneesh Neelam", "email": "neelam.aneesh@gmail.com"},
+      {"name": "Kashish Singhal", "email": "singhal2.kashish@gmail.com"},
+      {"name": "Kunal Nagpal", "email": "kunagpal@gmail.com"},
+      {"name": "Ayush Agarwal", "email": "agarwalayush161@gmail.com"},
+      {"name": "Shivam Mathur", "email": "burnualive@hotmail.com"},
+      {"name": "Karan Pittie", "email": "karan.pittie@yahoo.com"},
+      {"name": "Vikhyati Singh", "email": "vikhyati.singh2012@vit.ac.in"}
     ],
     [
-      {
-        "name": "Sakshi Anand",
-        "email": "sakku.anand3@gmail.com"
-      },
-      {
-        "name": "Saurabh Mathur",
-        "email": "saurabhmathur96@gmail.com"
-      },
-      {
-        "name": "Tanisha Chawla",
-        "email": "chawlatanisha20@gmail.com"
-      },
-      {
-        "name": "Harshal Varday",
-        "email": "harshal.varday2014@vit.ac.in"
-      },
-      {
-        "name": "Waris Chutani",
-        "email": "waris0023@gmail.com"
-      }
+      {"name": "Sakshi Anand", "email": "sakku.anand3@gmail.com"},
+      {"name": "Saurabh Mathur", "email": "saurabhmathur96@gmail.com"},
+      {"name": "Tanisha Chawla", "email": "chawlatanisha20@gmail.com"},
+      {"name": "Harshal Varday", "email": "harshal.varday2014@vit.ac.in"},
+      {"name": "Waris Chutani", "email": "waris0023@gmail.com"}
     ],
     [
-      {
-        "name": "Vishwajeetsinh Jadeja",
-        "email": "vishwajeetsinhjadeja4@gmail.com"
-      },
-      {
-        "name": "Ankur Sarode",
-        "email": "andkur.sarode@gmail.com"
-      },
-      {
-        "name": "Umang Chaudhary",
-        "email": "umang18oct@gmail.com"
-      },
-      {
-        "name": "Anish Singh Walia",
-        "email": "loveeanish@gmail.com"
-      }
+      {"name": "Vishwajeetsinh Jadeja", "email": "vishwajeetsinhjadeja4@gmail.com"},
+      {"name": "Ankur Sarode", "email": "andkur.sarode@gmail.com"},
+      {"name": "Umang Chaudhary", "email": "umang18oct@gmail.com"},
+      {"name": "Anish Singh Walia", "email": "loveeanish@gmail.com"}
     ]
   ],
   "dependencies": {
