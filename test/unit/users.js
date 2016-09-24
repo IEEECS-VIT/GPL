@@ -18,31 +18,29 @@
 
 // var assert = require("assert");
 
-describe("User functionality tests:", function() {
+describe("User functionality tests:", function () {
     // check for user authentication before tests
-    before(function() {
+	before(function () {});
 
-    });
+	it("Admin tasks");
 
-    it("Admin tasks");
+	it("Home page checks");
 
-    it("Home page checks");
+	it("Player selection checks");
 
-    it("Player selection checks");
+	it("Squad update checks");
 
-    it("Squad update checks");
+	it("Feature suggestion checks");
 
-    it("Feature suggestion checks");
+	it("User interest check");
 
-    it("User interest check");
+	it("Game stats checks");
 
-    it("Game stats checks");
+	it("Leaderboard checks");
 
-    it("Leaderboard checks");
+	it("Dashboard checks");
 
-    it("Dashboard checks");
+	it("Match detail checks");
 
-    it("Match detail checks");
-
-    it("Setting checks");
+	it("Setting checks");
 });

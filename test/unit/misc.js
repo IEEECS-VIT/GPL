@@ -19,23 +19,23 @@
 // var assert = require("assert");
 
 describe("Miscellaneous test suites:", function () {
-    describe("Commentary scraper:");
+	describe("Commentary scraper:");
 
-    it("Countdown page checks");
+	it("Countdown page checks");
 
-    it("Rules page");
+	it("Rules page");
 
-    it("Privacy page");
+	it("Privacy page");
 
-    it("Developers page");
+	it("Developers page");
 
-    it("Rules page");
+	it("Rules page");
 
-    it("Sponsors page");
+	it("Sponsors page");
 
-    it("Schedule page");
+	it("Schedule page");
 
-    it("Prizes page");
+	it("Prizes page");
 
-    it("Team name api check");
+	it("Team name api check");
 });

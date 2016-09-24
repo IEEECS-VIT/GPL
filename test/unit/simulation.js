@@ -18,28 +18,28 @@
 
 // var assert = require("assert");
 
-describe("Simulation tests:", function() {
-    describe("simulation trigger:", function() {
-        it("Check for database, match day and user collection parameter validity");
+describe("Simulation tests:", function () {
+	describe("simulation trigger:", function () {
+		it("should check for database, match day and user collection parameter validity");
 
-        it("Check for email worker status");
-    });
+		it("should check for email worker status");
+	});
 
-    describe("simulation completion:", function() {
-        it("Ensure that simulation terminates without exceptions");
+	describe("simulation completion:", function () {
+		it("should ensure that simulation terminates without exceptions");
 
-        it("Parse data for update queries");
-    });
+		it("should parse data for update queries");
+	});
 
-    describe("Match status update:", function() {
-        it("Verify successful completion of update queries");
+	describe("Match status update:", function () {
+		it("should verify successful completion of update queries");
 
-        it("Pass to master callback");
-    });
+		it("should pass to master callback");
+	});
 
-    describe("simulation emails:", function() {
-        it("Check for duplicate emails and invalid entries");
+	describe("simulation emails:", function () {
+		it("should check for duplicate emails and invalid entries");
 
-        it("Send emails, log failures.");
-    });
+		it("should send emails, log failures.");
+	});
 });
