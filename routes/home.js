@@ -109,7 +109,7 @@ router.get("/", authenticated, function (req, res){
     mongoUsers.fetchUser(credentials, onFetch);
 });
 
-router.get("/leaderboard", authenticated, function (req, res){
+/*router.get("/leaderboard", authenticated, function (req, res){
     if(req.signedCookies.lead && req.signedCookies.day === process.env.DAY)
     {
         return res.render("leaderboard", {"leaderboard": JSON.parse(req.signedCookies.lead)});
@@ -121,7 +121,7 @@ router.get("/leaderboard", authenticated, function (req, res){
             if (err)
             {
                 console.error(err.message);
-                res.flash																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																					("Unable to process the leaderboard at this time, please re-try");																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																															
+                res.flash																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																					("Unable to process the leaderboard at this time, please re-try");
                 res.redirect("/home");
             }
             else
@@ -138,7 +138,7 @@ router.get("/leaderboard", authenticated, function (req, res){
     {
         res.redirect("/home");
     }
-});
+});*/
 
 router.get("/matches", authenticated, function (req, res){ // Deprecated
     if (process.env.DAY > "0") // Initialize process.env.DAY with -1, set to zero to open registrations.
