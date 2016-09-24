@@ -31,7 +31,7 @@ var i,
 	async = require("async"),
 	path = require("path").join,
 	dir = [__dirname, "..", "database"],
-	router = require("express").Router(),
+	router = require("express").Router(), // eslint-disable-line new-cap
 	clean = function (arg) { return `${parseInt(arg / 6, 10)}.${arg % 6}`; },
 	authenticated = function (req, res, next) {
 		if (req.signedCookies.name || req.signedCookies.admin) {

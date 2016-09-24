@@ -30,7 +30,7 @@ var i,
 	},
 	async = require("async"),
 	path = require("path").join,
-	router = require("express").Router(),
+	router = require("express").Router(), // eslint-disable-line new-cap
 	dir = [__dirname, "..", "database"],
 	mongoTeam = require(path(...dir, "mongoTeam")),
 	mongoUsers = require(path(...dir, "mongoUsers")),

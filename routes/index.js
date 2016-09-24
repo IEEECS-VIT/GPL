@@ -31,7 +31,7 @@ var log,
 	crypto = require("crypto"),
 	path = require("path").join,
 	dir = [__dirname, "..", "database"],
-	router = require("express").Router(),
+	router = require("express").Router(), // eslint-disable-line new-cap
 	mongoTeam = require(path(...dir, "mongoTeam")),
 	mongoUsers = require(path(...dir, "mongoUsers")),
 	socialCookie = { signed: true, maxAge: 300000 },
