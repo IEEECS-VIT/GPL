@@ -93,8 +93,6 @@ exports.simulate = function (data, callback)
 	data.team[0].names = ["", "", "", "", "", "", "", "", "", "", ""];
 	data.team[1].names = ["", "", "", "", "", "", "", "", "", "", ""];
     temp = [data.team[0].ratings.length > 11, data.team[1].ratings.length > 11];
-    total = [0, 0];
-    wickets = [0, 0];
     if (!(temp[0] && temp[1])) // simplified check to determine which team lost / won if at least 1 team is short of 11 players and one coach.
     {
         for(i = 0; i < 2; ++i)
@@ -105,6 +103,8 @@ exports.simulate = function (data, callback)
     }
     else // if both teams have a valid playing eleven and a coach set.
     {
+        total = [0, 0];
+    wickets = [0, 0];
 	    toss = rand(2); // decide which team wins the toss.
 	    data.match.overs = []; // temporary array to hold over wise commentary objects
 	    ++data.team[toss].toss; // updates the number of successful tosses for the team
@@ -675,32 +675,33 @@ exports.simulate = function (data, callback)
         };
         data.match.commentary.push(`Man of the Match: ${findById (MoM.id, data.team[MoM.team].ratings).Name} (${data.team[MoM.team]._id})`); // display man of the match
         data.match.commentary.push(rand((helper.mom[findById(MoM.id, data.team[MoM.team].ratings).Type])), rand(helper.state[1])); // additional man of the match commentary
-    }
-
-    for(i = 0; i < 2; ++i)
-    {
-        ++data.team[i].played;
-        data.team[i].squad.pop(); // remove the coach from the squad array
-        delete data.team[i].ratings; // player ratings are not needed anymore, discard them
-        data.team[i].names = team[i].name;
-        data.team[i].overs.push(overs[i]);
-        data.team[i].scores.push(total[i]);
-        data.team[i].wickets.push(wickets[i]);
-        data.team[i].runRates.push(scale(total[i], overs[i], 6)); // array of run rates per match
-        data.team[i].lowestTotal = Math.min(data.team[i].lowestTotal, total[i]);
-        data.team[i].highestTotal = Math.max(data.team[i].highestTotal, total[i]);
-        data.team[i].netRunRate = scale((data.team[i].runsFor / data.team[i].ballsFor) - (data.team[i].runsAgainst / data.team[i].ballsAgainst), 0, 6, 4);
-
-        for(j = 0; j < 2; ++j) // this loop updates runs, balls, wickets, average (runs, wickets, balls) for and against
+        for(i = 0; i < 2; ++i)
         {
-	        data.team[i][`runs${key[j].val}`] += total[key[j].index[i]];
-	        data.team[i][`balls${key[j].val}`] += overs[key[j].index[i]];
-	        data.team[i][`wickets${key[j].val}`] += wickets[key[j].index[i]];
-            data.team[i][`avgRuns${key[j].val}`] = parseInt(scale(data.team[i][`runs${key[j].val}`], data.team[i].played), 10);
-            data.team[i][`avgWickets${key[j].val}`] = parseInt(scale(data.team[i][`wickets${key[j].val}`], data.team[i].played), 10);
-            data.team[i][`avgOvers${key[j].val}`] = Math.floor(data.team[i][`balls${key[j].val}`] / data.team[i].played / 6) + (Math.floor(data.team[i][`balls${key[j].val}`] / data.team[i].played) % 6) / 10;
+            ++data.team[i].played;
+            data.team[i].squad.pop(); // remove the coach from the squad array
+            delete data.team[i].ratings; // player ratings are not needed anymore, discard them
+            data.team[i].names = team[i].name;
+            data.team[i].overs.push(overs[i]);
+            data.team[i].scores.push(total[i]);
+            data.team[i].wickets.push(wickets[i]);
+            data.team[i].runRates.push(scale(total[i], overs[i], 6)); // array of run rates per match
+            data.team[i].lowestTotal = Math.min(data.team[i].lowestTotal, total[i]);
+            data.team[i].highestTotal = Math.max(data.team[i].highestTotal, total[i]);
+            data.team[i].netRunRate = scale((data.team[i].runsFor / data.team[i].ballsFor) - (data.team[i].runsAgainst / data.team[i].ballsAgainst), 0, 6, 4);
+
+            for(j = 0; j < 2; ++j) // this loop updates runs, balls, wickets, average (runs, wickets, balls) for and against
+            {
+                data.team[i][`runs${key[j].val}`] += total[key[j].index[i]];
+                data.team[i][`balls${key[j].val}`] += overs[key[j].index[i]];
+                data.team[i][`wickets${key[j].val}`] += wickets[key[j].index[i]];
+                data.team[i][`avgRuns${key[j].val}`] = parseInt(scale(data.team[i][`runs${key[j].val}`], data.team[i].played), 10);
+                data.team[i][`avgWickets${key[j].val}`] = parseInt(scale(data.team[i][`wickets${key[j].val}`], data.team[i].played), 10);
+                data.team[i][`avgOvers${key[j].val}`] = Math.floor(data.team[i][`balls${key[j].val}`] / data.team[i].played / 6) + (Math.floor(data.team[i][`balls${key[j].val}`] / data.team[i].played) % 6) / 10;
+            }
         }
     }
+
+
 
     console.timeEnd("sim"); // for benchmarking simulations
     callback({team1: data.team[0], team2: data.team[1], match: data.match}); // pass updated data to post-match handler

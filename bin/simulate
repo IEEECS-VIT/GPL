@@ -31,6 +31,8 @@ var ref =
     };
 var op = {};
 
+require("dotenv").load({"path": path(__dirname, "..", ".env")});
+
 if(!process.env.NODE_ENV)
 {
     require("dotenv").load({"path": path(__dirname, "..", ".env")});
