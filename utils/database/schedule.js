@@ -52,15 +52,20 @@ catch(err)
 
 if(!process.env.NODE_ENV)
 {
+    // set process.env.MONGO in .env, avoid using arbitrary values directly
     require("dotenv").load({path : path.join(__dirname, "..", "..", ".env")});
-    // mongoURI = `mongodb://127.0.0.1:27017/${mode}GPL`;
-    mongoURI = 'mongodb://127.0.0.1:27017/gpl3';
 }
 else
 {
+
     mongoURI = process.env.MONGO;
 	// var configure = new Heroku({token: process.env.HEROKU_API_TOKEN}).apps(process.env.HEROKU_APP_NAME).configVars().update;
+
+	// var configure = new Heroku({token: process.env.HEROKU_API_TOKEN}).apps(process.env.HEROKU_APP_NAME).configVars().update;
+
 }
+
+mongoURI = process.env.MONGO;
 
 if(process.env.DAY < "0")
 {

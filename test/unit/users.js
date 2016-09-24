@@ -16,17 +16,33 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-testFlag = true;
-var path = require("path").join;
+// var assert = require("assert");
 
-before(function(done){
-    // TODO: Enable after writing tests.
-    // testHelperCallback = done;
-    // require(path(__dirname, "..", "utils", "database", "purge"));
-    done();
-});
+describe("User functionality tests:", function() {
+    // check for user authentication before tests
+    before(function() {
 
-after(function(){
-    // TODO: Enable after writing tests.
-    // testDb.close(); // from utils/schedule.js
+    });
+
+    it("Admin tasks");
+
+    it("Home page checks");
+
+    it("Player selection checks");
+
+    it("Squad update checks");
+
+    it("Feature suggestion checks");
+
+    it("User interest check");
+
+    it("Game stats checks");
+
+    it("Leaderboard checks");
+
+    it("Dashboard checks");
+
+    it("Match detail checks");
+
+    it("Setting checks");
 });

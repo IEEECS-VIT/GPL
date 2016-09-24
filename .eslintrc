@@ -2,6 +2,25 @@ ecmaFeatures:
   modules: true
   jsx: true
 
+plugins:
+  - jsdoc
+  - lodash
+  - mocha
+  - mongodb
+  - security
+
+globals:
+  it: true
+  db: true
+  before: true
+  after: true
+  global: true
+  afterEach: true
+  beforeEach: true
+  testFlag: true
+  testDb: true
+  describe: true
+
 env:
   amd: true
   browser: true
@@ -57,7 +76,6 @@ rules:
   no-case-declarations: 2
   no-div-regex: 2
   no-else-return: 2
-  no-empty-label: 2
   no-empty-pattern: 2
   no-eq-null: 2
   no-eval: 2
@@ -138,7 +156,7 @@ rules:
   eol-last: 2
   func-names: 2
   func-style: 2
-  id-length: 2
+  id-length: 0
   id-match: 2
   indent: 2
   jsx-quotes: 0
@@ -174,20 +192,18 @@ rules:
   one-var: 0
   operator-assignment: 2
   operator-linebreak: 2
-  padded-blocks: 2
+  padded-blocks: [2, never]
   quote-props: 0
   quotes: [2, double]
   require-jsdoc: 0
   semi-spacing: 2
   semi: 2
   sort-vars: 0
-  space-after-keywords: 2
+  keyword-spacing: 2
   space-before-blocks: 2
   space-before-function-paren: 0
-  space-before-keywords: 2
   space-in-parens: 2
   space-infix-ops: 2
-  space-return-throw-case: 2
   space-unary-ops: 0
   spaced-comment: 0
   wrap-regex: 0
@@ -198,7 +214,7 @@ rules:
   arrow-spacing: 2
   constructor-super: 2
   generator-star-spacing: 2
-  no-arrow-condition: 2
+  no-confusing-arrow: 2
   no-class-assign: 2
   no-const-assign: 2
   no-dupe-class-members: 2
@@ -211,3 +227,93 @@ rules:
   prefer-spread: 2
   prefer-template: 2
   require-yield: 2
+
+  # JSDoc
+  jsdoc/check-param-names: 2
+  jsdoc/check-tag-names: 2
+  jsdoc/check-types: 2
+  jsdoc/newline-after-description: 2
+  jsdoc/require-description-complete-sentence: 2
+  jsdoc/require-hyphen-before-param-description: 2
+  jsdoc/require-param: 2
+  jsdoc/require-param-description: 2
+  jsdoc/require-param-type: 2
+  jsdoc/require-returns-description: 2
+  jsdoc/require-returns-type: 2
+
+  # Lodash
+  lodash/collection-method-value: 2
+  lodash/no-extra-args: 2
+  lodash/chain-style: 2
+  lodash/path-style: 2
+  lodash/prefer-chain: 2
+  lodash/prefer-compact: 2
+  lodash/prefer-filter: 2
+  lodash/prefer-flat-map: 2
+  lodash/prefer-invoke-map: 2
+  lodash/prefer-map: 2
+  lodash/prefer-reject: 2
+  lodash/prefer-thru: 2
+  lodash/preferred-alias: 2
+  lodash/prop-shorthand: 2
+  lodash/prefer-constant: 2
+  lodash/prefer-get: 2
+  lodash/prefer-includes: 2
+  lodash/prefer-is-nil: 2
+  lodash/prefer-lodash-chain: 2
+  lodash/prefer-lodash-method: 2
+  lodash/prefer-lodash-typecheck: 2
+  lodash/prefer-matches: 2
+  lodash/prefer-noop: 2
+  lodash/prefer-over-quantifier: 2
+  lodash/prefer-startswith: 2
+  lodash/prefer-times: 2
+
+  # Mocha
+  mocha/handle-done-callback: 2
+  mocha/no-exclusive-tests: 2
+  mocha/no-global-tests: 2
+  mocha/no-hooks-for-single-case: 2
+  mocha/no-hooks: 0
+  mocha/no-identical-title: 2
+  mocha/no-mocha-arrows: 2
+  mocha/no-pending-tests: 2
+  mocha/no-return-and-callback: 2
+  mocha/no-sibling-hooks: 2
+  mocha/no-skipped-tests: 2
+  mocha/no-synchronous-tests: 0
+  mocha/no-top-level-hooks: 0
+  mocha/valid-suite-description: 2
+  mocha/valid-test-description: 2
+
+  # MongoDB
+  mongodb/check-insert-calls: 2
+  mongodb/check-query-calls: 2
+  mongodb/check-update-calls: 2
+  mongodb/check-remove-calls: 2
+  mongodb/check-deprecated-calls: 2
+  mongodb/no-replace: 2
+  mongodb/check-rename-updates: 2
+  mongodb/check-unset-updates: 2
+  mongodb/check-current-date-updates: 2
+  mongodb/check-numeric-updates: 2
+  mongodb/check-minmax-updates: 2
+  mongodb/check-set-updates: 2
+  mongodb/check-push-updates: 2
+  mongodb/check-pull-updates: 2
+  mongodb/check-pop-updates: 2
+  mongodb/check-addtoset-updates: 2
+  mongodb/check-deprecated-updates: 2
+
+  # Security
+  security/detect-unsafe-regex: 2
+  security/detect-buffer-noassert: 2
+  security/detect-child-process: 1
+  security/detect-disable-mustache-escape: 2
+  security/detect-eval-with-expression: 2
+  security/detect-non-literal-fs-filename: 0
+  security/detect-non-literal-regexp: 2
+  security/detect-non-literal-require: 0
+  security/detect-object-injection: 1
+  security/detect-possible-timing-attacks: 2
+  security/detect-pseudoRandomBytes: 2
