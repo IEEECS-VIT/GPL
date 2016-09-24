@@ -16,74 +16,67 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var key;
-var user;
-var path = require("path").join;
-var passport = require("passport");
-var callback = function(req, token, refresh, profile, done)
-{
-    process.nextTick(function(){
-        mongoUsers.fetchUser({"_id": req.signedCookies.team}, function (err, doc) {
-            if (err)
-            {
-                return done(err);
-            }
-            if (doc && doc.authStrategy === profile.provider && profile.id === doc.profile)
-            {
-                return done(null, doc); // user found, return that user
-            }
-            if(req.signedCookies.phone && (!process.env.NODE_ENV || (process.env.DAY === "0" && process.env.MATCH === "users"))) // if there is no user, create one
-            {
-                user = record();
-                user.token = token;
-                user.dob = new Date();
-                delete user.passwordHash;
-                user.profile = profile.id;
-                user._id = req.signedCookies.team;
-                user.authStrategy = profile.provider;
-                user.phone = req.signedCookies.phone;
-                user.email = profile.emails[0].value;
+var key,
+	user,
+	path = require("path").join,
+	passport = require("passport"),
+	mongoUsers = require(path(__dirname, "mongoUsers")),
+	record = require(path(__dirname, "mongoRecord")).schema,
+	callback = function (req, token, refresh, profile, done) {
+		process.nextTick(function () {
+			mongoUsers.fetchUser({ _id: req.signedCookies.team }, function (err, doc) {
+				if (err) {
+					return done(err);
+				}
+				if (doc && doc.authStrategy === profile.provider && profile.id === doc.profile) {
+					return done(null, doc); // user found, return that user
+				}
+				if (req.signedCookies.phone &&
+					(!process.env.NODE_ENV || (process.env.DAY === "0" && process.env.MATCH === "users"))) {
+					// if there is no user, create one
+					user = record();
+					user.token = token;
+					user.dob = new Date();
+					delete user.passwordHash;
+					user.profile = profile.id;
+					user._id = req.signedCookies.team; // eslint-disable-line no-underscore-dangle
+					user.authStrategy = profile.provider;
+					user.phone = req.signedCookies.phone;
+					user.email = profile.emails[0].value;
 
-                mongoUsers.insert(process.env.MATCH, user, done);
-            }
-            else
-            {
-                done(err);
-            }
-        });
-    });
-};
-var ref =
-{
-    "undefined": "http://localhost:3000/auth/",
-    "dev": "http://gpl-dev.herokuapp.com/auth/",
-    "production": "http://gpl.ieeecsvit.com/auth/"
-};
-var facebook = require("passport-facebook").Strategy;
-var mongoUsers = require(path(__dirname, "mongoUsers"));
-var google = require("passport-google-oauth").OAuth2Strategy;
-var record = require(path(__dirname, "mongoRecord")).schema;
-var strategies =
-{
-    "GOOGLE": google,
-    "FACEBOOK": facebook
-};
+					mongoUsers.insert(process.env.MATCH, user, done);
+				}
+				else {
+					done(err);
+				}
+			});
+		});
+	},
+	ref = {
+		"undefined": "http://localhost:3000/auth/", // eslint-disable-line quote-props
+		dev: "http://gpl-dev.herokuapp.com/auth/",
+		production: "http://gpl.ieeecsvit.com/auth/"
+	},
+	facebook = require("passport-facebook").Strategy,
+	google = require("passport-google-oauth").OAuth2Strategy,
+	Strategies = {
+		GOOGLE: google,
+		FACEBOOK: facebook
+	};
 
-for(key in strategies)
-{
-    if(!strategies.hasOwnProperty(key))
-    {
-        continue;
-    }
+for (key in Strategies) {
+	if (!Strategies.hasOwnProperty(key)) {
+		continue;
+	}
 
-    passport.use(new strategies[key]({
-            "enableProof": true, // thwarts man in the middle attacks
-            "passReqToCallback": true, // allows us to pass in the req from our route (lets us check if a user is logged in or not)
-            "clientID": process.env[`${key}_ID`],
-            "clientSecret": process.env[`${key}_KEY`],
-            "profileFields": ["id", "email", "displayName"],
-            "callbackURL": ref[process.env.NODE_ENV] + key.toLowerCase() + "/callback"
-        },
+	passport.use(new Strategies[key]({
+		enableProof: true, // thwarts man in the middle attacks
+		passReqToCallback: true, // passes in the req from our route to check a user's is autentication status
+		clientID: process.env[`${key}_ID`],
+		clientSecret: process.env[`${key}_KEY`],
+		profileFields: ["id", "email", "displayName"],
+		callbackURL: `${ref[process.env.NODE_ENV] + key.toLowerCase()}/callback`
+	},
         callback
     ));
 }
