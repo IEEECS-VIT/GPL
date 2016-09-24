@@ -16,72 +16,62 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var scaleRef =
-{
-    "KB": 1024,
-    "MB": 1048576
-};
-var forgotRef =
-{
-    "user":
-    {
-        "user": 1
-    },
-    "password":
-    {
-        "password": 1
-    }
-};
-if(!process.env.NODE_ENV)
-{
-    var value = require("faker").commerce.price;
+var scaleRef = {
+		KB: 1024,
+		MB: 1048576
+	},
+	forgotRef =
+	{
+		user: {
+			user: 1
+		},
+		password: {
+			password: 1
+		}
+	},
+	value,
+	match = process.env.MATCH,
+	path = require("path").join,
+	mongoFeatures = require(path(__dirname, "mongoFeatures"));
+
+if (!process.env.NODE_ENV) {
+	value = require("faker").commerce.price; // eslint-disable-line global-require
 }
-var match = process.env.MATCH;
-var path = require("path").join;
-var mongoFeatures = require(path(__dirname, "mongoFeatures"));
 
-exports.scale = function(value, level)
-{
-    return (value / scaleRef[level]).toFixed(2) + level;
+exports.scale = function (data, level) {
+	return (data / scaleRef[level]).toFixed(2) + level;
 };
 
-exports.parse = function(mode, lower, upper)
-{
-    return Number[`parse${mode}`]((value() % (upper - lower + 1) + lower).toFixed(2), 10);
+exports.parse = function (mode, lower, upper) {
+	return Number[`parse${mode}`]((value() % (upper - lower + 1) + lower).toFixed(2), 10);
 };
 
-exports.forgotCallback = function(mode, callback)
-{
-    return (err) => {
-        if(err)
-        {
-            return callback(err);
-        }
+exports.forgotCallback = function (mode, callback) {
+	return (err) => {
+		if (err) {
+			return callback(err);
+		}
 
-        mongoFeatures.forgotCount(forgotRef[mode], callback);
-    }
+		return mongoFeatures.forgotCount(forgotRef[mode], callback);
+	};
 };
 
 exports.shortlistRef =
 {
-    "users":
-    {
-        "out": "round2",
-        "limit": parseInt(process.env.ONE, 10)
-    },
-    "round2":
-    {
-        "out": "round3",
-        "limit": 8
-    },
-    "round3":
-    {
-        "out": null,
-        "limit": 8
-    }
+	users: {
+		out: "round2",
+		limit: parseInt(process.env.ONE, 10)
+	},
+	round2: {
+		out: "round3",
+		limit: 8
+	},
+	round3: {
+		out: null,
+		limit: 8
+	}
 };
 
-exports.getData = function(team, slice, callback)
-{
-    db.collection(match).find(team, slice).limit(1).next(callback);
+exports.getData = function (team, slice, callback) {
+	db.collection(match).find(team, slice).limit(1).next(callback);
 };
