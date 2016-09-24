@@ -18,30 +18,30 @@
 
 // var assert = require("assert");
 
-describe("Authentication tests:", function() {
-    describe("Forget related actions:", function() {
-        it("Forgot user");
+describe("Authentication tests:", function () {
+	describe("Forget related actions:", function () {
+		it("should work correctly for forgot user");
 
-        it("Forgot password");
-    });
+		it("should work correctly for forgot password");
+	});
 
-    describe("Login actions:", function() {
-        it("Social login checks");
+	describe("Login actions:", function () {
+		it("should work correctly for social login");
 
-        it("Local login checks");
+		it("should work correctly for local login");
 
-        it("Admin login checks");
-    });
+		it("should work correctly for admin login");
+	});
 
-    describe("Registration checks:", function() {
-        it("Social registration checks");
+	describe("Registration checks:", function () {
+		it("should work correctly for social registation");
 
-        it("Local registration checks");
-    });
+		it("should work correctly for local registration");
+	});
 
-    describe("Logout checks:", function() {
-        it("Admin logout");
+	describe("Logout checks:", function () {
+		it("should un-authenticate an admin correctly");
 
-        it("User logout");
-    });
+		it("should unauthenticate a regular user correctly");
+	});
 });
