@@ -19,78 +19,77 @@
 
 console.time("sim-controller");
 
-var day;
-var path = require("path").join;
-var mongo = require("mongodb").MongoClient.connect;
-var mongoTeam = require(path(__dirname, "..", "database", "mongoTeam"));
-var simControl = require(path(__dirname, "..", "worker", "simController"));
-var ref =
-    {
-        "users": "round2",
-        "round2": "round3"
-    };
-var op = {};
+var day,
+	path = require("path").join,
+	mongo = require("mongodb").MongoClient.connect,
+	mongoTeam = require(path(__dirname, "..", "database", "mongoTeam")),
+	simControl = require(path(__dirname, "..", "worker", "simController")),
+	ref =
+	{
+		users: "round2",
+		round2: "round3"
+	},
+	op = {};
 
-if(!process.env.NODE_ENV)
+if (process.env.NODE_ENV)
 {
-    require("dotenv").load({"path": path(__dirname, "..", ".env")});
+	var Heroku = require("heroku-client"), // eslint-disable-line global-require
+		configure = new Heroku({ token: process.env.HEROKU_API_TOKEN })
+					.apps(process.env.HEROKU_APP_NAME).configVars().update;
 }
 else
 {
-    var Heroku = require("heroku-client");
-    var configure = new Heroku({"token": process.env.HEROKU_API_TOKEN}).apps(process.env.HEROKU_APP_NAME).configVars().update;
+	require("dotenv").load({ path: path(__dirname, "..", ".env") }); // eslint-disable-line global-require
 }
 
-day = parseInt(process.argv[2] || process.env.DAY);
+day = parseInt(process.argv[2] || process.env.DAY, 10);
 
-if(day === undefined)
+if (!day)
 {
-    console.log("Please enter the match day number (1-7) as an argument");
-    process.exit(1);
+	throw new Error("Please enter the match day number (1-7) as an argument");
 }
 
-mongo(process.env.MONGO, function(er, db){
-    if(er)
-    {
-        throw er;
-    }
-    else
-    {
-        database = db;
+mongo(process.env.MONGO, function (er, db) {
+	if (er)
+	{
+		throw er;
+	}
 
-        simControl.initSimulation(day, function (){
-            console.log("Simulation of Matches for Day " + day + " is complete");
+	global.database = db;
 
-            op.MATCH = ref[process.env.MATCH] || "round3";
+	simControl.initSimulation(day, function () {
+		console.log(`Simulation of Matches for Day ${day} is complete`);
 
-            if(!process.argv[2] || process.env.DAY === process.argv[2])
-            {
-                op.DAY = ((day + 1) % 8) || (process.env.DAY === "round3" ? 7 : 0);
-            }
+		op.MATCH = ref[process.env.MATCH] || "round3";
 
-            if(day === 7 && process.env.MATCH !== "round3")
-            {
-                mongoTeam.shortlist(function(err){
-                    if(err)
+		if (!process.argv[2] || process.env.DAY === process.argv[2])
+        {
+			op.DAY = ((day + 1) % 8) || (process.env.DAY === "round3" ? 7 : 0);
+		}
+
+		if (day === 7 && process.env.MATCH !== "round3")
+        {
+			mongoTeam.shortlist(function (err) {
+				if (err)
+                {
+					console.error(err.message);
+				}
+
+				configure(op, function (error) {
+					if (error)
                     {
-                        console.error(err.message);
-                    }
-                    configure(op, function(error){
-                        if(error)
-                        {
-                            console.error(error.message);
-                        }
+						console.error(error.message);
+					}
 
-                        database.close();
-                        console.timeEnd("sim-controller");
-                    });
-                });
-            }
-            else
-            {
-                database.close();
-                console.timeEnd("sim-controller");
-            }
-        });
-    }
+					global.database.close();
+					console.timeEnd("sim-controller");
+				});
+			});
+		}
+		else
+        {
+			global.database.close();
+			console.timeEnd("sim-controller");
+		}
+	});
 });
