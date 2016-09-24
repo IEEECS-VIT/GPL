@@ -53,7 +53,8 @@ catch(err)
 if(!process.env.NODE_ENV)
 {
     require("dotenv").load({path : path.join(__dirname, "..", "..", ".env")});
-    mongoURI = `mongodb://127.0.0.1:27017/${mode}GPL`;
+    // mongoURI = `mongodb://127.0.0.1:27017/${mode}GPL`;
+    mongoURI = 'mongodb://127.0.0.1:27017/gpl3';
 }
 else
 {

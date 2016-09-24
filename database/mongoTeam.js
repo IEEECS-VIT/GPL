@@ -114,7 +114,7 @@ exports.map = function (doc, callback)
     };
 
     helper.getData(doc, {teamNo: 1}, onFind);
-    db.collection(match).find(doc, {teamNo: 1}).limit(1).next(onFind);
+    // db.collection(match).find(doc, {teamNo: 1}).limit(1).next(onFind);
 };
 
 exports.shortlist = function (callback) // add email notification for shortlisted team owners.
@@ -230,7 +230,7 @@ exports.adminInfo = function (callback)
 
 exports.fetchMatches = function (team, callback) // deprecated, as match details are to be fetched one at a time
 {
-    var parallelTasks = Array.apply(null, Aray(7))
+    var parallelTasks = Array.apply(null, Array(7))
 						     .map((_, i) => {
 							     return (asyncCallback) => {
 							 	     mongoFeatures.match(i + 1, team, asyncCallback);
