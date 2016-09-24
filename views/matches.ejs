@@ -135,29 +135,31 @@
                                         <% for(j = 0; j < 4; ++j){ %>
                                             + "<%= match[i].commentary[j] %><br/>"
                                         <%}%>
-                                        + "<div class='col-sm-8 col-sm-offset-2'> <div class='row'> <table class='table table-bordered'>"
-                                        + " <thead><th><center><%=match[i].commentary[4][0]%></center></th><th><center><%=match[i].commentary[4][1]%></center></th></thead><tbody>"
-                                        <%for(var k = 5; k < 16; ++k){%>
+
+                                        + "<div class='col-sm-8 col-sm-offset-2'> <div class='row'> <h3>Batting Orders: </h3> <table class='table table-bordered'>"
+                                        + " <thead><th><center><%=match[i].commentary[5][0]%></center></th><th><center><%=match[i].commentary[5][1]%></center></th></thead><tbody>"
+                                        <%for(var k = 6; k < 16; ++k){%>
                                             + "<tr><td><center><%=match[i].commentary[k][0]%></center></td><td><center><%=match[i].commentary[k][1]%></center></td></tr>"
                                         <%}%>
-                                        + "</tbody></table></div></div><br/><div class='row'><div class='col-xs-12'><pre>"
+                                        + "</tbody></table></div></div><br/><div class='row'><div class='col-xs-12'><div style = 'white-space: pre-wrap'>"
                                         <%for(m = 17; m < match[i].commentary.length; ++m){%>
                                           <%if (typeof match[i].commentary[m] == "string") {%>
                                             <%if(match[i].commentary[m].slice(0, 4).match(/\d{1,2}\.1.?/) && (match[i].commentary[m - 1].split(', ')[1] !== 'wide')){%>
                                                 + "<hr>"
                                             <%}%>
 
-                                            <%match[i].commentary[m] = match[i].commentary[m].replace('FOUR', '<big><strong>FOUR</strong></big>')%>
-                                            <%match[i].commentary[m] = match[i].commentary[m].replace('SIX', '<big><strong>SIX</strong></big>')%>
-                                            <%match[i].commentary[m] = match[i].commentary[m].replace(', OUT', ', <big><strong>OUT</strong></big>')%>
-                                            <%match[i].commentary[m] = match[i].commentary[m].replace('Free Hit:', '<big><strong>Free Hit:</strong></big>')%>
-                                            <%match[i].commentary[m] = match[i].commentary[m].replace(/(\d+)\.(\d)\s/, '<big><strong>$1.$2 </strong></big>')%>
+                                            <%//match[i].commentary[m] = match[i].commentary[m].replace('FOUR', '<big><strong>FOUR</strong></big>')%>
+                                            <%//match[i].commentary[m] = match[i].commentary[m].replace('SIX', '<big><strong>SIX</strong></big>')%>
+                                            <%//match[i].commentary[m] = match[i].commentary[m].replace(', OUT', ', <big><strong>OUT</strong></big>')%>
+                                            <%//match[i].commentary[m] = match[i].commentary[m].replace('Free Hit:', '<big><strong>Free Hit:</strong></big>')%>
+                                            <%//match[i].commentary[m] = match[i].commentary[m].replace(/(\d+)\.(\d)\s/, '<big><strong>$1.$2 </strong></big>')%>
                                             <%}%>
                                             + "<%= match[i].commentary[m] %><br/>"
                                         <%}%>
-                                        + "</pre></div></div>"
+                                        + "</div></div></div>"
                                 <%}%>
                                 $("#text").html(html);
+								$('#text').html($('#text').html().replace(/FOUR/g, '<big><strong>FOUR</strong></big>').replace(/SIX/g, '<big><strong>SIX</strong></big>').replace(/, OUT/g, '<big><strong> OUT</strong></big>').replace(/Free Hit:/g, '<big><strong>Free Hit</strong></big>').replace(/(\d+) \. (\d)\s/g, '<big><strong>$1.$2 </strong></big>'));
                             });
                         <% } %>
                         <%  if( match[i].hasOwnProperty("scorecard") ) { %>
