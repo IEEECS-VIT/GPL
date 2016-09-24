@@ -16,36 +16,36 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var temp;
-var path = require("path").join;
-var passport = require("passport");
-var router = require("express").Router();
-var onRetrieve = function(req, res, next)
-{
-    passport.authenticate(req.url.split("/")[1], function(err, user){
-        temp = req.signedCookies.team.trim().toUpperCase();
-        res.clearCookie("team", {});
-        res.clearCookie("phone", {});
+var temp,
+	path = require("path").join,
+	passport = require("passport"),
+	router = require("express").Router(), // eslint-disable-line new-cap
+	onRetrieve = function (req, res, next) {
+		passport.authenticate(req.url.split("/")[1], function (err, user) {
+			temp = req.signedCookies.team.trim().toUpperCase();
+			res.clearCookie("team", {});
+			res.clearCookie("phone", {});
 
-        if(err)
-        {
-            res.status(422);
-            return next(err);
-        }
-        if(!user)
-        {
-            res.flash("That request failed, please re-try.");
-            return res.redirect("/social/login"); // redirect to login or register based on the request origin.
-        }
+			if (err) {
+				res.status(422);
 
-        res.cookie("name", temp, {"maxAge": 86400000, "signed": true});
-        return res.redirect("/home/players");
-    })(req, res, next);
-};
+				return next(err);
+			}
+			if (!user) {
+				res.flash("That request failed, please re-try.");
+
+				return res.redirect("/social/login"); // redirect to login or register based on the request origin.
+			}
+
+			res.cookie("name", temp, { maxAge: 86400000, signed: true });
+
+			return res.redirect("/home/players");
+		})(req, res, next);
+	};
 
 require(path(__dirname, "..", "database", "mongoPassport")); // pass passport for configuration
 
-router.get("/facebook", passport.authenticate("facebook", {"scope": "email"}));
+router.get("/facebook", passport.authenticate("facebook", { scope: "email" }));
 
 /*
 router.get('/twitter', passport.authenticate('twitter', {scope: 'email'}));
@@ -54,13 +54,8 @@ router.get('/twitter/callback', onRetrieve);
 */
 
 router.get("/google", passport.authenticate("google", {
-        "scope":
-        [
-            "https://www.googleapis.com/auth/userinfo.profile",
-            "https://www.googleapis.com/auth/userinfo.email"
-        ]
-    }
-));
+	scope: ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email"]
+}));
 
 router.get(/^\/facebook|google\/callback$/, onRetrieve);
 
