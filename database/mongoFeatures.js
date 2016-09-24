@@ -16,137 +16,105 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var async = require("async");
-var path = require("path").join;
-var mongoTeam = require(path(__dirname, "mongoTeam"));
-var simulator = require(path(__dirname, "..", "worker", "simController"));
+var async = require("async"),
+	path = require("path").join,
+	mongoTeam = require(path(__dirname, "mongoTeam")),
+	simulator = require(path(__dirname, "..", "worker", "simController"));
 
-exports.getStats = function (callback)
-{
-    db.collection("stats").find().limit(1).next(callback);
+exports.getStats = function (callback) {
+	db.collection("stats").find({}).limit(1).next(callback);
 };
 
-exports.notify = function (callback)
-{
-    db.collection("features").find().toArray(callback);
+exports.notify = function (callback) {
+	db.collection("features").find({}).toArray(callback);
 };
 
-exports.simulate = function (callback)
-{
-    simulator.initSimulation(process.env.DAY, callback);
+exports.simulate = function (callback) {
+	simulator.initSimulation(process.env.DAY, callback);
 };
 
-exports.forgotCount = function(option, callback)
-{
-    var onInc = function(err, doc)
-    {
-        if(err)
-        {
-            return callback(err);
-        }
+exports.forgotCount = function (option, callback) {
+	var onInc = function (err, doc) {
+		if (err) {
+			return callback(err);
+		}
 
-        return callback(null, doc.value);
-    };
+		return callback(null, doc.value);
+	};
 
-    db.collection("info").findOneAndUpdate({_id: "info"}, {$inc: option}, onInc);
+	db.collection("info").findOneAndUpdate({ _id: "info" }, { $inc: option }, onInc);
 };
 
-exports.warnEmptyTeams = function(callback)
-{
-    var onFind = function(err, docs)
-    {
-        if (err)
-        {
-            return callback(err);
-        }
+exports.warnEmptyTeams = function (callback) {
+	var onFind = function (err, docs) {
+		if (err) {
+			return callback(err);
+		}
 
-        var onMap = function(arg, mapCallback)
-        {
-            mapCallback(null, arg.email);
-        };
+		var onMap = function (arg, mapCallback) { mapCallback(null, arg.email);	};
 
-        async.map(docs, onMap, callback);
-    };
+		async.map(docs, onMap, callback);
+	};
 
-    db.collection("users").find({$or : [{team : []}, {squad : []}]}, {email : 1, _id : 0}).toArray(onFind);
+	db.collection("users").find({ $or: [{ team: [] }, { squad: [] }] }, { email: 1, _id: 0 }).toArray(onFind);
 };
 
-exports.match = function (day, team, callback)
-{
-    var filter =
-    {
-        $or:
-        [
-            {
-                "Team_1": team
-            },
-            {
-                "Team_2": team
-            }
-        ]
-    };
+exports.match = function (day, team, callback) {
+	var filter = {
+		$or:
+		[
+			{ Team_1: team }, {	Team_2: team } // eslint-disable-line camelcase
+		]
+	};
 
-    if (day <= process.env.DAY)
-    {
-        db.collection("matchday" + day).find(filter, {commentary: 1, scorecard: 1, count: 1}).limit(1).next(callback);
-    }
-    else
-    {
-        var onOpponent = function (err, doc)
-        {
-            if (err)
-            {
-                return callback(err);
-            }
+	if (day <= process.env.DAY) {
+		db.collection(`matchday${day}`).find(filter, { commentary: 1, scorecard: 1, count: 1 }).limit(1).next(callback);
+	}
+	else {
+		var onOpponent = function (err, doc) {
+			if (err) {
+				return callback(err);
+			}
 
-            mongoTeam.team({teamNo: doc}, callback);
-        };
+			mongoTeam.team({ teamNo: doc }, callback);
+		};
 
-        mongoTeam.opponent(day, team, onOpponent);
-    }
+		mongoTeam.opponent(day, team, onOpponent);
+	}
 };
 
-exports.fetchPlayers = function (callback)
-{
-    db.collection("players").find({}, {"_id": 1, "Name": 1, "Type": 1, "Country": 1, "Price": 1, "Cost": 1}).toArray(callback);
+exports.fetchPlayers = function (callback) {
+	db.collection("players").find({}, { _id: 1, Name: 1, Type: 1, Country: 1, Price: 1, Cost: 1 }).toArray(callback);
 };
 
-exports.getPlayer = function (id, fields, callback)
-{
-    var query =
-    {
-        "_id": id
-    };
+exports.getPlayer = function (id, fields, callback) {
+	var query = {
+		_id: id
+	};
 
-    if(typeof fields === "function")
-    {
-        callback = fields;
-        fields =
-        {
-            "Type": 1,
-            "Name": 1,
-            "Country": 1
-        }
-    }
+	if (typeof fields === "function") {
+		callback = fields;
+		fields = {
+			Type: 1,
+			Name: 1,
+			Country: 1
+		};
+	}
 
-    var onGetPlayer = function(err, player)
-    {
-        if(err)
-        {
-            return callback(err);
-        }
-        if(player)
-        {
-            return callback(null, player);
-        }
+	var onGetPlayer = function (err, player) {
+		if (err) {
+			return callback(err);
+		}
+		if (player) {
+			return callback(null, player);
+		}
 
-        return callback(false, null);
-    };
+		return callback(false, null);
+	};
 
-    db.collection("players").find(query, fields).limit(1).next(onGetPlayer);
+	db.collection("players").find(query, fields).limit(1).next(onGetPlayer);
 };
 
-exports.adminStats = function(callback)
-{
-    db.stats(callback);
+exports.adminStats = function (callback) {
+	db.stats(callback);
 };
