@@ -141,16 +141,19 @@
                                             + "<tr><td><center><%=match[i].commentary[k][0]%></center></td><td><center><%=match[i].commentary[k][1]%></center></td></tr>"
                                         <%}%>
                                         + "</tbody></table></div></div><br/><div class='row'><div class='col-xs-12'><pre>"
-                                        <%for(m = 16; m < match[i].commentary.length; ++m){%>
+                                        <%for(m = 17; m < match[i].commentary.length; ++m){%>
+                                          <%if (typeof match[i].commentary[m] == "string") {%>
                                             <%if(match[i].commentary[m].slice(0, 4).match(/\d{1,2}\.1.?/) && (match[i].commentary[m - 1].split(', ')[1] !== 'wide')){%>
                                                 + "<hr>"
                                             <%}%>
+
                                             <%match[i].commentary[m] = match[i].commentary[m].replace('FOUR', '<big><strong>FOUR</strong></big>')%>
                                             <%match[i].commentary[m] = match[i].commentary[m].replace('SIX', '<big><strong>SIX</strong></big>')%>
                                             <%match[i].commentary[m] = match[i].commentary[m].replace(', OUT', ', <big><strong>OUT</strong></big>')%>
                                             <%match[i].commentary[m] = match[i].commentary[m].replace('Free Hit:', '<big><strong>Free Hit:</strong></big>')%>
                                             <%match[i].commentary[m] = match[i].commentary[m].replace(/(\d+)\.(\d)\s/, '<big><strong>$1.$2 </strong></big>')%>
-                                            + "<%-match[i].commentary[m] %><br/>"
+                                            <%}%>
+                                            + "<%= match[i].commentary[m] %><br/>"
                                         <%}%>
                                         + "</pre></div></div>"
                                 <%}%>
