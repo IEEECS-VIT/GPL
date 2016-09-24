@@ -443,4 +443,8 @@ router.get("/trailer", function (req, res){ // trailer page
     res.render("trailer");
 });
 
+router.get("/glance", function (req, res) {
+    res.render("glance");
+})
+
 module.exports = router;

@@ -114,7 +114,7 @@ exports.map = function (doc, callback)
     };
 
     helper.getData(doc, {teamNo: 1}, onFind);
-    db.collection(match).find(doc, {teamNo: 1}).limit(1).next(onFind);
+    // db.collection(match).find(doc, {teamNo: 1}).limit(1).next(onFind);
 };
 
 exports.shortlist = function (callback) // add email notification for shortlisted team owners.
