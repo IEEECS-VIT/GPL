@@ -93,6 +93,8 @@ exports.simulate = function (data, callback)
 	data.team[0].names = ["", "", "", "", "", "", "", "", "", "", ""];
 	data.team[1].names = ["", "", "", "", "", "", "", "", "", "", ""];
     temp = [data.team[0].ratings.length > 11, data.team[1].ratings.length > 11];
+    total = [0, 0];
+    wickets = [0, 0];
     if (!(temp[0] && temp[1])) // simplified check to determine which team lost / won if at least 1 team is short of 11 players and one coach.
     {
         for(i = 0; i < 2; ++i)
@@ -127,6 +129,43 @@ exports.simulate = function (data, callback)
 
         for (loop = 0; loop < 2; ++loop) // loop through for two innings
         {
+            /* 
+             * reset all variables that are to be reset every inning
+             */
+            desperation = [0, 0]; // the extent of playing desperation, tracked for the two current batsmen on strike.
+            overs = [120, 120]; // the number of balls faced by each team. Is adjusted when an innings completes in less than 20 overs.
+            lastFiveOvers = []; // stores the runs scored in the last five overs.
+            wicketSequence = []; // stores the details of each dismissal.
+            frustration = [0, 0]; // stores the extent of frustration, which can change depending on the dot balls played by the current two batsmen.
+            score = genArray(11); // runs scored by each batsman. Reset after the innings is complete.
+            balls = genArray(11); // balls faced by each batsman. Reset after the innings is complete.
+            fours = genArray(11); // number of fours hit by each batsman. Reset after the innings is complete.
+            control = genArray(11); // the extent of innings control shown by each batsman. Reset after the innings is complete.
+            catches = genArray(11); // the number of catches taken by each bowler. Reset after the innings is complete.
+            maidens = genArray(11); // the number of maiden overs bowled by each bowler. Reset after the innings is complete.
+            maximums = genArray(11); // the number of sixes hit by each batsman. Reset after the innings is complete.
+            dotBalls = genArray(11); // the number of dot balls faced by each member of the batting side. Reset after the innings is complete.
+            dismissed = genArray(11); // an array of flags to denote whether a batsman was dismissed or not. Reset after the innings is complete.
+            milestone = genArray(11); // an array of flags to denote whether a batsman got to a 50 / 100. Reset after the innings is complete.
+            deliveries = genArray(11); // the number of balls bowled by each bowler. Reset after the innings is complete.
+            runsConceded = genArray(11); // the number of runs conceded by each bowler. Reset after the innings is complete.
+            wicketsTaken = genArray(11); // the number of wickets taken by each bowler. Reset after the innings is complete.
+            dotDeliveries = genArray(11); // the number of dot balls bowled by each bowler. Reset after the innings is complete.
+            fiveWicketHaul = genArray(11); // an array of flags to denote whether or not any bowler attained a 5 wicket haul. Reset after the innings is complete.
+            ballMatrix = genArray(11, 11); // a matrix that denotes the number of balls faced by each batsman, per bowler. Reset after the innings is complete.
+            partnershipRuns = genArray(10); // the number of runs score per wicket partnership. Reset after the innings is complete.
+            partnershipBalls = genArray(10); // the number of balls faced in each wicket partnership. Reset after the innings is complete.
+            continuousWickets = genArray(11); // the number of continuous wickets taken by each bowler. Reset after the innings is complete.
+            dot = 0; // the number of dot balls in each innings. Reset after the innings is complete.
+            extras = 0; // the number of wides / no-balls bowled in the innings. Reset after the innings is complete.
+            freeHit = 0; // used to denote whether the current delivery is a free-hit or not. Reset after the innings is complete.
+            previousOver = 0; // denotes the number of runs scored in the previous over. Reset after the innings is complete.
+            previousBatsman = -1; // denotes the batting position of the previous batsman. Reset after the innings is complete.
+            previousDismissal = -1; // stores the index of the bowler who got the previous wicket. Set to -1 for run-outs.
+            currentPartnership = 0; // denotes the index of the current partnership.
+
+
+
             strike = [0, 1]; // bring the openers to the crease
             strikeIndex = boundaryGap = 0;
             temp = Math.pow(-1, +(data.team[+tossIndex].streak < 0)) * ((total[+!tossIndex] + 1) / 5000) * data.team[+tossIndex].streak * team[+!tossIndex].meanRating;
@@ -138,8 +177,8 @@ exports.simulate = function (data, callback)
 
             currentBowler = previousBowler = team[+!tossIndex].bowlRating.reduce((a, b, i, arr) => b > arr[a] ? i : a, 0); // select bowler to start the innings
             data.match.commentary.push(`${team[+!tossIndex].name[previousBowler]} to start proceedings from the pavilion end.....`);
-
-            for (i = 0; i < 20 && (wickets[+tossIndex] < 10 && (!loop || total[+!tossIndex] <= total[+tossIndex])); ++i) // loop through for 20 overs
+            
+            for (i = 0; (i < 20) && (wickets[+tossIndex] < 10) && (!loop || !(total[+!tossIndex] <= total[+tossIndex])); ++i) // loop through for 20 overs
             {
                 currentOver = [];
                 previousOver = continuousMaximums = 0;
@@ -343,7 +382,7 @@ exports.simulate = function (data, callback)
                         else if (loop && (total[+tossIndex] > total[+!tossIndex]))
                         {
                             overs[+tossIndex] = i * 6 + j; // the target was chased down before the allocated 20 overs, hence the adjustments.
-                            data.match.commentary.push(`What an emphatic victory for ${data.team[+tossIndex]}!`);
+                            data.match.commentary.push(`What an emphatic victory for ${data.team[+tossIndex]._id}!`);
                             break;
                         }
                         if((!milestone[strike[+strikeIndex]] && score[strike[+strikeIndex]] > 49) || (milestone[strike[+strikeIndex]] === 1 && score[strike[+strikeIndex]] > 99))
@@ -569,15 +608,21 @@ exports.simulate = function (data, callback)
         }
 
         temp = +(total[0] === total[1]) + (wickets[0] === wickets[1]) * 2 + (overs[0] === overs[1]) * 4;
-
-	    switch(temp) // determining win / TIE conditions
+        // determining win / TIE conditions
+	    switch(temp) 
 	    {
 			case 0:
 		    case 2:
 		    case 4:
 		    case 6: // in these four cases, the runs scored will be different, indicating a regular victory
 			    winner = helper.decide(total, 1);
-			    data.match.commentary.push(data.team[winner]._id + " wins by " + (total[+!tossIndex] < total[+tossIndex]) * `${(10 - wickets[+tossIndex])} wicket(s) !` || `${(total[+!tossIndex] - total[+tossIndex])} run(s)!`);
+                
+                if (total[+!tossIndex] < total[+tossIndex]) {
+                    data.match.commentary.push(data.team[winner]._id + " wins by " + `${(10 - wickets[+tossIndex])} wicket(s) !`);
+                } else {
+                    data.match.commentary.push(data.team[winner]._id + `${(total[+!tossIndex] - total[+tossIndex])} run(s)!`);
+                }
+			    
 			    break;
 		    case 1:
 			case 3:
