@@ -29,9 +29,7 @@
     "test": "node node_modules/.bin/mocha tests --recursive -R dot"
   },
   "precommit": {
-    "run": [
-      "test"
-    ],
+    "run": [],
     "silent": false,
     "colors": true
   },
@@ -142,6 +140,10 @@
     "cheerio": "0.22.0",
     "csslint": "1.0.2",
     "dotenv": "^2.0.0",
+    "eslint-plugin-jsdoc": "2.3.1",
+    "eslint-plugin-mocha": "4.5.1",
+    "eslint-plugin-mongodb": "0.2.4",
+    "eslint-plugin-security": "1.2.0",
     "faker": "^3.1.0",
     "ink-docstrap": "1.3.0",
     "jsdoc": "3.4.1",

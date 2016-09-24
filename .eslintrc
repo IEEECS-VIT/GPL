@@ -2,6 +2,12 @@ ecmaFeatures:
   modules: true
   jsx: true
 
+plugins:
+  - jsdoc
+  - mocha
+  - mongodb
+  - security
+
 env:
   amd: true
   browser: true
@@ -211,3 +217,65 @@ rules:
   prefer-spread: 2
   prefer-template: 2
   require-yield: 2
+
+  # JSDoc
+  jsdoc/check-param-names: 2
+  jsdoc/check-tag-names: 2
+  jsdoc/check-types: 2
+  jsdoc/newline-after-description: 2
+  jsdoc/require-description-complete-sentence: 2
+  jsdoc/require-hyphen-before-param-description: 2
+  jsdoc/require-param: 2
+  jsdoc/require-param-description: 2
+  jsdoc/require-param-type: 2
+  jsdoc/require-returns-description: 2
+  jsdoc/require-returns-type: 2
+
+  # Mocha
+  mocha/handle-done-callback: 2
+  mocha/no-exclusive-tests: 2
+  mocha/no-global-tests: 2
+  mocha/no-hooks-for-single-case: 2
+  mocha/no-hooks: 0
+  mocha/no-identical-title: 2
+  mocha/no-mocha-arrows: 2
+  mocha/no-pending-tests: 2
+  mocha/no-return-and-callback: 2
+  mocha/no-sibling-hooks: 2
+  mocha/no-skipped-tests: 2
+  mocha/no-synchronous-tests: 0
+  mocha/no-top-level-hooks: 0
+  mocha/valid-suite-description: 2
+  mocha/valid-test-description: 2
+
+  # MongoDB
+  mongodb/check-insert-calls: 2
+  mongodb/check-query-calls: 2
+  mongodb/check-update-calls: 2
+  mongodb/check-remove-calls: 2
+  mongodb/check-deprecated-calls: 2
+  mongodb/no-replace: 2
+  mongodb/check-rename-updates: 2
+  mongodb/check-unset-updates: 2
+  mongodb/check-current-date-updates: 2
+  mongodb/check-numeric-updates: 2
+  mongodb/check-minmax-updates: 2
+  mongodb/check-set-updates: 2
+  mongodb/check-push-updates: 2
+  mongodb/check-pull-updates: 2
+  mongodb/check-pop-updates: 2
+  mongodb/check-addtoset-updates: 2
+  mongodb/check-deprecated-updates: 2
+
+  # Security
+  security/detect-unsafe-regex: 2
+  security/detect-buffer-noassert: 2
+  security/detect-child-process: 1
+  security/detect-disable-mustache-escape: 2
+  security/detect-eval-with-expression: 2
+  security/detect-non-literal-fs-filename: 0
+  security/detect-non-literal-regexp: 2
+  security/detect-non-literal-require: 0
+  security/detect-object-injection: 1
+  security/detect-possible-timing-attacks: 2
+  security/detect-pseudoRandomBytes: 2

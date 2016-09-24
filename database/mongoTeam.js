@@ -166,9 +166,9 @@ exports.adminInfo = function (callback)
 
         delete result.database.ok;
         delete result.database.extentFreeList;
-        result.database.fileSize = helper(result.database.fileSize, "MB");
+        result.database.fileSize = helper.scale(result.database.fileSize, "MB");
         result.database.dataSize = helper.scale(result.database.dataSize, "MB");
-        result.database.storageSize = helper(result.database.storageSize, "MB");
+        result.database.storageSize = helper.scale(result.database.storageSize, "MB");
         result.database.indexSize = helper.scale(result.database.indexSize, "KB");
         result.database.avgObjSize = helper.scale(result.database.avgObjSize, "KB");
         result.database.version = result.database.dataFileVersion.major + "." + result.database.dataFileVersion.minor;
