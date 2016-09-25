@@ -97,7 +97,7 @@ var i,
 		return teamArray[i][`${type}Rating`][j] < 0 ? Number(coach > 0) && coach : teamArray[i][`${type}Rating`][j];
 	},
 	baseRate = function (player) { // method to allot a base rating to each non-coach player
-		if (player.Rating) {
+		if (player.Rating && player.Type !== "all") {
 			teamArray[i][`${player.Type}Rating`].push(player.Rating);
 			teamArray[i][`${ref[player.Type]}Rating`].push(900 - player.Rating);
 
