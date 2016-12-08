@@ -89,7 +89,7 @@
     "uglify-js": "2.7.3"
   },
   "optionalDependencies": {
-    "bcrypt": "~0.8.5"
+    "bcrypt": "~1.0.1"
   },
   "devDependencies": {
     "cheerio": "0.22.0",
