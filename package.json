@@ -73,7 +73,7 @@
     "express-session": "1.14.1",
     "forever": "^0.15.2",
     "helmet": "2.2.0",
-    "heroku-client": "^2.4.3",
+    "heroku-client": "^3.0.0",
     "lodash": "4.16.1",
     "mongodb": "2.2.10",
     "morgan": "^1.7.0",
