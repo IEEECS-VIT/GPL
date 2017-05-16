@@ -85,7 +85,7 @@
     "passport-facebook": "^2.1.1",
     "passport-google-oauth": "^1.0.0",
     "raven": "0.12.1",
-    "serve-favicon": "^2.3.0",
+    "serve-favicon": "^2.4.3",
     "uglify-js": "2.7.3"
   },
   "optionalDependencies": {
