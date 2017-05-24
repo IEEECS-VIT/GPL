@@ -68,7 +68,7 @@
     "csurf": "^1.9.0",
     "debug": "^2.2.0",
     "ejs": "2.5.2",
-    "emailjs": "1.0.8",
+    "emailjs": "1.0.9",
     "express": "4.14.0",
     "express-session": "1.14.1",
     "forever": "^0.15.2",
