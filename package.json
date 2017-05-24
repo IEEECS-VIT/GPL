@@ -105,7 +105,7 @@
     "istanbul": "0.4.5",
     "js-yaml": "3.6.1",
     "jsdoc": "3.4.1",
-    "mocha": "3.0.2",
+    "mocha": "3.4.2",
     "nsp": "2.6.1",
     "pre-commit": "^1.1.2",
     "supertest": "2.0.0"
