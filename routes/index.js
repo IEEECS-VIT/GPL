@@ -96,7 +96,7 @@ router.get("/", cookieFilter, function (req, res) {
 
 router.get("/interest", function (req, res) {
 	if (process.env.DAY === "-1" || !process.env.NODE_ENV || req.signedCookies.admin) {
-		res.render("interest", { csrfToken: req.csrfToken() });
+		return res.render("new-interest");
 	}
 	else {
 		res.redirect("/register");
