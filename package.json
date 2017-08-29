@@ -134,7 +134,7 @@
     "passport-google-oauth": "^1.0.0",
     "raven": "0.12.1",
     "serve-favicon": "^2.3.0",
-    "uglify-js": "2.7.3"
+    "uglify-js": "2.8.13"
   },
   "optionalDependencies": {
     "bcrypt": "~0.8.5"
