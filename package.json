@@ -125,7 +125,7 @@
     "lodash": "4.16.1",
     "mongodb": "2.2.10",
     "morgan": "^1.7.0",
-    "newrelic": "1.30.3",
+    "newrelic": "1.39.0",
     "node-logentries": "^0.1.4",
     "nodemailer": "2.6.0",
     "nodemailer-sendgrid-transport": "0.2.0",
