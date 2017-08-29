@@ -124,7 +124,7 @@
     "heroku-client": "^2.4.3",
     "lodash": "4.16.1",
     "mongodb": "2.2.10",
-    "morgan": "^1.7.0",
+    "morgan": "^1.8.2",
     "newrelic": "1.30.3",
     "node-logentries": "^0.1.4",
     "nodemailer": "2.6.0",
