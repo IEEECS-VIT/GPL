@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GPL INTEREST FORM</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="gpl_form.css"/>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.1.21/tilt.jquery.min.js"></script>
+</head>
+<body>
+<img class="back" src="BG.png"></img>
+<div class="heading">
+<div class="row">
+  <img src="GPLlogo.png" title="GraVITas Premiere League" class="col-md-3 col-sm-2 col-xs-2  logo1"></img>
+  <div class=" head col-sm-6 col-xs-8 col-md-6 col-lg-6">
+    <h2>GraVITas Premiere League 2017</h2>
+    <h4>Interest form</h4>
+  </div>
+</div>
+</div>
+<div class="row">
+  <form class="col-sm-9 col-xs-9 col-lg-5 col-md-7">
+    <input type="text" id="name" class="inp col-md-11 col-lg-11 col-xs-11 col-sm-11" placeholder="Name"></input><br>
+    <input type="text" id="regnum" class="inp col-md-11 col-lg-11 col-xs-11 col-sm-11" placeholder="Reg. No."></input><br>
+    <input type="text" id="mobile" class="inp col-md-11 col-lg-11 col-xs-11 col-sm-11" placeholder="Mobile No."></input><br>
+    <input type="text" id="email" class="inp col-md-11 col-lg-11 col-xs-11 col-sm-11" placeholder="Email"></input><br><br><br>
+    <input type="submit" id="sub" class="col-md-3 col-lg-3 col-sm-4 col-xs-5" value="SUBMIT"></input><br>
+  </form>
+  <div data-tilt>
+  <img src="GPLlogo.png" title="GraVITas Premiere League"class="col-lg-3 logo2"></img>
+</div>
+</div>
+</body>
+<script>
+$(document).ready(function(){
+  const tilt = $('.logo2').tilt();
+  var win_width=$(window).width();
+  var win_height=$(window).height();
+  $("img.back").attr({
+    width:win_width,
+    height:win_height
+  });
+  if(win_width>1191)
+  {
+    $(".logo2").show();
+    $(".logo1").hide();
+  }
+  if(win_width<=1191)
+  {
+    $(".logo2").hide();
+    $(".logo1").show();
+    $("h2").html("GraVITas <br/> Premiere League 2017");
+  }
+  console.log(win_height+"<br>"+win_width);
+  $(window).on("resize",function(){
+    var win_height=$(window).height();
+    var win_width=$(window).width();
+    if(win_width>1191)
+    {
+      $(".logo2").show();
+      $(".logo1").hide();
+      $("h2").html("GraVITas Premiere League 2017");
+    }
+    else if(win_width<=1191)
+    {
+      $(".logo2").hide();
+      $(".logo1").show();
+      $("h2").html("GraVITas <br/> Premiere League 2017");
+    }
+    $("img.back").attr({
+      width:win_width,
+      height:win_height
+    });
+    console.log("width="+win_width);
+});
+});
+</script>
+</html>
