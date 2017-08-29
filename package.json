@@ -143,7 +143,7 @@
     "cheerio": "0.22.0",
     "csslint": "1.0.2",
     "dotenv": "^2.0.0",
-    "eslint-plugin-jsdoc": "2.3.1",
+    "eslint-plugin-jsdoc": "3.0.1",
     "eslint-plugin-lodash": "1.10.3",
     "eslint-plugin-mocha": "4.5.1",
     "eslint-plugin-mongodb": "0.2.4",
