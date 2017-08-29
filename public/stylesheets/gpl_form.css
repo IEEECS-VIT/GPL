@@ -1,0 +1,239 @@
+body {
+  margin:0px;
+  padding:0px;
+  font-family: 'Roboto'!important;
+}
+.row
+{
+  margin:0px;
+}
+img.back
+{
+  width:100%;
+  height:100vh;
+  position:fixed;
+}
+img.logo2
+{
+  visibility:visible;
+  margin-left:5%;
+  width:35%;
+  height:27em;
+}
+.head
+{
+  margin-top:6%;
+  margin-left:4%;
+}
+h2
+{
+  margin:0px;
+  text-align:center;
+  color:white;
+  /*font-family:verdana;*/
+  letter-spacing:1.7px;
+}
+h4
+{
+  margin:0px;
+  text-align:right;
+  color:white;
+  margin-right:16%;
+  font-style: italic;
+  font-weight:lighter;
+  /*font-family:verdana;*/
+}
+form
+{
+  margin:3%;
+  margin-left:7%;
+  background-color:black;
+  opacity:0.6;
+  padding:10px 15px;
+}
+#inp1
+{
+  margin-top:5%;
+}
+.inp
+{
+  background-color:transparent;
+  color:white;
+  font-weight:bold;
+  font-size:1.3em;
+  border:1px transparent;
+  padding:0px;
+  margin:10px;
+  margin-bottom:5%;
+  margin-left:4%;
+  border-bottom:1px solid white;
+  height:1.3em;
+}
+#sub
+{
+  background-color:transparent;
+  color:white;
+  margin-top:2%;
+  margin-bottom:2%;
+  margin-left:38%;
+  text-align:center;
+  border:2px solid white;
+  font-size:1.3em;
+}
+[class*="col-xs-"],[class*="col-sm-"]
+{
+  padding-left:0px;
+  padding-right:0px;
+}
+@media only screen and (max-width:767px)
+{
+  form
+  {
+    margin-left:11%;
+  }
+  .inp
+  {
+    font-size:1em;
+    margin-left:10%;
+  }
+  #sub
+  {
+    font-size:0.8em;
+    margin-left:30%;
+  }
+  .logo1
+  {
+    margin-top:5%;
+    margin-left:3.2%;
+    margin-bottom:5%;
+    height:8em;
+    width:30%;
+  }
+  .head
+  {
+    margin-left:0px;
+    margin-top:13%;
+  }
+  h2
+  {
+    margin-bottom:6px;
+    text-align:left;
+    font-size:1em;
+  }
+  h4
+  {
+    margin:0px;
+    text-align:left;
+    font-size:0.9em;
+  }
+}
+@media only screen and (min-width:768px) and (max-width:991px)
+{
+  .logo1
+  {
+    height:10em;
+    width:30%;
+    margin-top:5%;
+    margin-left:8%;
+  }
+  .head{
+    margin-top:10%;
+    margin-left:0px;
+  }
+  h2
+  {
+    margin:0px;
+    margin-bottom:5px;
+    text-align:left;
+  }
+  h4
+  {
+    margin:0px;
+    text-align:left;
+  }
+  form
+  {
+    margin-top:10%;
+    margin-left:13%;
+  }
+  #sub
+  {
+    margin-left:33%;
+    margin-bottom:3%;
+  }
+}
+@media screen and (min-width:992px) and (max-width:1191px)
+{
+  form
+  {
+    margin-left:20%;
+    margin-top:5%;
+  }
+  .logo1
+  {
+    margin-left:5.2%;
+    margin-top:6%;
+    height:16em;
+    width:35%;
+  }
+  .head
+  {
+    margin:0;
+    margin-top:10%;
+  }
+  h2
+  {
+    text-align:left;
+    margin:0px;
+    margin-bottom:5px;
+    font-size:2.3em;
+  }
+  h4
+  {
+    text-align:left;
+    margin:0px;
+    font-size:1.5em;
+  }
+
+}
+@media only screen and (min-width:1400px)
+{
+  h4
+  {
+    margin:0px;
+    text-align:center;
+  }
+  img.logo2
+  {
+    margin-top:3%;
+  }
+}
+input::-webkit-input-placeholder
+{
+  color:white;
+  font-size:1em;
+  font-weight:lighter;
+  /*font-family:verdana;*/
+}
+input::-ms-input-placeholder
+{
+  color:white;
+  font-size:1em;
+  font-weight:lighter;
+  /*font-family:verdana;*/
+}
+input::-moz-placeholder
+{
+  color:white;
+  font-size:1em;
+  font-weight:lighter;
+  /*font-family:verdana;*/
+  opacity:1;
+}
+input:focus::-webkit-input-placeholder{color:transparent;}
+input:focus:-ms-input-placeholder { color:transparent; }
+input:focus::-moz-placeholder{color:transparent;}
+input:focus
+{
+  outline:none;
+}
